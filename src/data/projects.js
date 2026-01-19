@@ -1,0 +1,42 @@
+export const projects = [
+  {
+    id: 1,
+    title: "Autonomous Navigation Systems",
+    category: "Autonomous Driving",
+    description: "Developing advanced path planning algorithms for autonomous vehicles in complex urban environments. Our research focuses on real-time decision-making, obstacle avoidance, and trajectory optimization under uncertainty.",
+    status: "Active",
+    image: null,
+  },
+  {
+    id: 2,
+    title: "Human-Robot Interaction",
+    category: "Cognitive Systems",
+    description: "Research on natural language processing and gesture recognition for intuitive robot control. We aim to create seamless communication channels between humans and autonomous systems through multimodal interaction paradigms.",
+    status: "Active",
+    image: null,
+  },
+  {
+    id: 3,
+    title: "Cognitive Architectures for Robotics",
+    category: "Cognitive Systems",
+    description: "Designing bio-inspired cognitive architectures that enable robots to learn, reason, and adapt in dynamic environments. This includes memory systems, attention mechanisms, and decision-making frameworks.",
+    status: "Active",
+    image: null,
+  },
+  {
+    id: 4,
+    title: "Vision-Based Perception",
+    category: "Autonomous Driving",
+    description: "Developing robust computer vision systems for object detection, tracking, and scene understanding. Our work leverages deep learning and sensor fusion to achieve reliable perception in diverse weather and lighting conditions.",
+    status: "Active",
+    image: null,
+  },
+  {
+    id: 5,
+    title: "Multi-Agent Coordination",
+    category: "Swarm Robotics",
+    description: "Investigating coordination strategies for teams of autonomous robots. Applications include collaborative exploration, distributed task allocation, and emergent collective behaviors in robot swarms.",
+    status: "Active",
+    image: null,
+  },
+];
