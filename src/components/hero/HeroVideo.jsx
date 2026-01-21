@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const HeroVideo = ({ src }) => {
+const HeroVideo = ({ src, poster }) => {
   const [error, setError] = useState(false)
 
   const handleError = () => {
@@ -21,6 +21,8 @@ const HeroVideo = ({ src }) => {
         loop
         muted
         playsInline
+        preload="auto"
+        poster={poster}
         onError={handleError}
         className="absolute inset-0 w-full h-full object-cover"
       >

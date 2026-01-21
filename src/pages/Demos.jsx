@@ -3,7 +3,7 @@ import DemonstrationsSection from '../components/demonstrations/DemonstrationsSe
 const Demos = () => {
   return (
     <div>
-      <DemonstrationsSection />
+      <DemonstrationsSection priority={true} />
     </div>
   )
 }

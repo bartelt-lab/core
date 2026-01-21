@@ -16,6 +16,10 @@ const TeamMemberCard = ({ member }) => {
           <img
             src={getAssetUrl(member.photo)}
             alt={member.name}
+            loading="lazy"
+            decoding="async"
+            width="128"
+            height="128"
             className="w-full h-full object-cover"
             onError={(e) => {
               e.target.style.display = 'none'

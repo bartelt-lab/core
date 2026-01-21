@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -14,54 +15,63 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const isActive = (path) => location.pathname === path
-
-  const linkBaseClasses = "relative text-sm font-bold uppercase tracking-widest transition-colors duration-300"
-  const activeClasses = "text-white"
-  const inactiveClasses = "text-gray-400 hover:text-white"
+  const isHome = location.pathname === '/'
+  const isNetwork = location.pathname === '/network'
 
   return (
     <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
       <div className={`
-        flex items-center gap-8 px-8 py-3 rounded-full 
-        bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl 
-        transition-all duration-300 ${isScrolled ? 'scale-95 py-2' : 'scale-100'}
+        relative flex items-center p-1.5 rounded-full 
+        bg-gray-900/80 backdrop-blur-md border border-white/10 shadow-2xl 
+        transition-all duration-300 ${isScrolled ? 'scale-95' : 'scale-100'}
       `}>
 
-        {/* Left Link: Home */}
+        {/* Tab 1: Home (CORE Labs) */}
         <Link
           to="/"
-          className={`${linkBaseClasses} ${isActive('/') ? activeClasses : inactiveClasses}`}
+          className="relative z-10 px-6 py-2 rounded-full flex items-center justify-center transition-colors duration-200"
         >
-          Home
-          {isActive('/') && (
-            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full animate-fade-in" />
+          {isHome && (
+            <motion.div
+              layoutId="nav-pill"
+              className="absolute inset-0 bg-white rounded-full shadow-md"
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
           )}
-        </Link>
-
-        {/* Center: Logo */}
-        <Link to="/" className="group relative flex items-center justify-center">
-          <div className="bg-white/10 p-1.5 rounded-full group-hover:bg-white/20 transition-colors">
+          <div className="relative z-20 flex items-center gap-2">
             <img
               src={`${import.meta.env.BASE_URL}images/logos/core labs logo.svg`}
               alt="CORE Labs"
-              className="h-8 w-auto invert brightness-100"
+              // Interactive Logic: Active (White Pill) -> Black Logo (filter-none). Inactive (Dark BG) -> White Logo (invert).
+              className={`h-10 w-auto transition-all duration-200 ${isHome ? 'opacity-100 scale-105' : 'opacity-60 grayscale hover:opacity-100 hover:scale-105'}`}
             />
+            {/* Optional Text Label if needed, mostly user wanted logo */}
+            {/* <span className={`text-sm font-bold tracking-wider ${isHome ? 'text-gray-900' : 'text-gray-400'}`}>HOME</span> */}
           </div>
         </Link>
 
-        {/* Right Link: Network */}
+        {/* Tab 2: Network (CORE Network) */}
         <Link
           to="/network"
-          className={`${linkBaseClasses} ${isActive('/network') ? activeClasses : inactiveClasses}`}
+          className="relative z-10 px-8 py-3 rounded-full flex items-center justify-center transition-colors duration-200"
         >
-          Network
-          {isActive('/network') && (
-            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full animate-fade-in" />
+          {isNetwork && (
+            <motion.div
+              layoutId="nav-pill"
+              className="absolute inset-0 bg-white rounded-full shadow-md"
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
           )}
+          <div className="relative z-20 flex items-center gap-2">
+            <img
+              src={`${import.meta.env.BASE_URL}images/logos/core-network-logo.png`}
+              alt="Network"
+              // Same Logic: Active -> Original. Inactive -> Force White (invert).
+              // If this causes a rectangle, the PNG has a background. Assuming transparent for now to match style.
+              className={`h-10 w-auto transition-all duration-200 ${isNetwork ? 'opacity-100 scale-105' : 'opacity-60 grayscale hover:opacity-100 hover:scale-105'}`}
+            />
+          </div>
         </Link>
-
-        {/* Future links could go here if requested, e.g. Demos */}
 
       </div>
     </nav>

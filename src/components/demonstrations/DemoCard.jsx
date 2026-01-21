@@ -24,6 +24,7 @@ const DemoCard = ({ demo }) => {
                 height="100%"
                 src={`https://www.youtube.com/embed/${demo.youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${demo.youtubeId}&playsinline=1&modestbranding=1&rel=0`}
                 title={demo.title}
+                loading="lazy"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -35,6 +36,8 @@ const DemoCard = ({ demo }) => {
             <img
               src={getAssetUrl(demo.gif)}
               alt={demo.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.style.display = 'none'
@@ -44,6 +47,8 @@ const DemoCard = ({ demo }) => {
             <img
               src={getAssetUrl(demo.thumbnail)}
               alt={demo.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.style.display = 'none'
@@ -108,6 +113,7 @@ const DemoCard = ({ demo }) => {
                 height="100%"
                 src={`https://www.youtube.com/embed/${demo.youtubeId || demo.youtubeIdModal}?autoplay=1&rel=0`}
                 title={demo.title}
+                loading="lazy"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

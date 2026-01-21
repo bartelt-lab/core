@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import Navbar from '../components/common/Navbar'
 import Section from '../components/common/Section'
+import Button from '../components/common/Button'
 
 const Dynamo = () => {
     return (
         <div className="bg-white min-h-screen">
             {/* Hero Section */}
-            <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-gray-900 text-white">
+            <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gray-900 text-white">
                 <div className="absolute inset-0">
                     <img
                         src={`${import.meta.env.BASE_URL}videos/demonstrations/robotics/Lab4K.jpeg`}
@@ -39,7 +41,7 @@ const Dynamo = () => {
                     <div>
                         <h2 className="text-3xl font-heading font-bold mb-6 text-gray-900">The Goal</h2>
                         <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                            Demonstrate an integrated system where a humanoid robot identifies, grasps, and places multiple objects onto an autonomously navigating mobile base—validated entirely in simulation before real-world deployment.
+                            Dynamo aims to demonstrate an integrated system where a humanoid robot identifies, grasps, and places multiple objects onto an autonomously navigating mobile base. This requires solving complex challenges in Sim2Real transfer, where policies learned in simulation must robustly handle the noise and unpredictability of the physical world without extensive real-world fine-tuning.
                         </p>
                         <div className="bg-gray-50 p-6 rounded-xl border-l-4 border-primary-600">
                             <p className="italic text-gray-600">
@@ -83,14 +85,18 @@ const Dynamo = () => {
                                 <span className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center mr-3 text-primary-600">1</span>
                                 Hardware Stack
                             </h3>
-                            <ul className="space-y-3 text-gray-600">
+                            <ul className="space-y-4 text-gray-600">
                                 <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2">Mobile Base:</span>
-                                    <span>Clearpath Ridgeback — autonomous navigation and payload transport</span>
+                                    <span className="font-semibold text-gray-900 mr-2 min-w-[100px]">Mobile Base:</span>
+                                    <span>
+                                        <strong>Clearpath Ridgeback</strong> — An omnidirectional platform designed for developing manipulation algorithms. It handles heavy payloads and provides a stable base for the humanoid torso.
+                                    </span>
                                 </li>
                                 <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2">Manipulator:</span>
-                                    <span>Unitree G1 humanoid — dexterous, multi-object manipulation</span>
+                                    <span className="font-semibold text-gray-900 mr-2 min-w-[100px]">Manipulator:</span>
+                                    <span>
+                                        <strong>Unitree G1 Humanoid</strong> — Features high-torque motors and advanced dexterity, allowing for complex multi-object manipulation and diverse grasping strategies.
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -101,18 +107,24 @@ const Dynamo = () => {
                                 <span className="w-8 h-8 rounded-full bg-accent-100 flex items-center justify-center mr-3 text-accent-600">2</span>
                                 Simulation & Tooling
                             </h3>
-                            <ul className="space-y-3 text-gray-600">
+                            <ul className="space-y-4 text-gray-600">
                                 <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2">Primary Simulator:</span>
-                                    <span>NVIDIA Isaac Lab</span>
+                                    <span className="font-semibold text-gray-900 mr-2 min-w-[140px]">Primary Simulator:</span>
+                                    <span>
+                                        <strong>NVIDIA Isaac Lab</strong> — Leverages GPU-accelerated physics to simulate thousands of environments in parallel, drastically reducing training time for reinforcement learning policies.
+                                    </span>
                                 </li>
                                 <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2">Scene Rep:</span>
-                                    <span>Universal Scene Description (USD)</span>
+                                    <span className="font-semibold text-gray-900 mr-2 min-w-[140px]">Scene Rep:</span>
+                                    <span>
+                                        <strong>Universal Scene Description (USD)</strong> — Enables high-fidelity asset interchange and complex scene composition, ensuring the simulation closely matches the physical lab environment.
+                                    </span>
                                 </li>
                                 <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2">Synthetic Data:</span>
-                                    <span>Isaac Replicator for scalable training</span>
+                                    <span className="font-semibold text-gray-900 mr-2 min-w-[140px]">Synthetic Data:</span>
+                                    <span>
+                                        <strong>Isaac Replicator</strong> — Procedurally generates diverse training data with randomized textures and lighting to improve the vision system's generalization.
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -142,7 +154,41 @@ const Dynamo = () => {
                     </div>
                 </div>
             </Section>
-        </div>
+
+            {/* Experiments & Results Section */}
+            <Section id="experiments" className="bg-gray-50">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h2 className="text-3xl font-heading font-bold mb-8 text-gray-900">Experiments & Results</h2>
+
+                    <div className="bg-white p-12 rounded-2xl shadow-lg border border-gray-100 flex flex-col items-center">
+                        <div className="w-16 h-16 rounded-full bg-primary-50 flex items-center justify-center mb-6 text-primary-600 animate-pulse">
+                            <span className="text-2xl">⚡</span>
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">Research in Progress</h3>
+                        <p className="text-gray-600 max-w-lg mb-8">
+                            We are actively conducting experiments on Sim2Real transfer and long-horizon manipulation tasks.
+                            Initial benchmarking results and demonstrations will be published here shortly.
+                        </p>
+                        <div className="flex gap-4">
+                            <div className="h-3 w-3 rounded-full bg-primary-400 animate-bounce" style={{ animationDelay: '0s' }}></div>
+                            <div className="h-3 w-3 rounded-full bg-primary-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                            <div className="h-3 w-3 rounded-full bg-primary-400 animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                        </div>
+                    </div>
+                </div>
+            </Section>
+
+            {/* Navigation Footer */}
+            <Section className="bg-gray-50 pb-20">
+                <div className="flex justify-center">
+                    <Link to="/">
+                        <Button variant="outline" size="lg" className="group">
+                            <span className="mr-2">←</span> Back to CORE Labs
+                        </Button>
+                    </Link>
+                </div>
+            </Section>
+        </div >
     )
 }
 
