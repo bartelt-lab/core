@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Section from '../common/Section'
-import CoreLabsLeadCard from './CoreLabsLeadCard'
+import TeamMemberCard from './TeamMemberCard'
 import { getCoreLabsLeads } from '../../data/team'
 
 const CoreLabsSection = () => {
@@ -14,7 +14,13 @@ const CoreLabsSection = () => {
     >
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         {labLeads.map((member) => (
-          <CoreLabsLeadCard key={member.id} member={member} />
+          <TeamMemberCard
+            key={member.id}
+            member={{
+              ...member,
+              title: member.coreLabsLead?.role || member.title
+            }}
+          />
         ))}
       </div>
 
