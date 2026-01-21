@@ -11,9 +11,11 @@ const PublicationsSection = () => {
       className="bg-gray-50"
     >
       <div className="space-y-6 max-w-4xl mx-auto">
-        {publications.map((publication) => (
-          <PublicationItem key={publication.id} publication={publication} />
-        ))}
+        {[...publications]
+          .sort((a, b) => b.year - a.year)
+          .map((publication) => (
+            <PublicationItem key={publication.id} publication={publication} />
+          ))}
       </div>
 
       <div className="mt-12 text-center">

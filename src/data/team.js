@@ -126,9 +126,9 @@ export const teamMembers = [
     links: {},
     coreLabsLead: {
       labName: 'Goslar & Cluj Lab',
-      role: 'Goslar & Cluj Lead',
-      researchFocus: ['Autonomous Driving', 'Embodied Robotics'],
-      shortDescription: 'Leading research on autonomous systems that perceive and interact with the physical world.',
+      role: 'Goslar & Cluj Operations',
+      researchFocus: ['Mobile Manipulation', 'Enbodied AI', 'Self-Driving'],
+      shortDescription: 'Leading operations for the Goslar and Cluj labs, fostering collaboration on autonomous systems and embodied robotics.',
       selectedPublications: []
     }
   },
@@ -146,9 +146,9 @@ export const teamMembers = [
     links: {},
     coreLabsLead: {
       labName: 'Rostock Lab',
-      role: 'Rostock Lead',
-      researchFocus: ['Egocentric Vision'],
-      shortDescription: 'Advancing research in first-person visual understanding and human-centric perception.',
+      role: 'Rostock Operations',
+      researchFocus: ['Egocentric Perception', 'Spatial Understanding'],
+      shortDescription: 'Coordinating the Rostock lab operations with a focus on human-centric perception and egocentric vision research.',
       selectedPublications: []
     }
   },
@@ -172,9 +172,9 @@ export const teamMembers = [
     },
     coreLabsLead: {
       labName: 'Vision Lab',
-      role: 'Vision Lead',
-      researchFocus: ['Computer Vision', 'Explainable AI'],
-      shortDescription: 'Developing interpretable visual AI systems using foundation models and concept-based explanations.',
+      role: 'Vision Methods Lead',
+      researchFocus: ['Vision-Language Models', 'Explainable AI'],
+      shortDescription: 'Investigating how foundation models can derive domain-specific visual concepts to enhance neural network transparency and interpretability.',
       selectedPublications: []
     }
   },
@@ -192,9 +192,9 @@ export const teamMembers = [
     links: {},
     coreLabsLead: {
       labName: 'RL Lab',
-      role: 'RL Lead',
-      researchFocus: ['Reinforcement Learning'],
-      shortDescription: 'Exploring adaptive learning algorithms for autonomous decision-making in complex environments.',
+      role: 'RL Methods Lead',
+      researchFocus: ['Reinforcement Learning', 'LLMs', 'Self-play'],
+      shortDescription: 'Researching Reinforcement Learning, Large Language Models, and Self-play algorithms for autonomous decision-making.',
       selectedPublications: []
     }
   },

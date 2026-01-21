@@ -1,5 +1,6 @@
 import { Routes, Route, HashRouter } from 'react-router-dom'
 import Navbar from './components/common/Navbar'
+import RightSidebar from './components/common/RightSidebar'
 import Footer from './components/common/Footer'
 import Home from './pages/Home'
 import Demos from './pages/Demos'
@@ -11,6 +12,7 @@ function App() {
     <HashRouter>
       <div className="min-h-screen flex flex-col">
         <Navbar />
+        <RightSidebar />
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />

@@ -5,27 +5,10 @@ import { autonomousDemonstrations, cognitiveRobotics } from '../../data/demonstr
 
 const DemonstrationsSection = () => {
   return (
-    <div className="space-y-20">
-      {/* Autonomous Driving Section */}
+    <div id="demonstrations" className="space-y-20">
+      {/* Cognitive Robotics / Dynamo Section - Now First */}
       <Section
-        id="autonomous"
-        title="Autonomous Driving"
-        subtitle="Research & Demonstrations"
-      >
-        <p className="text-gray-600 text-lg max-w-3xl mx-auto text-center mb-12">
-          Our autonomous driving research combines cutting-edge algorithms with practical
-          implementation, resulting in robust solutions for real-world scenarios.
-        </p>
-        <div className="grid md:grid-cols-2 gap-8">
-          {autonomousDemonstrations.map((demo) => (
-            <DemoCard key={demo.id} demo={demo} />
-          ))}
-        </div>
-      </Section>
-
-      {/* Cognitive Robotics Section */}
-      <Section
-        id="cognitive-robotics"
+        id="dynamo"
         title="Cognitive Robotics"
         subtitle="New Directions"
         className="bg-gray-50"
@@ -67,6 +50,23 @@ const DemonstrationsSection = () => {
               </Link>
             </div>
           </div>
+        </div>
+      </Section>
+
+      {/* Autonomous Driving Section - Now Second */}
+      <Section
+        id="autonomous"
+        title="Autonomous Driving"
+        subtitle="Research & Demonstrations"
+      >
+        <p className="text-gray-600 text-lg max-w-3xl mx-auto text-center mb-12">
+          Our autonomous driving research combines cutting-edge algorithms with practical
+          implementation, resulting in robust solutions for real-world scenarios.
+        </p>
+        <div className="grid md:grid-cols-2 gap-8">
+          {autonomousDemonstrations.map((demo) => (
+            <DemoCard key={demo.id} demo={demo} />
+          ))}
         </div>
       </Section>
     </div>

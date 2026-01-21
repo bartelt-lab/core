@@ -31,7 +31,8 @@ export const autonomousDemonstrations = [
     title: "Traffic Network Builder",
     description: "Interactive tools for constructing and simulating complex traffic networks to rigorously test autonomous systems.",
     video: "/videos/demonstrations/autonomous_driving/TrafficNetworkBuilder.mp4",
-    youtubeId: "-dYcWwliIzw",
+    youtubeId: null, // Embed blocked, use local video for preview
+    youtubeIdModal: "-dYcWwliIzw", // Full video in modal
     thumbnail: null,
     category: "Simulation",
   },
