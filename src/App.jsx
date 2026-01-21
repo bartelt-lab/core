@@ -4,6 +4,7 @@ import Footer from './components/common/Footer'
 import Home from './pages/Home'
 import Demos from './pages/Demos'
 import Network from './pages/Network'
+import Dynamo from './pages/Dynamo'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/demos" element={<Demos />} />
             <Route path="/network" element={<Network />} />
+            <Route path="/dynamo" element={<Dynamo />} />
           </Routes>
         </main>
         <Footer />

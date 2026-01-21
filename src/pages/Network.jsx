@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import TeamMemberCard from '../components/team/TeamMemberCard'
-import { getMembersGroupedByRole } from '../data/team'
+import { getNetworkMembers } from '../data/team'
 
 const Network = () => {
   const { ref, inView } = useInView({
@@ -18,15 +18,6 @@ const Network = () => {
       transition: { duration: 0.5, ease: 'easeOut' }
     },
   }
-
-  const groupedMembers = getMembersGroupedByRole()
-
-  const roleGroups = [
-    { key: 'professors', title: 'Professors', members: groupedMembers.professors },
-    { key: 'postdocs', title: 'Postdoctoral Researchers', members: groupedMembers.postdocs },
-    { key: 'phdStudents', title: 'PhD Students', members: groupedMembers.phdStudents },
-    { key: 'staff', title: 'Staff', members: groupedMembers.staff },
-  ].filter(group => group.members && group.members.length > 0)
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -60,18 +51,11 @@ const Network = () => {
         animate={inView ? 'visible' : 'hidden'}
         className="container mx-auto px-8 md:px-16 lg:px-24 max-w-6xl py-12 md:py-16"
       >
-        {roleGroups.map((group) => (
-          <div key={group.key} className="mb-16 last:mb-0">
-            <h2 className="text-2xl font-heading font-bold text-gray-900 mb-8">
-              {group.title}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {group.members.map((member) => (
-                <TeamMemberCard key={member.id} member={member} />
-              ))}
-            </div>
-          </div>
-        ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {getNetworkMembers().map((member) => (
+            <TeamMemberCard key={member.id} member={member} />
+          ))}
+        </div>
       </motion.div>
     </div>
   )
