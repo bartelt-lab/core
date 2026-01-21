@@ -18,7 +18,10 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="relative h-screen flex flex-col justify-end overflow-hidden pb-24 md:pb-32">
-      <HeroVideo src={`${import.meta.env.BASE_URL}videos/hero.mp4`} />
+      <HeroVideo
+        src={`${import.meta.env.BASE_URL}videos/hero.mp4`}
+        poster={`${import.meta.env.BASE_URL}images/hero-poster.jpg`}
+      />
 
       {/* Gradient Overlay for bottom text readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none z-0"></div>

@@ -9,7 +9,7 @@ const Home = () => {
       <HeroSection />
       <AboutSection />
       <DemonstrationsSection />
-      <PublicationsSection />
+      <PublicationsSection limit={3} viewAllLink="/network#publications" />
     </>
   )
 }

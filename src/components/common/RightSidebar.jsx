@@ -5,40 +5,73 @@ import { motion, AnimatePresence } from 'framer-motion'
 const RightSidebar = () => {
     const [activeSection, setActiveSection] = useState('hero')
     const location = useLocation()
-    const isHome = location.pathname === '/'
+    const isVisible = location.pathname === '/' || location.pathname === '/dynamo'
 
-    // Sections to track for the vertical line
-    const sections = [
-        { id: 'initiative', label: 'Initiative' },
-        { id: 'partners', label: 'Partners' },
-        { id: 'team', label: 'Team' },
-        { id: 'dynamo', label: 'Dynamo' },
-        { id: 'autonomous', label: 'Autonomous' },
-        { id: 'publications', label: 'Publications' },
-    ]
+    // Section configurations for different routes
+    const routeSections = {
+        '/': [
+            { id: 'hero', label: 'Vision' },
+            { id: 'initiative', label: 'Initiative' },
+            { id: 'team', label: 'Team' },
+            { id: 'dynamo', label: 'Dynamo' },
+            { id: 'autonomous', label: 'Self-Driving' },
+            { id: 'publications', label: 'Publications' },
+        ],
+        '/dynamo': [
+            { id: 'hero', label: 'Introduction' },
+            { id: 'goal', label: 'Goal' },
+            { id: 'overview', label: 'Overview' },
+            { id: 'technical', label: 'Technical' },
+            { id: 'experiments', label: 'Experiments' },
+        ]
+    }
+
+    const sections = routeSections[location.pathname] || []
 
     // Scroll Spy Logic
     useEffect(() => {
-        if (!isHome) return
+        if (!isVisible) return
 
         const handleScroll = () => {
-            // Find the section that is currently most visible
-            let current = 'hero'
             const scrollPosition = window.scrollY + window.innerHeight / 3
 
-            // Check each section position
-            for (const section of sections) {
-                const element = document.getElementById(section.id)
-                if (element) {
-                    const { top, bottom } = element.getBoundingClientRect()
-                    const elementTop = top + window.scrollY
-                    const elementBottom = bottom + window.scrollY
-
-                    if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
-                        current = section.id
+            // Find valid sections (that exist in DOM)
+            const validSections = sections
+                .map(section => {
+                    const element = document.getElementById(section.id)
+                    if (!element) return null
+                    const { top, height } = element.getBoundingClientRect()
+                    return {
+                        id: section.id,
+                        top: top + window.scrollY,
+                        bottom: top + window.scrollY + height
                     }
+                })
+                .filter(Boolean)
+
+            // Logic:
+            // 1. If we are near the bottom of page, highlight the last item (Publication/Contact usually)
+            // 2. Otherwise, find the last section that has its TOP above the scrollPosition.
+            //    This handles gaps because if we are in a gap, we are conceptually "inside" the previous section or just past it.
+
+            // Check bottom of page
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+                if (validSections.length > 0) {
+                    setActiveSection(validSections[validSections.length - 1].id)
+                    return
                 }
             }
+
+            // Find active section
+            let current = 'hero'
+            // Reverse iterate: find the first one whose top is <= scrollPosition
+            for (let i = validSections.length - 1; i >= 0; i--) {
+                if (validSections[i].top <= scrollPosition) {
+                    current = validSections[i].id
+                    break
+                }
+            }
+
             setActiveSection(current)
         }
 
@@ -47,7 +80,7 @@ const RightSidebar = () => {
         handleScroll()
 
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [isHome])
+    }, [isVisible, sections])
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id)
@@ -66,7 +99,7 @@ const RightSidebar = () => {
 
     return (
         <AnimatePresence>
-            {isHome && (
+            {isVisible && (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
