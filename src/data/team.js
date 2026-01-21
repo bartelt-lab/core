@@ -51,32 +51,64 @@ export const teamMembers = [
     email: '',
     links: {}
   },
-  // Postdocs
+  // Lecturers / Assistant Professors
   {
     id: 3,
     name: 'Iulian Benta',
-    title: 'Postdoctoral Researcher',
-    roleCategory: 'postdoc',
+    title: 'Lecturer',
+    roleCategory: 'lecturer',
     affiliations: [
       { institution: institutions.UBB, department: 'Faculty of Mathematics and Computer Science' }
     ],
     photo: '/images/team/iulian-benta.jpg',
-    bio: 'Postdoctoral researcher at UBB.',
+    bio: 'Lecturer at UBB.',
     email: '',
     links: {}
   },
   {
     id: 4,
     name: 'Stefan Lüdtke',
-    title: 'Postdoctoral Researcher',
-    roleCategory: 'postdoc',
+    title: 'Assistant Professor',
+    roleCategory: 'assistant_professor',
     affiliations: [
       { institution: institutions.ROSTOCK, department: 'Institute of Communications Engineering' }
     ],
-    photo: '/images/team/stefan-luedtke.jpg',
-    bio: 'Postdoctoral researcher at the University of Rostock.',
+    photo: '/images/team/stefan-luedtke.png',
+    bio: 'Assistant Professor at the University of Rostock.',
     email: '',
     links: {}
+  },
+  // Postdocs
+  {
+    id: 9,
+    name: 'Sascha Marton',
+    title: 'Postdoctoral Researcher',
+    roleCategory: 'postdoc',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/images/team/sascha-marton.jpg',
+    bio: 'Postdoctoral researcher at TU Clausthal.',
+    email: 'sascha.marton@tu-clausthal.de',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=5PQJ3sEAAAAJ',
+      website: 'https://s-marton.github.io'
+    }
+  },
+  {
+    id: 10,
+    name: 'Kristian Kolthoff',
+    title: 'Postdoctoral Researcher',
+    roleCategory: 'postdoc',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/images/team/kristian-kolthoff.png',
+    bio: 'Postdoctoral researcher at TU Clausthal.',
+    email: 'kristian.kolthoff@tu-clausthal.de',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=OJBv75IAAAAJ&hl=de'
+    }
   },
   // PhD Students / Researchers (also CORE Labs Leads)
   {
@@ -108,7 +140,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.ROSTOCK, department: 'Institute of Communications Engineering' }
     ],
-    photo: '/images/team/ashwin-nedungadi.jpg',
+    photo: '/images/team/ashwin-nedungadi.png',
     bio: 'PhD student specializing in egocentric vision and computer vision.',
     email: '',
     links: {},
@@ -167,38 +199,7 @@ export const teamMembers = [
     }
   },
   // Additional Postdocs
-  {
-    id: 9,
-    name: 'Sascha Marton',
-    title: 'Postdoctoral Researcher',
-    roleCategory: 'postdoc',
-    affiliations: [
-      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
-    ],
-    photo: '/images/team/sascha-marton.jpg',
-    bio: 'Postdoctoral researcher at TU Clausthal.',
-    email: 'sascha.marton@tu-clausthal.de',
-    links: {
-      scholar: 'https://scholar.google.com/citations?user=5PQJ3sEAAAAJ',
-      website: 'https://s-marton.github.io'
-    }
-  },
-  // Additional PhD Students
-  {
-    id: 10,
-    name: 'Kristian Kolthoff',
-    title: 'PhD Student',
-    roleCategory: 'phd_student',
-    affiliations: [
-      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
-    ],
-    photo: '/images/team/kristian-kolthoff.png',
-    bio: 'PhD student at TU Clausthal.',
-    email: 'kristian.kolthoff@tu-clausthal.de',
-    links: {
-      scholar: 'https://scholar.google.com/citations?user=OJBv75IAAAAJ&hl=de'
-    }
-  },
+
   {
     id: 11,
     name: 'Jannik Brinkmann',
@@ -286,33 +287,7 @@ export const teamMembers = [
       linkedin: 'https://www.linkedin.com/in/markus-herre/'
     }
   },
-  // Support Staff
-  {
-    id: 17,
-    name: 'Mareike Kroeller',
-    title: 'Administrative Assistant',
-    roleCategory: 'staff',
-    affiliations: [
-      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
-    ],
-    photo: '/images/team/mareike-kroeller.jpg',
-    bio: 'Administrative assistant at TU Clausthal.',
-    email: 'mareike.kroeller@tu-clausthal.de',
-    links: {}
-  },
-  {
-    id: 18,
-    name: 'Steffen Ottow',
-    title: 'IT Specialist',
-    roleCategory: 'staff',
-    affiliations: [
-      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
-    ],
-    photo: '/images/team/steffen-ottow.jpg',
-    bio: 'IT specialist at TU Clausthal.',
-    email: 'steffen.ottow@tu-clausthal.de',
-    links: {}
-  }
+
 ]
 
 // Helper functions
@@ -343,7 +318,11 @@ export const getMembersByRole = (roleCategory) => {
  */
 export const getMembersGroupedByRole = () => {
   return {
-    professors: getMembersByRole('professor'),
+    professors: [
+      ...getMembersByRole('professor'),
+      ...getMembersByRole('lecturer'),
+      ...getMembersByRole('assistant_professor')
+    ],
     postdocs: getMembersByRole('postdoc'),
     phdStudents: getMembersByRole('phd_student'),
     researchers: getMembersByRole('researcher'),
