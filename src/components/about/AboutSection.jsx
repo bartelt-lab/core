@@ -1,5 +1,11 @@
 import Section from '../common/Section'
 
+const getAssetUrl = (path) => {
+  if (!path) return path
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path
+  return `${import.meta.env.BASE_URL}${cleanPath}`
+}
+
 const AboutSection = () => {
   return (
     <Section id="about">
@@ -26,13 +32,13 @@ const AboutSection = () => {
         {/* Simple logo strip */}
         <div className="flex items-center justify-center gap-12 pt-8 opacity-60">
           <img
-            src="/src/assets/images/logos/ubb-logo.png"
+            src={getAssetUrl('images/logos/ubb-logo.png')}
             alt="UBB"
             className="h-20"
             onError={(e) => { e.target.style.display = 'none' }}
           />
           <img
-            src="/src/assets/images/logos/fmi-logo.png"
+            src={getAssetUrl('images/logos/fmi-logo.png')}
             alt="FMI"
             className="h-20"
             onError={(e) => { e.target.style.display = 'none' }}

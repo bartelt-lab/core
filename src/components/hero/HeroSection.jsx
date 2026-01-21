@@ -17,8 +17,8 @@ const HeroSection = () => {
   }
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      <HeroVideo src="/src/assets/videos/hero.mp4" />
+    <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+      <HeroVideo src={`${import.meta.env.BASE_URL}videos/hero.mp4`} />
 
       <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
         <motion.div

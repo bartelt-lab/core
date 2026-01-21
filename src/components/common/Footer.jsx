@@ -1,8 +1,14 @@
+const getAssetUrl = (path) => {
+  if (!path) return path
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path
+  return `${import.meta.env.BASE_URL}${cleanPath}`
+}
+
 const Footer = () => {
   const logos = [
-    { src: '/src/assets/images/logos/ubb-logo.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro' },
-    { src: '/src/assets/images/logos/fmi-logo.png', alt: 'Faculty of Mathematics and Informatics', url: '#' },
-    { src: '/src/assets/images/logos/deutschsprachiger-logo.png', alt: 'Deutschsprachiger Studiengang', url: '#' },
+    { src: 'images/logos/ubb-logo.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro' },
+    { src: 'images/logos/fmi-logo.png', alt: 'Faculty of Mathematics and Informatics', url: '#' },
+    { src: 'images/logos/deutschsprachiger-logo.png', alt: 'Deutschsprachiger Studiengang', url: '#' },
   ]
 
   return (
@@ -22,7 +28,7 @@ const Footer = () => {
                   className="opacity-80 hover:opacity-100 transition-opacity"
                 >
                   <img
-                    src={logo.src}
+                    src={getAssetUrl(logo.src)}
                     alt={logo.alt}
                     className="h-12 w-auto object-contain filter brightness-0 invert"
                     onError={(e) => {

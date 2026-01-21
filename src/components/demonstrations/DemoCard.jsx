@@ -3,6 +3,13 @@ import Card from '../common/Card'
 import VideoPlayer from '../common/VideoPlayer'
 import { FaPlay } from 'react-icons/fa'
 
+const getAssetUrl = (path) => {
+  if (!path) return path
+  // Remove leading slash if present, then prepend BASE_URL
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path
+  return `${import.meta.env.BASE_URL}${cleanPath}`
+}
+
 const DemoCard = ({ demo }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false)
 
@@ -13,7 +20,7 @@ const DemoCard = ({ demo }) => {
           {/* GIF Preview if available, otherwise video thumbnail */}
           {demo.gif ? (
             <img
-              src={demo.gif}
+              src={getAssetUrl(demo.gif)}
               alt={demo.title}
               className="w-full h-full object-cover"
               onError={(e) => {
@@ -22,7 +29,7 @@ const DemoCard = ({ demo }) => {
             />
           ) : demo.thumbnail ? (
             <img
-              src={demo.thumbnail}
+              src={getAssetUrl(demo.thumbnail)}
               alt={demo.title}
               className="w-full h-full object-cover"
               onError={(e) => {
@@ -77,7 +84,7 @@ const DemoCard = ({ demo }) => {
               Close ✕
             </button>
             <VideoPlayer
-              src={demo.video}
+              src={getAssetUrl(demo.video)}
               controls={true}
               className="w-full rounded-lg"
             />
