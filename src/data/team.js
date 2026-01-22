@@ -28,6 +28,7 @@ export const teamMembers = [
   {
     id: 1,
     name: 'Christian Bartelt',
+    prefix: 'Prof. Dr.',
     title: 'Professor',
     roleCategory: 'professor',
     affiliations: [
@@ -41,12 +42,13 @@ export const teamMembers = [
   {
     id: 2,
     name: 'Christian Sacarea',
+    prefix: 'Dr.',
     title: 'Professor',
     roleCategory: 'professor',
     affiliations: [
       { institution: institutions.UBB, department: 'Faculty of Mathematics and Computer Science' }
     ],
-    photo: '/images/team/christian-sacarea.jpg',
+    photo: '/images/team/christian-sacarea.jpeg',
     bio: 'Professor at Babeș-Bolyai University with expertise in formal methods and AI.',
     email: '',
     links: {}
@@ -55,12 +57,13 @@ export const teamMembers = [
   {
     id: 3,
     name: 'Iulian Benta',
+    prefix: 'Dr. Ing.',
     title: 'Lecturer',
     roleCategory: 'lecturer',
     affiliations: [
       { institution: institutions.UBB, department: 'Faculty of Mathematics and Computer Science' }
     ],
-    photo: '/images/team/iulian-benta.jpg',
+    photo: '/images/team/iulian-benta.jpeg',
     bio: 'Lecturer at UBB.',
     email: '',
     links: {}
@@ -68,6 +71,7 @@ export const teamMembers = [
   {
     id: 4,
     name: 'Stefan Lüdtke',
+    prefix: 'Prof. Dr.',
     title: 'Assistant Professor',
     roleCategory: 'assistant_professor',
     affiliations: [
@@ -82,6 +86,7 @@ export const teamMembers = [
   {
     id: 9,
     name: 'Sascha Marton',
+    prefix: 'Dr.',
     title: 'Postdoctoral Researcher',
     roleCategory: 'postdoc',
     affiliations: [
@@ -98,6 +103,7 @@ export const teamMembers = [
   {
     id: 10,
     name: 'Kristian Kolthoff',
+    prefix: 'Dr.',
     title: 'Postdoctoral Researcher',
     roleCategory: 'postdoc',
     affiliations: [

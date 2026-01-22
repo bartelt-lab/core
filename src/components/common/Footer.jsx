@@ -6,9 +6,9 @@ const getAssetUrl = (path) => {
 
 const Footer = () => {
   const logos = [
+    { src: 'images/logos/clausthal-logo.png', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de' },
     { src: 'images/logos/ubb-logo.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro' },
-    { src: 'images/logos/fmi-logo.png', alt: 'Faculty of Mathematics and Informatics', url: '#' },
-    { src: 'images/logos/deutschsprachiger-logo.png', alt: 'Deutschsprachiger Studiengang', url: '#' },
+    { src: 'images/logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.uni-rostock.de' },
   ]
 
   return (
@@ -30,7 +30,7 @@ const Footer = () => {
                   <img
                     src={getAssetUrl(logo.src)}
                     alt={logo.alt}
-                    className="h-12 w-auto object-contain filter brightness-0 invert"
+                    className="h-12 w-auto object-contain"
                     onError={(e) => {
                       e.target.style.display = 'none'
                     }}
