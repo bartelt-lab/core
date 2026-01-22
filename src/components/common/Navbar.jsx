@@ -43,7 +43,7 @@ const Navbar = () => {
               src={`${import.meta.env.BASE_URL}images/logos/core labs logo.svg`}
               alt="CORE Labs"
               // Interactive Logic: Active (White Pill) -> Black Logo (filter-none). Inactive (Dark BG) -> White Logo (invert).
-              className={`h-10 w-auto transition-all duration-200 ${isHome ? 'opacity-100 scale-105' : 'opacity-60 grayscale hover:opacity-100 hover:scale-105'}`}
+              className={`h-10 w-auto transition-all duration-200 ${isHome ? 'opacity-100 scale-105' : 'opacity-70 invert hover:opacity-100 hover:scale-105'}`}
             />
             {/* Optional Text Label if needed, mostly user wanted logo */}
             {/* <span className={`text-sm font-bold tracking-wider ${isHome ? 'text-gray-900' : 'text-gray-400'}`}>HOME</span> */}
@@ -53,7 +53,7 @@ const Navbar = () => {
         {/* Tab 2: Network (CORE Network) */}
         <Link
           to="/network"
-          className="relative z-10 px-8 py-3 rounded-full flex items-center justify-center transition-colors duration-200"
+          className="relative z-10 px-6 py-2 rounded-full flex items-center justify-center transition-colors duration-200"
         >
           {isNetwork && (
             <motion.div
@@ -64,11 +64,9 @@ const Navbar = () => {
           )}
           <div className="relative z-20 flex items-center gap-2">
             <img
-              src={`${import.meta.env.BASE_URL}images/logos/core-network-logo.png`}
+              src={`${import.meta.env.BASE_URL}images/logos/core network logo.svg`}
               alt="Network"
-              // Same Logic: Active -> Original. Inactive -> Force White (invert).
-              // If this causes a rectangle, the PNG has a background. Assuming transparent for now to match style.
-              className={`h-10 w-auto transition-all duration-200 ${isNetwork ? 'opacity-100 scale-105' : 'opacity-60 grayscale hover:opacity-100 hover:scale-105'}`}
+              className={`h-10 w-auto transition-all duration-200 ${isNetwork ? 'opacity-100 scale-105' : 'opacity-70 invert hover:opacity-100 hover:scale-105'}`}
             />
           </div>
         </Link>

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 const RightSidebar = () => {
     const [activeSection, setActiveSection] = useState('hero')
     const location = useLocation()
-    const isVisible = location.pathname === '/' || location.pathname === '/dynamo'
+    const isVisible = location.pathname === '/' || location.pathname === '/dynamo' || location.pathname === '/network'
 
     // Section configurations for different routes
     const routeSections = {
@@ -23,6 +23,11 @@ const RightSidebar = () => {
             { id: 'overview', label: 'Overview' },
             { id: 'technical', label: 'Technical' },
             { id: 'experiments', label: 'Experiments' },
+        ],
+        '/network': [
+            { id: 'hero', label: 'Network' },
+            { id: 'team', label: 'Team' },
+            { id: 'publications', label: 'Publications' },
         ]
     }
 
@@ -63,7 +68,7 @@ const RightSidebar = () => {
             }
 
             // Find active section
-            let current = 'hero'
+            let current = validSections.length > 0 ? validSections[0].id : 'hero'
             // Reverse iterate: find the first one whose top is <= scrollPosition
             for (let i = validSections.length - 1; i >= 0; i--) {
                 if (validSections[i].top <= scrollPosition) {
@@ -90,12 +95,17 @@ const RightSidebar = () => {
     }
 
     // Theme Colors based on section
-    const isDarkSection = activeSection !== 'hero'
-    // Dark theme: heavily opaque/solid black/gray for high visibility
-    const lineColor = isDarkSection ? 'bg-gray-900' : 'bg-white/30'
-    const dotBaseClass = isDarkSection ? 'bg-transparent border-gray-900 border-2' : 'bg-white/50 border-white'
-    const dotHoverClass = isDarkSection ? 'group-hover:bg-gray-900' : 'group-hover:bg-white'
-    const labelColor = isDarkSection ? 'text-gray-900' : 'text-white'
+    // Theme Colors based on section
+    // Only Home and Dynamo have dark Heroes. Network has a light Hero.
+    const isDarkBackground = (location.pathname === '/' || location.pathname === '/dynamo') && activeSection === 'hero'
+
+    // If background is dark, use light sidebar. If background is light (default), use dark sidebar.
+    const useDarkSidebar = !isDarkBackground
+
+    const lineColor = useDarkSidebar ? 'bg-gray-900' : 'bg-white/30'
+    const dotBaseClass = useDarkSidebar ? 'bg-transparent border-gray-900 border-2' : 'bg-white/50 border-white'
+    const dotHoverClass = useDarkSidebar ? 'group-hover:bg-gray-900' : 'group-hover:bg-white'
+    const labelColor = useDarkSidebar ? 'text-gray-900' : 'text-white'
 
     return (
         <AnimatePresence>

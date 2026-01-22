@@ -29,7 +29,7 @@ const Network = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Page Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div id="hero" className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-8 md:px-16 lg:px-24 max-w-6xl py-12 md:py-16">
           <Link
             to="/"
@@ -113,6 +113,7 @@ const Network = () => {
         variants={variants}
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
+        id="team"
         className="container mx-auto px-8 md:px-16 lg:px-24 max-w-6xl py-12 md:py-16"
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
