@@ -6,17 +6,17 @@ const getAssetUrl = (path) => {
 
 const Footer = () => {
   const logos = [
-    { src: 'images/logos/clausthal-logo.png', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de' },
-    { src: 'images/logos/ubb-logo.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro' },
-    { src: 'images/logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.uni-rostock.de' },
+    { src: 'images/logos/clausthal-logo.png', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
+    { src: 'images/logos/UBB_white.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-24' },
+    { src: 'images/logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.uni-rostock.de', className: 'h-20' },
   ]
 
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
           {/* Partner Logos */}
-          <div>
+          <div className="md:col-span-3">
             <h3 className="text-lg font-semibold mb-4">Partner Institutions</h3>
             <div className="flex flex-wrap items-center gap-6">
               {logos.map((logo, index) => (
@@ -30,7 +30,7 @@ const Footer = () => {
                   <img
                     src={getAssetUrl(logo.src)}
                     alt={logo.alt}
-                    className="h-12 w-auto object-contain"
+                    className={`${logo.className} w-auto object-contain`}
                     onError={(e) => {
                       e.target.style.display = 'none'
                     }}
@@ -41,7 +41,7 @@ const Footer = () => {
           </div>
 
           {/* Copyright and Info */}
-          <div className="md:text-right">
+          <div className="md:col-span-1 md:text-right">
             <h3 className="text-2xl font-heading font-bold mb-2">CORE</h3>
             <p className="text-gray-400 mb-4">
               Cognitive Robotics in Europe

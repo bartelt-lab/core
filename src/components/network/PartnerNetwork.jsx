@@ -99,11 +99,11 @@ const PartnerNetwork = () => {
             <div className="col-span-1 lg:col-span-12 pt-2 border-t border-gray-100 mt-4">
                 <div className="flex flex-wrap justify-center gap-8 md:gap-12 transition-all duration-500 items-center">
                     {/* TUC */}
-                    <img src={getAssetUrl('images/logos/clausthal-logo.png')} alt="TU Clausthal" className="h-32 object-contain" />
+                    <img src={getAssetUrl('images/logos/clausthal-logo.png')} alt="TU Clausthal" className="h-24 object-contain" />
                     {/* UBB Only */}
-                    <img src={getAssetUrl('images/logos/ubb-logo.png')} alt="UBB" className="h-32 object-contain" />
+                    <img src={getAssetUrl('images/logos/ubb-logo.png')} alt="UBB" className="h-40 object-contain" />
                     {/* Rostock */}
-                    <img src={getAssetUrl('images/logos/rostock-logo.png')} alt="University of Rostock" className="h-32 object-contain" />
+                    <img src={getAssetUrl('images/logos/rostock-logo.png')} alt="University of Rostock" className="h-28 object-contain" />
                 </div>
             </div>
         </div>
