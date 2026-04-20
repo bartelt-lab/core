@@ -131,10 +131,10 @@ export const teamMembers = [
     email: 'david.szilagyi@tu-clausthal.de',
     links: {},
     coreLabsLead: {
-      labName: 'Goslar & Cluj Lab',
-      role: 'Goslar & Cluj Operations',
-      researchFocus: ['Mobile Manipulation', 'Enbodied AI', 'Self-Driving'],
-      shortDescription: 'Leading operations for the Goslar and Cluj labs, fostering collaboration on autonomous systems and embodied robotics.',
+      labName: 'Physical AI Lab',
+      role: 'TUC & UBB Operations',
+      researchFocus: ['Physical AI', 'Enbodied AI', 'Locomanipulation', 'Imitation Learning'],
+      shortDescription: 'Leading operations fostering collaboration on autonomous systems and embodied robotics.',
       selectedPublications: []
     }
   },
@@ -177,10 +177,10 @@ export const teamMembers = [
       website: 'https://patrick-knab.github.io'
     },
     coreLabsLead: {
-      labName: 'Vision Lab',
-      role: 'Vision Methods Lead',
-      researchFocus: ['Vision-Language Models', 'Explainable AI'],
-      shortDescription: 'Investigating how foundation models can derive domain-specific visual concepts to enhance neural network transparency and interpretability.',
+      labName: 'Perception Lab',
+      role: 'Multimodal Methods Lead',
+      researchFocus: ['Multimodal Learning', 'Vision-Language Models', 'Cross-Modal Reasoning'],
+      shortDescription: 'Developing multimodal methods that fuse visual and language information to improve model robustness, generalization, and reasoning across diverse real-world tasks.',
       selectedPublications: []
     }
   },
@@ -198,8 +198,8 @@ export const teamMembers = [
     links: {},
     coreLabsLead: {
       labName: 'RL Lab',
-      role: 'RL Methods Lead',
-      researchFocus: ['Reinforcement Learning', 'LLMs', 'Self-play'],
+      role: 'Policy Learning Lead',
+      researchFocus: ['Reinforcement Learning', 'Imitation Learning', 'LLMs', 'Self-play'],
       shortDescription: 'Researching Reinforcement Learning, Large Language Models, and Self-play algorithms for autonomous decision-making.',
       selectedPublications: []
     }
