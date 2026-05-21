@@ -1,0 +1,180 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+}
+
+h2 {
+    color: #317053;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.container {
+    max-width: 896px;
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+}
+
+.banner {
+    background-color: #e3f0ea;
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
+}
+
+.banner-text {
+    color: #317053;
+    font-size: 2.5em;
+    font-weight: 600;
+    text-align: left;
+    width: 100%;
+}
+
+.content {
+    margin: 40px 0;
+}
+
+.content-text {
+    font-size: 1.1em;
+    color: #333;
+    line-height: 1.6;
+}
+
+.card {
+    background: white;
+    width: 100%;
+    padding: 12px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    gap: 12px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    height: 340px;
+    margin-bottom: 16px;
+}
+
+.card:hover {
+    border-color: #cbd5e1;
+}
+
+.left {
+    flex: 0 0 260px;
+    height: 100%;
+    padding: 4px;
+}
+
+.left img {
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid #e2e8f0;
+    display: block;
+}
+
+.right {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+}
+
+.title {
+    color: #317053;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.tags {
+    font-size: 0.8em;
+    margin: 16px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: #f0f2f5;
+    padding: 6px 12px;
+    border-radius: 24px;
+    color: #4a5568;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.tag:hover {
+    background-color: #e2e8f0;
+}
+
+.description {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.6;
+    margin: 16px 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* Add media query for smaller screens */
+@media screen and (max-width: 768px) {
+
+    .banner {
+        height: 12vh;
+    }
+
+    
+    .left {
+        display: none;
+    }
+    
+    .card {
+        gap: 0;
+        padding: 20px;
+        height: auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .right {
+        padding: 0;
+    }
+
+    .container {
+        padding: 0 16px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .banner-text {
+        font-size: 1.8em;
+    }
+
+    .title {
+        font-size: 1.2em;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .tag {
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+}

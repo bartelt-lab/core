@@ -1,3 +1,5 @@
+@import "./styles/legacy.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
