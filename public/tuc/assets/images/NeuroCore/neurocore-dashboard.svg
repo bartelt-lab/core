@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1">
+      <stop offset="0" stop-color="#eef2ff"/>
+      <stop offset="1" stop-color="#e6fffa"/>
+    </linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="24" flood-color="#2563eb" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)" rx="28"/>
+
+  <!-- Dashboard card -->
+  <g transform="translate(160 120)" filter="url(#s)">
+    <rect width="1280" height="660" rx="20" fill="#ffffff"/>
+
+    <!-- Header -->
+    <rect x="36" y="28" width="420" height="48" rx="10" fill="#eef2ff"/>
+    <text x="60" y="60" font-family="Inter, Arial, sans-serif" font-size="20" fill="#2563eb" font-weight="700">NeuroCore Dashboard</text>
+
+    <!-- Left column: metrics -->
+    <g transform="translate(60,110)">
+      <rect width="320" height="180" rx="12" fill="#f8fafc"/>
+      <text x="18" y="34" font-family="Inter, Arial" font-size="14" fill="#64748b">GPU Utilization</text>
+      <rect x="18" y="56" width="260" height="18" rx="9" fill="#e6f0ff"/>
+      <rect x="18" y="56" width="180" height="18" rx="9" fill="#3b82f6"/>
+
+      <text x="18" y="110" font-family="Inter, Arial" font-size="14" fill="#64748b">Node Health</text>
+      <g transform="translate(18,124)">
+        <circle cx="18" cy="12" r="12" fill="#10b981"/>
+        <circle cx="54" cy="12" r="12" fill="#f59e0b"/>
+        <circle cx="90" cy="12" r="12" fill="#ef4444"/>
+      </g>
+    </g>
+
+    <!-- Center: charts -->
+    <g transform="translate(420,120)">
+      <rect width="760" height="320" rx="12" fill="#fbfdff"/>
+
+      <!-- Line chart -->
+      <polyline points="32,220 120,160 200,190 300,120 420,140 560,90 680,130" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="#93c5fd" opacity="0.2">
+        <path d="M32 220 L120 160 L200 190 L300 120 L420 140 L560 90 L680 130 L760 320 L32 320 Z"/>
+      </g>
+
+      <!-- Small bar chart -->
+      <g transform="translate(32,28)">
+        <rect x="0" y="120" width="24" height="60" rx="4" fill="#60a5fa"/>
+        <rect x="40" y="84" width="24" height="96" rx="4" fill="#60a5fa"/>
+        <rect x="80" y="56" width="24" height="124" rx="4" fill="#60a5fa"/>
+        <rect x="120" y="96" width="24" height="84" rx="4" fill="#60a5fa"/>
+      </g>
+
+      <!-- GPU icon -->
+      <g transform="translate(560,220)">
+        <rect x="0" y="0" width="120" height="72" rx="10" fill="#0ea5a4"/>
+        <rect x="12" y="12" width="96" height="12" rx="4" fill="#075985"/>
+        <rect x="12" y="32" width="96" height="12" rx="4" fill="#075985"/>
+        <circle cx="96" cy="56" r="6" fill="#34d399"/>
+      </g>
+    </g>
+
+    <!-- Footer labels -->
+    <text x="56" y="620" font-family="Inter, Arial" font-size="12" fill="#94a3b8">Real-time metrics · SSH node monitoring · Job orchestration</text>
+  </g>
+</svg>
