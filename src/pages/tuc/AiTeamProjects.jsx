@@ -127,7 +127,7 @@ const AiTeamProjects = () => {
 
                         {/* Interactive Abstract Visual (hidden on mobile via CSS media query) */}
                         <motion.div
-                            className="desktop-only flex md:w-1/2 relative justify-center perspective-1000 h-[400px] items-center"
+                            className="hidden md:flex md:w-1/2 relative justify-center perspective-1000 h-[400px] items-center"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 1, delay: 0.2 }}

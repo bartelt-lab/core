@@ -1,33 +1,55 @@
 import { useState } from 'react';
 import assetUrl from '../../utils/assetUrl';
 
+const Section = ({ id, title, subtitle, children }) => (
+    <section id={id} className="border-b border-gray-200 last:border-b-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="md:col-span-1">
+                <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+                {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
+            </div>
+            <div className="md:col-span-3 prose prose-gray max-w-none prose-headings:text-gray-900">
+                {children}
+            </div>
+        </div>
+    </section>
+);
+
 const Projects = () => {
     const [showVideo, setShowVideo] = useState(false);
 
     return (
         <>
-            {/* Introduction Section */}
-            <section id="intro-ai" className="home-section">
-                <div className="container">
-                    <p>
-                        The European Master Team Project offers an exciting opportunity for students to collaborate internationally while working on real-world challenges.
-                        This long-standing program is a partnership between the Technical University of Clausthal and Babes-Bolyai University in Cluj-Napoca, Romania,
-                        led by Prof. Dr. Christian Bartelt.
+            <section id="intro-ai" className="border-b border-gray-200">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+                    <p className="text-gray-700 leading-relaxed max-w-3xl">
+                        The European Master Team Project offers an exciting opportunity for students to collaborate
+                        internationally while working on real-world challenges. This long-standing program is a
+                        partnership between the Technical University of Clausthal and Babes-Bolyai University in
+                        Cluj-Napoca, Romania, led by Prof. Dr. Christian Bartelt.
                     </p>
-                    <br />
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <div id="video-container" style={{ position: 'relative', width: '560px', height: '315px' }}>
+
+                    <div className="mt-8 flex justify-center">
+                        <div
+                            className="relative w-full max-w-2xl bg-black"
+                            style={{ aspectRatio: '16 / 9' }}
+                        >
                             {!showVideo ? (
-                                <img
-                                    src={assetUrl("/images/projects/project-image.png")}
-                                    alt="Video thumbnail"
-                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', cursor: 'pointer' }}
+                                <button
+                                    type="button"
+                                    className="absolute inset-0 w-full h-full"
                                     onClick={() => setShowVideo(true)}
-                                />
+                                    aria-label="Play video"
+                                >
+                                    <img
+                                        src={assetUrl('/images/projects/project-image.png')}
+                                        alt="Video thumbnail"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </button>
                             ) : (
                                 <iframe
-                                    width="560"
-                                    height="315"
+                                    className="absolute inset-0 w-full h-full"
                                     src="https://www.youtube.com/embed/Q7sZvdIEC0Y?start=5&autoplay=1"
                                     title="International Master Team Project 2022"
                                     frameBorder="0"
@@ -41,85 +63,62 @@ const Projects = () => {
                 </div>
             </section>
 
-            {/* Details Section */}
-            <section id="topics" className="home-section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xs-12 col-md-3 section-heading">
-                            <h1>Details</h1>
-                            <p style={{ fontSize: '0.9em', color: '#666' }}>Summer Semester 2025</p>
-                        </div>
-                        <div className="col-xs-12 col-md-9">
-                            <div className="course-list-item" itemScope itemType="http://schema.org/CreativeWork">
-                                <div className="row">
-                                    <div className="col-sm-12">
-                                        <div className="course-description">
-                                            <p>
-                                                From October 10, 2025 to January 30, 2026, students from both universities will work in interdisciplinary teams on innovative projects at the intersection
-                                                of computer science and engineering. Collaboration takes place primarily online, with regular team meetings, milestone reviews, and mentor check-ins.
-                                            </p>
-                                            <p>
-                                                Two in-person project weeks are included:
-                                                <ul>
-                                                    <li>Cluj-Napoca, Romania: Week Nov 9</li>
-                                                    <li>Goslar, Germany: Week Nov 30</li>
-                                                </ul>
-                                                Travel, accommodation, and social event costs are fully covered.
-                                            </p>
-                                            <p>
-                                                This initiative is inspired by the successful model at the University of Mannheim.
-                                                For an archive of past projects, visit the{' '}
-                                                <a href="https://www.uni-mannheim.de/en/ines/teaching/european-master-team-project/" target="_blank" rel="noreferrer">Mannheim project page</a>.
-                                            </p>
-                                            <p>
-                                                Take this chance to work on an exciting project, gain international teamwork experience, and expand your professional network!
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Section id="topics" title="Details" subtitle="Summer Semester 2025">
+                <p>
+                    From October 10, 2025 to January 30, 2026, students from both universities will work in
+                    interdisciplinary teams on innovative projects at the intersection of computer science and
+                    engineering. Collaboration takes place primarily online, with regular team meetings, milestone
+                    reviews, and mentor check-ins.
+                </p>
+                <p>
+                    Two in-person project weeks are included:
+                </p>
+                <ul>
+                    <li>Cluj-Napoca, Romania: Week Nov 9</li>
+                    <li>Goslar, Germany: Week Nov 30</li>
+                </ul>
+                <p>Travel, accommodation, and social event costs are fully covered.</p>
+                <p>
+                    This initiative is inspired by the successful model at the University of Mannheim. For an archive
+                    of past projects, visit the{' '}
+                    <a
+                        href="https://www.uni-mannheim.de/en/ines/teaching/european-master-team-project/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        Mannheim project page
+                    </a>
+                    .
+                </p>
+                <p>
+                    Take this chance to work on an exciting project, gain international teamwork experience, and
+                    expand your professional network!
+                </p>
+            </Section>
 
-            {/* Projects Section */}
-            <section className="home-section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xs-12 col-md-3 section-heading">
-                            <h1>Projects</h1>
-                            <p style={{ fontSize: '0.9em', color: '#666' }}>Summer Semester 2025</p>
-                        </div>
-                        <div className="col-xs-12 col-md-9">
-                            <div className="course-list-item" itemScope itemType="http://schema.org/CreativeWork">
-                                <div className="row">
-                                    <div className="col-sm-12">
-                                        <div className="course-description">
-                                            This semester we will offer the following projects:
-                                            <br /><br />
-                                            <p>
-                                                <b>Development of an LLM Training & Evaluation Environment in the GenAI Cluster.</b>
-                                                {' '}In this project you will design and deploy the infrastructure to train, fine-tune, and rigorously evaluate Large Language Models on the GenAI Labs new EUR 400 000 GPU cluster, which combines state-of-the-art NVIDIA H200 GPUs with other high-performance accelerators.
-                                                Together with your team you will build a platform that captures real-time GPU, memory, network, and power metrics, make them available through intuitive dashboards, and configure automated alerting systems.
-                                                You will craft reproducible benchmarks for key workloads—from inference to fine-tuning, so results across models and hardware can be compared.
-                                                By the end of the semester you will know how to deliver production-grade MLOps tooling.
-                                            </p>
-                                            <p>
-                                                <b>Large Language Models for Text-Based Games.</b>
-                                                <br />
-                                                In this project you develop a Large Language Model (LLM) agent that is capable of self-improvement in strategy-games.
-                                                Specifically, you will develop an Artificial Intelligence for the two-player strategy game Stratego.
-                                                Working in a cross-institutional team with students from Babes-Bolyai University, you will gain hands-on experience with LLM deployment (e.g., model parallelism, compression, activation checkpointing) and cutting-edge self-improvement methods which include reinforcement learning, self-play, exploration strategies, and advanced model analysis.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Section title="Projects" subtitle="Summer Semester 2025">
+                <p>This semester we will offer the following projects:</p>
+                <p>
+                    <strong>Development of an LLM Training &amp; Evaluation Environment in the GenAI Cluster.</strong>{' '}
+                    In this project you will design and deploy the infrastructure to train, fine-tune, and rigorously
+                    evaluate Large Language Models on the GenAI Labs new EUR 400 000 GPU cluster, which combines
+                    state-of-the-art NVIDIA H200 GPUs with other high-performance accelerators. Together with your team
+                    you will build a platform that captures real-time GPU, memory, network, and power metrics, make
+                    them available through intuitive dashboards, and configure automated alerting systems. You will
+                    craft reproducible benchmarks for key workloads — from inference to fine-tuning, so results across
+                    models and hardware can be compared. By the end of the semester you will know how to deliver
+                    production-grade MLOps tooling.
+                </p>
+                <p>
+                    <strong>Large Language Models for Text-Based Games.</strong>{' '}
+                    In this project you develop a Large Language Model (LLM) agent that is capable of self-improvement
+                    in strategy-games. Specifically, you will develop an Artificial Intelligence for the two-player
+                    strategy game Stratego. Working in a cross-institutional team with students from Babes-Bolyai
+                    University, you will gain hands-on experience with LLM deployment (e.g., model parallelism,
+                    compression, activation checkpointing) and cutting-edge self-improvement methods which include
+                    reinforcement learning, self-play, exploration strategies, and advanced model analysis.
+                </p>
+            </Section>
         </>
     );
 };

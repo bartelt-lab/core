@@ -309,7 +309,35 @@ export const teamMembers = [
       linkedin: 'https://www.linkedin.com/in/markus-herre/'
     }
   },
-
+  {
+    id: 17,
+    name: 'Paul Koenig',
+    slug: 'paul-koenig',
+    title: 'PhD Student',
+    roleCategory: 'phd_student',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/members/paul-koenig.jpeg',
+    bio: 'PhD student at TU Clausthal.',
+    email: '',
+    links: {}
+  },
+  // Support staff
+  {
+    id: 18,
+    name: 'Steffen Ottow',
+    slug: 'ottow',
+    title: 'IT Specialist',
+    roleCategory: 'support_staff',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/members/steffen-ottow.jpg',
+    bio: 'IT specialist supporting the research group at TU Clausthal.',
+    email: '',
+    links: {}
+  },
 ]
 
 // Helper functions
@@ -348,6 +376,21 @@ export const getMembersGroupedByRole = () => {
     postdocs: getMembersByRole('postdoc'),
     phdStudents: getMembersByRole('phd_student'),
     researchers: getMembersByRole('researcher'),
-    staff: getMembersByRole('staff')
+    staff: getMembersByRole('staff'),
+    supportStaff: getMembersByRole('support_staff')
   }
+}
+
+/**
+ * Get members affiliated with a specific institution shortName (e.g. 'TUC').
+ */
+export const getMembersByInstitution = (shortName) => {
+  return teamMembers.filter(m => m.affiliations.some(a => a.institution.shortName === shortName))
+}
+
+/**
+ * Look up a member by slug.
+ */
+export const getMemberBySlug = (slug) => {
+  return teamMembers.find(m => m.slug === slug) || null
 }

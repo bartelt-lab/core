@@ -139,8 +139,8 @@ const Theses = () => {
             `}</style>
 
             {/* Intro Section */}
-            <section id="intro-ai" className="home-section">
-                <div className="container">
+            <section id="intro-ai" className="py-12 sm:py-16 border-b border-gray-200 last:border-b-0">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <p>
                         We regularly offer bachelor and master thesis projects for motivated students who are excited to explore research questions in our areas of interest.
                         Topics vary depending on ongoing projects, but we are always open to new ideas and collaborative exploration.
@@ -150,16 +150,16 @@ const Theses = () => {
             </section>
 
             {/* Process Section */}
-            <section id="topics" className="home-section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xs-12 col-md-3 section-heading">
+            <section id="topics" className="py-12 sm:py-16 border-b border-gray-200 last:border-b-0">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div className="md:col-span-1">
                             <h1>Process</h1>
                         </div>
-                        <div className="col-xs-12 col-md-9">
-                            <div className="course-list-item" itemScope itemType="http://schema.org/CreativeWork">
-                                <div className="row">
-                                    <div className="col-sm-12">
+                        <div className="md:col-span-3">
+                            <div>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                                    <div className="w-full">
                                         <div style={{ marginTop: '1.5em' }}>
                                             <ol>
                                                 <li>
@@ -193,18 +193,18 @@ const Theses = () => {
             </section>
 
             {/* Bachelor Theses Section */}
-            <section id="bachelor" className="home-section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xs-12 col-md-3 section-heading">
+            <section id="bachelor" className="py-12 sm:py-16 border-b border-gray-200 last:border-b-0">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div className="md:col-span-1">
                             <h1>Bachelor&nbsp;Theses</h1>
                             <p style={{ fontSize: '0.9em', color: '#666' }}>Winter Semester 2025</p>
                         </div>
-                        <div className="col-xs-12 col-md-9">
-                            <div className="course-list-item" itemScope itemType="http://schema.org/CreativeWork">
-                                <div className="row">
-                                    <div className="col-sm-12">
-                                        <div className="course-description">
+                        <div className="md:col-span-3">
+                            <div>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                                    <div className="w-full">
+                                        <div>
                                             The following topics are available for Bachelor theses. Click on each topic to expand its full description.
                                         </div>
                                         <ThesisTopicList topics={bachelorTheses} />
@@ -217,18 +217,18 @@ const Theses = () => {
             </section>
 
             {/* Master Theses Section */}
-            <section id="master" className="home-section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xs-12 col-md-3 section-heading">
+            <section id="master" className="py-12 sm:py-16 border-b border-gray-200 last:border-b-0">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div className="md:col-span-1">
                             <h1>Master&nbsp;Theses</h1>
                             <p style={{ fontSize: '0.9em', color: '#666' }}>Winter Semester 2025</p>
                         </div>
-                        <div className="col-xs-12 col-md-9">
-                            <div className="course-list-item" itemScope itemType="http://schema.org/CreativeWork">
-                                <div className="row">
-                                    <div className="col-sm-12">
-                                        <div className="course-description">
+                        <div className="md:col-span-3">
+                            <div>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                                    <div className="w-full">
+                                        <div>
                                             The following topics are available for Master theses. Click on each topic to expand its full description.
                                         </div>
                                         <ThesisTopicList topics={masterTheses} />

@@ -157,7 +157,7 @@ const RightSidebar = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="desktop-only flex fixed top-0 right-0 h-full w-12 lg:w-48 z-40 flex-col items-end justify-center pointer-events-none"
+                    className="hidden md:flex fixed top-0 right-0 h-full w-12 lg:w-48 z-40 flex-col items-end justify-center pointer-events-none"
                 >
                     <div className="flex flex-col items-center space-y-6 pointer-events-auto mr-4">
                         <div className={`w-px h-12 ${lineColor} transition-colors duration-300`}></div>

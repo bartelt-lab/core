@@ -167,13 +167,13 @@ const quickLinks = [
 ];
 
 const SectionBlock = ({ title, intro, topContent, children, id }) => (
-    <section id={id} className="home-section teaching-section">
-        <div className="container">
-            <div className="row">
-                <div className="col-xs-12 col-md-3 section-heading">
-                    <h1>{title}</h1>
+    <section id={id} className="teaching-section">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="md:col-span-1">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{title}</h1>
                 </div>
-                <div className="col-xs-12 col-md-9">
+                <div className="md:col-span-3">
                     {topContent}
                     {intro && <p className="teaching-intro">{intro}</p>}
                     {children}
@@ -530,7 +530,7 @@ const Teaching = ({ initialSection }) => {
             `}</style>
 
             <section className="teaching-hero">
-                <div className="container">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <h1>Teaching</h1>
                     <p>
                         This page gives an overview of our courses, seminars, and thesis opportunities, including
