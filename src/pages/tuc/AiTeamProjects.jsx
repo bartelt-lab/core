@@ -9,7 +9,7 @@ const activeProjects = [
         title: "DyNAMO",
         tag: "Cognitive Systems / RL",
         status: "Active",
-        image: assetUrl("/tuc/assets/images/dynamo/hero.jpeg"),
+        image: assetUrl("/images/projects/dynamo/hero.jpeg"),
         description: "Developing a cognitive framework for dynamic manipulation and reasoning in unstructured environments. Bridging perception and action with advanced RL.",
         link: "/tuc/core-team-projects/dynamo"
     },
@@ -18,7 +18,7 @@ const activeProjects = [
         title: "AI4AI",
         tag: "Computer Vision / LLMs",
         status: "Active",
-        image: assetUrl("/tuc/assets/images/ai4ai/hero.png"),
+        image: assetUrl("/images/projects/ai4ai/hero.png"),
         description: "From Image to Model using AI-assisted AI. Transitioning static images into editable engineering models (CAD, BIM, TikZ) by leveraging LLMs and Computer Vision.",
         link: "/tuc/core-team-projects/ai4ai"
     },
@@ -27,7 +27,7 @@ const activeProjects = [
         title: "Vergabepilot.AI",
         tag: "LLMs / Web Automation",
         status: "Active",
-        image: assetUrl("/tuc/assets/images/vergabepilot/hero.png"),
+        image: assetUrl("/images/projects/vergabepilot/hero.png"),
         description: "LLM-based tender scraping for state-of-the-art tender search. Automating web scraper generation, validation, and improvement using LLMs and MLLM agents.",
         link: "/tuc/core-team-projects/vergabepilot"
     }
@@ -39,7 +39,7 @@ const archiveProjects = [
         title: "NeuroCore Dashboard",
         tag: "MLOps / Monitoring",
         status: "Archive",
-        video: assetUrl("/tuc/assets/videos/NeuroCore_demo.mp4"),
+        video: assetUrl("/videos/demonstrations/neurocore/NeuroCore_demo.mp4"),
         description: "A dashboard for orchestrating machine learning training jobs, monitoring GPU and node health via SSH, and visualizing real-time performance analytics across compute clusters.",
         link: "/tuc/core-team-projects/neurocore"
     },
@@ -48,7 +48,7 @@ const archiveProjects = [
         title: "Stratego — LLM Based Games",
         tag: "LLMs / Games",
         status: "Archive",
-        video: assetUrl("/tuc/assets/videos/Stratego - Demo Video (RP 3).mp4"),
+        video: assetUrl("/videos/demonstrations/stratego/stratego-demo-rp3.mp4"),
         description: "Explore how different large language models compete in the classic strategy board game Stratego, with automated matchups, head-to-head win comparisons, and gameplay behavior logging to reveal strengths and patterns in decision making.",
         link: "/tuc/core-team-projects/stratego"
     },
@@ -66,7 +66,7 @@ const archiveProjects = [
         title: "Traffic Network Builder",
         tag: "Simulation Tools",
         status: "Archive",
-        video: assetUrl("/tuc/assets/videos/TrafficNetworkBuilder.mp4"),
+        video: assetUrl("/videos/demonstrations/autonomous_driving/TrafficNetworkBuilder.mp4"),
         description: "Interactive tools for constructing and simulating complex traffic networks to rigorously test autonomous systems in virtual environments.",
         link: "/tuc/core-team-projects/traffic-network"
     }
@@ -218,7 +218,7 @@ const AiTeamProjects = () => {
                                 </span>
                             </div>
                             <video
-                                src={assetUrl("/tuc/assets/videos/CTP_Showcase.mp4")}
+                                src={assetUrl("/videos/demonstrations/autonomous_driving/CTP_Showcase.mp4")}
                                 className="w-full h-full object-cover"
                                 autoPlay
                                 muted
@@ -242,7 +242,7 @@ const AiTeamProjects = () => {
                                 </span>
                             </div>
                             <video
-                                src={assetUrl("/tuc/assets/videos/CTP_Showcase_2022.mp4")}
+                                src={assetUrl("/videos/demonstrations/autonomous_driving/CTP_Showcase_2022.mp4")}
                                 className="w-full h-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
                                 autoPlay
                                 muted

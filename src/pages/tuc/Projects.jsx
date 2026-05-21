@@ -19,7 +19,7 @@ const Projects = () => {
                         <div id="video-container" style={{ position: 'relative', width: '560px', height: '315px' }}>
                             {!showVideo ? (
                                 <img
-                                    src={assetUrl("/tuc/assets/images/project-image.png")}
+                                    src={assetUrl("/images/projects/project-image.png")}
                                     alt="Video thumbnail"
                                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', cursor: 'pointer' }}
                                     onClick={() => setShowVideo(true)}

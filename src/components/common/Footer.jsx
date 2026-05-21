@@ -6,9 +6,9 @@ const getAssetUrl = (path) => {
 
 const Footer = () => {
   const logos = [
-    { src: 'images/logos/clausthal-logo.png', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
-    { src: 'images/logos/UBB_white.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-24' },
-    { src: 'images/logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.uni-rostock.de', className: 'h-20' },
+    { src: 'logos/clausthal-logo.png', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
+    { src: 'logos/ubb-white.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-24' },
+    { src: 'logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.uni-rostock.de', className: 'h-20' },
   ]
 
   return (

@@ -35,7 +35,7 @@ const AI4AIProject = () => {
             features={features}
             requirements={requirements}
             offerings={offerings}
-            downloadUrl={assetUrl("/tuc/assets/project_descriptions/AI4AIv1.0.pdf")}
+            downloadUrl={assetUrl("/documents/project-descriptions/AI4AIv1.0.pdf")}
         >
             {/* Timeline / Sprint Structure */}
             <div className="py-12 border-t border-gray-100">

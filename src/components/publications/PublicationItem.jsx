@@ -37,7 +37,7 @@ const PublicationItem = ({ publication }) => {
       </div>
 
       <p className="text-gray-700 mb-3">
-        {publication.authors.join(', ')}
+        {publication.authors.map((a) => a.name).join(', ')}
       </p>
 
       <div className="flex items-center justify-between text-sm">

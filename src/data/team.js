@@ -28,13 +28,14 @@ export const teamMembers = [
   {
     id: 1,
     name: 'Christian Bartelt',
+    slug: 'bartelt',
     prefix: 'Prof. Dr.',
     title: 'Professor',
     roleCategory: 'professor',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/christian-bartelt.png',
+    photo: '/members/christian-bartelt.png',
     bio: 'Group leader at TU Clausthal focusing on AI and autonomous systems research.',
     email: 'bartelt@isse.tu-clausthal.de',
     links: {}
@@ -42,13 +43,14 @@ export const teamMembers = [
   {
     id: 2,
     name: 'Christian Sacarea',
+    slug: 'sacarea',
     prefix: 'Dr.',
     title: 'Professor',
     roleCategory: 'professor',
     affiliations: [
       { institution: institutions.UBB, department: 'Faculty of Mathematics and Computer Science' }
     ],
-    photo: '/images/team/christian-sacarea.jpeg',
+    photo: '/members/christian-sacarea.jpeg',
     bio: 'Professor at Babeș-Bolyai University with expertise in formal methods and AI.',
     email: '',
     links: {}
@@ -57,13 +59,14 @@ export const teamMembers = [
   {
     id: 3,
     name: 'Iulian Benta',
+    slug: 'benta',
     prefix: 'Dr. Ing.',
     title: 'Lecturer',
     roleCategory: 'lecturer',
     affiliations: [
       { institution: institutions.UBB, department: 'Faculty of Mathematics and Computer Science' }
     ],
-    photo: '/images/team/iulian-benta.jpeg',
+    photo: '/members/iulian-benta.jpeg',
     bio: 'Lecturer at UBB.',
     email: '',
     links: {}
@@ -71,13 +74,14 @@ export const teamMembers = [
   {
     id: 4,
     name: 'Stefan Lüdtke',
+    slug: 'ludtke',
     prefix: 'Prof. Dr.',
     title: 'Assistant Professor',
     roleCategory: 'assistant_professor',
     affiliations: [
       { institution: institutions.ROSTOCK, department: 'Institute of Communications Engineering' }
     ],
-    photo: '/images/team/stefan-luedtke.png',
+    photo: '/members/stefan-luedtke.png',
     bio: 'Assistant Professor at the University of Rostock.',
     email: '',
     links: {}
@@ -86,13 +90,14 @@ export const teamMembers = [
   {
     id: 9,
     name: 'Sascha Marton',
+    slug: 'marton',
     prefix: 'Dr.',
     title: 'Postdoctoral Researcher',
     roleCategory: 'postdoc',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/sascha-marton.jpg',
+    photo: '/members/sascha-marton.jpg',
     bio: 'Postdoctoral researcher at TU Clausthal.',
     email: 'sascha.marton@tu-clausthal.de',
     links: {
@@ -103,13 +108,14 @@ export const teamMembers = [
   {
     id: 10,
     name: 'Kristian Kolthoff',
+    slug: 'kolthoff',
     prefix: 'Dr.',
     title: 'Postdoctoral Researcher',
     roleCategory: 'postdoc',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/kristian-kolthoff.png',
+    photo: '/members/kristian-kolthoff.png',
     bio: 'Postdoctoral researcher at TU Clausthal.',
     email: 'kristian.kolthoff@tu-clausthal.de',
     links: {
@@ -120,13 +126,14 @@ export const teamMembers = [
   {
     id: 5,
     name: 'David Szilagyi',
+    slug: 'szilagyi',
     title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' },
       { institution: institutions.UBB, department: 'Faculty of Mathematics and Computer Science' }
     ],
-    photo: '/images/team/david-szilagyi.jpg',
+    photo: '/members/david-szilagyi.jpg',
     bio: 'PhD student working on autonomous driving and embodied robotics.',
     email: 'david.szilagyi@tu-clausthal.de',
     links: {},
@@ -141,12 +148,13 @@ export const teamMembers = [
   {
     id: 6,
     name: 'Ashwin Nedungadi',
+    slug: 'nedungadi',
     title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.ROSTOCK, department: 'Institute of Communications Engineering' }
     ],
-    photo: '/images/team/ashwin-nedungadi.png',
+    photo: '/members/ashwin-nedungadi.png',
     bio: 'PhD student specializing in egocentric vision and computer vision.',
     email: '',
     links: {},
@@ -161,12 +169,13 @@ export const teamMembers = [
   {
     id: 7,
     name: 'Patrick Knab',
+    slug: 'knab',
     title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/patrick-knab.jpg',
+    photo: '/members/patrick-knab.jpg',
     bio: 'Third-year PhD candidate focusing on Computer Vision and Explainable AI. Research explores how foundation models can derive domain-specific visual concepts to enhance neural network transparency and interpretability.',
     email: 'patrick.knab@tu-clausthal.de',
     links: {
@@ -187,12 +196,13 @@ export const teamMembers = [
   {
     id: 8,
     name: 'Tim Grams',
+    slug: 'grams',
     title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/tim-grams.png',
+    photo: '/members/tim-grams.png',
     bio: 'PhD student researching reinforcement learning and decision-making systems.',
     email: 'tim.grams@tu-clausthal.de',
     links: {},
@@ -209,12 +219,13 @@ export const teamMembers = [
   {
     id: 11,
     name: 'Jannik Brinkmann',
+    slug: 'brinkmann',
     title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/jannik-brinkmann.png',
+    photo: '/members/jannik-brinkmann.png',
     bio: 'PhD student at TU Clausthal.',
     email: 'jannik.brinkmann@tu-clausthal.de',
     links: {
@@ -224,12 +235,13 @@ export const teamMembers = [
   {
     id: 12,
     name: 'Janis Zenkner',
+    slug: 'zenkner',
     title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/janis-zenkner.png',
+    photo: '/members/janis-zenkner.png',
     bio: 'PhD student at TU Clausthal.',
     email: 'janis.zenkner@tu-clausthal.de',
     links: {
@@ -240,12 +252,13 @@ export const teamMembers = [
   {
     id: 13,
     name: 'Tobias Sesterhenn',
+    slug: 'sesterhenn',
     title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/tobias-sesterhenn.png',
+    photo: '/members/tobias-sesterhenn.png',
     bio: 'PhD student at TU Clausthal.',
     email: 'tobias.sesterhenn@tu-clausthal.de',
     links: {}
@@ -253,12 +266,13 @@ export const teamMembers = [
   {
     id: 14,
     name: 'Mihail Birsan',
+    slug: 'birsan',
     title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/mihail-birsan.jpg',
+    photo: '/members/mihail-birsan.jpg',
     bio: 'PhD student at TU Clausthal.',
     email: '',
     links: {
@@ -268,12 +282,13 @@ export const teamMembers = [
   {
     id: 15,
     name: 'Celina Homa',
+    slug: 'homa',
     title: 'PhD Student (External)',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/celina-homa.jpeg',
+    photo: '/members/celina-homa.jpeg',
     bio: 'External PhD student at Mercedes-Benz.',
     email: '',
     links: {}
@@ -281,12 +296,13 @@ export const teamMembers = [
   {
     id: 16,
     name: 'Markus Herre',
+    slug: 'herre',
     title: 'PhD Student (Incoming)',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/images/team/markus-herre.jpeg',
+    photo: '/members/markus-herre.jpeg',
     bio: 'Incoming PhD student at TU Clausthal.',
     email: '',
     links: {
