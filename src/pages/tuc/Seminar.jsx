@@ -115,8 +115,8 @@ const Seminar = () => {
             `}</style>
 
             {/* Intro Section */}
-            <section id="intro-ai" className="home-section">
-                <div className="container">
+            <section id="intro-ai" className="py-12 sm:py-16 border-b border-gray-200 last:border-b-0">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <p>
                         We offer seminars that dive into current research questions and recent developments in our field.
                         These are a great opportunity to engage with cutting-edge topics, practice critical thinking, and get a feel for ongoing work in the lab and beyond.
@@ -126,16 +126,16 @@ const Seminar = () => {
             </section>
 
             {/* Process Section */}
-            <section id="topics" className="home-section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xs-12 col-md-3 section-heading">
+            <section id="topics" className="py-12 sm:py-16 border-b border-gray-200 last:border-b-0">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div className="md:col-span-1">
                             <h1>Process</h1>
                         </div>
-                        <div className="col-xs-12 col-md-9">
-                            <div className="course-list-item" itemScope itemType="http://schema.org/CreativeWork">
-                                <div className="row">
-                                    <div className="col-sm-12">
+                        <div className="md:col-span-3">
+                            <div>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                                    <div className="w-full">
                                         <div style={{ marginTop: '1.5em' }}>
                                             <ol>
                                                 <li>
@@ -159,18 +159,18 @@ const Seminar = () => {
             </section>
 
             {/* Seminar Topics Section */}
-            <section id="seminar" className="home-section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xs-12 col-md-3 section-heading">
+            <section id="seminar" className="py-12 sm:py-16 border-b border-gray-200 last:border-b-0">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div className="md:col-span-1">
                             <h1>Seminar Topics</h1>
                             <p style={{ fontSize: '0.9em', color: '#666' }}>Winter Semester 2025</p>
                         </div>
-                        <div className="col-xs-12 col-md-9">
-                            <div className="course-list-item" itemScope itemType="http://schema.org/CreativeWork">
-                                <div className="row">
-                                    <div className="col-sm-12">
-                                        <div className="course-description">
+                        <div className="md:col-span-3">
+                            <div>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                                    <div className="w-full">
+                                        <div>
                                             The following seminar topics are available. Click on each to expand the full description and objectives.
                                         </div>
                                         <div className="seminar-details" style={{ marginTop: '1.5em' }}>
