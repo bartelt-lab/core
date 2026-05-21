@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import assetUrl from '../../utils/assetUrl';
+
+const YOUTUBE_ID = 'Q7sZvdIEC0Y';
+const YOUTUBE_THUMB = `https://img.youtube.com/vi/${YOUTUBE_ID}/maxresdefault.jpg`;
+const YOUTUBE_EMBED = `https://www.youtube.com/embed/${YOUTUBE_ID}?start=5&autoplay=1`;
 
 const Section = ({ id, title, subtitle, children }) => (
     <section id={id} className="border-b border-gray-200 last:border-b-0">
@@ -37,20 +40,25 @@ const Projects = () => {
                             {!showVideo ? (
                                 <button
                                     type="button"
-                                    className="absolute inset-0 w-full h-full"
+                                    className="absolute inset-0 w-full h-full group"
                                     onClick={() => setShowVideo(true)}
                                     aria-label="Play video"
                                 >
                                     <img
-                                        src={assetUrl('/images/projects/project-image.png')}
-                                        alt="Video thumbnail"
+                                        src={YOUTUBE_THUMB}
+                                        alt="International Master Team Project 2022 — video thumbnail"
                                         className="w-full h-full object-cover"
                                     />
+                                    <span className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                                        <span className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-lg">
+                                            <span className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-gray-900 ml-1" />
+                                        </span>
+                                    </span>
                                 </button>
                             ) : (
                                 <iframe
                                     className="absolute inset-0 w-full h-full"
-                                    src="https://www.youtube.com/embed/Q7sZvdIEC0Y?start=5&autoplay=1"
+                                    src={YOUTUBE_EMBED}
                                     title="International Master Team Project 2022"
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

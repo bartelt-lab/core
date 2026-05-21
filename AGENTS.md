@@ -89,7 +89,7 @@ public/
 ```
 
 `memberSlug` resolves against `slug` on each entry in `src/data/team.js`.
-Currently the value is written but not yet rendered as a link (issue 7).
+Currently the value is written but not yet rendered as a link (issue 2).
 
 ## Working state — what's been done
 
@@ -114,53 +114,23 @@ eslint 9.39 (flat config) / @tailwindcss/{typography,forms} /
 react-icons 5.6 / react-intersection-observer 9.16 / prettier 3.3
 ```
 
-`vite.config.js` `base: '/'` — assumes deploy at domain root (see issue 4).
+`vite.config.js` `base: '/'` — kept from before the merge; works with the
+existing Pages deploy.
 
 ---
 
 ## Open issues
 
-Numbered for stable reference. Add new items at the end.
+Numbered for stable reference. Add new items at the end. Resolved
+issues are deleted (see git history for what was fixed and how).
 
-### 1. `project-image.png` missing
-`src/pages/tuc/Projects.jsx:22` references `/images/projects/project-image.png`
-as the YouTube thumbnail before the user clicks Play. The file was broken in
-the original bartelt source and never copied. Currently shows a broken
-image until clicked. Fix: pick a real thumbnail (probably extract a frame
-from the YouTube video) and save to `public/images/projects/`, OR replace
-with a generic play-button placeholder (gradient block).
-
-### 2. DCBM publication `image` field points at a PDF
-`public/data/publications.json` entry `id: "dcbm"` has
-`"image": "/papers/DCBM.pdf"`. `components/tuc/PublicationItem.jsx`
-already filters out PDF paths via `isImage()` so this just renders an
-empty image cell rather than crashing. Fix options: (a) generate a PNG
-thumbnail from the PDF and reference that, (b) drop the field to `null`.
-
-### 3. GitHub Pages deploy workflow — *resolved*
-`.github/workflows/deploy.yml` was already present in this repo from
-before the merge. Triggers on push to `main`, runs `npm ci && npm run
-build`, uploads `dist/` via `actions/upload-pages-artifact@v3` and
-deploys with `actions/deploy-pages@v4`. No changes needed.
-
-### 4. `vite.config.js` `base` — *resolved*
-Kept at `base: '/'` (the value set before the merge). Works with the
-current Pages deploy. HashRouter handles client routing so SPA fallback
-isn't an issue.
-
-### 5. Favicon
+### 1. Favicon
 `public/favicon.ico` is the default Vite icon. `public/icons/avocado.png`
 is the bartelt favicon source (carried over). Pick one — likely generate
-proper multi-resolution favicon set from one of the CORE logos (or
-avocado for tuc nostalgia).
+a proper multi-resolution favicon set from one of the CORE logos (or
+avocado for tuc nostalgia). Not urgent.
 
-### 6. `src/utils/assetUrl.js` docstring stale
-The JSDoc example still references the bartelt path:
-`* Example: assetUrl('/assets/logos/logo.png') → '/bartelt-lab.github.io/...'`
-Trivial fix — update the example to a current path like
-`'/logos/core-labs-logo.svg' → '/logos/core-labs-logo.svg'`.
-
-### 7. Member detail pages — `memberSlug` lookup target
+### 2. Member detail pages — `memberSlug` lookup target
 `publications.json` carries `authors[].memberSlug` and `team.js` carries
 `slug` per member. There is no `/network/member/:slug` route yet, so no
 component renders the link. Until that page exists, `PublicationItem`
@@ -169,7 +139,7 @@ route it under both `/network/member/:slug` (core) and possibly
 `/tuc/member/:slug` (bartelt-style). When that exists, `PublicationItem`
 (both tuc shared one + core one) can wrap author names in `<Link>`.
 
-### 8. Fetch path inconsistency between core and tuc Publications
+### 3. Fetch path inconsistency between core and tuc Publications
 - `src/components/publications/PublicationsSection.jsx:11` —
   `fetch(\`${import.meta.env.BASE_URL}data/publications.json\`)`
 - `src/pages/tuc/Publications.jsx:10` and `src/pages/tuc/Home.jsx:84` —
@@ -177,7 +147,7 @@ route it under both `/network/member/:slug` (core) and possibly
 Same result, two patterns. Pick one (`assetUrl` is the project-wide helper
 and is the better choice).
 
-### 9. `tuc/iclr-2025/` orphan subsite
+### 4. `tuc/iclr-2025/` orphan subsite
 Static page at `public/tuc/iclr-2025/index.html` (title: "CORE at ICLR
 2025"). Has its own `style.css` + `assets/`. **Not linked from any React
 page.** Reachable directly at `<domain>/tuc/iclr-2025/` (bypasses
@@ -185,7 +155,7 @@ HashRouter — it's a real path served by the static file server, no `#`).
 Decide: keep as direct-link archive (do nothing) OR add a link from
 Publications/Home/News.
 
-### 10. Manual browser smoke pass
+### 5. Manual browser smoke pass
 Build passes consistently but nobody has clicked through the app in a
 real browser since the restyle. Verify in dev (`npm run dev`):
 - `/#/` (core home, pill nav, hero video plays)
@@ -205,7 +175,7 @@ real browser since the restyle. Verify in dev (`npm run dev`):
 - DevTools console: no React 19 deprecation warnings, no router v7
   future-flag warnings, no missing-key warnings
 
-### 11. RightSidebar `ROUTE_SECTIONS` entries vs actual DOM
+### 6. RightSidebar `ROUTE_SECTIONS` entries vs actual DOM
 `src/components/common/RightSidebar.jsx` ROUTE_SECTIONS map declares
 section IDs per route. Verify each route actually renders `<div id="...">`
 for the listed ids:
@@ -219,20 +189,20 @@ for the listed ids:
 Missing sections gracefully fall through (sidebar still renders, just
 that dot won't activate). Worth a one-time audit.
 
-### 12. Publications page filtering / grouping
+### 7. Publications page filtering / grouping
 `pages/tuc/Publications.jsx` currently renders all 21 entries flat,
 sorted by date. With hundreds of entries planned, add: year grouping,
 type/venue filter, member filter (powered by `memberSlug`), search
 box. Defer until count ≥ 30.
 
-### 13. `AiTeamProjects.jsx` audit
+### 8. `AiTeamProjects.jsx` audit
 381 lines. Restyle pass left it alone because it was Tailwind already.
 Worth a once-over for: residual bartelt-only inline styles, motion
 animations that might fight with the new minimal Layout, refs to removed
 classes. Scroll-spy ids: `hero`, `active-projects`, `archive` — verify
 these still match section ids in the file.
 
-### 14. Helper consolidation for Tuc social icons
+### 9. Helper consolidation for Tuc social icons
 `pages/tuc/Home.jsx` has a `SOCIAL_ICON` map and `socialEntries(member)`
 helper inline. `team.js` has `links: { scholar, github, twitter,
 linkedin, website, ... }` but the Home page only renders
@@ -240,15 +210,15 @@ linkedin, website, ... }` but the Home page only renders
 to cover all of `team.js` keys OR document why only those three are
 shown on tuc Home (visual density / academic context).
 
-### 15. `publications.bib` ↔ `publications.json` parity
+### 10. `publications.bib` ↔ `publications.json` parity
 `public/data/publications.bib` is the BibTeX export (15 entries from
 bartelt source). `publications.json` has 21 entries (8 from old core
 publications.js merged in). The `.bib` is currently *behind* the JSON.
 Either regenerate the `.bib` from the JSON on every update (build-time
 script) or stop carrying the `.bib` separately.
 
-### 16. (Future) Publications page "Download BibTeX" link
-Once issue 15 is resolved, surface a "Download BibTeX" button on the
+### 11. (Future) Publications page "Download BibTeX" link
+Once issue 10 is resolved, surface a "Download BibTeX" button on the
 Publications page that links to `/data/publications.bib`. Trivial.
 
 ---
@@ -256,7 +226,7 @@ Publications page that links to `/data/publications.bib`. Trivial.
 ## How to work in this repo
 
 1. Work on `merge/tuc` branch. Don't merge to `main` until smoke pass
-   (issue 10) is clean.
+   (issue 5) is clean.
 2. After any change touching pages/routes/styles, run `npm run build` —
    it's fast (~2s) and catches missing imports / dead refs.
 3. When editing team membership, only touch `src/data/team.js`. Both core

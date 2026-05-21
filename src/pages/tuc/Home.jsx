@@ -1,85 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { FiMail, FiGlobe, FiMapPin } from 'react-icons/fi';
-import { FaGoogleScholar } from 'react-icons/fa6';
+import { FiMail, FiMapPin } from 'react-icons/fi';
 import assetUrl from '../../utils/assetUrl';
 import PublicationItem from '../../components/tuc/PublicationItem';
-import { teamMembers, getMemberBySlug } from '../../data/team';
-
-const SOCIAL_ICON = {
-    email: FiMail,
-    website: FiGlobe,
-    scholar: FaGoogleScholar,
-};
-
-// Order of Bartelt-lab members on this page. Slugs from team.js.
-const HOME_MEMBER_SLUGS = [
-    'bartelt',
-    'marton',
-    'kolthoff',
-    'brinkmann',
-    'zenkner',
-    'grams',
-    'knab',
-    'sesterhenn',
-    'szilagyi',
-    'homa',
-    'herre',
-    'paul-koenig',
-    'birsan',
-];
-
-const SUPPORT_SLUGS = ['ottow'];
-
-const socialEntries = (member) => {
-    const entries = [];
-    if (member.email) entries.push({ kind: 'email', url: `mailto:${member.email}` });
-    if (member.links?.scholar) entries.push({ kind: 'scholar', url: member.links.scholar });
-    if (member.links?.website) entries.push({ kind: 'website', url: member.links.website });
-    return entries;
-};
-
-const MemberCard = ({ member }) => {
-    const socials = socialEntries(member);
-    return (
-        <div className="flex flex-col items-center text-center">
-            <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 border border-gray-200 mb-3">
-                {member.photo ? (
-                    <img
-                        src={assetUrl(member.photo)}
-                        alt={member.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover"
-                    />
-                ) : (
-                    <div className="w-full h-full bg-gray-200" />
-                )}
-            </div>
-            <h3 className="text-sm font-semibold text-gray-900 leading-tight">{member.name}</h3>
-            <p className="text-xs text-gray-500 mt-1">{member.title}</p>
-            {socials.length > 0 && (
-                <ul className="flex gap-3 mt-2 list-none p-0">
-                    {socials.map((s) => {
-                        const Icon = SOCIAL_ICON[s.kind] || FiGlobe;
-                        return (
-                            <li key={s.kind}>
-                                <a
-                                    href={s.url}
-                                    className="text-gray-400 hover:text-gray-900 transition-colors"
-                                    aria-label={s.kind}
-                                    target={s.kind === 'email' ? undefined : '_blank'}
-                                    rel="noreferrer"
-                                >
-                                    <Icon size={16} />
-                                </a>
-                            </li>
-                        );
-                    })}
-                </ul>
-            )}
-        </div>
-    );
-};
+import TeamMemberCard from '../../components/team/TeamMemberCard';
+import { getMembersByInstitution } from '../../data/team';
 
 const Home = () => {
     const [publications, setPublications] = useState([]);
@@ -101,8 +26,9 @@ const Home = () => {
             });
     }, []);
 
-    const members = HOME_MEMBER_SLUGS.map(getMemberBySlug).filter(Boolean);
-    const support = SUPPORT_SLUGS.map(getMemberBySlug).filter(Boolean);
+    const tucMembers = getMembersByInstitution('TUC');
+    const members = tucMembers.filter((m) => m.roleCategory !== 'support_staff');
+    const support = tucMembers.filter((m) => m.roleCategory === 'support_staff');
 
     return (
         <>
@@ -185,7 +111,7 @@ const Home = () => {
                     <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Members</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
                         {members.map((m) => (
-                            <MemberCard key={m.slug} member={m} />
+                            <TeamMemberCard key={m.slug} member={m} />
                         ))}
                     </div>
 
@@ -194,7 +120,7 @@ const Home = () => {
                             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-16 mb-8">Support Staff</h2>
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
                                 {support.map((m) => (
-                                    <MemberCard key={m.slug} member={m} />
+                                    <TeamMemberCard key={m.slug} member={m} />
                                 ))}
                             </div>
                         </>
