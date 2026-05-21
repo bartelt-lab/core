@@ -1,4 +1,4 @@
-import { FaGithub, FaTwitter, FaLinkedin, FaGlobe } from 'react-icons/fa'
+import { FaGithub, FaTwitter, FaLinkedin, FaGlobe, FaEnvelope } from 'react-icons/fa'
 import { SiGooglescholar } from 'react-icons/si'
 
 const getAssetUrl = (path) => {
@@ -40,9 +40,18 @@ const TeamMemberCard = ({ member }) => {
       </p>
 
       {/* Social/Academic Links */}
-      {member.links && (
+      {(member.email || member.links) && (
         <div className="flex justify-center gap-3">
-          {member.links.scholar && (
+          {member.email && (
+            <a
+              href={`mailto:${member.email}`}
+              className="text-gray-600 hover:text-primary-600 transition-colors"
+              title="Email"
+            >
+              <FaEnvelope className="text-xl" />
+            </a>
+          )}
+          {member.links?.scholar && (
             <a
               href={member.links.scholar}
               target="_blank"
@@ -53,7 +62,7 @@ const TeamMemberCard = ({ member }) => {
               <SiGooglescholar className="text-xl" />
             </a>
           )}
-          {member.links.github && (
+          {member.links?.github && (
             <a
               href={member.links.github}
               target="_blank"
@@ -64,7 +73,7 @@ const TeamMemberCard = ({ member }) => {
               <FaGithub className="text-xl" />
             </a>
           )}
-          {member.links.twitter && (
+          {member.links?.twitter && (
             <a
               href={member.links.twitter}
               target="_blank"
@@ -75,7 +84,7 @@ const TeamMemberCard = ({ member }) => {
               <FaTwitter className="text-xl" />
             </a>
           )}
-          {member.links.linkedin && (
+          {member.links?.linkedin && (
             <a
               href={member.links.linkedin}
               target="_blank"
@@ -86,7 +95,7 @@ const TeamMemberCard = ({ member }) => {
               <FaLinkedin className="text-xl" />
             </a>
           )}
-          {member.links.website && (
+          {member.links?.website && (
             <a
               href={member.links.website}
               target="_blank"
