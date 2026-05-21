@@ -1,11 +1,27 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Section from '../common/Section'
 import PublicationItem from './PublicationItem'
-import { publications } from '../../data/publications'
 
 const PublicationsSection = ({ limit, viewAllLink }) => {
-  const sortedPublications = [...publications].sort((a, b) => b.year - a.year)
-  const displayPublications = limit ? sortedPublications.slice(0, limit) : sortedPublications
+  const [publications, setPublications] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}data/publications.json`)
+      .then((res) => res.json())
+      .then((data) => {
+        const sorted = [...data.publications].sort((a, b) => b.year - a.year)
+        setPublications(sorted)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.error('Failed to load publications', err)
+        setLoading(false)
+      })
+  }, [])
+
+  const displayPublications = limit ? publications.slice(0, limit) : publications
 
   return (
     <Section
@@ -14,7 +30,9 @@ const PublicationsSection = ({ limit, viewAllLink }) => {
       subtitle="Research Output"
       className="bg-gray-50"
     >
-      {limit ? (
+      {loading ? (
+        <div className="text-center text-gray-500">Loading publications…</div>
+      ) : limit ? (
         // Preview Mode (Vertical List with Blurred 3rd Item)
         <div className="space-y-6 max-w-4xl mx-auto relative">
           {displayPublications.map((publication, index) => {
@@ -54,8 +72,7 @@ const PublicationsSection = ({ limit, viewAllLink }) => {
         </div>
       )}
 
-      {/* Footer Text (only show in full mode or if not limiting? User asked for user input to navigate. The link card handles it for preview.) */}
-      {!limit && (
+      {!loading && !limit && (
         <div className="mt-12 text-center">
           <p className="text-gray-600 text-base">
             Additional publications forthcoming as our research progresses.

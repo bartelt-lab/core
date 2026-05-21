@@ -40,7 +40,7 @@ const Navbar = () => {
           )}
           <div className="relative z-20 flex items-center gap-2">
             <img
-              src={`${import.meta.env.BASE_URL}images/logos/core labs logo.svg`}
+              src={`${import.meta.env.BASE_URL}logos/core-labs-logo.svg`}
               alt="CORE Labs"
               // Interactive Logic: Active (White Pill) -> Black Logo (filter-none). Inactive (Dark BG) -> White Logo (invert).
               className={`h-10 w-auto transition-all duration-200 ${isHome ? 'opacity-100 scale-105' : 'opacity-70 invert hover:opacity-100 hover:scale-105'}`}
@@ -64,7 +64,7 @@ const Navbar = () => {
           )}
           <div className="relative z-20 flex items-center gap-2">
             <img
-              src={`${import.meta.env.BASE_URL}images/logos/core network logo.svg`}
+              src={`${import.meta.env.BASE_URL}logos/core-network-logo.svg`}
               alt="Network"
               className={`h-10 w-auto transition-all duration-200 ${isNetwork ? 'opacity-100 scale-105' : 'opacity-70 invert hover:opacity-100 hover:scale-105'}`}
             />

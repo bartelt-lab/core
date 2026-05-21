@@ -35,8 +35,8 @@ const NeuroCoreProject = () => {
             subtitle="Orchestration, monitoring and analytics for ML compute clusters"
             status="Archive"
             tags={["MLOps", "Monitoring"]}
-            heroVideo={assetUrl('/tuc/assets/videos/NeuroCore_demo.mp4')}
-            heroImage={assetUrl('/tuc/assets/images/NeuroCore/neurocore-dashboard.svg')}
+            heroVideo={assetUrl('/videos/demonstrations/neurocore/NeuroCore_demo.mp4')}
+            heroImage={assetUrl('/images/projects/neurocore/neurocore-dashboard.svg')}
             overview="NeuroCore is a unified dashboard designed to orchestrate machine learning workloads, monitor GPU and node health through SSH-based probes, and provide real-time analytics across distributed compute clusters."
             features={features}
             showEvalSection={false}

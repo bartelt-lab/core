@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
                         </button>
                         <div className="navbar-brand">
                             <Link className="logo" to="/tuc">
-                                <img src={assetUrl("/tuc/assets/logos/core_logo_no_text.png")} alt="Research group logo" />
+                                <img src={assetUrl("/logos/core-no-text.png")} alt="Research group logo" />
                             </Link>
                         </div>
                     </div>

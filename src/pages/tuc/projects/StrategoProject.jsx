@@ -15,8 +15,8 @@ const StrategoProject = () => {
             subtitle="Exploring LLM decision-making in the strategy board game Stratego"
             status="Archive"
             tags={["LLMs", "Games"]}
-            heroImage={assetUrl('/tuc/assets/images/stratego/stratego-poster.svg')}
-            heroVideo={assetUrl('/tuc/assets/videos/Stratego - Demo Video (RP 3).mp4')}
+            heroImage={assetUrl('/images/projects/stratego/stratego-poster.svg')}
+            heroVideo={assetUrl('/videos/demonstrations/stratego/stratego-demo-rp3.mp4')}
             overview="Explore how different large language models compete in the classic strategy board game Stratego, with automated matchups, head-to-head win comparisons, and gameplay behavior logging to reveal strengths and patterns in decision making."
             features={features}
             showEvalSection={false}
