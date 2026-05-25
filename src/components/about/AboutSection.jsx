@@ -63,7 +63,7 @@ const AboutSection = () => {
               </p>
             </div>
 
-            <Link to="/network" className="hidden md:inline-flex px-6 py-3 bg-gray-100 text-gray-900 font-semibold rounded-full hover:bg-primary-50 hover:text-primary-600 transition-colors">
+            <Link to="/#team" className="hidden md:inline-flex px-6 py-3 bg-gray-100 text-gray-900 font-semibold rounded-full hover:bg-primary-50 hover:text-primary-600 transition-colors">
               Meet the Full Team
             </Link>
           </div>
@@ -124,7 +124,7 @@ const AboutSection = () => {
           </div>
 
           <div className="md:hidden text-center mt-8">
-            <Link to="/network" className="inline-flex px-6 py-3 bg-gray-100 text-gray-900 font-semibold rounded-full hover:bg-gray-200 transition-colors">
+            <Link to="/#team" className="inline-flex px-6 py-3 bg-gray-100 text-gray-900 font-semibold rounded-full hover:bg-gray-200 transition-colors">
               Meet the Full Team
             </Link>
           </div>

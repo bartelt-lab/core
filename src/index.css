@@ -20,6 +20,24 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .compute-carousel {
+    animation: compute-carousel 38s linear infinite;
+  }
+
+  .compute-carousel:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes compute-carousel {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Custom scrollbar */

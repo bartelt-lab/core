@@ -3,17 +3,20 @@ export const institutions = {
   TUC: {
     name: 'TU Clausthal',
     shortName: 'TUC',
-    location: 'Goslar, Germany'
+    location: 'Goslar, Germany',
+    website: 'https://www.tu-clausthal.de/en/'
   },
   UBB: {
     name: 'Babeș-Bolyai University',
     shortName: 'UBB',
-    location: 'Cluj-Napoca, Romania'
+    location: 'Cluj-Napoca, Romania',
+    website: 'https://www.ubbcluj.ro/en/'
   },
   ROSTOCK: {
     name: 'University of Rostock',
     shortName: 'Rostock',
-    location: 'Rostock, Germany'
+    location: 'Rostock, Germany',
+    website: 'https://www.uni-rostock.de/en/'
   },
   MANNHEIM: {
     name: 'University of Mannheim',

@@ -11,6 +11,7 @@ const Home = lazy(() => import('./pages/Home'))
 const Demos = lazy(() => import('./pages/Demos'))
 const Network = lazy(() => import('./pages/Network'))
 const Dynamo = lazy(() => import('./pages/Dynamo'))
+const ComputeCluster = lazy(() => import('./pages/ComputeCluster'))
 
 // /tuc/* pages
 const TucHome = lazy(() => import('./pages/tuc/Home'))
@@ -41,10 +42,13 @@ function CoreShell() {
       <main className="flex-grow">
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Network />} />
+            <Route path="/core-labs" element={<Home />} />
             <Route path="/demos" element={<Demos />} />
             <Route path="/network" element={<Network />} />
             <Route path="/dynamo" element={<Dynamo />} />
+            <Route path="/ai-team-projects" element={<TucAiTeamProjects />} />
+            <Route path="/compute-cluster" element={<ComputeCluster />} />
           </Routes>
         </Suspense>
       </main>

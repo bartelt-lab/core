@@ -6,12 +6,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ROUTE_SECTIONS = {
     // CORE routes
     '/': [
+        { id: 'hero', label: 'Network' },
+        { id: 'team', label: 'Team' },
+        { id: 'publications', label: 'Publications' },
+    ],
+    '/core-labs': [
         { id: 'hero', label: 'Vision' },
         { id: 'initiative', label: 'Initiative' },
         { id: 'team', label: 'Team' },
+        { id: 'publications', label: 'Publications' },
         { id: 'dynamo', label: 'Dynamo' },
         { id: 'autonomous', label: 'Self-Driving' },
-        { id: 'publications', label: 'Publications' },
     ],
     '/dynamo': [
         { id: 'hero', label: 'Introduction' },
@@ -24,6 +29,16 @@ const ROUTE_SECTIONS = {
         { id: 'hero', label: 'Network' },
         { id: 'team', label: 'Team' },
         { id: 'publications', label: 'Publications' },
+    ],
+    '/ai-team-projects': [
+        { id: 'hero', label: 'Overview' },
+        { id: 'active-projects', label: 'Active' },
+        { id: 'archive', label: 'Archive' },
+    ],
+    '/compute-cluster': [
+        { id: 'hero', label: 'Compute' },
+        { id: 'overview', label: 'Overview' },
+        { id: 'publications', label: 'Research' },
     ],
     // /tuc/* bartelt routes
     '/tuc/core-team-projects': [
@@ -53,7 +68,7 @@ const ROUTE_SECTIONS = {
 };
 
 // Routes with dark hero — sidebar uses light theme over the hero section
-const DARK_HERO_ROUTES = new Set(['/', '/dynamo']);
+const DARK_HERO_ROUTES = new Set(['/core-labs', '/dynamo', '/compute-cluster']);
 
 const RightSidebar = () => {
     const [activeSection, setActiveSection] = useState('hero');
@@ -146,9 +161,6 @@ const RightSidebar = () => {
     const dotBaseClass = useDarkSidebar ? 'bg-transparent border-gray-400 border-2' : 'bg-white/50 border-white';
     const dotHoverClass = useDarkSidebar ? 'group-hover:bg-gray-600' : 'group-hover:bg-white';
     const activeDotClass = useDarkSidebar ? 'bg-blue-600' : 'bg-white';
-    const activeLabelClass = useDarkSidebar ? 'text-blue-600' : 'text-white';
-    const inactiveLabelClass = useDarkSidebar ? 'text-gray-500' : 'text-white/70';
-
     return (
         <AnimatePresence>
             {isVisible && (
@@ -157,31 +169,22 @@ const RightSidebar = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="hidden md:flex fixed top-0 right-0 h-full w-12 lg:w-48 z-40 flex-col items-end justify-center pointer-events-none"
+                    className="hidden md:flex fixed top-0 right-5 h-full w-10 z-40 flex-col items-center justify-center pointer-events-none"
                 >
-                    <div className="flex flex-col items-center space-y-6 pointer-events-auto mr-4">
+                    <div className="flex flex-col items-center space-y-6 pointer-events-auto rounded-full bg-white/35 px-2 py-5 backdrop-blur-sm">
                         <div className={`w-px h-12 ${lineColor} transition-colors duration-300`}></div>
 
                         {sections.map((section) => (
                             <div key={section.id} className="relative group flex items-center">
-                                <span
-                                    className={`hidden lg:block text-xs font-bold uppercase tracking-widest transition-all duration-200 whitespace-nowrap mr-3
-                                        ${activeSection === section.id
-                                            ? `opacity-100 ${activeLabelClass}`
-                                            : `opacity-60 ${inactiveLabelClass} group-hover:opacity-90`
-                                        }
-                                    `}
-                                >
-                                    {section.label}
-                                </span>
                                 <button
                                     onClick={() => scrollToSection(section.id)}
                                     className="relative flex items-center justify-center w-8 h-8 group-hover:scale-110 transition-transform duration-200"
                                     aria-label={`Scroll to ${section.label}`}
+                                    title={section.label}
                                 >
                                     <div className={`rounded-full transition-all duration-300
                                         ${activeSection === section.id
-                                            ? `w-3.5 h-3.5 ${activeDotClass} scale-125`
+                                            ? `w-4 h-4 ${activeDotClass} scale-125`
                                             : `w-2.5 h-2.5 ${dotBaseClass} ${dotHoverClass}`
                                         }
                                     `} />
