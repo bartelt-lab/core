@@ -8,8 +8,12 @@ const Home = () => {
     <>
       <HeroSection />
       <AboutSection />
+      <PublicationsSection
+        title="CORE Labs Publications"
+        subtitle="Research Archive"
+        intro="A fuller archive of publications connected to CORE Labs and the wider network, shown with available paper visuals and direct links."
+      />
       <DemonstrationsSection />
-      <PublicationsSection limit={3} viewAllLink="/network#publications" />
     </>
   )
 }
