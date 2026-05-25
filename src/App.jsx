@@ -12,6 +12,7 @@ const Demos = lazy(() => import('./pages/Demos'))
 const Network = lazy(() => import('./pages/Network'))
 const Dynamo = lazy(() => import('./pages/Dynamo'))
 const ComputeCluster = lazy(() => import('./pages/ComputeCluster'))
+const Publications = lazy(() => import('./pages/Publications'))
 
 // /tuc/* pages
 const TucHome = lazy(() => import('./pages/tuc/Home'))
@@ -46,8 +47,16 @@ function CoreShell() {
             <Route path="/core-labs" element={<Home />} />
             <Route path="/demos" element={<Demos />} />
             <Route path="/network" element={<Network />} />
+            <Route path="/publications" element={<Publications />} />
             <Route path="/dynamo" element={<Dynamo />} />
             <Route path="/ai-team-projects" element={<TucAiTeamProjects />} />
+            <Route path="/ai-team-projects/dynamo" element={<TucDynamoProject />} />
+            <Route path="/ai-team-projects/ai4ai" element={<TucAI4AIProject />} />
+            <Route path="/ai-team-projects/vergabepilot" element={<TucVergabepilotProject />} />
+            <Route path="/ai-team-projects/neurocore" element={<TucNeuroCoreProject />} />
+            <Route path="/ai-team-projects/stratego" element={<TucStrategoProject />} />
+            <Route path="/ai-team-projects/traffic-network" element={<TucTrafficNetworkProject />} />
+            <Route path="/ai-team-projects/self-driving" element={<TucSelfDrivingProject />} />
             <Route path="/compute-cluster" element={<ComputeCluster />} />
           </Routes>
         </Suspense>

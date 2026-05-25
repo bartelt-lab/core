@@ -11,7 +11,7 @@ const NAV_ITEMS = [
     { to: '/tuc/publications', label: 'Publications' },
     { to: '/tuc/teaching', label: 'Teaching' },
     { to: '/tuc/join-us', label: 'Join Us' },
-    { to: '/tuc/core-team-projects', label: 'AI Team Projects' },
+    { to: '/network', label: 'CORE Network' },
 ];
 
 const Layout = ({ children }) => {
@@ -93,20 +93,39 @@ const Layout = ({ children }) => {
 
             <main className="flex-grow pt-16">{children}</main>
 
-            <footer className="border-t border-gray-200 bg-white">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500">
-                    <p className="m-0">
-                        Christian Bartelt, {CURRENT_YEAR}
-                    </p>
-                    <button
-                        type="button"
-                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                        className="inline-flex items-center gap-1 text-gray-500 hover:text-gray-900 transition-colors"
-                        aria-label="Back to top"
-                    >
-                        <FiChevronUp size={18} />
-                        Back to top
-                    </button>
+            <footer className="border-t border-slate-200 bg-gradient-to-b from-white to-slate-50">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+                    <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+                        <div className="flex min-w-0 items-center gap-3">
+                            <img
+                                src={assetUrl('/logos/core-no-text.png')}
+                                alt="Research group logo"
+                                className="h-8 w-auto shrink-0"
+                            />
+                            <div className="min-w-0">
+                                <p className="text-sm font-semibold leading-5 text-slate-900 break-words">
+                                    Machine Learning &amp; Cognitive Software
+                                </p>
+                                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                                    TU Clausthal
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 md:justify-end">
+                            <span>Christian Bartelt, {CURRENT_YEAR}</span>
+                            <span className="hidden sm:inline-block h-4 w-px bg-slate-300" aria-hidden="true" />
+                            <button
+                                type="button"
+                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                                className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-blue-300 hover:text-blue-700"
+                                aria-label="Back to top"
+                            >
+                                <FiChevronUp size={16} />
+                                Back to top
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </footer>
         </div>

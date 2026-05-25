@@ -5,6 +5,7 @@ const Section = ({
   id,
   children,
   className = '',
+  contentClassName = '',
   title,
   subtitle,
   dark = false,
@@ -33,7 +34,7 @@ const Section = ({
         variants={variants}
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
-        className="container mx-auto px-8 md:px-16 lg:px-24 max-w-6xl"
+        className={`container mx-auto px-8 md:px-16 lg:px-24 max-w-6xl ${contentClassName}`}
       >
         {(title || subtitle) && (
           <div className="text-center mb-12 md:mb-16">

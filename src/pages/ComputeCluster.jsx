@@ -1,98 +1,249 @@
-import { useEffect, useMemo, useState } from 'react'
-import { FaDatabase, FaMicrochip, FaNetworkWired, FaServer } from 'react-icons/fa'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  FaDatabase,
+  FaMicrochip,
+  FaNetworkWired,
+  FaServer,
+  FaCogs,
+  FaFlask,
+  FaUniversity,
+  FaCheckCircle,
+  FaExternalLinkAlt,
+  FaArrowRight,
+  FaShieldAlt,
+  FaChevronDown,
+  FaChevronUp,
+} from 'react-icons/fa'
+import PublicationCarousel from '../components/publications/PublicationCarousel'
 import assetUrl from '../utils/assetUrl'
 
+// ─── Data ──────────────────────────────────────────────────────────────────
+
 const clusterStats = [
-  { label: 'Research Jobs', value: 'ML', icon: FaMicrochip },
-  { label: 'Shared Storage', value: 'Datasets', icon: FaDatabase },
-  { label: 'Networked Sites', value: 'DE + RO', icon: FaNetworkWired },
+  { label: 'Research Projects', value: '10+', icon: FaFlask, description: 'Active and completed' },
+  { label: 'Publications', value: '21', icon: FaDatabase, description: 'Peer-reviewed outputs' },
+  { label: 'Network Sites', value: '3', icon: FaNetworkWired, description: 'DE · DE · RO' },
+  { label: 'Research Staff', value: '15+', icon: FaMicrochip, description: 'Across all institutions' },
 ]
 
-const fallbackImages = [
-  '/papers/guide.png',
-  '/papers/trove.png',
-  '/papers/mitigating.png',
-  '/papers/DSEG.png',
+const capabilities = [
+  {
+    icon: FaMicrochip,
+    title: 'GPU Compute',
+    tag: 'Training Infrastructure',
+    description:
+      'High-performance GPU nodes support deep learning training, reinforcement learning, and large-scale simulation workloads distributed across TU Clausthal and partner sites.',
+    points: ['Multi-GPU training jobs', 'Distributed experiment queues', 'Checkpoint storage'],
+  },
+  {
+    icon: FaDatabase,
+    title: 'Dataset Storage',
+    tag: 'Research Data Management',
+    description:
+      'Shared persistent storage keeps datasets, model checkpoints, evaluation artifacts, and paper supplementary material co-located with the experiments that produced them.',
+    points: ['Versioned dataset registry', 'Cross-site data access', 'Artifact archiving'],
+  },
+  {
+    icon: FaNetworkWired,
+    title: 'Multi-Site Network',
+    tag: 'Distributed Infrastructure',
+    description:
+      'Secure inter-site connectivity enables researchers at TU Clausthal, University of Rostock, and Babeș-Bolyai University to share jobs, access shared storage, and coordinate experiments.',
+    points: ['TUC ↔ Rostock ↔ UBB links', 'Managed access controls', 'Remote job submission'],
+  },
+  {
+    icon: FaCogs,
+    title: 'Robotics Simulation',
+    tag: 'Sim-to-Real Pipeline',
+    description:
+      'Isaac Lab and ROS2-based simulation environments run repeatable robot trials before hardware deployment, supporting the DyNAMO project and future robotics initiatives.',
+    points: ['Isaac Lab USD environments', 'Navigation & manipulation scenes', 'Sim2Real validation loop'],
+  },
 ]
+
+const infrastructure = [
+  {
+    site: 'TU Clausthal',
+    location: 'Goslar, Germany',
+    role: 'Primary Compute Node',
+    specs: ['GPU cluster (multi-node)', 'ROS2 / Isaac Lab stack', 'Ridgeback & G1 robot hardware'],
+    color: 'blue',
+  },
+  {
+    site: 'University of Rostock',
+    location: 'Rostock, Germany',
+    role: 'Research & Storage Node',
+    specs: ['Signal processing workloads', 'Shared storage endpoint', 'Communications engineering lab'],
+    color: 'emerald',
+  },
+  {
+    site: 'Babeș-Bolyai University',
+    location: 'Cluj-Napoca, Romania',
+    role: 'AI Research Node',
+    specs: ['Machine learning pipelines', 'Formal methods compute', 'Federated experiment access'],
+    color: 'violet',
+  },
+]
+
+const policies = [
+  {
+    title: 'Access & Allocation',
+    items: [
+      'Access is granted to active CORE Network researchers and affiliated students.',
+      'Compute allocations are managed through the CORE infrastructure coordination team.',
+      'Priority scheduling applies to publication-deadline-critical jobs.',
+    ],
+  },
+  {
+    title: 'Data Governance',
+    items: [
+      'All research data is stored in compliance with GDPR and institutional data protection guidelines.',
+      'Shared datasets require a brief data management plan before upload.',
+      'Data retention follows a minimum 5-year policy for published research.',
+    ],
+  },
+  {
+    title: 'Software Environment',
+    items: [
+      'Container-based environments (Docker / Singularity) are supported on all compute nodes.',
+      'Core software stack: ROS2, PyTorch, Isaac Lab, CUDA, Python 3.10+.',
+      'Environment snapshots are versioned alongside experiment checkpoints.',
+    ],
+  },
+]
+
+const faqs = [
+  {
+    q: 'Who can request access to the compute cluster?',
+    a: 'Access is available to all active CORE Network members — faculty, postdocs, and PhD students — at TU Clausthal, University of Rostock, and Babeș-Bolyai University. External collaborators may apply through the infrastructure coordination team.',
+  },
+  {
+    q: 'How do I submit a job to the shared cluster?',
+    a: 'Jobs are submitted via a shared SLURM queue. Contact the infrastructure team at TU Clausthal to obtain credentials and onboarding documentation.',
+  },
+  {
+    q: 'Is the cluster available for robotics simulation (Isaac Lab / ROS2)?',
+    a: 'Yes. The primary node at TU Clausthal is configured with the full ROS2 + Isaac Lab stack and supports both navigation and manipulation simulation tasks.',
+  },
+  {
+    q: 'What storage is available for datasets?',
+    a: 'Each project receives a shared storage allocation. Large dataset requests (>1 TB) should be coordinated with the infrastructure team in advance.',
+  },
+]
+
+// ─── Sub-components ─────────────────────────────────────────────────────────
+
+const FaqItem = ({ q, a }) => {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="border-b border-slate-200 last:border-0">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between gap-4 py-5 text-left"
+      >
+        <span className="text-base font-semibold text-slate-900">{q}</span>
+        {open ? (
+          <FaChevronUp className="h-4 w-4 flex-shrink-0 text-blue-600" />
+        ) : (
+          <FaChevronDown className="h-4 w-4 flex-shrink-0 text-slate-400" />
+        )}
+      </button>
+      {open && (
+        <p className="pb-5 text-sm leading-7 text-slate-600">{a}</p>
+      )}
+    </div>
+  )
+}
+
+const SiteColorMap = {
+  blue: {
+    badge: 'bg-blue-50 text-blue-700 border-blue-100',
+    icon: 'bg-blue-700',
+    dot: 'bg-blue-500',
+  },
+  emerald: {
+    badge: 'bg-emerald-50 text-emerald-700 border-emerald-100',
+    icon: 'bg-emerald-700',
+    dot: 'bg-emerald-500',
+  },
+  violet: {
+    badge: 'bg-violet-50 text-violet-700 border-violet-100',
+    icon: 'bg-violet-700',
+    dot: 'bg-violet-500',
+  },
+}
+
+// ─── Page ───────────────────────────────────────────────────────────────────
 
 const ComputeCluster = () => {
-  const [publications, setPublications] = useState([])
-
-  useEffect(() => {
-    fetch(assetUrl('/data/publications.json'))
-      .then((res) => res.json())
-      .then((data) => {
-        const withImages = data.publications
-          .filter((publication) => publication.image)
-          .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-        setPublications(withImages)
-      })
-      .catch((err) => {
-        console.error('Failed to load publication carousel', err)
-      })
-  }, [])
-
-  const carouselItems = useMemo(() => {
-    const source = publications.length > 0
-      ? publications
-      : fallbackImages.map((image, index) => ({
-        id: `fallback-${index}`,
-        title: 'CORE research output',
-        venue: 'Publication preview',
-        year: '',
-        image,
-      }))
-
-    return [...source, ...source]
-  }, [publications])
-
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
+
+      {/* ── Hero ── */}
       <section id="hero" className="relative min-h-screen overflow-hidden bg-[#f7fafc] text-gray-950">
         <img
-          className="absolute inset-y-0 right-0 h-full w-full object-cover object-center opacity-76"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-60"
           src={assetUrl('/images/hero/compute-cluster-hero.png')}
           alt=""
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#f7fafc] via-[#f7fafc]/96 via-[45%] to-[#f7fafc]/18" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/55" />
-        <div className="absolute left-0 top-0 h-full w-2/3 bg-[radial-gradient(circle_at_18%_22%,rgba(37,99,235,.10),transparent_32%),radial-gradient(circle_at_42%_82%,rgba(132,204,22,.10),transparent_30%)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f7fafc] via-[#f7fafc]/96 via-[40%] to-[#f7fafc]/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/40" />
 
         <div className="container relative mx-auto flex min-h-screen max-w-7xl items-center px-6 pb-14 pt-28 md:px-12 lg:px-20">
-          <div className="max-w-3xl">
-              <div className="mb-8 flex flex-wrap items-center gap-4">
-                <div className="inline-flex rounded-lg border border-gray-200 bg-white px-5 py-4 shadow-lg">
-                  <img
-                    src={assetUrl('/logos/core-network-logo.svg')}
-                    alt="CORE Network"
-                    className="h-12 md:h-16 w-auto"
-                  />
-                </div>
-                <div className="inline-flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-5 py-4 shadow-lg">
-                  <FaServer className="h-5 w-5 text-blue-700" aria-hidden="true" />
-                  <span className="text-sm font-bold tracking-wide text-gray-950">Compute Cluster</span>
-                </div>
-              </div>
-              <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-blue-700">
-                Shared Infrastructure
-              </p>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-6 tracking-tight text-gray-950">
-                Compute infrastructure for research that needs to move.
-              </h1>
-              <p className="text-lg md:text-xl leading-relaxed text-gray-700 max-w-3xl">
-                A shared environment for training, simulation, monitoring, and publication-backed
-                experimentation across the CORE Network.
-              </p>
+          <div className="max-w-2xl">
+            {/* Breadcrumb */}
+            <nav className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-400" aria-label="Breadcrumb">
+              <Link to="/" className="hover:text-blue-600 transition-colors">CORE Network</Link>
+              <span>/</span>
+              <span className="text-slate-600">Compute Cluster</span>
+            </nav>
 
-            <div className="mt-10 grid grid-cols-3 gap-3 max-w-2xl">
-              {clusterStats.map((stat) => {
-                const Icon = stat.icon
+            {/* Eyebrow */}
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-blue-700">
+              Shared Research Infrastructure
+            </p>
+
+            {/* Title */}
+            <h1 className="mb-6 text-4xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-5xl lg:text-6xl">
+              Compute Cluster
+            </h1>
+
+            {/* Description */}
+            <p className="mb-8 max-w-xl text-lg leading-8 text-gray-600 md:text-xl">
+              A shared, multi-site computational infrastructure supporting AI training,
+              robotics simulation, and research data management across the CORE Network.
+            </p>
+
+            {/* CTA row */}
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="mailto:bartelt@isse.tu-clausthal.de"
+                className="inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-blue-700"
+              >
+                Request Access
+                <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+              </a>
+              <a
+                href="#capabilities"
+                className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-bold text-gray-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700"
+              >
+                View Capabilities
+              </a>
+            </div>
+
+            {/* Stat pills */}
+            <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {clusterStats.map((s) => {
+                const Icon = s.icon
                 return (
-                  <div key={stat.label} className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-                    <Icon className="h-5 w-5 text-blue-700 mb-3" aria-hidden="true" />
-                    <p className="text-lg font-bold">{stat.value}</p>
-                    <p className="text-xs text-gray-600 leading-5">{stat.label}</p>
+                  <div key={s.label} className="rounded-xl border border-gray-200 bg-white/90 p-4 shadow-sm backdrop-blur">
+                    <Icon className="mb-2 h-4 w-4 text-blue-600" aria-hidden="true" />
+                    <p className="text-2xl font-bold text-gray-950">{s.value}</p>
+                    <p className="text-xs font-semibold text-gray-700 leading-5">{s.label}</p>
+                    <p className="mt-0.5 text-xs text-gray-400">{s.description}</p>
                   </div>
                 )
               })}
@@ -101,67 +252,250 @@ const ComputeCluster = () => {
         </div>
       </section>
 
-      <section id="overview" className="py-16 md:py-20 bg-white border-b border-gray-200">
-        <div className="container mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              ['Experiment Queues', 'Run repeatable training and evaluation workloads for robotics, vision, language, and simulation projects.'],
-              ['Research Artifacts', 'Keep datasets, checkpoints, reports, and paper previews close to the experiments that produced them.'],
-              ['Network Access', 'Support collaboration across CORE sites while keeping workflows inspectable and easy to hand over.'],
-            ].map(([title, text]) => (
-              <div key={title} className="rounded-lg border border-gray-200 bg-gray-50 p-6">
-                <h2 className="text-lg font-bold text-gray-950 mb-3">{title}</h2>
-                <p className="text-gray-600 leading-7">{text}</p>
+      {/* ── Purpose ── */}
+      <section id="purpose" className="border-t border-gray-100 bg-white py-16 md:py-24">
+        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <div className="grid gap-12 md:grid-cols-2 md:items-center">
+            <div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">About the Infrastructure</p>
+              <h2 className="mb-5 text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
+                Built for distributed, reproducible research
+              </h2>
+              <p className="mb-6 text-base leading-8 text-gray-600">
+                The CORE Compute Cluster is a shared research infrastructure spanning three partner institutions.
+                It provides centralised access to GPU resources, persistent dataset storage, and simulation
+                environments — allowing researchers across Germany and Romania to run experiments, share
+                artifacts, and iterate on results without institutional silos.
+              </p>
+              <p className="text-base leading-8 text-gray-600">
+                The cluster directly supports publication workflows: model checkpoints, evaluation data,
+                and supplementary materials are versioned and archived alongside the papers they underpin.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {[
+                { icon: FaCheckCircle, text: 'GPU-accelerated training and evaluation workloads' },
+                { icon: FaCheckCircle, text: 'ROS2 + Isaac Lab robotics simulation pipeline' },
+                { icon: FaCheckCircle, text: 'Shared persistent storage across all CORE sites' },
+                { icon: FaCheckCircle, text: 'GDPR-compliant data governance and retention' },
+                { icon: FaCheckCircle, text: 'Containerised software environments (Docker / Singularity)' },
+                { icon: FaCheckCircle, text: 'Remote job submission via shared SLURM queue' },
+              ].map(({ icon: Icon, text }) => (
+                <div key={text} className="flex items-start gap-3">
+                  <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" aria-hidden="true" />
+                  <p className="text-sm leading-6 text-gray-700">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Capabilities ── */}
+      <section id="capabilities" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
+        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <div className="mb-12 max-w-2xl">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Capabilities</p>
+            <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
+              Core infrastructure services
+            </h2>
+            <p className="mt-4 text-base leading-7 text-gray-600">
+              Each capability is available to all CORE Network researchers through unified access credentials.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {capabilities.map((cap) => {
+              const Icon = cap.icon
+              return (
+                <article
+                  key={cap.title}
+                  className="group rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg"
+                >
+                  <div className="mb-5 flex items-start justify-between gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-950 text-white">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <span className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-500">
+                      {cap.tag}
+                    </span>
+                  </div>
+                  <h3 className="mb-3 text-xl font-bold text-gray-950">{cap.title}</h3>
+                  <p className="mb-5 text-sm leading-7 text-gray-600">{cap.description}</p>
+                  <ul className="space-y-1.5">
+                    {cap.points.map((pt) => (
+                      <li key={pt} className="flex items-center gap-2 text-xs font-semibold text-gray-600">
+                        <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500" />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Infrastructure Sites ── */}
+      <section id="sites" className="border-t border-gray-100 bg-white py-16 md:py-24">
+        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <div className="mb-12 max-w-2xl">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Network Sites</p>
+            <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
+              Three institutions. One shared platform.
+            </h2>
+            <p className="mt-4 text-base leading-7 text-gray-600">
+              Each site contributes compute, storage, or specialised hardware to the network.
+              Researchers at any site can access the full shared environment.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {infrastructure.map((site) => {
+              const colors = SiteColorMap[site.color]
+              return (
+                <article
+                  key={site.site}
+                  className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+                >
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${colors.icon} text-white`}>
+                      <FaUniversity className="h-4 w-4" aria-hidden="true" />
+                    </div>
+                    <span className={`rounded-full border px-3 py-1 text-xs font-bold ${colors.badge}`}>
+                      {site.role}
+                    </span>
+                  </div>
+                  <h3 className="mb-1 text-lg font-bold text-gray-950">{site.site}</h3>
+                  <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-gray-400">{site.location}</p>
+                  <ul className="space-y-2">
+                    {site.specs.map((spec) => (
+                      <li key={spec} className="flex items-start gap-2 text-sm text-gray-600">
+                        <span className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${colors.dot}`} />
+                        {spec}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              )
+            })}
+          </div>
+
+          {/* Network diagram row */}
+          <div className="mt-8 overflow-hidden rounded-2xl bg-gray-950 text-white shadow-xl">
+            <div className="grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
+              {[
+                { step: '01', title: 'Submit', desc: 'Researchers submit jobs via the shared SLURM scheduler from any network site.' },
+                { step: '02', title: 'Execute', desc: 'Jobs are routed to available GPU nodes based on resource requirements and priority.' },
+                { step: '03', title: 'Archive', desc: 'Results, checkpoints, and artifacts are automatically stored in the shared registry.' },
+              ].map(({ step, title, desc }) => (
+                <div key={step} className="flex items-start gap-4 p-7">
+                  <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-black">
+                    {step}
+                  </span>
+                  <div>
+                    <h4 className="font-bold">{title}</h4>
+                    <p className="mt-1 text-sm leading-6 text-slate-300">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Policies ── */}
+      <section id="policies" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
+        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <div className="mb-12 max-w-2xl">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Policies</p>
+            <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
+              Access, data, and usage policies
+            </h2>
+            <p className="mt-4 text-base leading-7 text-gray-600">
+              Use of the CORE Compute Cluster is governed by shared policies agreed across all partner institutions.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {policies.map((pol) => (
+              <div key={pol.title} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-gray-950 text-white">
+                  <FaShieldAlt className="h-4 w-4" aria-hidden="true" />
+                </div>
+                <h3 className="mb-4 text-base font-bold text-gray-950">{pol.title}</h3>
+                <ul className="space-y-3">
+                  {pol.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm leading-6 text-gray-600">
+                      <FaCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-500" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="publications" className="py-16 md:py-20 bg-gray-50 overflow-hidden">
-        <div className="container mx-auto max-w-7xl px-6 md:px-12 lg:px-20 mb-10">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-blue-700">Research Carousel</span>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-950 mt-3 mb-4">
-              Publication outputs from the network.
-            </h2>
-            <p className="text-gray-600 leading-7">
-              These cards are loaded from the existing publications data and continuously swipe
-              across the page, giving the cluster page a living view of current research.
-            </p>
-          </div>
-        </div>
+      {/* ── Publications carousel ── */}
+      <div className="border-t border-gray-100">
+        <PublicationCarousel
+          title="Research outputs from the network."
+          subtitle="Publications"
+          intro="Papers, preprints, and workshop contributions produced using CORE Network infrastructure."
+          viewAllLink="/publications"
+          className="bg-white"
+        />
+      </div>
 
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-gray-50 to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-gray-50 to-transparent" />
-          <div className="compute-carousel flex w-max gap-6 px-6">
-            {carouselItems.map((publication, index) => (
-              <article
-                key={`${publication.id}-${index}`}
-                className="w-[280px] md:w-[340px] flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg"
-              >
-                <div className="aspect-[4/3] bg-gray-100">
-                  <img
-                    src={assetUrl(publication.image)}
-                    alt=""
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-5">
-                  <p className="text-xs font-bold uppercase tracking-widest text-blue-700 mb-2">
-                    {publication.venue} {publication.year}
-                  </p>
-                  <h3 className="text-base font-bold leading-6 text-gray-950 line-clamp-3">
-                    {publication.title}
-                  </h3>
-                </div>
-              </article>
+      {false && <section id="faq" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
+        <div className="container mx-auto max-w-3xl px-6 md:px-12">
+          <div className="mb-10 text-center">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">FAQ</p>
+            <h2 className="text-3xl font-heading font-bold text-gray-950">Frequently asked questions</h2>
+          </div>
+          <div className="rounded-2xl border border-gray-200 bg-white px-7 shadow-sm">
+            {faqs.map((faq) => (
+              <FaqItem key={faq.q} q={faq.q} a={faq.a} />
             ))}
           </div>
         </div>
-      </section>
+      </section>}
+
+      {false && <section id="contact" className="border-t border-gray-200 bg-gray-950 py-16 text-white">
+        <div className="container mx-auto max-w-4xl px-6 text-center md:px-12">
+          <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600">
+            <FaServer className="h-6 w-6" aria-hidden="true" />
+          </div>
+          <h2 className="mb-4 text-3xl font-heading font-bold md:text-4xl">
+            Request cluster access
+          </h2>
+          <p className="mx-auto mb-8 max-w-xl text-base leading-7 text-slate-300">
+            Access is available to all CORE Network researchers. Contact the infrastructure coordination
+            team at TU Clausthal to request credentials and onboarding documentation.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="mailto:bartelt@isse.tu-clausthal.de"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-gray-950 shadow-lg transition hover:bg-blue-50"
+            >
+              bartelt@isse.tu-clausthal.de
+              <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
+            </a>
+            <Link
+              to="/publications"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-bold text-white transition hover:border-white/50"
+            >
+              Browse publications
+              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>}
+
     </div>
   )
 }
