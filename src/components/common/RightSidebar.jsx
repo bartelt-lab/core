@@ -6,39 +6,42 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ROUTE_SECTIONS = {
     // CORE routes
     '/': [
-        { id: 'hero', label: 'Network' },
+        { id: 'hero', label: 'Home' },
+        { id: 'about', label: 'About' },
+        { id: 'partners', label: 'Partners' },
+        { id: 'platform', label: 'Platform' },
         { id: 'team', label: 'Team' },
-        { id: 'publications', label: 'Publications' },
     ],
     '/core-labs': [
-        { id: 'hero', label: 'Vision' },
+        { id: 'hero', label: 'Overview' },
         { id: 'initiative', label: 'Initiative' },
+        { id: 'research', label: 'Research' },
         { id: 'team', label: 'Team' },
-        { id: 'publications', label: 'Publications' },
+        { id: 'publications', label: 'Papers' },
         { id: 'dynamo', label: 'Dynamo' },
         { id: 'autonomous', label: 'Self-Driving' },
     ],
-    '/dynamo': [
-        { id: 'hero', label: 'Introduction' },
-        { id: 'goal', label: 'Goal' },
-        { id: 'overview', label: 'Overview' },
-        { id: 'technical', label: 'Technical' },
-        { id: 'experiments', label: 'Experiments' },
-    ],
+    '/dynamo': [],
     '/network': [
         { id: 'hero', label: 'Network' },
         { id: 'team', label: 'Team' },
         { id: 'publications', label: 'Publications' },
     ],
+    '/publications': [],
     '/ai-team-projects': [
         { id: 'hero', label: 'Overview' },
-        { id: 'active-projects', label: 'Active' },
-        { id: 'archive', label: 'Archive' },
+        { id: 'active-projects', label: 'Projects' },
+        { id: 'programme', label: 'Programme' },
+        { id: 'showcase', label: 'Showcase' },
+        { id: 'testimonials', label: 'Voices' },
     ],
     '/compute-cluster': [
-        { id: 'hero', label: 'Compute' },
-        { id: 'overview', label: 'Overview' },
-        { id: 'publications', label: 'Research' },
+        { id: 'hero', label: 'Overview' },
+        { id: 'purpose', label: 'Purpose' },
+        { id: 'capabilities', label: 'Capabilities' },
+        { id: 'sites', label: 'Sites' },
+        { id: 'policies', label: 'Policies' },
+        { id: 'faq', label: 'FAQ' },
     ],
     // /tuc/* bartelt routes
     '/tuc/core-team-projects': [

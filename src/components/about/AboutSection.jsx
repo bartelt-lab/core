@@ -19,37 +19,60 @@ const AboutSection = () => {
       <div className="max-w-7xl mx-auto space-y-24">
 
         {/* 1. Mission Statement */}
-        <div id="initiative" className="max-w-4xl mx-auto text-center space-y-6">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-primary-600 font-bold tracking-widest uppercase text-sm"
-          >
-            The Initiative
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-heading font-bold text-gray-900 leading-tight"
-          >
-            Advancing the Field <br /> of Cognitive Robotics
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto"
-          >
-            CORE (Cognitive Robotics in Europe) is a cross-institutional initiative uniting leading European universities. We combine expertise in AI, machine learning, and control theory, focusing on developing autonomous systems capable of robust perception and adaptability.
-          </motion.p>
+        <div id="initiative" className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(37,99,235,.08),transparent_42%),radial-gradient(circle_at_82%_78%,rgba(16,185,129,.08),transparent_45%)]" />
+          <div className="absolute -right-20 top-[-4rem] h-44 w-44 rounded-full bg-blue-100/60 blur-3xl" />
+          <div className="absolute -left-24 bottom-[-4rem] h-44 w-44 rounded-full bg-emerald-100/60 blur-3xl" />
+          <div className="relative grid gap-10 lg:grid-cols-[1.3fr_.7fr]">
+            <div className="space-y-6">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-bold uppercase tracking-widest text-primary-600 shadow-sm"
+            >
+              The Initiative
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-heading font-bold text-gray-900 leading-tight tracking-tight"
+            >
+              Advancing the Field <br /> of Cognitive Robotics
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl"
+            >
+              CORE (Cognitive Robotics in Europe) is a cross-institutional initiative uniting leading European universities. We combine expertise in AI, machine learning, and control theory, focusing on developing autonomous systems capable of robust perception and adaptability.
+            </motion.p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-white/85 p-5 shadow-sm backdrop-blur">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400">Focus Areas</p>
+              <div className="mt-4 space-y-3">
+                {['AI + Robotics', 'Shared Labs', 'EU Network'].map((item, index) => (
+                  <div key={item} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-950 text-xs font-bold text-white">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-950">{item}</p>
+                      <p className="mt-1 text-xs leading-5 text-slate-500">Coordinated research infrastructure</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 2. The Network (Map & Logos) */}
-        <div id="partners">
+        <div id="partners" className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-10">
           <PartnerNetwork />
         </div>
 

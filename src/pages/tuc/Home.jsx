@@ -1,31 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { FiMail, FiMapPin } from 'react-icons/fi';
 import assetUrl from '../../utils/assetUrl';
-import PublicationItem from '../../components/tuc/PublicationItem';
 import TeamMemberCard from '../../components/team/TeamMemberCard';
 import { getMembersByInstitution } from '../../data/team';
 
 const Home = () => {
-    const [publications, setPublications] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetch(assetUrl('/data/publications.json'))
-            .then((res) => res.json())
-            .then((data) => {
-                const sorted = [...data.publications].sort(
-                    (a, b) => new Date(b.date) - new Date(a.date)
-                );
-                setPublications(sorted);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.error('Failed to load publications', err);
-                setLoading(false);
-            });
-    }, []);
-
     const tucMembers = getMembersByInstitution('TUC');
     const members = tucMembers.filter((m) => m.roleCategory !== 'support_staff');
     const support = tucMembers.filter((m) => m.roleCategory === 'support_staff');
@@ -81,30 +60,6 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Publications preview */}
-            <section id="publications" className="border-b border-gray-200">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-                    <div className="flex items-end justify-between mb-6">
-                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Publications</h2>
-                        <Link
-                            to="/tuc/publications"
-                            className="text-sm font-medium text-gray-600 hover:text-gray-900"
-                        >
-                            See all →
-                        </Link>
-                    </div>
-                    {loading ? (
-                        <p className="text-gray-500">Loading publications…</p>
-                    ) : (
-                        <div>
-                            {publications.slice(0, 3).map((pub) => (
-                                <PublicationItem key={pub.id} pub={pub} />
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </section>
-
             {/* Members */}
             <section id="members" className="border-b border-gray-200">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
@@ -150,7 +105,7 @@ const Home = () => {
                                 rel="noreferrer"
                                 className="underline decoration-gray-300 underline-offset-4 hover:decoration-gray-900"
                             >
-                                Wallstraße 6, 38640 Goslar, Germany
+                                Wallstrasse 6, 38640 Goslar, Germany
                             </a>
                         </li>
                     </ul>
