@@ -21,7 +21,7 @@ const taughtCourses = [
         title: 'European AI Team Projects',
         semester: 'Summer Semester 2025',
         tone: 'Cross-institutional AI projects with applied and research-driven tracks.',
-        link: '/tuc/core-team-projects',
+        link: '/ai-team-projects',
         cta: 'Open project page'
     }
 ];

@@ -76,14 +76,6 @@ function TucShell() {
           <Route path="/projects" element={<TucProjects />} />
           <Route path="/seminar" element={<TucTeaching initialSection="seminars" />} />
           <Route path="/theses" element={<TucTeaching initialSection="theses" />} />
-          <Route path="/core-team-projects" element={<TucAiTeamProjects />} />
-          <Route path="/core-team-projects/dynamo" element={<TucDynamoProject />} />
-          <Route path="/core-team-projects/ai4ai" element={<TucAI4AIProject />} />
-          <Route path="/core-team-projects/vergabepilot" element={<TucVergabepilotProject />} />
-          <Route path="/core-team-projects/neurocore" element={<TucNeuroCoreProject />} />
-          <Route path="/core-team-projects/stratego" element={<TucStrategoProject />} />
-          <Route path="/core-team-projects/traffic-network" element={<TucTrafficNetworkProject />} />
-          <Route path="/core-team-projects/self-driving" element={<TucSelfDrivingProject />} />
         </Routes>
       </Suspense>
     </TucLayout>

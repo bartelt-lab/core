@@ -8,7 +8,7 @@ const Footer = () => {
   const logos = [
     { src: 'logos/clausthal-logo.png', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
     { src: 'logos/ubb-logo.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-20' },
-    { src: 'logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.uni-rostock.de', className: 'h-20' },
+    { src: 'logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.mds-lab.de/', className: 'h-20' },
   ]
 
   return (
@@ -41,7 +41,7 @@ const Footer = () => {
 
           <div className="md:col-span-1 md:text-right">
             <h3 className="mb-2 text-2xl font-heading font-bold">CORE</h3>
-            <p className="mb-4 text-gray-600">Cognitive Robotics in Europe</p>
+            <p className="mb-4 text-gray-600">Cognitive Software in Europe</p>
             <p className="text-sm text-gray-500">
               © {new Date().getFullYear()} CORE Initiative. All rights reserved.
             </p>
@@ -49,7 +49,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 border-t border-gray-200 pt-8 text-center text-sm text-gray-500">
-          <p>Advancing cognitive robotics research through European collaboration</p>
+          <p>Advancing cognitive software research through European collaboration</p>
         </div>
       </div>
     </footer>

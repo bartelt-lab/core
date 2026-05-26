@@ -15,7 +15,6 @@ const ROUTE_SECTIONS = {
     '/core-labs': [
         { id: 'hero', label: 'Overview' },
         { id: 'initiative', label: 'Initiative' },
-        { id: 'research', label: 'Research' },
         { id: 'team', label: 'Team' },
         { id: 'publications', label: 'Papers' },
         { id: 'dynamo', label: 'Dynamo' },
@@ -43,26 +42,20 @@ const ROUTE_SECTIONS = {
         { id: 'policies', label: 'Policies' },
         { id: 'faq', label: 'FAQ' },
     ],
-    // /tuc/* bartelt routes
-    '/tuc/core-team-projects': [
-        { id: 'hero', label: 'Overview' },
-        { id: 'active-projects', label: 'Active' },
-        { id: 'archive', label: 'Archive' },
-    ],
-    '/tuc/core-team-projects/dynamo': [
+    '/ai-team-projects/dynamo': [
         { id: 'hero', label: 'Overview' },
         { id: 'features', label: 'Features' },
         { id: 'evaluation', label: 'Evaluation' },
         { id: 'science', label: 'Science' },
         { id: 'architecture', label: 'Architecture' },
     ],
-    '/tuc/core-team-projects/ai4ai': [
+    '/ai-team-projects/ai4ai': [
         { id: 'hero', label: 'Overview' },
         { id: 'features', label: 'Features' },
         { id: 'evaluation', label: 'Evaluation' },
         { id: 'extra', label: 'Details' },
     ],
-    '/tuc/core-team-projects/vergabepilot': [
+    '/ai-team-projects/vergabepilot': [
         { id: 'hero', label: 'Overview' },
         { id: 'features', label: 'Features' },
         { id: 'evaluation', label: 'Evaluation' },
