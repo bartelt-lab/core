@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import {
-  FaArrowRight, FaBrain, FaCar, FaFlask, FaRobot,
-} from 'react-icons/fa'
+import { FaArrowRight } from 'react-icons/fa'
 import HeroVideo from '../components/hero/HeroVideo'
 import { getCoreLabsLeads, getNetworkMembers } from '../data/team'
 import PublicationsSection from '../components/publications/PublicationsSection'
@@ -12,13 +10,6 @@ const assetUrl = (path) => {
   const clean = path.startsWith('/') ? path.slice(1) : path
   return `${import.meta.env.BASE_URL}${clean}`
 }
-
-const researchAreas = [
-  { icon: FaRobot, title: 'Cognitive Robotics', body: 'Developing autonomous systems that perceive, reason, and act in unstructured environments.' },
-  { icon: FaBrain, title: 'Machine Learning & AI', body: 'Reinforcement learning, multimodal models, explainable AI, and LLM-based reasoning.' },
-  { icon: FaCar, title: 'Autonomous Driving', body: 'Algorithms and hardware platforms for safe, reliable autonomous navigation.' },
-  { icon: FaFlask, title: 'Applied AI Systems', body: 'Translating research into working prototypes, dashboards, agents, and engineering tools.' },
-]
 
 const leadDetails = {
   'David Szilagyi': {
@@ -66,8 +57,8 @@ const CoreLabs = () => {
             <p className="mb-8 max-w-2xl text-lg leading-8 text-white/80 md:text-xl">
               Shared research infrastructure, joint projects, and a cross-national team advancing cognitive autonomous systems.
             </p>
-            <a href="#research" className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-gray-950 shadow-lg transition hover:bg-blue-50">
-              Explore key areas
+            <a href="#initiative" className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-gray-950 shadow-lg transition hover:bg-blue-50">
+              Explore the labs
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
             </a>
           </motion.div>
@@ -109,26 +100,6 @@ const CoreLabs = () => {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="research" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-          <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Research Focus</p>
-            <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">Key areas</h2>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {researchAreas.map(({ icon: Icon, title, body }) => (
-              <div key={title} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gray-950 text-white">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <h3 className="mb-2 text-base font-bold text-gray-950">{title}</h3>
-                <p className="text-sm leading-6 text-gray-600">{body}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

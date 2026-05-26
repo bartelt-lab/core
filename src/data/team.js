@@ -16,7 +16,7 @@ export const institutions = {
     name: 'University of Rostock',
     shortName: 'Rostock',
     location: 'Rostock, Germany',
-    website: 'https://www.uni-rostock.de/en/'
+    website: 'https://www.mds-lab.de/'
   },
   MANNHEIM: {
     name: 'University of Mannheim',
@@ -82,7 +82,7 @@ export const teamMembers = [
     title: 'Assistant Professor',
     roleCategory: 'assistant_professor',
     affiliations: [
-      { institution: institutions.ROSTOCK, department: 'Institute of Communications Engineering' }
+      { institution: institutions.ROSTOCK, department: 'Institute for Visual and Analytic Computing' }
     ],
     photo: '/members/stefan-luedtke.png',
     bio: 'Assistant Professor at the University of Rostock.',
@@ -123,6 +123,23 @@ export const teamMembers = [
     email: 'kristian.kolthoff@tu-clausthal.de',
     links: {
       scholar: 'https://scholar.google.com/citations?user=OJBv75IAAAAJ&hl=de'
+    }
+  },
+  {
+    id: 19,
+    name: 'Daniel Wulff',
+    slug: 'wulff',
+    prefix: 'Dr.',
+    title: 'Postdoctoral Researcher',
+    roleCategory: 'postdoc',
+    affiliations: [
+      { institution: institutions.ROSTOCK, department: 'Institute for Visual and Analytic Computing' }
+    ],
+    photo: '/members/daniel-wulff.jpg',
+    bio: 'Postdoctoral researcher at the University of Rostock.',
+    email: 'd.wulff@uni-rostock.de',
+    links: {
+      scholar: 'https://scholar.google.de/citations?hl=de&user=y4TS8SoAAAAJ'
     }
   },
   // PhD Students / Researchers (also CORE Labs Leads)
@@ -171,7 +188,7 @@ export const teamMembers = [
     title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
-      { institution: institutions.ROSTOCK, department: 'Institute of Communications Engineering' }
+      { institution: institutions.ROSTOCK, department: 'Institute for Visual and Analytic Computing' }
     ],
     photo: '/members/ashwin-nedungadi.png',
     bio: 'PhD student specializing in egocentric vision and computer vision.',
@@ -300,13 +317,13 @@ export const teamMembers = [
     id: 16,
     name: 'Markus Herre',
     slug: 'herre',
-    title: 'PhD Student (Incoming)',
+    title: 'PhD Student',
     roleCategory: 'phd_student',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
     photo: '/members/markus-herre.jpeg',
-    bio: 'Incoming PhD student at TU Clausthal.',
+    bio: 'PhD student at TU Clausthal.',
     email: '',
     links: {
       linkedin: 'https://www.linkedin.com/in/markus-herre/'

@@ -97,15 +97,18 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <p className="mt-12 mb-4 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Member Institutions</p>
+          <div className="grid gap-4 md:grid-cols-3">
             {partnerLogos.map((logo) => {
+              const cta = logo.to ? 'Visit lab page →' : 'Visit website ↗'
               const content = (
-                <div className="flex min-h-28 items-center justify-center rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-                  <img src={assetUrl(logo.src)} alt={logo.name} className="max-h-16 max-w-full object-contain grayscale opacity-80 transition hover:grayscale-0 hover:opacity-100" />
+                <div className="group flex min-h-32 flex-col items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
+                  <img src={assetUrl(logo.src)} alt={logo.name} className="max-h-14 max-w-full object-contain grayscale opacity-80 transition group-hover:grayscale-0 group-hover:opacity-100" />
+                  <span className="text-xs font-bold text-blue-700 opacity-80 transition group-hover:opacity-100">{cta}</span>
                 </div>
               )
               return logo.to ? (
-                <Link key={logo.name} to={logo.to} aria-label="Open TU Clausthal page">{content}</Link>
+                <Link key={logo.name} to={logo.to} aria-label={`Open ${logo.name} lab page`}>{content}</Link>
               ) : (
                 <a key={logo.name} href={logo.href} target="_blank" rel="noreferrer" aria-label={`Open ${logo.name} website`}>{content}</a>
               )

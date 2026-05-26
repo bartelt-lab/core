@@ -181,7 +181,7 @@ const ProjectLayout = ({
 
             {/* Back to Projects */}
             <div className="container mx-auto px-4 py-12 text-center border-t border-gray-100">
-                <Link to="/tuc/core-team-projects" className="inline-flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors font-medium text-lg">
+                <Link to="/ai-team-projects" className="inline-flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors font-medium text-lg">
                     ← Back to All Projects
                 </Link>
             </div>
