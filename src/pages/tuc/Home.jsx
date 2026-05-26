@@ -45,7 +45,7 @@ const Home = () => {
                                 <img src={assetUrl('/logos/digit.jpg')} alt="DIGIT" className="h-14 object-contain" />
                             </a>
                             <Link to="/">
-                                <img src={assetUrl('/logos/core-network-logo.svg')} alt="CORE Network" className="h-14 object-contain" />
+                                <img src={assetUrl('/logos/core/core-network.png')} alt="CORE Network" className="h-14 object-contain" />
                             </Link>
                         </div>
                     </div>

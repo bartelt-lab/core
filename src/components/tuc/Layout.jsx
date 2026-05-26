@@ -41,9 +41,9 @@ const Layout = ({ children }) => {
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
                     <Link to="/tuc" className="flex items-center gap-3">
                         <img
-                            src={assetUrl('/logos/core-no-text.png')}
+                            src={assetUrl('/logos/core/core-with-tuc-logo.png')}
                             alt="Research group logo"
-                            className="h-9 w-auto"
+                            className="h-12 w-auto"
                         />
                     </Link>
 
@@ -101,18 +101,10 @@ const Layout = ({ children }) => {
                     <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
                         <div className="flex min-w-0 items-center gap-3">
                             <img
-                                src={assetUrl('/logos/core-no-text.png')}
-                                alt="Research group logo"
-                                className="h-8 w-auto shrink-0"
+                                src={assetUrl('/logos/core/core-with-cognitive-software.png')}
+                                alt="Cognitive Software, TU Clausthal"
+                                className="h-14 w-auto shrink-0"
                             />
-                            <div className="min-w-0">
-                                <p className="text-sm font-semibold leading-5 text-slate-900 break-words">
-                                    Cognitive Software
-                                </p>
-                                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-                                    TU Clausthal
-                                </p>
-                            </div>
                         </div>
 
                         <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 md:justify-end">
