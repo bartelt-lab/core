@@ -41,7 +41,9 @@ export const teamMembers = [
     photo: '/members/christian-bartelt.png',
     bio: 'Group leader at TU Clausthal focusing on AI and autonomous systems research.',
     email: 'bartelt@isse.tu-clausthal.de',
-    links: {}
+    links: {
+      scholar: 'https://scholar.google.de/citations?user=9FcF1gwAAAAJ&hl=de'
+    }
   },
   {
     id: 2,
@@ -56,12 +58,15 @@ export const teamMembers = [
     photo: '/members/christian-sacarea.jpeg',
     bio: 'Professor at Babeș-Bolyai University with expertise in formal methods and AI.',
     email: '',
-    links: {}
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=ciq4vzwAAAAJ&hl=en',
+      website: 'https://math.ubbcluj.ro/~csacarea/wordpress/'
+    }
   },
   // Lecturers / Assistant Professors
   {
     id: 3,
-    name: 'Iulian Benta',
+    name: 'Kuderna Iulian Benţa',
     slug: 'benta',
     prefix: 'Dr. Ing.',
     title: 'Lecturer',
@@ -72,14 +77,16 @@ export const teamMembers = [
     photo: '/members/iulian-benta.jpeg',
     bio: 'Lecturer at UBB.',
     email: '',
-    links: {}
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=iSQpE0YAAAAJ&hl=ro'
+    }
   },
   {
     id: 4,
     name: 'Stefan Lüdtke',
     slug: 'ludtke',
     prefix: 'Prof. Dr.',
-    title: 'Assistant Professor',
+    title: 'Asst. Professor',
     roleCategory: 'assistant_professor',
     affiliations: [
       { institution: institutions.ROSTOCK, department: 'Institute for Visual and Analytic Computing' }
@@ -87,7 +94,10 @@ export const teamMembers = [
     photo: '/members/stefan-luedtke.png',
     bio: 'Assistant Professor at the University of Rostock.',
     email: '',
-    links: {}
+    links: {
+      scholar: 'https://scholar.google.de/citations?user=DxgfRiQAAAAJ&hl=en',
+      website: 'https://www.mds-lab.de/stefan-ludtke'
+    }
   },
   // Postdocs
   {
@@ -95,7 +105,7 @@ export const teamMembers = [
     name: 'Sascha Marton',
     slug: 'marton',
     prefix: 'Dr.',
-    title: 'Postdoctoral Researcher',
+    title: 'Postdoc',
     roleCategory: 'postdoc',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
@@ -105,6 +115,8 @@ export const teamMembers = [
     email: 'sascha.marton@tu-clausthal.de',
     links: {
       scholar: 'https://scholar.google.com/citations?user=5PQJ3sEAAAAJ',
+      github: 'https://github.com/s-marton',
+      linkedin: 'https://de.linkedin.com/in/sascha-marton-phd-a19630185',
       website: 'https://s-marton.github.io'
     }
   },
@@ -113,7 +125,7 @@ export const teamMembers = [
     name: 'Kristian Kolthoff',
     slug: 'kolthoff',
     prefix: 'Dr.',
-    title: 'Postdoctoral Researcher',
+    title: 'Postdoc',
     roleCategory: 'postdoc',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
@@ -130,7 +142,7 @@ export const teamMembers = [
     name: 'Daniel Wulff',
     slug: 'wulff',
     prefix: 'Dr.',
-    title: 'Postdoctoral Researcher',
+    title: 'Postdoc',
     roleCategory: 'postdoc',
     affiliations: [
       { institution: institutions.ROSTOCK, department: 'Institute for Visual and Analytic Computing' }
@@ -156,7 +168,9 @@ export const teamMembers = [
     bio: 'PhD student at TU Clausthal.',
     email: 'jannik.brinkmann@tu-clausthal.de',
     links: {
-      scholar: 'https://scholar.google.com/citations?hl=en&user=YtdTeaMAAAAJ'
+      scholar: 'https://scholar.google.com/citations?hl=en&user=YtdTeaMAAAAJ',
+      github: 'https://github.com/jannik-brinkmann',
+      website: 'https://jannik-brinkmann.github.io/'
     }
   },
   {
@@ -172,7 +186,11 @@ export const teamMembers = [
     photo: '/members/david-szilagyi.jpg',
     bio: 'PhD student working on autonomous driving and embodied robotics.',
     email: 'david.szilagyi@tu-clausthal.de',
-    links: {},
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=YAvZ-WoAAAAJ&hl=en',
+      github: 'https://github.com/davszi',
+      linkedin: 'https://www.linkedin.com/in/david-t-szilagyi/'
+    },
     coreLabsLead: {
       labName: 'Goslar & Cluj Lab',
       role: 'Goslar & Cluj Operations',
@@ -193,7 +211,9 @@ export const teamMembers = [
     photo: '/members/ashwin-nedungadi.png',
     bio: 'PhD student specializing in egocentric vision and computer vision.',
     email: '',
-    links: {},
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=HD26ITEAAAAJ&hl=en'
+    },
     coreLabsLead: {
       labName: 'Rostock Lab',
       role: 'Rostock Operations',
@@ -241,7 +261,9 @@ export const teamMembers = [
     photo: '/members/tim-grams.png',
     bio: 'PhD student researching reinforcement learning and decision-making systems.',
     email: 'tim.grams@tu-clausthal.de',
-    links: {},
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=fs_6twkAAAAJ&hl=de'
+    },
     coreLabsLead: {
       labName: 'RL Lab',
       role: 'RL Methods Lead',
@@ -281,7 +303,9 @@ export const teamMembers = [
     photo: '/members/tobias-sesterhenn.png',
     bio: 'PhD student at TU Clausthal.',
     email: 'tobias.sesterhenn@tu-clausthal.de',
-    links: {}
+    links: {
+      github: 'https://github.com/Tsesterh'
+    }
   },
   {
     id: 14,
@@ -311,7 +335,9 @@ export const teamMembers = [
     photo: '/members/celina-homa.jpeg',
     bio: 'External PhD student at Mercedes-Benz.',
     email: '',
-    links: {}
+    links: {
+      linkedin: 'https://www.linkedin.com/in/celina-homa-b00a29153/'
+    }
   },
   {
     id: 16,
@@ -341,7 +367,9 @@ export const teamMembers = [
     photo: '/members/paul-koenig.jpeg',
     bio: 'PhD student at TU Clausthal.',
     email: '',
-    links: {}
+    links: {
+      linkedin: 'https://de.linkedin.com/in/p-koenig'
+    }
   },
   // Support staff
   {

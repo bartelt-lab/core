@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   FaArrowRight, FaBookOpen, FaBrain, FaEnvelope, FaExternalLinkAlt,
-  FaFlask, FaGlobe, FaServer,
+  FaFlask, FaGlobe, FaGithub, FaLinkedin, FaServer, FaTwitter,
 } from 'react-icons/fa'
 import { SiGooglescholar } from 'react-icons/si'
 import PublicationMiniCarousel from '../components/publications/PublicationMiniCarousel'
@@ -23,7 +23,7 @@ const pillars = [
 ]
 
 const LinkIcons = ({ member }) => (
-  <div className="mt-3 flex flex-wrap gap-2">
+  <div className="mt-3 flex flex-wrap justify-center gap-2">
     {member.email && (
       <a href={`mailto:${member.email}`} title="Email" className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-blue-300 hover:text-blue-600">
         <FaEnvelope className="h-3.5 w-3.5" />
@@ -32,6 +32,21 @@ const LinkIcons = ({ member }) => (
     {member.links?.scholar && (
       <a href={member.links.scholar} target="_blank" rel="noopener noreferrer" title="Google Scholar" className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-blue-300 hover:text-blue-600">
         <SiGooglescholar className="h-3.5 w-3.5" />
+      </a>
+    )}
+    {member.links?.github && (
+      <a href={member.links.github} target="_blank" rel="noopener noreferrer" title="GitHub" className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-blue-300 hover:text-blue-600">
+        <FaGithub className="h-3.5 w-3.5" />
+      </a>
+    )}
+    {member.links?.twitter && (
+      <a href={member.links.twitter} target="_blank" rel="noopener noreferrer" title="Twitter" className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-blue-300 hover:text-blue-600">
+        <FaTwitter className="h-3.5 w-3.5" />
+      </a>
+    )}
+    {member.links?.linkedin && (
+      <a href={member.links.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-blue-300 hover:text-blue-600">
+        <FaLinkedin className="h-3.5 w-3.5" />
       </a>
     )}
     {member.links?.website && (
@@ -85,34 +100,37 @@ const Home = () => {
               </p>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl">
-            <div className="relative h-[340px] md:h-[420px]">
-              <img src={assetUrl('/images/locations.png')} alt="CORE Network Map" className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/85 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 text-white">
-                <p className="text-sm font-bold uppercase tracking-widest text-blue-200">CORE Network Map</p>
-                <h3 className="mt-2 text-2xl font-bold">Distributed Research Network</h3>
-                <p className="mt-1 text-sm text-gray-200">Connecting innovation hubs across Germany and Romania.</p>
+          <div className="grid gap-6 lg:grid-cols-[260px_1fr] lg:items-stretch">
+            <div className="flex flex-col">
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Member Institutions</p>
+              <div className="grid flex-1 gap-4">
+                {partnerLogos.map((logo) => {
+                  const content = (
+                    <div className="group relative flex h-full cursor-pointer items-center justify-center rounded-xl border border-gray-200 bg-white px-3 py-1 shadow-sm ring-blue-100 transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md hover:ring-4">
+                      <img src={assetUrl(logo.src)} alt={logo.name} className={`object-contain ${logo.name === 'UBB' ? 'max-h-[6.5rem] max-w-full' : 'max-h-[5.5rem] max-w-[90%]'}`} />
+                      <FaArrowRight className="absolute right-3 top-3 h-3 w-3 -rotate-45 text-blue-600 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
+                    </div>
+                  )
+                  return logo.to ? (
+                    <Link key={logo.name} to={logo.to} aria-label={`Open ${logo.name} lab page`}>{content}</Link>
+                  ) : (
+                    <a key={logo.name} href={logo.href} target="_blank" rel="noreferrer" aria-label={`Open ${logo.name} website`}>{content}</a>
+                  )
+                })}
               </div>
             </div>
-          </div>
 
-          <p className="mt-12 mb-4 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Member Institutions</p>
-          <div className="grid gap-4 md:grid-cols-3">
-            {partnerLogos.map((logo) => {
-              const cta = logo.to ? 'Visit lab page →' : 'Visit website ↗'
-              const content = (
-                <div className="group flex min-h-32 flex-col items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
-                  <img src={assetUrl(logo.src)} alt={logo.name} className="max-h-14 max-w-full object-contain grayscale opacity-80 transition group-hover:grayscale-0 group-hover:opacity-100" />
-                  <span className="text-xs font-bold text-blue-700 opacity-80 transition group-hover:opacity-100">{cta}</span>
+            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl">
+              <div className="relative h-full min-h-[340px]">
+                <img src={assetUrl('/images/locations.png')} alt="CORE Network Map" className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950/85 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white">
+                  <p className="text-sm font-bold uppercase tracking-widest text-blue-200">CORE Network Map</p>
+                  <h3 className="mt-2 text-2xl font-bold">Distributed Research Network</h3>
+                  <p className="mt-1 text-sm text-gray-200">Connecting innovation hubs across Germany and Romania.</p>
                 </div>
-              )
-              return logo.to ? (
-                <Link key={logo.name} to={logo.to} aria-label={`Open ${logo.name} lab page`}>{content}</Link>
-              ) : (
-                <a key={logo.name} href={logo.href} target="_blank" rel="noreferrer" aria-label={`Open ${logo.name} website`}>{content}</a>
-              )
-            })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -148,13 +166,17 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {members.map((member, i) => (
-              <motion.div key={member.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04, duration: 0.4 }} className="group flex flex-col items-center rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+              <motion.div key={member.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04, duration: 0.4 }} className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+                <div className="absolute left-0 top-3 flex flex-col gap-1">
+                  {member.affiliations.map((a) => (
+                    <span key={a.institution.shortName} className="rounded-r-md bg-blue-600 py-0.5 pl-1.5 pr-2 text-[9px] font-bold uppercase tracking-wide text-white shadow-sm">{a.institution.shortName}</span>
+                  ))}
+                </div>
                 <div className="mb-3 h-20 w-20 overflow-hidden rounded-full border border-gray-200 bg-gray-100">
                   <img src={getAssetUrl(member.photo)} alt={member.name} loading="lazy" className="h-full w-full object-cover" />
                 </div>
                 <p className="text-center text-sm font-bold leading-snug text-gray-950">{member.prefix ? `${member.prefix} ` : ''}{member.name}</p>
                 <p className="mt-1 text-center text-xs text-blue-700 font-semibold leading-5">{member.title}</p>
-                <p className="mt-0.5 w-full truncate text-center text-xs leading-5 text-gray-400">{member.affiliations[0]?.institution.shortName}</p>
                 <LinkIcons member={member} />
               </motion.div>
             ))}

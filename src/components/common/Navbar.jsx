@@ -19,6 +19,12 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [location.pathname])
 
+  const labSites = [
+    { initials: 'TUC', to: '/tuc', title: 'TU Clausthal lab' },
+    { initials: 'MDS', href: 'https://www.mds-lab.de/', title: 'MDS Lab, Rostock' },
+    { initials: 'UBB', href: 'https://www.ubbcluj.ro/en/', title: 'Babeș-Bolyai lab' }, // TODO placeholder until UBB lab site exists
+  ]
+
   const navItems = [
     {
       to: '/publications',
@@ -56,11 +62,24 @@ const Navbar = () => {
         }`}
       >
         <img
-          src={`${import.meta.env.BASE_URL}logos/core-network-logo.svg`}
+          src={`${import.meta.env.BASE_URL}logos/core/core-network.png`}
           alt="CORE Network"
           className="h-8 max-w-[4rem] object-contain sm:h-10 sm:max-w-[5rem]"
         />
       </Link>
+
+      <div className={`fixed right-4 top-4 z-[60] flex items-center gap-1.5 transition-all duration-300 ${
+        hideOnDynamoContent ? 'pointer-events-none -translate-y-20 opacity-0' : isScrolled ? 'scale-95 opacity-100' : 'scale-100 opacity-100'
+      }`}>
+        {labSites.map((lab) => {
+          const cls = 'flex h-9 items-center justify-center rounded-full border border-white/70 bg-white/85 px-3 text-xs font-bold tracking-wide text-gray-900 shadow-lg backdrop-blur-md transition hover:bg-white sm:h-10 sm:px-3.5 sm:text-sm'
+          return lab.to ? (
+            <Link key={lab.initials} to={lab.to} title={lab.title} aria-label={lab.title} className={cls}>{lab.initials}</Link>
+          ) : (
+            <a key={lab.initials} href={lab.href} target="_blank" rel="noreferrer" title={lab.title} aria-label={lab.title} className={cls}>{lab.initials}</a>
+          )
+        })}
+      </div>
 
       <nav className={`fixed top-16 left-1/2 z-50 w-[calc(100%-5rem)] max-w-4xl -translate-x-1/2 px-2 transition-all duration-300 sm:top-4 sm:w-[calc(100%-9rem)] ${
         hideOnDynamoContent ? 'pointer-events-none -translate-y-20 opacity-0' : 'opacity-100'
