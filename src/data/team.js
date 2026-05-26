@@ -127,6 +127,22 @@ export const teamMembers = [
   },
   // PhD Students / Researchers (also CORE Labs Leads)
   {
+    id: 11,
+    name: 'Jannik Brinkmann',
+    slug: 'brinkmann',
+    title: 'PhD Student',
+    roleCategory: 'phd_student',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/members/jannik-brinkmann.png',
+    bio: 'PhD student at TU Clausthal.',
+    email: 'jannik.brinkmann@tu-clausthal.de',
+    links: {
+      scholar: 'https://scholar.google.com/citations?hl=en&user=YtdTeaMAAAAJ'
+    }
+  },
+  {
     id: 5,
     name: 'David Szilagyi',
     slug: 'szilagyi',
@@ -219,22 +235,6 @@ export const teamMembers = [
   },
   // Additional Postdocs
 
-  {
-    id: 11,
-    name: 'Jannik Brinkmann',
-    slug: 'brinkmann',
-    title: 'PhD Student',
-    roleCategory: 'phd_student',
-    affiliations: [
-      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
-    ],
-    photo: '/members/jannik-brinkmann.png',
-    bio: 'PhD student at TU Clausthal.',
-    email: 'jannik.brinkmann@tu-clausthal.de',
-    links: {
-      scholar: 'https://scholar.google.com/citations?hl=en&user=YtdTeaMAAAAJ'
-    }
-  },
   {
     id: 12,
     name: 'Janis Zenkner',

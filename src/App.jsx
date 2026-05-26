@@ -8,15 +8,14 @@ import TucLayout from './components/tuc/Layout'
 
 // CORE pages
 const Home = lazy(() => import('./pages/Home'))
+const CoreLabs = lazy(() => import('./pages/CoreLabs'))
 const Demos = lazy(() => import('./pages/Demos'))
-const Network = lazy(() => import('./pages/Network'))
 const Dynamo = lazy(() => import('./pages/Dynamo'))
 const ComputeCluster = lazy(() => import('./pages/ComputeCluster'))
 const Publications = lazy(() => import('./pages/Publications'))
 
 // /tuc/* pages
 const TucHome = lazy(() => import('./pages/tuc/Home'))
-const TucPublications = lazy(() => import('./pages/tuc/Publications'))
 const TucTeaching = lazy(() => import('./pages/tuc/Teaching'))
 const TucJoinUs = lazy(() => import('./pages/tuc/JoinUs'))
 const TucProjects = lazy(() => import('./pages/tuc/Projects'))
@@ -43,10 +42,10 @@ function CoreShell() {
       <main className="flex-grow">
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
-            <Route path="/" element={<Network />} />
-            <Route path="/core-labs" element={<Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/core-labs" element={<CoreLabs />} />
             <Route path="/demos" element={<Demos />} />
-            <Route path="/network" element={<Network />} />
+            <Route path="/network" element={<Home />} />
             <Route path="/publications" element={<Publications />} />
             <Route path="/dynamo" element={<Dynamo />} />
             <Route path="/ai-team-projects" element={<TucAiTeamProjects />} />
@@ -72,7 +71,6 @@ function TucShell() {
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<TucHome />} />
-          <Route path="/publications" element={<TucPublications />} />
           <Route path="/teaching" element={<TucTeaching />} />
           <Route path="/join-us" element={<TucJoinUs />} />
           <Route path="/projects" element={<TucProjects />} />

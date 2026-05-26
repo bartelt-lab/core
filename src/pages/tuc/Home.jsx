@@ -13,9 +13,9 @@ const Home = () => {
         <>
             {/* Hero */}
             <section className="border-b border-gray-200">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-10 sm:pt-24 sm:pb-12">
                     <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 leading-tight tracking-tight">
-                        Machine Learning and COgnitive SoftwaRE
+                        COgnitive SoftwaRE
                     </h1>
                     <p className="mt-3 text-base sm:text-lg text-gray-500">
                         Research group at the Institute for Software Systems Engineering (ISSE), TU Clausthal.
@@ -25,7 +25,8 @@ const Home = () => {
 
             {/* Overview */}
             <section id="overview" className="border-b border-gray-200">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-12 sm:pt-10 sm:pb-16">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">About</h2>
                     <p className="max-w-3xl text-gray-700 leading-relaxed">
                         Our research group explores the intersection of artificial intelligence, cognitive computing,
                         and software engineering. Our work focuses on developing machine learning models that enhance
@@ -43,18 +44,9 @@ const Home = () => {
                             <a href="https://www.digit-research.de" target="_blank" rel="noreferrer">
                                 <img src={assetUrl('/logos/digit.jpg')} alt="DIGIT" className="h-14 object-contain" />
                             </a>
-                        </div>
-                    </div>
-
-                    <div className="mt-10">
-                        <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">Partner Institutions</p>
-                        <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
-                            <a href="https://www.uni-mannheim.de" target="_blank" rel="noreferrer">
-                                <img src={assetUrl('/logos/uma.png')} alt="University of Mannheim" className="h-14 object-contain" />
-                            </a>
-                            <a href="https://www.diepsam.uni-rostock.de/en/" target="_blank" rel="noreferrer">
-                                <img src={assetUrl('/logos/universitaet-rostock.png')} alt="University of Rostock" className="h-14 object-contain" />
-                            </a>
+                            <Link to="/">
+                                <img src={assetUrl('/logos/core-network-logo.svg')} alt="CORE Network" className="h-14 object-contain" />
+                            </Link>
                         </div>
                     </div>
                 </div>

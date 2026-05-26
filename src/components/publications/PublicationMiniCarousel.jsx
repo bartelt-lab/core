@@ -40,7 +40,6 @@ const PublicationMiniCarousel = () => {
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-1">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Recent Publications</p>
-          <p className="mt-1 text-xs font-semibold text-gray-500">Moving preview from the CORE research archive</p>
         </div>
         <Link to="/publications" className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-xs font-bold text-blue-700 transition hover:border-blue-200 hover:bg-blue-700 hover:text-white">
           All publications
