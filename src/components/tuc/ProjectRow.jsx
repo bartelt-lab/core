@@ -55,7 +55,7 @@ const ProjectRow = ({ project, index }) => {
             {/* Content Side */}
             <div className="w-full lg:w-2/5 flex flex-col items-start text-left">
                 <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 text-xs font-bold tracking-wider text-blue-600 uppercase bg-blue-50 rounded-full border border-blue-100">
+                    <span className="px-3 py-1 text-xs font-bold tracking-wider text-primary-600 uppercase bg-primary-50 rounded-full border border-primary-100">
                         {status}
                     </span>
                     <span className="text-sm font-medium text-gray-500 tracking-wide uppercase">
@@ -76,7 +76,7 @@ const ProjectRow = ({ project, index }) => {
                         href={link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-2 text-blue-600 font-semibold text-lg hover:text-blue-800 transition-colors"
+                        className="group inline-flex items-center gap-2 text-primary-600 font-semibold text-lg hover:text-primary-800 transition-colors"
                     >
                         View Project Details
                         <span className="transform group-hover:translate-x-1 transition-transform">→</span>
@@ -84,7 +84,7 @@ const ProjectRow = ({ project, index }) => {
                 ) : (
                     <Link
                         to={link}
-                        className="group inline-flex items-center gap-2 text-blue-600 font-semibold text-lg hover:text-blue-800 transition-colors"
+                        className="group inline-flex items-center gap-2 text-primary-600 font-semibold text-lg hover:text-primary-800 transition-colors"
                     >
                         View Project Details
                         <span className="transform group-hover:translate-x-1 transition-transform">→</span>

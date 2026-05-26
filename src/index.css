@@ -2,6 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme palettes — RGB triplets consumed by tailwind.config.js via rgb(var(--x)) */
+:root {
+  /* avocado (default) */
+  --primary-50: 236 253 241;
+  --primary-100: 209 248 219;
+  --primary-200: 164 239 185;
+  --primary-300: 110 226 141;
+  --primary-400: 51 204 92;
+  --primary-500: 16 175 57;
+  --primary-600: 0 144 32;
+  --primary-700: 4 120 29;
+  --primary-800: 9 95 28;
+  --primary-900: 12 78 27;
+  --primary-950: 2 48 13;
+
+  --secondary-50: 251 255 230;
+  --secondary-100: 244 255 192;
+  --secondary-200: 233 255 133;
+  --secondary-300: 216 245 63;
+  --secondary-400: 196 229 16;
+  --secondary-500: 176 208 0;
+  --secondary-600: 140 166 0;
+  --secondary-700: 106 125 4;
+  --secondary-800: 84 98 10;
+  --secondary-900: 71 83 14;
+
+  --tertiary-500: 107 45 8;
+  --tertiary-600: 80 32 0;
+  --tertiary-700: 63 25 0;
+}
+
+[data-theme="blue"] {
+  /* original blue */
+  --primary-50: 239 246 255;
+  --primary-100: 219 234 254;
+  --primary-200: 191 219 254;
+  --primary-300: 147 197 253;
+  --primary-400: 96 165 250;
+  --primary-500: 59 130 246;
+  --primary-600: 37 99 235;
+  --primary-700: 29 78 216;
+  --primary-800: 30 64 175;
+  --primary-900: 30 58 138;
+  --primary-950: 23 37 84;
+
+  /* secondary accents fall back to blue so the blue theme stays monochrome */
+  --secondary-50: 239 246 255;
+  --secondary-100: 219 234 254;
+  --secondary-200: 191 219 254;
+  --secondary-300: 147 197 253;
+  --secondary-400: 96 165 250;
+  --secondary-500: 59 130 246;
+  --secondary-600: 37 99 235;
+  --secondary-700: 29 78 216;
+  --secondary-800: 30 64 175;
+  --secondary-900: 30 58 138;
+
+  /* tertiary accents become slate ink in the blue theme */
+  --tertiary-500: 51 65 85;
+  --tertiary-600: 30 41 59;
+  --tertiary-700: 15 23 42;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

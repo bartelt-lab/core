@@ -271,7 +271,7 @@ const GoalImageCarousel = () => {
                     className={`h-full w-full transition-opacity duration-500 ${slide.fit}`}
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-5 text-white">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200">{slide.title}</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary-200">{slide.title}</p>
                     <p className="mt-2 text-sm leading-6 text-white/82">{slide.note}</p>
                 </div>
                 <button
@@ -297,7 +297,7 @@ const GoalImageCarousel = () => {
                         key={item.title}
                         type="button"
                         onClick={() => setActiveIndex(index)}
-                        className={`h-2.5 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-blue-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
+                        className={`h-2.5 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-primary-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
                         aria-label={`Show ${item.title}`}
                     />
                 ))}
@@ -323,7 +323,7 @@ const Dynamo = () => {
 
                 <div className="container relative z-10 mx-auto flex min-h-[72vh] max-w-7xl items-end px-6 pb-16 pt-28 md:px-10">
                     <div className="max-w-3xl">
-                        <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-blue-200">
+                        <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary-200">
                             Dynamic Navigation and Manipulation Operations
                         </p>
                         <h1 className="mb-5 text-5xl font-black leading-none tracking-tight md:text-7xl">
@@ -336,7 +336,7 @@ const Dynamo = () => {
                         <button
                             type="button"
                             onClick={() => setActiveTab('experiments')}
-                            className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-950 shadow-xl transition hover:bg-blue-50"
+                            className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-950 shadow-xl transition hover:bg-primary-50"
                         >
                             View result timeline
                         </button>
@@ -376,7 +376,7 @@ const Dynamo = () => {
                 <section id="goal" className="py-20 md:py-28">
                     <div className="container mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:items-center md:px-10">
                         <div>
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-blue-700">Project Goal</p>
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Project Goal</p>
                             <h2 className="mb-6 text-4xl font-black leading-tight tracking-tight md:text-5xl">
                                 Build the bridge between navigation, manipulation, and embodied reasoning.
                             </h2>
@@ -386,7 +386,7 @@ const Dynamo = () => {
                                 The core challenge is Sim2Real transfer: behavior developed in simulation must survive
                                 the noise and constraints of physical operation.
                             </p>
-                            <div className="mt-8 rounded-lg border-l-4 border-blue-600 bg-slate-50 p-5">
+                            <div className="mt-8 rounded-lg border-l-4 border-primary-600 bg-slate-50 p-5">
                                 <p className="text-sm italic leading-7 text-slate-600">
                                     Bridging perception, reasoning, navigation, and manipulation through a visible experiment pipeline.
                                 </p>
@@ -400,7 +400,7 @@ const Dynamo = () => {
                 <section id="status" className="bg-slate-50 py-20 md:py-24">
                     <div className="container mx-auto max-w-6xl px-6 md:px-10">
                         <div className="mx-auto mb-12 max-w-3xl text-center">
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-blue-700">Current Status</p>
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Current Status</p>
                             <h2 className="mb-4 text-3xl font-black leading-tight tracking-tight md:text-4xl">
                                 Active workstreams moving toward one integrated robot testbed.
                             </h2>
@@ -418,7 +418,7 @@ const Dynamo = () => {
                                         <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-md bg-slate-950 text-white">
                                             <Icon className="h-4 w-4" aria-hidden="true" />
                                         </div>
-                                        <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-blue-700">{card.eyebrow}</p>
+                                        <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">{card.eyebrow}</p>
                                         <h3 className="mb-3 text-xl font-bold">{card.title}</h3>
                                         <p className="leading-7 text-slate-600">{card.text}</p>
                                     </article>
@@ -435,7 +435,7 @@ const Dynamo = () => {
                 <section id="architecture" className="bg-gradient-to-b from-white to-slate-50 py-20 md:py-24">
                     <div className="container mx-auto max-w-6xl px-6 md:px-10">
                         <div className="mb-10 text-center">
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-blue-700">System Architecture</p>
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">System Architecture</p>
                             <h2 className="text-3xl font-black tracking-tight md:text-4xl">
                                 Interface-driven robotics architecture.
                             </h2>
@@ -457,7 +457,7 @@ const Dynamo = () => {
                 <section id="technical" className="bg-[#f6f9fc] py-20 md:py-24">
                     <div className="container mx-auto max-w-6xl px-6 md:px-10">
                         <div className="mb-12 text-center">
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-blue-700">Technical Overview</p>
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Technical Overview</p>
                             <h2 className="text-3xl font-black tracking-tight md:text-4xl">The stack behind the experiments.</h2>
                         </div>
 
@@ -466,14 +466,14 @@ const Dynamo = () => {
                                 {technicalBlocks.map((block, index) => {
                                     const Icon = block.icon
                                     const colorClasses = {
-                                        blue: 'bg-blue-50 text-blue-700 border-blue-100',
+                                        blue: 'bg-primary-50 text-primary-700 border-primary-100',
                                         emerald: 'bg-emerald-50 text-emerald-700 border-emerald-100',
                                         amber: 'bg-amber-50 text-amber-700 border-amber-100',
                                         violet: 'bg-violet-50 text-violet-700 border-violet-100',
                                     }
 
                                     return (
-                                        <article key={block.title} className="relative rounded-xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                                        <article key={block.title} className="relative rounded-xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary-200 hover:shadow-lg">
                                             <div className="mb-5 flex items-start justify-between gap-4">
                                                 <div className={`flex h-12 w-12 items-center justify-center rounded-lg border ${colorClasses[block.color]}`}>
                                                     <Icon className="h-5 w-5" aria-hidden="true" />
@@ -482,7 +482,7 @@ const Dynamo = () => {
                                                     0{index + 1}
                                                 </span>
                                             </div>
-                                            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-blue-700">{block.label}</p>
+                                            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">{block.label}</p>
                                             <h3 className="mb-2 text-xl font-bold text-slate-950">{block.title}</h3>
                                             <p className="mb-5 text-sm font-semibold text-slate-500">{block.metric}</p>
                                             <div className="flex flex-wrap gap-2">
@@ -502,7 +502,7 @@ const Dynamo = () => {
                             <div className="grid md:grid-cols-3">
                                 {['Simulate', 'Validate', 'Integrate'].map((step, index) => (
                                     <div key={step} className="flex items-start gap-4 border-white/10 p-6 md:border-r md:last:border-r-0">
-                                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 text-sm font-black">
+                                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-sm font-black">
                                             {index + 1}
                                         </span>
                                         <div>
@@ -525,7 +525,7 @@ const Dynamo = () => {
                 <section id="experiments" className="py-20 md:py-24">
                     <div className="container mx-auto max-w-6xl px-6 md:px-10">
                         <div className="mx-auto mb-12 max-w-3xl text-center">
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-blue-700">Experiments & Results</p>
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Experiments & Results</p>
                             <h2 className="mb-4 text-3xl font-black leading-tight tracking-tight md:text-4xl">
                                 Timeline of Dynamo results with associated proof videos.
                             </h2>
@@ -540,10 +540,10 @@ const Dynamo = () => {
                                 <article key={item.title} className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xl">
                                     <div className="grid lg:grid-cols-12">
                                         <div className="p-8 md:p-10 lg:col-span-5">
-                                            <span className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-700 text-sm font-bold text-white">
+                                            <span className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-700 text-sm font-bold text-white">
                                                 {index + 1}
                                             </span>
-                                            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-blue-700">{item.phase}</p>
+                                            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">{item.phase}</p>
                                             <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{item.operation}</p>
                                             <h3 className="mb-4 text-2xl font-bold">{item.title}</h3>
                                             <p className="mb-5 leading-7 text-slate-600">{item.summary}</p>
@@ -567,7 +567,7 @@ const Dynamo = () => {
                 <section className="pb-20 text-center">
                     <Link
                         to="/core-labs"
-                        className="inline-flex items-center gap-3 rounded-full border border-blue-700 px-6 py-3 text-sm font-bold text-blue-700 transition hover:bg-blue-700 hover:text-white"
+                        className="inline-flex items-center gap-3 rounded-full border border-primary-700 px-6 py-3 text-sm font-bold text-primary-700 transition hover:bg-primary-700 hover:text-white"
                     >
                         <FaArrowLeft className="h-3 w-3" aria-hidden="true" />
                         Back to CORE Labs

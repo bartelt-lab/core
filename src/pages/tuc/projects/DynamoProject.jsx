@@ -50,9 +50,9 @@ const DynamoProject = () => {
                         <p>
                             Our capstone goal is to construct an <strong>Integrated Test Environment</strong> where Ridgeback and G1 robots operate simultaneously amidst animated human characters in a unified simulation — then transfer those capabilities to the real world.
                         </p>
-                        <div className="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-500 mt-6">
-                            <h4 className="font-bold text-blue-900 mb-2">Key Challenges</h4>
-                            <ul className="list-disc list-inside text-blue-800 space-y-1 text-base">
+                        <div className="bg-primary-50 p-6 rounded-xl border-l-4 border-primary-500 mt-6">
+                            <h4 className="font-bold text-primary-900 mb-2">Key Challenges</h4>
+                            <ul className="list-disc list-inside text-primary-800 space-y-1 text-base">
                                 <li>Bridging simulation and reality (Sim2Real transfer)</li>
                                 <li>Grounding language models in physical robotic actions</li>
                                 <li>Coordinating autonomous navigation with dexterous manipulation</li>
@@ -82,7 +82,7 @@ const DynamoProject = () => {
                         <p className="text-gray-500">Visual abstract of the end-to-end pipeline</p>
                     </div>
                     <div className="max-w-5xl mx-auto shadow-2xl rounded-2xl overflow-hidden bg-white border border-gray-100 relative group">
-                        <div className="absolute inset-0 bg-blue-900/5 group-hover:bg-transparent transition-colors duration-300 pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-primary-900/5 group-hover:bg-transparent transition-colors duration-300 pointer-events-none"></div>
                         <img
                             src={assetUrl("/images/projects/dynamo/architecture.png")}
                             alt="Dynamo Visual Abstract"

@@ -145,7 +145,7 @@ const FaqItem = ({ q, a }) => {
       >
         <span className="text-base font-semibold text-slate-900">{q}</span>
         {open ? (
-          <FaChevronUp className="h-4 w-4 flex-shrink-0 text-blue-600" />
+          <FaChevronUp className="h-4 w-4 flex-shrink-0 text-primary-600" />
         ) : (
           <FaChevronDown className="h-4 w-4 flex-shrink-0 text-slate-400" />
         )}
@@ -159,9 +159,9 @@ const FaqItem = ({ q, a }) => {
 
 const SiteColorMap = {
   blue: {
-    badge: 'bg-blue-50 text-blue-700 border-blue-100',
-    icon: 'bg-blue-700',
-    dot: 'bg-blue-500',
+    badge: 'bg-primary-50 text-primary-700 border-primary-100',
+    icon: 'bg-primary-700',
+    dot: 'bg-primary-500',
   },
   emerald: {
     badge: 'bg-emerald-50 text-emerald-700 border-emerald-100',
@@ -196,13 +196,13 @@ const ComputeCluster = () => {
           <div className="max-w-2xl">
             {/* Breadcrumb */}
             <nav className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-400" aria-label="Breadcrumb">
-              <Link to="/" className="hover:text-blue-600 transition-colors">CORE Network</Link>
+              <Link to="/" className="hover:text-primary-600 transition-colors">CORE Network</Link>
               <span>/</span>
               <span className="text-slate-600">Compute Cluster</span>
             </nav>
 
             {/* Eyebrow */}
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-blue-700">
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">
               Shared Research Infrastructure
             </p>
 
@@ -221,14 +221,14 @@ const ComputeCluster = () => {
             <div className="flex flex-wrap items-center gap-4">
               <a
                 href="mailto:bartelt@isse.tu-clausthal.de"
-                className="inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-blue-700"
+                className="inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700"
               >
                 Request Access
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </a>
               <a
                 href="#capabilities"
-                className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-bold text-gray-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700"
+                className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-bold text-gray-700 shadow-sm transition hover:border-primary-300 hover:text-primary-700"
               >
                 View Capabilities
               </a>
@@ -240,7 +240,7 @@ const ComputeCluster = () => {
                 const Icon = s.icon
                 return (
                   <div key={s.label} className="rounded-xl border border-gray-200 bg-white/90 p-4 shadow-sm backdrop-blur">
-                    <Icon className="mb-2 h-4 w-4 text-blue-600" aria-hidden="true" />
+                    <Icon className="mb-2 h-4 w-4 text-primary-600" aria-hidden="true" />
                     <p className="text-2xl font-bold text-gray-950">{s.value}</p>
                     <p className="text-xs font-semibold text-gray-700 leading-5">{s.label}</p>
                     <p className="mt-0.5 text-xs text-gray-400">{s.description}</p>
@@ -257,7 +257,7 @@ const ComputeCluster = () => {
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
             <div>
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">About the Infrastructure</p>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">About the Infrastructure</p>
               <h2 className="mb-5 text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
                 Built for distributed, reproducible research
               </h2>
@@ -283,7 +283,7 @@ const ComputeCluster = () => {
                 { icon: FaCheckCircle, text: 'Remote job submission via shared SLURM queue' },
               ].map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-start gap-3">
-                  <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" aria-hidden="true" />
+                  <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary-600" aria-hidden="true" />
                   <p className="text-sm leading-6 text-gray-700">{text}</p>
                 </div>
               ))}
@@ -296,7 +296,7 @@ const ComputeCluster = () => {
       <section id="capabilities" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Capabilities</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Capabilities</p>
             <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
               Core infrastructure services
             </h2>
@@ -311,7 +311,7 @@ const ComputeCluster = () => {
               return (
                 <article
                   key={cap.title}
-                  className="group rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg"
+                  className="group rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-lg"
                 >
                   <div className="mb-5 flex items-start justify-between gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-950 text-white">
@@ -326,7 +326,7 @@ const ComputeCluster = () => {
                   <ul className="space-y-1.5">
                     {cap.points.map((pt) => (
                       <li key={pt} className="flex items-center gap-2 text-xs font-semibold text-gray-600">
-                        <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500" />
+                        <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-500" />
                         {pt}
                       </li>
                     ))}
@@ -342,7 +342,7 @@ const ComputeCluster = () => {
       <section id="sites" className="border-t border-gray-100 bg-white py-16 md:py-24">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Network Sites</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Network Sites</p>
             <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
               Three institutions. One shared platform.
             </h2>
@@ -392,7 +392,7 @@ const ComputeCluster = () => {
                 { step: '03', title: 'Archive', desc: 'Results, checkpoints, and artifacts are automatically stored in the shared registry.' },
               ].map(({ step, title, desc }) => (
                 <div key={step} className="flex items-start gap-4 p-7">
-                  <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-black">
+                  <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary-600 text-sm font-black">
                     {step}
                   </span>
                   <div>
@@ -410,7 +410,7 @@ const ComputeCluster = () => {
       <section id="policies" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Policies</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Policies</p>
             <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
               Access, data, and usage policies
             </h2>
@@ -429,7 +429,7 @@ const ComputeCluster = () => {
                 <ul className="space-y-3">
                   {pol.items.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm leading-6 text-gray-600">
-                      <FaCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-500" aria-hidden="true" />
+                      <FaCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary-500" aria-hidden="true" />
                       {item}
                     </li>
                   ))}
@@ -454,7 +454,7 @@ const ComputeCluster = () => {
       {false && <section id="faq" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
         <div className="container mx-auto max-w-3xl px-6 md:px-12">
           <div className="mb-10 text-center">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">FAQ</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">FAQ</p>
             <h2 className="text-3xl font-heading font-bold text-gray-950">Frequently asked questions</h2>
           </div>
           <div className="rounded-2xl border border-gray-200 bg-white px-7 shadow-sm">
@@ -467,7 +467,7 @@ const ComputeCluster = () => {
 
       {false && <section id="contact" className="border-t border-gray-200 bg-gray-950 py-16 text-white">
         <div className="container mx-auto max-w-4xl px-6 text-center md:px-12">
-          <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600">
+          <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-600">
             <FaServer className="h-6 w-6" aria-hidden="true" />
           </div>
           <h2 className="mb-4 text-3xl font-heading font-bold md:text-4xl">
@@ -480,7 +480,7 @@ const ComputeCluster = () => {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="mailto:bartelt@isse.tu-clausthal.de"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-gray-950 shadow-lg transition hover:bg-blue-50"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-gray-950 shadow-lg transition hover:bg-primary-50"
             >
               bartelt@isse.tu-clausthal.de
               <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
