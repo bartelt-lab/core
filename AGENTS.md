@@ -1,17 +1,21 @@
 # Agent context — core repo
 
-## Project state (as of branch `merge/tuc`)
+## Project state (as of branch `merge/core-network`)
 
 This repo (`github.com/bartelt-lab/core`) is the merged home of two sites:
 
-- **CORE Labs / CORE Network** — original content of this repo. React 19 + Vite 7
-  + Tailwind v3, HashRouter. Routes: `/`, `/demos`, `/network`, `/dynamo`.
+- **CORE Network / CORE Labs** — original content of this repo. React 19 + Vite 7
+  + Tailwind v3, HashRouter. Routes: `/` (CORE Network landing, served by
+  `pages/Home.jsx`), `/network` (alias of `/`), `/core-labs` (CORE Labs page,
+  `pages/CoreLabs.jsx`), `/demos`, `/dynamo`, `/publications`, `/compute-cluster`.
+  CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
   merged in under the hash prefix `/#/tuc/*`. Routes: `/tuc`,
-  `/tuc/publications`, `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses`,
+  `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses`,
   `/tuc/join-us`, `/tuc/projects`, `/tuc/core-team-projects`, plus 7 project
   subpages under `/tuc/core-team-projects/{dynamo,ai4ai,vergabepilot,
-  neurocore,stratego,traffic-network,self-driving}`.
+  neurocore,stratego,traffic-network,self-driving}`. TUC navbar links out to
+  the CORE Network site for `/network` and `/publications` (no `/tuc/publications`).
 
 App is split via `<Routes>` in `src/App.jsx` between `CoreShell` (core's
 pill Navbar + Footer) and `TucShell` (bartelt-style Layout). Each subtree
@@ -40,12 +44,14 @@ src/
       ProjectCard.jsx
       ProjectLayout.jsx            outer chrome for /tuc/core-team-projects/*
       ProjectRow.jsx
-      PublicationItem.jsx          shared by tuc Home preview + Publications
+      PublicationItem.jsx          publication row (tuc-style)
   pages/
-    Home.jsx Demos.jsx Network.jsx Dynamo.jsx   core
+    Home.jsx CoreLabs.jsx Demos.jsx Dynamo.jsx   core
+                                   (Home.jsx = CORE Network landing,
+                                    CoreLabs.jsx = CORE Labs page)
+    ComputeCluster.jsx Publications.jsx   core
     tuc/
-      Home.jsx                     bartelt landing (hero + members + pubs + contact)
-      Publications.jsx             full publications list
+      Home.jsx                     bartelt landing (hero + members + contact)
       Teaching.jsx Seminar.jsx Theses.jsx  teaching subtree
       JoinUs.jsx Projects.jsx AiTeamProjects.jsx
       projects/{AI4AI,Dynamo,NeuroCore,SelfDriving,Stratego,TrafficNetwork,Vergabepilot}Project.jsx
@@ -139,11 +145,10 @@ route it under both `/network/member/:slug` (core) and possibly
 `/tuc/member/:slug` (bartelt-style). When that exists, `PublicationItem`
 (both tuc shared one + core one) can wrap author names in `<Link>`.
 
-### 3. Fetch path inconsistency between core and tuc Publications
+### 3. Fetch path inconsistency for publications
 - `src/components/publications/PublicationsSection.jsx:11` —
   `fetch(\`${import.meta.env.BASE_URL}data/publications.json\`)`
-- `src/pages/tuc/Publications.jsx:10` and `src/pages/tuc/Home.jsx:84` —
-  `fetch(assetUrl('/data/publications.json'))`
+- other call sites use `fetch(assetUrl('/data/publications.json'))`
 Same result, two patterns. Pick one (`assetUrl` is the project-wide helper
 and is the better choice).
 
@@ -160,9 +165,8 @@ Build passes consistently but nobody has clicked through the app in a
 real browser since the restyle. Verify in dev (`npm run dev`):
 - `/#/` (core home, pill nav, hero video plays)
 - `/#/demos`, `/#/network`, `/#/dynamo` (core unaffected)
-- `/#/tuc` (bartelt home, members grid loads from team.js, pubs preview
-  fetches `/data/publications.json`, contact links work)
-- `/#/tuc/publications` (full list with images where present)
+- `/#/tuc` (bartelt home, members grid loads from team.js, CORE Network
+  affiliation logo + contact links work)
 - `/#/tuc/teaching`, `/#/tuc/seminar`, `/#/tuc/theses` (teaching-* CSS
   still applies — those inline `<style>` blocks survived)
 - `/#/tuc/join-us` (disclosure pattern expands/collapses)
@@ -190,10 +194,11 @@ Missing sections gracefully fall through (sidebar still renders, just
 that dot won't activate). Worth a one-time audit.
 
 ### 7. Publications page filtering / grouping
-`pages/tuc/Publications.jsx` currently renders all 21 entries flat,
-sorted by date. With hundreds of entries planned, add: year grouping,
+`pages/Publications.jsx` (core, `/publications`) renders all 21 entries
+flat, sorted by date. With hundreds of entries planned, add: year grouping,
 type/venue filter, member filter (powered by `memberSlug`), search
-box. Defer until count ≥ 30.
+box. Defer until count ≥ 30. (The tuc-specific `/tuc/publications` page was
+removed — TUC now links to the core publications page.)
 
 ### 8. `AiTeamProjects.jsx` audit
 381 lines. Restyle pass left it alone because it was Tailwind already.

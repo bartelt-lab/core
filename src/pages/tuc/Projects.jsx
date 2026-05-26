@@ -28,7 +28,7 @@ const Projects = () => {
                     <p className="text-gray-700 leading-relaxed max-w-3xl">
                         The European Master Team Project offers an exciting opportunity for students to collaborate
                         internationally while working on real-world challenges. This long-standing program is a
-                        partnership between the Technical University of Clausthal and Babes-Bolyai University in
+                        partnership between the Technical University of Clausthal and Babeș-Bolyai University in
                         Cluj-Napoca, Romania, led by Prof. Dr. Christian Bartelt.
                     </p>
 
@@ -121,7 +121,7 @@ const Projects = () => {
                     <strong>Large Language Models for Text-Based Games.</strong>{' '}
                     In this project you develop a Large Language Model (LLM) agent that is capable of self-improvement
                     in strategy-games. Specifically, you will develop an Artificial Intelligence for the two-player
-                    strategy game Stratego. Working in a cross-institutional team with students from Babes-Bolyai
+                    strategy game Stratego. Working in a cross-institutional team with students from Babeș-Bolyai
                     University, you will gain hands-on experience with LLM deployment (e.g., model parallelism,
                     compression, activation checkpointing) and cutting-edge self-improvement methods which include
                     reinforcement learning, self-play, exploration strategies, and advanced model analysis.

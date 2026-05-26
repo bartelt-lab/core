@@ -6,13 +6,25 @@ import assetUrl from '../../utils/assetUrl';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-const NAV_ITEMS = [
-    { to: '/tuc', label: 'Home', end: true },
-    { to: '/tuc/publications', label: 'Publications' },
+const TUC_NAV = [
     { to: '/tuc/teaching', label: 'Teaching' },
     { to: '/tuc/join-us', label: 'Join Us' },
-    { to: '/network', label: 'CORE Network' },
 ];
+
+const NETWORK_NAV = [
+    { to: '/network', label: 'CORE Network' },
+    { to: '/publications', label: 'Publications' },
+];
+
+const navClass = ({ isActive }) =>
+    `text-sm font-medium transition-colors ${
+        isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
+    }`;
+
+const mobileNavClass = ({ isActive }) =>
+    `px-3 py-2 rounded text-sm font-medium ${
+        isActive ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+    }`;
 
 const Layout = ({ children }) => {
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -32,23 +44,17 @@ const Layout = ({ children }) => {
                             alt="Research group logo"
                             className="h-9 w-auto"
                         />
-                        <span className="hidden sm:inline text-sm font-semibold tracking-wide text-gray-800">
-                            Machine Learning &amp; Cognitive Software
-                        </span>
                     </Link>
 
                     <nav className="hidden md:flex items-center gap-6">
-                        {NAV_ITEMS.map((item) => (
-                            <NavLink
-                                key={item.to}
-                                to={item.to}
-                                end={item.end}
-                                className={({ isActive }) =>
-                                    `text-sm font-medium transition-colors ${
-                                        isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
-                                    }`
-                                }
-                            >
+                        {TUC_NAV.map((item) => (
+                            <NavLink key={item.to} to={item.to} className={navClass}>
+                                {item.label}
+                            </NavLink>
+                        ))}
+                        <span className="h-5 w-px bg-gray-300" aria-hidden="true" />
+                        {NETWORK_NAV.map((item) => (
+                            <NavLink key={item.to} to={item.to} className={navClass}>
                                 {item.label}
                             </NavLink>
                         ))}
@@ -68,19 +74,15 @@ const Layout = ({ children }) => {
                 {isNavOpen && (
                     <div className="md:hidden border-t border-gray-200 bg-white">
                         <nav className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
-                            {NAV_ITEMS.map((item) => (
-                                <NavLink
-                                    key={item.to}
-                                    to={item.to}
-                                    end={item.end}
-                                    className={({ isActive }) =>
-                                        `px-3 py-2 rounded text-sm font-medium ${
-                                            isActive
-                                                ? 'bg-gray-100 text-gray-900'
-                                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                                        }`
-                                    }
-                                >
+                            {TUC_NAV.map((item) => (
+                                <NavLink key={item.to} to={item.to} className={mobileNavClass}>
+                                    {item.label}
+                                </NavLink>
+                            ))}
+                            <div className="my-2 border-t border-gray-200" />
+                            <p className="px-3 pb-1 text-xs uppercase tracking-widest text-gray-400">CORE Network</p>
+                            {NETWORK_NAV.map((item) => (
+                                <NavLink key={item.to} to={item.to} className={mobileNavClass}>
                                     {item.label}
                                 </NavLink>
                             ))}
@@ -104,7 +106,7 @@ const Layout = ({ children }) => {
                             />
                             <div className="min-w-0">
                                 <p className="text-sm font-semibold leading-5 text-slate-900 break-words">
-                                    Machine Learning &amp; Cognitive Software
+                                    Cognitive Software
                                 </p>
                                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
                                     TU Clausthal

@@ -44,7 +44,7 @@ const JoinUs = () => {
                     <div className="border-l-4 border-gray-900 bg-gray-50 px-5 py-4">
                         <p className="m-0 text-gray-700">
                             We currently have open positions for PhD candidates and research assistants in our
-                            research group <em>Machine Learning &amp; Cognitive Software</em> at the Institute for
+                            research group <em>Cognitive Software</em> at the Institute for
                             Software Systems Engineering (ISSE) at TU Clausthal. Explore the opportunities below to
                             find the position that best fits your career goals.
                         </p>
@@ -57,7 +57,7 @@ const JoinUs = () => {
                         onToggle={toggle}
                     >
                         <p>Du möchtest in der akademischen Forschung durchstarten und dich mit aktuellen Fragen der Künstlichen Intelligenz auseinandersetzen? Du begeisterst dich für anspruchsvolle Themen im Machine Learning und möchtest promovieren? Dann freuen wir uns darauf, dich kennenzulernen.</p>
-                        <p>Unsere Forschungsgruppe Machine Learning &amp; Cognitive Software (<a href="https://www.isse.tu-clausthal.de/forschung/forschungsgruppen/machine-learning-and-cognitive-software">ISSE page</a>) am Institut für Software Systems Engineering (ISSE) der Technischen Universität Clausthal am Standort Goslar verbindet Grundlagenforschung mit praxisnahen Anwendungen. Unser Ziel ist es, moderne Architekturen und Engineering-Methoden für zukünftige KI-Systeme zu entwerfen und weiterzuentwickeln. In den kommenden Monaten starten bei uns mehrere große Drittmittelprojekte, insbesondere zu Generative AI, KI-Architekturen für Large Language Models und Reinforcement Learning. Dafür suchen wir motivierte neue Teammitglieder, die mit uns gemeinsam forschen wollen.</p>
+                        <p>Unsere Forschungsgruppe Cognitive Software (<a href="https://www.isse.tu-clausthal.de/forschung/forschungsgruppen/machine-learning-and-cognitive-software">ISSE page</a>) am Institut für Software Systems Engineering (ISSE) der Technischen Universität Clausthal am Standort Goslar verbindet Grundlagenforschung mit praxisnahen Anwendungen. Unser Ziel ist es, moderne Architekturen und Engineering-Methoden für zukünftige KI-Systeme zu entwerfen und weiterzuentwickeln. In den kommenden Monaten starten bei uns mehrere große Drittmittelprojekte, insbesondere zu Generative AI, KI-Architekturen für Large Language Models und Reinforcement Learning. Dafür suchen wir motivierte neue Teammitglieder, die mit uns gemeinsam forschen wollen.</p>
                         <p>Unser Team besteht aus neun engagierten Wissenschaftlerinnen und Wissenschaftlern, die in einem kollegialen und dynamischen Umfeld zusammenarbeiten. Wir forschen gemeinsam mit international tätigen Unternehmen wie Bosch, BASF, Daimler, Roche, SAP und Siemens, aber auch mit Gründern innovativer Start-ups und Mittelständlern.</p>
                         <p>Wir suchen Bewerberinnen und Bewerber, die einen sehr guten Masterabschluss in Informatik, Mathematik oder einem verwandten Fachbereich mitbringen. Du solltest Interesse an einer wissenschaftlichen Laufbahn oder an einer späteren Tätigkeit in der industriellen Forschung mitbringen.</p>
                         <h4>Wir bieten …</h4>
@@ -74,7 +74,7 @@ const JoinUs = () => {
                         <p>
                             <strong>Prof. Dr. Christian Bartelt</strong><br />
                             Technische Universität Clausthal<br />
-                            Machine Learning &amp; COgnitive SoftwaRE<br />
+                            COgnitive SoftwaRE<br />
                             Institut für Software Systems Engineering (ISSE)<br />
                             Wallstraße 6, 38640 Goslar<br />
                             E-Mail: <a href="mailto:bartelt@isse.tu-clausthal.de">bartelt@isse.tu-clausthal.de</a>
@@ -90,7 +90,7 @@ const JoinUs = () => {
                     >
                         <p><strong>(20–38 hours/month)</strong></p>
                         <p>Are you studying computer science, mathematics, or a related field and want to gain hands-on research experience in the field of Artificial Intelligence? Are you excited about machine learning, generative AI, or reinforcement learning, and want to contribute your skills to exciting projects? Then this role might be just what you are looking for!</p>
-                        <p>Our Machine Learning &amp; Cognitive Software research group at the Institute for Software Systems Engineering (ISSE) of Clausthal University of Technology, based in Goslar, combines fundamental research with practical applications.</p>
+                        <p>Our Cognitive Software research group at the Institute for Software Systems Engineering (ISSE) of Clausthal University of Technology, based in Goslar, combines fundamental research with practical applications.</p>
                         <h4>Your tasks:</h4>
                         <ul>
                             <li>Support our research teams in current projects, e.g., generative AI, AI architectures for large language models, and reinforcement learning</li>
