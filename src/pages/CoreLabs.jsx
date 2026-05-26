@@ -50,14 +50,14 @@ const CoreLabs = () => {
 
         <div className="container relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="max-w-3xl">
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-blue-300">CORE Labs</p>
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-secondary-400">CORE Labs</p>
             <h1 className="mb-6 text-4xl font-heading font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-7xl">
               Labs for Cognitive<br className="hidden md:block" /> Robotics in Europe
             </h1>
             <p className="mb-8 max-w-2xl text-lg leading-8 text-white/80 md:text-xl">
               Shared research infrastructure, joint projects, and a cross-national team advancing cognitive autonomous systems.
             </p>
-            <a href="#initiative" className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-gray-950 shadow-lg transition hover:bg-blue-50">
+            <a href="#initiative" className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-gray-950 shadow-lg transition hover:bg-primary-50">
               Explore the labs
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
             </a>
@@ -69,7 +69,7 @@ const CoreLabs = () => {
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="grid gap-14 lg:grid-cols-[1fr_.95fr] lg:items-start">
             <div>
-              <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-blue-700">The Initiative</p>
+              <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary-700">The Initiative</p>
               <h2 className="mb-8 text-4xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-5xl">
                 One lab across three cities
               </h2>
@@ -93,7 +93,7 @@ const CoreLabs = () => {
                     </div>
                     <div>
                       <p className="text-sm font-bold text-gray-950">{pi.prefix ? `${pi.prefix} ${pi.name}` : pi.name}</p>
-                      <p className="text-xs font-semibold text-blue-700">Principal Investigator</p>
+                      <p className="text-xs font-semibold text-primary-700">Principal Investigator</p>
                       <p className="mt-0.5 text-xs font-semibold text-gray-400">{pi.affiliations[0].institution.name}</p>
                     </div>
                   </div>
@@ -108,11 +108,11 @@ const CoreLabs = () => {
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-xl">
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Scientific Coordination</p>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Scientific Coordination</p>
               <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">Lab leads</h2>
               <p className="mt-3 text-base leading-7 text-gray-600">Our lab leads coordinate research and operational activities across our distributed locations.</p>
             </div>
-            <Link to="/#team" className="hidden items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-bold text-gray-600 shadow-sm transition hover:border-blue-300 hover:text-blue-700 md:inline-flex">
+            <Link to="/#team" className="hidden items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-bold text-gray-600 shadow-sm transition hover:border-primary-300 hover:text-primary-700 md:inline-flex">
               Meet the Full Team
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
             </Link>
@@ -128,12 +128,12 @@ const CoreLabs = () => {
               }
 
               return (
-                <motion.div key={lead.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.4 }} className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+                <motion.div key={lead.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.4 }} className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:border-primary-200 hover:shadow-md">
                   <div className="mb-4 h-20 w-20 overflow-hidden rounded-xl border border-gray-100 bg-gray-100">
                     <img src={assetUrl(lead.photo)} alt={lead.name} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
                   </div>
                   <h3 className="text-base font-bold leading-snug text-gray-950">{lead.name}</h3>
-                  <p className="mt-1 text-xs font-bold text-blue-700">{details.role}</p>
+                  <p className="mt-1 text-xs font-bold text-primary-700">{details.role}</p>
                   <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-gray-400">{details.institution}</p>
                   <p className="mt-4 text-sm leading-6 text-gray-600">{details.description}</p>
                   <div className="mt-4 flex flex-wrap gap-1.5">
@@ -153,12 +153,12 @@ const CoreLabs = () => {
       <section id="publications" className="border-t border-gray-100 bg-gradient-to-br from-white via-slate-50 to-white py-10 md:py-14">
         <div className="container mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[0.85fr_1fr] md:items-center md:px-12 lg:px-20">
           <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">CORE Labs</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">CORE Labs</p>
             <h2 className="mb-4 text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">Research publications</h2>
             <p className="text-sm leading-6 text-gray-600">
               A rotating preview of recent publications connected to CORE Labs. Open the archive for the full publication list across the CORE Network.
             </p>
-            <Link to="/publications" className="mt-6 inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-blue-700">
+            <Link to="/publications" className="mt-6 inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700">
               View all publications
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
             </Link>

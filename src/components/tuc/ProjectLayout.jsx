@@ -31,7 +31,7 @@ const ProjectLayout = ({
                     <div className="max-w-4xl mx-auto text-center mb-12">
                         <div className="flex justify-center gap-2 mb-6">
                             {tags.map((tag, i) => (
-                                <span key={i} className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold uppercase tracking-wider">
+                                <span key={i} className="px-3 py-1 bg-primary-50 text-primary-600 rounded-full text-xs font-bold uppercase tracking-wider">
                                     {tag}
                                 </span>
                             ))}
@@ -50,7 +50,7 @@ const ProjectLayout = ({
                                 href={downloadUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+                                className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -135,7 +135,7 @@ const ProjectLayout = ({
                                 <ul className="space-y-6">
                                     {requirements.map((req, i) => (
                                         <li key={i} className="flex items-start gap-4">
-                                            <span className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
+                                            <span className="w-6 h-6 rounded-full bg-primary-500 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
                                             <span className="text-gray-300 leading-relaxed font-light text-lg">
                                                 {req}
                                             </span>
@@ -149,7 +149,7 @@ const ProjectLayout = ({
                                 initial={{ opacity: 0, x: 20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-blue-600 text-white rounded-3xl p-10 md:p-12 shadow-2xl relative overflow-hidden"
+                                className="bg-primary-600 text-white rounded-3xl p-10 md:p-12 shadow-2xl relative overflow-hidden"
                             >
                                 <div className="absolute top-0 right-0 p-8 opacity-10 font-black text-9xl leading-none select-none pointer-events-none">
                                     OFF
@@ -160,8 +160,8 @@ const ProjectLayout = ({
                                 <ul className="space-y-6">
                                     {offerings.map((offering, i) => (
                                         <li key={i} className="flex items-start gap-4">
-                                            <span className="w-6 h-6 rounded-full bg-white text-blue-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">★</span>
-                                            <span className="text-blue-50 leading-relaxed font-medium text-lg">
+                                            <span className="w-6 h-6 rounded-full bg-white text-primary-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">★</span>
+                                            <span className="text-primary-50 leading-relaxed font-medium text-lg">
                                                 {offering}
                                             </span>
                                         </li>
@@ -181,7 +181,7 @@ const ProjectLayout = ({
 
             {/* Back to Projects */}
             <div className="container mx-auto px-4 py-12 text-center border-t border-gray-100">
-                <Link to="/ai-team-projects" className="inline-flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors font-medium text-lg">
+                <Link to="/ai-team-projects" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-600 transition-colors font-medium text-lg">
                     ← Back to All Projects
                 </Link>
             </div>

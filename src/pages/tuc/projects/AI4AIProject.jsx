@@ -43,21 +43,21 @@ const AI4AIProject = () => {
 
                 <div className="grid md:grid-cols-3 gap-8 mb-20">
                     {/* Week 1-4 */}
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border border-blue-100 relative overflow-hidden">
-                        <div className="absolute top-4 right-4 text-6xl font-black text-blue-100 select-none pointer-events-none">01</div>
-                        <span className="text-sm font-bold text-blue-600 uppercase tracking-wider">Week 1–4</span>
+                    <div className="bg-gradient-to-br from-primary-50 to-indigo-50 p-8 rounded-2xl border border-primary-100 relative overflow-hidden">
+                        <div className="absolute top-4 right-4 text-6xl font-black text-primary-100 select-none pointer-events-none">01</div>
+                        <span className="text-sm font-bold text-primary-600 uppercase tracking-wider">Week 1–4</span>
                         <h4 className="text-xl font-bold text-gray-900 mt-2 mb-4">LLM Coding + Setup</h4>
                         <ul className="text-gray-600 space-y-2 text-sm">
                             <li className="flex items-start gap-2">
-                                <span className="text-blue-500 mt-0.5">▸</span>
+                                <span className="text-primary-500 mt-0.5">▸</span>
                                 Basics of LLMs and AI-assisted coding
                             </li>
                             <li className="flex items-start gap-2">
-                                <span className="text-blue-500 mt-0.5">▸</span>
+                                <span className="text-primary-500 mt-0.5">▸</span>
                                 VM and Conda environment setup
                             </li>
                             <li className="flex items-start gap-2">
-                                <span className="text-blue-500 mt-0.5">▸</span>
+                                <span className="text-primary-500 mt-0.5">▸</span>
                                 AI-assisted scaffold creation
                             </li>
                         </ul>

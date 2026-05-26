@@ -52,7 +52,7 @@ const PublicationCarousel = ({
       <div className="container mx-auto max-w-7xl px-6 md:px-12 lg:px-20 mb-10">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-blue-700">{subtitle}</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-primary-700">{subtitle}</span>
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-950 mt-3 mb-4">
               {title}
             </h2>
@@ -61,7 +61,7 @@ const PublicationCarousel = ({
           {viewAllLink && (
             <Link
               to={viewAllLink}
-              className="inline-flex w-fit items-center gap-3 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-700"
+              className="inline-flex w-fit items-center gap-3 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-700"
             >
               View full publication archive
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
@@ -88,7 +88,7 @@ const PublicationCarousel = ({
                 />
               </div>
               <div className="p-5">
-                <p className="text-xs font-bold uppercase tracking-widest text-blue-700 mb-2">
+                <p className="text-xs font-bold uppercase tracking-widest text-primary-700 mb-2">
                   {publication.venue} {publication.year}
                 </p>
                 <h3 className="text-base font-bold leading-6 text-gray-950 line-clamp-3">

@@ -10,7 +10,7 @@ const PublicationCard = ({ publication, featured = false, compact = false }) => 
   const hasUrl = publication.url && publication.url !== '#'
 
   return (
-    <article className={`group overflow-hidden ${compact ? 'rounded-3xl border border-gray-200 bg-white shadow-xl shadow-slate-200/70' : 'rounded-lg border border-gray-200 bg-white shadow-sm'} transition-all hover:border-blue-200 hover:shadow-xl ${featured && !compact ? 'grid md:grid-cols-[44%_1fr]' : ''}`}>
+    <article className={`group overflow-hidden ${compact ? 'rounded-3xl border border-gray-200 bg-white shadow-xl shadow-slate-200/70' : 'rounded-lg border border-gray-200 bg-white shadow-sm'} transition-all hover:border-primary-200 hover:shadow-xl ${featured && !compact ? 'grid md:grid-cols-[44%_1fr]' : ''}`}>
       <div className={`${featured ? (compact ? 'hidden' : 'min-h-[260px]') : 'aspect-[4/3]'} bg-gray-100 overflow-hidden`}>
         <img
           src={assetUrl(image)}
@@ -20,8 +20,8 @@ const PublicationCard = ({ publication, featured = false, compact = false }) => 
         />
       </div>
       <div className={featured ? (compact ? 'p-5 md:p-6' : 'p-8 md:p-10') : 'p-6'}>
-        {compact && <div className="mb-5 h-1 w-16 rounded-full bg-blue-600" />}
-        <div className={`${compact ? 'mb-4 text-[11px]' : 'mb-3 text-xs'} flex flex-wrap items-center gap-2 font-bold uppercase tracking-widest text-blue-700`}>
+        {compact && <div className="mb-5 h-1 w-16 rounded-full bg-primary-600" />}
+        <div className={`${compact ? 'mb-4 text-[11px]' : 'mb-3 text-xs'} flex flex-wrap items-center gap-2 font-bold uppercase tracking-widest text-primary-700`}>
           <span>{publication.type}</span>
           <span className="h-1 w-1 rounded-full bg-gray-300" />
           <span>{publication.year}</span>
@@ -45,7 +45,7 @@ const PublicationCard = ({ publication, featured = false, compact = false }) => 
               href={publication.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-blue-100 px-4 py-2 text-sm font-bold text-blue-700 hover:border-blue-700 hover:text-blue-900"
+              className="inline-flex items-center gap-2 rounded-full border border-primary-100 px-4 py-2 text-sm font-bold text-primary-700 hover:border-primary-700 hover:text-primary-900"
             >
               Paper
               <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
@@ -173,7 +173,7 @@ const PublicationsSection = ({
                 value={filters.query}
                 onChange={(event) => updateFilter('query', event.target.value)}
                 placeholder="Search title, venue, author"
-                className="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 pl-10 pr-3 text-sm outline-none transition focus:border-blue-500 focus:bg-white"
+                className="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 pl-10 pr-3 text-sm outline-none transition focus:border-primary-500 focus:bg-white"
               />
             </label>
 
@@ -188,7 +188,7 @@ const PublicationsSection = ({
                 <select
                   value={filters[key]}
                   onChange={(event) => updateFilter(key, event.target.value)}
-                  className="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-medium text-gray-700 outline-none transition focus:border-blue-500 focus:bg-white"
+                  className="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-medium text-gray-700 outline-none transition focus:border-primary-500 focus:bg-white"
                 >
                   <option value="all">{label}</option>
                   {values.map((value) => (
@@ -215,7 +215,7 @@ const PublicationsSection = ({
                   key={publication.id}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className={`h-2.5 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-blue-700' : 'w-2.5 bg-gray-300 hover:bg-gray-400'}`}
+                  className={`h-2.5 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-primary-700' : 'w-2.5 bg-gray-300 hover:bg-gray-400'}`}
                   aria-label={`Show publication ${index + 1}`}
                 />
               ))}
@@ -225,7 +225,7 @@ const PublicationsSection = ({
             <div className="mt-10 text-center">
               <Link
                 to={viewAllLink}
-                className="inline-flex items-center gap-3 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-700"
+                className="inline-flex items-center gap-3 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-700"
               >
                 View all publications
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
@@ -244,7 +244,7 @@ const PublicationsSection = ({
             <div className="mt-10 text-center">
               <Link
                 to={viewAllLink}
-                className="inline-flex items-center gap-3 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-700"
+                className="inline-flex items-center gap-3 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-700"
               >
                 View full publication archive
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />

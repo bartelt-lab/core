@@ -4,6 +4,7 @@ import Navbar from './components/common/Navbar'
 import RightSidebar from './components/common/RightSidebar'
 import Footer from './components/common/Footer'
 import ScrollToTop from './components/common/ScrollToTop'
+import ThemeToggle from './components/common/ThemeToggle'
 import TucLayout from './components/tuc/Layout'
 
 // CORE pages
@@ -86,6 +87,7 @@ function App() {
   return (
     <HashRouter>
       <ScrollToTop />
+      <ThemeToggle />
       <Routes>
         <Route path="/tuc/*" element={<TucShell />} />
         <Route path="/*" element={<CoreShell />} />

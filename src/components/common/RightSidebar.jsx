@@ -156,7 +156,7 @@ const RightSidebar = () => {
     const lineColor = useDarkSidebar ? 'bg-gray-300' : 'bg-white/30';
     const dotBaseClass = useDarkSidebar ? 'bg-transparent border-gray-400 border-2' : 'bg-white/50 border-white';
     const dotHoverClass = useDarkSidebar ? 'group-hover:bg-gray-600' : 'group-hover:bg-white';
-    const activeDotClass = useDarkSidebar ? 'bg-blue-600' : 'bg-white';
+    const activeDotClass = useDarkSidebar ? 'bg-primary-600' : 'bg-white';
     return (
         <AnimatePresence>
             {isVisible && (

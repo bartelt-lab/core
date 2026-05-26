@@ -98,16 +98,16 @@ const AiTeamProjects = () => {
 
     return (
         <div className="min-h-screen bg-white text-slate-950">
-            <section id="hero" className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/55 to-slate-100 pt-28 pb-16">
-                <div className="absolute left-1/2 top-8 h-80 w-80 -translate-x-1/2 rounded-full bg-blue-200/25 blur-3xl" aria-hidden="true" />
+            <section id="hero" className="relative overflow-hidden bg-gradient-to-br from-white via-primary-50/55 to-slate-100 pt-28 pb-16">
+                <div className="absolute left-1/2 top-8 h-80 w-80 -translate-x-1/2 rounded-full bg-primary-200/25 blur-3xl" aria-hidden="true" />
                 <div className="container relative mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-[0.95fr_1.05fr] md:px-10">
                     <div className="text-center md:text-left">
-                        <span className="mb-6 inline-flex rounded-full border border-blue-100 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-widest text-blue-700 shadow-sm backdrop-blur">
+                        <span className="mb-6 inline-flex rounded-full border border-primary-100 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-widest text-primary-700 shadow-sm backdrop-blur">
                             Applied Intelligence
                         </span>
                         <h1 className="mb-5 text-5xl font-black leading-tight tracking-tight md:text-6xl">
                             AI Team<br />
-                            <span className="text-blue-700">Projects</span>
+                            <span className="text-primary-700">Projects</span>
                         </h1>
                         <p className="mx-auto max-w-2xl text-base leading-8 text-slate-600 md:mx-0">
                             The AI Team Projects bridge academia, cutting-edge AI/ML research, and international collaboration.
@@ -117,24 +117,24 @@ const AiTeamProjects = () => {
                             <button
                                 type="button"
                                 onClick={() => scrollToSection('active-projects')}
-                                className="rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-blue-700"
+                                className="rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700"
                             >
                                 Current Projects
                             </button>
                             <button
                                 type="button"
                                 onClick={() => scrollToSection('archive')}
-                                className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:border-blue-200 hover:text-blue-700"
+                                className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:border-primary-200 hover:text-primary-700"
                             >
                                 Archive Projects
                             </button>
                         </div>
                     </div>
                     <div className="hidden justify-center md:flex">
-                        <div className="relative flex h-80 w-80 items-center justify-center rounded-full border border-dashed border-blue-100">
+                        <div className="relative flex h-80 w-80 items-center justify-center rounded-full border border-dashed border-primary-100">
                             <div className="absolute inset-10 rounded-full border border-slate-100" />
-                            <div className="absolute h-28 w-28 rotate-6 rounded-3xl bg-white shadow-2xl shadow-blue-100" />
-                            <div className="relative h-24 w-24 rotate-6 rounded-2xl bg-blue-600 shadow-2xl shadow-blue-200" />
+                            <div className="absolute h-28 w-28 rotate-6 rounded-3xl bg-white shadow-2xl shadow-primary-100" />
+                            <div className="relative h-24 w-24 rotate-6 rounded-2xl bg-primary-600 shadow-2xl shadow-primary-200" />
                             <div className="absolute right-20 top-40 h-4 w-4 rounded-full bg-sky-400" />
                         </div>
                     </div>
@@ -156,7 +156,7 @@ const AiTeamProjects = () => {
                             ['ARCHIVE (2022)', '/videos/demonstrations/autonomous_driving/CTP_Showcase_2022.mp4'],
                         ].map(([label, src]) => (
                             <div key={label} className="relative overflow-hidden rounded-lg shadow-2xl">
-                                <span className="absolute left-4 top-4 z-10 rounded-full bg-blue-600 px-3 py-1 text-xs font-bold">{label}</span>
+                                <span className="absolute left-4 top-4 z-10 rounded-full bg-primary-600 px-3 py-1 text-xs font-bold">{label}</span>
                                 <video src={assetUrl(src)} className="aspect-video w-full object-cover" controls muted playsInline />
                             </div>
                         ))}
@@ -168,7 +168,7 @@ const AiTeamProjects = () => {
                 <div className="container mx-auto max-w-6xl px-6 md:px-10">
                     <div className="mb-10 text-center">
                         <h2 className="text-3xl font-light">Active Projects</h2>
-                        <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-blue-600" />
+                        <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-primary-600" />
                         <p className="mt-5 text-sm text-slate-500">Pushing the boundaries of what's possible in cognitive systems and automated intelligence.</p>
                     </div>
                     <div className="grid gap-7 md:grid-cols-3">
@@ -180,7 +180,7 @@ const AiTeamProjects = () => {
                                     <span className="absolute bottom-3 right-3 rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700">View details</span>
                                 </div>
                                 <div className="p-6">
-                                    <h3 className="mb-3 text-xl font-bold text-blue-700">{project.title}</h3>
+                                    <h3 className="mb-3 text-xl font-bold text-primary-700">{project.title}</h3>
                                     <p className="text-sm leading-7 text-slate-600">{project.description}</p>
                                 </div>
                             </Link>
@@ -193,7 +193,7 @@ const AiTeamProjects = () => {
                 <div className="container mx-auto max-w-6xl px-6 md:px-10">
                     <div className="mb-10 text-center">
                         <h2 className="text-3xl font-light">Student Testimonials</h2>
-                        <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-blue-600" />
+                        <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-primary-600" />
                     </div>
                     <div className="grid gap-6 md:grid-cols-3">
                         {testimonials.map((src, index) => (
@@ -209,7 +209,7 @@ const AiTeamProjects = () => {
                 <div className="container mx-auto max-w-6xl px-6 md:px-10">
                     <div className="mb-10 text-center">
                         <h2 className="text-3xl font-light">Project Archive</h2>
-                        <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-blue-600" />
+                        <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-primary-600" />
                     </div>
                     <div className="space-y-16">
                         {archiveProjects.map((project, index) => (
@@ -219,12 +219,12 @@ const AiTeamProjects = () => {
                                 </div>
                                 <div>
                                     <div className="mb-3 flex items-center gap-3">
-                                        <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase text-blue-700">Archive</span>
+                                        <span className="rounded-full bg-primary-50 px-3 py-1 text-xs font-bold uppercase text-primary-700">Archive</span>
                                         <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">{project.tag}</span>
                                     </div>
                                     <h3 className="mb-4 text-2xl font-bold">{project.title}</h3>
                                     <p className="mb-5 leading-7 text-slate-600">{project.description}</p>
-                                    <Link to={project.link} className="inline-flex items-center gap-2 text-sm font-bold text-blue-700">
+                                    <Link to={project.link} className="inline-flex items-center gap-2 text-sm font-bold text-primary-700">
                                         View Project Details
                                         <FaArrowRight className="h-3 w-3" aria-hidden="true" />
                                     </Link>
@@ -236,7 +236,7 @@ const AiTeamProjects = () => {
                         <p className="mx-auto mb-4 max-w-3xl text-sm leading-7 text-slate-500">
                             Looking for earlier iterations? These projects continue the tradition of our team projects from the University of Mannheim, where the same format ran under the European Master Team Project.
                         </p>
-                        <a href="https://www.uni-mannheim.de/en/ines/teaching/european-master-team-project/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-blue-700">
+                        <a href="https://www.uni-mannheim.de/en/ines/teaching/european-master-team-project/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-primary-700">
                             View previous projects at Uni Mannheim
                             <FaArrowRight className="h-3 w-3" aria-hidden="true" />
                         </a>

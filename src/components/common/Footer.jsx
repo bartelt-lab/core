@@ -24,7 +24,7 @@ const Footer = () => {
                   href={logo.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex min-h-24 min-w-48 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 px-5 py-4 transition hover:border-blue-200 hover:bg-white hover:shadow-md"
+                  className="flex min-h-24 min-w-48 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 px-5 py-4 transition hover:border-primary-200 hover:bg-white hover:shadow-md"
                 >
                   <img
                     src={getAssetUrl(logo.src)}
@@ -40,7 +40,7 @@ const Footer = () => {
           </div>
 
           <div className="md:col-span-1 md:text-right">
-            <h3 className="mb-2 text-2xl font-heading font-bold">CORE</h3>
+            <h3 className="mb-2 text-2xl font-heading font-bold text-tertiary-600">CORE</h3>
             <p className="mb-4 text-gray-600">Cognitive Software in Europe</p>
             <p className="text-sm text-gray-500">
               © {new Date().getFullYear()} CORE Initiative. All rights reserved.
