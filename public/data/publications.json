@@ -16,7 +16,7 @@
       "status": "Accepted",
       "url": "",
       "code": null,
-      "image": "/papers/eacl_paper.png",
+      "image": "/papers/eacl_paper.webp",
       "abstract": null
     },
     {
@@ -174,7 +174,7 @@
       "status": "Published",
       "url": "https://arxiv.org/abs/2501.06346",
       "code": null,
-      "image": "/papers/naacl2025.png",
+      "image": "/papers/naacl2025.webp",
       "abstract": null
     },
     {
@@ -250,7 +250,7 @@
       "status": "Published",
       "url": "https://arxiv.org/pdf/2408.08761",
       "code": null,
-      "image": "/papers/mitigating.png",
+      "image": "/papers/mitigating.webp",
       "abstract": "Addresses how reinforcement learning has seen significant success across various domains, but its adoption is often limited by the black-box nature of neural network policies."
     },
     {
@@ -270,7 +270,7 @@
       "status": "Published",
       "url": "https://arxiv.org/abs/2501.08925",
       "code": null,
-      "image": "/papers/disentangling.png",
+      "image": "/papers/disentangling.webp",
       "abstract": "Examines exploration as a crucial skill for in-context reinforcement learning in unknown environments and investigates whether large language models can effectively explore partially observable settings."
     },
     {
@@ -288,7 +288,7 @@
       "status": "Published",
       "url": "https://hdl.handle.net/10125/107324",
       "code": null,
-      "image": "/papers/DRAMA.png",
+      "image": "/papers/DRAMA.webp",
       "abstract": null
     },
     {
@@ -307,7 +307,7 @@
       "status": "Published",
       "url": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1492.pdf",
       "code": null,
-      "image": "/papers/RAISE.png",
+      "image": "/papers/RAISE.webp",
       "abstract": null
     },
     {

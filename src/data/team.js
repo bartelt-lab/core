@@ -38,7 +38,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/christian-bartelt.png',
+    photo: '/members/christian-bartelt.webp',
     bio: 'Group leader at TU Clausthal focusing on AI and autonomous systems research.',
     email: 'bartelt@isse.tu-clausthal.de',
     links: {
@@ -55,7 +55,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.UBB, department: 'Faculty of Mathematics and Computer Science' }
     ],
-    photo: '/members/christian-sacarea.jpeg',
+    photo: '/members/christian-sacarea.webp',
     bio: 'Professor at Babeș-Bolyai University with expertise in formal methods and AI.',
     email: '',
     links: {
@@ -130,7 +130,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/kristian-kolthoff.png',
+    photo: '/members/kristian-kolthoff.webp',
     bio: 'Postdoctoral researcher at TU Clausthal.',
     email: 'kristian.kolthoff@tu-clausthal.de',
     links: {
@@ -147,7 +147,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.ROSTOCK, department: 'Institute for Visual and Analytic Computing' }
     ],
-    photo: '/members/daniel-wulff.jpg',
+    photo: '/members/daniel-wulff.webp',
     bio: 'Postdoctoral researcher at the University of Rostock.',
     email: 'd.wulff@uni-rostock.de',
     links: {
@@ -164,7 +164,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/jannik-brinkmann.png',
+    photo: '/members/jannik-brinkmann.webp',
     bio: 'PhD student at TU Clausthal.',
     email: 'jannik.brinkmann@tu-clausthal.de',
     links: {
@@ -183,7 +183,7 @@ export const teamMembers = [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' },
       { institution: institutions.UBB, department: 'Faculty of Mathematics and Computer Science' }
     ],
-    photo: '/members/david-szilagyi.jpg',
+    photo: '/members/david-szilagyi.webp',
     bio: 'PhD student working on autonomous driving and embodied robotics.',
     email: 'david.szilagyi@tu-clausthal.de',
     links: {
@@ -283,7 +283,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/janis-zenkner.png',
+    photo: '/members/janis-zenkner.webp',
     bio: 'PhD student at TU Clausthal.',
     email: 'janis.zenkner@tu-clausthal.de',
     links: {
@@ -300,7 +300,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/tobias-sesterhenn.png',
+    photo: '/members/tobias-sesterhenn.webp',
     bio: 'PhD student at TU Clausthal.',
     email: 'tobias.sesterhenn@tu-clausthal.de',
     links: {
@@ -316,7 +316,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/mihail-birsan.jpg',
+    photo: '/members/mihail-birsan.webp',
     bio: 'PhD student at TU Clausthal.',
     email: '',
     links: {
@@ -332,7 +332,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/celina-homa.jpeg',
+    photo: '/members/celina-homa.webp',
     bio: 'External PhD student at Mercedes-Benz.',
     email: '',
     links: {
@@ -364,7 +364,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/paul-koenig.jpeg',
+    photo: '/members/paul-koenig.webp',
     bio: 'PhD student at TU Clausthal.',
     email: '',
     links: {
@@ -381,7 +381,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/steffen-ottow.jpg',
+    photo: '/members/steffen-ottow.webp',
     bio: 'IT specialist supporting the research group at TU Clausthal.',
     email: '',
     links: {}

@@ -2,9 +2,9 @@ import assetUrl from '../../utils/assetUrl'
 
 const Footer = () => {
   const logos = [
-    { src: 'logos/clausthal-logo.png', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
+    { src: 'logos/clausthal-logo.webp', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
     { src: 'logos/ubb-logo.webp', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-20' },
-    { src: 'logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.uni-rostock.de/en/', className: 'h-20' },
+    { src: 'logos/rostock-logo.webp', alt: 'University of Rostock', url: 'https://www.uni-rostock.de/en/', className: 'h-20' },
   ]
 
   return (
