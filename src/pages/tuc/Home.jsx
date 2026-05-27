@@ -39,13 +39,13 @@ const Home = () => {
                         <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">Affiliations</p>
                         <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
                             <a href="https://www.tu-clausthal.de" target="_blank" rel="noreferrer">
-                                <img src={assetUrl('/logos/tu-clausthal.jpeg')} alt="TU Clausthal" className="h-14 object-contain" />
+                                <img src={assetUrl('/logos/tu-clausthal.jpeg')} alt="TU Clausthal" loading="lazy" decoding="async" className="h-14 object-contain" />
                             </a>
                             <a href="https://www.digit-research.de" target="_blank" rel="noreferrer">
-                                <img src={assetUrl('/logos/digit.jpg')} alt="DIGIT" className="h-14 object-contain" />
+                                <img src={assetUrl('/logos/digit.jpg')} alt="DIGIT" loading="lazy" decoding="async" className="h-14 object-contain" />
                             </a>
                             <Link to="/">
-                                <img src={assetUrl('/logos/core/core-network.png')} alt="CORE Network" className="h-14 object-contain" />
+                                <img src={assetUrl('/logos/core/core-network.png')} alt="CORE Network" loading="lazy" decoding="async" className="h-14 object-contain" />
                             </Link>
                         </div>
                     </div>

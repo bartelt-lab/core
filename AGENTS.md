@@ -52,7 +52,7 @@ src/
     ComputeCluster.jsx Publications.jsx   core
     tuc/
       Home.jsx                     bartelt landing (hero + members + contact)
-      Teaching.jsx Seminar.jsx Theses.jsx  teaching subtree
+      Teaching.jsx                   teaching subtree (/seminar, /theses route to it)
       JoinUs.jsx Projects.jsx AiTeamProjects.jsx
       projects/{AI4AI,Dynamo,NeuroCore,SelfDriving,Stratego,TrafficNetwork,Vergabepilot}Project.jsx
 
@@ -66,12 +66,16 @@ public/
   documents/project-descriptions/  3 PDFs
   images/projects/{ai4ai,dynamo,neurocore,stratego,vergabepilot}/
   images/locations.png             /network page map
-  videos/hero* hero-poster.png     core hero
+  videos/hero.mp4 hero-poster.webp core hero (poster auto-WebP'd)
   videos/demonstrations/{autonomous_driving,robotics,neurocore,stratego}/
   videos/testimonials/             student testimonial mp4s
   icons/avocado.png                bartelt favicon source (unused)
   tuc/iclr-2025/                   static subsite kept as-is (see issue 9)
 ```
+
+Asset loading rules, the `LazyVideo` component, `npm run optimize-images`, and the
+ffmpeg video pipeline are documented in `docs/assets.md`. Large PNG/JPEG (>250 KB) are
+converted to WebP; `public/tuc/iclr-2025/` is excluded from that pipeline.
 
 ## Schema — publications.json
 
@@ -89,7 +93,7 @@ public/
   "status": "Published|Preprint|Accepted",
   "url": "primary link or \"\"",
   "code": "code link or null",
-  "image": "/papers/x.png or null (may be a PDF — see issue 2)",
+  "image": "/papers/x.webp|.png or null (may be a PDF — see issue 2)",
   "abstract": "string or null"
 }
 ```

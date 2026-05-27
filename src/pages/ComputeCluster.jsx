@@ -138,9 +138,11 @@ const ComputeCluster = () => {
       <section id="hero" className="relative min-h-screen overflow-hidden bg-[#f7fafc] text-gray-950">
         <img
           className="absolute inset-0 h-full w-full object-cover object-center opacity-60"
-          src={assetUrl('/images/hero/compute-cluster-hero.png')}
+          src={assetUrl('/images/hero/compute-cluster-hero.webp')}
           alt=""
           aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#f7fafc] via-[#f7fafc]/96 via-[40%] to-[#f7fafc]/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/40" />

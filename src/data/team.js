@@ -74,7 +74,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.UBB, department: 'Faculty of Mathematics and Computer Science' }
     ],
-    photo: '/members/iulian-benta.jpeg',
+    photo: '/members/iulian-benta.webp',
     bio: 'Lecturer at UBB.',
     email: '',
     links: {
@@ -91,7 +91,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.ROSTOCK, department: 'Institute for Visual and Analytic Computing' }
     ],
-    photo: '/members/stefan-luedtke.png',
+    photo: '/members/stefan-luedtke.webp',
     bio: 'Assistant Professor at the University of Rostock.',
     email: '',
     links: {
@@ -110,7 +110,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/sascha-marton.jpg',
+    photo: '/members/sascha-marton.webp',
     bio: 'Postdoctoral researcher at TU Clausthal.',
     email: 'sascha.marton@tu-clausthal.de',
     links: {
@@ -208,7 +208,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.ROSTOCK, department: 'Institute for Visual and Analytic Computing' }
     ],
-    photo: '/members/ashwin-nedungadi.png',
+    photo: '/members/ashwin-nedungadi.webp',
     bio: 'PhD student specializing in egocentric vision and computer vision.',
     email: '',
     links: {
@@ -231,7 +231,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/patrick-knab.jpg',
+    photo: '/members/patrick-knab.webp',
     bio: 'Third-year PhD candidate focusing on Computer Vision and Explainable AI. Research explores how foundation models can derive domain-specific visual concepts to enhance neural network transparency and interpretability.',
     email: 'patrick.knab@tu-clausthal.de',
     links: {
@@ -258,7 +258,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/tim-grams.png',
+    photo: '/members/tim-grams.webp',
     bio: 'PhD student researching reinforcement learning and decision-making systems.',
     email: 'tim.grams@tu-clausthal.de',
     links: {
@@ -348,7 +348,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/markus-herre.jpeg',
+    photo: '/members/markus-herre.webp',
     bio: 'PhD student at TU Clausthal.',
     email: '',
     links: {

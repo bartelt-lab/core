@@ -4,10 +4,10 @@ import { FaArrowRight } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
 
 const fallbackImages = [
-  '/papers/guide.png',
-  '/papers/trove.png',
+  '/papers/guide.webp',
+  '/papers/trove.webp',
   '/papers/mitigating.png',
-  '/papers/DSEG.png',
+  '/papers/DSEG.webp',
 ]
 
 const PublicationCarousel = ({

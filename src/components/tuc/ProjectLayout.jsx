@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import LazyVideo from '../common/LazyVideo';
 
 const ProjectLayout = ({
     title,
@@ -80,14 +81,13 @@ const ProjectLayout = ({
                         <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-gray-100 mb-20 relative group">
                             {/* Overlay Gradient */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
-                            <video
+                            <LazyVideo
                                 src={heroVideo}
                                 poster={heroImage || undefined}
                                 className="w-full h-auto object-cover"
                                 controls
                                 muted
                                 loop
-                                playsInline
                                 autoPlay
                             />
                         </div>

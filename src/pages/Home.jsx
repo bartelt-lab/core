@@ -55,14 +55,14 @@ const Home = () => {
   const members = getNetworkMembers()
   const partnerLogos = [
     { name: 'TU Clausthal', src: '/logos/clausthal-logo.png', to: '/tuc' },
-    { name: 'UBB', src: '/logos/ubb-logo.png', href: institutions.UBB.website },
+    { name: 'UBB', src: '/logos/ubb-logo.webp', href: institutions.UBB.website },
     { name: 'University of Rostock', src: '/logos/rostock-logo.png', href: institutions.ROSTOCK.website },
   ]
 
   return (
     <div className="min-h-screen bg-white">
       <section id="hero" className="relative min-h-screen overflow-hidden bg-[#f7fafc] text-gray-950">
-        <img src={assetUrl('/images/hero/core-network-hero.png')} alt="" className="absolute inset-0 h-full w-full object-cover object-center opacity-60" aria-hidden="true" />
+        <img src={assetUrl('/images/hero/core-network-hero.webp')} alt="" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover object-center opacity-60" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#f7fafc] via-[#f7fafc]/95 via-[40%] to-[#f7fafc]/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/40" />
 
@@ -101,7 +101,7 @@ const Home = () => {
                 {partnerLogos.map((logo) => {
                   const content = (
                     <div className="group relative flex h-full cursor-pointer items-center justify-center rounded-xl border border-gray-200 bg-white px-3 py-1 shadow-sm ring-primary-100 transition hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md hover:ring-4">
-                      <img src={assetUrl(logo.src)} alt={logo.name} className={`object-contain ${logo.name === 'UBB' ? 'max-h-[6.5rem] max-w-full' : 'max-h-[5.5rem] max-w-[90%]'}`} />
+                      <img src={assetUrl(logo.src)} alt={logo.name} loading="lazy" decoding="async" className={`object-contain ${logo.name === 'UBB' ? 'max-h-[6.5rem] max-w-full' : 'max-h-[5.5rem] max-w-[90%]'}`} />
                       <FaArrowRight className="absolute right-3 top-3 h-3 w-3 -rotate-45 text-secondary-600 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
                     </div>
                   )
@@ -116,7 +116,7 @@ const Home = () => {
 
             <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl">
               <div className="relative h-full min-h-[340px]">
-                <img src={assetUrl('/images/locations.png')} alt="CORE Network Map" className="h-full w-full object-cover" />
+                <img src={assetUrl('/images/locations.webp')} alt="CORE Network Map" loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950/85 via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6 text-white">
                   <p className="text-sm font-bold uppercase tracking-widest text-primary-200">CORE Network Map</p>

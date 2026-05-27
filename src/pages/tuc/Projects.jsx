@@ -47,6 +47,8 @@ const Projects = () => {
                                     <img
                                         src={YOUTUBE_THUMB}
                                         alt="International Master Team Project 2022 — video thumbnail"
+                                        loading="lazy"
+                                        decoding="async"
                                         className="w-full h-full object-cover"
                                     />
                                     <span className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">

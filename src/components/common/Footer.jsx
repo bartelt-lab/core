@@ -3,7 +3,7 @@ import assetUrl from '../../utils/assetUrl'
 const Footer = () => {
   const logos = [
     { src: 'logos/clausthal-logo.png', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
-    { src: 'logos/ubb-logo.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-20' },
+    { src: 'logos/ubb-logo.webp', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-20' },
     { src: 'logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.uni-rostock.de/en/', className: 'h-20' },
   ]
 
@@ -25,6 +25,8 @@ const Footer = () => {
                   <img
                     src={assetUrl(logo.src)}
                     alt={logo.alt}
+                    loading="lazy"
+                    decoding="async"
                     className={`${logo.className} w-auto object-contain opacity-85 grayscale transition hover:opacity-100 hover:grayscale-0`}
                     onError={(e) => {
                       e.target.style.display = 'none'
