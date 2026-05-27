@@ -6,7 +6,7 @@ import assetUrl from '../../utils/assetUrl'
 const fallbackImages = [
   '/papers/guide.webp',
   '/papers/trove.webp',
-  '/papers/mitigating.png',
+  '/papers/mitigating.webp',
   '/papers/DSEG.webp',
 ]
 

@@ -19,9 +19,13 @@ import sharp from 'sharp'
 const ROOT = fileURLToPath(new URL('..', import.meta.url))
 const PUBLIC_DIR = join(ROOT, 'public')
 
-const MIN_BYTES = 250 * 1024 // only touch assets worth converting
+const MIN_BYTES = 0 // convert every raster asset; the size guard below keeps the smaller file
 const QUALITY = 80
-const EXCLUDE = [join('tuc', 'iclr-2025')] // self-contained static page
+const EXCLUDE = [
+  join('tuc', 'iclr-2025'), // self-contained static page
+  join('logos', 'core', 'legacy'), // historical brand archive, not displayed
+  'icons', // favicon source assets, not page images
+]
 const SOURCE_EXT = new Set(['.png', '.jpg', '.jpeg'])
 
 // Max width by location — photos/logos display small, hero stills large.
@@ -85,6 +89,13 @@ async function main() {
       .toFile(outFile)
 
     const newSize = statSync(outFile).size
+
+    // Keep whichever is smaller — WebP can lose to an already-tiny PNG/JPEG.
+    if (newSize >= size) {
+      rmSync(outFile)
+      continue
+    }
+
     rmSync(file)
     conversions.push({ oldRel: rel, newRel, oldSize: size, newSize })
   }

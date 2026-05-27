@@ -63,7 +63,7 @@ const Navbar = () => {
         }`}
       >
         <img
-          src={assetUrl('/logos/core/core-network.png')}
+          src={assetUrl('/logos/core/core-network.webp')}
           alt="CORE Network"
           className="h-8 max-w-[4rem] object-contain sm:h-10 sm:max-w-[5rem]"
         />

@@ -63,7 +63,7 @@ const DynamoProject = () => {
 
                     <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 group">
                         <img
-                            src={assetUrl("/images/projects/dynamo/goal.png")}
+                            src={assetUrl("/images/projects/dynamo/goal.webp")}
                             alt="Dynamo Goal Illustration"
                             loading="lazy"
                             decoding="async"

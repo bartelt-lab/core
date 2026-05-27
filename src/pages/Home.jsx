@@ -54,9 +54,9 @@ const LinkIcons = ({ member }) => (
 const Home = () => {
   const members = getNetworkMembers()
   const partnerLogos = [
-    { name: 'TU Clausthal', src: '/logos/clausthal-logo.png', to: '/tuc' },
+    { name: 'TU Clausthal', src: '/logos/clausthal-logo.webp', to: '/tuc' },
     { name: 'UBB', src: '/logos/ubb-logo.webp', href: institutions.UBB.website },
-    { name: 'University of Rostock', src: '/logos/rostock-logo.png', href: institutions.ROSTOCK.website },
+    { name: 'University of Rostock', src: '/logos/rostock-logo.webp', href: institutions.ROSTOCK.website },
   ]
 
   return (
