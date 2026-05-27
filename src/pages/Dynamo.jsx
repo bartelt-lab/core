@@ -185,7 +185,7 @@ const VideoCarousel = ({ videos }) => {
             <article className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
                 <div className="aspect-video bg-slate-950">
                     <LazyVideo
-                        src={assetUrl('/videos/hero.mp4')}
+                        src={assetUrl('/videos/core-labs-hero.mp4')}
                         poster={assetUrl('/videos/hero-poster.webp')}
                         className="h-full w-full object-cover opacity-75"
                         autoPlay

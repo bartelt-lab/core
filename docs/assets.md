@@ -60,30 +60,42 @@ re-running only touches new oversized assets.
 Workflow when adding a large image: drop it in `public/`, reference it, then run
 `npm run optimize-images` and commit the resulting `.webp` + the (auto-rewritten) refs.
 
-## Video pipeline — `ffmpeg` (run manually)
+## Video pipeline — `scripts/compress-videos.ps1`
 
-`ffmpeg` is not installed in CI here, so compress videos locally before committing. Targets in
-priority order: `public/videos/testimonials/*` (80–98 MB each), the
-`autonomous_driving` demos (34–60 MB), and `videos/hero.mp4` (25 MB).
+Needs `ffmpeg` on PATH (`winget install Gyan.FFmpeg`). The script re-encodes to web-friendly
+H.264 (libx264, `+faststart`, `yuv420p`), caps width, and writes `<name>.opt.mp4` next to each
+source — pass `-Replace` to overwrite in place.
 
-```bash
-# Re-encode to a web-friendly H.264 (1280px wide cap, faststart for streaming).
-# Drop -an to strip audio (use for muted background loops); keep it for testimonials.
-ffmpeg -i in.mp4 -vf "scale='min(1280,iw)':-2" -c:v libx264 -crf 28 -preset slow \
-       -movflags +faststart -an out.mp4
+```powershell
+# Test one clip (writes Student-Testim-2.opt.mp4 alongside for review)
+./scripts/compress-videos.ps1 -Path public/videos/testimonials/Student-Testim-2.mp4
 
-# Smaller still (VP9/WebM) when you want a modern-only path:
-ffmpeg -i in.mp4 -vf "scale='min(1280,iw)':-2" -c:v libvpx-vp9 -crf 34 -b:v 0 -an out.webm
-
-# Generate a poster frame, then convert it to WebP via the image pipeline:
-ffmpeg -i in.mp4 -ss 1 -frames:v 1 poster.png   # then: npm run optimize-images
+# Replace in place, per the settings used for this repo:
+./scripts/compress-videos.ps1 -Path public/videos/testimonials      -MaxWidth 1280 -Crf 28 -Replace             # 720p, keep audio
+./scripts/compress-videos.ps1 -Path public/videos/demonstrations     -MaxWidth 1920 -Crf 23 -Replace             # 1080p, keep audio
+./scripts/compress-videos.ps1 -Path public/videos/core-labs-hero.mp4 -MaxWidth 1920 -Crf 23 -Replace -StripAudio # 1080p background, muted
 ```
 
-CRF ~26–30 is a good quality/size tradeoff; lower = better quality + bigger. Always add
-`-movflags +faststart` so playback can begin before the full file downloads.
+Resolution rule: **talking-head testimonials → 720p (CRF 28); everything else
+(detail demos, background hero) → 1080p (CRF 23)**. `-StripAudio` for muted
+background/preview loops, keep audio where a clip plays with sound (testimonials, demo modal).
 
-> The 665 MB of video makes the git repo heavy. Consider Git LFS or external/CDN hosting for
-> the testimonial and demo clips as a follow-up.
+**Codec — H.264 only.** HEVC/H.265 is ~40–50% smaller but doesn't play in a plain `<video>`
+on Firefox and often fails in Chrome (no reliable decoder); only Safari is dependable. A single
+H.264 MP4 plays everywhere. Use **CRF** (constant quality), not a fixed bitrate — CRF picks the
+bytes for you; ~21–25 is the 1080p web sweet spot (don't go as low as CRF 12 — near-lossless,
+huge files).
+
+Raw `ffmpeg` equivalents if you need them:
+
+```bash
+ffmpeg -i in.mp4 -vf "scale='min(1280,iw)':-2" -c:v libx264 -crf 28 -preset slow \
+       -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 96k out.mp4   # -an to drop audio
+ffmpeg -i in.mp4 -ss 1 -frames:v 1 poster.png   # poster frame -> npm run optimize-images
+```
+
+> Even compressed, the video lives in git. Consider Git LFS or external/CDN hosting for
+> `public/videos/**` as a follow-up if repo size becomes a problem.
 
 ## Checklist for a new asset
 
