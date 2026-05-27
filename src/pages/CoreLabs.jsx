@@ -41,7 +41,7 @@ const CoreLabs = () => {
   return (
     <div className="min-h-screen bg-white">
       <section id="hero" className="relative flex h-screen flex-col justify-end overflow-hidden pb-24 md:pb-32">
-        <HeroVideo src={assetUrl('/videos/hero.mp4')} poster={assetUrl('/videos/hero-poster.webp')} />
+        <HeroVideo src={assetUrl('/videos/core-labs-hero.mp4')} poster={assetUrl('/videos/hero-poster.webp')} />
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none" />
 
         <div className="container relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
