@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaBookOpen, FaBrain, FaFlask, FaServer } from 'react-icons/fa'
+import assetUrl from '../../utils/assetUrl'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -62,7 +63,7 @@ const Navbar = () => {
         }`}
       >
         <img
-          src={`${import.meta.env.BASE_URL}logos/core/core-network.png`}
+          src={assetUrl('/logos/core/core-network.png')}
           alt="CORE Network"
           className="h-8 max-w-[4rem] object-contain sm:h-10 sm:max-w-[5rem]"
         />

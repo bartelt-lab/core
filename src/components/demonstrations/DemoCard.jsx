@@ -1,13 +1,7 @@
 import { useState } from 'react'
 import Card from '../common/Card'
 import VideoPlayer from '../common/VideoPlayer'
-
-const getAssetUrl = (path) => {
-  if (!path) return path
-  // Remove leading slash if present, then prepend BASE_URL
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  return `${import.meta.env.BASE_URL}${cleanPath}`
-}
+import assetUrl from '../../utils/assetUrl'
 
 const DemoCard = ({ demo }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false)
@@ -34,7 +28,7 @@ const DemoCard = ({ demo }) => {
             </div>
           ) : demo.gif ? (
             <img
-              src={getAssetUrl(demo.gif)}
+              src={assetUrl(demo.gif)}
               alt={demo.title}
               loading="lazy"
               decoding="async"
@@ -45,7 +39,7 @@ const DemoCard = ({ demo }) => {
             />
           ) : demo.thumbnail ? (
             <img
-              src={getAssetUrl(demo.thumbnail)}
+              src={assetUrl(demo.thumbnail)}
               alt={demo.title}
               loading="lazy"
               decoding="async"
@@ -56,7 +50,7 @@ const DemoCard = ({ demo }) => {
             />
           ) : demo.video ? (
             <video
-              src={getAssetUrl(demo.video)}
+              src={assetUrl(demo.video)}
               className="w-full h-full object-cover"
               autoPlay
               muted
@@ -121,7 +115,7 @@ const DemoCard = ({ demo }) => {
               ></iframe>
             ) : (
               <VideoPlayer
-                src={getAssetUrl(demo.video)}
+                src={assetUrl(demo.video)}
                 controls={true}
                 className="w-full h-full"
                 autoPlay={true}

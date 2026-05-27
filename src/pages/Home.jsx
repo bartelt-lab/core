@@ -9,12 +9,6 @@ import PublicationMiniCarousel from '../components/publications/PublicationMiniC
 import { getNetworkMembers, institutions } from '../data/team'
 import assetUrl from '../utils/assetUrl'
 
-const getAssetUrl = (path) => {
-  if (!path) return path
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  return `${import.meta.env.BASE_URL}${cleanPath}`
-}
-
 const pillars = [
   { to: '/core-labs', icon: FaFlask, eyebrow: 'Research Labs', title: 'CORE Labs', body: 'Joint laboratory infrastructure spanning Goslar, Cluj-Napoca, and Rostock.' },
   { to: '/ai-team-projects', icon: FaBrain, eyebrow: 'Education & Projects', title: 'AI Team Projects', body: 'Semester-long, cross-national student projects jointly run by TU Clausthal and Babeș-Bolyai University.' },
@@ -173,7 +167,7 @@ const Home = () => {
                   ))}
                 </div>
                 <div className="mb-3 h-20 w-20 overflow-hidden rounded-full border border-gray-200 bg-gray-100">
-                  <img src={getAssetUrl(member.photo)} alt={member.name} loading="lazy" className="h-full w-full object-cover" />
+                  <img src={assetUrl(member.photo)} alt={member.name} loading="lazy" className="h-full w-full object-cover" />
                 </div>
                 <p className="text-center text-sm font-bold leading-snug text-gray-950">{member.prefix ? `${member.prefix} ` : ''}{member.name}</p>
                 <p className="mt-1 text-center text-xs text-primary-700 font-semibold leading-5">{member.title}</p>

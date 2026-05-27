@@ -1,11 +1,6 @@
 import { FaGithub, FaTwitter, FaLinkedin, FaGlobe, FaEnvelope } from 'react-icons/fa'
 import { SiGooglescholar } from 'react-icons/si'
-
-const getAssetUrl = (path) => {
-  if (!path) return path
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  return `${import.meta.env.BASE_URL}${cleanPath}`
-}
+import assetUrl from '../../utils/assetUrl'
 
 const TeamMemberCard = ({ member }) => {
   return (
@@ -14,7 +9,7 @@ const TeamMemberCard = ({ member }) => {
       <div className="mb-4">
         <div className="w-32 h-32 mx-auto rounded-full overflow-hidden bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
           <img
-            src={getAssetUrl(member.photo)}
+            src={assetUrl(member.photo)}
             alt={member.name}
             loading="lazy"
             decoding="async"

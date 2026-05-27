@@ -131,9 +131,13 @@ const PublicationsSection = ({
     return () => window.clearInterval(timer)
   }, [displayPublications.length, isRotator])
 
-  useEffect(() => {
+  // Reset the rotator/list to the first item when filters or limit change.
+  const resetKey = `${JSON.stringify(filters)}|${limit}`
+  const [prevResetKey, setPrevResetKey] = useState(resetKey)
+  if (prevResetKey !== resetKey) {
+    setPrevResetKey(resetKey)
     setActiveIndex(0)
-  }, [filters, limit])
+  }
 
   const updateFilter = (key, value) => {
     setFilters((current) => ({ ...current, [key]: value }))

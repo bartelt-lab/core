@@ -1,8 +1,4 @@
-const getAssetUrl = (path) => {
-  if (!path) return path
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  return `${import.meta.env.BASE_URL}${cleanPath}`
-}
+import assetUrl from '../../utils/assetUrl'
 
 const Footer = () => {
   const logos = [
@@ -27,7 +23,7 @@ const Footer = () => {
                   className="flex min-h-24 min-w-48 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 px-5 py-4 transition hover:border-primary-200 hover:bg-white hover:shadow-md"
                 >
                   <img
-                    src={getAssetUrl(logo.src)}
+                    src={assetUrl(logo.src)}
                     alt={logo.alt}
                     className={`${logo.className} w-auto object-contain opacity-85 grayscale transition hover:opacity-100 hover:grayscale-0`}
                     onError={(e) => {

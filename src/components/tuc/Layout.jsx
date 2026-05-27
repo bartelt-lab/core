@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FiMenu, FiX, FiChevronUp } from 'react-icons/fi';
 import RightSidebar from '../common/RightSidebar';
 import assetUrl from '../../utils/assetUrl';
@@ -31,9 +31,12 @@ const Layout = ({ children }) => {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const location = useLocation();
 
-    useEffect(() => {
+    // Close the mobile nav whenever the route changes (incl. back/forward).
+    const [prevPath, setPrevPath] = useState(location.pathname);
+    if (prevPath !== location.pathname) {
+        setPrevPath(location.pathname);
         setIsNavOpen(false);
-    }, [location]);
+    }
 
     return (
         <div className="min-h-screen flex flex-col bg-white text-gray-900">
