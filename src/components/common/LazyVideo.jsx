@@ -29,7 +29,9 @@ const LazyVideo = ({
   const [shouldLoad, setShouldLoad] = useState(false)
   if (inView && !shouldLoad) setShouldLoad(true)
 
-  // Background clips: play while in view, pause when out of view.
+  // Background clips: keep playing while in view, pause when scrolled out.
+  // The native `autoPlay` attribute (set once src exists) handles first start;
+  // this effect resumes playback when the clip re-enters the viewport.
   useEffect(() => {
     const el = videoRef.current
     if (!el || !autoPlay || !shouldLoad) return
@@ -52,6 +54,7 @@ const LazyVideo = ({
       src={shouldLoad ? src : undefined}
       poster={poster}
       preload="none"
+      autoPlay={autoPlay && shouldLoad}
       loop={loop}
       muted={muted}
       controls={controls}
