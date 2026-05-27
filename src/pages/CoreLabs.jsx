@@ -5,11 +5,7 @@ import HeroVideo from '../components/hero/HeroVideo'
 import { getCoreLabsLeads, getNetworkMembers } from '../data/team'
 import PublicationsSection from '../components/publications/PublicationsSection'
 import DemonstrationsSection from '../components/demonstrations/DemonstrationsSection'
-
-const assetUrl = (path) => {
-  const clean = path.startsWith('/') ? path.slice(1) : path
-  return `${import.meta.env.BASE_URL}${clean}`
-}
+import assetUrl from '../utils/assetUrl'
 
 const leadDetails = {
   'David Szilagyi': {

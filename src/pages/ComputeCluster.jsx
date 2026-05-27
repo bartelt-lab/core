@@ -1,19 +1,14 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   FaDatabase,
   FaMicrochip,
   FaNetworkWired,
-  FaServer,
   FaCogs,
   FaFlask,
   FaUniversity,
   FaCheckCircle,
-  FaExternalLinkAlt,
   FaArrowRight,
   FaShieldAlt,
-  FaChevronDown,
-  FaChevronUp,
 } from 'react-icons/fa'
 import PublicationCarousel from '../components/publications/PublicationCarousel'
 import assetUrl from '../utils/assetUrl'
@@ -113,49 +108,7 @@ const policies = [
   },
 ]
 
-const faqs = [
-  {
-    q: 'Who can request access to the compute cluster?',
-    a: 'Access is available to all active CORE Network members — faculty, postdocs, and PhD students — at TU Clausthal, University of Rostock, and Babeș-Bolyai University. External collaborators may apply through the infrastructure coordination team.',
-  },
-  {
-    q: 'How do I submit a job to the shared cluster?',
-    a: 'Jobs are submitted via a shared SLURM queue. Contact the infrastructure team at TU Clausthal to obtain credentials and onboarding documentation.',
-  },
-  {
-    q: 'Is the cluster available for robotics simulation (Isaac Lab / ROS2)?',
-    a: 'Yes. The primary node at TU Clausthal is configured with the full ROS2 + Isaac Lab stack and supports both navigation and manipulation simulation tasks.',
-  },
-  {
-    q: 'What storage is available for datasets?',
-    a: 'Each project receives a shared storage allocation. Large dataset requests (>1 TB) should be coordinated with the infrastructure team in advance.',
-  },
-]
-
 // ─── Sub-components ─────────────────────────────────────────────────────────
-
-const FaqItem = ({ q, a }) => {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className="border-b border-slate-200 last:border-0">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-4 py-5 text-left"
-      >
-        <span className="text-base font-semibold text-slate-900">{q}</span>
-        {open ? (
-          <FaChevronUp className="h-4 w-4 flex-shrink-0 text-primary-600" />
-        ) : (
-          <FaChevronDown className="h-4 w-4 flex-shrink-0 text-slate-400" />
-        )}
-      </button>
-      {open && (
-        <p className="pb-5 text-sm leading-7 text-slate-600">{a}</p>
-      )}
-    </div>
-  )
-}
 
 const SiteColorMap = {
   blue: {
@@ -450,51 +403,6 @@ const ComputeCluster = () => {
           className="bg-white"
         />
       </div>
-
-      {false && <section id="faq" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-6 md:px-12">
-          <div className="mb-10 text-center">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">FAQ</p>
-            <h2 className="text-3xl font-heading font-bold text-gray-950">Frequently asked questions</h2>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-white px-7 shadow-sm">
-            {faqs.map((faq) => (
-              <FaqItem key={faq.q} q={faq.q} a={faq.a} />
-            ))}
-          </div>
-        </div>
-      </section>}
-
-      {false && <section id="contact" className="border-t border-gray-200 bg-gray-950 py-16 text-white">
-        <div className="container mx-auto max-w-4xl px-6 text-center md:px-12">
-          <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-600">
-            <FaServer className="h-6 w-6" aria-hidden="true" />
-          </div>
-          <h2 className="mb-4 text-3xl font-heading font-bold md:text-4xl">
-            Request cluster access
-          </h2>
-          <p className="mx-auto mb-8 max-w-xl text-base leading-7 text-slate-300">
-            Access is available to all CORE Network researchers. Contact the infrastructure coordination
-            team at TU Clausthal to request credentials and onboarding documentation.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="mailto:bartelt@isse.tu-clausthal.de"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-gray-950 shadow-lg transition hover:bg-primary-50"
-            >
-              bartelt@isse.tu-clausthal.de
-              <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
-            </a>
-            <Link
-              to="/publications"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-bold text-white transition hover:border-white/50"
-            >
-              Browse publications
-              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </section>}
 
     </div>
   )

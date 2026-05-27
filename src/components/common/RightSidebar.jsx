@@ -40,7 +40,6 @@ const ROUTE_SECTIONS = {
         { id: 'capabilities', label: 'Capabilities' },
         { id: 'sites', label: 'Sites' },
         { id: 'policies', label: 'Policies' },
-        { id: 'faq', label: 'FAQ' },
     ],
     '/ai-team-projects/dynamo': [
         { id: 'hero', label: 'Overview' },
@@ -86,11 +85,12 @@ const RightSidebar = () => {
     const sections = useMemo(() => ROUTE_SECTIONS[resolvedPath] || [], [resolvedPath]);
     const isVisible = sections.length > 0;
 
-    useEffect(() => {
-        if (sections.length > 0) {
-            setActiveSection(sections[0].id);
-        }
-    }, [resolvedPath]);
+    // Reset the highlighted section when the route changes (render-phase, no effect).
+    const [prevPath, setPrevPath] = useState(resolvedPath);
+    if (prevPath !== resolvedPath) {
+        setPrevPath(resolvedPath);
+        if (sections.length > 0) setActiveSection(sections[0].id);
+    }
 
     useEffect(() => {
         if (!isVisible) return;

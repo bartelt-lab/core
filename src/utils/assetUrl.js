@@ -8,5 +8,7 @@
 const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
 
 export default function assetUrl(path) {
-    return `${BASE}${path}`;
+    if (!path) return path;
+    const clean = path.startsWith('/') ? path : `/${path}`;
+    return `${BASE}${clean}`;
 }

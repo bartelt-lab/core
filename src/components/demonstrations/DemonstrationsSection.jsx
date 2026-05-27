@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Section from '../common/Section'
 import DemoCard from './DemoCard'
 import { autonomousDemonstrations, cognitiveProjects } from '../../data/demonstrations'
+import assetUrl from '../../utils/assetUrl'
 
 const DemonstrationsSection = ({ priority = false }) => {
   return (
@@ -24,7 +25,7 @@ const DemonstrationsSection = ({ priority = false }) => {
                 {project.image ? (
                   <>
                     <img
-                      src={`${import.meta.env.BASE_URL}${project.image.startsWith('/') ? project.image.slice(1) : project.image}`}
+                      src={assetUrl(project.image)}
                       alt={project.title}
                       loading={priority ? "eager" : "lazy"}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
