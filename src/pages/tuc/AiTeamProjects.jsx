@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
 import assetUrl from '../../utils/assetUrl';
+import LazyVideo from '../../components/common/LazyVideo';
 
 const activeProjects = [
     {
         id: 'dynamo',
         title: 'DyNAMO',
         tag: 'Cognitive Systems / RL',
-        image: assetUrl('/images/projects/dynamo/hero.jpeg'),
+        image: assetUrl('/images/projects/dynamo/hero.webp'),
         description: 'Developing a cognitive framework for dynamic manipulation and reasoning in unstructured environments. Bridging perception and action with advanced RL.',
         link: '/ai-team-projects/dynamo',
     },
@@ -16,7 +17,7 @@ const activeProjects = [
         id: 'ai4ai',
         title: 'AI4AI',
         tag: 'Computer Vision / LLMs',
-        image: assetUrl('/images/projects/ai4ai/hero.png'),
+        image: assetUrl('/images/projects/ai4ai/hero.webp'),
         description: 'From Image to Model using AI-assisted AI. Transitioning static images into editable engineering models by leveraging LLMs and Computer Vision.',
         link: '/ai-team-projects/ai4ai',
     },
@@ -24,7 +25,7 @@ const activeProjects = [
         id: 'vergabepilot',
         title: 'Vergabepilot.AI',
         tag: 'LLMs / Web Automation',
-        image: assetUrl('/images/projects/vergabepilot/hero.png'),
+        image: assetUrl('/images/projects/vergabepilot/hero.webp'),
         description: 'LLM-based tender scraping for state-of-the-art tender search. Automating web scraper generation and validation using LLMs and MLLM agents.',
         link: '/ai-team-projects/vergabepilot',
     },
@@ -85,10 +86,10 @@ const Media = ({ project }) => {
     }
 
     if (project.video) {
-        return <video src={project.video} className="h-full w-full object-cover" autoPlay muted loop playsInline />;
+        return <LazyVideo src={project.video} className="h-full w-full object-cover" autoPlay muted loop />;
     }
 
-    return <img src={project.image} alt={project.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />;
+    return <img src={project.image} alt={project.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />;
 };
 
 const AiTeamProjects = () => {
@@ -157,7 +158,7 @@ const AiTeamProjects = () => {
                         ].map(([label, src]) => (
                             <div key={label} className="relative overflow-hidden rounded-lg shadow-2xl">
                                 <span className="absolute left-4 top-4 z-10 rounded-full bg-primary-600 px-3 py-1 text-xs font-bold">{label}</span>
-                                <video src={assetUrl(src)} className="aspect-video w-full object-cover" controls muted playsInline />
+                                <LazyVideo src={assetUrl(src)} className="aspect-video w-full object-cover" controls muted />
                             </div>
                         ))}
                     </div>
@@ -175,7 +176,7 @@ const AiTeamProjects = () => {
                         {activeProjects.map((project) => (
                             <Link key={project.id} to={project.link} className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl">
                                 <div className="relative aspect-[16/10] overflow-hidden">
-                                    <img src={project.image} alt={project.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                                    <img src={project.image} alt={project.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
                                     <span className="absolute left-3 top-3 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-bold text-white">{project.tag}</span>
                                     <span className="absolute bottom-3 right-3 rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700">View details</span>
                                 </div>
@@ -198,7 +199,7 @@ const AiTeamProjects = () => {
                     <div className="grid gap-6 md:grid-cols-3">
                         {testimonials.map((src, index) => (
                             <motion.div key={src} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }} className="overflow-hidden rounded-lg bg-slate-950 shadow-xl">
-                                <video src={src} className="aspect-video w-full object-cover" controls playsInline preload="metadata" />
+                                <LazyVideo src={src} className="aspect-video w-full object-cover" controls />
                             </motion.div>
                         ))}
                     </div>

@@ -37,7 +37,7 @@
       "status": "Accepted",
       "url": "",
       "code": null,
-      "image": "/papers/uwso.png",
+      "image": "/papers/uwso.webp",
       "abstract": null
     },
     {
@@ -56,7 +56,7 @@
       "status": "Published",
       "url": "https://arxiv.org/abs/2507.22069",
       "code": null,
-      "image": "/papers/trove.png",
+      "image": "/papers/trove.webp",
       "abstract": null
     },
     {
@@ -76,7 +76,7 @@
       "status": "Published",
       "url": "https://dl.acm.org/doi/full/10.1145/3706598.3713932",
       "code": null,
-      "image": "/papers/closing_the_loop.png",
+      "image": "/papers/closing_the_loop.webp",
       "abstract": null
     },
     {
@@ -96,7 +96,7 @@
       "status": "Published",
       "url": "https://www.computer.org/csdl/proceedings-article/icse-companion/2025/368300a001/27vTfGNTz0s",
       "code": "https://github.com/GUIDE-Prototyper/GUIDE",
-      "image": "/papers/guide.png",
+      "image": "/papers/guide.webp",
       "abstract": null
     },
     {
@@ -115,7 +115,7 @@
       "status": "Published",
       "url": "https://dl.acm.org/doi/abs/10.1145/3691620.3695350",
       "code": "https://github.com/SERGUI-Prototyper/SERGUI-Prototyping",
-      "image": "/papers/self_elicitation_of_requirements.png",
+      "image": "/papers/self_elicitation_of_requirements.webp",
       "abstract": null
     },
     {
@@ -135,7 +135,7 @@
       "status": "Published",
       "url": "https://ieeexplore.ieee.org/abstract/document/10628517/",
       "code": "https://github.com/IUS-GUI-Prototyping/IUS-GUI",
-      "image": "/papers/interlinking_user_stories_and_gui_prototyping.png",
+      "image": "/papers/interlinking_user_stories_and_gui_prototyping.webp",
       "abstract": null
     },
     {
@@ -210,7 +210,7 @@
       "status": "Published",
       "url": "https://arxiv.org/abs/2403.07733",
       "code": "https://github.com/patrick-knab/DSEG-LIME",
-      "image": "/papers/DSEG.png",
+      "image": "/papers/DSEG.webp",
       "abstract": "Presents DSEG-LIME framework for improved image explanation using foundation model integration."
     },
     {
@@ -229,7 +229,7 @@
       "status": "Published",
       "url": "https://patrick-knab.github.io/which-lime-to-trust/",
       "code": null,
-      "image": "/papers/LIME.png",
+      "image": "/papers/LIME.webp",
       "abstract": null
     },
     {

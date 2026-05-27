@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Card from '../common/Card'
 import VideoPlayer from '../common/VideoPlayer'
+import LazyVideo from '../common/LazyVideo'
 import assetUrl from '../../utils/assetUrl'
 
 const DemoCard = ({ demo }) => {
@@ -49,13 +50,12 @@ const DemoCard = ({ demo }) => {
               }}
             />
           ) : demo.video ? (
-            <video
+            <LazyVideo
               src={assetUrl(demo.video)}
               className="w-full h-full object-cover"
               autoPlay
               muted
               loop
-              playsInline
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center">

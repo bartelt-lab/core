@@ -41,7 +41,7 @@ const CoreLabs = () => {
   return (
     <div className="min-h-screen bg-white">
       <section id="hero" className="relative flex h-screen flex-col justify-end overflow-hidden pb-24 md:pb-32">
-        <HeroVideo src={assetUrl('/videos/hero.mp4')} poster={assetUrl('/images/hero-poster.jpg')} />
+        <HeroVideo src={assetUrl('/videos/hero.mp4')} poster={assetUrl('/videos/hero-poster.webp')} />
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none" />
 
         <div className="container relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
@@ -85,7 +85,7 @@ const CoreLabs = () => {
                 {principalInvestigators.map((pi) => (
                   <div key={pi.id} className="flex items-center gap-4 rounded-xl bg-white p-3 shadow-sm">
                     <div className="h-14 w-14 overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
-                      <img src={assetUrl(pi.photo)} alt={pi.name} className="h-full w-full object-cover" />
+                      <img src={assetUrl(pi.photo)} alt={pi.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                     </div>
                     <div>
                       <p className="text-sm font-bold text-gray-950">{pi.prefix ? `${pi.prefix} ${pi.name}` : pi.name}</p>

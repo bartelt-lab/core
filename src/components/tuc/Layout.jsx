@@ -106,6 +106,8 @@ const Layout = ({ children }) => {
                             <img
                                 src={assetUrl('/logos/core/core-with-cognitive-software.png')}
                                 alt="Cognitive Software, TU Clausthal"
+                                loading="lazy"
+                                decoding="async"
                                 className="h-14 w-auto shrink-0"
                             />
                         </div>

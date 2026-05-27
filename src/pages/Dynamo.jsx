@@ -14,6 +14,7 @@ import {
     FaRoute,
 } from 'react-icons/fa'
 import assetUrl from '../utils/assetUrl'
+import LazyVideo from '../components/common/LazyVideo'
 
 const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1`
 
@@ -147,19 +148,19 @@ const experimentResults = [
 const goalSlides = [
     {
         title: 'Clinical inspection task',
-        image: '/images/projects/dynamo/goal-clinic.png',
+        image: '/images/projects/dynamo/goal-clinic.webp',
         note: 'Humanoid reasoning and operator-facing task execution in a structured room.',
         fit: 'object-contain bg-slate-100',
     },
     {
         title: 'Warehouse manipulation task',
-        image: '/images/projects/dynamo/goal-warehouse.png',
+        image: '/images/projects/dynamo/goal-warehouse.webp',
         note: 'Mobile-base support for logistics-style object handling and placement.',
         fit: 'object-contain bg-slate-100',
     },
     {
         title: 'Domestic handling task',
-        image: '/images/projects/dynamo/goal-laundry.png',
+        image: '/images/projects/dynamo/goal-laundry.webp',
         note: 'Humanoid handling in a domestic environment with soft-object manipulation.',
         fit: 'object-contain bg-slate-100',
     },
@@ -183,14 +184,13 @@ const VideoCarousel = ({ videos }) => {
         return (
             <article className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
                 <div className="aspect-video bg-slate-950">
-                    <video
+                    <LazyVideo
                         src={assetUrl('/videos/hero.mp4')}
-                        poster={assetUrl('/videos/hero-poster.png')}
+                        poster={assetUrl('/videos/hero-poster.webp')}
                         className="h-full w-full object-cover opacity-75"
                         autoPlay
                         muted
                         loop
-                        playsInline
                     />
                 </div>
                 <div className="p-4">
@@ -268,6 +268,8 @@ const GoalImageCarousel = () => {
                     key={slide.image}
                     src={assetUrl(slide.image)}
                     alt={slide.title}
+                    loading="lazy"
+                    decoding="async"
                     className={`h-full w-full transition-opacity duration-500 ${slide.fit}`}
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-5 text-white">
@@ -313,8 +315,10 @@ const Dynamo = () => {
         <div className="bg-white text-slate-950">
             <section id="hero" className="relative min-h-[72vh] overflow-hidden bg-slate-950 text-white">
                 <img
-                    src={assetUrl('/images/projects/dynamo/hero.jpeg')}
+                    src={assetUrl('/images/projects/dynamo/hero.webp')}
                     alt=""
+                    fetchPriority="high"
+                    decoding="async"
                     className="absolute inset-0 h-full w-full object-cover opacity-55"
                     aria-hidden="true"
                 />
@@ -443,8 +447,10 @@ const Dynamo = () => {
                         <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl shadow-slate-200/70 md:p-6">
                           <div className="overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
                             <img
-                                src={assetUrl('/images/projects/dynamo/architecture.png')}
+                                src={assetUrl('/images/projects/dynamo/architecture.webp')}
                                 alt="Dynamo system architecture"
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full object-contain"
                             />
                           </div>

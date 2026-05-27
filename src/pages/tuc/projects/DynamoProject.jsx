@@ -31,7 +31,7 @@ const DynamoProject = () => {
             subtitle="Dynamic Navigation & Autonomous Manipulation Operations"
             status="Active"
             tags={["Robotic Manipulation", "Simulation", "Embodied AI"]}
-            heroImage={assetUrl("/images/projects/dynamo/hero.jpeg")}
+            heroImage={assetUrl("/images/projects/dynamo/hero.webp")}
             overview="DyNAMO is an ambitious, high-complexity research initiative where students tackle undefined problems in robotics — not follow a fixed tutorial. We physically decouple the Mobile Base (Logistics) from the Manipulator (Dexterity), allowing sub-teams to develop against agreed-upon interfaces. Operating on an agile 2-week sprint cycle with a simulation-first approach using NVIDIA Isaac Lab, teams iterate rapidly and safely before deploying to real hardware."
             features={features}
             requirements={requirements}
@@ -65,6 +65,8 @@ const DynamoProject = () => {
                         <img
                             src={assetUrl("/images/projects/dynamo/goal.png")}
                             alt="Dynamo Goal Illustration"
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-auto transform transition-transform duration-700 group-hover:scale-105"
                         />
                         <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-4">
@@ -84,8 +86,10 @@ const DynamoProject = () => {
                     <div className="max-w-5xl mx-auto shadow-2xl rounded-2xl overflow-hidden bg-white border border-gray-100 relative group">
                         <div className="absolute inset-0 bg-primary-900/5 group-hover:bg-transparent transition-colors duration-300 pointer-events-none"></div>
                         <img
-                            src={assetUrl("/images/projects/dynamo/architecture.png")}
+                            src={assetUrl("/images/projects/dynamo/architecture.webp")}
                             alt="Dynamo Visual Abstract"
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-auto"
                         />
                     </div>

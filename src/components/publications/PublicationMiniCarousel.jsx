@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FaArrowRight } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
 
-const fallbackImages = ['/papers/guide.png', '/papers/trove.png', '/papers/mitigating.png']
+const fallbackImages = ['/papers/guide.webp', '/papers/trove.webp', '/papers/mitigating.png']
 
 const PublicationMiniCarousel = () => {
   const [publications, setPublications] = useState([])
