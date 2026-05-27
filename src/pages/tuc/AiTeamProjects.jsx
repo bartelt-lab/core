@@ -158,7 +158,7 @@ const AiTeamProjects = () => {
                         ].map(([label, src]) => (
                             <div key={label} className="relative overflow-hidden rounded-lg shadow-2xl">
                                 <span className="absolute left-4 top-4 z-10 rounded-full bg-primary-600 px-3 py-1 text-xs font-bold">{label}</span>
-                                <LazyVideo src={assetUrl(src)} className="aspect-video w-full object-cover" controls muted />
+                                <LazyVideo src={assetUrl(src)} poster={assetUrl(src.replace('.mp4', '-poster.webp'))} className="aspect-video w-full object-cover" controls muted autoPlay loop />
                             </div>
                         ))}
                     </div>
@@ -199,7 +199,7 @@ const AiTeamProjects = () => {
                     <div className="grid gap-6 md:grid-cols-3">
                         {testimonials.map((src, index) => (
                             <motion.div key={src} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }} className="overflow-hidden rounded-lg bg-slate-950 shadow-xl">
-                                <LazyVideo src={src} className="aspect-video w-full object-cover" controls />
+                                <LazyVideo src={src} poster={src.replace('.mp4', '-poster.webp')} className="aspect-video w-full object-cover" controls />
                             </motion.div>
                         ))}
                     </div>
