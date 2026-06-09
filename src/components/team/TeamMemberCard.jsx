@@ -1,11 +1,6 @@
-import { FaGithub, FaTwitter, FaLinkedin, FaGlobe } from 'react-icons/fa'
+import { FaGithub, FaTwitter, FaLinkedin, FaGlobe, FaEnvelope } from 'react-icons/fa'
 import { SiGooglescholar } from 'react-icons/si'
-
-const getAssetUrl = (path) => {
-  if (!path) return path
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  return `${import.meta.env.BASE_URL}${cleanPath}`
-}
+import assetUrl from '../../utils/assetUrl'
 
 const TeamMemberCard = ({ member }) => {
   return (
@@ -14,7 +9,7 @@ const TeamMemberCard = ({ member }) => {
       <div className="mb-4">
         <div className="w-32 h-32 mx-auto rounded-full overflow-hidden bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
           <img
-            src={getAssetUrl(member.photo)}
+            src={assetUrl(member.photo)}
             alt={member.name}
             loading="lazy"
             decoding="async"
@@ -40,9 +35,18 @@ const TeamMemberCard = ({ member }) => {
       </p>
 
       {/* Social/Academic Links */}
-      {member.links && (
+      {(member.email || member.links) && (
         <div className="flex justify-center gap-3">
-          {member.links.scholar && (
+          {member.email && (
+            <a
+              href={`mailto:${member.email}`}
+              className="text-gray-600 hover:text-primary-600 transition-colors"
+              title="Email"
+            >
+              <FaEnvelope className="text-xl" />
+            </a>
+          )}
+          {member.links?.scholar && (
             <a
               href={member.links.scholar}
               target="_blank"
@@ -53,7 +57,7 @@ const TeamMemberCard = ({ member }) => {
               <SiGooglescholar className="text-xl" />
             </a>
           )}
-          {member.links.github && (
+          {member.links?.github && (
             <a
               href={member.links.github}
               target="_blank"
@@ -64,7 +68,7 @@ const TeamMemberCard = ({ member }) => {
               <FaGithub className="text-xl" />
             </a>
           )}
-          {member.links.twitter && (
+          {member.links?.twitter && (
             <a
               href={member.links.twitter}
               target="_blank"
@@ -75,7 +79,7 @@ const TeamMemberCard = ({ member }) => {
               <FaTwitter className="text-xl" />
             </a>
           )}
-          {member.links.linkedin && (
+          {member.links?.linkedin && (
             <a
               href={member.links.linkedin}
               target="_blank"
@@ -86,7 +90,7 @@ const TeamMemberCard = ({ member }) => {
               <FaLinkedin className="text-xl" />
             </a>
           )}
-          {member.links.website && (
+          {member.links?.website && (
             <a
               href={member.links.website}
               target="_blank"

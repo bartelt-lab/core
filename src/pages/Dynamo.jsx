@@ -1,194 +1,586 @@
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from '../components/common/Navbar'
-import Section from '../components/common/Section'
-import Button from '../components/common/Button'
+import {
+    FaArrowLeft,
+    FaArrowRight,
+    FaBezierCurve,
+    FaCubes,
+    FaHome,
+    FaLayerGroup,
+    FaMapMarkedAlt,
+    FaMicrochip,
+    FaProjectDiagram,
+    FaRobot,
+    FaRoute,
+} from 'react-icons/fa'
+import assetUrl from '../utils/assetUrl'
+import LazyVideo from '../components/common/LazyVideo'
 
-const Dynamo = () => {
-    return (
-        <div className="bg-white min-h-screen">
-            {/* Hero Section */}
-            <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gray-900 text-white">
-                <div className="absolute inset-0">
-                    <img
-                        src={`${import.meta.env.BASE_URL}videos/demonstrations/robotics/Lab4K.jpeg`}
-                        alt="Dynamo Lab"
-                        className="w-full h-full object-cover opacity-40"
+const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1`
+
+const statusCards = [
+    {
+        icon: FaMapMarkedAlt,
+        eyebrow: 'Active Experiment',
+        title: 'Mobile Base',
+        text: 'Ridgeback navigation is being validated through simulation, exploration, and hardware-facing runs.',
+    },
+    {
+        icon: FaRobot,
+        eyebrow: 'Teleop Track',
+        title: 'Manipulator',
+        text: 'Unitree G1 operation is being tested through teleoperation to understand control and safety constraints.',
+    },
+    {
+        icon: FaCubes,
+        eyebrow: 'Simulation First',
+        title: 'Integration',
+        text: 'The project is moving toward stable interfaces between navigation, manipulation, perception, and scene state.',
+    },
+]
+
+const tabs = [
+    { id: 'home', label: 'Home', icon: FaHome },
+    { id: 'architecture', label: 'Architecture', icon: FaProjectDiagram },
+    { id: 'experiments', label: 'Experiments & Results', icon: FaBezierCurve },
+]
+
+const technicalBlocks = [
+    {
+        icon: FaRoute,
+        label: 'Mobile Base',
+        title: 'Ridgeback navigation',
+        metric: 'Nav2 + exploration',
+        color: 'blue',
+        points: ['Mapping', 'Path planning', 'Hardware-facing runs'],
+    },
+    {
+        icon: FaRobot,
+        label: 'Manipulator',
+        title: 'Unitree G1 control',
+        metric: 'Teleop + policy interface',
+        color: 'emerald',
+        points: ['Command timing', 'Safety boundaries', 'Manipulation trials'],
+    },
+    {
+        icon: FaMicrochip,
+        label: 'Simulation',
+        title: 'Isaac Lab pipeline',
+        metric: 'Repeatable test scenes',
+        color: 'amber',
+        points: ['USD environments', 'Synthetic scenarios', 'Sim2Real validation'],
+    },
+    {
+        icon: FaLayerGroup,
+        label: 'Integration',
+        title: 'Interface contracts',
+        metric: 'Mobility + manipulation',
+        color: 'violet',
+        points: ['Scene state', 'Perception links', 'Evidence loop'],
+    },
+]
+
+const experimentResults = [
+    {
+        phase: 'Result 01',
+        operation: 'Navigation simulation',
+        title: 'Ridgeback movement and exploration behavior',
+        summary: 'The mobile-base track was first evaluated in simulation to test navigation, map interaction, and exploration behavior before hardware deployment.',
+        outcome: 'The videos show the base operating in repeatable simulated environments, which makes debugging and iteration possible before physical tests.',
+        videos: [
+            {
+                title: 'Ridgeback simulation run',
+                id: '1aUkfy_dM499HRmpudlG6zFFvVCRq36yF',
+                note: 'Navigation pipeline running in simulation.',
+            },
+            {
+                title: 'Ridgeback exploration simulation',
+                id: '1Hin82KFFeiVCN8Djjczv8MRuGI2HrbrS',
+                note: 'Exploration behavior for environment interaction.',
+            },
+            {
+                title: 'Ridgeback simulation refinement',
+                id: '19ro5Az4d_Qzw95xYvcMBbgbkThifTZDG',
+                note: 'Additional simulation iteration for mobile-base behavior.',
+            },
+        ],
+    },
+    {
+        phase: 'Result 02',
+        operation: 'Manipulator teleoperation',
+        title: 'G1 control and manipulation-side testing',
+        summary: 'The humanoid side was tested through teleoperation to observe command timing, safety boundaries, and practical manipulation constraints.',
+        outcome: 'The videos document how the G1 control interface behaves under human operation, which informs later autonomous manipulation policies.',
+        videos: [
+            {
+                title: 'G1 teleoperation trial',
+                id: '19UT7k_I5e67tzVv4i4_xohpvqyEDJPqX',
+                note: 'Early teleoperation behavior for the Unitree G1 track.',
+            },
+            {
+                title: 'G1 teleoperation rehearsal',
+                id: '1EhGsDjBYzPCShm950dRyMCiXjkwHNKLy',
+                note: 'Continued operation testing for manipulation-side control.',
+            },
+            {
+                title: 'G1 manipulation demo',
+                id: '1uposYPz2cl5ZFItDsBejknmc-kXbni1y',
+                note: 'Additional G1 demonstration from the project material.',
+            },
+        ],
+    },
+    {
+        phase: 'Result 03',
+        operation: 'Hardware-facing validation',
+        title: 'Ridgeback exploration and integration readiness',
+        summary: 'The current operation validates the mobile base beyond isolated simulation and prepares it for integration with manipulation and scene representation.',
+        outcome: 'The hardware-facing exploration run shows progress toward a Sim2Real-ready test environment where navigation and manipulation can be connected through stable interfaces.',
+        videos: [
+            {
+                title: 'Ridgeback hardware exploration',
+                id: '1Q60muLRK3wOiiZelpSNghu_nWZ8qYblP',
+                note: 'Hardware-facing exploration progress for the mobile base.',
+            },
+        ],
+    },
+]
+
+const goalSlides = [
+    {
+        title: 'Clinical inspection task',
+        image: '/images/projects/dynamo/goal-clinic.webp',
+        note: 'Humanoid reasoning and operator-facing task execution in a structured room.',
+        fit: 'object-contain bg-slate-100',
+    },
+    {
+        title: 'Warehouse manipulation task',
+        image: '/images/projects/dynamo/goal-warehouse.webp',
+        note: 'Mobile-base support for logistics-style object handling and placement.',
+        fit: 'object-contain bg-slate-100',
+    },
+    {
+        title: 'Domestic handling task',
+        image: '/images/projects/dynamo/goal-laundry.webp',
+        note: 'Humanoid handling in a domestic environment with soft-object manipulation.',
+        fit: 'object-contain bg-slate-100',
+    },
+]
+
+const VideoCarousel = ({ videos }) => {
+    const [activeIndex, setActiveIndex] = useState(0)
+    const hasVideos = videos.length > 0
+    const video = hasVideos ? videos[activeIndex] : null
+    const hasMultiple = videos.length > 1
+
+    const showPrevious = () => {
+        setActiveIndex((current) => (current === 0 ? videos.length - 1 : current - 1))
+    }
+
+    const showNext = () => {
+        setActiveIndex((current) => (current + 1) % videos.length)
+    }
+
+    if (!hasVideos) {
+        return (
+            <article className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+                <div className="aspect-video bg-slate-950">
+                    <LazyVideo
+                        src={assetUrl('/videos/core-labs-hero.mp4')}
+                        poster={assetUrl('/videos/hero-poster.webp')}
+                        className="h-full w-full object-cover opacity-75"
+                        autoPlay
+                        muted
+                        loop
                     />
                 </div>
-                <div className="relative z-10 container mx-auto px-4 text-center">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-7xl font-heading font-bold mb-6"
-                    >
-                        DyNAMO
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto"
-                    >
-                        Dynamic Navigation And Manipulation Operations
-                    </motion.p>
+                <div className="p-4">
+                    <h4 className="text-sm font-bold text-slate-950">Project context preview</h4>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                        This milestone defines the technical objective. Operation-specific proof appears once concrete robot runs are executed.
+                    </p>
+                </div>
+            </article>
+        )
+    }
+
+    return (
+        <article className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+            <div className="relative aspect-video bg-slate-950">
+                <iframe
+                    src={drivePreview(video.id)}
+                    title={video.title}
+                    className="h-full w-full"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowFullScreen
+                />
+                {hasMultiple && (
+                    <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-between px-3 pointer-events-none">
+                        <button
+                            type="button"
+                            onClick={showPrevious}
+                            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-lg transition hover:bg-white"
+                            aria-label="Previous video"
+                        >
+                            <FaArrowLeft className="h-4 w-4" aria-hidden="true" />
+                        </button>
+                        <button
+                            type="button"
+                            onClick={showNext}
+                            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-lg transition hover:bg-white"
+                            aria-label="Next video"
+                        >
+                            <FaArrowRight className="h-4 w-4" aria-hidden="true" />
+                        </button>
+                    </div>
+                )}
+            </div>
+            <div className="p-4">
+                <div className="mb-2 flex items-center justify-between gap-4">
+                    <h4 className="text-sm font-bold text-slate-950">{video.title}</h4>
+                    {hasMultiple && (
+                        <span className="text-xs font-bold text-slate-400">
+                            {activeIndex + 1}/{videos.length}
+                        </span>
+                    )}
+                </div>
+                <p className="text-sm leading-6 text-slate-600">{video.note}</p>
+            </div>
+        </article>
+    )
+}
+
+const GoalImageCarousel = () => {
+    const [activeIndex, setActiveIndex] = useState(0)
+    const slide = goalSlides[activeIndex]
+
+    useEffect(() => {
+        const timer = window.setInterval(() => {
+            setActiveIndex((current) => (current + 1) % goalSlides.length)
+        }, 4200)
+
+        return () => window.clearInterval(timer)
+    }, [])
+
+    return (
+        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-200/70">
+            <div className="relative h-[620px] max-h-[72vh] min-h-[480px] bg-slate-100">
+                <img
+                    key={slide.image}
+                    src={assetUrl(slide.image)}
+                    alt={slide.title}
+                    loading="lazy"
+                    decoding="async"
+                    className={`h-full w-full transition-opacity duration-500 ${slide.fit}`}
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-5 text-white">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary-200">{slide.title}</p>
+                    <p className="mt-2 text-sm leading-6 text-white/82">{slide.note}</p>
+                </div>
+                <button
+                    type="button"
+                    onClick={() => setActiveIndex((current) => (current === 0 ? goalSlides.length - 1 : current - 1))}
+                    className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-lg transition hover:bg-white"
+                    aria-label="Previous goal image"
+                >
+                    <FaArrowLeft className="h-4 w-4" aria-hidden="true" />
+                </button>
+                <button
+                    type="button"
+                    onClick={() => setActiveIndex((current) => (current + 1) % goalSlides.length)}
+                    className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-lg transition hover:bg-white"
+                    aria-label="Next goal image"
+                >
+                    <FaArrowRight className="h-4 w-4" aria-hidden="true" />
+                </button>
+            </div>
+            <div className="flex items-center justify-center gap-2 p-4">
+                {goalSlides.map((item, index) => (
+                    <button
+                        key={item.title}
+                        type="button"
+                        onClick={() => setActiveIndex(index)}
+                        className={`h-2.5 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-primary-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
+                        aria-label={`Show ${item.title}`}
+                    />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+const Dynamo = () => {
+    const [activeTab, setActiveTab] = useState('home')
+
+    return (
+        <div className="bg-white text-slate-950">
+            <section id="hero" className="relative min-h-[72vh] overflow-hidden bg-slate-950 text-white">
+                <img
+                    src={assetUrl('/images/projects/dynamo/hero.webp')}
+                    alt=""
+                    fetchPriority="high"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover opacity-55"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/82 to-slate-950/22" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+
+                <div className="container relative z-10 mx-auto flex min-h-[72vh] max-w-7xl items-end px-6 pb-16 pt-28 md:px-10">
+                    <div className="max-w-3xl">
+                        <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary-200">
+                            Dynamic Navigation and Manipulation Operations
+                        </p>
+                        <h1 className="mb-5 text-5xl font-black leading-none tracking-tight md:text-7xl">
+                            DyNAMO
+                        </h1>
+                        <p className="max-w-2xl text-lg leading-8 text-white/78">
+                            A visible robotics research progression: from an integrated navigation-manipulation goal
+                            to simulation, teleoperation, and hardware-facing validation.
+                        </p>
+                        <button
+                            type="button"
+                            onClick={() => setActiveTab('experiments')}
+                            className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-950 shadow-xl transition hover:bg-primary-50"
+                        >
+                            View result timeline
+                        </button>
+                    </div>
                 </div>
             </section>
 
-            {/* Goal Section */}
-            <Section id="goal" className="bg-white">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 className="text-3xl font-heading font-bold mb-6 text-gray-900">The Goal</h2>
-                        <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                            Dynamo aims to demonstrate an integrated system where a humanoid robot identifies, grasps, and places multiple objects onto an autonomously navigating mobile base. This requires solving complex challenges in Sim2Real transfer, where policies learned in simulation must robustly handle the noise and unpredictability of the physical world without extensive real-world fine-tuning.
-                        </p>
-                        <div className="bg-gray-50 p-6 rounded-xl border-l-4 border-primary-600">
-                            <p className="italic text-gray-600">
-                                "Bridging the gap between perception, reasoning, and action."
+            <div className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur-xl">
+                <div className="container mx-auto max-w-5xl px-4 pt-2">
+                    <div className="grid grid-cols-3 items-end gap-1 border-b border-slate-200">
+                        {tabs.map((tab) => {
+                            const Icon = tab.icon
+                            const isActive = activeTab === tab.id
+                            return (
+                                <button
+                                    key={tab.id}
+                                    type="button"
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`relative -mb-px flex min-h-11 items-center justify-center gap-2 rounded-t-md border px-3 text-xs font-bold transition md:text-sm ${
+                                        isActive
+                                            ? 'border-slate-200 border-b-white bg-white text-slate-950 shadow-[0_-8px_24px_rgba(15,23,42,0.08)]'
+                                            : 'border-transparent bg-slate-100/75 text-slate-500 hover:bg-white hover:text-slate-950'
+                                    }`}
+                                >
+                                    <Icon className="h-4 w-4" aria-hidden="true" />
+                                    <span className="hidden sm:inline">{tab.label}</span>
+                                </button>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+
+            <main>
+                {activeTab === 'home' && (
+                    <>
+                <section id="goal" className="py-20 md:py-28">
+                    <div className="container mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:items-center md:px-10">
+                        <div>
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Project Goal</p>
+                            <h2 className="mb-6 text-4xl font-black leading-tight tracking-tight md:text-5xl">
+                                Build the bridge between navigation, manipulation, and embodied reasoning.
+                            </h2>
+                            <p className="text-lg leading-8 text-slate-600">
+                                Dynamo aims to demonstrate an integrated system where a humanoid robot identifies,
+                                grasps, and places objects while working with an autonomously navigating mobile base.
+                                The core challenge is Sim2Real transfer: behavior developed in simulation must survive
+                                the noise and constraints of physical operation.
+                            </p>
+                            <div className="mt-8 rounded-lg border-l-4 border-primary-600 bg-slate-50 p-5">
+                                <p className="text-sm italic leading-7 text-slate-600">
+                                    Bridging perception, reasoning, navigation, and manipulation through a visible experiment pipeline.
+                                </p>
+                            </div>
+                        </div>
+
+                        <GoalImageCarousel />
+                    </div>
+                </section>
+
+                <section id="status" className="bg-slate-50 py-20 md:py-24">
+                    <div className="container mx-auto max-w-6xl px-6 md:px-10">
+                        <div className="mx-auto mb-12 max-w-3xl text-center">
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Current Status</p>
+                            <h2 className="mb-4 text-3xl font-black leading-tight tracking-tight md:text-4xl">
+                                Active workstreams moving toward one integrated robot testbed.
+                            </h2>
+                            <p className="text-slate-600">
+                                The current project state is intentionally iterative: each operation captures
+                                simulation, teleoperation, or hardware validation rather than a polished final product.
                             </p>
                         </div>
-                    </div>
-                    <div className="relative rounded-2xl overflow-hidden shadow-xl">
-                        <img
-                            src={`${import.meta.env.BASE_URL}videos/demonstrations/robotics/Dynamo_Goal_Illustration.png`}
-                            alt="Dynamo Goal Illustration"
-                            className="w-full h-auto"
-                        />
-                    </div>
-                </div>
-            </Section>
 
-            {/* Visual Abstract Section */}
-            <Section id="overview" className="bg-gray-50">
-                <div className="flex flex-col items-center">
-                    <h2 className="text-3xl font-heading font-bold mb-10 text-gray-900 text-center">System Architecture</h2>
-                    <div className="max-w-5xl w-full shadow-2xl rounded-2xl overflow-hidden bg-white">
-                        <img
-                            src={`${import.meta.env.BASE_URL}videos/demonstrations/robotics/DynamoVisualAbstract.png`}
-                            alt="Dynamo Visual Abstract"
-                            className="w-full h-auto"
-                        />
-                    </div>
-                </div>
-            </Section>
-
-            {/* Technical Overview Section */}
-            <Section id="technical" className="bg-white">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-heading font-bold mb-12 text-center text-gray-900">Technical Overview</h2>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {/* Hardware Stack */}
-                        <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                            <h3 className="text-xl font-bold mb-4 text-primary-700 flex items-center">
-                                <span className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center mr-3 text-primary-600">1</span>
-                                Hardware Stack
-                            </h3>
-                            <ul className="space-y-4 text-gray-600">
-                                <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2 min-w-[100px]">Mobile Base:</span>
-                                    <span>
-                                        <strong>Clearpath Ridgeback</strong> — An omnidirectional platform designed for developing manipulation algorithms. It handles heavy payloads and provides a stable base for the humanoid torso.
-                                    </span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2 min-w-[100px]">Manipulator:</span>
-                                    <span>
-                                        <strong>Unitree G1 Humanoid</strong> — Features high-torque motors and advanced dexterity, allowing for complex multi-object manipulation and diverse grasping strategies.
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Simulation & Tooling */}
-                        <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                            <h3 className="text-xl font-bold mb-4 text-accent-600 flex items-center">
-                                <span className="w-8 h-8 rounded-full bg-accent-100 flex items-center justify-center mr-3 text-accent-600">2</span>
-                                Simulation & Tooling
-                            </h3>
-                            <ul className="space-y-4 text-gray-600">
-                                <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2 min-w-[140px]">Primary Simulator:</span>
-                                    <span>
-                                        <strong>NVIDIA Isaac Lab</strong> — Leverages GPU-accelerated physics to simulate thousands of environments in parallel, drastically reducing training time for reinforcement learning policies.
-                                    </span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2 min-w-[140px]">Scene Rep:</span>
-                                    <span>
-                                        <strong>Universal Scene Description (USD)</strong> — Enables high-fidelity asset interchange and complex scene composition, ensuring the simulation closely matches the physical lab environment.
-                                    </span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="font-semibold text-gray-900 mr-2 min-w-[140px]">Synthetic Data:</span>
-                                    <span>
-                                        <strong>Isaac Replicator</strong> — Procedurally generates diverse training data with randomized textures and lighting to improve the vision system's generalization.
-                                    </span>
-                                </li>
-                            </ul>
+                        <div className="grid gap-5 md:grid-cols-3">
+                            {statusCards.map((card) => {
+                                const Icon = card.icon
+                                return (
+                                    <article key={card.title} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+                                        <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-md bg-slate-950 text-white">
+                                            <Icon className="h-4 w-4" aria-hidden="true" />
+                                        </div>
+                                        <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">{card.eyebrow}</p>
+                                        <h3 className="mb-3 text-xl font-bold">{card.title}</h3>
+                                        <p className="leading-7 text-slate-600">{card.text}</p>
+                                    </article>
+                                )
+                            })}
                         </div>
                     </div>
+                </section>
 
-                    {/* Core Technical Focus */}
-                    <div className="mt-12 bg-gray-900 text-white p-8 rounded-2xl shadow-xl">
-                        <h3 className="text-2xl font-bold mb-6 text-center">Core Technical Focus</h3>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="flex items-start">
-                                <div className="w-2 h-2 mt-2 rounded-full bg-primary-400 mr-3 flex-shrink-0"></div>
-                                <p>Autonomous navigation, mapping, and socially aware path planning</p>
-                            </div>
-                            <div className="flex items-start">
-                                <div className="w-2 h-2 mt-2 rounded-full bg-primary-400 mr-3 flex-shrink-0"></div>
-                                <p>AI-based manipulation using foundation models, imitation learning, and VLA policies</p>
-                            </div>
-                            <div className="flex items-start">
-                                <div className="w-2 h-2 mt-2 rounded-full bg-primary-400 mr-3 flex-shrink-0"></div>
-                                <p>Interface-driven system design to decouple mobility, manipulation, and perception</p>
-                            </div>
-                            <div className="flex items-start">
-                                <div className="w-2 h-2 mt-2 rounded-full bg-primary-400 mr-3 flex-shrink-0"></div>
-                                <p>Procedural simulation environments with accurate physics and digital twins</p>
+                    </>
+                )}
+
+                {activeTab === 'architecture' && (
+                <section id="architecture" className="bg-gradient-to-b from-white to-slate-50 py-20 md:py-24">
+                    <div className="container mx-auto max-w-6xl px-6 md:px-10">
+                        <div className="mb-10 text-center">
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">System Architecture</p>
+                            <h2 className="text-3xl font-black tracking-tight md:text-4xl">
+                                Interface-driven robotics architecture.
+                            </h2>
+                        </div>
+                        <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl shadow-slate-200/70 md:p-6">
+                          <div className="overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
+                            <img
+                                src={assetUrl('/images/projects/dynamo/architecture.webp')}
+                                alt="Dynamo system architecture"
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full object-contain"
+                            />
+                          </div>
+                        </div>
+                    </div>
+                </section>
+                )}
+
+                {activeTab === 'home' && (
+                <section id="technical" className="bg-[#f6f9fc] py-20 md:py-24">
+                    <div className="container mx-auto max-w-6xl px-6 md:px-10">
+                        <div className="mb-12 text-center">
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Technical Overview</p>
+                            <h2 className="text-3xl font-black tracking-tight md:text-4xl">The stack behind the experiments.</h2>
+                        </div>
+
+                        <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-200/60 md:p-6">
+                            <div className="grid gap-5 md:grid-cols-2">
+                                {technicalBlocks.map((block, index) => {
+                                    const Icon = block.icon
+                                    const colorClasses = {
+                                        blue: 'bg-primary-50 text-primary-700 border-primary-100',
+                                        emerald: 'bg-emerald-50 text-emerald-700 border-emerald-100',
+                                        amber: 'bg-amber-50 text-amber-700 border-amber-100',
+                                        violet: 'bg-violet-50 text-violet-700 border-violet-100',
+                                    }
+
+                                    return (
+                                        <article key={block.title} className="relative rounded-xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary-200 hover:shadow-lg">
+                                            <div className="mb-5 flex items-start justify-between gap-4">
+                                                <div className={`flex h-12 w-12 items-center justify-center rounded-lg border ${colorClasses[block.color]}`}>
+                                                    <Icon className="h-5 w-5" aria-hidden="true" />
+                                                </div>
+                                                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500">
+                                                    0{index + 1}
+                                                </span>
+                                            </div>
+                                            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">{block.label}</p>
+                                            <h3 className="mb-2 text-xl font-bold text-slate-950">{block.title}</h3>
+                                            <p className="mb-5 text-sm font-semibold text-slate-500">{block.metric}</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {block.points.map((point) => (
+                                                    <span key={point} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-600">
+                                                        {point}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </article>
+                                    )
+                                })}
                             </div>
                         </div>
-                    </div>
-                </div>
-            </Section>
 
-            {/* Experiments & Results Section */}
-            <Section id="experiments" className="bg-gray-50">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-3xl font-heading font-bold mb-8 text-gray-900">Experiments & Results</h2>
-
-                    <div className="bg-white p-12 rounded-2xl shadow-lg border border-gray-100 flex flex-col items-center">
-                        <div className="w-16 h-16 rounded-full bg-primary-50 flex items-center justify-center mb-6 text-primary-600 animate-pulse">
-                            <span className="text-2xl">⚡</span>
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">Research in Progress</h3>
-                        <p className="text-gray-600 max-w-lg mb-8">
-                            We are actively conducting experiments on Sim2Real transfer and long-horizon manipulation tasks.
-                            Initial benchmarking results and demonstrations will be published here shortly.
-                        </p>
-                        <div className="flex gap-4">
-                            <div className="h-3 w-3 rounded-full bg-primary-400 animate-bounce" style={{ animationDelay: '0s' }}></div>
-                            <div className="h-3 w-3 rounded-full bg-primary-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                            <div className="h-3 w-3 rounded-full bg-primary-400 animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                        <div className="mt-8 overflow-hidden rounded-2xl bg-slate-950 text-white shadow-2xl">
+                            <div className="grid md:grid-cols-3">
+                                {['Simulate', 'Validate', 'Integrate'].map((step, index) => (
+                                    <div key={step} className="flex items-start gap-4 border-white/10 p-6 md:border-r md:last:border-r-0">
+                                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-sm font-black">
+                                            {index + 1}
+                                        </span>
+                                        <div>
+                                            <h3 className="font-bold">{step}</h3>
+                                            <p className="text-sm text-slate-300">
+                                                {index === 0 && 'Build repeatable scenes and robot behavior trials.'}
+                                                {index === 1 && 'Compare simulation evidence with hardware-facing runs.'}
+                                                {index === 2 && 'Connect mobility, manipulation, perception, and state.'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Section>
+                </section>
+                )}
 
-            {/* Navigation Footer */}
-            <Section className="bg-gray-50 pb-20">
-                <div className="flex justify-center">
-                    <Link to="/">
-                        <Button variant="outline" size="lg" className="group">
-                            <span className="mr-2">←</span> Back to CORE Labs
-                        </Button>
+                {activeTab === 'experiments' && (
+                <section id="experiments" className="py-20 md:py-24">
+                    <div className="container mx-auto max-w-6xl px-6 md:px-10">
+                        <div className="mx-auto mb-12 max-w-3xl text-center">
+                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Experiments & Results</p>
+                            <h2 className="mb-4 text-3xl font-black leading-tight tracking-tight md:text-4xl">
+                                Timeline of Dynamo results with associated proof videos.
+                            </h2>
+                            <p className="text-slate-600">
+                                Each result is described by the technical operation carried out, the observed outcome,
+                                and one visible video at a time for that part of the project.
+                            </p>
+                        </div>
+
+                        <div className="space-y-8">
+                            {experimentResults.map((item, index) => (
+                                <article key={item.title} className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xl">
+                                    <div className="grid lg:grid-cols-12">
+                                        <div className="p-8 md:p-10 lg:col-span-5">
+                                            <span className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-700 text-sm font-bold text-white">
+                                                {index + 1}
+                                            </span>
+                                            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">{item.phase}</p>
+                                            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{item.operation}</p>
+                                            <h3 className="mb-4 text-2xl font-bold">{item.title}</h3>
+                                            <p className="mb-5 leading-7 text-slate-600">{item.summary}</p>
+                                            <div className="rounded-lg border border-slate-200 bg-slate-50 p-5">
+                                                <p className="mb-2 text-sm font-bold text-slate-950">Result</p>
+                                                <p className="text-sm leading-6 text-slate-600">{item.outcome}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-slate-50 p-5 md:p-8 lg:col-span-7">
+                                            <VideoCarousel videos={item.videos} />
+                                        </div>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+                )}
+
+                <section className="pb-20 text-center">
+                    <Link
+                        to="/core-labs"
+                        className="inline-flex items-center gap-3 rounded-full border border-primary-700 px-6 py-3 text-sm font-bold text-primary-700 transition hover:bg-primary-700 hover:text-white"
+                    >
+                        <FaArrowLeft className="h-3 w-3" aria-hidden="true" />
+                        Back to CORE Labs
                     </Link>
-                </div>
-            </Section>
-        </div >
+                </section>
+            </main>
+        </div>
     )
 }
 

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1">
+      <stop offset="0" stop-color="#fffaf0"/>
+      <stop offset="1" stop-color="#f8fafc"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0" x2="1">
+      <stop offset="0" stop-color="#7c2d12"/>
+      <stop offset="1" stop-color="#4c1d95"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="20" fill="url(#bg)" stroke="#f1f5f9"/>
+
+  <!-- Header -->
+  <rect x="40" y="28" width="1520" height="160" rx="14" fill="#fff5f3" stroke="#fde68a"/>
+  <text x="800" y="120" font-family="Georgia, 'Times New Roman', serif" font-size="72" text-anchor="middle" fill="url(#titleGrad)" font-weight="800">STRATEGO</text>
+  <text x="800" y="160" font-family="Inter, Arial, sans-serif" font-size="20" text-anchor="middle" fill="#6b7280">LLM for text-based games • automated matchups &amp; analytics</text>
+
+  <!-- Main content area -->
+  <g transform="translate(60,210)">
+    <rect width="1480" height="640" rx="14" fill="#fff" stroke="#e6e9ef"/>
+
+    <!-- Left: board visualization -->
+    <g transform="translate(40,28)">
+      <rect width="520" height="520" rx="12" fill="#f8fafc" stroke="#e6eef6"/>
+      <g transform="translate(36,36)">
+        <!-- small 8x8 grid -->
+        <g stroke="#e6e9ef">
+          <defs>
+            <pattern id="cell" width="64" height="64" patternUnits="userSpaceOnUse">
+              <rect width="64" height="64" fill="#fff7ed"/>
+            </pattern>
+          </defs>
+          <rect width="448" height="448" fill="#fff" rx="8"/>
+          <!-- grid lines -->
+          <g stroke="#f1f5f9">
+            <!-- vertical -->
+            <g>
+              <line x1="56" y1="0" x2="56" y2="448" />
+              <line x1="112" y1="0" x2="112" y2="448" />
+              <line x1="168" y1="0" x2="168" y2="448" />
+              <line x1="224" y1="0" x2="224" y2="448" />
+              <line x1="280" y1="0" x2="280" y2="448" />
+              <line x1="336" y1="0" x2="336" y2="448" />
+              <line x1="392" y1="0" x2="392" y2="448" />
+            </g>
+            <!-- horizontal -->
+            <g>
+              <line x1="0" y1="56" x2="448" y2="56" />
+              <line x1="0" y1="112" x2="448" y2="112" />
+              <line x1="0" y1="168" x2="448" y2="168" />
+              <line x1="0" y1="224" x2="448" y2="224" />
+              <line x1="0" y1="280" x2="448" y2="280" />
+              <line x1="0" y1="336" x2="448" y2="336" />
+              <line x1="0" y1="392" x2="448" y2="392" />
+            </g>
+          </g>
+
+          <!-- example pieces -->
+          <g transform="translate(20,20)" fill="#0ea5a4" font-family="Inter, Arial" font-size="12" font-weight="700">
+            <circle cx="24" cy="24" r="20" fill="#ef4444" opacity="0.95"/>
+            <text x="24" y="29" text-anchor="middle" fill="#fff">S</text>
+            <circle cx="88" cy="88" r="20" fill="#3b82f6" opacity="0.95"/>
+            <text x="88" y="93" text-anchor="middle" fill="#fff">M</text>
+            <rect x="152" y="40" width="36" height="36" rx="6" fill="#f59e0b"/>
+            <text x="170" y="65" text-anchor="middle" fill="#fff" font-weight="800">F</text>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- Center: architecture / match summary -->
+    <g transform="translate(620,28)">
+      <rect width="520" height="520" rx="12" fill="#fbfdff" stroke="#eef2ff"/>
+      <text x="260" y="40" font-family="Inter, Arial" font-size="20" text-anchor="middle" fill="#374151" font-weight="700">Match Controller &amp; LLM Arena</text>
+      <g transform="translate(40,84)" fill="#eef2ff" font-family="Inter, Arial" font-size="14">
+        <rect x="0" y="0" width="440" height="120" rx="8" fill="#eef2ff" stroke="#c7d2fe"/>
+        <text x="220" y="28" text-anchor="middle" fill="#4338ca" font-weight="700">Automated matchups</text>
+        <text x="220" y="56" text-anchor="middle" fill="#6b7280">LLM vs LLM • head-to-head analytics • gameplay logs</text>
+        <rect x="0" y="140" width="440" height="120" rx="8" fill="#fffbeb" stroke="#fed7aa"/>
+        <text x="220" y="168" text-anchor="middle" fill="#92400e" font-weight="700">Behavior logging</text>
+        <text x="220" y="196" text-anchor="middle" fill="#6b7280">Win rates • move sequences • decision traces</text>
+      </g>
+    </g>
+
+    <!-- Right: How to play / badges -->
+    <g transform="translate(1180,28)">
+      <rect width="280" height="520" rx="12" fill="#fff7ed" stroke="#fde68a"/>
+      <text x="140" y="40" font-family="Inter, Arial" font-size="18" text-anchor="middle" fill="#92400e" font-weight="800">How to play</text>
+      <text x="20" y="80" font-family="Inter, Arial" font-size="12" fill="#6b7280">- Hidden enemy pieces unless revealed in combat.</text>
+      <text x="20" y="104" font-family="Inter, Arial" font-size="12" fill="#6b7280">- Move one piece per turn; Scouts move any distance.</text>
+      <text x="20" y="128" font-family="Inter, Arial" font-size="12" fill="#6b7280">- Special pieces: Miner defuses bombs; Spy defeats Marshall.</text>
+
+      <g transform="translate(20,160)">
+        <rect x="0" y="0" width="80" height="80" rx="10" fill="#ef4444"/>
+        <text x="40" y="48" text-anchor="middle" font-family="Inter" font-size="22" fill="#fff" font-weight="800">S</text>
+        <rect x="100" y="0" width="80" height="80" rx="10" fill="#3b82f6"/>
+        <text x="140" y="48" text-anchor="middle" font-family="Inter" font-size="22" fill="#fff" font-weight="800">M</text>
+      </g>
+    </g>
+
+    <!-- Footer caption -->
+    <text x="40" y="600" font-family="Inter, Arial" font-size="12" fill="#9ca3af">LLM-based Stratego research — automated matchups, analytics, and gameplay visualizations</text>
+  </g>
+</svg>
