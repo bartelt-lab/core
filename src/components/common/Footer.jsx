@@ -1,36 +1,33 @@
-const getAssetUrl = (path) => {
-  if (!path) return path
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  return `${import.meta.env.BASE_URL}${cleanPath}`
-}
+import assetUrl from '../../utils/assetUrl'
 
 const Footer = () => {
   const logos = [
-    { src: 'images/logos/clausthal-logo.png', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
-    { src: 'images/logos/UBB_white.png', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-24' },
-    { src: 'images/logos/rostock-logo.png', alt: 'University of Rostock', url: 'https://www.uni-rostock.de', className: 'h-20' },
+    { src: 'logos/clausthal-logo.webp', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
+    { src: 'logos/ubb-logo.webp', alt: 'Babeș-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-20' },
+    { src: 'logos/rostock-logo.webp', alt: 'University of Rostock', url: 'https://www.uni-rostock.de/en/', className: 'h-20' },
   ]
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
-          {/* Partner Logos */}
+    <footer className="border-t border-gray-200 bg-white py-12 text-gray-950">
+      <div className="container mx-auto max-w-7xl px-4">
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-4">
           <div className="md:col-span-3">
-            <h3 className="text-lg font-semibold mb-4">Partner Institutions</h3>
-            <div className="flex flex-wrap items-center gap-6">
-              {logos.map((logo, index) => (
+            <h3 className="mb-4 text-lg font-semibold">Partner Institutions</h3>
+            <div className="flex flex-wrap items-center gap-4">
+              {logos.map((logo) => (
                 <a
-                  key={index}
+                  key={logo.src}
                   href={logo.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="opacity-80 hover:opacity-100 transition-opacity"
+                  className="flex min-h-24 min-w-48 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 px-5 py-4 transition hover:border-primary-200 hover:bg-white hover:shadow-md"
                 >
                   <img
-                    src={getAssetUrl(logo.src)}
+                    src={assetUrl(logo.src)}
                     alt={logo.alt}
-                    className={`${logo.className} w-auto object-contain`}
+                    loading="lazy"
+                    decoding="async"
+                    className={`${logo.className} w-auto object-contain opacity-85 grayscale transition hover:opacity-100 hover:grayscale-0`}
                     onError={(e) => {
                       e.target.style.display = 'none'
                     }}
@@ -40,22 +37,17 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Copyright and Info */}
           <div className="md:col-span-1 md:text-right">
-            <h3 className="text-2xl font-heading font-bold mb-2">CORE</h3>
-            <p className="text-gray-400 mb-4">
-              Cognitive Robotics in Europe
-            </p>
+            <h3 className="mb-2 text-2xl font-heading font-bold text-tertiary-600">CORE</h3>
+            <p className="mb-4 text-gray-600">Cognitive Software in Europe</p>
             <p className="text-sm text-gray-500">
               © {new Date().getFullYear()} CORE Initiative. All rights reserved.
             </p>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-          <p>
-            Advancing cognitive robotics research through European collaboration
-          </p>
+        <div className="mt-8 border-t border-gray-200 pt-8 text-center text-sm text-gray-500">
+          <p>Advancing cognitive software research through European collaboration</p>
         </div>
       </div>
     </footer>

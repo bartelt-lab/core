@@ -1,0 +1,405 @@
+{
+  "publications": [
+    {
+      "id": "attwell2026is",
+      "title": "Is This LLM Library Learning? Evaluation Must Account For Compute and Behaviour",
+      "authors": [
+        { "name": "Berlot-Attwell, Ian", "memberSlug": null },
+        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
+        { "name": "Rudzicz, Frank", "memberSlug": null },
+        { "name": "Si, Xujie", "memberSlug": null }
+      ],
+      "venue": "EACL 2026",
+      "year": 2026,
+      "date": "2026-02",
+      "type": "Conference",
+      "status": "Accepted",
+      "url": "",
+      "code": null,
+      "image": "/papers/eacl_paper.webp",
+      "abstract": null
+    },
+    {
+      "id": "kirchdorfer2026investigating",
+      "title": "Investigating Uncertainty Weighting for Multi-Task Learning: Insights and Analytical Alternative",
+      "authors": [
+        { "name": "Kirchdorfer, Lukas", "memberSlug": null },
+        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Stuckenschmidt, Heiner", "memberSlug": null },
+        { "name": "Schott, Lukas", "memberSlug": null },
+        { "name": "Köhler, Jan M.", "memberSlug": null }
+      ],
+      "venue": "International Journal of Computer Vision",
+      "year": 2026,
+      "date": "2026-02",
+      "type": "Journal",
+      "status": "Accepted",
+      "url": "",
+      "code": null,
+      "image": "/papers/uwso.webp",
+      "abstract": null
+    },
+    {
+      "id": "sesterhenn2025trove",
+      "title": "A Compute-Matched Re-Evaluation of TroVE on MATH",
+      "authors": [
+        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
+        { "name": "Berlot-Attwell, Ian", "memberSlug": null },
+        { "name": "Zenkner, Janis", "memberSlug": "zenkner" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+      ],
+      "venue": "ICML 2025 (AI4MATH Workshop)",
+      "year": 2025,
+      "date": "2025-07",
+      "type": "Workshop",
+      "status": "Published",
+      "url": "https://arxiv.org/abs/2507.22069",
+      "code": null,
+      "image": "/papers/trove.webp",
+      "abstract": null
+    },
+    {
+      "id": "kretzer2025closing",
+      "title": "Closing the Loop Between User Stories and GUI Prototypes: An LLM-based Assistant for Cross-Functional Integration in Software Development",
+      "authors": [
+        { "name": "Kretzer, Felix", "memberSlug": null },
+        { "name": "Kolthoff, Kristian", "memberSlug": "kolthoff" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Ponzetto, Simone Paolo", "memberSlug": null },
+        { "name": "Maedche, Alexander", "memberSlug": null }
+      ],
+      "venue": "CHI 2025",
+      "year": 2025,
+      "date": "2025-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://dl.acm.org/doi/full/10.1145/3706598.3713932",
+      "code": null,
+      "image": "/papers/closing_the_loop.webp",
+      "abstract": null
+    },
+    {
+      "id": "kolthoff2025guide",
+      "title": "GUIDE: LLM-Driven GUI Generation Decomposition for Automated Prototyping",
+      "authors": [
+        { "name": "Kolthoff, Kristian", "memberSlug": "kolthoff" },
+        { "name": "Kretzer, Felix", "memberSlug": null },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Maedche, Alexander", "memberSlug": null },
+        { "name": "Ponzetto, Simone Paolo", "memberSlug": null }
+      ],
+      "venue": "ICSE 2025",
+      "year": 2025,
+      "date": "2025-06",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://www.computer.org/csdl/proceedings-article/icse-companion/2025/368300a001/27vTfGNTz0s",
+      "code": "https://github.com/GUIDE-Prototyper/GUIDE",
+      "image": "/papers/guide.webp",
+      "abstract": null
+    },
+    {
+      "id": "kolthoff2024self-elicitation",
+      "title": "Self-Elicitation of Requirements with Automated GUI Prototyping",
+      "authors": [
+        { "name": "Kolthoff, Kristian", "memberSlug": "kolthoff" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Ponzetto, Simone Paolo", "memberSlug": null },
+        { "name": "Schneider, Kurt", "memberSlug": null }
+      ],
+      "venue": "ASE 2024",
+      "year": 2024,
+      "date": "2024-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://dl.acm.org/doi/abs/10.1145/3691620.3695350",
+      "code": "https://github.com/SERGUI-Prototyper/SERGUI-Prototyping",
+      "image": "/papers/self_elicitation_of_requirements.webp",
+      "abstract": null
+    },
+    {
+      "id": "kolthoff2024interlinking",
+      "title": "Interlinking User Stories and GUI Prototyping: A Semi-Automatic LLM-based Approach",
+      "authors": [
+        { "name": "Kolthoff, Kristian", "memberSlug": "kolthoff" },
+        { "name": "Kretzer, Felix", "memberSlug": null },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Maedche, Alexander", "memberSlug": null },
+        { "name": "Ponzetto, Simone Paolo", "memberSlug": null }
+      ],
+      "venue": "RE 2024",
+      "year": 2024,
+      "date": "2024-06",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://ieeexplore.ieee.org/abstract/document/10628517/",
+      "code": "https://github.com/IUS-GUI-Prototyping/IUS-GUI",
+      "image": "/papers/interlinking_user_stories_and_gui_prototyping.webp",
+      "abstract": null
+    },
+    {
+      "id": "dcbm",
+      "title": "DCBM: Data-Efficient Visual Concept Bottleneck Models",
+      "authors": [
+        { "name": "Prasse, Katharina", "memberSlug": null },
+        { "name": "Knab, Patrick", "memberSlug": "knab" },
+        { "name": "Marton, Sascha", "memberSlug": "marton" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Keuper, Margret", "memberSlug": null }
+      ],
+      "venue": "ICML 2025",
+      "year": 2025,
+      "date": "2025-07",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://arxiv.org/abs/2412.11576",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "naacl2025",
+      "title": "Large Language Models Share Representations of Latent Grammatical Concepts Across Typologically Diverse Languages",
+      "authors": [
+        { "name": "Brinkmann, Jannik", "memberSlug": "brinkmann" },
+        { "name": "Wendler, Chris", "memberSlug": null },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Mueller, Aaron", "memberSlug": null }
+      ],
+      "venue": "NAACL 2025",
+      "year": 2025,
+      "date": "2025-05",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://arxiv.org/abs/2501.06346",
+      "code": null,
+      "image": "/papers/naacl2025.webp",
+      "abstract": null
+    },
+    {
+      "id": "zenkner2025shedding",
+      "title": "Shedding Light on Task Decomposition in Program Synthesis: The Driving Force of the Synthesizer Model",
+      "authors": [
+        { "name": "Zenkner, Janis", "memberSlug": "zenkner" },
+        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+      ],
+      "venue": "ICLR 2025 (DL4C Workshop)",
+      "year": 2025,
+      "date": "2025-03",
+      "type": "Workshop",
+      "status": "Published",
+      "url": "https://openreview.net/pdf?id=3vqnyd2Xe8",
+      "code": null,
+      "image": "/papers/accuracy_barplot_deepcoder.svg",
+      "abstract": null
+    },
+    {
+      "id": "dseg-lime",
+      "title": "Beyond Pixels: Enhancing LIME with Hierarchical Features and Segmentation Foundation Models",
+      "authors": [
+        { "name": "Knab, Patrick", "memberSlug": "knab" },
+        { "name": "Marton, Sascha", "memberSlug": "marton" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+      ],
+      "venue": "ECAI 2025",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://arxiv.org/abs/2403.07733",
+      "code": "https://github.com/patrick-knab/DSEG-LIME",
+      "image": "/papers/DSEG.webp",
+      "abstract": "Presents DSEG-LIME framework for improved image explanation using foundation model integration."
+    },
+    {
+      "id": "lime-survey",
+      "title": "Which LIME should I trust? Concepts, Challenges, and Solutions",
+      "authors": [
+        { "name": "Knab, Patrick", "memberSlug": "knab" },
+        { "name": "Marton, Sascha", "memberSlug": "marton" },
+        { "name": "Schlegel, Udo", "memberSlug": null },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+      ],
+      "venue": "xAI 2025",
+      "year": 2025,
+      "date": "2025-03",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://patrick-knab.github.io/which-lime-to-trust/",
+      "code": null,
+      "image": "/papers/LIME.webp",
+      "abstract": null
+    },
+    {
+      "id": "marton2025sympol",
+      "title": "Mitigating Information Loss in Tree-Based Reinforcement Learning via Direct Optimization",
+      "authors": [
+        { "name": "Marton, Sascha", "memberSlug": "marton" },
+        { "name": "Grams, Tim", "memberSlug": "grams" },
+        { "name": "Vogt, Florian", "memberSlug": null },
+        { "name": "Lüdtke, Stefan", "memberSlug": "ludtke" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Stuckenschmidt, Heiner", "memberSlug": null }
+      ],
+      "venue": "ICLR 2025",
+      "year": 2025,
+      "date": "2025-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://arxiv.org/pdf/2408.08761",
+      "code": null,
+      "image": "/papers/mitigating.webp",
+      "abstract": "Addresses how reinforcement learning has seen significant success across various domains, but its adoption is often limited by the black-box nature of neural network policies."
+    },
+    {
+      "id": "grams2025disentangling",
+      "title": "Disentangling Exploration of Large Language Models by Optimal Exploitation",
+      "authors": [
+        { "name": "Grams, Tim", "memberSlug": "grams" },
+        { "name": "Betz, Patrick", "memberSlug": null },
+        { "name": "Marton, Sascha", "memberSlug": "marton" },
+        { "name": "Lüdtke, Stefan", "memberSlug": "ludtke" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+      ],
+      "venue": "ECAI 2025",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://arxiv.org/abs/2501.08925",
+      "code": null,
+      "image": "/papers/disentangling.webp",
+      "abstract": "Examines exploration as a crucial skill for in-context reinforcement learning in unknown environments and investigates whether large language models can effectively explore partially observable settings."
+    },
+    {
+      "id": "oesterle2024drama",
+      "title": "DRAMA at the PettingZoo: Dynamically Restricted Action Spaces for Multi-Agent Reinforcement Learning Frameworks",
+      "authors": [
+        { "name": "Oesterle, Michael", "memberSlug": null },
+        { "name": "Grams, Tim", "memberSlug": "grams" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+      ],
+      "venue": "HICSS 2024",
+      "year": 2024,
+      "date": "2024-01",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://hdl.handle.net/10125/107324",
+      "code": null,
+      "image": "/papers/DRAMA.webp",
+      "abstract": null
+    },
+    {
+      "id": "oesterle2024raise",
+      "title": "RAISE the Bar: Restriction of Action Spaces for Improved Social Welfare and Equity in Traffic Management",
+      "authors": [
+        { "name": "Oesterle, Michael", "memberSlug": null },
+        { "name": "Grams, Tim", "memberSlug": "grams" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Stuckenschmidt, Heiner", "memberSlug": null }
+      ],
+      "venue": "AAMAS 2024",
+      "year": 2024,
+      "date": "2024-05",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1492.pdf",
+      "code": null,
+      "image": "/papers/RAISE.webp",
+      "abstract": null
+    },
+    {
+      "id": "knab2025motif",
+      "title": "Concepts in Motion: Temporal Bottlenecks for Interpretable Video Classification",
+      "authors": [
+        { "name": "Knab, Patrick", "memberSlug": "knab" },
+        { "name": "Marton, Sascha", "memberSlug": "marton" },
+        { "name": "Schubert, P.J.", "memberSlug": null },
+        { "name": "Guggiana, D.", "memberSlug": null },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+      ],
+      "venue": "arXiv Preprint",
+      "year": 2025,
+      "date": "2025-09",
+      "type": "Preprint",
+      "status": "Preprint",
+      "url": "https://arxiv.org/abs/2509.20899",
+      "code": "https://patrick-knab.github.io/MoTIF/",
+      "image": null,
+      "abstract": "Introduces MoTIF framework adapting concept bottleneck models for video classification with temporal analysis capabilities."
+    },
+    {
+      "id": "szilagyi2025accelerating",
+      "title": "Accelerating Intelligent Vehicle Vision: A Hybrid Python-Rust Architecture with Partial-Blocking Inter-Process Communication",
+      "authors": [
+        { "name": "Szilagyi, David", "memberSlug": "szilagyi" },
+        { "name": "Filea, R.", "memberSlug": null },
+        { "name": "Benta, K.I.", "memberSlug": "benta" }
+      ],
+      "venue": "Romanian Journal of Information Technology and Automatic Control",
+      "year": 2025,
+      "date": "2025-01",
+      "type": "Journal",
+      "status": "Published",
+      "url": "",
+      "code": null,
+      "image": null,
+      "abstract": "A hybrid Python-Rust architecture for intelligent vehicle vision systems."
+    },
+    {
+      "id": "szilagyi2024benchmarking",
+      "title": "Benchmarking Autonomous Driving Systems using a Modular and Scalable Simulation Environment",
+      "authors": [
+        { "name": "Szilagyi, David", "memberSlug": "szilagyi" },
+        { "name": "Benta, K.I.", "memberSlug": "benta" },
+        { "name": "Sacarea, Christian", "memberSlug": "sacarea" }
+      ],
+      "venue": "IEEE 36th ICTAI",
+      "year": 2024,
+      "date": "2024-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "szilagyi2025scalable",
+      "title": "Scalable Aggregation Under Client-Side Compute Variability in Federated Learning",
+      "authors": [
+        { "name": "Szilagyi, David", "memberSlug": "szilagyi" },
+        { "name": "Petec, R.G.", "memberSlug": null },
+        { "name": "Benta, K.I.", "memberSlug": "benta" }
+      ],
+      "venue": "IEEE 37th ICTAI",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.ieeecomputersociety.org/10.1109/ICTAI66417.2025.00085",
+      "code": null,
+      "image": null,
+      "abstract": "Proposes FedCompAvg, a compute-aware aggregation strategy for Federated Learning."
+    },
+    {
+      "id": "nedungadi2019grasping",
+      "title": "Design of an Active-Reliable Grasping Mechanism for Autonomous Unmanned Aerial Vehicles",
+      "authors": [
+        { "name": "Nedungadi, Ashwin S.", "memberSlug": "nedungadi" },
+        { "name": "Saska, Martin", "memberSlug": null }
+      ],
+      "venue": "Modelling and Simulation for Autonomous Systems (MESAS)",
+      "year": 2019,
+      "date": "2019-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "",
+      "code": null,
+      "image": null,
+      "abstract": "Design of an active-reliable grasping mechanism for autonomous unmanned aerial vehicles."
+    }
+  ]
+}

@@ -4,39 +4,94 @@ import Navbar from './components/common/Navbar'
 import RightSidebar from './components/common/RightSidebar'
 import Footer from './components/common/Footer'
 import ScrollToTop from './components/common/ScrollToTop'
+import ThemeToggle from './components/common/ThemeToggle'
+import TucLayout from './components/tuc/Layout'
 
-// Lazy load pages
+// CORE pages
 const Home = lazy(() => import('./pages/Home'))
+const CoreLabs = lazy(() => import('./pages/CoreLabs'))
 const Demos = lazy(() => import('./pages/Demos'))
-const Network = lazy(() => import('./pages/Network'))
 const Dynamo = lazy(() => import('./pages/Dynamo'))
+const ComputeCluster = lazy(() => import('./pages/ComputeCluster'))
+const Publications = lazy(() => import('./pages/Publications'))
 
-// Loading component
+// /tuc/* pages
+const TucHome = lazy(() => import('./pages/tuc/Home'))
+const TucTeaching = lazy(() => import('./pages/tuc/Teaching'))
+const TucJoinUs = lazy(() => import('./pages/tuc/JoinUs'))
+const TucProjects = lazy(() => import('./pages/tuc/Projects'))
+const TucAiTeamProjects = lazy(() => import('./pages/tuc/AiTeamProjects'))
+const TucDynamoProject = lazy(() => import('./pages/tuc/projects/DynamoProject'))
+const TucAI4AIProject = lazy(() => import('./pages/tuc/projects/AI4AIProject'))
+const TucVergabepilotProject = lazy(() => import('./pages/tuc/projects/VergabepilotProject'))
+const TucNeuroCoreProject = lazy(() => import('./pages/tuc/projects/NeuroCoreProject'))
+const TucStrategoProject = lazy(() => import('./pages/tuc/projects/StrategoProject'))
+const TucTrafficNetworkProject = lazy(() => import('./pages/tuc/projects/TrafficNetworkProject'))
+const TucSelfDrivingProject = lazy(() => import('./pages/tuc/projects/SelfDrivingProject'))
+
 const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-[50vh]">
     <div className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
   </div>
 )
 
+function CoreShell() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <RightSidebar />
+      <main className="flex-grow">
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/core-labs" element={<CoreLabs />} />
+            <Route path="/demos" element={<Demos />} />
+            <Route path="/network" element={<Home />} />
+            <Route path="/publications" element={<Publications />} />
+            <Route path="/dynamo" element={<Dynamo />} />
+            <Route path="/ai-team-projects" element={<TucAiTeamProjects />} />
+            <Route path="/ai-team-projects/dynamo" element={<TucDynamoProject />} />
+            <Route path="/ai-team-projects/ai4ai" element={<TucAI4AIProject />} />
+            <Route path="/ai-team-projects/vergabepilot" element={<TucVergabepilotProject />} />
+            <Route path="/ai-team-projects/neurocore" element={<TucNeuroCoreProject />} />
+            <Route path="/ai-team-projects/stratego" element={<TucStrategoProject />} />
+            <Route path="/ai-team-projects/traffic-network" element={<TucTrafficNetworkProject />} />
+            <Route path="/ai-team-projects/self-driving" element={<TucSelfDrivingProject />} />
+            <Route path="/compute-cluster" element={<ComputeCluster />} />
+          </Routes>
+        </Suspense>
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+function TucShell() {
+  return (
+    <TucLayout>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route path="/" element={<TucHome />} />
+          <Route path="/teaching" element={<TucTeaching />} />
+          <Route path="/join-us" element={<TucJoinUs />} />
+          <Route path="/projects" element={<TucProjects />} />
+          <Route path="/seminar" element={<TucTeaching initialSection="seminars" />} />
+          <Route path="/theses" element={<TucTeaching initialSection="theses" />} />
+        </Routes>
+      </Suspense>
+    </TucLayout>
+  )
+}
+
 function App() {
   return (
     <HashRouter>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <RightSidebar />
-        <main className="flex-grow">
-          <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/demos" element={<Demos />} />
-              <Route path="/network" element={<Network />} />
-              <Route path="/dynamo" element={<Dynamo />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-      </div>
+      <ThemeToggle />
+      <Routes>
+        <Route path="/tuc/*" element={<TucShell />} />
+        <Route path="/*" element={<CoreShell />} />
+      </Routes>
     </HashRouter>
   )
 }

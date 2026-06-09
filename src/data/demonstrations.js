@@ -44,7 +44,7 @@ export const cognitiveProjects = [
     title: "DyNAMO",
     description: "Our research advances Cognitive Robotics by bridging perception, reasoning, and action. At the core is Dynamo, a comprehensive framework for dynamic manipulation and operational intelligence.",
     content: "Dynamo is a cognitive robotic system built to adapt to unstructured environments and learn through interaction. By integrating foundation models with rigorous control theory, it achieves versatile, robust behavior in real-world settings.",
-    image: "/videos/demonstrations/robotics/Lab4K.jpeg",
+    image: "/videos/demonstrations/robotics/Lab4K.webp",
     link: "/dynamo",
     isTeaser: false,
   },
