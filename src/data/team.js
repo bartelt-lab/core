@@ -217,8 +217,8 @@ export const teamMembers = [
     coreLabsLead: {
       labName: 'Rostock Lab',
       role: 'Rostock Operations',
-      researchFocus: ['Egocentric Perception', 'Spatial Understanding'],
-      shortDescription: 'Coordinating the Rostock lab operations with a focus on human-centric perception and egocentric vision research.',
+      researchFocus: ['Multi-Modal Perception', 'Spatial Reasoning', 'Robot Learning'],
+      shortDescription: 'Leading robotics research at Rostock focusing on multi-modal egocentric perception, spatial reasoning, and robot learning.',
       selectedPublications: []
     }
   },
@@ -372,6 +372,20 @@ export const teamMembers = [
     }
   },
   // Support staff
+  {
+    id: 19,
+    name: 'Mareike Kroeller',
+    slug: 'kroeller',
+    title: 'Administrative Assistant',
+    roleCategory: 'support_staff',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/placeholder-avatar.svg',
+    bio: 'Administrative assistant at TU Clausthal.',
+    email: 'mareike.kroeller@tu-clausthal.de',
+    links: {}
+  },
   {
     id: 18,
     name: 'Steffen Ottow',

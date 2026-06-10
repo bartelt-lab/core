@@ -17,8 +17,8 @@ const leadDetails = {
   'Ashwin Nedungadi': {
     role: 'Rostock Operations',
     institution: 'University of Rostock',
-    description: 'Coordinating the Rostock lab operations with a focus on human-centric perception and egocentric vision research.',
-    focus: ['Egocentric Perception', 'Spatial Understanding'],
+    description: 'Leading robotics research at Rostock focusing on multi-modal egocentric perception, spatial reasoning, and robot learning.',
+    focus: ['Multi-Modal Perception', 'Spatial Reasoning', 'Robot Learning'],
   },
   'Patrick Knab': {
     role: 'Multimodal Methods Lead',

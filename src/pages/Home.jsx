@@ -52,7 +52,7 @@ const LinkIcons = ({ member }) => (
 )
 
 const Home = () => {
-  const members = getNetworkMembers()
+  const members = getNetworkMembers().filter((m) => m.roleCategory !== 'support_staff')
   const partnerLogos = [
     { name: 'TU Clausthal', src: '/logos/clausthal-logo.webp', to: '/tuc' },
     { name: 'UBB', src: '/logos/ubb-logo.webp', href: institutions.UBB.website },
