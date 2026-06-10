@@ -14,7 +14,7 @@ const projects = [
         partners: ['neoBIM', 'Cogintal Ltd.'],
         duration: '3 Jahre',
         fundingProgram: 'BMFTR',
-        budget: '2,0 Mio. EUR / 140 Tsd. EUR',
+        budget: '2,0 Mio. EUR',
         summary:
             'AI-BIM entwickelt einen KI-gestützten Co-Piloten, der nachhaltige Architekturentwürfe unter Einbezug von Umweltstandards planbar und optimierbar macht.',
         contribution:
@@ -29,7 +29,7 @@ const projects = [
         partners: ['neoBIM', 'Ramblr GmbH', 'University of Rostock'],
         duration: '3 Jahre',
         fundingProgram: 'BMFTR',
-        budget: '2,6 Mio. EUR / 670 Tsd. EUR',
+        budget: '2,6 Mio. EUR',
         summary:
             'Show2Instruct übersetzt natürlichsprachige Bedieninteraktion und visuelle Objektreferenzen in maschinenverarbeitbare Steuerbefehle für BIM-Kontexte.',
         contribution:
@@ -59,7 +59,7 @@ const projects = [
         partners: ['SEW-Eurodrive', 'Things Alive Robotics', 'insensiv', 'FZI', 'Fraunhofer IML'],
         duration: '3 Jahre',
         fundingProgram: 'BMFTR',
-        budget: '3,5 Mio. EUR / 800,7 Tsd. EUR',
+        budget: '3,5 Mio. EUR',
         summary:
             'MediCar 4.0 entwickelt hochautomatisierte E-Fahrzeugsysteme und modulare Container für sichere On-Demand-Transportprozesse in Krankenhäusern.',
         contribution:
@@ -89,7 +89,7 @@ const projects = [
         partners: ['Scannery GmbH'],
         duration: '1,5 Jahre',
         fundingProgram: 'BMFTR',
-        budget: '292 Tsd. EUR / 173 Tsd. EUR',
+        budget: '292 Tsd. EUR',
         summary:
             'mAImuse optimiert virtuelle Kleidungsanprobe durch KI-gestützte Bilderkennung und personalisierte Produktvorschläge auf Basis individueller Körperformen.',
         contribution:
@@ -104,7 +104,7 @@ const projects = [
         partners: ['University of Mannheim', 'M2M', 'Osapiens'],
         duration: '3 Jahre',
         fundingProgram: 'BMFTR',
-        budget: '2,2 Mio. EUR / 327 Tsd. EUR',
+        budget: '2,2 Mio. EUR',
         summary:
             'Physical Guards adressiert IoT-Sicherheit in Smart Home, Produktion und sensibler Infrastruktur über physikalische Signalparameter statt isolierter Sensormeldungen.',
         contribution:
