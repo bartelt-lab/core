@@ -4,7 +4,6 @@ import {
   FaMicrochip,
   FaNetworkWired,
   FaCogs,
-  FaFlask,
   FaUniversity,
   FaCheckCircle,
   FaArrowRight,
