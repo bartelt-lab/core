@@ -7,6 +7,7 @@ import assetUrl from '../../utils/assetUrl';
 const CURRENT_YEAR = new Date().getFullYear();
 
 const TUC_NAV = [
+    { to: '/tuc/industry-projects', label: 'Industrieprojekte' },
     { to: '/tuc/teaching', label: 'Teaching' },
     { to: '/tuc/join-us', label: 'Join Us' },
 ];
