@@ -109,9 +109,9 @@ const Projects = () => {
             <Section title="Projects" subtitle="Summer Semester 2025">
                 <p>This semester we will offer the following projects:</p>
                 <p>
-                    <strong>Development of an LLM Training &amp; Evaluation Environment in the GenAI Cluster.</strong>{' '}
+                    <strong>Development of an LLM Training &amp; Evaluation Environment in the Kaiser I Cluster.</strong>{' '}
                     In this project you will design and deploy the infrastructure to train, fine-tune, and rigorously
-                    evaluate Large Language Models on the GenAI Labs new EUR 400 000 GPU cluster, which combines
+                    evaluate Large Language Models on the GenAI Lab's new €400,000 Kaiser I GPU cluster, which combines
                     state-of-the-art NVIDIA H200 GPUs with other high-performance accelerators. Together with your team
                     you will build a platform that captures real-time GPU, memory, network, and power metrics, make
                     them available through intuitive dashboards, and configure automated alerting systems. You will

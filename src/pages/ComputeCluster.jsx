@@ -16,94 +16,94 @@ import assetUrl from '../utils/assetUrl'
 // ─── Data ──────────────────────────────────────────────────────────────────
 
 const clusterStats = [
-  { label: 'Research Projects', value: '10+', icon: FaFlask, description: 'Active and completed' },
-  { label: 'Publications', value: '21', icon: FaDatabase, description: 'Peer-reviewed outputs' },
-  { label: 'Network Sites', value: '3', icon: FaNetworkWired, description: 'DE · DE · RO' },
-  { label: 'Research Staff', value: '15+', icon: FaMicrochip, description: 'Across all institutions' },
+  { label: 'Total Nodes', value: '5', icon: FaNetworkWired, description: '1 Login, 4 Workers' },
+  { label: 'NVIDIA GPUs', value: '16', icon: FaMicrochip, description: '8x H200, 8x RTX 6000' },
+  { label: 'Funding', value: '€400k+', icon: FaUniversity, description: 'EU & Niedersachsen' },
+  { label: 'Scheduler', value: 'Slurm', icon: FaCogs, description: 'Resource manager' },
 ]
 
 const capabilities = [
   {
     icon: FaMicrochip,
-    title: 'GPU Compute',
-    tag: 'Training Infrastructure',
+    title: 'High-Performance Nodes',
+    tag: '2 Nodes · H200 GPUs',
     description:
-      'High-performance GPU nodes support deep learning training, reinforcement learning, and large-scale simulation workloads distributed across TU Clausthal and partner sites.',
-    points: ['Multi-GPU training jobs', 'Distributed experiment queues', 'Checkpoint storage'],
+      'Two high-performance worker nodes, each hosting up to 8 NVIDIA H200 NVL GPUs (minimum 8 H200 GPUs total) interconnected via NVLink for maximum data throughput.',
+    points: ['Up to 8 H200 NVL per node', 'Optimized for model fine-tuning up to 70B', 'Inference of Llama 3, Qwen 3, Gemma 3'],
+  },
+  {
+    icon: FaMicrochip,
+    title: 'Mid-Performance Nodes',
+    tag: '2 Nodes · RTX 6000 GPUs',
+    description:
+      'Two mid-performance worker nodes hosting up to 8 NVIDIA RTX PRO 6000 Blackwell Max-Q GPUs. Tailored for resource-efficient training and vision models.',
+    points: ['Blackwell Max-Q GPU architecture', 'Optimized for training models < 3B', 'Supports vision models (SAM, CLIP)'],
   },
   {
     icon: FaDatabase,
-    title: 'Dataset Storage',
-    tag: 'Research Data Management',
+    title: 'Storage & Master Node',
+    tag: 'Fileserver · ≥ 150 TB',
     description:
-      'Shared persistent storage keeps datasets, model checkpoints, evaluation artifacts, and paper supplementary material co-located with the experiments that produced them.',
-    points: ['Versioned dataset registry', 'Cross-site data access', 'Artifact archiving'],
+      'A master node and fileserver equipped with ≥ 150 TB of high-speed persistent storage to manage large datasets, model checkpoints, and evaluation runs.',
+    points: ['≥ 150 TB persistent storage capacity', 'Centralized checkpoint registry', 'Secure, high-availability backups'],
   },
   {
     icon: FaNetworkWired,
-    title: 'Multi-Site Network',
-    tag: 'Distributed Infrastructure',
+    title: 'InfiniBand Network Interconnect',
+    tag: 'Up to 200 Gbit/s',
     description:
-      'Secure inter-site connectivity enables researchers at TU Clausthal, University of Rostock, and Babeș-Bolyai University to share jobs, access shared storage, and coordinate experiments.',
-    points: ['TUC ↔ Rostock ↔ UBB links', 'Managed access controls', 'Remote job submission'],
-  },
-  {
-    icon: FaCogs,
-    title: 'Robotics Simulation',
-    tag: 'Sim-to-Real Pipeline',
-    description:
-      'Isaac Lab and ROS2-based simulation environments run repeatable robot trials before hardware deployment, supporting the DyNAMO project and future robotics initiatives.',
-    points: ['Isaac Lab USD environments', 'Navigation & manipulation scenes', 'Sim2Real validation loop'],
+      'High-speed InfiniBand network interface running up to 200 Gbit/s to minimize latency and maximize transfer rates during distributed training operations.',
+    points: ['200 Gbit/s maximum throughput', 'Low latency multi-GPU sync', 'Fast dataset streaming from fileserver'],
   },
 ]
 
 const infrastructure = [
   {
-    site: 'TU Clausthal',
-    location: 'Goslar, Germany',
-    role: 'Primary Compute Node',
-    specs: ['GPU cluster (multi-node)', 'ROS2 / Isaac Lab stack', 'Ridgeback & G1 robot hardware'],
+    site: 'batch (Default)',
+    location: 'Non-interactive partition',
+    role: 'All Cluster Nodes',
+    specs: ['Default queue for sbatch jobs', 'Supports long-running training tasks', 'Max duration up to 36 hours (llm-research)'],
     color: 'blue',
   },
   {
-    site: 'University of Rostock',
-    location: 'Rostock, Germany',
-    role: 'Research & Storage Node',
-    specs: ['Signal processing workloads', 'Shared storage endpoint', 'Communications engineering lab'],
+    site: 'interactive',
+    location: 'Interactive partition',
+    role: 'RTX 6000 Pro Nodes Only',
+    specs: ['Enables srun --pty bash or salloc sessions', 'Strict 6-hour time limit per session', 'Ideal for debugging and GPU checking'],
     color: 'emerald',
   },
   {
-    site: 'Babeș-Bolyai University',
-    location: 'Cluj-Napoca, Romania',
-    role: 'AI Research Node',
-    specs: ['Machine learning pipelines', 'Formal methods compute', 'Federated experiment access'],
+    site: 'Login / Frontend',
+    location: 'cloud-201.rz.tu-clausthal.de',
+    role: 'Gateway Node (Rechenzentrum)',
+    specs: ['Located at the Computing Center of TU Clausthal', 'For editing code, data upload, and scheduling', 'Strictly no compute workloads allowed'],
     color: 'violet',
   },
 ]
 
 const policies = [
   {
-    title: 'Access & Allocation',
+    title: 'Workshops & Open Lab',
     items: [
-      'Access is granted to active CORE Network researchers and affiliated students.',
-      'Compute allocations are managed through the CORE infrastructure coordination team.',
-      'Priority scheduling applies to publication-deadline-critical jobs.',
+      'Regular workshops presenting the infrastructure to science, start-ups, and industry.',
+      'Active initiation of collaborative research and engineering projects.',
+      'Workshops registration opens after cluster commissioning (by Sep 1, 2025).',
     ],
   },
   {
-    title: 'Data Governance',
+    title: 'Innovation Hub',
     items: [
-      'All research data is stored in compliance with GDPR and institutional data protection guidelines.',
-      'Shared datasets require a brief data management plan before upload.',
-      'Data retention follows a minimum 5-year policy for published research.',
+      'Connects regional universities and enterprises to strengthen technology transfer.',
+      'Directly supports the Lower Saxony RIS3 innovation strategy.',
+      'Enables resource-efficient design, circular production, and cognitive robotics.',
     ],
   },
   {
-    title: 'Software Environment',
+    title: 'User-Friendly Access',
     items: [
-      'Container-based environments (Docker / Singularity) are supported on all compute nodes.',
-      'Core software stack: ROS2, PyTorch, Isaac Lab, CUDA, Python 3.10+.',
-      'Environment snapshots are versioned alongside experiment checkpoints.',
+      'Training courses, direct hotline, and on-site support in German.',
+      'Full maintenance and replacement part service guaranteed for five years.',
+      'For collaboration inquiries, contact bartelt@isse.tu-clausthal.de.',
     ],
   },
 ]
@@ -158,37 +158,47 @@ const ComputeCluster = () => {
 
             {/* Eyebrow */}
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">
-              Shared Research Infrastructure
+              High-Performance Infrastructure
             </p>
 
             {/* Title */}
-            <h1 className="mb-6 text-4xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-5xl lg:text-6xl">
-              Compute Cluster
+            <h1 className="mb-4 text-4xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-5xl lg:text-6xl">
+              Kaiser I
             </h1>
+
+            {/* Funding Logo */}
+            <div className="mb-6 max-w-[280px] rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
+              <img
+                src={assetUrl('/images/eu_fuer_niedersachsen.png')}
+                alt="EU & Land Niedersachsen Funding"
+                className="w-full object-contain h-12"
+                loading="lazy"
+              />
+            </div>
 
             {/* Description */}
             <p className="mb-8 max-w-xl text-lg leading-8 text-gray-600 md:text-xl">
-              A shared, multi-site computational infrastructure supporting AI training,
-              robotics simulation, and research data management across the CORE Network.
+              Kaiser I is our scalable, high-performance GPU computing cluster designed to advance generative AI models, cognitive robotics, and circular systems engineering.
             </p>
 
             {/* CTA row */}
             <div className="flex flex-wrap items-center gap-4">
               <a
-                href="mailto:bartelt@isse.tu-clausthal.de"
-                className="inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700"
+                href="https://genai-cluster.github.io/documentation/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-200 hover:bg-primary-700 hover:scale-[1.02] active:scale-[0.98]"
               >
-                Request Access
+                Documentation Website
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </a>
               <a
                 href="#capabilities"
-                className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-bold text-gray-700 shadow-sm transition hover:border-primary-300 hover:text-primary-700"
+                className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-bold text-gray-700 shadow-sm transition-all duration-200 hover:border-primary-300 hover:text-primary-700 hover:scale-[1.02] active:scale-[0.98]"
               >
-                View Capabilities
+                View Nodes & Hardware
               </a>
             </div>
-
             {/* Stat pills */}
             <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {clusterStats.map((s) => {
@@ -212,36 +222,43 @@ const ComputeCluster = () => {
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
             <div>
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">About the Infrastructure</p>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Project Description</p>
               <h2 className="mb-5 text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
-                Built for distributed, reproducible research
+                The Kaiser I GPU Cluster
               </h2>
               <p className="mb-6 text-base leading-8 text-gray-600">
-                The CORE Compute Cluster is a shared research infrastructure spanning three partner institutions.
-                It provides centralised access to GPU resources, persistent dataset storage, and simulation
-                environments — allowing researchers across Germany and Romania to run experiments, share
-                artifacts, and iterate on results without institutional silos.
+                The Kaiser I cluster is established as the central digital platform at the Technical University of Clausthal to unlock the full potential of Generative Artificial Intelligence (GenAI) for systems engineering. The goal is to both advance fundamental AI methods and drive concrete engineering applications—ranging from resource-efficient design and circular production to cognitive robotics and sustainable mobility.
               </p>
               <p className="text-base leading-8 text-gray-600">
-                The cluster directly supports publication workflows: model checkpoints, evaluation data,
-                and supplementary materials are versioned and archived alongside the papers they underpin.
+                Led by Prof. Dr. Christian Bartelt at the Institute for Software and Systems Engineering (ISSE), Kaiser I provides a scalable, high-performance environment that strengthens research, teaching, and technology transfer while fostering regional and international innovation partnerships.
               </p>
             </div>
 
-            <div className="space-y-4">
-              {[
-                { icon: FaCheckCircle, text: 'GPU-accelerated training and evaluation workloads' },
-                { icon: FaCheckCircle, text: 'ROS2 + Isaac Lab robotics simulation pipeline' },
-                { icon: FaCheckCircle, text: 'Shared persistent storage across all CORE sites' },
-                { icon: FaCheckCircle, text: 'GDPR-compliant data governance and retention' },
-                { icon: FaCheckCircle, text: 'Containerised software environments (Docker / Singularity)' },
-                { icon: FaCheckCircle, text: 'Remote job submission via shared SLURM queue' },
-              ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex items-start gap-3">
-                  <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary-600" aria-hidden="true" />
-                  <p className="text-sm leading-6 text-gray-700">{text}</p>
+            <div className="flex flex-col gap-6">
+              <div className="overflow-hidden rounded-2xl border border-gray-200 bg-gray-50 shadow-sm">
+                <img
+                  src={assetUrl('/images/genai-lab-opening.jpg')}
+                  alt="Inauguration of Kaiser I"
+                  className="w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="p-4 text-xs font-semibold text-gray-500 leading-normal text-center bg-white border-t border-gray-100">
+                  Prof. Dr. Christian Bartelt and researchers powering up the new Kaiser I GPU Cluster at TU Clausthal.
                 </div>
-              ))}
+              </div>
+              <div className="space-y-4">
+                {[
+                  { icon: FaCheckCircle, text: 'Kaiser I funded by the European Union & Land Niedersachsen (EFRE/ESF/ELER)' },
+                  { icon: FaCheckCircle, text: 'Located at Rechenzentrum der TU Clausthal, Erzstraße 18' },
+                  { icon: FaCheckCircle, text: 'Led by Prof. Dr. Christian Bartelt (ISSE)' },
+                  { icon: FaCheckCircle, text: 'Open workshops and innovation hub access for industry partners' },
+                ].map(({ icon: Icon, text }) => (
+                  <div key={text} className="flex items-start gap-3">
+                    <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary-600" aria-hidden="true" />
+                    <p className="text-sm leading-6 text-gray-700">{text}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -251,12 +268,12 @@ const ComputeCluster = () => {
       <section id="capabilities" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Capabilities</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Hardware & Nodes</p>
             <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
-              Core infrastructure services
+              Cluster nodes and hardware layout
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              Each capability is available to all CORE Network researchers through unified access credentials.
+              The cluster is structured into login and worker nodes containing specific GPU architectures.
             </p>
           </div>
 
@@ -297,13 +314,12 @@ const ComputeCluster = () => {
       <section id="sites" className="border-t border-gray-100 bg-white py-16 md:py-24">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Network Sites</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Cluster Queues</p>
             <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
-              Three institutions. One shared platform.
+              Partition layouts and nodes
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              Each site contributes compute, storage, or specialised hardware to the network.
-              Researchers at any site can access the full shared environment.
+              Slurm uses partitions to manage resource allocations and group nodes.
             </p>
           </div>
 
@@ -317,7 +333,7 @@ const ComputeCluster = () => {
                 >
                   <div className="mb-4 flex items-center gap-3">
                     <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${colors.icon} text-white`}>
-                      <FaUniversity className="h-4 w-4" aria-hidden="true" />
+                      <FaNetworkWired className="h-4 w-4" aria-hidden="true" />
                     </div>
                     <span className={`rounded-full border px-3 py-1 text-xs font-bold ${colors.badge}`}>
                       {site.role}
@@ -342,9 +358,9 @@ const ComputeCluster = () => {
           <div className="mt-8 overflow-hidden rounded-2xl bg-gray-950 text-white shadow-xl">
             <div className="grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
               {[
-                { step: '01', title: 'Submit', desc: 'Researchers submit jobs via the shared SLURM scheduler from any network site.' },
-                { step: '02', title: 'Execute', desc: 'Jobs are routed to available GPU nodes based on resource requirements and priority.' },
-                { step: '03', title: 'Archive', desc: 'Results, checkpoints, and artifacts are automatically stored in the shared registry.' },
+                { step: '01', title: 'Submit', desc: 'Submit jobs via the Slurm scheduler using sbatch (batch) or srun (interactive).' },
+                { step: '02', title: 'Monitor', desc: 'Monitor active jobs and resource allocations with squeue and sinfo.' },
+                { step: '03', title: 'Execute', desc: 'Jobs run in isolated environments with resources allocated automatically.' },
               ].map(({ step, title, desc }) => (
                 <div key={step} className="flex items-start gap-4 p-7">
                   <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary-600 text-sm font-black">
@@ -367,10 +383,10 @@ const ComputeCluster = () => {
           <div className="mb-12 max-w-2xl">
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Policies</p>
             <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
-              Access, data, and usage policies
+              Access, queue, and usage policies
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              Use of the CORE Compute Cluster is governed by shared policies agreed across all partner institutions.
+              Use of the Kaiser I GPU Cluster is governed by account groups and limits designed to share compute resources fairly.
             </p>
           </div>
 
@@ -391,6 +407,22 @@ const ComputeCluster = () => {
                 </ul>
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 rounded-2xl border border-gray-250 bg-gradient-to-br from-white to-gray-50/70 p-8 shadow-md text-center">
+            <h3 className="text-xl font-bold text-gray-950 mb-2">Need detailed usage instructions?</h3>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              Learn how to connect via SSH, run interactive pseudo-terminals, submit batch jobs, and manage your conda/singularity environments in our comprehensive cluster documentation.
+            </p>
+            <a
+              href="https://genai-cluster.github.io/documentation/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-200 hover:bg-primary-700 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Access Cluster Documentation
+              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+            </a>
           </div>
         </div>
       </section>
