@@ -26,7 +26,7 @@ const projects = [
         title: 'Show2Instruct',
         domain: 'Bau & BIM',
         topic: 'Multimodaler BIM-Copilot für maschinenlesbare Anweisungen',
-        partners: ['neoBIM', 'Ramblr GmbH', 'University of Rostock'],
+        partners: ['neoBIM', 'Ramblr GmbH', 'TU Clausthal', 'University of Rostock'],
         duration: '3 Jahre',
         fundingProgram: 'BMFTR',
         budget: '2,6 Mio. EUR',
@@ -113,6 +113,88 @@ const projects = [
     },
 ];
 
+const PARTNER_LOGOS = {
+    'neoBIM': {
+        src: assetUrl('/logos/partners/neobim.svg'),
+        alt: 'neoBIM logo',
+        href: 'https://neobim.ai/',
+    },
+    'Cogintal Ltd.': {
+        src: assetUrl('/logos/partners/cogintal.svg'),
+        alt: 'Cogintal Ltd. logo',
+    },
+    'Ramblr GmbH': {
+        src: assetUrl('/logos/partners/ramblr.svg'),
+        alt: 'Ramblr logo',
+        href: 'https://ramblr.ai/',
+    },
+    'TU Clausthal': {
+        src: assetUrl('/logos/tu-clausthal.webp'),
+        alt: 'TU Clausthal logo',
+        href: 'https://www.tu-clausthal.de/en/',
+    },
+    'University of Rostock': {
+        src: assetUrl('/logos/rostock-logo.webp'),
+        alt: 'University of Rostock logo',
+        href: 'https://www.uni-rostock.de/en/',
+    },
+    'ILS Mannheim gGmbH': {
+        src: assetUrl('/logos/partners/ils-mannheim.jpg'),
+        alt: 'ILS Mannheim logo',
+        href: 'https://www.ils-mannheim.de/',
+    },
+    'SEW-Eurodrive': {
+        src: assetUrl('/logos/partners/sew-eurodrive.png'),
+        alt: 'SEW-Eurodrive logo',
+        href: 'https://www.sew-eurodrive.de/',
+    },
+    'Things Alive Robotics': {
+        src: assetUrl('/logos/partners/things-alive-robotics.svg'),
+        alt: 'Things Alive Robotics logo',
+        href: 'https://thingsalive.de/',
+    },
+    insensiv: {
+        src: assetUrl('/logos/partners/insensiv.png'),
+        alt: 'insensiv logo',
+        href: 'https://insensiv.de/',
+    },
+    FZI: {
+        src: assetUrl('/logos/partners/fzi.png'),
+        alt: 'FZI logo',
+        href: 'https://www.fzi.de/',
+    },
+    'Fraunhofer IML': {
+        src: assetUrl('/logos/partners/fraunhofer-iml.png'),
+        alt: 'Fraunhofer IML logo',
+        href: 'https://www.iml.fraunhofer.de/',
+    },
+    'CU Mehrweg GmbH': {
+        src: assetUrl('/logos/partners/cu-mehrweg.avif'),
+        alt: 'CU Mehrweg logo',
+        href: 'https://www.cu-mehrweg.com/',
+    },
+    'Scannery GmbH': {
+        src: assetUrl('/logos/partners/scannery.svg'),
+        alt: 'Scannery logo',
+        href: 'https://scannery.de/',
+    },
+    'University of Mannheim': {
+        src: assetUrl('/logos/uma.webp'),
+        alt: 'University of Mannheim logo',
+        href: 'https://www.uni-mannheim.de/',
+    },
+    M2M: {
+        src: assetUrl('/logos/partners/m2m-germany.svg'),
+        alt: 'M2M Germany logo',
+        href: 'https://www.m2mgermany.de/',
+    },
+    Osapiens: {
+        src: assetUrl('/logos/partners/osapiens.svg'),
+        alt: 'osapiens logo',
+        href: 'https://osapiens.com/',
+    },
+};
+
 const domainClass = (domain) => {
     switch (domain) {
         case 'Bau & BIM':
@@ -168,6 +250,74 @@ const ProjectVisual = ({ project }) => {
     );
 };
 
+const PartnerLogo = ({ partner, compact = false }) => {
+    const logo = PARTNER_LOGOS[partner];
+
+    if (!logo) {
+        return (
+            <span
+                className={`text-xs font-semibold text-gray-700 ${
+                    compact ? 'block max-w-full truncate text-center' : ''
+                }`}
+            >
+                {partner}
+            </span>
+        );
+    }
+
+    const logoImage = (
+        <img
+            src={logo.src}
+            alt={logo.alt}
+            loading="lazy"
+            decoding="async"
+            className={`h-auto w-auto object-contain ${
+                compact ? 'max-h-7 max-w-[4.75rem] sm:max-w-[5.25rem]' : 'max-h-8 max-w-[7rem]'
+            }`}
+        />
+    );
+
+    const className = compact
+        ? 'inline-flex h-9 w-[4.75rem] shrink-0 items-center justify-center transition hover:opacity-80 sm:w-[5.25rem]'
+        : 'inline-flex items-center justify-center transition hover:opacity-80';
+
+    if (!logo.href) {
+        return (
+            <span className={className} title={partner}>
+                {logoImage}
+            </span>
+        );
+    }
+
+    return (
+        <a
+            href={logo.href}
+            target="_blank"
+            rel="noreferrer"
+            className={className}
+            title={partner}
+            aria-label={`${partner} website`}
+        >
+            {logoImage}
+        </a>
+    );
+};
+
+const PartnerLogoStrip = ({ partners }) => {
+    const isCompact = partners.length >= 3;
+    const className = isCompact
+        ? 'mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-3'
+        : 'mt-5 flex flex-wrap items-center justify-center gap-3';
+
+    return (
+        <div className={className} aria-label="Project partners">
+            {partners.map((partner) => (
+                <PartnerLogo key={partner} partner={partner} compact={isCompact} />
+            ))}
+        </div>
+    );
+};
+
 const IndustryProjects = () => {
     return (
         <>
@@ -213,7 +363,9 @@ const IndustryProjects = () => {
                                         <p>{project.contribution}</p>
                                     </div>
 
-                                    <dl className="mt-5 grid grid-cols-3 gap-3 border-t border-gray-200 pt-5 text-xs">
+                                    <PartnerLogoStrip partners={project.partners} />
+
+                                    <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-gray-200 pt-5 text-xs">
                                         <div>
                                             <dt className="font-semibold uppercase tracking-wide text-gray-400">Förderung</dt>
                                             <dd className="mt-1 font-semibold text-gray-800">{project.fundingProgram}</dd>
