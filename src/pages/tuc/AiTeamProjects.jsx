@@ -134,9 +134,20 @@ const AiTeamProjects = () => {
                     <div className="hidden justify-center md:flex">
                         <div className="relative flex h-80 w-80 items-center justify-center rounded-full border border-dashed border-primary-100">
                             <div className="absolute inset-10 rounded-full border border-slate-100" />
-                            <div className="absolute h-28 w-28 rotate-6 rounded-3xl bg-white shadow-2xl shadow-primary-100" />
-                            <div className="relative h-24 w-24 rotate-6 rounded-2xl bg-primary-600 shadow-2xl shadow-primary-200" />
-                            <div className="absolute right-20 top-40 h-4 w-4 rounded-full bg-sky-400" />
+                            <motion.img
+                                src={assetUrl('/logos/core/avocando-icon.svg')}
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                                decoding="async"
+                                className="h-64 w-64 drop-shadow-xl select-none"
+                                animate={{
+                                    x: [0, 80, 60, -70, -50, 0],
+                                    y: [0, -60, 70, 50, -40, 0],
+                                    rotate: [0, 18, -12, 22, -8, 0],
+                                }}
+                                transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+                            />
                         </div>
                     </div>
                 </div>

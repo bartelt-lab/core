@@ -3,24 +3,34 @@ import { SiGooglescholar } from 'react-icons/si'
 import assetUrl from '../../utils/assetUrl'
 
 const TeamMemberCard = ({ member }) => {
+  const hasPhoto = member.photo && member.photo !== '/placeholder-avatar.svg'
   return (
     <div className="text-center">
       {/* Profile Photo */}
       <div className="mb-4">
         <div className="w-32 h-32 mx-auto rounded-full overflow-hidden bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-          <img
-            src={assetUrl(member.photo)}
-            alt={member.name}
-            loading="lazy"
-            decoding="async"
-            width="128"
-            height="128"
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.style.display = 'none'
-              e.target.parentElement.innerHTML = `<span class="text-white text-4xl font-bold">${member.name.split(' ').map(n => n[0]).join('')}</span>`
-            }}
-          />
+          {hasPhoto ? (
+            <img
+              src={assetUrl(member.photo)}
+              alt={member.name}
+              loading="lazy"
+              decoding="async"
+              width="128"
+              height="128"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.style.display = 'none'
+                e.target.parentElement.innerHTML = `<span class="text-white text-4xl font-bold">${member.name.split(' ').map(n => n[0]).join('')}</span>`
+              }}
+            />
+          ) : (
+            // Themed placeholder: white silhouette over the primary gradient,
+            // which follows the active [data-theme] palette.
+            <svg viewBox="0 0 400 400" className="h-3/4 w-3/4 text-white" fill="currentColor" aria-hidden="true">
+              <circle cx="200" cy="150" r="70" />
+              <path d="M 80 380 Q 200 270 320 380 Z" />
+            </svg>
+          )}
         </div>
       </div>
 
