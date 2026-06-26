@@ -45,7 +45,7 @@ const Home = () => {
                                 <img src={assetUrl('/logos/digit.webp')} alt="DIGIT" loading="lazy" decoding="async" className="h-14 object-contain" />
                             </a>
                             <Link to="/">
-                                <img src={assetUrl('/logos/core/core-network.webp')} alt="CORE Network" loading="lazy" decoding="async" className="h-14 object-contain" />
+                                <img src={assetUrl('/logos/core/light-background/core.svg')} alt="CORE Network" loading="lazy" decoding="async" className="h-14 object-contain" />
                             </Link>
                         </div>
                     </div>
