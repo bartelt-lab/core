@@ -30,9 +30,8 @@ const ROUTE_SECTIONS = {
     '/ai-team-projects': [
         { id: 'hero', label: 'Overview' },
         { id: 'active-projects', label: 'Projects' },
-        { id: 'programme', label: 'Programme' },
-        { id: 'showcase', label: 'Showcase' },
         { id: 'testimonials', label: 'Voices' },
+        { id: 'archive', label: 'Archive' },
     ],
     '/compute-cluster': [
         { id: 'hero', label: 'Overview' },
