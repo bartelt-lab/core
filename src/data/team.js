@@ -373,8 +373,8 @@ export const teamMembers = [
   },
   // Support staff
   {
-    id: 19,
-    name: 'Mareike Kroeller',
+    id: 20,
+    name: 'Mareike Kröller',
     slug: 'kroeller',
     title: 'Administrative Assistant',
     roleCategory: 'support_staff',
@@ -398,20 +398,6 @@ export const teamMembers = [
     photo: '/members/steffen-ottow.webp',
     bio: 'IT specialist supporting the research group at TU Clausthal.',
     email: '',
-    links: {}
-  },
-  {
-    id: 19,
-    name: 'Mareike Kröller',
-    slug: 'kroeller',
-    title: 'Administrative Assistant',
-    roleCategory: 'support_staff',
-    affiliations: [
-      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
-    ],
-    photo: '/placeholder-avatar.svg',
-    bio: 'Administrative assistant at TU Clausthal.',
-    email: 'mareike.kroeller@tu-clausthal.de',
     links: {}
   },
 ]
