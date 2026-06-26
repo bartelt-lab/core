@@ -8,23 +8,25 @@ const ROUTE_SECTIONS = {
     '/': [
         { id: 'hero', label: 'Home' },
         { id: 'about', label: 'About' },
-        { id: 'partners', label: 'Partners' },
         { id: 'platform', label: 'Platform' },
         { id: 'team', label: 'Team' },
+        { id: 'contact', label: 'Contact' },
     ],
     '/core-labs': [
         { id: 'hero', label: 'Overview' },
         { id: 'initiative', label: 'Initiative' },
         { id: 'team', label: 'Team' },
-        { id: 'publications', label: 'Papers' },
         { id: 'dynamo', label: 'Dynamo' },
         { id: 'autonomous', label: 'Self-Driving' },
+        { id: 'publications', label: 'Papers' },
     ],
     '/dynamo': [],
     '/network': [
         { id: 'hero', label: 'Network' },
+        { id: 'about', label: 'About' },
+        { id: 'platform', label: 'Platform' },
         { id: 'team', label: 'Team' },
-        { id: 'publications', label: 'Publications' },
+        { id: 'contact', label: 'Contact' },
     ],
     '/publications': [],
     '/ai-team-projects': [
@@ -164,7 +166,7 @@ const RightSidebar = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="hidden md:flex fixed top-0 right-5 h-full w-10 z-40 flex-col items-center justify-center pointer-events-none"
+                    className="hidden md:flex fixed top-0 right-5 h-full w-10 z-40 flex-col items-center justify-center pointer-events-none select-none cursor-default"
                 >
                     <div className="flex flex-col items-center space-y-6 pointer-events-auto rounded-full bg-white/35 px-2 py-5 backdrop-blur-sm">
                         <div className={`w-px h-12 ${lineColor} transition-colors duration-300`}></div>
