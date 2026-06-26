@@ -6,7 +6,7 @@ import PublicationItem from './PublicationItem'
 import assetUrl from '../../utils/assetUrl'
 
 const PublicationCard = ({ publication, featured = false, compact = false }) => {
-  const image = publication.image || '/logos/core/core-no-text.webp'
+  const image = publication.image || '/logos/core/light-background/core.svg'
   const hasUrl = publication.url && publication.url !== '#'
 
   return (

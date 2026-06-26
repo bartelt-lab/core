@@ -400,6 +400,20 @@ export const teamMembers = [
     email: '',
     links: {}
   },
+  {
+    id: 19,
+    name: 'Mareike Kröller',
+    slug: 'kroeller',
+    title: 'Administrative Assistant',
+    roleCategory: 'support_staff',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/placeholder-avatar.svg',
+    bio: 'Administrative assistant at TU Clausthal.',
+    email: 'mareike.kroeller@tu-clausthal.de',
+    links: {}
+  },
 ]
 
 // Helper functions
