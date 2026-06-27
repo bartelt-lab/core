@@ -5,19 +5,24 @@ const STORAGE_KEY = 'core-theme'
 const THEMES = [
   { value: 'avocado', label: 'Avocado theme', swatch: '#009020' },
   { value: 'blue', label: 'Blue theme', swatch: '#2563eb' },
+  { value: 'forest', label: 'Forest theme', swatch: '#538d58' },
 ]
 
+const DEFAULT_THEME = 'avocado'
+const VALID_THEMES = new Set(THEMES.map((t) => t.value))
+
 const getInitialTheme = () => {
-  if (typeof localStorage === 'undefined') return 'avocado'
-  return localStorage.getItem(STORAGE_KEY) === 'blue' ? 'blue' : 'avocado'
+  if (typeof localStorage === 'undefined') return DEFAULT_THEME
+  const stored = localStorage.getItem(STORAGE_KEY)
+  return VALID_THEMES.has(stored) ? stored : DEFAULT_THEME
 }
 
 const applyTheme = (theme) => {
   const root = document.documentElement
-  if (theme === 'blue') {
-    root.setAttribute('data-theme', 'blue')
-  } else {
+  if (theme === DEFAULT_THEME) {
     root.removeAttribute('data-theme')
+  } else {
+    root.setAttribute('data-theme', theme)
   }
 }
 

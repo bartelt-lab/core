@@ -1,21 +1,27 @@
 # Agent context — core repo
 
-## Project state (as of branch `merge/core-network`)
+## Project state
 
-This repo (`github.com/bartelt-lab/core`) is the merged home of two sites:
+Merged to `main`; the old `merge/*` branches are gone. Deploys to GitHub Pages
+on push to `main` (`.github/workflows/deploy.yml`). This repo
+(`github.com/bartelt-lab/core`) is the merged home of two sites:
 
-- **CORE Network / CORE Labs** — original content of this repo. React 19 + Vite 7
-  + Tailwind v3, HashRouter. Routes: `/` (CORE Network landing, served by
-  `pages/Home.jsx`), `/network` (alias of `/`), `/core-labs` (CORE Labs page,
-  `pages/CoreLabs.jsx`), `/demos`, `/dynamo`, `/publications`, `/compute-cluster`.
+- **CORE Network / CORE Labs** — React 19 + Vite 7 + Tailwind v3, HashRouter.
+  Routes (all in `CoreShell`): `/` (CORE Network landing, `pages/Home.jsx`),
+  `/network` (renders the same `Home.jsx`), `/core-labs` (`pages/CoreLabs.jsx`),
+  `/demos`, `/dynamo`, `/publications`, `/compute-cluster`, `/ai-team-projects`
+  (`pages/tuc/AiTeamProjects.jsx`) plus 7 project subpages under
+  `/ai-team-projects/{dynamo,ai4ai,vergabepilot,neurocore,stratego,
+  traffic-network,self-driving}` (`pages/tuc/projects/*Project.jsx`).
   CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
-  merged in under the hash prefix `/#/tuc/*`. Routes: `/tuc`,
-  `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses`,
-  `/tuc/join-us`, `/tuc/projects`, `/tuc/core-team-projects`, plus 7 project
-  subpages under `/tuc/core-team-projects/{dynamo,ai4ai,vergabepilot,
-  neurocore,stratego,traffic-network,self-driving}`. TUC navbar links out to
-  the CORE Network site for `/network` and `/publications` (no `/tuc/publications`).
+  merged in under the hash prefix `/#/tuc/*` (`TucShell`). Routes: `/tuc`,
+  `/tuc/industry-projects`, `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses`,
+  `/tuc/join-us`, `/tuc/projects`. TUC navbar links out to the CORE Network
+  site for `/network` and `/publications` (no `/tuc/publications`).
+
+Note: the AI Team Projects pages live in `pages/tuc/` but route under
+`/ai-team-projects/*` in `CoreShell` (not `/tuc/*`).
 
 App is split via `<Routes>` in `src/App.jsx` between `CoreShell` (core's
 pill Navbar + Footer) and `TucShell` (bartelt-style Layout). Each subtree
@@ -29,9 +35,11 @@ src/
   main.jsx
   index.css                        tailwind v3 entry, no @import anymore
   data/
-    team.js                        18 members + 4 institutions + helpers
+    team.js                        20 members + 4 institutions + helpers
                                    (getCoreLabsLeads, getMembersByInstitution,
                                     getMemberBySlug, getMembersGroupedByRole)
+                                   NOTE: member `id` must be unique — a merge
+                                   once produced duplicate ids; grep before reuse.
     projects.js                    CORE Labs projects metadata
     demonstrations.js              demo cards
   utils/
@@ -60,8 +68,16 @@ public/
   data/
     publications.json              canonical, 21 entries
     publications.bib               BibTeX export (download artifact)
-  members/                         18 photos, full-name scheme
-  logos/                           15 logos, flat, kebab-case names
+  members/                         member photos, full-name scheme
+                                   (photoless members → themed placeholder, see
+                                    TeamMemberCard)
+  logos/                           partner logos (flat, kebab-case) +
+                                   logos/core/ CORE brand SVGs in 4 bg variants
+                                   (white/light/dark/black-background) +
+                                   logos/core/legacy/ old raster logos +
+                                   logos/core/avocando-icon.svg (mascot)
+  favicon.{ico,svg,png} +          generated from avocando-icon.svg
+    apple-touch-icon.png
   papers/                          16 publication preview images
   documents/project-descriptions/  3 PDFs
   images/projects/{ai4ai,dynamo,neurocore,stratego,vergabepilot}/
@@ -69,7 +85,6 @@ public/
   videos/hero.mp4 hero-poster.webp core hero (poster auto-WebP'd)
   videos/demonstrations/{autonomous_driving,robotics,neurocore,stratego}/
   videos/testimonials/             student testimonial mp4s
-  icons/avocado.png                bartelt favicon source (unused)
   tuc/iclr-2025/                   static subsite kept as-is (see issue 9)
 ```
 
@@ -111,7 +126,7 @@ Currently the value is written but not yet rendered as a link (issue 2).
 - All `/tuc/*` pages restyled to minimal neutral Tailwind (grays, no brand
   palette). Bootstrap grid classes (`col-xs-*`, `col-md-*`, `row`,
   `container`) eliminated.
-- Single team source of truth: `src/data/team.js` with 18 members carrying
+- Single team source of truth: `src/data/team.js` with 20 members carrying
   `slug` fields. Tuc Home pulls members via `getMemberBySlug` over a fixed
   slug order.
 
@@ -134,11 +149,10 @@ existing Pages deploy.
 Numbered for stable reference. Add new items at the end. Resolved
 issues are deleted (see git history for what was fixed and how).
 
-### 1. Favicon
-`public/favicon.ico` is the default Vite icon. `public/icons/avocado.png`
-is the bartelt favicon source (carried over). Pick one — likely generate
-a proper multi-resolution favicon set from one of the CORE logos (or
-avocado for tuc nostalgia). Not urgent.
+### 1. Favicon — RESOLVED
+Multi-resolution favicon set (`favicon.ico/.svg`, `favicon-16/32.png`,
+`apple-touch-icon.png`) generated from `logos/core/avocando-icon.svg` and wired
+into `index.html`. The old `public/icons/avocado.png` has been removed.
 
 ### 2. Member detail pages — `memberSlug` lookup target
 `publications.json` carries `authors[].memberSlug` and `team.js` carries
@@ -175,27 +189,45 @@ real browser since the restyle. Verify in dev (`npm run dev`):
   still applies — those inline `<style>` blocks survived)
 - `/#/tuc/join-us` (disclosure pattern expands/collapses)
 - `/#/tuc/projects` (YouTube embed click-to-play)
-- `/#/tuc/core-team-projects` (project tiles)
-- `/#/tuc/core-team-projects/dynamo` (RightSidebar shows Overview/
+- `/#/ai-team-projects` (project tiles; sidebar Overview/Projects/Voices/Archive)
+- `/#/ai-team-projects/dynamo` (RightSidebar shows Overview/
   Features/Evaluation/Science/Architecture, scroll-spy follows)
 - Network panel: zero 404s on `/members/*`, `/papers/*`, `/logos/*`,
   `/videos/*`, `/data/*`
 - DevTools console: no React 19 deprecation warnings, no router v7
   future-flag warnings, no missing-key warnings
 
-### 6. RightSidebar `ROUTE_SECTIONS` entries vs actual DOM
-`src/components/common/RightSidebar.jsx` ROUTE_SECTIONS map declares
-section IDs per route. Verify each route actually renders `<div id="...">`
-for the listed ids:
-- `/`: `hero, initiative, team, dynamo, autonomous, publications`
-- `/dynamo`: `hero, goal, overview, technical, experiments`
-- `/network`: `hero, team, publications`
-- `/tuc/core-team-projects`: `hero, active-projects, archive`
-- `/tuc/core-team-projects/dynamo`: `hero, features, evaluation, science,
-  architecture`
-- `/tuc/core-team-projects/ai4ai`, `/vergabepilot`: same shape
-Missing sections gracefully fall through (sidebar still renders, just
-that dot won't activate). Worth a one-time audit.
+### 6. RightSidebar `ROUTE_SECTIONS` — keep in sync (audited 2026-06)
+**Recurring gotcha — read before touching sections or the sidebar.**
+`src/components/common/RightSidebar.jsx` `ROUTE_SECTIONS` maps each route to
+the dots shown in the right scroll-spy nav. Every `{ id }` MUST match an
+element actually rendered for that route, or the dot is dead (won't scroll /
+won't highlight). Two traps:
+
+1. **Ids can come from child components, not just the page file.** Grep the
+   rendered children too:
+   - `/core-labs` gets `#dynamo` and `#autonomous` from
+     `components/demonstrations/DemonstrationsSection.jsx`, not `CoreLabs.jsx`.
+   - project pages get `#hero #features #evaluation #extra` from
+     `components/tuc/ProjectLayout.jsx`; the page's own sections (e.g. Dynamo's
+     `#science #architecture`) render inside `#extra` as children.
+   - `ProjectLayout` only renders `#evaluation` when `showEvalSection !== false`
+     (neurocore/stratego/traffic-network/self-driving pass `false`).
+   - `/` and `/network` render the same `Home.jsx`; it has NO `#partners` or
+     `#publications` (it uses `PublicationMiniCarousel`, which has no id).
+2. **Dot order should follow DOM order**, or scroll-spy highlights the wrong
+   dot. On `/core-labs` the demos render before `#publications`.
+
+Current verified configs: `/` and `/network` →
+`hero, about, platform, team, contact`; `/core-labs` →
+`hero, initiative, team, dynamo, autonomous, publications`; `/ai-team-projects`
+→ `hero, active-projects, testimonials, archive`; `/compute-cluster` →
+`hero, purpose, capabilities, sites, policies`. Routes with `[]` (`/dynamo`,
+`/publications`) and unconfigured routes show no sidebar by design.
+
+Gap (not broken, just no nav): the 4 `showEvalSection={false}` project pages,
+`/demos`, and all `/tuc/*` pages have no `ROUTE_SECTIONS` entry. Add configs if
+they should get a side nav.
 
 ### 7. Publications page filtering / grouping
 `pages/Publications.jsx` (core, `/publications`) renders all 21 entries
@@ -208,8 +240,8 @@ removed — TUC now links to the core publications page.)
 381 lines. Restyle pass left it alone because it was Tailwind already.
 Worth a once-over for: residual bartelt-only inline styles, motion
 animations that might fight with the new minimal Layout, refs to removed
-classes. Scroll-spy ids: `hero`, `active-projects`, `archive` — verify
-these still match section ids in the file.
+classes. Scroll-spy ids (now in sync, see issue 6): `hero`,
+`active-projects`, `testimonials`, `archive`.
 
 ### 9. Helper consolidation for Tuc social icons
 `pages/tuc/Home.jsx` has a `SOCIAL_ICON` map and `socialEntries(member)`
@@ -234,8 +266,8 @@ Publications page that links to `/data/publications.bib`. Trivial.
 
 ## How to work in this repo
 
-1. Work on `merge/tuc` branch. Don't merge to `main` until smoke pass
-   (issue 5) is clean.
+1. `main` is the live branch — pushing to it deploys to GitHub Pages. Do
+   feature work on a branch and merge when ready. Ask before pushing.
 2. After any change touching pages/routes/styles, run `npm run build` —
    it's fast (~2s) and catches missing imports / dead refs.
 3. When editing team membership, only touch `src/data/team.js`. Both core

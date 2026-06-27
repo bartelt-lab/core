@@ -373,8 +373,8 @@ export const teamMembers = [
   },
   // Support staff
   {
-    id: 19,
-    name: 'Mareike Kroeller',
+    id: 20,
+    name: 'Mareike Kröller',
     slug: 'kroeller',
     title: 'Administrative Assistant',
     roleCategory: 'support_staff',
