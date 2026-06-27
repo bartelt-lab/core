@@ -6,14 +6,18 @@ import Footer from './components/common/Footer'
 import ScrollToTop from './components/common/ScrollToTop'
 import ThemeToggle from './components/common/ThemeToggle'
 import TucLayout from './components/tuc/Layout'
+import UbbLayout from './components/ubb/Layout'
 
 // CORE pages
 const Home = lazy(() => import('./pages/Home'))
 const CoreLabs = lazy(() => import('./pages/CoreLabs'))
 const Demos = lazy(() => import('./pages/Demos'))
 const Dynamo = lazy(() => import('./pages/Dynamo'))
+const LeaderFollowing = lazy(() => import('./pages/LeaderFollowing'))
+const VialSort = lazy(() => import('./pages/VialSort'))
 const ComputeCluster = lazy(() => import('./pages/ComputeCluster'))
 const Publications = lazy(() => import('./pages/Publications'))
+const UbbHome = lazy(() => import('./pages/ubb/Home'))
 
 // /tuc/* pages
 const TucHome = lazy(() => import('./pages/tuc/Home'))
@@ -50,6 +54,8 @@ function CoreShell() {
             <Route path="/network" element={<Home />} />
             <Route path="/publications" element={<Publications />} />
             <Route path="/dynamo" element={<Dynamo />} />
+            <Route path="/leader-following" element={<LeaderFollowing />} />
+            <Route path="/vial-sort" element={<VialSort />} />
             <Route path="/ai-team-projects" element={<TucAiTeamProjects />} />
             <Route path="/ai-team-projects/dynamo" element={<TucDynamoProject />} />
             <Route path="/ai-team-projects/ai4ai" element={<TucAI4AIProject />} />
@@ -85,6 +91,18 @@ function TucShell() {
   )
 }
 
+function UbbShell() {
+  return (
+    <UbbLayout>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route path="/" element={<UbbHome />} />
+        </Routes>
+      </Suspense>
+    </UbbLayout>
+  )
+}
+
 function App() {
   return (
     <HashRouter>
@@ -92,6 +110,7 @@ function App() {
       <ThemeToggle />
       <Routes>
         <Route path="/tuc/*" element={<TucShell />} />
+        <Route path="/ubb/*" element={<UbbShell />} />
         <Route path="/*" element={<CoreShell />} />
       </Routes>
     </HashRouter>

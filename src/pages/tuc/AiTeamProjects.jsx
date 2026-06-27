@@ -99,46 +99,79 @@ const AiTeamProjects = () => {
 
     return (
         <div className="min-h-screen bg-white text-slate-950">
-            <section id="hero" className="relative overflow-hidden bg-gradient-to-br from-white via-primary-50/55 to-slate-100 pt-28 pb-16">
-                <div className="absolute left-1/2 top-8 h-80 w-80 -translate-x-1/2 rounded-full bg-primary-200/25 blur-3xl" aria-hidden="true" />
-                <div className="container relative mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-[0.95fr_1.05fr] md:px-10">
-                    <div className="text-center md:text-left">
-                        <span className="mb-6 inline-flex rounded-full border border-primary-100 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-widest text-primary-700 shadow-sm backdrop-blur">
+            <section id="hero" className="relative isolate min-h-[760px] overflow-hidden border-b border-slate-200 bg-white pb-20 pt-32 sm:pb-24 sm:pt-36">
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_20%,rgba(219,234,254,0.85),transparent_30%),radial-gradient(circle_at_84%_74%,rgba(220,252,231,0.72),transparent_32%),linear-gradient(135deg,#ffffff_0%,#f8fbff_48%,#f4fbf8_100%)]" aria-hidden="true" />
+                <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(148,163,184,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.07)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]" aria-hidden="true" />
+                <div className="absolute -right-24 top-28 -z-10 h-[34rem] w-[34rem] rounded-full bg-blue-100/60 blur-3xl" aria-hidden="true" />
+                <div className="container relative mx-auto grid min-h-[560px] max-w-7xl items-center gap-14 px-6 md:px-10 lg:grid-cols-[0.95fr_1.05fr]">
+                    <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.55, ease: 'easeOut' }}
+                        className="text-center lg:text-left"
+                    >
+                        <span className="mb-7 inline-flex rounded-full border border-blue-200 bg-white/80 px-5 py-2 text-xs font-bold uppercase tracking-[0.22em] text-blue-700 shadow-sm shadow-blue-100/70 backdrop-blur">
                             Applied Intelligence
                         </span>
-                        <h1 className="mb-5 text-5xl font-black leading-tight tracking-tight md:text-6xl">
-                            AI Team<br />
-                            <span className="text-primary-700">Projects</span>
+                        <h1 className="font-heading text-6xl font-black leading-[0.95] tracking-[-0.06em] text-slate-950 sm:text-7xl lg:text-[5.75rem]">
+                            AI Team
+                            <span className="block bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">Projects</span>
                         </h1>
-                        <p className="mx-auto max-w-2xl text-base leading-8 text-slate-600 md:mx-0">
+                        <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-slate-600 md:text-lg lg:mx-0 lg:leading-9">
                             The AI Team Projects bridge academia, cutting-edge AI/ML research, and international collaboration.
                             Jointly organized by Clausthal University of Technology and Babeș-Bolyai University, this semester-long program challenges mixed teams to build real-world AI and ML solutions.
                         </p>
-                        <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+                        <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-slate-500 lg:justify-start">
+                            {['Mixed teams', 'Real-world systems', 'Research culture'].map((item) => (
+                                <span key={item} className="inline-flex items-center gap-2">
+                                    <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+                                    {item}
+                                </span>
+                            ))}
+                        </div>
+                        <div className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start">
                             <button
                                 type="button"
                                 onClick={() => scrollToSection('active-projects')}
-                                className="rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700"
+                                className="group inline-flex items-center gap-2 rounded-full bg-slate-950 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-slate-300/60 transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700"
                             >
                                 Current Projects
+                                <FaArrowRight className="text-xs transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                             </button>
                             <button
                                 type="button"
                                 onClick={() => scrollToSection('archive')}
-                                className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:border-primary-200 hover:text-primary-700"
+                                className="rounded-full border border-slate-200 bg-white/85 px-7 py-3.5 text-sm font-bold text-slate-700 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700"
                             >
                                 Archive Projects
                             </button>
                         </div>
-                    </div>
-                    <div className="hidden justify-center md:flex">
-                        <div className="relative flex h-80 w-80 items-center justify-center rounded-full border border-dashed border-primary-100">
-                            <div className="absolute inset-10 rounded-full border border-slate-100" />
-                            <div className="absolute h-28 w-28 rotate-6 rounded-3xl bg-white shadow-2xl shadow-primary-100" />
-                            <div className="relative h-24 w-24 rotate-6 rounded-2xl bg-primary-600 shadow-2xl shadow-primary-200" />
-                            <div className="absolute right-20 top-40 h-4 w-4 rounded-full bg-sky-400" />
-                        </div>
-                    </div>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.94, y: 12 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+                        className="relative mx-auto flex min-h-[25rem] w-full max-w-[34rem] items-center justify-center lg:min-h-[34rem]"
+                        aria-hidden="true"
+                    >
+                        <div className="absolute h-[22rem] w-[22rem] rounded-full border border-dashed border-blue-200/80 bg-white/20 lg:h-[29rem] lg:w-[29rem]" />
+                        <div className="absolute h-[15rem] w-[15rem] rounded-full border border-slate-200/70 bg-white/30 lg:h-[21rem] lg:w-[21rem]" />
+                        <motion.img
+                            src={assetUrl('/icons/avocando-icon.svg')}
+                            alt=""
+                            className="relative z-10 h-64 w-auto drop-shadow-[0_28px_32px_rgba(15,23,42,0.18)] sm:h-72 lg:h-[22rem]"
+                            animate={{ y: [-12, 10, -12], rotate: [-2.5, 2.5, -2.5] }}
+                            transition={{ duration: 5.4, repeat: Infinity, ease: 'easeInOut' }}
+                        />
+                        <motion.div
+                            className="absolute bottom-10 right-8 rounded-full border border-white bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-700 shadow-lg backdrop-blur"
+                            animate={{ y: [8, -8, 8] }}
+                            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+                        >
+                            CORE × UBB
+                        </motion.div>
+                    </motion.div>
                 </div>
             </section>
 

@@ -16,7 +16,7 @@ import {
 import assetUrl from '../utils/assetUrl'
 import LazyVideo from '../components/common/LazyVideo'
 
-const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1`
+const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1&playsinline=1`
 
 const statusCards = [
     {
@@ -83,63 +83,85 @@ const technicalBlocks = [
 const experimentResults = [
     {
         phase: 'Result 01',
-        operation: 'Navigation simulation',
-        title: 'Ridgeback movement and exploration behavior',
-        summary: 'The mobile-base track was first evaluated in simulation to test navigation, map interaction, and exploration behavior before hardware deployment.',
-        outcome: 'The videos show the base operating in repeatable simulated environments, which makes debugging and iteration possible before physical tests.',
+        operation: 'Ridgeback perception and navigation',
+        title: 'Starting with SLAM, navigation, and a visible target',
+        summary: 'The Ridgeback work began with SLAM and navigation around a clear perception cue: a detected red sphere. This gave the mobile-base track a concrete target for validating detection, localization, and movement in the same run.',
+        outcome: 'The run shows the Ridgeback using the red-sphere detection as part of the navigation story, connecting perception evidence with the robot motion that follows from it.',
         videos: [
             {
-                title: 'Ridgeback simulation run',
+                title: 'Red-sphere SLAM and navigation',
                 id: '1aUkfy_dM499HRmpudlG6zFFvVCRq36yF',
-                note: 'Navigation pipeline running in simulation.',
-            },
-            {
-                title: 'Ridgeback exploration simulation',
-                id: '1Hin82KFFeiVCN8Djjczv8MRuGI2HrbrS',
-                note: 'Exploration behavior for environment interaction.',
-            },
-            {
-                title: 'Ridgeback simulation refinement',
-                id: '19ro5Az4d_Qzw95xYvcMBbgbkThifTZDG',
-                note: 'Additional simulation iteration for mobile-base behavior.',
+                note: 'SLAM and Ridgeback navigation with the red sphere used as the detected object in the scene.',
             },
         ],
     },
     {
         phase: 'Result 02',
-        operation: 'Manipulator teleoperation',
-        title: 'G1 control and manipulation-side testing',
-        summary: 'The humanoid side was tested through teleoperation to observe command timing, safety boundaries, and practical manipulation constraints.',
-        outcome: 'The videos document how the G1 control interface behaves under human operation, which informs later autonomous manipulation policies.',
+        operation: 'Frontier exploration',
+        title: 'Moving from target navigation to environment exploration',
+        summary: 'After the target-based navigation run, the next step was frontier exploration. The Ridgeback was tasked with exploring unknown space so the system could evaluate how the map grows and how the robot chooses useful next regions.',
+        outcome: 'This stage documents the first exploration behavior: the robot begins to expand the known environment, exposing the practical limits that had to be improved in later runs.',
         videos: [
             {
-                title: 'G1 teleoperation trial',
-                id: '19UT7k_I5e67tzVv4i4_xohpvqyEDJPqX',
-                note: 'Early teleoperation behavior for the Unitree G1 track.',
-            },
-            {
-                title: 'G1 teleoperation rehearsal',
-                id: '1EhGsDjBYzPCShm950dRyMCiXjkwHNKLy',
-                note: 'Continued operation testing for manipulation-side control.',
-            },
-            {
-                title: 'G1 manipulation demo',
-                id: '1uposYPz2cl5ZFItDsBejknmc-kXbni1y',
-                note: 'Additional G1 demonstration from the project material.',
+                title: 'Frontier exploration attempt',
+                id: '1Hin82KFFeiVCN8Djjczv8MRuGI2HrbrS',
+                note: 'Ridgeback frontier exploration run for mapping and environment coverage.',
             },
         ],
     },
     {
         phase: 'Result 03',
-        operation: 'Hardware-facing validation',
-        title: 'Ridgeback exploration and integration readiness',
-        summary: 'The current operation validates the mobile base beyond isolated simulation and prepares it for integration with manipulation and scene representation.',
-        outcome: 'The hardware-facing exploration run shows progress toward a Sim2Real-ready test environment where navigation and manipulation can be connected through stable interfaces.',
+        operation: 'Distance estimator benchmarking',
+        title: 'Measuring distance with a consistent detection baseline',
+        summary: 'The distance-estimator benchmark keeps the detection step fixed: the G1 bounding box is detected with the same method for every estimator, and only valid detections are evaluated. Each estimator then calculates distance on the camera view, with results compared against Gazebo ground truth.',
+        outcome: 'The benchmark saves individual logs per estimator, an overall summary report, and the camera footage. This gives the project a repeatable way to compare distance estimates before those estimates are used inside larger robot behavior.',
         videos: [
             {
-                title: 'Ridgeback hardware exploration',
+                title: 'Distance Estimator Benchmarking',
+                id: '1S7JTz9UyBMKuEjdReUGhigULS6RMaK_4',
+                note: 'Detect, estimate, and log: one detector baseline, distance overlays against Gazebo ground truth, per-estimator logs, a summary report, and saved camera footage.',
+            },
+        ],
+    },
+    {
+        phase: 'Result 04',
+        operation: 'Exploration iteration',
+        title: 'Improving exploration after an incomplete run',
+        summary: 'One Ridgeback exploration run expanded the map but did not cover the full environment. That partial result was still useful because it showed where the exploration behavior needed adjustment before the final coverage run.',
+        outcome: 'The result captures the project in progress: the robot explores part of the environment, the limitation is visible, and the next iteration has a clear target.',
+        videos: [
+            {
+                title: 'Partial Ridgeback exploration',
+                id: '19ro5Az4d_Qzw95xYvcMBbgbkThifTZDG',
+                note: 'Exploration run where the environment is explored, but not yet fully covered.',
+            },
+        ],
+    },
+    {
+        phase: 'Result 05',
+        operation: 'Full environment exploration',
+        title: 'Completing the Ridgeback exploration loop',
+        summary: 'The later Ridgeback run shows the intended behavior more completely: the robot explores the full environment properly and demonstrates a stronger navigation and coverage result.',
+        outcome: 'This is the clearest mobile-base result in the sequence. The Ridgeback completes the environment exploration more reliably, giving the navigation side a stronger foundation for later integration.',
+        videos: [
+            {
+                title: 'Full Ridgeback environment exploration',
                 id: '1Q60muLRK3wOiiZelpSNghu_nWZ8qYblP',
-                note: 'Hardware-facing exploration progress for the mobile base.',
+                note: 'Ridgeback explores the full environment properly and completes the exploration behavior more cleanly.',
+            },
+        ],
+    },
+    {
+        phase: 'Result 06',
+        operation: 'Humanoid teleoperation',
+        title: 'Adding the Unitree G1 humanoid control track',
+        summary: 'Alongside the Ridgeback navigation work, the humanoid side was tested through teleoperation with the Unitree G1. This focused on direct operator control before moving toward more autonomous behavior.',
+        outcome: 'The teleoperation run documents that the G1 can be controlled in the project setup, giving the humanoid track a practical starting point for later manipulation and integration experiments.',
+        videos: [
+            {
+                title: 'Unitree G1 teleoperation',
+                id: '1PAxkPUROKN5dDTs7-5LCuMKNqdZAJL6t',
+                note: 'Teleoperation trial with the humanoid robot.',
             },
         ],
     },
@@ -171,6 +193,16 @@ const VideoCarousel = ({ videos }) => {
     const hasVideos = videos.length > 0
     const video = hasVideos ? videos[activeIndex] : null
     const hasMultiple = videos.length > 1
+
+    useEffect(() => {
+        if (!hasMultiple) return undefined
+
+        const timer = window.setInterval(() => {
+            setActiveIndex((current) => (current + 1) % videos.length)
+        }, 18000)
+
+        return () => window.clearInterval(timer)
+    }, [hasMultiple, videos.length])
 
     const showPrevious = () => {
         setActiveIndex((current) => (current === 0 ? videos.length - 1 : current - 1))
@@ -207,10 +239,11 @@ const VideoCarousel = ({ videos }) => {
         <article className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
             <div className="relative aspect-video bg-slate-950">
                 <iframe
+                    key={video.id}
                     src={drivePreview(video.id)}
                     title={video.title}
                     className="h-full w-full"
-                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
                     allowFullScreen
                 />
                 {hasMultiple && (

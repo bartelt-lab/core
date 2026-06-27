@@ -14,7 +14,7 @@ const TUC_NAV = [
 
 const NETWORK_NAV = [
     { to: '/network', label: 'CORE Network' },
-    { to: '/publications', label: 'Publications' },
+    { to: '/publications?institution=TUC', label: 'Publications' },
     { to: '/ai-team-projects', label: 'AI Team Projects' },
 ];
 

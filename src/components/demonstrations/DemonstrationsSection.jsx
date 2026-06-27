@@ -5,6 +5,12 @@ import { autonomousDemonstrations, cognitiveProjects } from '../../data/demonstr
 import assetUrl from '../../utils/assetUrl'
 
 const DemonstrationsSection = ({ priority = false }) => {
+  const projectMeta = {
+    dynamo: ['Cognitive robotics', 'Dynamic manipulation', 'Operational intelligence'],
+    'leader-following': ['ICRA 2025', 'RF + RGB + LiDAR', 'ANYmal'],
+    'vial-sort': ['VLA policy', 'LeRobot', 'Jetson inference'],
+  }
+
   return (
     <div id="demonstrations" className="space-y-20">
       {/* Cognitive Robotics / Dynamo Section - Now First */}
@@ -30,15 +36,16 @@ const DemonstrationsSection = ({ priority = false }) => {
                       loading={priority ? "eager" : "lazy"}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-900/88 to-gray-900/20"></div>
+                    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-gray-950/70 to-transparent"></div>
                   </>
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-black"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-gray-950 via-slate-900 to-black"></div>
                 )}
               </div>
 
               {/* Content */}
-              <div className={`relative z-10 p-8 ${project.isTeaser ? 'md:p-10 flex flex-col justify-center h-full' : 'md:p-12'} max-w-2xl`}>
+              <div className={`relative z-10 p-8 ${project.isTeaser ? 'md:p-10 flex flex-col justify-center h-full' : 'md:p-12'} max-w-3xl`}>
 
                 {project.isTeaser ? (
                   /* Teaser Content */
@@ -56,22 +63,29 @@ const DemonstrationsSection = ({ priority = false }) => {
                 ) : (
                   /* Standard Content (Dynamo) */
                   <>
+                    <div className="mb-5 flex flex-wrap gap-2">
+                      {(projectMeta[project.id] || []).map((item) => (
+                        <span key={item} className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white/70 backdrop-blur">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                     <h3 className="text-4xl font-heading font-bold text-white mb-6">
                       <Link to={project.link} className="hover:text-primary-400 transition-colors">
                         {project.title}
                       </Link>
                     </h3>
-                    <p className="text-xl text-gray-200 leading-relaxed mb-8 font-light">
+                    <p className="text-lg text-gray-100 leading-8 mb-6 font-light md:text-xl">
                       {project.description}
                     </p>
-                    <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 mb-8">
-                      <p className="text-gray-100 italic">
+                    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mb-8 shadow-2xl shadow-black/20">
+                      <p className="text-sm leading-7 text-gray-100 md:text-base">
                         {project.content}
                       </p>
                     </div>
                     <Link
                       to={project.link}
-                      className="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-semibold transition-colors shadow-lg"
+                      className="inline-flex items-center px-6 py-3 bg-white text-gray-950 rounded-full font-bold transition-colors shadow-lg hover:bg-primary-50"
                     >
                       View Technical Overview &rarr;
                     </Link>
