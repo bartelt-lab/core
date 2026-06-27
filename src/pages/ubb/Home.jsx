@@ -58,7 +58,7 @@ const UbbHome = () => {
             <div className="mt-12 flex items-center gap-5 border-t border-slate-200/80 pt-6">
               <img src={assetUrl('/logos/ubb-logo-only.webp')} alt="" className="h-10 w-10 object-contain opacity-80" />
               <div className="h-8 w-px bg-slate-200" aria-hidden="true" />
-              <img src={assetUrl('/logos/core/core-no-text.webp')} alt="" className="h-9 w-9 object-contain opacity-80" />
+              <img src={assetUrl('/logos/core/avocando-icon.svg')} alt="" className="h-9 w-9 object-contain opacity-80" />
               <p className="max-w-[12rem] text-xs leading-5 text-slate-400">A joint research initiative in the CORE Network.</p>
             </div>
           </motion.div>

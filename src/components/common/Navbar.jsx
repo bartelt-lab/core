@@ -70,7 +70,7 @@ const Navbar = () => {
           className="flex h-full w-[5.25rem] shrink-0 items-center justify-center rounded-2xl transition hover:bg-slate-50 sm:w-[7.5rem] lg:w-[9rem]"
         >
           <img
-            src={assetUrl('/logos/core/core-network.webp')}
+            src={assetUrl('/logos/core/light-background/core.svg')}
             alt="CORE Network"
             className="h-10 max-w-[4.5rem] object-contain sm:h-12 sm:max-w-[6.75rem]"
           />
