@@ -4,6 +4,7 @@ import { FaArrowRight, FaExternalLinkAlt, FaFilter, FaSearch } from 'react-icons
 import Section from '../common/Section'
 import PublicationItem from './PublicationItem'
 import assetUrl from '../../utils/assetUrl'
+import { getMemberBySlug } from '../../data/team'
 
 const PublicationCard = ({ publication, featured = false, compact = false }) => {
   const image = publication.image || '/logos/core/core-no-text.webp'
@@ -59,6 +60,29 @@ const PublicationCard = ({ publication, featured = false, compact = false }) => 
 
 const getUnique = (items) => [...new Set(items.filter(Boolean))].sort()
 
+const institutionLabels = {
+  TUC: 'TU Clausthal',
+  UBB: 'Babeș-Bolyai University',
+  Rostock: 'University of Rostock',
+}
+
+const memberInstitutionOverrides = {
+  szilagyi: ['UBB'],
+  nedungadi: ['Rostock'],
+}
+
+const getPublicationInstitutions = (publication) => {
+  const institutions = publication.authors.flatMap((author) => {
+    if (!author.memberSlug) return []
+    if (memberInstitutionOverrides[author.memberSlug]) return memberInstitutionOverrides[author.memberSlug]
+
+    const member = getMemberBySlug(author.memberSlug)
+    return member?.affiliations.map(({ institution }) => institution.shortName) || []
+  })
+
+  return [...new Set(institutions)]
+}
+
 const PublicationsSection = ({
   limit,
   viewAllLink,
@@ -68,6 +92,7 @@ const PublicationsSection = ({
   intro,
   showFilters = false,
   compact = false,
+  initialInstitution = 'all',
 }) => {
   const [publications, setPublications] = useState([])
   const [loading, setLoading] = useState(true)
@@ -78,6 +103,7 @@ const PublicationsSection = ({
     status: 'all',
     year: 'all',
     researcher: 'all',
+    institution: initialInstitution,
   })
 
   useEffect(() => {
@@ -99,6 +125,7 @@ const PublicationsSection = ({
     statuses: getUnique(publications.map((publication) => publication.status)),
     years: getUnique(publications.map((publication) => String(publication.year || ''))).reverse(),
     researchers: getUnique(publications.flatMap((publication) => publication.authors.map((author) => author.name))),
+    institutions: ['TUC', 'UBB', 'Rostock'],
   }), [publications])
 
   const filteredPublications = useMemo(() => {
@@ -113,7 +140,8 @@ const PublicationsSection = ({
         (filters.type === 'all' || publication.type === filters.type) &&
         (filters.status === 'all' || publication.status === filters.status) &&
         (filters.year === 'all' || String(publication.year) === filters.year) &&
-        (filters.researcher === 'all' || publication.authors.some((author) => author.name === filters.researcher))
+        (filters.researcher === 'all' || publication.authors.some((author) => author.name === filters.researcher)) &&
+        (filters.institution === 'all' || getPublicationInstitutions(publication).includes(filters.institution))
       )
     })
   }, [filters, publications])
@@ -169,7 +197,7 @@ const PublicationsSection = ({
             </div>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-[1.5fr_repeat(4,1fr)]">
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[1.5fr_repeat(5,1fr)]">
             <label className="relative block">
               <span className="sr-only">Search publications</span>
               <FaSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
@@ -186,6 +214,7 @@ const PublicationsSection = ({
               ['status', 'All statuses', options.statuses],
               ['year', 'All years', options.years],
               ['researcher', 'All researchers', options.researchers],
+              ['institution', 'All institutions', options.institutions],
             ].map(([key, label, values]) => (
               <label key={key}>
                 <span className="sr-only">{label}</span>
@@ -196,7 +225,7 @@ const PublicationsSection = ({
                 >
                   <option value="all">{label}</option>
                   {values.map((value) => (
-                    <option key={value} value={value}>{value}</option>
+                    <option key={value} value={value}>{key === 'institution' ? institutionLabels[value] : value}</option>
                   ))}
                 </select>
               </label>
