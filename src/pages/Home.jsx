@@ -7,7 +7,12 @@ import {
 import { SiGooglescholar } from 'react-icons/si'
 import PublicationMiniCarousel from '../components/publications/PublicationMiniCarousel'
 import { getNetworkMembers, institutions } from '../data/team'
+import { cognitiveProjects } from '../data/demonstrations'
 import assetUrl from '../utils/assetUrl'
+
+// Which project gets the homepage spotlight. Swap the id to feature a different one
+// (it must be a non-teaser entry in cognitiveProjects with an /images/projects/<id>/hero.webp).
+const FEATURED_PROJECT_ID = 'dynamo'
 
 const pillars = [
   { to: '/core-labs', icon: FaFlask, eyebrow: 'Research Labs', title: 'CORE Labs', body: 'Joint laboratory infrastructure spanning Goslar, Cluj-Napoca, and Rostock.' },
@@ -53,6 +58,7 @@ const LinkIcons = ({ member }) => (
 
 const Home = () => {
   const members = getNetworkMembers().filter((m) => m.roleCategory !== 'support_staff')
+  const featured = cognitiveProjects.find((project) => project.id === FEATURED_PROJECT_ID)
   const partnerLogos = [
     { name: 'TU Clausthal', src: '/logos/clausthal-logo.webp', to: '/tuc' },
     { name: 'UBB', src: '/logos/ubb-logo.webp', href: institutions.UBB.website },
@@ -68,15 +74,43 @@ const Home = () => {
 
         <div className="container relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-6 pb-14 pt-28 md:px-12 lg:px-20">
           <div className="w-full max-w-6xl">
-            <div className="max-w-2xl">
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">Research Network</p>
-            <h1 className="mb-6 text-4xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-5xl lg:text-6xl">
-              Cognitive Software<br className="hidden md:block" /> in Europe.
-            </h1>
-            <p className="mb-4 max-w-xl text-lg leading-8 text-gray-600 md:text-xl">
-              Shared labs, shared compute, one mission: cognitive systems that perceive, reason, and act.
-            </p>
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+              <div className="max-w-2xl">
+                <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">Research Network</p>
+                <h1 className="mb-6 text-4xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-5xl lg:text-6xl">
+                  Cognitive Software<br className="hidden md:block" /> in Europe.
+                </h1>
+                <p className="mb-4 max-w-xl text-lg leading-8 text-gray-600 md:text-xl">
+                  Shared labs, shared compute, one mission: cognitive systems that perceive, reason, and act.
+                </p>
+              </div>
+
+              {featured && (
+                <Link
+                  to={featured.link}
+                  aria-label={`Featured project: ${featured.title}`}
+                  className="group relative block w-44 shrink-0 overflow-hidden rounded-3xl border border-white/70 shadow-2xl shadow-slate-300/50 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl sm:w-52"
+                >
+                  <div className="relative aspect-square">
+                    <img
+                      src={assetUrl(`/images/projects/${featured.id}/hero.webp`)}
+                      alt={featured.title}
+                      decoding="async"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/25 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-300">Featured project</p>
+                      <div className="mt-1 flex items-center justify-between gap-2">
+                        <h3 className="font-heading text-lg font-bold leading-tight">{featured.title}</h3>
+                        <FaArrowRight className="h-3.5 w-3.5 shrink-0 -rotate-45 transition group-hover:rotate-0" aria-hidden="true" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              )}
             </div>
+
             <PublicationMiniCarousel />
           </div>
         </div>

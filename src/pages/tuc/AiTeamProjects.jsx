@@ -164,13 +164,6 @@ const AiTeamProjects = () => {
                             animate={{ y: [-12, 10, -12], rotate: [-2.5, 2.5, -2.5] }}
                             transition={{ duration: 5.4, repeat: Infinity, ease: 'easeInOut' }}
                         />
-                        <motion.div
-                            className="absolute bottom-10 right-8 rounded-full border border-white bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-700 shadow-lg backdrop-blur"
-                            animate={{ y: [8, -8, 8] }}
-                            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-                        >
-                            CORE × UBB
-                        </motion.div>
                     </motion.div>
                 </div>
             </section>
