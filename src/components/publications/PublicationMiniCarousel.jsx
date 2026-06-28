@@ -39,7 +39,7 @@ const PublicationMiniCarousel = () => {
     <div className="mt-6 w-full max-w-6xl overflow-hidden rounded-3xl border border-white/70 bg-white/88 p-4 shadow-2xl shadow-slate-200/70 backdrop-blur-xl">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-1">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Recent Publications</p>
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Latest publications</p>
         </div>
         <Link to="/publications" className="inline-flex items-center gap-2 rounded-full border border-primary-100 bg-primary-50 px-4 py-2 text-xs font-bold text-primary-700 transition hover:border-primary-200 hover:bg-primary-700 hover:text-white">
           All publications

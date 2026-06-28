@@ -5,12 +5,6 @@ import { autonomousDemonstrations, cognitiveProjects } from '../../data/demonstr
 import assetUrl from '../../utils/assetUrl'
 
 const DemonstrationsSection = ({ priority = false }) => {
-  const projectMeta = {
-    dynamo: ['Cognitive robotics', 'Dynamic manipulation', 'Operational intelligence'],
-    'leader-following': ['Ridgeback', 'Person tracking', 'Sensor fusion', '3D perception'],
-    'vial-sort': ['VLA policy', 'LeRobot', 'Jetson inference'],
-  }
-
   return (
     <div id="demonstrations" className="space-y-20">
       {/* Cognitive Robotics / Dynamo Section - Now First */}
@@ -64,7 +58,7 @@ const DemonstrationsSection = ({ priority = false }) => {
                   /* Standard Content (Dynamo) */
                   <>
                     <div className="mb-5 flex flex-wrap gap-2">
-                      {(projectMeta[project.id] || []).map((item) => (
+                      {(project.tags || []).map((item) => (
                         <span key={item} className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white/70 backdrop-blur">
                           {item}
                         </span>
