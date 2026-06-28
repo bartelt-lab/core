@@ -41,7 +41,7 @@ const Footer = () => {
             <h3 className="mb-2 text-2xl font-heading font-bold text-tertiary-600">CORE</h3>
             <p className="mb-4 text-gray-600">Cognitive Software in Europe</p>
             <p className="text-sm text-gray-500">
-              © {new Date().getFullYear()} CORE Initiative. All rights reserved.
+              Â© {new Date().getFullYear()} CORE Initiative. All rights reserved.
             </p>
           </div>
         </div>
