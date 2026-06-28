@@ -60,21 +60,84 @@ const PublicationCard = ({ publication, featured = false, compact = false }) => 
 
 const getUnique = (items) => [...new Set(items.filter(Boolean))].sort()
 
-const institutionLabels = {
-  TUC: 'TU Clausthal',
-  UBB: 'Babeș-Bolyai University',
-  Rostock: 'University of Rostock',
+const pillClass = (active) =>
+  `rounded-full border px-3.5 py-1.5 text-sm font-semibold transition ${
+    active
+      ? 'border-primary-600 bg-primary-600 text-white shadow-sm'
+      : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50'
+  }`
+
+// Multi-select pill group. `selected` is an array; empty array = "All".
+const FilterPills = ({ label, options, selected, onToggle, onClear, renderLabel }) => (
+  <div>
+    <span className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-500">{label}</span>
+    <div className="flex flex-wrap gap-2">
+      <button type="button" onClick={onClear} aria-pressed={selected.length === 0} className={pillClass(selected.length === 0)}>
+        All
+      </button>
+      {options.map((option) => {
+        const active = selected.includes(option)
+        return (
+          <button key={option} type="button" onClick={() => onToggle(option)} aria-pressed={active} className={pillClass(active)}>
+            {renderLabel ? renderLabel(option) : option}
+          </button>
+        )
+      })}
+    </div>
+  </div>
+)
+
+const YearRangeSlider = ({ min, max, value, onChange }) => {
+  const [from, to] = value
+  const span = max - min || 1
+  const pctFrom = ((from - min) / span) * 100
+  const pctTo = ((to - min) / span) * 100
+
+  return (
+    <div>
+      <div className="mb-2 flex items-center justify-between">
+        <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Year</span>
+        <span className="text-sm font-semibold text-gray-700">{from === to ? from : `${from} – ${to}`}</span>
+      </div>
+      <div className="range-dual">
+        <div className="pointer-events-none absolute left-0 top-1/2 h-1.5 w-full -translate-y-1/2 rounded-full bg-gray-200" />
+        <div
+          className="pointer-events-none absolute top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-primary-600"
+          style={{ left: `${pctFrom}%`, right: `${100 - pctTo}%` }}
+        />
+        <input
+          type="range"
+          min={min}
+          max={max}
+          value={from}
+          onChange={(event) => onChange([Math.min(Number(event.target.value), to), to])}
+          aria-label="Earliest year"
+        />
+        <input
+          type="range"
+          min={min}
+          max={max}
+          value={to}
+          onChange={(event) => onChange([from, Math.max(Number(event.target.value), from)])}
+          aria-label="Latest year"
+        />
+      </div>
+    </div>
+  )
 }
 
-const memberInstitutionOverrides = {
-  szilagyi: ['UBB'],
-  nedungadi: ['Rostock'],
+// Default institution for a member when a publication doesn't override it per-author.
+// szilagyi is affiliated with both TUC and UBB; default his output to TUC unless a
+// publication's author entry specifies otherwise (see the `institution` field in publications.json).
+const memberInstitutionDefaults = {
+  szilagyi: ['TUC'],
 }
 
 const getPublicationInstitutions = (publication) => {
   const institutions = publication.authors.flatMap((author) => {
     if (!author.memberSlug) return []
-    if (memberInstitutionOverrides[author.memberSlug]) return memberInstitutionOverrides[author.memberSlug]
+    if (author.institution) return [author.institution]
+    if (memberInstitutionDefaults[author.memberSlug]) return memberInstitutionDefaults[author.memberSlug]
 
     const member = getMemberBySlug(author.memberSlug)
     return member?.affiliations.map(({ institution }) => institution.shortName) || []
@@ -99,11 +162,11 @@ const PublicationsSection = ({
   const [activeIndex, setActiveIndex] = useState(0)
   const [filters, setFilters] = useState({
     query: '',
-    type: 'all',
-    status: 'all',
-    year: 'all',
+    type: [],
+    status: [],
+    yearRange: null,
     researcher: 'all',
-    institution: initialInstitution,
+    institution: initialInstitution === 'all' ? [] : [initialInstitution],
   })
 
   useEffect(() => {
@@ -123,25 +186,38 @@ const PublicationsSection = ({
   const options = useMemo(() => ({
     types: getUnique(publications.map((publication) => publication.type)),
     statuses: getUnique(publications.map((publication) => publication.status)),
-    years: getUnique(publications.map((publication) => String(publication.year || ''))).reverse(),
-    researchers: getUnique(publications.flatMap((publication) => publication.authors.map((author) => author.name))),
+    // Only CORE members (authors linked to a team.js member via memberSlug), not external coauthors.
+    researchers: getUnique(
+      publications.flatMap((publication) =>
+        publication.authors.filter((author) => author.memberSlug).map((author) => author.name),
+      ),
+    ),
     institutions: ['TUC', 'UBB', 'Rostock'],
   }), [publications])
+
+  const yearBounds = useMemo(() => {
+    const years = publications.map((publication) => Number(publication.year)).filter(Boolean)
+    return years.length ? [Math.min(...years), Math.max(...years)] : null
+  }, [publications])
+
 
   const filteredPublications = useMemo(() => {
     const query = filters.query.trim().toLowerCase()
 
+    const yearRange = filters.yearRange
+
     return publications.filter((publication) => {
       const authorNames = publication.authors.map((author) => author.name).join(' ')
       const searchable = `${publication.title} ${publication.venue} ${authorNames}`.toLowerCase()
+      const year = Number(publication.year)
 
       return (
         (!query || searchable.includes(query)) &&
-        (filters.type === 'all' || publication.type === filters.type) &&
-        (filters.status === 'all' || publication.status === filters.status) &&
-        (filters.year === 'all' || String(publication.year) === filters.year) &&
+        (filters.type.length === 0 || filters.type.includes(publication.type)) &&
+        (filters.status.length === 0 || filters.status.includes(publication.status)) &&
+        (!yearRange || (year >= yearRange[0] && year <= yearRange[1])) &&
         (filters.researcher === 'all' || publication.authors.some((author) => author.name === filters.researcher)) &&
-        (filters.institution === 'all' || getPublicationInstitutions(publication).includes(filters.institution))
+        (filters.institution.length === 0 || getPublicationInstitutions(publication).some((institution) => filters.institution.includes(institution)))
       )
     })
   }, [filters, publications])
@@ -159,6 +235,11 @@ const PublicationsSection = ({
     return () => window.clearInterval(timer)
   }, [displayPublications.length, isRotator])
 
+  // Initialise the year range to the full span once data has loaded.
+  if (yearBounds && !filters.yearRange) {
+    setFilters((current) => ({ ...current, yearRange: yearBounds }))
+  }
+
   // Reset the rotator/list to the first item when filters or limit change.
   const resetKey = `${JSON.stringify(filters)}|${limit}`
   const [prevResetKey, setPrevResetKey] = useState(resetKey)
@@ -170,6 +251,18 @@ const PublicationsSection = ({
   const updateFilter = (key, value) => {
     setFilters((current) => ({ ...current, [key]: value }))
   }
+
+  const toggleFilter = (key, option) => {
+    setFilters((current) => {
+      const selected = current[key]
+      return {
+        ...current,
+        [key]: selected.includes(option) ? selected.filter((value) => value !== option) : [...selected, option],
+      }
+    })
+  }
+
+  const clearFilter = (key) => updateFilter(key, [])
 
   return (
     <Section
@@ -197,7 +290,7 @@ const PublicationsSection = ({
             </div>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[1.5fr_repeat(5,1fr)]">
+          <div className="grid gap-3 md:grid-cols-2">
             <label className="relative block">
               <span className="sr-only">Search publications</span>
               <FaSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
@@ -209,27 +302,51 @@ const PublicationsSection = ({
               />
             </label>
 
-            {[
-              ['type', 'All types', options.types],
-              ['status', 'All statuses', options.statuses],
-              ['year', 'All years', options.years],
-              ['researcher', 'All researchers', options.researchers],
-              ['institution', 'All institutions', options.institutions],
-            ].map(([key, label, values]) => (
-              <label key={key}>
-                <span className="sr-only">{label}</span>
-                <select
-                  value={filters[key]}
-                  onChange={(event) => updateFilter(key, event.target.value)}
-                  className="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-medium text-gray-700 outline-none transition focus:border-primary-500 focus:bg-white"
-                >
-                  <option value="all">{label}</option>
-                  {values.map((value) => (
-                    <option key={value} value={value}>{key === 'institution' ? institutionLabels[value] : value}</option>
-                  ))}
-                </select>
-              </label>
-            ))}
+            <label>
+              <span className="sr-only">All researchers</span>
+              <select
+                value={filters.researcher}
+                onChange={(event) => updateFilter('researcher', event.target.value)}
+                className="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-medium text-gray-700 outline-none transition focus:border-primary-500 focus:bg-white"
+              >
+                <option value="all">All researchers</option>
+                {options.researchers.map((value) => (
+                  <option key={value} value={value}>{value}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <div className="mt-5 grid gap-5 sm:grid-cols-2">
+            <FilterPills
+              label="Institution"
+              options={options.institutions}
+              selected={filters.institution}
+              onToggle={(value) => toggleFilter('institution', value)}
+              onClear={() => clearFilter('institution')}
+            />
+            <FilterPills
+              label="Type"
+              options={options.types}
+              selected={filters.type}
+              onToggle={(value) => toggleFilter('type', value)}
+              onClear={() => clearFilter('type')}
+            />
+            <FilterPills
+              label="Status"
+              options={options.statuses}
+              selected={filters.status}
+              onToggle={(value) => toggleFilter('status', value)}
+              onClear={() => clearFilter('status')}
+            />
+            {filters.yearRange && yearBounds && yearBounds[0] !== yearBounds[1] && (
+              <YearRangeSlider
+                min={yearBounds[0]}
+                max={yearBounds[1]}
+                value={filters.yearRange}
+                onChange={(range) => updateFilter('yearRange', range)}
+              />
+            )}
           </div>
         </div>
       )}

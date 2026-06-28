@@ -334,7 +334,7 @@
       "id": "szilagyi2025accelerating",
       "title": "Accelerating Intelligent Vehicle Vision: A Hybrid Python-Rust Architecture with Partial-Blocking Inter-Process Communication",
       "authors": [
-        { "name": "Szilagyi, David", "memberSlug": "szilagyi" },
+        { "name": "Szilagyi, David", "memberSlug": "szilagyi", "institution": "UBB" },
         { "name": "Filea, R.", "memberSlug": null },
         { "name": "Benta, K.I.", "memberSlug": "benta" }
       ],
@@ -352,7 +352,7 @@
       "id": "szilagyi2024benchmarking",
       "title": "Benchmarking Autonomous Driving Systems using a Modular and Scalable Simulation Environment",
       "authors": [
-        { "name": "Szilagyi, David", "memberSlug": "szilagyi" },
+        { "name": "Szilagyi, David", "memberSlug": "szilagyi", "institution": "UBB" },
         { "name": "Benta, K.I.", "memberSlug": "benta" },
         { "name": "Sacarea, Christian", "memberSlug": "sacarea" }
       ],
@@ -370,7 +370,7 @@
       "id": "szilagyi2025scalable",
       "title": "Scalable Aggregation Under Client-Side Compute Variability in Federated Learning",
       "authors": [
-        { "name": "Szilagyi, David", "memberSlug": "szilagyi" },
+        { "name": "Szilagyi, David", "memberSlug": "szilagyi", "institution": "UBB" },
         { "name": "Petec, R.G.", "memberSlug": null },
         { "name": "Benta, K.I.", "memberSlug": "benta" }
       ],
