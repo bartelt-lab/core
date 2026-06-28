@@ -7,7 +7,7 @@ import assetUrl from '../../utils/assetUrl'
 const DemonstrationsSection = ({ priority = false }) => {
   const projectMeta = {
     dynamo: ['Cognitive robotics', 'Dynamic manipulation', 'Operational intelligence'],
-    'leader-following': ['ICRA 2025', 'RF + RGB + LiDAR', 'ANYmal'],
+    'leader-following': ['Ridgeback', 'Person tracking', 'Sensor fusion', '3D perception'],
     'vial-sort': ['VLA policy', 'LeRobot', 'Jetson inference'],
   }
 

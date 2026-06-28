@@ -3,12 +3,26 @@
 How a CORE Labs project subpage (e.g. `/dynamo`) should look and behave. The goal
 is that every project page feels like the same family without being a copy-paste.
 
-**Reference implementations** (read these before building a new one):
+**Shared components** (`src/components/common/`) — build with these, don't re-roll them:
 
-- `src/pages/Dynamo.jsx` — the fullest version of the pattern (cinematic hero +
-  research-question intro + milestone browser + architecture/stack).
-- `src/pages/VialSort.jsx` — the research-question card and the back-to-labs pill.
-- `src/pages/LeaderFollowing.jsx` — the player + side-list browser in its simplest form.
+- `Eyebrow.jsx` → `Label` (hairline section eyebrow) and `MiniLabel` (sidebar/quiet eyebrow).
+- `BackToLabsPill.jsx` → back-to-CORE-Labs pill; `variant="dark"` (on a dark hero) or
+  `variant="light"` (light header).
+- `ResearchQuestionCard.jsx` → the primary-tinted question + tags card.
+- `ResearchQuestionIntro.jsx` → two-column objective + `ResearchQuestionCard` (use below a hero).
+- `MilestoneBrowser.jsx` → the player + newest-first selector (autocycle, mount-once media).
+  Each item's `media` is `{ type: 'drive', id }`, `{ type: 'video', src }` (local mp4), or
+  `{ type: 'image', src, alt }` (a "Placeholder" still). Props: `items`, `label`, `pillLabel`,
+  `autoCycleMs`, `aside`.
+
+**Reference implementations** (how the pieces compose):
+
+- `src/pages/Dynamo.jsx` — fullest version (cinematic hero + `ResearchQuestionIntro` +
+  `MilestoneBrowser` + architecture/stack).
+- `src/pages/VialSort.jsx` — light header with `ResearchQuestionCard`; `MilestoneBrowser`
+  with mixed media (a native video + an image placeholder) and a Project-setup / About
+  `aside`; pipeline / expected-outcome / metrics sections.
+- `src/pages/LeaderFollowing.jsx` — light header + `MilestoneBrowser` with an ABOUT `aside`.
 
 ## The mental model
 
@@ -82,21 +96,25 @@ Every project should pose a real research question — it's the spine of the pag
 
 ## The work: a milestone browser
 
-The progress videos are the centerpiece. Layout (from LeaderFollowing):
+The progress milestones are the centerpiece — use the `MilestoneBrowser` component
+(`src/components/common/MilestoneBrowser.jsx`); don't re-roll it. Shape per the props
+above. Layout (from LeaderFollowing):
 
 - Grid `lg:grid-cols-[1fr_300px]` — **player left**, **selector right**.
-- **Player:** `aspect-video` video on top, caption below — a label pill
-  (`Milestone 06`), an operation eyebrow, bold title, summary, and a green-bordered
-  **OUTCOME** line. Prev/next arrows + an `NN/total` counter.
+- **Player:** `aspect-video` media on top (Drive embed, local video, or image
+  placeholder), caption below — a label pill (`Milestone 06`), an operation eyebrow,
+  bold title, summary, and a green-bordered **OUTCOME** line. Prev/next arrows + an
+  `NN/total` counter. A milestone whose footage isn't ready yet uses an `image` media
+  with a "Placeholder" badge until the clip lands.
 - **Selector** (labelled **Milestones**): a stretching frosted card listing entries
   **newest-first**, numbered chronologically (01 = first ever, highest = latest).
   Active item gets a primary ring. The list defines the row height so it can grow
   as milestones are added.
 - **Autoplay:** advance newest → oldest every ~8s; **stop the autocycle once the
   user clicks** an entry or an arrow.
-- **No reload on swap:** mount each video iframe the moment it first becomes active
-  (so it loads visible and autoplays) and keep it mounted — revisiting is instant.
-  See the `mounted` set + `activeRunRef` pattern in `Dynamo.jsx`.
+- **No reload on swap:** the component mounts each milestone's media the moment it
+  first becomes active (so it loads visible and autoplays) and keeps it mounted —
+  revisiting is instant (`mounted` set + `activeRunRef` pattern).
 
 ## Supporting sections
 
@@ -107,8 +125,9 @@ eyebrows, no heavy color.
 
 ## Video hosting (current limitation)
 
-Project clips are currently Google Drive `/preview` iframes (`?autoplay=1&mute=1`).
-**Drive's player has no working loop parameter** — to loop a clip on end you must
-host it as a real file and use a native `<video loop muted>` (the VialSort
-approach, `public/videos/demonstrations/...` + the `LazyVideo` component — see
-[assets.md](assets.md)). Migrate when looping/finer control is needed.
+Most clips are Google Drive `/preview` iframes (`media.type: 'drive'`). **Drive's
+player has no working loop parameter** — to loop a clip on end, host it as a real file
+and use `media.type: 'video'` (a native `<video loop muted>`, like VialSort's annotated
+episode in `public/videos/demonstrations/...`; the `LazyVideo` component is the
+viewport-gated variant — see [assets.md](assets.md)). Migrate Drive clips when
+looping/finer control is needed.
