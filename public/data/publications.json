@@ -1,6 +1,72 @@
 {
   "publications": [
     {
+      "id": "zenkner2026tiips",
+      "title": "Beyond Either-Or Reasoning: Transduction and Induction as Cooperative Problem-Solving Paradigms",
+      "authors": [
+        { "name": "Zenkner, Janis", "memberSlug": "zenkner" },
+        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+      ],
+      "venue": "ECML PKDD 2026",
+      "year": 2026,
+      "date": "2026-09",
+      "type": "Conference",
+      "status": "Accepted",
+      "url": "https://arxiv.org/abs/2505.14744",
+      "code": null,
+      "image": "/papers/tiips.webp",
+      "abstract": "Introduces TIIPS, a cooperative transductive-inductive framework that interleaves transduction and induction for Programming-by-Example to guide program synthesis and improve solution behavior."
+    },
+    {
+      "id": "knab2026barista",
+      "title": "BARISTA: A Multi-Task Egocentric Benchmark for Compositional Visual Understanding",
+      "authors": [
+        { "name": "Knab, Patrick", "memberSlug": "knab" },
+        { "name": "Xhelili, Orgest", "memberSlug": null },
+        { "name": "Buzi, Inis", "memberSlug": null },
+        { "name": "Guggiana Nilo, Drago Andres", "memberSlug": null },
+        { "name": "Khan, Mohd Saquib", "memberSlug": null },
+        { "name": "Kolb, Lorenz", "memberSlug": null },
+        { "name": "Scherzer, Manuel", "memberSlug": null },
+        { "name": "Yildirir, Kerem", "memberSlug": null },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Schubert, Philipp Johannes", "memberSlug": null }
+      ],
+      "venue": "ICML 2026 (Combining Theory and Benchmarks Workshop)",
+      "year": 2026,
+      "date": "2026-07",
+      "type": "Workshop",
+      "status": "Accepted",
+      "url": "https://openreview.net/forum?id=xtnrFDmu1O",
+      "code": null,
+      "image": "/papers/barista.webp",
+      "abstract": null
+    },
+    {
+      "id": "knab2026whats",
+      "title": "What\u2019s in the Bottle? A Survey and Roadmap of Concept Bottleneck Models",
+      "authors": [
+        { "name": "Knab, Patrick", "memberSlug": "knab" },
+        { "name": "Steinmann, David", "memberSlug": null },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Kersting, Kristian", "memberSlug": null },
+        { "name": "Schiele, Bernt", "memberSlug": null },
+        { "name": "Seidl, Thomas", "memberSlug": null },
+        { "name": "Schlegel, Udo", "memberSlug": null },
+        { "name": "Stammer, Wolfgang", "memberSlug": null }
+      ],
+      "venue": "Transactions on Machine Learning Research",
+      "year": 2026,
+      "date": "2026-05",
+      "type": "Journal",
+      "status": "Published",
+      "url": "https://openreview.net/forum?id=IF5vnqxBEW",
+      "code": null,
+      "image": "/papers/whats-in-the-bottle.webp",
+      "abstract": "Surveys the Concept Bottleneck Model literature, identifies core components and challenges, and proposes a unified taxonomy and roadmap for future interpretable concept-based learning systems."
+    },
+    {
       "id": "attwell2026is",
       "title": "Is This LLM Library Learning? Evaluation Must Account For Compute and Behaviour",
       "authors": [
@@ -311,24 +377,24 @@
       "abstract": null
     },
     {
-      "id": "knab2025motif",
-      "title": "Concepts in Motion: Temporal Bottlenecks for Interpretable Video Classification",
+      "id": "knab2026concepts",
+      "title": "Concepts in Motion: Temporal Concept Bottleneck Model for Interpretable Video Classification",
       "authors": [
         { "name": "Knab, Patrick", "memberSlug": "knab" },
         { "name": "Marton, Sascha", "memberSlug": "marton" },
-        { "name": "Schubert, P.J.", "memberSlug": null },
-        { "name": "Guggiana, D.", "memberSlug": null },
+        { "name": "Schubert, Philipp Johannes", "memberSlug": null },
+        { "name": "Guggiana Nilo, Drago Andres", "memberSlug": null },
         { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
       ],
-      "venue": "arXiv Preprint",
-      "year": 2025,
-      "date": "2025-09",
-      "type": "Preprint",
-      "status": "Preprint",
+      "venue": "CVPR 2026 (XAI4CV Workshop) and ICML 2026 (CompLearn Workshop)",
+      "year": 2026,
+      "date": "2026-07",
+      "type": "Workshop",
+      "status": "Accepted",
       "url": "https://arxiv.org/abs/2509.20899",
       "code": "https://patrick-knab.github.io/MoTIF/",
-      "image": null,
-      "abstract": "Introduces MoTIF framework adapting concept bottleneck models for video classification with temporal analysis capabilities."
+      "image": "/papers/concepts-in-motion.webp",
+      "abstract": "Introduces MoTIF, a transformer-based temporal concept bottleneck framework that discovers video concepts with vision-language models and models their temporal patterns for interpretable video classification."
     },
     {
       "id": "szilagyi2025accelerating",
