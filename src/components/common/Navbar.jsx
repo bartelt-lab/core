@@ -58,7 +58,7 @@ const Navbar = () => {
         isScrolled ? 'scale-[0.985] opacity-100' : 'scale-100 opacity-100'
       }`}
     >
-      <div className="flex h-[4.5rem] items-center gap-3 rounded-[1.75rem] border border-white/90 bg-white/90 p-2.5 shadow-[0_18px_55px_-24px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:h-[5.25rem] sm:gap-4 sm:p-3">
+      <div className="flex h-[3.75rem] items-center gap-3 rounded-[1.5rem] border border-white/90 bg-white/90 p-2.5 shadow-[0_18px_55px_-24px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:h-[4.5rem] sm:gap-4 sm:p-3">
         <Link
           to="/"
           aria-label="CORE Network home"
