@@ -1,6 +1,31 @@
 {
   "publications": [
     {
+      "id": "knab2026barista",
+      "title": "BARISTA: A Multi-Task Egocentric Benchmark for Compositional Visual Understanding",
+      "authors": [
+        { "name": "Knab, Patrick", "memberSlug": "knab" },
+        { "name": "Xhelili, Orgest", "memberSlug": null },
+        { "name": "Buzi, Inis", "memberSlug": null },
+        { "name": "Guggiana Nilo, Drago Andres", "memberSlug": null },
+        { "name": "Khan, Mohd Saquib", "memberSlug": null },
+        { "name": "Kolb, Lorenz", "memberSlug": null },
+        { "name": "Scherzer, Manuel", "memberSlug": null },
+        { "name": "Yildirir, Kerem", "memberSlug": null },
+        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
+        { "name": "Schubert, Philipp Johannes", "memberSlug": null }
+      ],
+      "venue": "ICML 2026 (Combining Theory and Benchmarks Workshop)",
+      "year": 2026,
+      "date": "2026-07",
+      "type": "Workshop",
+      "status": "Accepted",
+      "url": "https://openreview.net/forum?id=xtnrFDmu1O",
+      "code": null,
+      "image": "/papers/barista.webp",
+      "abstract": null
+    },
+    {
       "id": "attwell2026is",
       "title": "Is This LLM Library Learning? Evaluation Must Account For Compute and Behaviour",
       "authors": [
