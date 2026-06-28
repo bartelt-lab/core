@@ -6,19 +6,18 @@ import assetUrl from '../../utils/assetUrl'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [hideOnDynamoContent, setHideOnDynamoContent] = useState(false)
   const location = useLocation()
 
-  // Handle scroll opacity/scale animation
+  // Shrink the bar slightly once scrolled. (To make the bar hide entirely past a
+  // scroll threshold on a specific route, see wiki/navbar-scroll-hide.md.)
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
-      setHideOnDynamoContent(location.pathname === '/dynamo' && window.scrollY > window.innerHeight * 0.68)
     }
     handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [location.pathname])
+  }, [])
 
   const labSites = [
     { initials: 'TUC', to: '/tuc', title: 'TU Clausthal lab' },
@@ -56,11 +55,7 @@ const Navbar = () => {
   return (
     <header
       className={`fixed inset-x-3 top-3 z-[60] mx-auto max-w-[94rem] transition-all duration-300 sm:inset-x-5 sm:top-4 ${
-        hideOnDynamoContent
-          ? 'pointer-events-none -translate-y-24 opacity-0'
-          : isScrolled
-            ? 'scale-[0.985] opacity-100'
-            : 'scale-100 opacity-100'
+        isScrolled ? 'scale-[0.985] opacity-100' : 'scale-100 opacity-100'
       }`}
     >
       <div className="flex h-[4.5rem] items-center gap-3 rounded-[1.75rem] border border-white/90 bg-white/90 p-2.5 shadow-[0_18px_55px_-24px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:h-[5.25rem] sm:gap-4 sm:p-3">

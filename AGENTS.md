@@ -89,8 +89,22 @@ public/
 ```
 
 Asset loading rules, the `LazyVideo` component, `npm run optimize-images`, and the
-ffmpeg video pipeline are documented in `docs/assets.md`. Large PNG/JPEG (>250 KB) are
+ffmpeg video pipeline are documented in `wiki/assets.md`. Large PNG/JPEG (>250 KB) are
 converted to WebP; `public/tuc/iclr-2025/` is excluded from that pipeline.
+
+## Wiki — `wiki/`
+
+Longer-form conventions and parked techniques live in the `wiki/` folder (sorts to
+the bottom of the file tree). Read the relevant one before related work:
+
+- `wiki/project-subsites.md` — **how CORE Labs project subpages (e.g. `/dynamo`)
+  should look and behave.** Visual language, hero forms, the research-question
+  intro, the milestone video browser. Read this before building or restyling any
+  project subpage. Reference impls: `Dynamo.jsx`, `VialSort.jsx`,
+  `LeaderFollowing.jsx`.
+- `wiki/assets.md` — image/video loading, optimization, and ffmpeg pipeline.
+- `wiki/navbar-scroll-hide.md` — how to make the navbar slide away past a scroll
+  threshold on a route (removed from `/dynamo`, kept here for reuse).
 
 ## Schema — publications.json
 

@@ -1,618 +1,370 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import {
-    FaArrowLeft,
-    FaArrowRight,
-    FaBezierCurve,
-    FaCubes,
-    FaHome,
-    FaLayerGroup,
-    FaMapMarkedAlt,
-    FaMicrochip,
-    FaProjectDiagram,
-    FaRobot,
-    FaRoute,
-} from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import assetUrl from '../utils/assetUrl'
-import LazyVideo from '../components/common/LazyVideo'
 
-const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1&playsinline=1`
+const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1&playsinline=1&loop=1`
 
-const statusCards = [
-    {
-        icon: FaMapMarkedAlt,
-        eyebrow: 'Active Experiment',
-        title: 'Mobile Base',
-        text: 'Ridgeback navigation is being validated through simulation, exploration, and hardware-facing runs.',
-    },
-    {
-        icon: FaRobot,
-        eyebrow: 'Teleop Track',
-        title: 'Manipulator',
-        text: 'Unitree G1 operation is being tested through teleoperation to understand control and safety constraints.',
-    },
-    {
-        icon: FaCubes,
-        eyebrow: 'Simulation First',
-        title: 'Integration',
-        text: 'The project is moving toward stable interfaces between navigation, manipulation, perception, and scene state.',
-    },
-]
+const pad = (n) => String(n).padStart(2, '0')
 
-const tabs = [
-    { id: 'home', label: 'Home', icon: FaHome },
-    { id: 'architecture', label: 'Architecture', icon: FaProjectDiagram },
-    { id: 'experiments', label: 'Experiments & Results', icon: FaBezierCurve },
-]
+const heroTags = ['Cognitive robotics', 'Dynamic manipulation', 'Operational intelligence']
 
-const technicalBlocks = [
-    {
-        icon: FaRoute,
-        label: 'Mobile Base',
-        title: 'Ridgeback navigation',
-        metric: 'Nav2 + exploration',
-        color: 'blue',
-        points: ['Mapping', 'Path planning', 'Hardware-facing runs'],
-    },
-    {
-        icon: FaRobot,
-        label: 'Manipulator',
-        title: 'Unitree G1 control',
-        metric: 'Teleop + policy interface',
-        color: 'emerald',
-        points: ['Command timing', 'Safety boundaries', 'Manipulation trials'],
-    },
-    {
-        icon: FaMicrochip,
-        label: 'Simulation',
-        title: 'Isaac Lab pipeline',
-        metric: 'Repeatable test scenes',
-        color: 'amber',
-        points: ['USD environments', 'Synthetic scenarios', 'Sim2Real validation'],
-    },
-    {
-        icon: FaLayerGroup,
-        label: 'Integration',
-        title: 'Interface contracts',
-        metric: 'Mobility + manipulation',
-        color: 'violet',
-        points: ['Scene state', 'Perception links', 'Evidence loop'],
-    },
+const researchTags = ['Ridgeback', 'Unitree G1', 'Isaac Lab', 'Nav2']
+
+const stackRows = [
+    { layer: 'Mobile base', system: 'Ridgeback navigation', approach: 'Nav2 + exploration', detail: 'Mapping · Path planning · Hardware-facing runs' },
+    { layer: 'Manipulator', system: 'Unitree G1 control', approach: 'Teleop + policy interface', detail: 'Command timing · Safety boundaries · Manipulation trials' },
+    { layer: 'Simulation', system: 'Isaac Lab pipeline', approach: 'Repeatable test scenes', detail: 'USD environments · Synthetic scenarios · Sim2Real validation' },
+    { layer: 'Integration', system: 'Interface contracts', approach: 'Mobility + manipulation', detail: 'Scene state · Perception links · Evidence loop' },
 ]
 
 const experimentResults = [
     {
-        phase: 'Result 01',
         operation: 'Ridgeback perception and navigation',
         title: 'Starting with SLAM, navigation, and a visible target',
         summary: 'The Ridgeback work began with SLAM and navigation around a clear perception cue: a detected red sphere. This gave the mobile-base track a concrete target for validating detection, localization, and movement in the same run.',
         outcome: 'The run shows the Ridgeback using the red-sphere detection as part of the navigation story, connecting perception evidence with the robot motion that follows from it.',
-        videos: [
-            {
-                title: 'Red-sphere SLAM and navigation',
-                id: '1aUkfy_dM499HRmpudlG6zFFvVCRq36yF',
-                note: 'SLAM and Ridgeback navigation with the red sphere used as the detected object in the scene.',
-            },
-        ],
+        video: { id: '1aUkfy_dM499HRmpudlG6zFFvVCRq36yF', title: 'Red-sphere SLAM and navigation' },
     },
     {
-        phase: 'Result 02',
         operation: 'Frontier exploration',
         title: 'Moving from target navigation to environment exploration',
         summary: 'After the target-based navigation run, the next step was frontier exploration. The Ridgeback was tasked with exploring unknown space so the system could evaluate how the map grows and how the robot chooses useful next regions.',
         outcome: 'This stage documents the first exploration behavior: the robot begins to expand the known environment, exposing the practical limits that had to be improved in later runs.',
-        videos: [
-            {
-                title: 'Frontier exploration attempt',
-                id: '1Hin82KFFeiVCN8Djjczv8MRuGI2HrbrS',
-                note: 'Ridgeback frontier exploration run for mapping and environment coverage.',
-            },
-        ],
+        video: { id: '1Hin82KFFeiVCN8Djjczv8MRuGI2HrbrS', title: 'Frontier exploration attempt' },
     },
     {
-        phase: 'Result 03',
         operation: 'Distance estimator benchmarking',
         title: 'Measuring distance with a consistent detection baseline',
         summary: 'The distance-estimator benchmark keeps the detection step fixed: the G1 bounding box is detected with the same method for every estimator, and only valid detections are evaluated. Each estimator then calculates distance on the camera view, with results compared against Gazebo ground truth.',
         outcome: 'The benchmark saves individual logs per estimator, an overall summary report, and the camera footage. This gives the project a repeatable way to compare distance estimates before those estimates are used inside larger robot behavior.',
-        videos: [
-            {
-                title: 'Distance Estimator Benchmarking',
-                id: '1S7JTz9UyBMKuEjdReUGhigULS6RMaK_4',
-                note: 'Detect, estimate, and log: one detector baseline, distance overlays against Gazebo ground truth, per-estimator logs, a summary report, and saved camera footage.',
-            },
-        ],
+        video: { id: '1S7JTz9UyBMKuEjdReUGhigULS6RMaK_4', title: 'Distance Estimator Benchmarking' },
     },
     {
-        phase: 'Result 04',
         operation: 'Exploration iteration',
         title: 'Improving exploration after an incomplete run',
         summary: 'One Ridgeback exploration run expanded the map but did not cover the full environment. That partial result was still useful because it showed where the exploration behavior needed adjustment before the final coverage run.',
         outcome: 'The result captures the project in progress: the robot explores part of the environment, the limitation is visible, and the next iteration has a clear target.',
-        videos: [
-            {
-                title: 'Partial Ridgeback exploration',
-                id: '19ro5Az4d_Qzw95xYvcMBbgbkThifTZDG',
-                note: 'Exploration run where the environment is explored, but not yet fully covered.',
-            },
-        ],
+        video: { id: '19ro5Az4d_Qzw95xYvcMBbgbkThifTZDG', title: 'Partial Ridgeback exploration' },
     },
     {
-        phase: 'Result 05',
         operation: 'Full environment exploration',
         title: 'Completing the Ridgeback exploration loop',
         summary: 'The later Ridgeback run shows the intended behavior more completely: the robot explores the full environment properly and demonstrates a stronger navigation and coverage result.',
         outcome: 'This is the clearest mobile-base result in the sequence. The Ridgeback completes the environment exploration more reliably, giving the navigation side a stronger foundation for later integration.',
-        videos: [
-            {
-                title: 'Full Ridgeback environment exploration',
-                id: '1Q60muLRK3wOiiZelpSNghu_nWZ8qYblP',
-                note: 'Ridgeback explores the full environment properly and completes the exploration behavior more cleanly.',
-            },
-        ],
+        video: { id: '1Q60muLRK3wOiiZelpSNghu_nWZ8qYblP', title: 'Full Ridgeback environment exploration' },
     },
     {
-        phase: 'Result 06',
         operation: 'Humanoid teleoperation',
         title: 'Adding the Unitree G1 humanoid control track',
         summary: 'Alongside the Ridgeback navigation work, the humanoid side was tested through teleoperation with the Unitree G1. This focused on direct operator control before moving toward more autonomous behavior.',
         outcome: 'The teleoperation run documents that the G1 can be controlled in the project setup, giving the humanoid track a practical starting point for later manipulation and integration experiments.',
-        videos: [
-            {
-                title: 'Unitree G1 teleoperation',
-                id: '1PAxkPUROKN5dDTs7-5LCuMKNqdZAJL6t',
-                note: 'Teleoperation trial with the humanoid robot.',
-            },
-        ],
+        video: { id: '1PAxkPUROKN5dDTs7-5LCuMKNqdZAJL6t', title: 'Unitree G1 teleoperation' },
     },
 ]
 
-const goalSlides = [
-    {
-        title: 'Clinical inspection task',
-        image: '/images/projects/dynamo/goal-clinic.webp',
-        note: 'Humanoid reasoning and operator-facing task execution in a structured room.',
-        fit: 'object-contain bg-slate-100',
-    },
-    {
-        title: 'Warehouse manipulation task',
-        image: '/images/projects/dynamo/goal-warehouse.webp',
-        note: 'Mobile-base support for logistics-style object handling and placement.',
-        fit: 'object-contain bg-slate-100',
-    },
-    {
-        title: 'Domestic handling task',
-        image: '/images/projects/dynamo/goal-laundry.webp',
-        note: 'Humanoid handling in a domestic environment with soft-object manipulation.',
-        fit: 'object-contain bg-slate-100',
-    },
-]
+// Quiet uppercase eyebrow with a single green hairline — the page's one accent, kept from the glassy pass.
+const Label = ({ children }) => (
+    <div className="flex items-center gap-2.5">
+        <span className="h-px w-5 bg-primary-500" aria-hidden="true" />
+        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">{children}</span>
+    </div>
+)
 
-const VideoCarousel = ({ videos }) => {
-    const [activeIndex, setActiveIndex] = useState(0)
-    const hasVideos = videos.length > 0
-    const video = hasVideos ? videos[activeIndex] : null
-    const hasMultiple = videos.length > 1
+const MiniLabel = ({ children }) => (
+    <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">
+        <span className="h-px w-4 bg-primary-500" aria-hidden="true" />
+        {children}
+    </p>
+)
 
-    useEffect(() => {
-        if (!hasMultiple) return undefined
-
-        const timer = window.setInterval(() => {
-            setActiveIndex((current) => (current + 1) % videos.length)
-        }, 18000)
-
-        return () => window.clearInterval(timer)
-    }, [hasMultiple, videos.length])
-
-    const showPrevious = () => {
-        setActiveIndex((current) => (current === 0 ? videos.length - 1 : current - 1))
-    }
-
-    const showNext = () => {
-        setActiveIndex((current) => (current + 1) % videos.length)
-    }
-
-    if (!hasVideos) {
-        return (
-            <article className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-                <div className="aspect-video bg-slate-950">
-                    <LazyVideo
-                        src={assetUrl('/videos/core-labs-hero.mp4')}
-                        poster={assetUrl('/videos/hero-poster.webp')}
-                        className="h-full w-full object-cover opacity-75"
-                        autoPlay
-                        muted
-                        loop
-                    />
-                </div>
-                <div className="p-4">
-                    <h4 className="text-sm font-bold text-slate-950">Project context preview</h4>
-                    <p className="mt-1 text-sm leading-6 text-slate-600">
-                        This milestone defines the technical objective. Operation-specific proof appears once concrete robot runs are executed.
-                    </p>
-                </div>
-            </article>
-        )
-    }
-
-    return (
-        <article className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-            <div className="relative aspect-video bg-slate-950">
-                <iframe
-                    key={video.id}
-                    src={drivePreview(video.id)}
-                    title={video.title}
-                    className="h-full w-full"
-                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                    allowFullScreen
-                />
-                {hasMultiple && (
-                    <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-between px-3 pointer-events-none">
-                        <button
-                            type="button"
-                            onClick={showPrevious}
-                            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-lg transition hover:bg-white"
-                            aria-label="Previous video"
-                        >
-                            <FaArrowLeft className="h-4 w-4" aria-hidden="true" />
-                        </button>
-                        <button
-                            type="button"
-                            onClick={showNext}
-                            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-lg transition hover:bg-white"
-                            aria-label="Next video"
-                        >
-                            <FaArrowRight className="h-4 w-4" aria-hidden="true" />
-                        </button>
-                    </div>
-                )}
-            </div>
-            <div className="p-4">
-                <div className="mb-2 flex items-center justify-between gap-4">
-                    <h4 className="text-sm font-bold text-slate-950">{video.title}</h4>
-                    {hasMultiple && (
-                        <span className="text-xs font-bold text-slate-400">
-                            {activeIndex + 1}/{videos.length}
-                        </span>
-                    )}
-                </div>
-                <p className="text-sm leading-6 text-slate-600">{video.note}</p>
-            </div>
-        </article>
-    )
-}
-
-const GoalImageCarousel = () => {
-    const [activeIndex, setActiveIndex] = useState(0)
-    const slide = goalSlides[activeIndex]
-
-    useEffect(() => {
-        const timer = window.setInterval(() => {
-            setActiveIndex((current) => (current + 1) % goalSlides.length)
-        }, 4200)
-
-        return () => window.clearInterval(timer)
-    }, [])
-
-    return (
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-200/70">
-            <div className="relative h-[620px] max-h-[72vh] min-h-[480px] bg-slate-100">
-                <img
-                    key={slide.image}
-                    src={assetUrl(slide.image)}
-                    alt={slide.title}
-                    loading="lazy"
-                    decoding="async"
-                    className={`h-full w-full transition-opacity duration-500 ${slide.fit}`}
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-5 text-white">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary-200">{slide.title}</p>
-                    <p className="mt-2 text-sm leading-6 text-white/82">{slide.note}</p>
-                </div>
-                <button
-                    type="button"
-                    onClick={() => setActiveIndex((current) => (current === 0 ? goalSlides.length - 1 : current - 1))}
-                    className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-lg transition hover:bg-white"
-                    aria-label="Previous goal image"
-                >
-                    <FaArrowLeft className="h-4 w-4" aria-hidden="true" />
-                </button>
-                <button
-                    type="button"
-                    onClick={() => setActiveIndex((current) => (current + 1) % goalSlides.length)}
-                    className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-lg transition hover:bg-white"
-                    aria-label="Next goal image"
-                >
-                    <FaArrowRight className="h-4 w-4" aria-hidden="true" />
-                </button>
-            </div>
-            <div className="flex items-center justify-center gap-2 p-4">
-                {goalSlides.map((item, index) => (
-                    <button
-                        key={item.title}
-                        type="button"
-                        onClick={() => setActiveIndex(index)}
-                        className={`h-2.5 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-primary-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
-                        aria-label={`Show ${item.title}`}
-                    />
-                ))}
-            </div>
-        </div>
-    )
-}
+const total = experimentResults.length
+// Newest progress entry first; numbering stays chronological (first ever = 01).
+const displayOrder = Array.from({ length: total }, (_, k) => total - 1 - k)
 
 const Dynamo = () => {
-    const [activeTab, setActiveTab] = useState('home')
+    const [activeRun, setActiveRun] = useState(total - 1)
+    const [paused, setPaused] = useState(false)
+    // Indices whose iframe has been mounted. A video mounts the moment it first
+    // becomes active (so it loads while visible and autoplays), then stays
+    // mounted — revisiting it is instant with no reload.
+    const [mounted, setMounted] = useState(() => new Set([total - 1]))
+    const activeRunRef = useRef(total - 1)
+
+    const run = experimentResults[activeRun]
+
+    useEffect(() => {
+        activeRunRef.current = activeRun
+    }, [activeRun])
+
+    const show = (i) => {
+        activeRunRef.current = i
+        setActiveRun(i)
+        setMounted((prev) => (prev.has(i) ? prev : new Set(prev).add(i)))
+    }
+
+    // Auto-advance newest → oldest every 8s until the user picks one manually.
+    useEffect(() => {
+        if (paused) return undefined
+        const timer = window.setInterval(() => {
+            const next = (activeRunRef.current - 1 + total) % total
+            activeRunRef.current = next
+            setActiveRun(next)
+            setMounted((prev) => (prev.has(next) ? prev : new Set(prev).add(next)))
+        }, 8000)
+        return () => window.clearInterval(timer)
+    }, [paused])
+
+    const selectRun = (i) => {
+        setPaused(true)
+        show(i)
+    }
+
+    const step = (delta) => {
+        setPaused(true)
+        show((activeRunRef.current + delta + total) % total)
+    }
 
     return (
-        <div className="bg-white text-slate-950">
-            <section id="hero" className="relative min-h-[72vh] overflow-hidden bg-slate-950 text-white">
-                <img
-                    src={assetUrl('/images/projects/dynamo/hero.webp')}
-                    alt=""
-                    fetchPriority="high"
-                    decoding="async"
-                    className="absolute inset-0 h-full w-full object-cover opacity-55"
-                    aria-hidden="true"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/82 to-slate-950/22" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+        <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 font-sans text-slate-950">
+            {/* Hero — kept from the cinematic pass: a dark rounded render panel anchoring the light page */}
+            <section className="px-3 pt-3 sm:px-4 sm:pt-4">
+                <div className="relative min-h-[33rem] overflow-hidden rounded-3xl bg-slate-950 md:min-h-[36rem]">
+                    <img
+                        src={assetUrl('/images/projects/dynamo/hero.webp')}
+                        alt=""
+                        fetchPriority="high"
+                        decoding="async"
+                        className="absolute inset-0 h-full w-full object-cover"
+                        aria-hidden="true"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/75 to-slate-950/15" aria-hidden="true" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/25" aria-hidden="true" />
 
-                <div className="container relative z-10 mx-auto flex min-h-[72vh] max-w-7xl items-end px-6 pb-16 pt-28 md:px-10">
-                    <div className="max-w-3xl">
-                        <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary-200">
-                            Dynamic Navigation and Manipulation Operations
-                        </p>
-                        <h1 className="mb-5 text-5xl font-black leading-none tracking-tight md:text-7xl">
-                            DyNAMO
-                        </h1>
-                        <p className="max-w-2xl text-lg leading-8 text-white/78">
-                            A visible robotics research progression: from an integrated navigation-manipulation goal
-                            to simulation, teleoperation, and hardware-facing validation.
-                        </p>
-                        <button
-                            type="button"
-                            onClick={() => setActiveTab('experiments')}
-                            className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-950 shadow-xl transition hover:bg-primary-50"
-                        >
-                            View result timeline
-                        </button>
+                    <div className="container relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-28 sm:px-10 md:pb-16 md:pt-32">
+                        <div className="max-w-2xl">
+                            <div className="flex flex-wrap gap-2.5">
+                                {heroTags.map((tag) => (
+                                    <span
+                                        key={tag}
+                                        className="rounded-full border border-white/25 bg-white/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white/85 backdrop-blur-sm"
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+
+                            <h1 className="mt-6 text-5xl font-bold tracking-tight text-white md:text-6xl">DyNAMO</h1>
+                            <p className="mt-5 text-lg leading-8 text-white/85">
+                                DyNAMO advances cognitive robotics by bridging perception, reasoning, and action — an
+                                integrated framework for dynamic navigation and manipulation, carried from simulation
+                                through to real hardware.
+                            </p>
+
+                            <div className="mt-7 rounded-2xl border border-white/15 bg-white/10 p-6 backdrop-blur-md">
+                                <p className="text-[15px] leading-7 text-white/85">
+                                    A cognitive robotic system built to adapt to unstructured environments and learn
+                                    through interaction. It pairs foundation-model reasoning with classical navigation
+                                    and control to reach versatile, robust behavior in real-world settings.
+                                </p>
+                            </div>
+
+                            <Link
+                                to="/core-labs"
+                                className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/90 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700 shadow-lg shadow-slate-950/30 backdrop-blur transition hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-primary-900"
+                            >
+                                <FaArrowLeft className="h-3 w-3" aria-hidden="true" />
+                                CORE Labs
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <div className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur-xl">
-                <div className="container mx-auto max-w-5xl px-4 pt-2">
-                    <div className="grid grid-cols-3 items-end gap-1 border-b border-slate-200">
-                        {tabs.map((tab) => {
-                            const Icon = tab.icon
-                            const isActive = activeTab === tab.id
-                            return (
-                                <button
-                                    key={tab.id}
-                                    type="button"
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`relative -mb-px flex min-h-11 items-center justify-center gap-2 rounded-t-md border px-3 text-xs font-bold transition md:text-sm ${
-                                        isActive
-                                            ? 'border-slate-200 border-b-white bg-white text-slate-950 shadow-[0_-8px_24px_rgba(15,23,42,0.08)]'
-                                            : 'border-transparent bg-slate-100/75 text-slate-500 hover:bg-white hover:text-slate-950'
-                                    }`}
-                                >
-                                    <Icon className="h-4 w-4" aria-hidden="true" />
-                                    <span className="hidden sm:inline">{tab.label}</span>
-                                </button>
-                            )
-                        })}
-                    </div>
-                </div>
-            </div>
-
-            <main>
-                {activeTab === 'home' && (
-                    <>
-                <section id="goal" className="py-20 md:py-28">
-                    <div className="container mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:items-center md:px-10">
+            {/* Experiment browser — leader-follower layout: player + run selector + about */}
+            <section id="experiments" className="scroll-mt-6 py-14 md:py-20">
+                <div className="container mx-auto max-w-7xl px-6 md:px-10">
+                    {/* Objective + research question — VialSort-style intro replacing the old "Results and proof videos" header */}
+                    <div className="grid gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-end">
                         <div>
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Project Goal</p>
-                            <h2 className="mb-6 text-4xl font-black leading-tight tracking-tight md:text-5xl">
-                                Build the bridge between navigation, manipulation, and embodied reasoning.
+                            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Objective</p>
+                            <h2 className="text-2xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">
+                                Integrate navigation, manipulation, and reasoning
                             </h2>
-                            <p className="text-lg leading-8 text-slate-600">
-                                Dynamo aims to demonstrate an integrated system where a humanoid robot identifies,
-                                grasps, and places objects while working with an autonomously navigating mobile base.
-                                The core challenge is Sim2Real transfer: behavior developed in simulation must survive
-                                the noise and constraints of physical operation.
-                            </p>
-                            <div className="mt-8 rounded-lg border-l-4 border-primary-600 bg-slate-50 p-5">
-                                <p className="text-sm italic leading-7 text-slate-600">
-                                    Bridging perception, reasoning, navigation, and manipulation through a visible experiment pipeline.
-                                </p>
-                            </div>
-                        </div>
-
-                        <GoalImageCarousel />
-                    </div>
-                </section>
-
-                <section id="status" className="bg-slate-50 py-20 md:py-24">
-                    <div className="container mx-auto max-w-6xl px-6 md:px-10">
-                        <div className="mx-auto mb-12 max-w-3xl text-center">
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Current Status</p>
-                            <h2 className="mb-4 text-3xl font-black leading-tight tracking-tight md:text-4xl">
-                                Active workstreams moving toward one integrated robot testbed.
-                            </h2>
-                            <p className="text-slate-600">
-                                The current project state is intentionally iterative: each operation captures
-                                simulation, teleoperation, or hardware validation rather than a polished final product.
+                            <p className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-600 md:text-base md:leading-8">
+                                Dynamo demonstrates an integrated system where a humanoid robot identifies, grasps, and
+                                places objects while working with an autonomously navigating mobile base. The core
+                                challenge is Sim2Real transfer: behavior developed in simulation must survive the noise
+                                and constraints of physical operation.
                             </p>
                         </div>
-
-                        <div className="grid gap-5 md:grid-cols-3">
-                            {statusCards.map((card) => {
-                                const Icon = card.icon
-                                return (
-                                    <article key={card.title} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-                                        <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-md bg-slate-950 text-white">
-                                            <Icon className="h-4 w-4" aria-hidden="true" />
-                                        </div>
-                                        <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">{card.eyebrow}</p>
-                                        <h3 className="mb-3 text-xl font-bold">{card.title}</h3>
-                                        <p className="leading-7 text-slate-600">{card.text}</p>
-                                    </article>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </section>
-
-                    </>
-                )}
-
-                {activeTab === 'architecture' && (
-                <section id="architecture" className="bg-gradient-to-b from-white to-slate-50 py-20 md:py-24">
-                    <div className="container mx-auto max-w-6xl px-6 md:px-10">
-                        <div className="mb-10 text-center">
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">System Architecture</p>
-                            <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                                Interface-driven robotics architecture.
-                            </h2>
-                        </div>
-                        <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl shadow-slate-200/70 md:p-6">
-                          <div className="overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
-                            <img
-                                src={assetUrl('/images/projects/dynamo/architecture.webp')}
-                                alt="Dynamo system architecture"
-                                loading="lazy"
-                                decoding="async"
-                                className="w-full object-contain"
-                            />
-                          </div>
-                        </div>
-                    </div>
-                </section>
-                )}
-
-                {activeTab === 'home' && (
-                <section id="technical" className="bg-[#f6f9fc] py-20 md:py-24">
-                    <div className="container mx-auto max-w-6xl px-6 md:px-10">
-                        <div className="mb-12 text-center">
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Technical Overview</p>
-                            <h2 className="text-3xl font-black tracking-tight md:text-4xl">The stack behind the experiments.</h2>
-                        </div>
-
-                        <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-200/60 md:p-6">
-                            <div className="grid gap-5 md:grid-cols-2">
-                                {technicalBlocks.map((block, index) => {
-                                    const Icon = block.icon
-                                    const colorClasses = {
-                                        blue: 'bg-primary-50 text-primary-700 border-primary-100',
-                                        emerald: 'bg-emerald-50 text-emerald-700 border-emerald-100',
-                                        amber: 'bg-amber-50 text-amber-700 border-amber-100',
-                                        violet: 'bg-violet-50 text-violet-700 border-violet-100',
-                                    }
-
-                                    return (
-                                        <article key={block.title} className="relative rounded-xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary-200 hover:shadow-lg">
-                                            <div className="mb-5 flex items-start justify-between gap-4">
-                                                <div className={`flex h-12 w-12 items-center justify-center rounded-lg border ${colorClasses[block.color]}`}>
-                                                    <Icon className="h-5 w-5" aria-hidden="true" />
-                                                </div>
-                                                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500">
-                                                    0{index + 1}
-                                                </span>
-                                            </div>
-                                            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">{block.label}</p>
-                                            <h3 className="mb-2 text-xl font-bold text-slate-950">{block.title}</h3>
-                                            <p className="mb-5 text-sm font-semibold text-slate-500">{block.metric}</p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {block.points.map((point) => (
-                                                    <span key={point} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-600">
-                                                        {point}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </article>
-                                    )
-                                })}
-                            </div>
-                        </div>
-
-                        <div className="mt-8 overflow-hidden rounded-2xl bg-slate-950 text-white shadow-2xl">
-                            <div className="grid md:grid-cols-3">
-                                {['Simulate', 'Validate', 'Integrate'].map((step, index) => (
-                                    <div key={step} className="flex items-start gap-4 border-white/10 p-6 md:border-r md:last:border-r-0">
-                                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-sm font-black">
-                                            {index + 1}
-                                        </span>
-                                        <div>
-                                            <h3 className="font-bold">{step}</h3>
-                                            <p className="text-sm text-slate-300">
-                                                {index === 0 && 'Build repeatable scenes and robot behavior trials.'}
-                                                {index === 1 && 'Compare simulation evidence with hardware-facing runs.'}
-                                                {index === 2 && 'Connect mobility, manipulation, perception, and state.'}
-                                            </p>
-                                        </div>
-                                    </div>
+                        <div className="rounded-2xl border border-primary-100 bg-white/85 p-5 shadow-xl shadow-primary-100/70 backdrop-blur">
+                            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Research question</p>
+                            <p className="mt-3 text-sm leading-7 text-slate-600">
+                                Can navigation and manipulation developed in simulation transfer to real hardware as one
+                                integrated system — and how reliably does each subsystem hold up under physical conditions?
+                            </p>
+                            <div className="mt-4 flex flex-wrap gap-2">
+                                {researchTags.map((tag) => (
+                                    <span
+                                        key={tag}
+                                        className="rounded-full border border-primary-200 bg-primary-50 px-3 py-1 text-xs font-bold text-primary-800"
+                                    >
+                                        {tag}
+                                    </span>
                                 ))}
                             </div>
                         </div>
                     </div>
-                </section>
-                )}
 
-                {activeTab === 'experiments' && (
-                <section id="experiments" className="py-20 md:py-24">
-                    <div className="container mx-auto max-w-6xl px-6 md:px-10">
-                        <div className="mx-auto mb-12 max-w-3xl text-center">
-                            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-primary-700">Experiments & Results</p>
-                            <h2 className="mb-4 text-3xl font-black leading-tight tracking-tight md:text-4xl">
-                                Timeline of Dynamo results with associated proof videos.
-                            </h2>
-                            <p className="text-slate-600">
-                                Each result is described by the technical operation carried out, the observed outcome,
-                                and one visible video at a time for that part of the project.
-                            </p>
+                    <p className="mb-5 mt-12 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Experiment log</p>
+                    <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
+                        {/* Player */}
+                        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60 lg:self-start">
+                            <div className="relative aspect-video w-full bg-black">
+                                {/* Each iframe mounts when first active (loads visible → autoplays) then stays mounted, so swapping back is instant with no reload */}
+                                {experimentResults.map((item, i) =>
+                                    i === activeRun || mounted.has(i) ? (
+                                        <iframe
+                                            key={item.video.id}
+                                            src={drivePreview(item.video.id)}
+                                            title={item.video.title}
+                                            className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${
+                                                i === activeRun ? 'z-10 opacity-100' : 'pointer-events-none z-0 opacity-0'
+                                            }`}
+                                            allow="autoplay; encrypted-media; picture-in-picture"
+                                            allowFullScreen
+                                        />
+                                    ) : null,
+                                )}
+                            </div>
+
+                            <div className="flex items-start justify-between gap-4 border-t border-slate-200 bg-white px-5 py-4">
+                                <div className="min-w-0">
+                                    <div className="mb-2 flex flex-wrap items-center gap-2">
+                                        <span className="rounded bg-primary-600 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-white">
+                                            Milestone {pad(activeRun + 1)}
+                                        </span>
+                                        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">
+                                            {run.operation}
+                                        </span>
+                                    </div>
+                                    <h3 className="text-lg font-bold text-slate-950">{run.title}</h3>
+                                    <p className="mt-2 text-sm leading-6 text-slate-600">{run.summary}</p>
+                                    <p className="mt-3 border-l-2 border-primary-400 pl-3 text-sm leading-6 text-slate-500">
+                                        <span className="font-bold uppercase tracking-[0.18em] text-primary-700">Outcome</span>
+                                        <span className="mx-1">·</span>
+                                        {run.outcome}
+                                    </p>
+                                </div>
+                                <div className="flex shrink-0 items-center gap-1.5">
+                                    <button
+                                        type="button"
+                                        onClick={() => step(1)}
+                                        className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition hover:bg-primary-50 hover:text-primary-700"
+                                        aria-label="Newer milestone"
+                                    >
+                                        <FaArrowLeft className="h-3 w-3" />
+                                    </button>
+                                    <span className="w-9 text-center font-mono text-xs font-bold text-slate-400">
+                                        {pad(activeRun + 1)}/{pad(total)}
+                                    </span>
+                                    <button
+                                        type="button"
+                                        onClick={() => step(-1)}
+                                        className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition hover:bg-primary-50 hover:text-primary-700"
+                                        aria-label="Older milestone"
+                                    >
+                                        <FaArrowRight className="h-3 w-3" />
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="space-y-8">
-                            {experimentResults.map((item, index) => (
-                                <article key={item.title} className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xl">
-                                    <div className="grid lg:grid-cols-12">
-                                        <div className="p-8 md:p-10 lg:col-span-5">
-                                            <span className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-700 text-sm font-bold text-white">
-                                                {index + 1}
-                                            </span>
-                                            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">{item.phase}</p>
-                                            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{item.operation}</p>
-                                            <h3 className="mb-4 text-2xl font-bold">{item.title}</h3>
-                                            <p className="mb-5 leading-7 text-slate-600">{item.summary}</p>
-                                            <div className="rounded-lg border border-slate-200 bg-slate-50 p-5">
-                                                <p className="mb-2 text-sm font-bold text-slate-950">Result</p>
-                                                <p className="text-sm leading-6 text-slate-600">{item.outcome}</p>
+                        {/* Sidebar: update selector — newest first, stretches full height as more land */}
+                        <section className="flex flex-col rounded-2xl border border-slate-200 bg-white/70 p-3 shadow-sm backdrop-blur-sm">
+                            <div className="mb-3 px-1">
+                                <MiniLabel>Milestones</MiniLabel>
+                            </div>
+                            <div className="space-y-2">
+                                {displayOrder.map((idx) => {
+                                    const item = experimentResults[idx]
+                                    const isActive = idx === activeRun
+                                    return (
+                                        <button
+                                            key={item.video.id}
+                                            type="button"
+                                            onClick={() => selectRun(idx)}
+                                            className={`group w-full overflow-hidden rounded-xl text-left transition ${
+                                                isActive
+                                                    ? 'bg-primary-50 ring-2 ring-primary-500 ring-offset-1 ring-offset-white'
+                                                    : 'hover:bg-slate-50'
+                                            }`}
+                                        >
+                                            <div className="flex items-center gap-3 p-3">
+                                                <div className="relative flex aspect-video w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100">
+                                                    <span className="font-mono text-sm font-bold text-slate-400">{pad(idx + 1)}</span>
+                                                    {isActive && <span className="absolute inset-0 bg-primary-600/10" />}
+                                                </div>
+                                                <div className="min-w-0">
+                                                    <p className={`truncate text-[11px] font-bold uppercase tracking-[0.18em] ${isActive ? 'text-primary-700' : 'text-slate-400'}`}>
+                                                        {item.operation}
+                                                    </p>
+                                                    <p className={`mt-0.5 line-clamp-2 text-sm font-semibold leading-5 ${isActive ? 'text-slate-900' : 'text-slate-700'}`}>
+                                                        {item.title}
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </button>
+                                    )
+                                })}
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
 
-                                        <div className="bg-slate-50 p-5 md:p-8 lg:col-span-7">
-                                            <VideoCarousel videos={item.videos} />
-                                        </div>
+            {/* System architecture + technical stack */}
+            <section id="architecture" className="border-t border-slate-200/70 py-14 md:py-20">
+                <div className="container mx-auto grid max-w-7xl gap-10 px-6 md:px-10 lg:grid-cols-12">
+                    <div className="lg:col-span-7">
+                        <Label>System architecture</Label>
+                        <figure className="mt-5 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                            <div className="overflow-hidden rounded-xl bg-white">
+                                <img
+                                    src={assetUrl('/images/projects/dynamo/architecture.webp')}
+                                    alt="Dynamo system architecture"
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="max-h-[440px] w-full object-contain"
+                                />
+                            </div>
+                            <figcaption className="mt-3 px-1 text-xs leading-5 text-slate-500">
+                                <span className="font-mono text-slate-400">Fig. 1</span>
+                                <span className="mx-1.5">·</span>
+                                Interfaces between navigation, manipulation, perception, and scene state.
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div className="lg:col-span-5">
+                        <Label>Technical stack</Label>
+                        <div className="mt-5 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white/70 shadow-sm backdrop-blur-sm">
+                            {stackRows.map((row) => (
+                                <div key={row.layer} className="px-5 py-3.5">
+                                    <div className="flex items-baseline justify-between gap-3">
+                                        <h3 className="text-sm font-semibold text-slate-900">{row.layer}</h3>
+                                        <span className="font-mono text-xs text-slate-500">{row.approach}</span>
                                     </div>
-                                </article>
+                                    <p className="mt-1 text-sm text-slate-700">{row.system}</p>
+                                    <p className="mt-1 text-xs leading-5 text-slate-500">{row.detail}</p>
+                                </div>
                             ))}
                         </div>
                     </div>
-                </section>
-                )}
+                </div>
+            </section>
 
-                <section className="pb-20 text-center">
-                    <Link
-                        to="/core-labs"
-                        className="inline-flex items-center gap-3 rounded-full border border-primary-700 px-6 py-3 text-sm font-bold text-primary-700 transition hover:bg-primary-700 hover:text-white"
-                    >
-                        <FaArrowLeft className="h-3 w-3" aria-hidden="true" />
-                        Back to CORE Labs
-                    </Link>
-                </section>
-            </main>
         </div>
     )
 }

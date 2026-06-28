@@ -37,7 +37,7 @@ npm run dev      # vite dev server at http://localhost:5173
 | `npm run build` | Production build to `dist/`. Fast (~2s); run after route/style changes to catch dead refs. |
 | `npm run preview` | Serve the built `dist/` locally. |
 | `npm run lint` | ESLint (flat config), zero warnings allowed. |
-| `npm run optimize-images` | Convert large PNG/JPEG in `public/` to WebP (see `docs/assets.md`). |
+| `npm run optimize-images` | Convert large PNG/JPEG in `public/` to WebP (see `wiki/assets.md`). |
 
 ## Project structure
 
