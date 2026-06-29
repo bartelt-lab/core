@@ -107,6 +107,29 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
+
+  /* Tailwind preflight no longer sets cursor:pointer on buttons, so icon
+     buttons fell back to the text caret. Restore pointer on interactive
+     controls and stop their labels/icons from showing a text-selection cursor. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+
+  button,
+  [role="button"],
+  a {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Icons are decorative glyphs, never selectable text — inherit the
+     parent's cursor instead of resolving to the I-beam. */
+  svg {
+    cursor: inherit;
+  }
 }
 
 @layer utilities {
