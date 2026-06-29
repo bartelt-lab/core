@@ -9,13 +9,21 @@ const milestones = [
         operation: 'RGB-D + 2D LiDAR',
         title: 'Leader following',
         summary: 'The Ridgeback is placed in a simulated room with three humans wearing purple, red, and yellow shirts plus two green sphere obstacles. YOLOv8 detects humans and objects, HSV analysis classifies shirt colors, and RViz overlays each person in the 3D point cloud with matching colors and 3D bounding boxes. The yellow human is tele-operated as the leader, while a light yellow line shows the intended follow path.',
-        media: { type: 'drive', id: '1I3MewBHfAIEDlvqzZKx_gaFmSe2IZ_qo', title: 'Leader Following' },
+        media: {
+            type: 'video',
+            src: '/videos/demonstrations/leader-following/leader-following-run-01.mp4',
+            title: 'Leader Following',
+        },
     },
     {
         operation: '3D LiDAR',
-        title: 'Leader following — 3D LiDAR',
+        title: 'Leader following - 3D LiDAR',
         summary: 'This version uses a 3D 360-degree LiDAR instead of 2D LiDARs. The Ridgeback understands the surrounding environment mainly from the LiDAR point cloud, while the camera is used only for human detection, shirt-color classification, and highlighting the detected humans in RViz.',
-        media: { type: 'drive', id: '16poGKtDsxvexz3IPuVGQ8PdITIMffGqa', title: 'Leader Following - 3D LiDAR' },
+        media: {
+            type: 'video',
+            src: '/videos/demonstrations/leader-following/leader-following-run-02.mp4',
+            title: 'Leader Following - 3D LiDAR',
+        },
     },
 ]
 
@@ -49,12 +57,12 @@ const LeaderFollowing = () => (
             <div className="grid gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-end">
                 <div>
                     <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">
-                        Cognitive robotics · Ridgeback simulation
+                        Cognitive robotics - Ridgeback simulation
                     </p>
                     <h1 className="text-4xl font-bold leading-none tracking-tight md:text-6xl">Leader Following</h1>
                     <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600">
                         Ridgeback leader-following experiments that pick a chosen person out of a crowded scene and
-                        follow them through clutter — fusing camera-based detection with point-cloud perception to
+                        follow them through clutter - fusing camera-based detection with point-cloud perception to
                         track the leader and visualize the intended follow path in RViz.
                     </p>
                 </div>
