@@ -9,14 +9,19 @@ const milestones = [
     {
         operation: 'Teleoperated demonstration',
         title: 'Annotated episode',
-        summary: 'Language instruction, camera observation, and vial manipulation in one run — the annotated demonstration the training dataset is built from.',
+        summary: 'Language instruction, camera observation, and vial manipulation in one run - the annotated demonstration the training dataset is built from.',
         media: { type: 'video', src: '/videos/demonstrations/vial-sort/annotated_episode.mp4', title: 'Annotated episode' },
     },
     {
         operation: 'Autonomous policy',
         title: 'First successful autonomous run',
-        summary: 'The first end-to-end autonomous vial sort executed by the fine-tuned pi0 policy. Footage is being prepared — the still is a placeholder until the run video is added.',
-        media: { type: 'image', src: '/images/projects/vial-sort/hero.webp', alt: 'First successful autonomous run (placeholder)' },
+        summary: 'The first end-to-end autonomous vial sort executed by the fine-tuned pi0 policy.',
+        media: {
+            type: 'video',
+            src: '/videos/demonstrations/vial-sort/autonomous_run.mp4',
+            poster: '/videos/demonstrations/vial-sort/autonomous_run-poster.webp',
+            title: 'First successful autonomous run',
+        },
     },
 ]
 
@@ -66,13 +71,13 @@ const AboutCard = () => (
 
 const VialSort = () => (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 font-sans text-slate-950">
-        <header className="relative overflow-hidden pt-36 pb-12 md:pt-40">
+        <header className="relative overflow-hidden pb-12 pt-36 md:pt-40">
             <div className="absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-white/80 to-transparent" aria-hidden="true" />
             <div className="container relative mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[0.95fr_1.05fr] md:items-end md:px-10">
                 <div>
                     <BackToLabsPill variant="light" className="mb-8" />
                     <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">
-                        Cognitive robotics · SO-101 robotic arm
+                        Cognitive robotics - SO-101 robotic arm
                     </p>
                     <h1 className="text-4xl font-bold leading-none tracking-tight md:text-6xl">Vial Sort</h1>
                     <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600 md:text-lg">

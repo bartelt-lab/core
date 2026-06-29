@@ -35,6 +35,7 @@ const Media = ({ media, title, active }) => {
         return (
             <video
                 src={assetUrl(media.src)}
+                poster={media.poster ? assetUrl(media.poster) : undefined}
                 title={media.title || title}
                 className={`${cls} object-cover`}
                 autoPlay
