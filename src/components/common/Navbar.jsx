@@ -3,10 +3,12 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaBookOpen, FaBrain, FaFlask, FaServer } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
+import { useLanguage } from '../../i18n/useLanguage'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
+  const { pick } = useLanguage()
 
   // Shrink the bar slightly once scrolled. (To make the bar hide entirely past a
   // scroll threshold on a specific route, see wiki/navbar-scroll-hide.md.)
@@ -90,7 +92,18 @@ const Navbar = () => {
                   }`}
                   aria-hidden="true"
                 />
-                <span className="hidden lg:inline">{item.label}</span>
+                <span className="hidden lg:inline">
+                  {pick(
+                    item.label,
+                    item.label === 'Publications'
+                      ? 'Publikationen'
+                      : item.label === 'AI Team Projects'
+                        ? 'AI-Team-Projekte'
+                        : item.label === 'Compute Cluster'
+                          ? 'Rechencluster'
+                          : item.label,
+                  )}
+                </span>
                 {item.isActive && (
                   <motion.span
                     layoutId="nav-underline"

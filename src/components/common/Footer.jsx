@@ -1,6 +1,8 @@
 import assetUrl from '../../utils/assetUrl'
+import { useLanguage } from '../../i18n/useLanguage'
 
 const Footer = () => {
+  const { pick } = useLanguage()
   const logos = [
     { src: 'logos/clausthal-logo.webp', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
     { src: 'logos/ubb-logo.webp', alt: 'Babes-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-20' },
@@ -12,7 +14,7 @@ const Footer = () => {
       <div className="container mx-auto max-w-7xl px-4 md:pr-20 lg:pr-24">
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-4">
           <div className="md:col-span-3">
-            <h3 className="mb-4 text-lg font-semibold">Partner Institutions</h3>
+            <h3 className="mb-4 text-lg font-semibold">{pick('Partner Institutions', 'Partnerinstitutionen')}</h3>
             <div className="flex flex-wrap items-center gap-4">
               {logos.map((logo) => (
                 <a
@@ -39,7 +41,7 @@ const Footer = () => {
 
           <div className="md:col-span-1 md:pr-6 md:text-right lg:pr-10">
             <h3 className="mb-2 text-2xl font-heading font-bold text-tertiary-600">CORE</h3>
-            <p className="mb-4 text-gray-600">Cognitive Software in Europe</p>
+            <p className="mb-4 text-gray-600">{pick('Cognitive Software in Europe', 'Kognitive Software in Europa')}</p>
             <p className="text-sm text-gray-500">
               © {new Date().getFullYear()} CORE Initiative. All rights reserved.
             </p>
@@ -47,7 +49,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 border-t border-gray-200 pt-8 text-center text-sm text-gray-500">
-          <p>Advancing cognitive software research through European collaboration</p>
+          <p>{pick('Advancing cognitive software research through European collaboration', 'Wir fördern Forschung zu kognitiver Software durch europäische Zusammenarbeit')}</p>
         </div>
       </div>
     </footer>
