@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '../../i18n/useLanguage';
 
 const taughtCourses = [
     {
@@ -161,9 +162,9 @@ const thesisAiUse = [
 ];
 
 const quickLinks = [
-    { label: 'Courses', href: '#courses-overview' },
-    { label: 'Seminars', href: '#seminars' },
-    { label: 'Theses', href: '#theses' }
+    { id: 'courses-overview', label: 'Courses' },
+    { id: 'seminars', label: 'Seminars' },
+    { id: 'theses', label: 'Theses' }
 ];
 
 const SectionBlock = ({ title, intro, topContent, children, id }) => (
@@ -185,6 +186,11 @@ const SectionBlock = ({ title, intro, topContent, children, id }) => (
 
 const Teaching = ({ initialSection }) => {
     const location = useLocation();
+    const { pick } = useLanguage();
+    const normalizeSection = (value) => (
+        quickLinks.some((item) => item.id === value) ? value : 'courses-overview'
+    );
+    const [activeSection, setActiveSection] = useState(() => normalizeSection(initialSection));
 
     const scrollToSection = (targetId) => {
         const element = document.getElementById(targetId);
@@ -204,10 +210,20 @@ const Teaching = ({ initialSection }) => {
             return;
         }
 
+        const frame = window.requestAnimationFrame(() => {
+            setActiveSection(normalizeSection(targetId));
+            scrollToSection(normalizeSection(targetId));
+        });
+
+        return () => window.cancelAnimationFrame(frame);
+    }, [initialSection, location.hash]);
+
+    const selectSection = (targetId) => {
+        setActiveSection(targetId);
         window.requestAnimationFrame(() => {
             scrollToSection(targetId);
         });
-    }, [initialSection, location.hash]);
+    };
 
     return (
         <>
@@ -215,11 +231,11 @@ const Teaching = ({ initialSection }) => {
                 .teaching-hero {
                     position: relative;
                     overflow: hidden;
-                    padding: 120px 0 72px;
+                    padding: 50px 0 38px;
                     background:
-                        radial-gradient(circle at top left, rgba(235, 117, 78, 0.25), transparent 32%),
-                        radial-gradient(circle at right 20%, rgba(34, 101, 163, 0.28), transparent 34%),
-                        linear-gradient(135deg, #f7efe8 0%, #f8f4ee 38%, #e8f0f7 100%);
+                        radial-gradient(circle at top left, rgba(16, 175, 57, 0.2), transparent 32%),
+                        radial-gradient(circle at right 20%, rgba(209, 248, 219, 0.6), transparent 34%),
+                        linear-gradient(135deg, #ffffff 0%, #f8fff9 42%, #eefbf2 100%);
                 }
                 .teaching-hero::before,
                 .teaching-hero::after {
@@ -234,35 +250,48 @@ const Teaching = ({ initialSection }) => {
                     height: 260px;
                     right: -70px;
                     top: 40px;
-                    background: rgba(235, 117, 78, 0.18);
+                    background: rgba(16, 175, 57, 0.16);
                 }
                 .teaching-hero::after {
                     width: 320px;
                     height: 320px;
                     left: -120px;
                     bottom: -120px;
-                    background: rgba(34, 101, 163, 0.14);
+                    background: rgba(209, 248, 219, 0.5);
                 }
                 .teaching-hero h1 {
-                    margin: 18px 0 16px;
-                    font-size: clamp(2.8rem, 5vw, 5.2rem);
-                    line-height: 0.98;
+                    margin: 0 0 12px;
+                    font-size: clamp(2.4rem, 4vw, 4rem);
+                    line-height: 1;
                     color: #1f2d3d;
                 }
                 .teaching-hero p {
-                    max-width: 700px;
-                    font-size: 1.02em;
-                    line-height: 1.7;
+                    max-width: 860px;
+                    font-size: 1em;
+                    line-height: 1.55;
                     color: #3d4e62;
                 }
-                .teaching-quick-links,
+                .teaching-hero-content {
+                    position: relative;
+                    z-index: 1;
+                    display: grid;
+                    gap: 20px;
+                }
                 .teaching-list-grid {
                     display: grid;
                     gap: 16px;
                     margin-top: 30px;
                 }
                 .teaching-quick-links {
-                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                    display: inline-flex;
+                    flex-wrap: wrap;
+                    gap: 6px;
+                    width: fit-content;
+                    padding: 5px;
+                    border: 1px solid rgba(31, 45, 61, 0.08);
+                    border-radius: 999px;
+                    background: rgba(255, 255, 255, 0.74);
+                    box-shadow: 0 12px 28px rgba(36, 54, 80, 0.08);
                 }
                 .teaching-quick-links button,
                 .teaching-card,
@@ -274,25 +303,30 @@ const Teaching = ({ initialSection }) => {
                     box-shadow: 0 18px 40px rgba(36, 54, 80, 0.08);
                 }
                 .teaching-quick-links button {
-                    display: block;
-                    width: 100%;
-                    padding: 16px 18px;
-                    background: rgba(255, 255, 255, 0.8);
-                    border: 1px solid rgba(31, 45, 61, 0.08);
+                    min-width: 124px;
+                    padding: 9px 18px;
+                    background: transparent;
+                    border: 0;
+                    border-radius: 999px;
                     color: #1f2d3d;
                     font-weight: 700;
                     text-decoration: none;
-                    text-align: left;
+                    text-align: center;
                     cursor: pointer;
-                    transition: transform 0.18s ease, box-shadow 0.18s ease;
+                    box-shadow: none;
+                    transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
                 }
                 .teaching-quick-links button:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 22px 48px rgba(36, 54, 80, 0.12);
+                    background: rgba(255, 255, 255, 0.9);
+                }
+                .teaching-quick-links button[aria-pressed='true'] {
+                    background: rgb(var(--primary-600));
+                    color: #fff;
+                    box-shadow: 0 8px 18px rgba(0, 144, 32, 0.2);
                 }
                 .teaching-section {
-                    padding-top: 56px;
-                    padding-bottom: 56px;
+                    padding-top: 32px;
+                    padding-bottom: 48px;
                 }
                 .teaching-intro {
                     max-width: 760px;
@@ -341,7 +375,7 @@ const Teaching = ({ initialSection }) => {
                 .teaching-card .cta {
                     display: inline-block;
                     margin-top: 10px;
-                    color: #2265a3;
+                    color: rgb(var(--primary-700));
                     font-weight: 700;
                 }
                 .teaching-simple-list {
@@ -360,7 +394,7 @@ const Teaching = ({ initialSection }) => {
                 }
                 .teaching-inline-link {
                     margin-left: 8px;
-                    color: #2265a3;
+                    color: rgb(var(--primary-700));
                     font-weight: 700;
                     white-space: nowrap;
                 }
@@ -371,9 +405,9 @@ const Teaching = ({ initialSection }) => {
                 }
                 .teaching-band {
                     padding: 18px 22px;
-                    border-left: 5px solid #c85c33;
+                    border-left: 5px solid rgb(var(--primary-600));
                     border-radius: 18px;
-                    background: linear-gradient(90deg, rgba(200, 92, 51, 0.08), rgba(255, 255, 255, 0.95));
+                    background: linear-gradient(90deg, rgba(16, 175, 57, 0.08), rgba(255, 255, 255, 0.95));
                 }
                 .teaching-band p {
                     margin: 0;
@@ -433,7 +467,7 @@ const Teaching = ({ initialSection }) => {
                 .teaching-topic-card .lead {
                     display: inline-block;
                     margin-bottom: 8px;
-                    color: #2265a3;
+                    color: rgb(var(--primary-700));
                     font-weight: 700;
                 }
                 .teaching-highlight {
@@ -507,8 +541,8 @@ const Teaching = ({ initialSection }) => {
                     margin-bottom: 28px;
                     padding: 18px 20px;
                     border-radius: 18px;
-                    border-left: 4px solid #c85c33;
-                    background: linear-gradient(90deg, rgba(200, 92, 51, 0.09), rgba(255, 255, 255, 0.96));
+                    border-left: 4px solid rgb(var(--primary-600));
+                    background: linear-gradient(90deg, rgba(16, 175, 57, 0.09), rgba(255, 255, 255, 0.96));
                     color: #684f42;
                     line-height: 1.6;
                 }
@@ -520,126 +554,162 @@ const Teaching = ({ initialSection }) => {
                 }
                 @media (max-width: 767px) {
                     .teaching-hero {
-                        padding: 110px 0 56px;
+                        padding: 38px 0 28px;
+                    }
+                    .teaching-hero-content {
+                        gap: 18px;
+                    }
+                    .teaching-quick-links {
+                        display: grid;
+                        grid-template-columns: repeat(3, minmax(0, 1fr));
+                        width: 100%;
+                        border-radius: 18px;
+                    }
+                    .teaching-quick-links button {
+                        min-width: 0;
+                        padding: 9px 10px;
                     }
                     .teaching-section {
-                        padding-top: 42px;
+                        padding-top: 28px;
                         padding-bottom: 42px;
                     }
                 }
             `}</style>
 
             <section className="teaching-hero">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                    <h1>Teaching</h1>
-                    <p>
-                        This page gives an overview of our courses, seminars, and thesis opportunities, including
-                        the current seminar format and thesis process. It is meant to help students quickly see what
-                        we offer, how to apply, and which topics are available.
-                    </p>
-
-                    <div className="teaching-quick-links">
+                <div className="teaching-hero-content max-w-6xl mx-auto px-4 sm:px-6">
+                    <div>
+                        <h1>{pick('Teaching', 'Lehre')}</h1>
+                        <p>
+                            {pick(
+                                'This page gives an overview of our courses, seminars, and thesis opportunities, including the current seminar format and thesis process. It is meant to help students quickly see what we offer, how to apply, and which topics are available.',
+                                'Diese Seite gibt einen Überblick über unsere Kurse, Seminare und Abschlussarbeiten, einschließlich des aktuellen Seminarformats und des Prozesses für Abschlussarbeiten. Studierende sollen schnell erkennen, was wir anbieten, wie sie sich bewerben können und welche Themen verfügbar sind.'
+                            )}
+                        </p>
+                    </div>
+                    <div id="teaching-tabs" className="teaching-quick-links" role="tablist" aria-label="Teaching sections">
                         {quickLinks.map((item) => (
-                            <button key={item.href} type="button" onClick={() => scrollToSection(item.href.slice(1))}>
-                                {item.label}
+                            <button
+                                key={item.id}
+                                type="button"
+                                role="tab"
+                                aria-selected={activeSection === item.id}
+                                aria-pressed={activeSection === item.id}
+                                onClick={() => selectSection(item.id)}
+                            >
+                                {pick(item.label, item.id === 'courses-overview' ? 'Kurse' : item.id === 'seminars' ? 'Seminare' : 'Abschlussarbeiten')}
                             </button>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <SectionBlock
-                id="courses-overview"
-                title="Courses"
-                intro="Our teaching spans foundational courses, project-based formats, seminars, and supervised theses. The sections below combine the practical information that used to be spread across multiple subpages."
-            >
-                <ul className="teaching-simple-list">
-                    {taughtCourses.map((course) => (
-                        <li key={course.title}>
-                            <strong>{course.title}</strong> ({course.semester})<br />
-                            {course.tone}
-                            {course.link && (
-                                <Link className="teaching-inline-link" to={course.link}>
-                                    {course.cta}
-                                </Link>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            </SectionBlock>
-
-            <SectionBlock
-                id="seminars"
-                title="Seminars"
-                topContent={
-                    <div className="teaching-note">
-                        <p><strong>Apply for a seminar</strong></p>
-                        <p>
-                            Send your Transcript of Records and your topic preferences to{' '}
-                            <a href="mailto:patrick.knab@tu-clausthal.de">patrick.knab@tu-clausthal.de</a>.
-                            {' '}You can also include a short CV if relevant.
-                        </p>
-                        <p>
-                            Please allow 2-3 weeks for a response after your initial request.
-                        </p>
-                    </div>
-                }
-                intro="The seminar process is organized in two stages: first a guided reading phase, then an independent research phase, followed by submission and presentation."
-            >
-                <h3 className="teaching-process-title">Process</h3>
-                <div className="teaching-timeline">
-                    {seminarProcess.map((step) => (
-                        <div key={step.title} className="teaching-timeline-card">
-                            <span className="teaching-phase">{step.phase}</span>
-                            <h3>{step.title}</h3>
-                            <ul>
-                                {step.points.map((point) => (
-                                    <li key={point}>{point}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            </SectionBlock>
-
-            <SectionBlock
-                id="theses"
-                title="Bachelor & Master Thesis Guidelines"
-                topContent={
-                    <div className="teaching-note">
-                        <p><strong>Apply for a thesis</strong></p>
-                        <p>
-                            Send your topic of interest, Transcript of Records, and CV to{' '}
-                            <a href="mailto:patrick.knab@tu-clausthal.de">patrick.knab@tu-clausthal.de</a>.
-                        </p>
-                        <p>
-                            Please allow 2-3 weeks for a response after your initial request.
-                        </p>
-                    </div>
-                }
-                intro="We offer thesis topics, subject to availability, across several active research areas. The information below consolidates the current public-facing process, expectations, and submission guidance."
-            >
-                <div className="teaching-card">
-                    <h3>Available Thesis Topics</h3>
+            {activeSection === 'courses-overview' && (
+                <SectionBlock
+                    id="courses-overview"
+                    title={pick('Courses', 'Kurse')}
+                    intro={pick(
+                        'Our teaching spans foundational courses, project-based formats, seminars, and supervised theses. The sections below combine the practical information that used to be spread across multiple subpages.',
+                        'Unsere Lehre umfasst Grundlagenveranstaltungen, projektbasierte Formate, Seminare und betreute Abschlussarbeiten. Die folgenden Bereiche bündeln praktische Informationen, die zuvor auf mehrere Unterseiten verteilt waren.'
+                    )}
+                >
                     <ul className="teaching-simple-list">
-                        {researchAreas.slice(0, 7).map((entry) => (
-                            <li key={entry.area}>
-                                <strong>{entry.area}.</strong> {entry.summary}
+                        {taughtCourses.map((course) => (
+                            <li key={course.title}>
+                                <strong>{course.title}</strong> ({course.semester})<br />
+                                {course.tone}
+                                {course.link && (
+                                    <Link className="teaching-inline-link" to={course.link}>
+                                        {course.cta}
+                                    </Link>
+                                )}
                             </li>
                         ))}
                     </ul>
-                </div>
+                </SectionBlock>
+            )}
 
-                <h3 className="teaching-process-title">Process</h3>
+            {activeSection === 'seminars' && (
+                <SectionBlock
+                    id="seminars"
+                    title={pick('Seminars', 'Seminare')}
+                    topContent={
+                        <div className="teaching-note">
+                            <p><strong>{pick('Apply for a seminar', 'Für ein Seminar bewerben')}</strong></p>
+                            <p>
+                                {pick('Send your Transcript of Records and your topic preferences to', 'Senden Sie Ihren Notenspiegel und Ihre Themenpräferenzen an')}{' '}
+                                <a href="mailto:patrick.knab@tu-clausthal.de">patrick.knab@tu-clausthal.de</a>.
+                                {' '}{pick('You can also include a short CV if relevant.', 'Optional können Sie einen kurzen Lebenslauf beifügen.')}
+                            </p>
+                            <p>
+                                {pick('Please allow 2-3 weeks for a response after your initial request.', 'Bitte rechnen Sie nach der ersten Anfrage mit 2-3 Wochen Bearbeitungszeit.')}
+                            </p>
+                        </div>
+                    }
+                    intro={pick(
+                        'The seminar process is organized in two stages: first a guided reading phase, then an independent research phase, followed by submission and presentation.',
+                        'Der Seminarprozess ist in zwei Phasen organisiert: zunächst eine betreute Lesephase, danach eine eigenständige Recherchephase, gefolgt von Abgabe und Präsentation.'
+                    )}
+                >
+                    <h3 className="teaching-process-title">{pick('Process', 'Ablauf')}</h3>
+                    <div className="teaching-timeline">
+                        {seminarProcess.map((step) => (
+                            <div key={step.title} className="teaching-timeline-card">
+                                <span className="teaching-phase">{step.phase}</span>
+                                <h3>{step.title}</h3>
+                                <ul>
+                                    {step.points.map((point) => (
+                                        <li key={point}>{point}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </SectionBlock>
+            )}
+
+            {activeSection === 'theses' && (
+                <SectionBlock
+                    id="theses"
+                    title={pick('Bachelor & Master Thesis Guidelines', 'Richtlinien für Bachelor- und Masterarbeiten')}
+                    topContent={
+                        <div className="teaching-note">
+                            <p><strong>{pick('Apply for a thesis', 'Für eine Abschlussarbeit bewerben')}</strong></p>
+                            <p>
+                                {pick('Send your topic of interest, Transcript of Records, and CV to', 'Senden Sie Ihr Interessengebiet, Ihren Notenspiegel und Ihren Lebenslauf an')}{' '}
+                                <a href="mailto:patrick.knab@tu-clausthal.de">patrick.knab@tu-clausthal.de</a>.
+                            </p>
+                            <p>
+                                {pick('Please allow 2-3 weeks for a response after your initial request.', 'Bitte rechnen Sie nach der ersten Anfrage mit 2-3 Wochen Bearbeitungszeit.')}
+                            </p>
+                        </div>
+                    }
+                    intro={pick(
+                        'We offer thesis topics, subject to availability, across several active research areas. The information below consolidates the current public-facing process, expectations, and submission guidance.',
+                        'Wir bieten, abhängig von der Verfügbarkeit, Abschlussarbeitsthemen in mehreren aktiven Forschungsbereichen an. Die folgenden Informationen bündeln den aktuellen öffentlichen Prozess, Erwartungen und Hinweise zur Abgabe.'
+                    )}
+                >
+                    <div className="teaching-card">
+                        <h3>{pick('Available Thesis Topics', 'Verfügbare Themen für Abschlussarbeiten')}</h3>
+                        <ul className="teaching-simple-list">
+                            {researchAreas.slice(0, 7).map((entry) => (
+                                <li key={entry.area}>
+                                    <strong>{entry.area}.</strong> {entry.summary}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                <h3 className="teaching-process-title">{pick('Process', 'Ablauf')}</h3>
                 <ol className="teaching-process-list">
                     {thesisApplicationSteps.map((step, index) => (
                         <li key={step}>
-                            <strong>Step {index + 1}.</strong> {step}
+                            <strong>{pick(`Step ${index + 1}.`, `Schritt ${index + 1}.`)}</strong> {step}
                         </li>
                     ))}
                 </ol>
 
-                <ul className="teaching-guideline-list">
+                    <ul className="teaching-guideline-list">
                     <li>
                         <h3>What the Exposé Should Cover</h3>
                         <ul>
@@ -704,8 +774,9 @@ const Teaching = ({ initialSection }) => {
                             Internal grading uses the UMA grading template, adapted as needed by the supervising researcher.
                         </p>
                     </li>
-                </ul>
-            </SectionBlock>
+                    </ul>
+                </SectionBlock>
+            )}
         </>
     );
 };

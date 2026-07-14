@@ -350,9 +350,12 @@ export const teamMembers = [
     ],
     photo: '/members/markus-herre.webp',
     bio: 'PhD student at TU Clausthal.',
-    email: '',
+    email: 'markus.herre@tu-clausthal.de',
     links: {
-      linkedin: 'https://www.linkedin.com/in/markus-herre/'
+      scholar: 'https://scholar.google.de/citations?user=tRHay2QAAAAJ&hl=de',
+      github: 'https://github.com/m-herre',
+      linkedin: 'https://www.linkedin.com/in/markus-herre/',
+      website: 'https://m-herre.github.io/'
     }
   },
   {
@@ -370,6 +373,55 @@ export const teamMembers = [
     links: {
       linkedin: 'https://de.linkedin.com/in/p-koenig'
     }
+  },
+  // Student research assistants (HiWi)
+  {
+    id: 21,
+    name: 'Pratham Rathod',
+    slug: 'pratham-rathod',
+    title: 'Research Assistant',
+    roleCategory: 'research_assistant',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/members/pratham-rathod.png',
+    bio: 'Student research assistant at TU Clausthal.',
+    email: 'pratham.rakesh.rathod@tu-clausthal.de',
+    links: {
+      github: 'https://github.com/PrathamRathod14',
+      linkedin: 'https://www.linkedin.com/in/prathamrathod14/',
+      website: 'https://prathamrathod14.github.io/'
+    }
+  },
+  {
+    id: 22,
+    name: 'Sari Abdan',
+    slug: 'sari-abdan',
+    title: 'Research Assistant',
+    roleCategory: 'research_assistant',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/members/sari-abdan.jpeg',
+    bio: 'Student research assistant at TU Clausthal.',
+    email: '',
+    links: {
+      linkedin: 'https://www.linkedin.com/in/sari-abdan-015960358/'
+    }
+  },
+  {
+    id: 23,
+    name: 'Shidan Chen',
+    slug: 'stand',
+    title: 'Research Assistant',
+    roleCategory: 'research_assistant',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+    ],
+    photo: '/placeholder-avatar.svg',
+    bio: 'Student research assistant at TU Clausthal.',
+    email: '',
+    links: {}
   },
   // Support staff
   {
@@ -438,6 +490,7 @@ export const getMembersGroupedByRole = () => {
     postdocs: getMembersByRole('postdoc'),
     phdStudents: getMembersByRole('phd_student'),
     researchers: getMembersByRole('researcher'),
+    researchAssistants: getMembersByRole('research_assistant'),
     staff: getMembersByRole('staff'),
     supportStaff: getMembersByRole('support_staff')
   }

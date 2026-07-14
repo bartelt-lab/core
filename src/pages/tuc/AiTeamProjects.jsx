@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
 import assetUrl from '../../utils/assetUrl';
 import LazyVideo from '../../components/common/LazyVideo';
+import { useLanguage } from '../../i18n/useLanguage';
 
 const activeProjects = [
     {
@@ -11,6 +12,7 @@ const activeProjects = [
         tag: 'Cognitive Systems / RL',
         image: assetUrl('/images/projects/dynamo/hero.webp'),
         description: 'Developing a cognitive framework for dynamic manipulation and reasoning in unstructured environments. Bridging perception and action with advanced RL.',
+        descriptionDe: 'Entwicklung eines kognitiven Frameworks für dynamische Manipulation und Schlussfolgern in unstrukturierten Umgebungen.',
         link: '/ai-team-projects/dynamo',
     },
     {
@@ -19,6 +21,7 @@ const activeProjects = [
         tag: 'Computer Vision / LLMs',
         image: assetUrl('/images/projects/ai4ai/hero.webp'),
         description: 'From Image to Model using AI-assisted AI. Transitioning static images into editable engineering models by leveraging LLMs and Computer Vision.',
+        descriptionDe: 'Von Bildern zu Modellen mit KI-gestützter KI: Statische Bilder werden mithilfe von LLMs und Computer Vision in editierbare Engineering-Modelle überführt.',
         link: '/ai-team-projects/ai4ai',
     },
     {
@@ -27,6 +30,7 @@ const activeProjects = [
         tag: 'LLMs / Web Automation',
         image: assetUrl('/images/projects/vergabepilot/hero.webp'),
         description: 'LLM-based tender scraping for state-of-the-art tender search. Automating web scraper generation and validation using LLMs and MLLM agents.',
+        descriptionDe: 'LLM-basiertes Tender-Scraping für moderne Ausschreibungssuche. Web-Scraper werden mithilfe von LLMs und MLLM-Agenten automatisch erzeugt und validiert.',
         link: '/ai-team-projects/vergabepilot',
     },
 ];
@@ -38,6 +42,7 @@ const archiveProjects = [
         tag: 'MLOps / Monitoring',
         video: assetUrl('/videos/demonstrations/neurocore/NeuroCore_demo.mp4'),
         description: 'A dashboard for orchestrating machine learning training jobs, monitoring GPU and node health, and visualizing real-time analytics.',
+        descriptionDe: 'Ein Dashboard zur Orchestrierung von Machine-Learning-Trainingsjobs, zur Überwachung von GPU- und Node-Zuständen und zur Visualisierung von Echtzeit-Analysen.',
         link: '/ai-team-projects/neurocore',
     },
     {
@@ -46,6 +51,7 @@ const archiveProjects = [
         tag: 'LLMs / Games',
         video: assetUrl('/videos/demonstrations/stratego/stratego-demo-rp3.mp4'),
         description: 'Explore how different large language models compete in Stratego through automated matchups and gameplay behavior logging.',
+        descriptionDe: 'Untersuchung, wie verschiedene große Sprachmodelle in Stratego gegeneinander antreten, inklusive automatisierter Matches und Protokollierung des Spielverhaltens.',
         link: '/ai-team-projects/stratego',
     },
     {
@@ -54,6 +60,7 @@ const archiveProjects = [
         tag: 'Autonomous Navigation',
         youtubeId: 'wrY34WyTEzo',
         description: 'A completed initiative scaling down autonomous driving algorithms for rapid prototyping with SLAM and path planning.',
+        descriptionDe: 'Eine abgeschlossene Initiative, die Algorithmen für autonomes Fahren für schnelles Prototyping mit SLAM und Pfadplanung auf ein 1:10-Fahrzeug überträgt.',
         link: '/ai-team-projects/self-driving',
     },
     {
@@ -62,6 +69,7 @@ const archiveProjects = [
         tag: 'Simulation Tools',
         video: assetUrl('/videos/demonstrations/autonomous_driving/TrafficNetworkBuilder.mp4'),
         description: 'Interactive tools for constructing and simulating complex traffic networks to test autonomous systems in virtual environments.',
+        descriptionDe: 'Interaktive Werkzeuge zum Erstellen und Simulieren komplexer Verkehrsnetze, um autonome Systeme in virtuellen Umgebungen zu testen.',
         link: '/ai-team-projects/traffic-network',
     },
 ];
@@ -93,57 +101,64 @@ const Media = ({ project }) => {
 };
 
 const AiTeamProjects = () => {
+    const { pick } = useLanguage();
     const scrollToSection = (id) => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     return (
         <div className="min-h-screen bg-white text-slate-950">
-            <section id="hero" className="relative isolate min-h-[760px] overflow-hidden border-b border-slate-200 bg-white pb-20 pt-32 sm:pb-24 sm:pt-36">
-                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_20%,rgba(219,234,254,0.85),transparent_30%),radial-gradient(circle_at_84%_74%,rgba(220,252,231,0.72),transparent_32%),linear-gradient(135deg,#ffffff_0%,#f8fbff_48%,#f4fbf8_100%)]" aria-hidden="true" />
+            <section id="hero" className="relative isolate overflow-hidden border-b border-slate-200 bg-white pb-16 pt-32 sm:pb-18 sm:pt-36 lg:flex lg:min-h-screen lg:items-center lg:pb-8 lg:pt-32">
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_18%,rgba(220,252,231,0.72),transparent_28%),radial-gradient(circle_at_82%_70%,rgba(209,248,219,0.56),transparent_30%),linear-gradient(135deg,#ffffff_0%,#f9fffb_52%,#f4fbf8_100%)]" aria-hidden="true" />
                 <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(148,163,184,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.07)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]" aria-hidden="true" />
-                <div className="absolute -right-24 top-28 -z-10 h-[34rem] w-[34rem] rounded-full bg-blue-100/60 blur-3xl" aria-hidden="true" />
-                <div className="container relative mx-auto grid min-h-[560px] max-w-7xl items-center gap-14 px-6 md:px-10 lg:grid-cols-[0.95fr_1.05fr]">
+                <div className="absolute -right-24 top-32 -z-10 h-[30rem] w-[30rem] rounded-full bg-primary-100/50 blur-3xl" aria-hidden="true" />
+                <div className="container relative mx-auto grid w-full max-w-7xl items-center gap-12 px-6 md:px-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(25rem,1.12fr)] lg:gap-10 xl:gap-16">
                     <motion.div
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.55, ease: 'easeOut' }}
-                        className="text-center lg:text-left"
+                        className="mx-auto max-w-2xl text-center lg:mx-0 lg:max-w-[38rem] lg:text-left"
                     >
-                        <span className="mb-7 inline-flex rounded-full border border-blue-200 bg-white/80 px-5 py-2 text-xs font-bold uppercase tracking-[0.22em] text-blue-700 shadow-sm shadow-blue-100/70 backdrop-blur">
-                            Applied Intelligence
+                        <span className="mb-5 inline-flex rounded-full border border-primary-200 bg-white/90 px-5 py-2 text-xs font-bold uppercase tracking-[0.22em] text-primary-700 shadow-sm shadow-primary-100/70 backdrop-blur">
+                            {pick('Applied Intelligence', 'Angewandte Intelligenz')}
                         </span>
-                        <h1 className="font-heading text-6xl font-black leading-[0.95] tracking-[-0.06em] text-slate-950 sm:text-7xl lg:text-[5.75rem]">
+                        <h1 className="font-heading text-5xl font-black leading-[0.98] text-slate-950 sm:text-6xl lg:text-[4.9rem] xl:text-[5.45rem]">
                             AI Team
-                            <span className="block bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">Projects</span>
+                            <span className="block bg-gradient-to-r from-primary-700 to-primary-500 bg-clip-text text-transparent">{pick('Projects', 'Projekte')}</span>
                         </h1>
-                        <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-slate-600 md:text-lg lg:mx-0 lg:leading-9">
-                            The AI Team Projects bridge academia, cutting-edge AI/ML research, and international collaboration.
-                            Jointly organized by Clausthal University of Technology and Babeș-Bolyai University, this semester-long program challenges mixed teams to build real-world AI and ML solutions.
+                        <p className="mx-auto mt-5 max-w-[40rem] text-base leading-8 text-slate-600 md:text-lg lg:mx-0 lg:max-w-[36rem] lg:leading-8">
+                            {pick(
+                                'AI Team Projects connect academic research with real-world AI and ML development. In this semester-long program, mixed international teams from Clausthal University of Technology and Babes-Bolyai University build practical intelligent systems together.',
+                                'AI-Team-Projekte verbinden akademische Forschung mit realer KI- und ML-Entwicklung. In diesem semesterlangen Programm bauen gemischte internationale Teams der TU Clausthal und der Babes-Bolyai University gemeinsam praktische intelligente Systeme.'
+                            )}
                         </p>
-                        <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-slate-500 lg:justify-start">
-                            {['Mixed teams', 'Real-world systems', 'Research culture'].map((item) => (
-                                <span key={item} className="inline-flex items-center gap-2">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
-                                    {item}
+                        <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-slate-500 lg:justify-start">
+                            {[
+                                ['Mixed teams', 'Gemischte Teams'],
+                                ['Real-world systems', 'Reale Systeme'],
+                                ['Research culture', 'Forschungskultur'],
+                            ].map(([en, de]) => (
+                                <span key={en} className="inline-flex items-center gap-2">
+                                    <span className="h-1.5 w-1.5 rounded-full bg-primary-600" />
+                                    {pick(en, de)}
                                 </span>
                             ))}
                         </div>
-                        <div className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start">
+                        <div className="mt-7 flex flex-wrap justify-center gap-4 lg:justify-start">
                             <button
                                 type="button"
                                 onClick={() => scrollToSection('active-projects')}
-                                className="group inline-flex items-center gap-2 rounded-full bg-slate-950 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-slate-300/60 transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700"
+                                className="group inline-flex min-w-40 items-center justify-center gap-2 rounded-full bg-slate-950 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-slate-300/60 transition duration-300 hover:-translate-y-0.5 hover:bg-primary-700"
                             >
-                                Current Projects
+                                {pick('Current Projects', 'Aktuelle Projekte')}
                                 <FaArrowRight className="text-xs transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                             </button>
                             <button
                                 type="button"
                                 onClick={() => scrollToSection('archive')}
-                                className="rounded-full border border-slate-200 bg-white/85 px-7 py-3.5 text-sm font-bold text-slate-700 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700"
+                                className="min-w-40 rounded-full border border-slate-200 bg-white/85 px-7 py-3.5 text-sm font-bold text-slate-700 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:text-primary-700"
                             >
-                                Archive Projects
+                                {pick('Archive Projects', 'Archivprojekte')}
                             </button>
                         </div>
                     </motion.div>
@@ -152,15 +167,15 @@ const AiTeamProjects = () => {
                         initial={{ opacity: 0, scale: 0.94, y: 12 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-                        className="relative mx-auto flex min-h-[25rem] w-full max-w-[34rem] items-center justify-center lg:min-h-[34rem]"
+                        className="relative mx-auto flex min-h-[19rem] w-full max-w-[28rem] items-center justify-center sm:min-h-[22rem] lg:min-h-[29rem] lg:max-w-[33rem] xl:min-h-[31rem]"
                         aria-hidden="true"
                     >
-                        <div className="absolute h-[22rem] w-[22rem] rounded-full border border-dashed border-blue-200/80 bg-white/20 lg:h-[29rem] lg:w-[29rem]" />
-                        <div className="absolute h-[15rem] w-[15rem] rounded-full border border-slate-200/70 bg-white/30 lg:h-[21rem] lg:w-[21rem]" />
+                        <div className="absolute h-[17rem] w-[17rem] rounded-full border border-dashed border-primary-200/80 bg-white/20 sm:h-[20rem] sm:w-[20rem] lg:h-[25rem] lg:w-[25rem] xl:h-[27rem] xl:w-[27rem]" />
+                        <div className="absolute h-[12.5rem] w-[12.5rem] rounded-full border border-slate-200/70 bg-white/30 sm:h-[15rem] sm:w-[15rem] lg:h-[18.5rem] lg:w-[18.5rem]" />
                         <motion.img
                             src={assetUrl('/icons/avocando-icon.svg')}
                             alt=""
-                            className="relative z-10 h-64 w-auto drop-shadow-[0_28px_32px_rgba(15,23,42,0.18)] sm:h-72 lg:h-[22rem]"
+                            className="relative z-10 h-52 w-auto drop-shadow-[0_28px_32px_rgba(15,23,42,0.18)] sm:h-60 lg:h-[18.5rem] xl:h-[20rem]"
                             animate={{ y: [-12, 10, -12], rotate: [-2.5, 2.5, -2.5] }}
                             transition={{ duration: 5.4, repeat: Infinity, ease: 'easeInOut' }}
                         />
@@ -171,10 +186,13 @@ const AiTeamProjects = () => {
             <section className="bg-slate-950 py-16 text-white">
                 <div className="container mx-auto max-w-6xl px-6 md:px-10">
                     <div className="mx-auto mb-10 max-w-4xl text-center">
-                        <h2 className="mb-2 text-3xl font-light uppercase tracking-[0.24em]">The Experience</h2>
+                        <h2 className="mb-2 text-3xl font-light uppercase tracking-[0.24em]">{pick('The Experience', 'Die Erfahrung')}</h2>
                         <p className="mb-4 text-lg font-bold italic tracking-[0.12em]">WORK HARD 💪PLAY HARD 🏀</p>
                         <p className="text-sm leading-7 text-slate-300">
-                            The absolute highlight of the ATP experience are the two onsite travel weeks—one hosted in Cluj and one in Goslar. These weeks are full-immersion. Students don't just hack together on their AI models; they participate in all-day events where intense coding sessions are balanced with extensive teambuilding activities, cultural exchange, and evening socials. We believe that the best technical innovations come from teams that know how to connect, adapt, and have fun together
+                            {pick(
+                                "The absolute highlight of the ATP experience are the two onsite travel weeks, one hosted in Cluj and one in Goslar. These weeks are full immersion: students do not just hack together on AI models, they join all-day events where focused coding sessions are balanced with teambuilding, cultural exchange, and evening socials. The best technical ideas come from teams that know how to connect, adapt, and have fun together.",
+                                'Das Highlight der ATP-Erfahrung sind die zwei Vor-Ort-Wochen, eine in Cluj und eine in Goslar. Diese Wochen sind besonders intensiv: Die Studierenden arbeiten nicht nur gemeinsam an ihren KI-Modellen, sondern nehmen an ganztägigen Events teil, in denen konzentrierte Coding-Sessions mit Teambuilding, kulturellem Austausch und gemeinsamen Abendprogrammen verbunden werden. Die besten technischen Ideen entstehen in Teams, die sich kennen, flexibel zusammenarbeiten und gemeinsam Spaß haben.'
+                            )}
                         </p>
                     </div>
                     <div className="grid gap-8 md:grid-cols-2">
@@ -194,9 +212,11 @@ const AiTeamProjects = () => {
             <section id="active-projects" className="bg-gray-50 py-16">
                 <div className="container mx-auto max-w-6xl px-6 md:px-10">
                     <div className="mb-10 text-center">
-                        <h2 className="text-3xl font-light">Active Projects</h2>
+                        <h2 className="text-3xl font-light">{pick('Active Projects', 'Aktive Projekte')}</h2>
                         <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-primary-600" />
-                        <p className="mt-5 text-sm text-slate-500">Pushing the boundaries of what's possible in cognitive systems and automated intelligence.</p>
+                        <p className="mt-5 text-sm text-slate-500">
+                            {pick("Pushing the boundaries of what's possible in cognitive systems and automated intelligence.", 'Wir erweitern die Möglichkeiten kognitiver Systeme und automatisierter Intelligenz.')}
+                        </p>
                     </div>
                     <div className="grid gap-7 md:grid-cols-3">
                         {activeProjects.map((project) => (
@@ -204,11 +224,11 @@ const AiTeamProjects = () => {
                                 <div className="relative aspect-[16/10] overflow-hidden">
                                     <img src={project.image} alt={project.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
                                     <span className="absolute left-3 top-3 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-bold text-white">{project.tag}</span>
-                                    <span className="absolute bottom-3 right-3 rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700">View details</span>
+                                    <span className="absolute bottom-3 right-3 rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700">{pick('View details', 'Details')}</span>
                                 </div>
                                 <div className="p-6">
                                     <h3 className="mb-3 text-xl font-bold text-primary-700">{project.title}</h3>
-                                    <p className="text-sm leading-7 text-slate-600">{project.description}</p>
+                                    <p className="text-sm leading-7 text-slate-600">{pick(project.description, project.descriptionDe)}</p>
                                 </div>
                             </Link>
                         ))}
@@ -219,7 +239,7 @@ const AiTeamProjects = () => {
             <section id="testimonials" className="bg-white py-16">
                 <div className="container mx-auto max-w-6xl px-6 md:px-10">
                     <div className="mb-10 text-center">
-                        <h2 className="text-3xl font-light">Student Testimonials</h2>
+                        <h2 className="text-3xl font-light">{pick('Student Testimonials', 'Stimmen von Studierenden')}</h2>
                         <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-primary-600" />
                     </div>
                     <div className="grid gap-6 md:grid-cols-3">
@@ -235,7 +255,7 @@ const AiTeamProjects = () => {
             <section id="archive" className="bg-white py-16">
                 <div className="container mx-auto max-w-6xl px-6 md:px-10">
                     <div className="mb-10 text-center">
-                        <h2 className="text-3xl font-light">Project Archive</h2>
+                        <h2 className="text-3xl font-light">{pick('Project Archive', 'Projektarchiv')}</h2>
                         <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-primary-600" />
                     </div>
                     <div className="space-y-16">
@@ -246,13 +266,13 @@ const AiTeamProjects = () => {
                                 </div>
                                 <div>
                                     <div className="mb-3 flex items-center gap-3">
-                                        <span className="rounded-full bg-primary-50 px-3 py-1 text-xs font-bold uppercase text-primary-700">Archive</span>
+                                        <span className="rounded-full bg-primary-50 px-3 py-1 text-xs font-bold uppercase text-primary-700">{pick('Archive', 'Archiv')}</span>
                                         <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">{project.tag}</span>
                                     </div>
                                     <h3 className="mb-4 text-2xl font-bold">{project.title}</h3>
-                                    <p className="mb-5 leading-7 text-slate-600">{project.description}</p>
+                                    <p className="mb-5 leading-7 text-slate-600">{pick(project.description, project.descriptionDe)}</p>
                                     <Link to={project.link} className="inline-flex items-center gap-2 text-sm font-bold text-primary-700">
-                                        View Project Details
+                                        {pick('View Project Details', 'Projektdetails ansehen')}
                                         <FaArrowRight className="h-3 w-3" aria-hidden="true" />
                                     </Link>
                                 </div>

@@ -5,24 +5,39 @@ import Section from '../common/Section'
 import PublicationItem from './PublicationItem'
 import assetUrl from '../../utils/assetUrl'
 import { getMemberBySlug } from '../../data/team'
+import { useLanguage } from '../../i18n/useLanguage'
 
-const PublicationCard = ({ publication, featured = false, compact = false }) => {
+const PublicationCard = ({ publication, featured = false, compact = false, compactHeightClass = 'h-[350px]' }) => {
+  const { pick } = useLanguage()
   const image = publication.image || '/logos/core/light-background/core.svg'
   const hasUrl = publication.url && publication.url !== '#'
+  const institutions = getPublicationInstitutions(publication)
 
   return (
-    <article className={`group overflow-hidden ${compact ? 'rounded-3xl border border-gray-200 bg-white shadow-xl shadow-slate-200/70' : 'rounded-lg border border-gray-200 bg-white shadow-sm'} transition-all hover:border-primary-200 hover:shadow-xl ${featured && !compact ? 'grid md:grid-cols-[44%_1fr]' : ''}`}>
-      <div className={`${featured ? (compact ? 'hidden' : 'min-h-[260px]') : 'aspect-[4/3]'} bg-gray-100 overflow-hidden`}>
+    <article className={`group flex ${compact ? compactHeightClass : 'h-full'} overflow-hidden ${compact ? 'rounded-2xl border border-gray-200 bg-white shadow-xl shadow-slate-200/70' : 'rounded-lg border border-gray-200 bg-white shadow-sm'} transition-all hover:border-primary-200 hover:shadow-xl ${featured && !compact ? 'md:grid md:grid-cols-[44%_1fr]' : 'flex-col'}`}>
+      <div className={`${featured ? (compact ? 'hidden' : 'min-h-[220px]') : 'h-36'} relative shrink-0 bg-gray-100 overflow-hidden`}>
         <img
           src={assetUrl(image)}
           alt=""
-          className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${publication.image ? 'object-cover' : 'object-contain p-12 opacity-70'}`}
+          className={`h-full w-full brightness-[0.96] saturate-[0.9] transition-transform duration-500 group-hover:scale-105 group-hover:brightness-100 group-hover:saturate-100 ${publication.image ? 'object-cover' : 'object-contain p-12 opacity-70'}`}
           loading="lazy"
         />
+        {institutions.length > 0 && (
+          <div className="absolute left-0 top-3 flex overflow-hidden rounded-r-full bg-primary-700 text-white shadow-lg shadow-primary-900/15">
+            {institutions.map((institution, index) => (
+              <span
+                key={institution}
+                className={`px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] ${index > 0 ? 'border-l border-white/25' : ''}`}
+              >
+                {institution}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
-      <div className={featured ? (compact ? 'p-5 md:p-6' : 'p-8 md:p-10') : 'p-6'}>
-        {compact && <div className="mb-5 h-1 w-16 rounded-full bg-primary-600" />}
-        <div className={`${compact ? 'mb-4 text-[11px]' : 'mb-3 text-xs'} flex flex-wrap items-center gap-2 font-bold uppercase tracking-widest text-primary-700`}>
+      <div className={`${featured ? (compact ? 'p-4' : 'p-7 md:p-8') : 'p-4'} flex flex-1 flex-col`}>
+        {compact && <div className="mb-2.5 h-1 w-12 rounded-full bg-primary-600" />}
+        <div className={`${compact ? 'mb-2.5 text-[9px]' : 'mb-2 text-[11px]'} flex flex-wrap items-center gap-2 font-bold uppercase tracking-widest text-primary-700`}>
           <span>{publication.type}</span>
           <span className="h-1 w-1 rounded-full bg-gray-300" />
           <span>{publication.year}</span>
@@ -33,22 +48,22 @@ const PublicationCard = ({ publication, featured = false, compact = false }) => 
             </>
           )}
         </div>
-        <h3 className={`${featured ? (compact ? 'text-xl leading-7 line-clamp-3 md:text-2xl md:leading-8' : 'text-2xl leading-8') : 'text-lg leading-7 line-clamp-3'} mb-3 font-bold text-gray-950`}>
+        <h3 className={`${featured ? (compact ? 'text-base leading-6 line-clamp-3' : 'text-2xl leading-8') : 'text-base leading-6 line-clamp-3'} mb-2 font-bold text-gray-950`}>
           {publication.title}
         </h3>
-        <p className={`${featured ? (compact ? 'text-sm leading-6 line-clamp-2' : 'text-base leading-7') : 'text-sm leading-6 line-clamp-2'} mb-5 text-gray-600`}>
+        <p className={`${featured ? (compact ? 'text-xs leading-5 line-clamp-2' : 'text-base leading-7') : 'text-sm leading-6 line-clamp-2'} mb-1.5 text-gray-600`}>
           {publication.authors.map((a) => a.name).join(', ')}
         </p>
-        <div className={`${compact ? 'border-t border-gray-100 pt-4' : ''} flex flex-wrap items-center justify-between gap-4`}>
-          <span className="text-sm font-semibold text-gray-700">{publication.venue}</span>
+        <div className={`${compact ? 'border-t border-gray-100 pt-2.5' : ''} mt-auto flex flex-wrap items-center justify-between gap-2`}>
+          <span className={`text-xs font-semibold text-gray-700 ${compact ? 'line-clamp-1' : 'line-clamp-2'}`}>{publication.venue}</span>
           {hasUrl && (
             <a
               href={publication.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-primary-100 px-4 py-2 text-sm font-bold text-primary-700 hover:border-primary-700 hover:text-primary-900"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-primary-100 px-2.5 py-1 text-xs font-bold text-primary-700 hover:border-primary-700 hover:text-primary-900"
             >
-              Paper
+              {pick('Paper', 'Paper')}
               <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
             </a>
           )}
@@ -68,12 +83,14 @@ const pillClass = (active) =>
   }`
 
 // Multi-select pill group. `selected` is an array; empty array = "All".
-const FilterPills = ({ label, options, selected, onToggle, onClear, renderLabel }) => (
+const FilterPills = ({ label, options, selected, onToggle, onClear, renderLabel }) => {
+  const { pick } = useLanguage()
+  return (
   <div>
     <span className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-500">{label}</span>
     <div className="flex flex-wrap gap-2">
       <button type="button" onClick={onClear} aria-pressed={selected.length === 0} className={pillClass(selected.length === 0)}>
-        All
+        {pick('All', 'Alle')}
       </button>
       {options.map((option) => {
         const active = selected.includes(option)
@@ -85,9 +102,11 @@ const FilterPills = ({ label, options, selected, onToggle, onClear, renderLabel 
       })}
     </div>
   </div>
-)
+  )
+}
 
 const YearRangeSlider = ({ min, max, value, onChange }) => {
+  const { pick } = useLanguage()
   const [from, to] = value
   const span = max - min || 1
   const pctFrom = ((from - min) / span) * 100
@@ -96,7 +115,7 @@ const YearRangeSlider = ({ min, max, value, onChange }) => {
   return (
     <div>
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Year</span>
+        <span className="text-xs font-bold uppercase tracking-wider text-gray-500">{pick('Year', 'Jahr')}</span>
         <span className="text-sm font-semibold text-gray-700">{from === to ? from : `${from} – ${to}`}</span>
       </div>
       <div className="range-dual">
@@ -111,7 +130,7 @@ const YearRangeSlider = ({ min, max, value, onChange }) => {
           max={max}
           value={from}
           onChange={(event) => onChange([Math.min(Number(event.target.value), to), to])}
-          aria-label="Earliest year"
+          aria-label={pick('Earliest year', 'Frühestes Jahr')}
         />
         <input
           type="range"
@@ -119,7 +138,7 @@ const YearRangeSlider = ({ min, max, value, onChange }) => {
           max={max}
           value={to}
           onChange={(event) => onChange([from, Math.max(Number(event.target.value), from)])}
-          aria-label="Latest year"
+          aria-label={pick('Latest year', 'Spätestes Jahr')}
         />
       </div>
     </div>
@@ -155,8 +174,10 @@ const PublicationsSection = ({
   intro,
   showFilters = false,
   compact = false,
+  compactHeightClass = 'h-[350px]',
   initialInstitution = 'all',
 }) => {
+  const { pick } = useLanguage()
   const [publications, setPublications] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -267,8 +288,8 @@ const PublicationsSection = ({
   return (
     <Section
       id="publications"
-      title={title}
-      subtitle={subtitle}
+      title={pick(title, title === 'Publications' ? 'Publikationen' : title)}
+      subtitle={pick(subtitle, subtitle === 'Research Output' ? 'Forschungsergebnisse' : subtitle)}
       className={`bg-gray-50 ${compact ? '!py-0' : ''}`}
       contentClassName={compact ? '!max-w-none !px-0' : ''}
     >
@@ -285,31 +306,31 @@ const PublicationsSection = ({
               <FaFilter className="h-4 w-4" aria-hidden="true" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-gray-950">Filter publications</h3>
-              <p className="text-sm text-gray-500">{displayPublications.length} results from {publications.length} records</p>
+              <h3 className="text-base font-bold text-gray-950">{pick('Filter publications', 'Publikationen filtern')}</h3>
+              <p className="text-sm text-gray-500">{pick(`${displayPublications.length} results from ${publications.length} records`, `${displayPublications.length} Ergebnisse aus ${publications.length} Einträgen`)}</p>
             </div>
           </div>
 
           <div className="grid gap-3 md:grid-cols-2">
             <label className="relative block">
-              <span className="sr-only">Search publications</span>
+              <span className="sr-only">{pick('Search publications', 'Publikationen suchen')}</span>
               <FaSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
               <input
                 value={filters.query}
                 onChange={(event) => updateFilter('query', event.target.value)}
-                placeholder="Search title, venue, author"
+                placeholder={pick('Search title, venue, author', 'Titel, Venue, Autor suchen')}
                 className="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 pl-10 pr-3 text-sm outline-none transition focus:border-primary-500 focus:bg-white"
               />
             </label>
 
             <label>
-              <span className="sr-only">All researchers</span>
+              <span className="sr-only">{pick('All researchers', 'Alle Forschenden')}</span>
               <select
                 value={filters.researcher}
                 onChange={(event) => updateFilter('researcher', event.target.value)}
                 className="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-medium text-gray-700 outline-none transition focus:border-primary-500 focus:bg-white"
               >
-                <option value="all">All researchers</option>
+                <option value="all">{pick('All researchers', 'Alle Forschenden')}</option>
                 {options.researchers.map((value) => (
                   <option key={value} value={value}>{value}</option>
                 ))}
@@ -352,11 +373,11 @@ const PublicationsSection = ({
       )}
 
       {loading ? (
-        <div className="text-center text-gray-500">Loading publications...</div>
+        <div className="text-center text-gray-500">{pick('Loading publications...', 'Publikationen werden geladen...')}</div>
       ) : isRotator ? (
         <div className={`mx-auto ${compact ? 'max-w-2xl' : 'max-w-5xl'}`}>
           {displayPublications.length > 0 && (
-            <PublicationCard publication={displayPublications[activeIndex]} featured compact={compact} />
+            <PublicationCard publication={displayPublications[activeIndex]} featured compact={compact} compactHeightClass={compactHeightClass} />
           )}
           {displayPublications.length > 1 && (
             <div className="mt-5 flex items-center justify-center gap-2">
@@ -377,7 +398,7 @@ const PublicationsSection = ({
                 to={viewAllLink}
                 className="inline-flex items-center gap-3 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-700"
               >
-                View all publications
+                {pick('View all publications', 'Alle Publikationen ansehen')}
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </Link>
             </div>
@@ -385,7 +406,7 @@ const PublicationsSection = ({
         </div>
       ) : layout === 'cards' ? (
         <div>
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {displayPublications.map((publication) => (
               <PublicationCard key={publication.id} publication={publication} />
             ))}
@@ -396,7 +417,7 @@ const PublicationsSection = ({
                 to={viewAllLink}
                 className="inline-flex items-center gap-3 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-700"
               >
-                View full publication archive
+                {pick('View full publication archive', 'Vollständiges Publikationsarchiv ansehen')}
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </Link>
             </div>
@@ -419,7 +440,7 @@ const PublicationsSection = ({
                     className="absolute inset-0 z-10 flex cursor-pointer flex-col items-center justify-center bg-white/40 transition-colors hover:bg-white/20"
                   >
                     <div className="flex items-center gap-3 rounded-full border border-gray-200 bg-white/90 px-8 py-4 shadow-2xl backdrop-blur-md transition-transform duration-300 group-hover:scale-110">
-                      <span className="font-bold text-gray-900">View full publication archive</span>
+                      <span className="font-bold text-gray-900">{pick('View full publication archive', 'Vollständiges Publikationsarchiv ansehen')}</span>
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-600 text-sm text-white">-&gt;</span>
                     </div>
                   </Link>
@@ -440,7 +461,7 @@ const PublicationsSection = ({
 
       {!loading && displayPublications.length === 0 && (
         <div className="mx-auto max-w-xl rounded-lg border border-dashed border-gray-300 bg-white p-8 text-center text-gray-500">
-          No publications match the selected filters.
+          {pick('No publications match the selected filters.', 'Keine Publikationen passen zu den ausgewählten Filtern.')}
         </div>
       )}
     </Section>

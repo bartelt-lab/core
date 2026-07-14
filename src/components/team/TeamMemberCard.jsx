@@ -2,7 +2,7 @@ import { FaGithub, FaTwitter, FaLinkedin, FaGlobe, FaEnvelope } from 'react-icon
 import { SiGooglescholar } from 'react-icons/si'
 import assetUrl from '../../utils/assetUrl'
 
-const TeamMemberCard = ({ member }) => {
+const TeamMemberCard = ({ member, showAffiliations = true }) => {
   const hasPhoto = member.photo && member.photo !== '/placeholder-avatar.svg'
   return (
     <div className="text-center">
@@ -43,6 +43,19 @@ const TeamMemberCard = ({ member }) => {
       <p className="text-primary-600 font-semibold mb-4">
         {member.title}
       </p>
+
+      {showAffiliations && member.affiliations?.length > 0 && (
+        <div className="mb-4 flex flex-wrap justify-center gap-1.5">
+          {member.affiliations.map(({ institution }) => (
+            <span
+              key={institution.shortName}
+              className="rounded-full border border-primary-100 bg-primary-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary-700"
+            >
+              {institution.shortName}
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* Social/Academic Links */}
       {(member.email || member.links) && (

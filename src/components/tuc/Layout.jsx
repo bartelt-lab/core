@@ -3,11 +3,12 @@ import { useState } from 'react';
 import { FiMenu, FiX, FiChevronUp } from 'react-icons/fi';
 import RightSidebar from '../common/RightSidebar';
 import assetUrl from '../../utils/assetUrl';
+import { useLanguage } from '../../i18n/useLanguage';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 const TUC_NAV = [
-    { to: '/tuc/industry-projects', label: 'Industrieprojekte' },
+    { to: '/tuc/industry-projects', label: 'Industry Projects' },
     { to: '/tuc/teaching', label: 'Teaching' },
     { to: '/tuc/join-us', label: 'Join Us' },
 ];
@@ -31,6 +32,7 @@ const mobileNavClass = ({ isActive }) =>
 const Layout = ({ children }) => {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const location = useLocation();
+    const { pick } = useLanguage();
 
     // Close the mobile nav whenever the route changes (incl. back/forward).
     const [prevPath, setPrevPath] = useState(location.pathname);
@@ -54,13 +56,13 @@ const Layout = ({ children }) => {
                     <nav className="hidden md:flex items-center gap-6">
                         {TUC_NAV.map((item) => (
                             <NavLink key={item.to} to={item.to} className={navClass}>
-                                {item.label}
+                                {pick(item.label, item.label === 'Industry Projects' ? 'Industrieprojekte' : item.label === 'Teaching' ? 'Lehre' : 'Mitmachen')}
                             </NavLink>
                         ))}
                         <span className="h-5 w-px bg-gray-300" aria-hidden="true" />
                         {NETWORK_NAV.map((item) => (
                             <NavLink key={item.to} to={item.to} className={navClass}>
-                                {item.label}
+                                {pick(item.label, item.label === 'Publications' ? 'Publikationen' : item.label === 'AI Team Projects' ? 'AI-Team-Projekte' : item.label)}
                             </NavLink>
                         ))}
                     </nav>
@@ -81,14 +83,14 @@ const Layout = ({ children }) => {
                         <nav className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
                             {TUC_NAV.map((item) => (
                                 <NavLink key={item.to} to={item.to} className={mobileNavClass}>
-                                    {item.label}
+                                    {pick(item.label, item.label === 'Industry Projects' ? 'Industrieprojekte' : item.label === 'Teaching' ? 'Lehre' : 'Mitmachen')}
                                 </NavLink>
                             ))}
                             <div className="my-2 border-t border-gray-200" />
                             <p className="px-3 pb-1 text-xs uppercase tracking-widest text-gray-400">CORE Network</p>
                             {NETWORK_NAV.map((item) => (
                                 <NavLink key={item.to} to={item.to} className={mobileNavClass}>
-                                    {item.label}
+                                    {pick(item.label, item.label === 'Publications' ? 'Publikationen' : item.label === 'AI Team Projects' ? 'AI-Team-Projekte' : item.label)}
                                 </NavLink>
                             ))}
                         </nav>
@@ -120,10 +122,10 @@ const Layout = ({ children }) => {
                                 type="button"
                                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                                 className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-primary-300 hover:text-primary-700"
-                                aria-label="Back to top"
+                                aria-label={pick('Back to top', 'Nach oben')}
                             >
                                 <FiChevronUp size={16} />
-                                Back to top
+                                {pick('Back to top', 'Nach oben')}
                             </button>
                         </div>
                     </div>
