@@ -5,6 +5,8 @@ import RightSidebar from './components/common/RightSidebar'
 import Footer from './components/common/Footer'
 import ScrollToTop from './components/common/ScrollToTop'
 import ThemeToggle from './components/common/ThemeToggle'
+import LanguageToggle from './components/common/LanguageToggle'
+import { LanguageProvider } from './i18n/LanguageContext'
 import TucLayout from './components/tuc/Layout'
 import UbbLayout from './components/ubb/Layout'
 
@@ -106,13 +108,16 @@ function UbbShell() {
 function App() {
   return (
     <HashRouter>
-      <ScrollToTop />
-      <ThemeToggle />
-      <Routes>
-        <Route path="/tuc/*" element={<TucShell />} />
-        <Route path="/ubb/*" element={<UbbShell />} />
-        <Route path="/*" element={<CoreShell />} />
-      </Routes>
+      <LanguageProvider>
+        <ScrollToTop />
+        <ThemeToggle />
+        <LanguageToggle />
+        <Routes>
+          <Route path="/tuc/*" element={<TucShell />} />
+          <Route path="/ubb/*" element={<UbbShell />} />
+          <Route path="/*" element={<CoreShell />} />
+        </Routes>
+      </LanguageProvider>
     </HashRouter>
   )
 }

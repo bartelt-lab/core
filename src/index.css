@@ -107,6 +107,26 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
+
+  button,
+  a,
+  summary,
+  [role='button'],
+  [role='tab'] {
+    cursor: pointer;
+  }
+
+  input,
+  textarea {
+    cursor: text;
+  }
+
+  select,
+  input[type='range'],
+  input[type='checkbox'],
+  input[type='radio'] {
+    cursor: pointer;
+  }
 }
 
 @layer utilities {

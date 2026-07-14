@@ -2,10 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaArrowRight } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
+import { useLanguage } from '../../i18n/useLanguage'
 
 const fallbackImages = ['/papers/guide.webp', '/papers/trove.webp', '/papers/mitigating.webp']
 
 const PublicationMiniCarousel = () => {
+  const { pick } = useLanguage()
   const [publications, setPublications] = useState([])
 
   useEffect(() => {
@@ -26,23 +28,23 @@ const PublicationMiniCarousel = () => {
       ? publications
       : fallbackImages.map((image, index) => ({
         id: `fallback-${index}`,
-        title: 'CORE research output',
-        venue: 'Publication preview',
+        title: pick('CORE research output', 'CORE-Forschungsergebnisse'),
+        venue: pick('Publication preview', 'Publikationsvorschau'),
         year: '',
         image,
       }))
 
     return [...source, ...source]
-  }, [publications])
+  }, [pick, publications])
 
   return (
     <div className="mt-6 w-full max-w-6xl overflow-hidden rounded-3xl border border-white/70 bg-white/88 p-4 shadow-2xl shadow-slate-200/70 backdrop-blur-xl">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-1">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Latest publications</p>
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Latest publications', 'Neueste Publikationen')}</p>
         </div>
         <Link to="/publications" className="inline-flex items-center gap-2 rounded-full border border-primary-100 bg-primary-50 px-4 py-2 text-xs font-bold text-primary-700 transition hover:border-primary-200 hover:bg-primary-700 hover:text-white">
-          All publications
+          {pick('All publications', 'Alle Publikationen')}
           <FaArrowRight className="h-3 w-3" aria-hidden="true" />
         </Link>
       </div>
