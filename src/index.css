@@ -113,13 +113,24 @@
      controls and stop their labels/icons from showing a text-selection cursor. */
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
+  [role="tab"],
   label[for],
+  select,
+  input[type='range'],
+  input[type='checkbox'],
+  input[type='radio'],
   summary {
     cursor: pointer;
   }
 
+  input,
+  textarea {
+    cursor: text;
+  }
+
   button,
   [role="button"],
+  [role="tab"],
   a {
     user-select: none;
     -webkit-user-select: none;
