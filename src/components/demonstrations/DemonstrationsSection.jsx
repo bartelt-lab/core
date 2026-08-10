@@ -3,6 +3,7 @@ import Section from '../common/Section'
 import DemoCard from './DemoCard'
 import { autonomousDemonstrations, cognitiveProjects } from '../../data/demonstrations'
 import assetUrl from '../../utils/assetUrl'
+import ProjectPeople from '../common/ProjectPeople'
 
 const DemonstrationsSection = ({ priority = false }) => {
   return (
@@ -28,7 +29,10 @@ const DemonstrationsSection = ({ priority = false }) => {
                       src={assetUrl(project.image)}
                       alt={project.title}
                       loading={priority ? "eager" : "lazy"}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className={`w-full h-full object-cover transition-transform duration-700 ${
+                        project.imageZoom ? 'scale-110 group-hover:scale-[1.14]' : 'group-hover:scale-105'
+                      }`}
+                      style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-900/88 to-gray-900/20"></div>
                     <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-gray-950/70 to-transparent"></div>
@@ -77,15 +81,26 @@ const DemonstrationsSection = ({ priority = false }) => {
                         {project.content}
                       </p>
                     </div>
-                    <Link
-                      to={project.link}
-                      className="inline-flex items-center px-6 py-3 bg-white text-gray-950 rounded-full font-bold transition-colors shadow-lg hover:bg-primary-50"
-                    >
-                      View Technical Overview &rarr;
-                    </Link>
+                    <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+                      <Link
+                        to={project.link}
+                        className="inline-flex w-fit items-center px-6 py-3 bg-white text-gray-950 rounded-full font-bold transition-colors shadow-lg hover:bg-primary-50"
+                      >
+                        View Technical Overview &rarr;
+                      </Link>
+                      <ProjectPeople slugs={project.people || []} label={project.peopleLabel || 'Team'} variant="dark" className="md:hidden" />
+                    </div>
                   </>
                 )}
               </div>
+              {!project.isTeaser && (
+                <ProjectPeople
+                  slugs={project.people || []}
+                  label={project.peopleLabel || 'Team'}
+                  variant="dark"
+                  className="absolute bottom-8 right-8 z-20 hidden md:flex"
+                />
+              )}
             </div>
           ))}
         </div>

@@ -412,15 +412,15 @@ export const teamMembers = [
   {
     id: 23,
     name: 'Shidan Chen',
-    slug: 'stand',
+    slug: 'shidan-chen',
     title: 'Research Assistant',
     roleCategory: 'research_assistant',
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/placeholder-avatar.svg',
+    photo: '/members/shidan-chen.webp',
     bio: 'Student research assistant at TU Clausthal.',
-    email: '',
+    email: 'shidan.chen@tu-clausthal.de',
     links: {}
   },
   // Support staff

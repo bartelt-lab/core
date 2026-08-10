@@ -464,6 +464,54 @@ const Teaching = ({ initialSection }) => {
                     padding: 22px;
                     background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
                 }
+                .teaching-topic-disclosures {
+                    display: grid;
+                    gap: 10px;
+                    margin-top: 16px;
+                }
+                .teaching-topic-disclosure {
+                    overflow: hidden;
+                    border: 1px solid rgba(31, 45, 61, 0.08);
+                    border-radius: 16px;
+                    background: #fff;
+                }
+                .teaching-topic-disclosure summary {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 16px;
+                    padding: 16px 18px;
+                    color: #1f2d3d;
+                    font-weight: 800;
+                    cursor: pointer;
+                    list-style: none;
+                }
+                .teaching-topic-disclosure summary::-webkit-details-marker {
+                    display: none;
+                }
+                .teaching-topic-disclosure summary::after {
+                    content: '+';
+                    display: inline-flex;
+                    flex: 0 0 auto;
+                    align-items: center;
+                    justify-content: center;
+                    width: 26px;
+                    height: 26px;
+                    border-radius: 999px;
+                    background: rgba(16, 175, 57, 0.1);
+                    color: rgb(var(--primary-700));
+                    font-size: 1.1rem;
+                    line-height: 1;
+                }
+                .teaching-topic-disclosure[open] summary::after {
+                    content: '-';
+                }
+                .teaching-topic-disclosure p {
+                    margin: 0;
+                    padding: 0 18px 18px;
+                    color: #536377;
+                    line-height: 1.65;
+                }
                 .teaching-topic-card .lead {
                     display: inline-block;
                     margin-bottom: 8px;
@@ -503,12 +551,14 @@ const Teaching = ({ initialSection }) => {
                     margin-top: 22px;
                 }
                 .teaching-guideline-list {
+                    display: grid;
+                    gap: 10px;
                     margin: 22px 0 0;
                     padding-left: 0;
                     list-style: none;
                 }
                 .teaching-guideline-list > li {
-                    margin-bottom: 26px;
+                    margin-bottom: 0;
                     color: #536377;
                     line-height: 1.7;
                     list-style: none;
@@ -529,6 +579,47 @@ const Teaching = ({ initialSection }) => {
                 .teaching-guideline-list ul li {
                     margin-bottom: 8px;
                     list-style: disc;
+                }
+                .teaching-guideline-disclosure {
+                    overflow: hidden;
+                    border: 1px solid rgba(31, 45, 61, 0.08);
+                    border-radius: 16px;
+                    background: #fff;
+                    box-shadow: 0 12px 26px rgba(36, 54, 80, 0.06);
+                }
+                .teaching-guideline-disclosure summary {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 16px;
+                    padding: 15px 18px;
+                    color: #1f2d3d;
+                    font-weight: 800;
+                    cursor: pointer;
+                    list-style: none;
+                }
+                .teaching-guideline-disclosure summary::-webkit-details-marker {
+                    display: none;
+                }
+                .teaching-guideline-disclosure summary::after {
+                    content: '+';
+                    display: inline-flex;
+                    flex: 0 0 auto;
+                    align-items: center;
+                    justify-content: center;
+                    width: 26px;
+                    height: 26px;
+                    border-radius: 999px;
+                    background: rgba(31, 45, 61, 0.08);
+                    color: #1f2d3d;
+                    font-size: 1.1rem;
+                    line-height: 1;
+                }
+                .teaching-guideline-disclosure[open] summary::after {
+                    content: '-';
+                }
+                .teaching-guideline-body {
+                    padding: 0 18px 18px;
                 }
                 .teaching-guideline-grid ul,
                 .teaching-timeline-card ul,
@@ -691,13 +782,14 @@ const Teaching = ({ initialSection }) => {
                 >
                     <div className="teaching-card">
                         <h3>{pick('Available Thesis Topics', 'Verfügbare Themen für Abschlussarbeiten')}</h3>
-                        <ul className="teaching-simple-list">
+                        <div className="teaching-topic-disclosures">
                             {researchAreas.slice(0, 7).map((entry) => (
-                                <li key={entry.area}>
-                                    <strong>{entry.area}.</strong> {entry.summary}
-                                </li>
+                                <details key={entry.area} className="teaching-topic-disclosure">
+                                    <summary>{entry.area}</summary>
+                                    <p>{entry.summary}</p>
+                                </details>
                             ))}
-                        </ul>
+                        </div>
                     </div>
 
                 <h3 className="teaching-process-title">{pick('Process', 'Ablauf')}</h3>
@@ -711,68 +803,100 @@ const Teaching = ({ initialSection }) => {
 
                     <ul className="teaching-guideline-list">
                     <li>
-                        <h3>What the Exposé Should Cover</h3>
-                        <ul>
-                            {exposeGuidelines.map((item) => (
-                                <li key={item}>{item}</li>
-                            ))}
-                        </ul>
+                        <details className="teaching-guideline-disclosure">
+                            <summary>What the Expose Should Cover</summary>
+                            <div className="teaching-guideline-body">
+                                <ul>
+                                    {exposeGuidelines.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </details>
                     </li>
                     <li>
-                        <h3>Report Basics</h3>
-                        <ul>
-                            {thesisFormatting.map((item) => (
-                                <li key={item}>{item}</li>
-                            ))}
-                        </ul>
+                        <details className="teaching-guideline-disclosure">
+                            <summary>Report Basics</summary>
+                            <div className="teaching-guideline-body">
+                                <ul>
+                                    {thesisFormatting.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </details>
                     </li>
                     <li>
-                        <h3>Working With Your Advisor</h3>
-                        <ul>
-                            {thesisSupervision.map((item) => (
-                                <li key={item}>{item}</li>
-                            ))}
-                        </ul>
+                        <details className="teaching-guideline-disclosure">
+                            <summary>Working With Your Advisor</summary>
+                            <div className="teaching-guideline-body">
+                                <ul>
+                                    {thesisSupervision.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </details>
                     </li>
                     <li>
-                        <h3>Report Expectations</h3>
-                        <ul>
-                            {thesisWriting.map((item) => (
-                                <li key={item}>{item}</li>
-                            ))}
-                        </ul>
+                        <details className="teaching-guideline-disclosure">
+                            <summary>Report Expectations</summary>
+                            <div className="teaching-guideline-body">
+                                <ul>
+                                    {thesisWriting.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </details>
                     </li>
                     <li>
-                        <h3>Defense Format</h3>
-                        <ul>
-                            {thesisFinalPresentation.map((item) => (
-                                <li key={item}>{item}</li>
-                            ))}
-                        </ul>
+                        <details className="teaching-guideline-disclosure">
+                            <summary>Defense Format</summary>
+                            <div className="teaching-guideline-body">
+                                <ul>
+                                    {thesisFinalPresentation.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </details>
                     </li>
                     <li>
-                        <h3>What Must Be Handed In</h3>
-                        <ul>
-                            {thesisSubmission.map((item) => (
-                                <li key={item}>{item}</li>
-                            ))}
-                        </ul>
+                        <details className="teaching-guideline-disclosure">
+                            <summary>What Must Be Handed In</summary>
+                            <div className="teaching-guideline-body">
+                                <ul>
+                                    {thesisSubmission.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </details>
                     </li>
                     <li>
-                        <h3>Use of Generative AI</h3>
-                        <ul>
-                            {thesisAiUse.map((item) => (
-                                <li key={item}>{item}</li>
-                            ))}
-                        </ul>
+                        <details className="teaching-guideline-disclosure">
+                            <summary>Use of Generative AI</summary>
+                            <div className="teaching-guideline-body">
+                                <ul>
+                                    {thesisAiUse.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </details>
                     </li>
                     <li>
-                        <h3>Assessment</h3>
-                        <p>
-                            The report remains the primary basis for grading. In addition, supervisors prepare
-                            comprehension questions for the final presentation to verify topic understanding.
-                            Internal grading uses the UMA grading template, adapted as needed by the supervising researcher.
-                        </p>
+                        <details className="teaching-guideline-disclosure">
+                            <summary>Assessment</summary>
+                            <div className="teaching-guideline-body">
+                                <p>
+                                    The report remains the primary basis for grading. In addition, supervisors prepare
+                                    comprehension questions for the final presentation to verify topic understanding.
+                                    Internal grading uses the UMA grading template, adapted as needed by the supervising researcher.
+                                </p>
+                            </div>
+                        </details>
                     </li>
                     </ul>
                 </SectionBlock>
