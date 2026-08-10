@@ -3,17 +3,30 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
 import { MiniLabel } from './Eyebrow'
 
-const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1&playsinline=1&loop=1`
+const drivePreview = (id, playKey = 0) =>
+    `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1&playsinline=1&loop=1&play=${playKey}`
 const pad = (n) => String(n).padStart(2, '0')
 const keyOf = (item) => item.media.id || item.media.src
 
 // One frame of a milestone's media, absolutely filling the player. `active` controls
 // visibility (we keep all visited media mounted so swapping never reloads). Supports a
 // Google Drive embed, a native local video, or a still image placeholder.
-const Media = ({ media, title, active }) => {
+const Media = ({ media, title, active, playKey = 0 }) => {
+    const videoRef = useRef(null)
     const cls = `absolute inset-0 h-full w-full transition-opacity duration-500 ${
         active ? 'z-10 opacity-100' : 'pointer-events-none z-0 opacity-0'
     }`
+
+    useEffect(() => {
+        if (media.type !== 'video' || !videoRef.current) return
+
+        if (active) {
+            videoRef.current.currentTime = 0
+            videoRef.current.play().catch(() => {})
+        } else {
+            videoRef.current.pause()
+        }
+    }, [active, media.type, playKey])
 
     if (media.type === 'image') {
         return (
@@ -34,6 +47,7 @@ const Media = ({ media, title, active }) => {
     if (media.type === 'video') {
         return (
             <video
+                ref={videoRef}
                 src={assetUrl(media.src)}
                 poster={media.poster ? assetUrl(media.poster) : undefined}
                 title={media.title || title}
@@ -50,7 +64,7 @@ const Media = ({ media, title, active }) => {
 
     return (
         <iframe
-            src={drivePreview(media.id)}
+            src={drivePreview(media.id, active ? playKey : 0)}
             title={media.title || title}
             className={cls}
             allow="autoplay; encrypted-media; picture-in-picture"
@@ -68,7 +82,7 @@ const Media = ({ media, title, active }) => {
 //
 // items: [{ media, operation?, title, summary, outcome? }]
 //   media: { type: 'drive', id } | { type: 'video', src } | { type: 'image', src, alt }
-// aside: optional ReactNode rendered in the sidebar below the list (e.g. an About card).
+// aside: optional ReactNode or ({ run, activeRun }) => ReactNode below the list.
 const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone', autoCycleMs = 8000, aside = null }) => {
     const total = items.length
     const displayOrder = Array.from({ length: total }, (_, k) => total - 1 - k)
@@ -76,6 +90,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
     const [activeRun, setActiveRun] = useState(total - 1)
     const [paused, setPaused] = useState(false)
     const [mounted, setMounted] = useState(() => new Set([total - 1]))
+    const [playKey, setPlayKey] = useState(1)
     const activeRunRef = useRef(total - 1)
 
     const run = items[activeRun]
@@ -87,6 +102,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
     const show = (i) => {
         activeRunRef.current = i
         setActiveRun(i)
+        setPlayKey((prev) => prev + 1)
         setMounted((prev) => (prev.has(i) ? prev : new Set(prev).add(i)))
     }
 
@@ -96,6 +112,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
             const next = (activeRunRef.current - 1 + total) % total
             activeRunRef.current = next
             setActiveRun(next)
+            setPlayKey((prev) => prev + 1)
             setMounted((prev) => (prev.has(next) ? prev : new Set(prev).add(next)))
         }, autoCycleMs)
         return () => window.clearInterval(timer)
@@ -112,11 +129,14 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
     }
 
     const sidebar = (
-        <section className="flex flex-col rounded-2xl border border-slate-200 bg-white/70 p-3 shadow-sm backdrop-blur-sm">
-            <div className="mb-3 px-1">
+        <section className="flex flex-col rounded-2xl border border-slate-200 bg-white/80 p-2.5 shadow-sm backdrop-blur-sm lg:sticky lg:top-28 lg:max-h-[calc(100vh-9rem)]">
+            <div className="mb-2.5 flex items-center justify-between gap-3 px-1">
                 <MiniLabel>{label}</MiniLabel>
+                <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
+                    {total} videos
+                </span>
             </div>
-            <div className="space-y-2">
+            <div className="-mr-1 max-h-[23rem] space-y-1.5 overflow-y-auto pr-1 [scrollbar-color:#cbd5e1_transparent] [scrollbar-width:thin] lg:max-h-[calc(100vh-13rem)]">
                 {displayOrder.map((idx) => {
                     const item = items[idx]
                     const isActive = idx === activeRun
@@ -131,18 +151,18 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
                                     : 'hover:bg-slate-50'
                             }`}
                         >
-                            <div className="flex items-center gap-3 p-3">
-                                <div className="relative flex aspect-video w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100">
-                                    <span className="font-mono text-sm font-bold text-slate-400">{pad(idx + 1)}</span>
+                            <div className="flex items-center gap-2.5 p-2.5">
+                                <div className="relative flex aspect-video w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100">
+                                    <span className="font-mono text-xs font-bold text-slate-400">{pad(idx + 1)}</span>
                                     {isActive && <span className="absolute inset-0 bg-primary-600/10" />}
                                 </div>
                                 <div className="min-w-0">
                                     {item.operation && (
-                                        <p className={`truncate text-[11px] font-bold uppercase tracking-[0.18em] ${isActive ? 'text-primary-700' : 'text-slate-400'}`}>
+                                        <p className={`truncate text-[10px] font-bold uppercase tracking-[0.16em] ${isActive ? 'text-primary-700' : 'text-slate-400'}`}>
                                             {item.operation}
                                         </p>
                                     )}
-                                    <p className={`mt-0.5 line-clamp-2 text-sm font-semibold leading-5 ${isActive ? 'text-slate-900' : 'text-slate-700'}`}>
+                                    <p className={`mt-0.5 line-clamp-2 text-[13px] font-semibold leading-5 ${isActive ? 'text-slate-900' : 'text-slate-700'}`}>
                                         {item.title}
                                     </p>
                                 </div>
@@ -155,19 +175,25 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
     )
 
     return (
-        <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
+        <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_280px]">
             {/* Player */}
-            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60 lg:self-start">
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/60 lg:self-start">
                 <div className="relative aspect-video w-full bg-black">
                     {/* Each milestone mounts when first active (loads visible → autoplays) then stays mounted */}
                     {items.map((item, i) =>
                         i === activeRun || mounted.has(i) ? (
-                            <Media key={keyOf(item)} media={item.media} title={item.title} active={i === activeRun} />
+                            <Media
+                                key={keyOf(item)}
+                                media={item.media}
+                                title={item.title}
+                                active={i === activeRun}
+                                playKey={i === activeRun ? playKey : 0}
+                            />
                         ) : null,
                     )}
                 </div>
 
-                <div className="flex items-start justify-between gap-4 border-t border-slate-200 bg-white px-5 py-4">
+                <div className="flex items-start justify-between gap-3 border-t border-slate-200 bg-white px-4 py-3.5">
                     <div className="min-w-0">
                         <div className="mb-2 flex flex-wrap items-center gap-2">
                             <span className="rounded bg-primary-600 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-white">
@@ -179,10 +205,10 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
                                 </span>
                             )}
                         </div>
-                        <h3 className="text-lg font-bold text-slate-950">{run.title}</h3>
-                        <p className="mt-2 text-sm leading-6 text-slate-600">{run.summary}</p>
+                        <h3 className="text-base font-bold text-slate-950">{run.title}</h3>
+                        <p className="mt-1.5 text-sm leading-6 text-slate-600">{run.summary}</p>
                         {run.outcome && (
-                            <p className="mt-3 border-l-2 border-primary-400 pl-3 text-sm leading-6 text-slate-500">
+                            <p className="mt-2.5 border-l-2 border-primary-400 pl-3 text-sm leading-6 text-slate-500">
                                 <span className="font-bold uppercase tracking-[0.18em] text-primary-700">Outcome</span>
                                 <span className="mx-1">·</span>
                                 {run.outcome}
@@ -217,7 +243,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
             {aside ? (
                 <div className="flex flex-col gap-6">
                     {sidebar}
-                    {aside}
+                    {typeof aside === 'function' ? aside({ run, activeRun }) : aside}
                 </div>
             ) : (
                 sidebar

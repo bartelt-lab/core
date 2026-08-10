@@ -3,6 +3,7 @@ import { Label } from '../components/common/Eyebrow'
 import BackToLabsPill from '../components/common/BackToLabsPill'
 import ResearchQuestionIntro from '../components/common/ResearchQuestionIntro'
 import MilestoneBrowser from '../components/common/MilestoneBrowser'
+import ProjectPeople from '../components/common/ProjectPeople'
 
 const heroTags = ['Cognitive robotics', 'Dynamic manipulation', 'Operational intelligence']
 
@@ -17,6 +18,20 @@ const stackRows = [
 
 const experimentResults = [
     {
+        operation: 'Humanoid teleoperation',
+        title: 'Adding the Unitree G1 humanoid control track',
+        summary: 'Alongside the Ridgeback navigation work, the humanoid side was tested through teleoperation with the Unitree G1. This focused on direct operator control before moving toward more autonomous behavior.',
+        outcome: 'The teleoperation run documents that the G1 can be controlled in the project setup, giving the humanoid track a practical starting point for later manipulation and integration experiments.',
+        media: { type: 'drive', id: '1PAxkPUROKN5dDTs7-5LCuMKNqdZAJL6t', title: 'Unitree G1 teleoperation' },
+    },
+    {
+        operation: 'Environment generation',
+        title: 'Randomized Isaac Sim room scenes',
+        summary: 'The first room-generation work explores randomized placement of objects across surfaces such as tables, the robot, and wall-mounted elements. Multiple environments are generated in parallel for inspection.',
+        outcome: 'This creates a practical foundation for testing scene diversity and evaluating randomized object placement.',
+        media: { type: 'drive', id: '1ETMXBPVD0uwvC2E2-eEu4HAG7PnPVfXB', title: 'Initial Isaac Sim room generation' },
+    },
+    {
         operation: 'Ridgeback perception and navigation',
         title: 'Starting with SLAM, navigation, and a visible target',
         summary: 'The Ridgeback work began with SLAM and navigation around a clear perception cue: a detected red sphere. This gave the mobile-base track a concrete target for validating detection, localization, and movement in the same run.',
@@ -24,11 +39,18 @@ const experimentResults = [
         media: { type: 'drive', id: '1aUkfy_dM499HRmpudlG6zFFvVCRq36yF', title: 'Red-sphere SLAM and navigation' },
     },
     {
-        operation: 'Frontier exploration',
-        title: 'Moving from target navigation to environment exploration',
-        summary: 'After the target-based navigation run, the next step was frontier exploration. The Ridgeback was tasked with exploring unknown space so the system could evaluate how the map grows and how the robot chooses useful next regions.',
-        outcome: 'This stage documents the first exploration behavior: the robot begins to expand the known environment, exposing the practical limits that had to be improved in later runs.',
-        media: { type: 'drive', id: '1Hin82KFFeiVCN8Djjczv8MRuGI2HrbrS', title: 'Frontier exploration attempt' },
+        operation: 'Demonstration data',
+        title: 'Demonstration data collection',
+        summary: 'The operator repeatedly performs pick-and-place tasks with the G1 and Dex1 hands through teleoperation. Multi-view camera images, joint states, and actions are recorded at each timestep.',
+        outcome: 'Each successful run becomes one training episode for pi0.5, making the size and variety of the dataset a key factor for later policy performance.',
+        media: { type: 'drive', id: '1pU50eyYvszLwmZiXx5Czi8Og3qTQTxib', title: 'Demonstration data collection' },
+    },
+    {
+        operation: 'Overlap detection',
+        title: 'Improving placement with bounding boxes',
+        summary: 'Bounding boxes make object placement and intersections easier to inspect. Each object type is shown in a distinct color so generated scenes can be checked quickly.',
+        outcome: 'The visualization helped refine the placement logic and overlap-detection algorithm, resulting in more reliable object positioning across generated environments.',
+        media: { type: 'drive', id: '1YZcWjOT0z6Nn4dO9z1bm5_r2c0teNYXe', title: 'Bounding-box room generation' },
     },
     {
         operation: 'Distance estimator benchmarking',
@@ -38,11 +60,11 @@ const experimentResults = [
         media: { type: 'drive', id: '1S7JTz9UyBMKuEjdReUGhigULS6RMaK_4', title: 'Distance Estimator Benchmarking' },
     },
     {
-        operation: 'Exploration iteration',
-        title: 'Improving exploration after an incomplete run',
-        summary: 'One Ridgeback exploration run expanded the map but did not cover the full environment. That partial result was still useful because it showed where the exploration behavior needed adjustment before the final coverage run.',
-        outcome: 'The result captures the project in progress: the robot explores part of the environment, the limitation is visible, and the next iteration has a clear target.',
-        media: { type: 'drive', id: '19ro5Az4d_Qzw95xYvcMBbgbkThifTZDG', title: 'Partial Ridgeback exploration' },
+        operation: 'Real-robot policy',
+        title: 'Red block pick and place',
+        summary: 'A fine-tuned pi0.5 model runs on the real robot. From camera images, robot state, and a language instruction, the model outputs actions in real time so the G1 can grasp the red block and move it to the target position.',
+        outcome: 'This single-object baseline confirms that teleoperation, data collection, fine-tuning, and deployment work together as one end-to-end pipeline.',
+        media: { type: 'drive', id: '1Cgjxm1uxCZXPFIVNmrSz7h0cazscpVYg', title: 'Red block pick and place' },
     },
     {
         operation: 'Full environment exploration',
@@ -52,19 +74,33 @@ const experimentResults = [
         media: { type: 'drive', id: '1Q60muLRK3wOiiZelpSNghu_nWZ8qYblP', title: 'Full Ridgeback environment exploration' },
     },
     {
-        operation: 'Humanoid teleoperation',
-        title: 'Adding the Unitree G1 humanoid control track',
-        summary: 'Alongside the Ridgeback navigation work, the humanoid side was tested through teleoperation with the Unitree G1. This focused on direct operator control before moving toward more autonomous behavior.',
-        outcome: 'The teleoperation run documents that the G1 can be controlled in the project setup, giving the humanoid track a practical starting point for later manipulation and integration experiments.',
-        media: { type: 'drive', id: '1PAxkPUROKN5dDTs7-5LCuMKNqdZAJL6t', title: 'Unitree G1 teleoperation' },
+        operation: 'Pick-and-place integration',
+        title: 'Randomized task environments for pick and place',
+        summary: 'The randomized Isaac Sim environment is connected to the pick-and-place task and its restart mechanism. Extra cubes are placed on the table to create more varied and demanding training scenes.',
+        outcome: 'The setup supports automated resets in diverse scenes and helps the model learn to handle cluttered object placements.',
+        media: { type: 'drive', id: '1rO2wTx2Yegn4wCfOfl5HCxcH6nRtHB1V', title: 'Randomized pick-and-place environment' },
+    },
+    {
+        operation: 'Multi-object manipulation',
+        title: 'Three-color block pick and place',
+        summary: 'The task is extended from one object to three colored blocks. The G1 receives natural-language instructions, identifies the correct block by color, and places each block at its target position in sequence.',
+        outcome: 'This moves the manipulation pipeline closer to the capstone goal, where the robot must handle multiple objects and eventually place them onto the Ridgeback.',
+        media: { type: 'drive', id: '11WKgAMWyji5y63Qe1UMqCkH_aY2U5vY5', title: 'Three-color block pick and place' },
+    },
+    {
+        operation: 'Simulation teleoperation',
+        title: 'G1 and Ridgeback teleoperation in simulation',
+        summary: 'The G1 upper body with Dex1 dexterous hands and the Ridgeback are loaded into one NVIDIA Isaac Sim scene. The operator teleoperates the G1 to perform manipulation next to the Ridgeback.',
+        outcome: 'This verifies that the teleoperation interface works in Isaac Sim and that both robots can share the same workspace for the final object-placement task.',
+        media: { type: 'drive', id: '1GKC_pMXkN1mcfHdPOctymIzjfvxmjmN-', title: 'G1 and Ridgeback teleoperation in simulation' },
     },
 ]
 
 const Dynamo = () => (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 font-sans text-slate-950">
         {/* Hero — cinematic dark render panel anchoring the light page */}
-        <section className="px-3 pt-3 sm:px-4 sm:pt-4">
-            <div className="relative min-h-[33rem] overflow-hidden rounded-3xl bg-slate-950 md:min-h-[36rem]">
+        <section className="px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
+            <div className="relative mx-auto min-h-[24rem] max-w-7xl overflow-hidden rounded-3xl bg-slate-950 md:min-h-[27rem]">
                 <img
                     src={assetUrl('/images/projects/dynamo/hero.webp')}
                     alt=""
@@ -76,9 +112,9 @@ const Dynamo = () => (
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/75 to-slate-950/15" aria-hidden="true" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/25" aria-hidden="true" />
 
-                <div className="container relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-28 sm:px-10 md:pb-16 md:pt-32">
+                <div className="container relative z-10 mx-auto max-w-6xl px-5 pb-7 pt-20 sm:px-8 md:pb-9 md:pt-24">
                     <div className="max-w-2xl">
-                        <BackToLabsPill variant="dark" className="mb-7" />
+                        <BackToLabsPill variant="dark" className="mb-5" />
                         <div className="flex flex-wrap gap-2.5">
                             {heroTags.map((tag) => (
                                 <span
@@ -90,28 +126,34 @@ const Dynamo = () => (
                             ))}
                         </div>
 
-                        <h1 className="mt-6 text-5xl font-bold tracking-tight text-white md:text-6xl">DyNAMO</h1>
-                        <p className="mt-5 text-lg leading-8 text-white/85">
+                        <h1 className="mt-5 text-3xl font-bold tracking-tight text-white md:text-4xl">DyNAMO</h1>
+                        <p className="mt-4 text-sm leading-7 text-white/85 md:text-base">
                             DyNAMO advances cognitive robotics by bridging perception, reasoning, and action — an
                             integrated framework for dynamic navigation and manipulation, carried from simulation
                             through to real hardware.
                         </p>
 
-                        <div className="mt-7 rounded-2xl border border-white/15 bg-white/10 p-6 backdrop-blur-md">
-                            <p className="text-[15px] leading-7 text-white/85">
+                        <div className="mt-4 rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-md">
+                            <p className="text-sm leading-6 text-white/85">
                                 A cognitive robotic system built to adapt to unstructured environments and learn
                                 through interaction. It pairs foundation-model reasoning with classical navigation
                                 and control to reach versatile, robust behavior in real-world settings.
                             </p>
                         </div>
+                        <ProjectPeople
+                            slugs={['szilagyi', 'pratham-rathod', 'shidan-chen']}
+                            label="Team"
+                            variant="dark"
+                            className="mt-4"
+                        />
                     </div>
                 </div>
             </div>
         </section>
 
         {/* Objective + research question, then the milestone browser */}
-        <section id="experiments" className="scroll-mt-6 py-14 md:py-20">
-            <div className="container mx-auto max-w-7xl px-6 md:px-10">
+        <section id="experiments" className="scroll-mt-6 py-10 md:py-14">
+            <div className="container mx-auto max-w-6xl px-6 md:px-8">
                 <ResearchQuestionIntro
                     heading="Integrate navigation, manipulation, and reasoning"
                     body="Dynamo demonstrates an integrated system where a humanoid robot identifies, grasps, and places objects while working with an autonomously navigating mobile base. The core challenge is Sim2Real transfer: behavior developed in simulation must survive the noise and constraints of physical operation."
@@ -119,7 +161,7 @@ const Dynamo = () => (
                     tags={researchTags}
                 />
 
-                <p className="mb-5 mt-12 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Experiment log</p>
+                <p className="mb-4 mt-9 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Experiment log</p>
                 <MilestoneBrowser items={experimentResults} />
             </div>
         </section>

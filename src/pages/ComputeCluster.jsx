@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fa'
 import PublicationCarousel from '../components/publications/PublicationCarousel'
 import assetUrl from '../utils/assetUrl'
+import { useLanguage } from '../i18n/useLanguage'
 
 // ─── Data ──────────────────────────────────────────────────────────────────
 
@@ -107,6 +108,97 @@ const policies = [
   },
 ]
 
+const de = {
+  'Total Nodes': 'Knoten gesamt',
+  '1 Login, 4 Workers': '1 Login, 4 Worker',
+  'NVIDIA GPUs': 'NVIDIA-GPUs',
+  'Funding': 'Förderung',
+  'EU & Niedersachsen': 'EU & Niedersachsen',
+  'Scheduler': 'Scheduler',
+  'Resource manager': 'Ressourcenverwaltung',
+  'High-Performance Nodes': 'High-Performance-Knoten',
+  '2 Nodes Â· H200 GPUs': '2 Knoten · H200-GPUs',
+  'Two high-performance worker nodes, each hosting up to 8 NVIDIA H200 NVL GPUs (minimum 8 H200 GPUs total) interconnected via NVLink for maximum data throughput.':
+    'Zwei High-Performance-Worker-Knoten mit jeweils bis zu 8 NVIDIA H200 NVL GPUs (mindestens 8 H200 GPUs insgesamt), verbunden über NVLink für maximalen Datendurchsatz.',
+  'Up to 8 H200 NVL per node': 'Bis zu 8 H200 NVL pro Knoten',
+  'Optimized for model fine-tuning up to 70B': 'Optimiert für Modell-Fine-Tuning bis 70B',
+  'Inference of Llama 3, Qwen 3, Gemma 3': 'Inference für Llama 3, Qwen 3, Gemma 3',
+  'Mid-Performance Nodes': 'Mid-Performance-Knoten',
+  '2 Nodes Â· RTX 6000 GPUs': '2 Knoten · RTX-6000-GPUs',
+  'Two mid-performance worker nodes hosting up to 8 NVIDIA RTX PRO 6000 Blackwell Max-Q GPUs. Tailored for resource-efficient training and vision models.':
+    'Zwei Mid-Performance-Worker-Knoten mit bis zu 8 NVIDIA RTX PRO 6000 Blackwell Max-Q GPUs. Ausgelegt für ressourceneffizientes Training und Vision-Modelle.',
+  'Blackwell Max-Q GPU architecture': 'Blackwell Max-Q GPU-Architektur',
+  'Optimized for training models < 3B': 'Optimiert für das Training von Modellen < 3B',
+  'Supports vision models (SAM, CLIP)': 'Unterstützt Vision-Modelle (SAM, CLIP)',
+  'Storage & Master Node': 'Storage- & Master-Knoten',
+  'Fileserver Â· â‰¥ 150 TB': 'Fileserver · ≥ 150 TB',
+  'A master node and fileserver equipped with â‰¥ 150 TB of high-speed persistent storage to manage large datasets, model checkpoints, and evaluation runs.':
+    'Ein Master-Knoten und Fileserver mit ≥ 150 TB schnellem persistentem Speicher für große Datensätze, Modell-Checkpoints und Evaluationsläufe.',
+  'â‰¥ 150 TB persistent storage capacity': '≥ 150 TB persistente Speicherkapazität',
+  'Centralized checkpoint registry': 'Zentrale Checkpoint-Verwaltung',
+  'Secure, high-availability backups': 'Sichere, hochverfügbare Backups',
+  'InfiniBand Network Interconnect': 'InfiniBand-Netzwerkverbindung',
+  'High-speed InfiniBand network interface running up to 200 Gbit/s to minimize latency and maximize transfer rates during distributed training operations.':
+    'Eine schnelle InfiniBand-Netzwerkschnittstelle mit bis zu 200 Gbit/s minimiert Latenzen und maximiert Transferraten bei verteiltem Training.',
+  '200 Gbit/s maximum throughput': '200 Gbit/s maximaler Durchsatz',
+  'Low latency multi-GPU sync': 'Niedrige Latenz bei Multi-GPU-Synchronisation',
+  'Fast dataset streaming from fileserver': 'Schnelles Dataset-Streaming vom Fileserver',
+  'batch (Default)': 'batch (Standard)',
+  'Non-interactive partition': 'Nicht-interaktive Partition',
+  'All Cluster Nodes': 'Alle Cluster-Knoten',
+  'Default queue for sbatch jobs': 'Standard-Queue für sbatch-Jobs',
+  'Supports long-running training tasks': 'Unterstützt lang laufende Trainingsjobs',
+  'Max duration up to 36 hours (llm-research)': 'Maximale Laufzeit bis zu 36 Stunden (llm-research)',
+  'interactive': 'interactive',
+  'Interactive partition': 'Interaktive Partition',
+  'RTX 6000 Pro Nodes Only': 'Nur RTX-6000-Pro-Knoten',
+  'Enables srun --pty bash or salloc sessions': 'Ermöglicht srun --pty bash oder salloc-Sessions',
+  'Strict 6-hour time limit per session': 'Striktes 6-Stunden-Limit pro Session',
+  'Ideal for debugging and GPU checking': 'Ideal für Debugging und GPU-Prüfungen',
+  'Login / Frontend': 'Login / Frontend',
+  'Gateway Node (Rechenzentrum)': 'Gateway-Knoten (Rechenzentrum)',
+  'Located at the Computing Center of TU Clausthal': 'Standort im Rechenzentrum der TU Clausthal',
+  'For editing code, data upload, and scheduling': 'Für Codebearbeitung, Datenupload und Scheduling',
+  'Strictly no compute workloads allowed': 'Compute-Workloads sind dort nicht erlaubt',
+  'Workshops & Open Lab': 'Workshops & Open Lab',
+  'Regular workshops presenting the infrastructure to science, start-ups, and industry.':
+    'Regelmäßige Workshops stellen die Infrastruktur Wissenschaft, Start-ups und Industrie vor.',
+  'Active initiation of collaborative research and engineering projects.':
+    'Aktive Anbahnung gemeinsamer Forschungs- und Engineering-Projekte.',
+  'Workshops registration opens after cluster commissioning (by Sep 1, 2025).':
+    'Die Workshop-Registrierung öffnet nach der Inbetriebnahme des Clusters (bis 1. September 2025).',
+  'Innovation Hub': 'Innovation Hub',
+  'Connects regional universities and enterprises to strengthen technology transfer.':
+    'Verbindet regionale Hochschulen und Unternehmen, um Technologietransfer zu stärken.',
+  'Directly supports the Lower Saxony RIS3 innovation strategy.':
+    'Unterstützt direkt die RIS3-Innovationsstrategie Niedersachsens.',
+  'Enables resource-efficient design, circular production, and cognitive robotics.':
+    'Ermöglicht ressourceneffizientes Design, zirkuläre Produktion und kognitive Robotik.',
+  'User-Friendly Access': 'Nutzerfreundlicher Zugang',
+  'Training courses, direct hotline, and on-site support in German.':
+    'Schulungen, direkte Hotline und Vor-Ort-Unterstützung auf Deutsch.',
+  'Full maintenance and replacement part service guaranteed for five years.':
+    'Vollständiger Wartungs- und Ersatzteilservice für fünf Jahre garantiert.',
+  'For collaboration inquiries, contact bartelt@isse.tu-clausthal.de.':
+    'Für Kooperationsanfragen kontaktieren Sie bartelt@isse.tu-clausthal.de.',
+  'Kaiser I funded by the European Union & Land Niedersachsen (EFRE/ESF/ELER)':
+    'Kaiser I wird von der Europäischen Union und dem Land Niedersachsen (EFRE/ESF/ELER) gefördert',
+  'Located at Rechenzentrum der TU Clausthal, ErzstraÃŸe 18':
+    'Standort im Rechenzentrum der TU Clausthal, Erzstraße 18',
+  'Led by Prof. Dr. Christian Bartelt (ISSE)': 'Leitung durch Prof. Dr. Christian Bartelt (ISSE)',
+  'Open workshops and innovation hub access for industry partners':
+    'Offene Workshops und Innovation-Hub-Zugang für Industriepartner',
+  'Submit': 'Absenden',
+  'Submit jobs via the Slurm scheduler using sbatch (batch) or srun (interactive).':
+    'Jobs über den Slurm-Scheduler mit sbatch (batch) oder srun (interactive) absenden.',
+  'Monitor': 'Überwachen',
+  'Monitor active jobs and resource allocations with squeue and sinfo.':
+    'Aktive Jobs und Ressourcenzuweisungen mit squeue und sinfo überwachen.',
+  'Execute': 'Ausführen',
+  'Jobs run in isolated environments with resources allocated automatically.':
+    'Jobs laufen in isolierten Umgebungen mit automatisch zugewiesenen Ressourcen.',
+}
+
 // ─── Sub-components ─────────────────────────────────────────────────────────
 
 const SiteColorMap = {
@@ -130,6 +222,9 @@ const SiteColorMap = {
 // ─── Page ───────────────────────────────────────────────────────────────────
 
 const ComputeCluster = () => {
+  const { pick } = useLanguage()
+  const t = (text) => pick(text, de[text] || text)
+
   return (
     <div className="min-h-screen bg-white">
 
@@ -152,12 +247,12 @@ const ComputeCluster = () => {
             <nav className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-400" aria-label="Breadcrumb">
               <Link to="/" className="hover:text-primary-600 transition-colors">CORE Network</Link>
               <span>/</span>
-              <span className="text-slate-600">Compute Cluster</span>
+              <span className="text-slate-600">{pick('Compute Cluster', 'Rechencluster')}</span>
             </nav>
 
             {/* Eyebrow */}
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">
-              High-Performance Infrastructure
+              {pick('High-Performance Infrastructure', 'High-Performance-Infrastruktur')}
             </p>
 
             {/* Title */}
@@ -169,7 +264,7 @@ const ComputeCluster = () => {
             <div className="mb-6 max-w-[280px] rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
               <img
                 src={assetUrl('/images/eu_fuer_niedersachsen.png')}
-                alt="EU & Land Niedersachsen Funding"
+                alt={pick('EU & Land Niedersachsen Funding', 'Förderung durch EU und Land Niedersachsen')}
                 className="w-full object-contain h-12"
                 loading="lazy"
               />
@@ -177,7 +272,10 @@ const ComputeCluster = () => {
 
             {/* Description */}
             <p className="mb-8 max-w-xl text-lg leading-8 text-gray-600 md:text-xl">
-              Kaiser I is our scalable, high-performance GPU computing cluster designed to advance generative AI models, cognitive robotics, and circular systems engineering.
+              {pick(
+                'Kaiser I is our scalable, high-performance GPU computing cluster designed to advance generative AI models, cognitive robotics, and circular systems engineering.',
+                'Kaiser I ist unser skalierbarer High-Performance-GPU-Cluster zur Weiterentwicklung generativer KI-Modelle, kognitiver Robotik und zirkulärer Systemtechnik.'
+              )}
             </p>
 
             {/* CTA row */}
@@ -188,14 +286,14 @@ const ComputeCluster = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-200 hover:bg-primary-700 hover:scale-[1.02] active:scale-[0.98]"
               >
-                Documentation Website
+                {pick('Documentation Website', 'Dokumentationswebsite')}
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </a>
               <a
                 href="#capabilities"
                 className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-bold text-gray-700 shadow-sm transition-all duration-200 hover:border-primary-300 hover:text-primary-700 hover:scale-[1.02] active:scale-[0.98]"
               >
-                View Nodes & Hardware
+                {pick('View Nodes & Hardware', 'Knoten & Hardware ansehen')}
               </a>
             </div>
             {/* Stat pills */}
@@ -206,8 +304,8 @@ const ComputeCluster = () => {
                   <div key={s.label} className="rounded-xl border border-gray-200 bg-white/90 p-4 shadow-sm backdrop-blur">
                     <Icon className="mb-2 h-4 w-4 text-primary-600" aria-hidden="true" />
                     <p className="text-2xl font-bold text-gray-950">{s.value}</p>
-                    <p className="text-xs font-semibold text-gray-700 leading-5">{s.label}</p>
-                    <p className="mt-0.5 text-xs text-gray-400">{s.description}</p>
+                    <p className="text-xs font-semibold text-gray-700 leading-5">{t(s.label)}</p>
+                    <p className="mt-0.5 text-xs text-gray-400">{t(s.description)}</p>
                   </div>
                 )
               })}
@@ -221,15 +319,21 @@ const ComputeCluster = () => {
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
             <div>
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Project Description</p>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Project Description', 'Projektbeschreibung')}</p>
               <h2 className="mb-5 text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
-                The Kaiser I GPU Cluster
+                {pick('The Kaiser I GPU Cluster', 'Der Kaiser I GPU-Cluster')}
               </h2>
               <p className="mb-6 text-base leading-8 text-gray-600">
-                The Kaiser I cluster is established as the central digital platform at the Technical University of Clausthal to unlock the full potential of Generative Artificial Intelligence (GenAI) for systems engineering. The goal is to both advance fundamental AI methods and drive concrete engineering applications—ranging from resource-efficient design and circular production to cognitive robotics and sustainable mobility.
+                {pick(
+                  'The Kaiser I cluster is established as the central digital platform at the Technical University of Clausthal to unlock the full potential of Generative Artificial Intelligence (GenAI) for systems engineering. The goal is to both advance fundamental AI methods and drive concrete engineering applications - ranging from resource-efficient design and circular production to cognitive robotics and sustainable mobility.',
+                  'Der Kaiser I Cluster wird als zentrale digitale Plattform der Technischen Universität Clausthal aufgebaut, um das Potenzial generativer Künstlicher Intelligenz (GenAI) für das Systems Engineering nutzbar zu machen. Ziel ist es, sowohl grundlegende KI-Methoden weiterzuentwickeln als auch konkrete Engineering-Anwendungen voranzutreiben - von ressourceneffizientem Design und zirkulärer Produktion bis hin zu kognitiver Robotik und nachhaltiger Mobilität.'
+                )}
               </p>
               <p className="text-base leading-8 text-gray-600">
-                Led by Prof. Dr. Christian Bartelt at the Institute for Software and Systems Engineering (ISSE), Kaiser I provides a scalable, high-performance environment that strengthens research, teaching, and technology transfer while fostering regional and international innovation partnerships.
+                {pick(
+                  'Led by Prof. Dr. Christian Bartelt at the Institute for Software and Systems Engineering (ISSE), Kaiser I provides a scalable, high-performance environment that strengthens research, teaching, and technology transfer while fostering regional and international innovation partnerships.',
+                  'Unter der Leitung von Prof. Dr. Christian Bartelt am Institute for Software and Systems Engineering (ISSE) bietet Kaiser I eine skalierbare High-Performance-Umgebung, die Forschung, Lehre und Technologietransfer stärkt und regionale sowie internationale Innovationspartnerschaften fördert.'
+                )}
               </p>
             </div>
 
@@ -242,7 +346,10 @@ const ComputeCluster = () => {
                   loading="lazy"
                 />
                 <div className="p-4 text-xs font-semibold text-gray-500 leading-normal text-center bg-white border-t border-gray-100">
-                  Prof. Dr. Christian Bartelt and researchers powering up the new Kaiser I GPU Cluster at TU Clausthal.
+                  {pick(
+                    'Prof. Dr. Christian Bartelt and researchers powering up the new Kaiser I GPU Cluster at TU Clausthal.',
+                    'Prof. Dr. Christian Bartelt und Forschende bei der Inbetriebnahme des neuen Kaiser I GPU-Clusters an der TU Clausthal.'
+                  )}
                 </div>
               </div>
               <div className="space-y-4">
@@ -254,7 +361,7 @@ const ComputeCluster = () => {
                 ].map(({ icon: Icon, text }) => (
                   <div key={text} className="flex items-start gap-3">
                     <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary-600" aria-hidden="true" />
-                    <p className="text-sm leading-6 text-gray-700">{text}</p>
+                    <p className="text-sm leading-6 text-gray-700">{t(text)}</p>
                   </div>
                 ))}
               </div>
@@ -267,12 +374,15 @@ const ComputeCluster = () => {
       <section id="capabilities" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Hardware & Nodes</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Hardware & Nodes', 'Hardware & Knoten')}</p>
             <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
-              Cluster nodes and hardware layout
+              {pick('Cluster nodes and hardware layout', 'Cluster-Knoten und Hardware-Aufbau')}
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              The cluster is structured into login and worker nodes containing specific GPU architectures.
+              {pick(
+                'The cluster is structured into login and worker nodes containing specific GPU architectures.',
+                'Der Cluster ist in Login- und Worker-Knoten mit spezifischen GPU-Architekturen gegliedert.'
+              )}
             </p>
           </div>
 
@@ -289,16 +399,16 @@ const ComputeCluster = () => {
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </div>
                     <span className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-500">
-                      {cap.tag}
+                      {t(cap.tag)}
                     </span>
                   </div>
-                  <h3 className="mb-3 text-xl font-bold text-gray-950">{cap.title}</h3>
-                  <p className="mb-5 text-sm leading-7 text-gray-600">{cap.description}</p>
+                  <h3 className="mb-3 text-xl font-bold text-gray-950">{t(cap.title)}</h3>
+                  <p className="mb-5 text-sm leading-7 text-gray-600">{t(cap.description)}</p>
                   <ul className="space-y-1.5">
                     {cap.points.map((pt) => (
                       <li key={pt} className="flex items-center gap-2 text-xs font-semibold text-gray-600">
                         <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-500" />
-                        {pt}
+                        {t(pt)}
                       </li>
                     ))}
                   </ul>
@@ -313,12 +423,15 @@ const ComputeCluster = () => {
       <section id="sites" className="border-t border-gray-100 bg-white py-16 md:py-24">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Cluster Queues</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Cluster Queues', 'Cluster-Queues')}</p>
             <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
-              Partition layouts and nodes
+              {pick('Partition layouts and nodes', 'Partitionsaufbau und Knoten')}
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              Slurm uses partitions to manage resource allocations and group nodes.
+              {pick(
+                'Slurm uses partitions to manage resource allocations and group nodes.',
+                'Slurm nutzt Partitionen, um Ressourcenzuweisungen zu verwalten und Knoten zu gruppieren.'
+              )}
             </p>
           </div>
 
@@ -335,16 +448,16 @@ const ComputeCluster = () => {
                       <FaNetworkWired className="h-4 w-4" aria-hidden="true" />
                     </div>
                     <span className={`rounded-full border px-3 py-1 text-xs font-bold ${colors.badge}`}>
-                      {site.role}
+                      {t(site.role)}
                     </span>
                   </div>
-                  <h3 className="mb-1 text-lg font-bold text-gray-950">{site.site}</h3>
-                  <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-gray-400">{site.location}</p>
+                  <h3 className="mb-1 text-lg font-bold text-gray-950">{t(site.site)}</h3>
+                  <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-gray-400">{t(site.location)}</p>
                   <ul className="space-y-2">
                     {site.specs.map((spec) => (
                       <li key={spec} className="flex items-start gap-2 text-sm text-gray-600">
                         <span className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${colors.dot}`} />
-                        {spec}
+                        {t(spec)}
                       </li>
                     ))}
                   </ul>
@@ -366,8 +479,8 @@ const ComputeCluster = () => {
                     {step}
                   </span>
                   <div>
-                    <h4 className="font-bold">{title}</h4>
-                    <p className="mt-1 text-sm leading-6 text-slate-300">{desc}</p>
+                    <h4 className="font-bold">{t(title)}</h4>
+                    <p className="mt-1 text-sm leading-6 text-slate-300">{t(desc)}</p>
                   </div>
                 </div>
               ))}
@@ -380,12 +493,15 @@ const ComputeCluster = () => {
       <section id="policies" className="border-t border-gray-100 bg-gray-50 py-16 md:py-24">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">Policies</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Policies', 'Richtlinien')}</p>
             <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">
-              Access, queue, and usage policies
+              {pick('Access, queue, and usage policies', 'Zugangs-, Queue- und Nutzungsrichtlinien')}
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              Use of the Kaiser I GPU Cluster is governed by account groups and limits designed to share compute resources fairly.
+              {pick(
+                'Use of the Kaiser I GPU Cluster is governed by account groups and limits designed to share compute resources fairly.',
+                'Die Nutzung des Kaiser I GPU-Clusters wird durch Account-Gruppen und Limits geregelt, damit Compute-Ressourcen fair geteilt werden.'
+              )}
             </p>
           </div>
 
@@ -395,12 +511,12 @@ const ComputeCluster = () => {
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-gray-950 text-white">
                   <FaShieldAlt className="h-4 w-4" aria-hidden="true" />
                 </div>
-                <h3 className="mb-4 text-base font-bold text-gray-950">{pol.title}</h3>
+                <h3 className="mb-4 text-base font-bold text-gray-950">{t(pol.title)}</h3>
                 <ul className="space-y-3">
                   {pol.items.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm leading-6 text-gray-600">
                       <FaCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary-500" aria-hidden="true" />
-                      {item}
+                      {t(item)}
                     </li>
                   ))}
                 </ul>
@@ -409,9 +525,12 @@ const ComputeCluster = () => {
           </div>
 
           <div className="mt-12 rounded-2xl border border-gray-250 bg-gradient-to-br from-white to-gray-50/70 p-8 shadow-md text-center">
-            <h3 className="text-xl font-bold text-gray-950 mb-2">Need detailed usage instructions?</h3>
+            <h3 className="text-xl font-bold text-gray-950 mb-2">{pick('Need detailed usage instructions?', 'Brauchen Sie detaillierte Nutzungshinweise?')}</h3>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Learn how to connect via SSH, run interactive pseudo-terminals, submit batch jobs, and manage your conda/singularity environments in our comprehensive cluster documentation.
+              {pick(
+                'Learn how to connect via SSH, run interactive pseudo-terminals, submit batch jobs, and manage your conda/singularity environments in our comprehensive cluster documentation.',
+                'In unserer ausführlichen Cluster-Dokumentation erfahren Sie, wie Sie sich per SSH verbinden, interaktive Pseudo-Terminals starten, Batch-Jobs absenden und conda-/singularity-Umgebungen verwalten.'
+              )}
             </p>
             <a
               href="https://genai-cluster.github.io/documentation/"
@@ -419,7 +538,7 @@ const ComputeCluster = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-200 hover:bg-primary-700 hover:scale-[1.02] active:scale-[0.98]"
             >
-              Access Cluster Documentation
+              {pick('Access Cluster Documentation', 'Cluster-Dokumentation öffnen')}
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
             </a>
           </div>
@@ -429,9 +548,12 @@ const ComputeCluster = () => {
       {/* ── Publications carousel ── */}
       <div className="border-t border-gray-100">
         <PublicationCarousel
-          title="Research outputs from the network."
-          subtitle="Publications"
-          intro="Papers, preprints, and workshop contributions produced using CORE Network infrastructure."
+          title={pick('Research outputs from the network.', 'Forschungsergebnisse aus dem Netzwerk.')}
+          subtitle={pick('Publications', 'Publikationen')}
+          intro={pick(
+            'Papers, preprints, and workshop contributions produced using CORE Network infrastructure.',
+            'Papers, Preprints und Workshop-Beiträge, die mit Infrastruktur des CORE Network entstanden sind.'
+          )}
           viewAllLink="/publications"
           className="bg-white"
         />
