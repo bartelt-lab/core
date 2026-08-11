@@ -66,6 +66,68 @@ const researchAreas = [
     }
 ];
 
+const seminarTopics = [
+    {
+        title: 'How LLM Agents Combine External Memory and Parameter Post-Training',
+        abstract: [
+            'LLM agents adapt from experience in two main ways: storing it externally as retrievable memory (trajectories, procedures, distilled facts read back at inference time), or baking it into model weights via post-training (fine-tuning, RLHF, RL over trajectories). Memory-based methods adapt cheaply without touching weights but are bounded by context and retrieval quality; parameter-based methods generalize more deeply but are costly to update and risk forgetting.',
+            'Recent work argues neither suffices alone, proposing hybrids: distilling stable memory into weights over time, learning policies that decide what to store or forget, or treating memory operations themselves as RL-trained actions. This raises open questions about what should live in weights versus in an external store, how information moves between the two, and how to evaluate such systems over long horizons.'
+        ]
+    },
+    {
+        title: 'Safety Pretraining: Building Alignment into Foundation Models from the Start',
+        abstract: [
+            'Safety alignment in large language models is often treated as a post-training problem, using methods such as supervised fine-tuning, RLHF, refusal tuning, or constitutional training. However, recent work argues that many unsafe behaviors are already learned during pretraining and may be difficult to remove afterwards. The aim of this seminar is to understand, analyse, and compare approaches that introduce safety interventions directly during the pretraining stage.',
+            'A central starting point is Safety Pretraining by Maini et al., which proposes data-centric interventions such as harmful-data filtering, synthetic safety data, refusal-style pretraining data, moral-education data, and harmfulness tags injected during pretraining. Their results suggest that safety-pretrained models can reduce attack success rates without degrading standard benchmark performance.',
+            'The seminar should investigate how safety pretraining differs from classical post-hoc alignment, what kinds of safety signals can be incorporated into pretraining data, and whether such methods improve robustness against jailbreaks, downstream fine-tuning, or inference-time attacks. Further starting points include work on filtering harmful pretraining data, the timing of safety interventions during pretraining, and recent safety-reflection approaches that argue safety should be learned as an internal model behavior rather than only as a data-filtering objective.'
+        ]
+    },
+    {
+        title: 'JEPA World Models for Planning and Control',
+        abstract: [
+            'Joint-Embedding Predictive Architectures (JEPAs) learn to predict in a latent representation space instead of reconstructing raw observations, and have recently been used as world models for planning and control. The aim of this seminar is to understand, analyse and compare how latent dynamics models are trained and then used for planning (e.g. via CEM/MPC in latent space). A special interest lies in the comparison between model-based planning and model-free reinforcement learning for control, as studied by Sobal et al. A second starting point is V-JEPA 2.'
+        ],
+        references: [
+            {
+                label: 'Sobal et al. (arXiv:2502.14819)',
+                url: 'https://arxiv.org/abs/2502.14819'
+            },
+            {
+                label: 'V-JEPA 2 (arXiv:2506.09985)',
+                url: 'https://arxiv.org/abs/2506.09985'
+            }
+        ]
+    },
+    {
+        title: 'Context Optimisation for Tabular Foundation Models',
+        abstract: [
+            'This seminar explores how tabular foundation models can be improved by optimizing their inference-time context. Using VIP-COP and CRUMB as core papers, we discuss sample selection, feature selection, and distribution-matched batching as alternatives to simply using the full training set. The seminar highlights context optimisation as a practical route to better scalability and performance without model retraining.'
+        ],
+        references: [
+            {
+                label: 'VIP-COP (arXiv:2606.11473)',
+                url: 'https://arxiv.org/abs/2606.11473'
+            },
+            {
+                label: 'CRUMB (arXiv:2605.12904)',
+                url: 'https://arxiv.org/abs/2605.12904'
+            }
+        ]
+    },
+    {
+        title: 'Evolutionary Algorithms within prompt optimisation',
+        abstract: [
+            'Evolutionary algorithms have been fruitfully used to optimise prompts. The aim of this seminar is to understand, analyse and compare different approaches. A special interest lies in the comparison to Reinforcement Learning as highlighted by Agrawal et al.'
+        ],
+        references: [
+            {
+                label: 'Agrawal et al. (arXiv:2507.19457)',
+                url: 'https://arxiv.org/abs/2507.19457'
+            }
+        ]
+    }
+];
+
 const seminarProcess = [
     {
         phase: 'Stage 1',
@@ -143,7 +205,7 @@ const thesisWriting = [
 ];
 
 const thesisFinalPresentation = [
-    'The final presentation is scheduled by the Studienbüro after submission.',
+    'The final presentation is scheduled after the thesis submission.',
     'After the presentation, supervisors ask 3-5 comprehension questions.',
     'You may consult your slides or thesis for up to 30 seconds before answering each question.'
 ];
@@ -506,11 +568,33 @@ const Teaching = ({ initialSection }) => {
                 .teaching-topic-disclosure[open] summary::after {
                     content: '-';
                 }
-                .teaching-topic-disclosure p {
+                .teaching-topic-disclosure > p {
                     margin: 0;
                     padding: 0 18px 18px;
                     color: #536377;
                     line-height: 1.65;
+                }
+                .teaching-topic-content {
+                    padding: 0 18px 18px;
+                }
+                .teaching-topic-content p {
+                    margin: 0 0 12px;
+                    color: #536377;
+                    line-height: 1.65;
+                }
+                .teaching-topic-content p:last-of-type {
+                    margin-bottom: 0;
+                }
+                .teaching-topic-references {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px 16px;
+                    margin-top: 14px;
+                }
+                .teaching-topic-references a {
+                    color: rgb(var(--primary-700));
+                    font-weight: 700;
+                    overflow-wrap: anywhere;
                 }
                 .teaching-topic-card .lead {
                     display: inline-block;
@@ -742,6 +826,37 @@ const Teaching = ({ initialSection }) => {
                         'Der Seminarprozess ist in zwei Phasen organisiert: zunächst eine betreute Lesephase, danach eine eigenständige Recherchephase, gefolgt von Abgabe und Präsentation.'
                     )}
                 >
+                    <div className="teaching-card">
+                        <span className="muted">HWS2026/27</span>
+                        <h3>{pick('Seminar Topics', 'Seminarthemen')}</h3>
+                        <div className="teaching-topic-disclosures">
+                            {seminarTopics.map((topic) => (
+                                <details key={topic.title} className="teaching-topic-disclosure">
+                                    <summary>{topic.title}</summary>
+                                    <div className="teaching-topic-content">
+                                        {topic.abstract.map((paragraph) => (
+                                            <p key={paragraph}>{paragraph}</p>
+                                        ))}
+                                        {topic.references && (
+                                            <div className="teaching-topic-references" aria-label="References">
+                                                {topic.references.map((reference) => (
+                                                    <a
+                                                        key={reference.url}
+                                                        href={reference.url}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                    >
+                                                        {reference.label}
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                </details>
+                            ))}
+                        </div>
+                    </div>
+
                     <h3 className="teaching-process-title">{pick('Process', 'Ablauf')}</h3>
                     <div className="teaching-timeline">
                         {seminarProcess.map((step) => (
