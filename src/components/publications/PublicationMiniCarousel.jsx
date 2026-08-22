@@ -52,19 +52,32 @@ const PublicationMiniCarousel = () => {
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-white to-transparent" />
         <div className="compute-carousel flex w-max gap-4">
-          {items.map((publication, index) => (
-            <article key={`${publication.id}-${index}`} className="w-64 flex-shrink-0 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-lg">
-              <div className="aspect-[16/9] bg-gray-100">
-                <img src={assetUrl(publication.image)} alt="" className="h-full w-full object-cover" loading="lazy" />
-              </div>
-              <div className="p-4">
-                <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary-700">
-                  {publication.venue} {publication.year}
-                </p>
-                <h3 className="line-clamp-2 text-sm font-bold leading-5 text-gray-950">{publication.title}</h3>
-              </div>
-            </article>
-          ))}
+          {items.map((publication, index) => {
+            const hasUrl = publication.url && publication.url !== '#'
+            const content = (
+              <>
+                <div className="aspect-[16/9] bg-gray-100">
+                  <img src={assetUrl(publication.image)} alt="" className="h-full w-full object-cover" loading="lazy" />
+                </div>
+                <div className="p-4">
+                  <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary-700">
+                    {publication.venue} {publication.year}
+                  </p>
+                  <h3 className="line-clamp-2 text-sm font-bold leading-5 text-gray-950">{publication.title}</h3>
+                </div>
+              </>
+            )
+
+            return hasUrl ? (
+              <a key={`${publication.id}-${index}`} href={publication.url} target="_blank" rel="noopener noreferrer" className="w-64 flex-shrink-0 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-lg">
+                {content}
+              </a>
+            ) : (
+              <article key={`${publication.id}-${index}`} className="w-64 flex-shrink-0 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-lg">
+                {content}
+              </article>
+            )
+          })}
         </div>
       </div>
     </div>

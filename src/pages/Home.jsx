@@ -23,7 +23,7 @@ const pillars = [
 ]
 
 const LinkIcons = ({ member }) => (
-  <div className="mt-3 flex flex-wrap justify-center gap-2">
+  <div className="flex max-w-[10rem] flex-wrap items-center justify-center gap-1.5 self-center">
     {member.email && (
       <a href={`mailto:${member.email}`} title="Email" className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-primary-300 hover:text-primary-600">
         <FaEnvelope className="h-3.5 w-3.5" />
@@ -222,17 +222,17 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {members.map((member, i) => (
-              <motion.div key={member.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04, duration: 0.4 }} className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary-200 hover:shadow-md">
+              <motion.div key={member.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04, duration: 0.4 }} className="group relative grid h-[19rem] grid-rows-[5rem_4rem_2.5rem_4.5rem] justify-items-center gap-1 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition hover:border-primary-200 hover:shadow-md">
                 <div className="absolute left-0 top-3 flex flex-col gap-1">
                   {member.affiliations.map((a) => (
                     <span key={a.institution.shortName} className="rounded-r-md bg-primary-600 py-0.5 pl-1.5 pr-2 text-[9px] font-bold uppercase tracking-wide text-white shadow-sm">{a.institution.shortName}</span>
                   ))}
                 </div>
-                <div className="mb-3 h-20 w-20 overflow-hidden rounded-full border border-gray-200 bg-gray-100">
+                <div className="h-20 w-20 overflow-hidden rounded-full border border-gray-200 bg-gray-100">
                   <img src={assetUrl(member.photo)} alt={member.name} loading="lazy" className="h-full w-full object-cover" />
                 </div>
-                <p className="text-center text-sm font-bold leading-snug text-gray-950">{member.prefix ? `${member.prefix} ` : ''}{member.name}</p>
-                <p className="mt-1 text-center text-xs text-primary-700 font-semibold leading-5">{member.title}</p>
+                <p className="flex h-full items-center text-center text-sm font-bold leading-5 text-gray-950">{member.prefix ? `${member.prefix} ` : ''}{member.name}</p>
+                <p className="flex h-full items-center text-center text-xs font-semibold leading-5 text-primary-700">{member.title}</p>
                 <LinkIcons member={member} />
               </motion.div>
             ))}

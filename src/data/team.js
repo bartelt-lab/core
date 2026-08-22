@@ -22,7 +22,7 @@ export const institutions = {
     name: 'University of Mannheim',
     shortName: 'Mannheim',
     location: 'Mannheim, Germany'
-  }
+   }
 }
 
 // Team members with new schema
@@ -97,6 +97,24 @@ export const teamMembers = [
     links: {
       scholar: 'https://scholar.google.de/citations?user=DxgfRiQAAAAJ&hl=en',
       website: 'https://www.mds-lab.de/stefan-ludtke'
+    }
+  },
+  {
+    id: 24,
+    name: 'Kai Kunze',
+    slug: 'kai-kunze',
+    prefix: 'Prof. Dr.',
+    title: 'Professor',
+    roleCategory: 'professor',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Graduate School of Media Design' }
+    ],
+    photo: '/members/kai-kunze.webp',
+    bio: 'Professor at TUC University working on wearable computing, eyewear computing, human-computer interaction, and cognitive augmentation.',
+    email: '',
+    links: {
+      website: 'https://kaikunze.de/',
+      linkedin: 'https://www.linkedin.com/in/kaikunze/'
     }
   },
   // Postdocs
@@ -374,6 +392,23 @@ export const teamMembers = [
       linkedin: 'https://de.linkedin.com/in/p-koenig'
     }
   },
+  {
+    id: 25,
+    name: 'Dominik Schulz',
+    slug: 'dominik-schulz',
+    title: 'PhD Student',
+    roleCategory: 'phd_student',
+    affiliations: [
+      { institution: institutions.TUC, department: 'Human-Centered Information Systems' }
+    ],
+    photo: '/members/dominik-schulz.webp',
+    bio: 'PhD student at Clausthal University of Technology focusing on human-centered information systems and digital interfaces.',
+    email: 'dominik.schulz@tu-clausthal.de',
+    links: {
+      scholar: 'https://scholar.google.com/citations?hl=en&user=_4HOPvQAAAAJ&view_op=list_works&sortby=pubdate',
+      linkedin: 'https://www.linkedin.com/in/dominikschulz/'
+    }
+  },
   // Student research assistants (HiWi)
   {
     id: 21,
@@ -384,7 +419,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/pratham-rathod.png',
+    photo: '/members/pratham-rathod.webp',
     bio: 'Student research assistant at TU Clausthal.',
     email: 'pratham.rakesh.rathod@tu-clausthal.de',
     links: {
@@ -402,7 +437,7 @@ export const teamMembers = [
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
-    photo: '/members/sari-abdan.jpeg',
+    photo: '/members/sari-abdan.webp',
     bio: 'Student research assistant at TU Clausthal.',
     email: '',
     links: {

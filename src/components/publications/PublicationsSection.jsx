@@ -153,6 +153,8 @@ const memberInstitutionDefaults = {
 }
 
 const getPublicationInstitutions = (publication) => {
+  if (Array.isArray(publication.institutions)) return publication.institutions
+
   const institutions = publication.authors.flatMap((author) => {
     if (!author.memberSlug) return []
     if (author.institution) return [author.institution]
