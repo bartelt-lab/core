@@ -7,7 +7,9 @@ import { useLanguage } from '../../i18n/useLanguage';
 
 const Home = () => {
     const { pick } = useLanguage();
-    const tucMembers = getMembersByInstitution('TUC');
+    const tucMembers = getMembersByInstitution('TUC').filter(
+        (m) => !['dominik-schulz', 'kai-kunze'].includes(m.slug)
+    );
     const members = tucMembers.filter((m) => !['research_assistant', 'support_staff'].includes(m.roleCategory));
     const researchAssistants = tucMembers.filter((m) => m.roleCategory === 'research_assistant');
     const support = tucMembers.filter((m) => m.roleCategory === 'support_staff');

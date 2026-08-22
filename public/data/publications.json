@@ -4,9 +4,18 @@
       "id": "zenkner2026tiips",
       "title": "Beyond Either-Or Reasoning: Transduction and Induction as Cooperative Problem-Solving Paradigms",
       "authors": [
-        { "name": "Zenkner, Janis", "memberSlug": "zenkner" },
-        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+        {
+          "name": "Zenkner, Janis",
+          "memberSlug": "zenkner"
+        },
+        {
+          "name": "Sesterhenn, Tobias",
+          "memberSlug": "sesterhenn"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
       ],
       "venue": "ECML PKDD 2026",
       "year": 2026,
@@ -19,19 +28,123 @@
       "abstract": "Introduces TIIPS, a cooperative transductive-inductive framework that interleaves transduction and induction for Programming-by-Example to guide program synthesis and improve solution behavior."
     },
     {
+      "id": "elgarba2026enhancing",
+      "title": "Enhancing Contextual Awareness in (Non)Critical Care Situations - Results from an Exploratory Study to Inform Decision-Making with Smart Glasses and Telepresence Robots in Night Shifts",
+      "authors": [
+        {
+          "name": "Elgarba, Ahmed Ashraf Abdelazim",
+          "memberSlug": null
+        },
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Arjmand Boroujeni, Seyed Behzad",
+          "memberSlug": null
+        },
+        {
+          "name": "Unbehaun, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Wulf, Volker",
+          "memberSlug": null
+        }
+      ],
+      "venue": "ACM Transactions on Computing for Healthcare",
+      "year": 2026,
+      "date": "2026-08",
+      "type": "Journal",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3837075",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "lee2026nasa",
+      "title": "NASA-Task Load Index in CHI: A Comprehensive Review and Subscale Meta-Analysis with Implementation Guidelines",
+      "authors": [
+        {
+          "name": "Lee, Juyoung",
+          "memberSlug": null
+        },
+        {
+          "name": "Starner, Thad",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Kosch, Thomas",
+          "memberSlug": null
+        },
+        {
+          "name": "Pospelova, Maria",
+          "memberSlug": null
+        },
+        {
+          "name": "Woo, Woontack",
+          "memberSlug": null
+        }
+      ],
+      "venue": "ACM Transactions on Computer-Human Interaction",
+      "year": 2026,
+      "date": "2026-08",
+      "type": "Journal",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3837858",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
       "id": "knab2026barista",
       "title": "BARISTA: A Multi-Task Egocentric Benchmark for Compositional Visual Understanding",
       "authors": [
-        { "name": "Knab, Patrick", "memberSlug": "knab" },
-        { "name": "Xhelili, Orgest", "memberSlug": null },
-        { "name": "Buzi, Inis", "memberSlug": null },
-        { "name": "Guggiana Nilo, Drago Andres", "memberSlug": null },
-        { "name": "Khan, Mohd Saquib", "memberSlug": null },
-        { "name": "Kolb, Lorenz", "memberSlug": null },
-        { "name": "Scherzer, Manuel", "memberSlug": null },
-        { "name": "Yildirir, Kerem", "memberSlug": null },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Schubert, Philipp Johannes", "memberSlug": null }
+        {
+          "name": "Knab, Patrick",
+          "memberSlug": "knab"
+        },
+        {
+          "name": "Xhelili, Orgest",
+          "memberSlug": null
+        },
+        {
+          "name": "Buzi, Inis",
+          "memberSlug": null
+        },
+        {
+          "name": "Guggiana Nilo, Drago Andres",
+          "memberSlug": null
+        },
+        {
+          "name": "Khan, Mohd Saquib",
+          "memberSlug": null
+        },
+        {
+          "name": "Kolb, Lorenz",
+          "memberSlug": null
+        },
+        {
+          "name": "Scherzer, Manuel",
+          "memberSlug": null
+        },
+        {
+          "name": "Yildirir, Kerem",
+          "memberSlug": null
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Schubert, Philipp Johannes",
+          "memberSlug": null
+        }
       ],
       "venue": "ICML 2026 (Combining Theory and Benchmarks Workshop)",
       "year": 2026,
@@ -44,17 +157,201 @@
       "abstract": null
     },
     {
-      "id": "knab2026whats",
-      "title": "What\u2019s in the Bottle? A Survey and Roadmap of Concept Bottleneck Models",
+      "id": "knab2026concepts",
+      "title": "Concepts in Motion: Temporal Concept Bottleneck Model for Interpretable Video Classification",
       "authors": [
-        { "name": "Knab, Patrick", "memberSlug": "knab" },
-        { "name": "Steinmann, David", "memberSlug": null },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Kersting, Kristian", "memberSlug": null },
-        { "name": "Schiele, Bernt", "memberSlug": null },
-        { "name": "Seidl, Thomas", "memberSlug": null },
-        { "name": "Schlegel, Udo", "memberSlug": null },
-        { "name": "Stammer, Wolfgang", "memberSlug": null }
+        {
+          "name": "Knab, Patrick",
+          "memberSlug": "knab"
+        },
+        {
+          "name": "Marton, Sascha",
+          "memberSlug": "marton"
+        },
+        {
+          "name": "Schubert, Philipp Johannes",
+          "memberSlug": null
+        },
+        {
+          "name": "Guggiana Nilo, Drago Andres",
+          "memberSlug": null
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
+      ],
+      "venue": "CVPR 2026 (XAI4CV Workshop) and ICML 2026 (CompLearn Workshop)",
+      "year": 2026,
+      "date": "2026-07",
+      "type": "Workshop",
+      "status": "Accepted",
+      "url": "https://arxiv.org/abs/2509.20899",
+      "code": "https://patrick-knab.github.io/MoTIF/",
+      "image": "/papers/concepts-in-motion.webp",
+      "abstract": "Introduces MoTIF, a transformer-based temporal concept bottleneck framework that discovers video concepts with vision-language models and models their temporal patterns for interpretable video classification."
+    },
+    {
+      "id": "osifade2026supporting",
+      "title": "Supporting Decision-Making in Emergency Situations Through Smart Glass and Collaborative Telepresence Robotics in Healthcare Environments",
+      "authors": [
+        {
+          "name": "Osifade, Timileyin Damilare",
+          "memberSlug": null
+        },
+        {
+          "name": "Elgarba, Ahmed Ashraf Abdelazim",
+          "memberSlug": null
+        },
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Unbehaun, David",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the 2026 ACM Interactive Health Conference",
+      "year": 2026,
+      "date": "2026-07",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3786579.3804995",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "barbareschi2026counter",
+      "title": "Creating Empowering Counter-Narratives through Collective Digital Art by Disabled People",
+      "authors": [
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Sato, Chihiro",
+          "memberSlug": null
+        },
+        {
+          "name": "Chen, Dunya",
+          "memberSlug": null
+        },
+        {
+          "name": "Chen, Sifan",
+          "memberSlug": null
+        },
+        {
+          "name": "Koga, Eimi",
+          "memberSlug": null
+        },
+        {
+          "name": "Wilsher-Mills, Jason",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Proceedings of the 2026 Designing Interactive Systems Conference",
+      "year": 2026,
+      "date": "2026-06",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3800645.3813063",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "xu2026floating",
+      "title": "Floating Companion: Exploring Design Space for Soft Floating Robots in Indoor Environments",
+      "authors": [
+        {
+          "name": "Xu, Mingyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Li, Yanheng",
+          "memberSlug": null
+        },
+        {
+          "name": "Dumlu, Burcu Nimet",
+          "memberSlug": null
+        },
+        {
+          "name": "LC, RAY",
+          "memberSlug": null
+        },
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Hoppe, Matthias",
+          "memberSlug": null
+        },
+        {
+          "name": "Li, Jie",
+          "memberSlug": null
+        },
+        {
+          "name": "Minamizawa, Kouta",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Proceedings of the 2026 Designing Interactive Systems Conference",
+      "year": 2026,
+      "date": "2026-06",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3800645.3813051",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "knab2026whats",
+      "title": "What’s in the Bottle? A Survey and Roadmap of Concept Bottleneck Models",
+      "authors": [
+        {
+          "name": "Knab, Patrick",
+          "memberSlug": "knab"
+        },
+        {
+          "name": "Steinmann, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Kersting, Kristian",
+          "memberSlug": null
+        },
+        {
+          "name": "Schiele, Bernt",
+          "memberSlug": null
+        },
+        {
+          "name": "Seidl, Thomas",
+          "memberSlug": null
+        },
+        {
+          "name": "Schlegel, Udo",
+          "memberSlug": null
+        },
+        {
+          "name": "Stammer, Wolfgang",
+          "memberSlug": null
+        }
       ],
       "venue": "Transactions on Machine Learning Research",
       "year": 2026,
@@ -67,53 +364,1256 @@
       "abstract": "Surveys the Concept Bottleneck Model literature, identifies core components and challenges, and proposes a unified taxonomy and roadmap for future interpretable concept-based learning systems."
     },
     {
-      "id": "attwell2026is",
-      "title": "Is This LLM Library Learning? Evaluation Must Account For Compute and Behaviour",
+      "id": "lan2026qifield",
+      "title": "Qìfield: Externalizing Qi as a Palmar Haptic Field for Volitional Extension in Tai Chi Practices",
       "authors": [
-        { "name": "Berlot-Attwell, Ian", "memberSlug": null },
-        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
-        { "name": "Rudzicz, Frank", "memberSlug": null },
-        { "name": "Si, Xujie", "memberSlug": null }
+        {
+          "name": "Lan, Wei",
+          "memberSlug": null
+        },
+        {
+          "name": "Ren, Yilin",
+          "memberSlug": null
+        },
+        {
+          "name": "Si, Mingda",
+          "memberSlug": null
+        },
+        {
+          "name": "Feng, Changfei",
+          "memberSlug": null
+        },
+        {
+          "name": "Peng, Danyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Shen, Ximing",
+          "memberSlug": null
+        },
+        {
+          "name": "Pai, Yun Suen",
+          "memberSlug": null
+        },
+        {
+          "name": "Ishii, Hiroshi",
+          "memberSlug": null
+        },
+        {
+          "name": "Minamizawa, Kouta",
+          "memberSlug": null
+        }
       ],
-      "venue": "EACL 2026",
+      "venue": "Proceedings of the Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems",
       "year": 2026,
-      "date": "2026-02",
+      "date": "2026-04",
       "type": "Conference",
-      "status": "Accepted",
-      "url": "",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3772363.3798743",
       "code": null,
-      "image": "/papers/eacl_paper.webp",
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "chen2026sensing",
+      "title": "Sensing Your Vocals: Exploring the Activity of Vocal Cord Muscles for Pitch Assessment Using Electromyography and Ultrasonography",
+      "authors": [
+        {
+          "name": "Chen, Kanyu",
+          "memberSlug": null
+        },
+        {
+          "name": "Panskus, Rebecca",
+          "memberSlug": null
+        },
+        {
+          "name": "Wu, Erwin",
+          "memberSlug": null
+        },
+        {
+          "name": "Peng, Yichen",
+          "memberSlug": null
+        },
+        {
+          "name": "Saito, Daichi",
+          "memberSlug": null
+        },
+        {
+          "name": "Kamiyama, Emiko",
+          "memberSlug": null
+        },
+        {
+          "name": "Li, Ruiteng",
+          "memberSlug": null
+        },
+        {
+          "name": "Liao, Chen-Chieh",
+          "memberSlug": null
+        },
+        {
+          "name": "Marky, Karola",
+          "memberSlug": null
+        },
+        {
+          "name": "Akira, Kato",
+          "memberSlug": null
+        },
+        {
+          "name": "Koike, Hideki",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems",
+      "year": 2026,
+      "date": "2026-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3772318.3790965",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "meng2026abstract",
+      "title": "Abstraction Beats Realism: Physiological Visualizations Enhance Arousal Synchrony in VR Concert Recreations",
+      "authors": [
+        {
+          "name": "Meng, Xiaru",
+          "memberSlug": null
+        },
+        {
+          "name": "Ju, Yulan",
+          "memberSlug": null
+        },
+        {
+          "name": "Hoppe, Matthias",
+          "memberSlug": null
+        },
+        {
+          "name": "Han, Jiawen",
+          "memberSlug": null
+        },
+        {
+          "name": "He, Yan",
+          "memberSlug": null
+        },
+        {
+          "name": "Minamizawa, Kouta",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "The Augmented Humans International Conference 2026 (AHs 2026), March 16–19, 2026, Okinawa, Japan",
+      "year": 2026,
+      "date": "2026-03",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3795011.3795059",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "lee2026affective",
+      "title": "Affective Wearable Haptic Interventions: A Systematic Literature Review",
+      "authors": [
+        {
+          "name": "Lee, Jueun",
+          "memberSlug": null
+        },
+        {
+          "name": "Röddiger, Tobias",
+          "memberSlug": null
+        },
+        {
+          "name": "Makarem, Sarah",
+          "memberSlug": null
+        },
+        {
+          "name": "Riedel, Till",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Beigl, Michael",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies",
+      "year": 2026,
+      "date": "2026-03",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3790116",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "kunze2026sonic",
+      "title": "Embodied Responses to Posthuman Performance: A Mixed-Methods Study of Physiological and Emotional Audience Reactions",
+      "authors": [
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Xu, Mingyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Peng, Danyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Oliveira, Lucas",
+          "memberSlug": null
+        },
+        {
+          "name": "Shao, Rose",
+          "memberSlug": null
+        },
+        {
+          "name": "Meng, Xiaru",
+          "memberSlug": null
+        },
+        {
+          "name": "Hoppe, Matthias",
+          "memberSlug": null
+        },
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        }
+      ],
+      "venue": "The Augmented Humans International Conference 2026 (AHs 2026), March 16–19, 2026, Okinawa, Japan",
+      "year": 2026,
+      "date": "2026-03",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3795011.3795056",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "nanayakkara2026inbody",
+      "title": "Inbody Interactions",
+      "authors": [
+        {
+          "name": "Nanayakkara, Suranga",
+          "memberSlug": null
+        },
+        {
+          "name": "Inami, Masahiko",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Churchill, Elizabeth",
+          "memberSlug": null
+        },
+        {
+          "name": "Chen, Kanyu",
+          "memberSlug": null
+        },
+        {
+          "name": "Peng, Danyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Sasikumar, Prasanth",
+          "memberSlug": null
+        },
+        {
+          "name": "Wei, Yize",
+          "memberSlug": null
+        },
+        {
+          "name": "Nguyen, Mia Huong",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the Augmented Humans International Conference 2026",
+      "year": 2026,
+      "date": "2026-03",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3795011.3797157",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "zhang2026opticalaging",
+      "title": "OpticalAging: Real-time Presbyopia Simulation for Inclusive Design via Tunable Lenses",
+      "authors": [
+        {
+          "name": "Zhang, Qing",
+          "memberSlug": null
+        },
+        {
+          "name": "Su, Zixiong",
+          "memberSlug": null
+        },
+        {
+          "name": "Kondoh, Yoshihito",
+          "memberSlug": null
+        },
+        {
+          "name": "Asada, Kazunori",
+          "memberSlug": null
+        },
+        {
+          "name": "Starner, Thad",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Itoh, Yuta",
+          "memberSlug": null
+        },
+        {
+          "name": "Rekimoto, Jun",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the Augmented Humans International Conference 2026",
+      "year": 2026,
+      "date": "2026-03",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3795011.3795035",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "lan2026towards",
+      "title": "Towards EMG-Driven Pseudo-Haptic Feedback for VR Surgical Training",
+      "authors": [
+        {
+          "name": "Lan, Wei",
+          "memberSlug": null
+        },
+        {
+          "name": "Peng, Danyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Xia, Zicheng",
+          "memberSlug": null
+        },
+        {
+          "name": "Langlotz, Tobias",
+          "memberSlug": null
+        },
+        {
+          "name": "Zollmann, Stefanie",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)",
+      "year": 2026,
+      "date": "2026-03",
+      "type": "Workshop",
+      "status": "Published",
+      "url": "https://doi.org/10.1109/VRW70859.2026.00143",
+      "code": null,
+      "image": null,
       "abstract": null
     },
     {
       "id": "kirchdorfer2026investigating",
       "title": "Investigating Uncertainty Weighting for Multi-Task Learning: Insights and Analytical Alternative",
       "authors": [
-        { "name": "Kirchdorfer, Lukas", "memberSlug": null },
-        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Stuckenschmidt, Heiner", "memberSlug": null },
-        { "name": "Schott, Lukas", "memberSlug": null },
-        { "name": "Köhler, Jan M.", "memberSlug": null }
+        {
+          "name": "Kirchdorfer, Lukas",
+          "memberSlug": null
+        },
+        {
+          "name": "Sesterhenn, Tobias",
+          "memberSlug": "sesterhenn"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Stuckenschmidt, Heiner",
+          "memberSlug": null
+        },
+        {
+          "name": "Schott, Lukas",
+          "memberSlug": null
+        },
+        {
+          "name": "Köhler, Jan M.",
+          "memberSlug": null
+        }
       ],
       "venue": "International Journal of Computer Vision",
       "year": 2026,
       "date": "2026-02",
       "type": "Journal",
       "status": "Accepted",
-      "url": "",
+      "url": "https://link.springer.com/article/10.1007/s11263-025-02625-x",
       "code": null,
       "image": "/papers/uwso.webp",
+      "abstract": null
+    },
+    {
+      "id": "attwell2026is",
+      "title": "Is This LLM Library Learning? Evaluation Must Account For Compute and Behaviour",
+      "authors": [
+        {
+          "name": "Berlot-Attwell, Ian",
+          "memberSlug": null
+        },
+        {
+          "name": "Sesterhenn, Tobias",
+          "memberSlug": "sesterhenn"
+        },
+        {
+          "name": "Rudzicz, Frank",
+          "memberSlug": null
+        },
+        {
+          "name": "Si, Xujie",
+          "memberSlug": null
+        }
+      ],
+      "venue": "EACL 2026",
+      "year": 2026,
+      "date": "2026-02",
+      "type": "Conference",
+      "status": "Accepted",
+      "url": "https://aclanthology.org/2026.eacl-long.163/",
+      "code": null,
+      "image": "/papers/eacl_paper.webp",
+      "abstract": null
+    },
+    {
+      "id": "ramesh2026characterizing",
+      "title": "Characterizing In-the-Wild Personal Listening Device Use to Inform Earable Application Design",
+      "authors": [
+        {
+          "name": "Ramesh, Supraja",
+          "memberSlug": null
+        },
+        {
+          "name": "Hummel, Jonas",
+          "memberSlug": null
+        },
+        {
+          "name": "Becker, Silvia",
+          "memberSlug": null
+        },
+        {
+          "name": "Clarke, Christopher",
+          "memberSlug": null
+        },
+        {
+          "name": "Stuchbury-Wass, Jake",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Loewe, Axel",
+          "memberSlug": null
+        },
+        {
+          "name": "Beigl, Michael",
+          "memberSlug": null
+        },
+        {
+          "name": "Röddiger, Tobias",
+          "memberSlug": null
+        }
+      ],
+      "venue": "arXiv preprint arXiv:2607.24603",
+      "year": 2026,
+      "date": "2026-07",
+      "type": "Preprint",
+      "status": "Published",
+      "url": "https://arxiv.org/abs/2607.24603",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "kosch2026cognitive",
+      "title": "Cognitive Sensing and Interaction (Dagstuhl Seminar 25422)",
+      "authors": [
+        {
+          "name": "Kosch, Thomas",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Schneegass, Christina",
+          "memberSlug": null
+        },
+        {
+          "name": "Starner, Thad",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Dagstuhl Reports",
+      "year": 2026,
+      "date": "2026-06",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.4230/DagRep.15.10.75",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "bhattarai2026electronic",
+      "title": "Electronic Healthcare Record Templates and Clinician Autonomy: Invisible Coordination in Interdisciplinary Documentation",
+      "authors": [
+        {
+          "name": "Bhattarai, Sameer",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Maj-Britt",
+          "memberSlug": null
+        },
+        {
+          "name": "Fosse, Kjersti Zakariassen",
+          "memberSlug": null
+        },
+        {
+          "name": "Paluch, Richard",
+          "memberSlug": null
+        },
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Zhao, Jianrui",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the 24th EUSSET Conference on Computer-Supported Cooperative Work",
+      "year": 2026,
+      "date": "2026-06",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.48340/ecscw2026_094",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "thiel2026invisible",
+      "title": "Invisible work and unpredictable challenges in clinical practice: results from a participatory design case study",
+      "authors": [
+        {
+          "name": "Thiel, Katharina",
+          "memberSlug": null
+        },
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Lingl, Lorin",
+          "memberSlug": null
+        },
+        {
+          "name": "Unbehaun, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Wulf, Volker",
+          "memberSlug": null
+        }
+      ],
+      "venue": "i-com",
+      "year": 2026,
+      "date": "2026-01",
+      "type": "Journal",
+      "status": "Published",
+      "url": "https://doi.org/10.1515/icom-2025-0041",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "boroujeni2026sustainable",
+      "title": "Sustainable digital transformation in training: evaluating manuals, tablets, and smart glasses for procedural guidance in an assembling process",
+      "authors": [
+        {
+          "name": "Arjmand Boroujeni, Seyed Behzad",
+          "memberSlug": null
+        },
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Unbehaun, David",
+          "memberSlug": null
+        }
+      ],
+      "venue": "i-com",
+      "year": 2026,
+      "date": "2026-01",
+      "type": "Journal",
+      "status": "Published",
+      "url": "https://doi.org/10.1515/icom-2025-0051",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "zhang2025pro",
+      "title": "Pro's Eyes: A Wearable System for Synchronous and Asynchronous Observational Pattern Learning",
+      "authors": [
+        {
+          "name": "Zhang, Qing",
+          "memberSlug": null
+        },
+        {
+          "name": "Huang, Jing",
+          "memberSlug": null
+        },
+        {
+          "name": "Itoh, Yuta",
+          "memberSlug": null
+        },
+        {
+          "name": "Starner, Thad",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Rekimoto, Jun",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the SIGGRAPH Asia 2025 Emerging Technologies, 1-2",
+      "year": 2025,
+      "date": "2025-12",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3757373.3763766",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "chen2025multimodal",
+      "title": "A Multimodal Wearable Sensing System for Vocal Muscle Biofeedback in Singing Pitch Training",
+      "authors": [
+        {
+          "name": "Chen, Kanyu",
+          "memberSlug": null
+        },
+        {
+          "name": "Kato, Akira",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Companion of the 2025 ACM International Joint Conference on Pervasive and Ubiquitous Computing",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3714394.3750550",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "dseg-lime",
+      "title": "Beyond Pixels: Enhancing LIME with Hierarchical Features and Segmentation Foundation Models",
+      "authors": [
+        {
+          "name": "Knab, Patrick",
+          "memberSlug": "knab"
+        },
+        {
+          "name": "Marton, Sascha",
+          "memberSlug": "marton"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
+      ],
+      "venue": "ECAI 2025",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://arxiv.org/abs/2403.07733",
+      "code": "https://github.com/patrick-knab/DSEG-LIME",
+      "image": "/papers/DSEG.webp",
+      "abstract": "Presents DSEG-LIME framework for improved image explanation using foundation model integration."
+    },
+    {
+      "id": "zhang2025beyond",
+      "title": "Beyond Symbols: Motion Perception Cues Enhance Dual-Task Performance with Wearable Directional Guidance",
+      "authors": [
+        {
+          "name": "Zhang, Qing",
+          "memberSlug": null
+        },
+        {
+          "name": "Chen, Junyu",
+          "memberSlug": null
+        },
+        {
+          "name": "Huang, Yifei",
+          "memberSlug": null
+        },
+        {
+          "name": "Huang, Jing",
+          "memberSlug": null
+        },
+        {
+          "name": "Starner, Thad",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Rekimoto, Jun",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the 2025 ACM International Symposium on Wearable Computers, 22-29",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3715071.3750418",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "hakkila2025biosensing",
+      "title": "Biosensing, Enhanced Senses and Experience Design for Augmented Humans",
+      "authors": [
+        {
+          "name": "Häkkilä, Jonna",
+          "memberSlug": null
+        },
+        {
+          "name": "Mäntyjärvi, Jani",
+          "memberSlug": null
+        },
+        {
+          "name": "Gong, Zhengya",
+          "memberSlug": null
+        },
+        {
+          "name": "Müller, Heiko",
+          "memberSlug": null
+        },
+        {
+          "name": "Pettersson, Kati",
+          "memberSlug": null
+        },
+        {
+          "name": "Colley, Ashley",
+          "memberSlug": null
+        },
+        {
+          "name": "Raisamo, Roope",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Schmidt, Albrecht",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Companion of the 2025 ACM International Joint Conference on Pervasive and Ubiquitous Computing",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3714394.3750568",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "lee2025closedloop",
+      "title": "Closed-Loop Rhythmic Haptic Biofeedback via Smartwatch for Relaxation and Sleep Onset",
+      "authors": [
+        {
+          "name": "Lee, Jueun",
+          "memberSlug": null
+        },
+        {
+          "name": "Moschina, Dennis",
+          "memberSlug": null
+        },
+        {
+          "name": "Ramesh, Supraja",
+          "memberSlug": null
+        },
+        {
+          "name": "Röddiger, Tobias",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Beigl, Michael",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the 2025 ACM International Symposium on Wearable Computers",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3715071.3750412",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "peng2025conscious",
+      "title": "Conscious or Unconscious Meditation? Haptic Interaction Design in Meditation Augmentation Using Physiological Sensing",
+      "authors": [
+        {
+          "name": "Peng, Danyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Chen, Kanyu",
+          "memberSlug": null
+        },
+        {
+          "name": "Pai, Yun Suen",
+          "memberSlug": null
+        },
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Minamizawa, Kouta",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Companion of the 2025 ACM International Joint Conference on Pervasive and Ubiquitous Computing",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3714394.3756165",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "grams2025disentangling",
+      "title": "Disentangling Exploration of Large Language Models by Optimal Exploitation",
+      "authors": [
+        {
+          "name": "Grams, Tim",
+          "memberSlug": "grams"
+        },
+        {
+          "name": "Betz, Patrick",
+          "memberSlug": null
+        },
+        {
+          "name": "Marton, Sascha",
+          "memberSlug": "marton"
+        },
+        {
+          "name": "Lüdtke, Stefan",
+          "memberSlug": "ludtke"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
+      ],
+      "venue": "ECAI 2025",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://arxiv.org/abs/2501.08925",
+      "code": null,
+      "image": "/papers/disentangling.webp",
+      "abstract": "Examines exploration as a crucial skill for in-context reinforcement learning in unknown environments and investigates whether large language models can effectively explore partially observable settings."
+    },
+    {
+      "id": "peng2025echosense",
+      "title": "EchoSense: Frontal Haptic Navigation in VR towards Biomimetic Empathy",
+      "authors": [
+        {
+          "name": "Peng, Danyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Wang, Yihou",
+          "memberSlug": null
+        },
+        {
+          "name": "Tang, Antony",
+          "memberSlug": null
+        },
+        {
+          "name": "Shen, Ximing",
+          "memberSlug": null
+        },
+        {
+          "name": "Pai, Yun Suen",
+          "memberSlug": null
+        },
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Anderson, Iain",
+          "memberSlug": null
+        },
+        {
+          "name": "Minamizawa, Kouta",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Companion of the 2025 ACM International Joint Conference on Pervasive and Ubiquitous Computing",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3714394.3754428",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "chen2025exploring",
+      "title": "Exploring Singing Breath: Physiological Insights and Directions for Breath-Aware Augmentation in Mixed Reality Design",
+      "authors": [
+        {
+          "name": "Chen, Kanyu",
+          "memberSlug": null
+        },
+        {
+          "name": "Chang, Zhuang",
+          "memberSlug": null
+        },
+        {
+          "name": "Zou, Qianyuan",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Companion of the 2025 ACM International Joint Conference on Pervasive and Ubiquitous Computing",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3714394.3756159",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "chen2025introduction",
+      "title": "Introduction of the VCSD Dataset: A Vocal Cords Dataset Using EMG and Ultrasonography for Singing Pitch Skill Recognition",
+      "authors": [
+        {
+          "name": "Chen, Kanyu",
+          "memberSlug": null
+        },
+        {
+          "name": "Wu, Erwin",
+          "memberSlug": null
+        },
+        {
+          "name": "Liao, Chen-Chieh",
+          "memberSlug": null
+        },
+        {
+          "name": "Saito, Daichi",
+          "memberSlug": null
+        },
+        {
+          "name": "Peng, Yichen",
+          "memberSlug": null
+        },
+        {
+          "name": "Akira, Kato",
+          "memberSlug": null
+        },
+        {
+          "name": "Koike, Hideki",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Companion of the 2025 ACM International Joint Conference on Pervasive and Ubiquitous Computing",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3714394.3754407",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "szilagyi2025scalable",
+      "title": "Scalable Aggregation Under Client-Side Compute Variability in Federated Learning",
+      "authors": [
+        {
+          "name": "Szilagyi, David",
+          "memberSlug": "szilagyi",
+          "institution": "UBB"
+        },
+        {
+          "name": "Petec, R.G.",
+          "memberSlug": null
+        },
+        {
+          "name": "Benta, K.I.",
+          "memberSlug": "benta"
+        }
+      ],
+      "venue": "IEEE 37th ICTAI",
+      "year": 2025,
+      "date": "2025-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.ieeecomputersociety.org/10.1109/ICTAI66417.2025.00085",
+      "code": null,
+      "image": null,
+      "abstract": "Proposes FedCompAvg, a compute-aware aggregation strategy for Federated Learning."
+    },
+    {
+      "id": "gruenerbl20252nd",
+      "title": "2nd International Workshop on Mobile Cognitive-Augmenting and Cognition-Altering Technologies (CAT) in Human-Centered AI",
+      "authors": [
+        {
+          "name": "Gruenerbl, Agnes",
+          "memberSlug": null
+        },
+        {
+          "name": "Spilski, Jan",
+          "memberSlug": null
+        },
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "ElAgroudy, Passant",
+          "memberSlug": null
+        },
+        {
+          "name": "Lachmann, Thomas",
+          "memberSlug": null
+        },
+        {
+          "name": "Lukowicz, Paul",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Adjunct Proceedings of the 27th International Conference on Mobile Human-Computer Interaction",
+      "year": 2025,
+      "date": "2025-09",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3737821.3743747",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "kikuchi2025mindspace",
+      "title": "MindSpace: Improving Relaxation Break and Performance Using a Device Exterting Tactile Sensation of Life-like Breathing Movement with Squeeze-like Deep Touch Pressure on Users' Upper Chest Area",
+      "authors": [
+        {
+          "name": "Kikuchi, Misaki",
+          "memberSlug": null
+        },
+        {
+          "name": "Chen, Kanyu",
+          "memberSlug": null
+        },
+        {
+          "name": "Panskus, Rebecca",
+          "memberSlug": null
+        },
+        {
+          "name": "Chen, Dunya",
+          "memberSlug": null
+        },
+        {
+          "name": "Okawa, Keiko",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Proceedings of the Mensch und Computer 2025",
+      "year": 2025,
+      "date": "2025-08",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3743049.3743054",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "xu2025spread",
+      "title": "Spread Your Wings: Demonstrating a Soft Floating Robotic Avatar with Flapping Wings for Novel Physical Interactions",
+      "authors": [
+        {
+          "name": "Xu, Mingyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Ju, Yulan",
+          "memberSlug": null
+        },
+        {
+          "name": "Zhang, Qing",
+          "memberSlug": null
+        },
+        {
+          "name": "Kim, Christopher Changmok",
+          "memberSlug": null
+        },
+        {
+          "name": "Gao, Qingyuan",
+          "memberSlug": null
+        },
+        {
+          "name": "Pai, Yun Suen",
+          "memberSlug": null
+        },
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Hoppe, Matthias",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Minamizawa, Kouta",
+          "memberSlug": null
+        }
+      ],
+      "venue": "ACM SIGGRAPH 2025 Emerging Technologies",
+      "year": 2025,
+      "date": "2025-08",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3721257.3734034",
+      "code": null,
+      "image": null,
       "abstract": null
     },
     {
       "id": "sesterhenn2025trove",
       "title": "A Compute-Matched Re-Evaluation of TroVE on MATH",
       "authors": [
-        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
-        { "name": "Berlot-Attwell, Ian", "memberSlug": null },
-        { "name": "Zenkner, Janis", "memberSlug": "zenkner" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+        {
+          "name": "Sesterhenn, Tobias",
+          "memberSlug": "sesterhenn"
+        },
+        {
+          "name": "Berlot-Attwell, Ian",
+          "memberSlug": null
+        },
+        {
+          "name": "Zenkner, Janis",
+          "memberSlug": "zenkner"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
       ],
       "venue": "ICML 2025 (AI4MATH Workshop)",
       "year": 2025,
@@ -126,34 +1626,95 @@
       "abstract": null
     },
     {
-      "id": "kretzer2025closing",
-      "title": "Closing the Loop Between User Stories and GUI Prototypes: An LLM-based Assistant for Cross-Functional Integration in Software Development",
+      "id": "dcbm",
+      "title": "DCBM: Data-Efficient Visual Concept Bottleneck Models",
       "authors": [
-        { "name": "Kretzer, Felix", "memberSlug": null },
-        { "name": "Kolthoff, Kristian", "memberSlug": "kolthoff" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Ponzetto, Simone Paolo", "memberSlug": null },
-        { "name": "Maedche, Alexander", "memberSlug": null }
+        {
+          "name": "Prasse, Katharina",
+          "memberSlug": null
+        },
+        {
+          "name": "Knab, Patrick",
+          "memberSlug": "knab"
+        },
+        {
+          "name": "Marton, Sascha",
+          "memberSlug": "marton"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Keuper, Margret",
+          "memberSlug": null
+        }
       ],
-      "venue": "CHI 2025",
+      "venue": "ICML 2025",
       "year": 2025,
-      "date": "2025-04",
+      "date": "2025-07",
       "type": "Conference",
       "status": "Published",
-      "url": "https://dl.acm.org/doi/full/10.1145/3706598.3713932",
+      "url": "https://arxiv.org/abs/2412.11576",
       "code": null,
-      "image": "/papers/closing_the_loop.webp",
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "schulz2025integrating",
+      "title": "Integrating Augmented Reality and Game-Based Learning for Chemistry Education: A Participatory Design Approach",
+      "authors": [
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Unbehaun, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Alkountar, Dani",
+          "memberSlug": null
+        },
+        {
+          "name": "Dawod, Mohamed",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the 12th International Conference on Communities & Technologies",
+      "year": 2025,
+      "date": "2025-07",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3742800.3742854",
+      "code": null,
+      "image": null,
       "abstract": null
     },
     {
       "id": "kolthoff2025guide",
       "title": "GUIDE: LLM-Driven GUI Generation Decomposition for Automated Prototyping",
       "authors": [
-        { "name": "Kolthoff, Kristian", "memberSlug": "kolthoff" },
-        { "name": "Kretzer, Felix", "memberSlug": null },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Maedche, Alexander", "memberSlug": null },
-        { "name": "Ponzetto, Simone Paolo", "memberSlug": null }
+        {
+          "name": "Kolthoff, Kristian",
+          "memberSlug": "kolthoff"
+        },
+        {
+          "name": "Kretzer, Felix",
+          "memberSlug": null
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Maedche, Alexander",
+          "memberSlug": null
+        },
+        {
+          "name": "Ponzetto, Simone Paolo",
+          "memberSlug": null
+        }
       ],
       "venue": "ICSE 2025",
       "year": 2025,
@@ -166,13 +1727,705 @@
       "abstract": null
     },
     {
+      "id": "zaidi2025tieboard",
+      "title": "TIEboard: A Digital Educational Tool for Kids Geometric Learning",
+      "authors": [
+        {
+          "name": "Zaidi, Arooj",
+          "memberSlug": null
+        },
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Pai, Yun Suen",
+          "memberSlug": null
+        },
+        {
+          "name": "Yamaoka, Junichi",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies",
+      "year": 2025,
+      "date": "2025-06",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3729478",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "hansen2025bodypursuits",
+      "title": "BodyPursuits: Exploring Smooth Pursuit Gaze Interaction Based on Body Motion Targets",
+      "authors": [
+        {
+          "name": "Hansen, Anja",
+          "memberSlug": null
+        },
+        {
+          "name": "Makarem, Sarah",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Zhou, Yexu",
+          "memberSlug": null
+        },
+        {
+          "name": "Knierim, Michael Thomas",
+          "memberSlug": null
+        },
+        {
+          "name": "Clarke, Christopher",
+          "memberSlug": null
+        },
+        {
+          "name": "Gellersen, Hans",
+          "memberSlug": null
+        },
+        {
+          "name": "Beigl, Michael",
+          "memberSlug": null
+        },
+        {
+          "name": "Röddiger, Tobias",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the 2025 Symposium on Eye Tracking Research and Applications",
+      "year": 2025,
+      "date": "2025-05",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3715669.3723110",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "kim2025eye",
+      "title": "Eye-Tracking for Cognitive Well-Being: Balancing Detection and Ethical Feedback",
+      "authors": [
+        {
+          "name": "Kim, Christopher Changmok",
+          "memberSlug": null
+        },
+        {
+          "name": "Hoppe, Matthias",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Proceedings of the 2025 Symposium on Eye Tracking Research and Applications",
+      "year": 2025,
+      "date": "2025-05",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3715669.3726817",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "naacl2025",
+      "title": "Large Language Models Share Representations of Latent Grammatical Concepts Across Typologically Diverse Languages",
+      "authors": [
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Wendler, Chris",
+          "memberSlug": null
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Mueller, Aaron",
+          "memberSlug": null
+        }
+      ],
+      "venue": "NAACL 2025",
+      "year": 2025,
+      "date": "2025-05",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://arxiv.org/abs/2501.06346",
+      "code": null,
+      "image": "/papers/naacl2025.webp",
+      "abstract": null
+    },
+    {
+      "id": "meng2025placebo",
+      "title": "A Placebo Concert: The Placebo Effect for Visualization of Physiological Audience Data during Experience Recreation in Virtual Reality",
+      "authors": [
+        {
+          "name": "Meng, Xiaru",
+          "memberSlug": null
+        },
+        {
+          "name": "Ju, Yulan",
+          "memberSlug": null
+        },
+        {
+          "name": "Kim, Christopher Changmok",
+          "memberSlug": null
+        },
+        {
+          "name": "He, Yan",
+          "memberSlug": null
+        },
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Minamizawa, Kouta",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Hoppe, Matthias",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems",
+      "year": 2025,
+      "date": "2025-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3706598.3713594",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "kretzer2025closing",
+      "title": "Closing the Loop Between User Stories and GUI Prototypes: An LLM-based Assistant for Cross-Functional Integration in Software Development",
+      "authors": [
+        {
+          "name": "Kretzer, Felix",
+          "memberSlug": null
+        },
+        {
+          "name": "Kolthoff, Kristian",
+          "memberSlug": "kolthoff"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Ponzetto, Simone Paolo",
+          "memberSlug": null
+        },
+        {
+          "name": "Maedche, Alexander",
+          "memberSlug": null
+        }
+      ],
+      "venue": "CHI 2025",
+      "year": 2025,
+      "date": "2025-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://dl.acm.org/doi/full/10.1145/3706598.3713932",
+      "code": null,
+      "image": "/papers/closing_the_loop.webp",
+      "abstract": null
+    },
+    {
+      "id": "marton2025sympol",
+      "title": "Mitigating Information Loss in Tree-Based Reinforcement Learning via Direct Optimization",
+      "authors": [
+        {
+          "name": "Marton, Sascha",
+          "memberSlug": "marton"
+        },
+        {
+          "name": "Grams, Tim",
+          "memberSlug": "grams"
+        },
+        {
+          "name": "Vogt, Florian",
+          "memberSlug": null
+        },
+        {
+          "name": "Lüdtke, Stefan",
+          "memberSlug": "ludtke"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Stuckenschmidt, Heiner",
+          "memberSlug": null
+        }
+      ],
+      "venue": "ICLR 2025",
+      "year": 2025,
+      "date": "2025-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://arxiv.org/pdf/2408.08761",
+      "code": null,
+      "image": "/papers/mitigating.webp",
+      "abstract": "Addresses how reinforcement learning has seen significant success across various domains, but its adoption is often limited by the black-box nature of neural network policies."
+    },
+    {
+      "id": "barbareschi2025sticking",
+      "title": "Sticking With Electronics for Crafting Practices: An Inclusive Approach to Promote Making Literacy Among Older Adults",
+      "authors": [
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Sato, Chihiro",
+          "memberSlug": null
+        },
+        {
+          "name": "Senyer, Seray",
+          "memberSlug": null
+        },
+        {
+          "name": "Junpeng, Michael Pan",
+          "memberSlug": null
+        },
+        {
+          "name": "Zhao, Jianrui",
+          "memberSlug": null
+        },
+        {
+          "name": "Chen, Dunya",
+          "memberSlug": null
+        },
+        {
+          "name": "Ellis, Kirsten",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems",
+      "year": 2025,
+      "date": "2025-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3706598.3714234",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "li2025beyond",
+      "title": "Beyond Human: Cognitive and Physical Augmentation through AI, Robotics, and XR–Opportunities and Risks",
+      "authors": [
+        {
+          "name": "Li, Jie",
+          "memberSlug": null
+        },
+        {
+          "name": "Withana, Anusha",
+          "memberSlug": null
+        },
+        {
+          "name": "Diening, Alexandra",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        },
+        {
+          "name": "Inami, Masahiko",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the Augmented Humans International Conference 2025",
+      "year": 2025,
+      "date": "2025-03",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3745900.3746127",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "xu2025cuddle",
+      "title": "Cuddle-fish: Exploring a soft floating robot with flapping wings for physical interactions",
+      "authors": [
+        {
+          "name": "Xu, Mingyang",
+          "memberSlug": null
+        },
+        {
+          "name": "Shao, Jiayi",
+          "memberSlug": null
+        },
+        {
+          "name": "Ju, Yulan",
+          "memberSlug": null
+        },
+        {
+          "name": "Shen, Ximing",
+          "memberSlug": null
+        },
+        {
+          "name": "Gao, Qingyuan",
+          "memberSlug": null
+        },
+        {
+          "name": "Chen, Weijen",
+          "memberSlug": null
+        },
+        {
+          "name": "Zhang, Qing",
+          "memberSlug": null
+        },
+        {
+          "name": "Pai, Yun Suen",
+          "memberSlug": null
+        },
+        {
+          "name": "Barbareschi, Giulia",
+          "memberSlug": null
+        },
+        {
+          "name": "Hoppe, Matthias",
+          "memberSlug": null
+        },
+        {
+          "name": "Minamizawa, Kouta",
+          "memberSlug": null
+        },
+        {
+          "name": "Kunze, Kai",
+          "memberSlug": "kai-kunze"
+        }
+      ],
+      "venue": "Proceedings of the Augmented Humans International Conference 2025, 160-173",
+      "year": 2025,
+      "date": "2025-03",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3745900.3746080",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "zenkner2025shedding",
+      "title": "Shedding Light on Task Decomposition in Program Synthesis: The Driving Force of the Synthesizer Model",
+      "authors": [
+        {
+          "name": "Zenkner, Janis",
+          "memberSlug": "zenkner"
+        },
+        {
+          "name": "Sesterhenn, Tobias",
+          "memberSlug": "sesterhenn"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
+      ],
+      "venue": "ICLR 2025 (DL4C Workshop)",
+      "year": 2025,
+      "date": "2025-03",
+      "type": "Workshop",
+      "status": "Published",
+      "url": "https://openreview.net/pdf?id=3vqnyd2Xe8",
+      "code": null,
+      "image": "/papers/accuracy_barplot_deepcoder.svg",
+      "abstract": null
+    },
+    {
+      "id": "lime-survey",
+      "title": "Which LIME should I trust? Concepts, Challenges, and Solutions",
+      "authors": [
+        {
+          "name": "Knab, Patrick",
+          "memberSlug": "knab"
+        },
+        {
+          "name": "Marton, Sascha",
+          "memberSlug": "marton"
+        },
+        {
+          "name": "Schlegel, Udo",
+          "memberSlug": null
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
+      ],
+      "venue": "xAI 2025",
+      "year": 2025,
+      "date": "2025-03",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://patrick-knab.github.io/which-lime-to-trust/",
+      "code": null,
+      "image": "/papers/LIME.webp",
+      "abstract": null
+    },
+    {
+      "id": "unbehaun2025exploring",
+      "title": "Exploring technical implications and design opportunities for interactive and engaging telepresence robots in rehabilitation – results from an ethnographic requirement analysis with patients and health-care professionals",
+      "authors": [
+        {
+          "name": "Unbehaun, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Kirsch, Marcel",
+          "memberSlug": null
+        },
+        {
+          "name": "Schulte-Huermann, Johannes",
+          "memberSlug": null
+        },
+        {
+          "name": "Beckmann, Julia",
+          "memberSlug": null
+        },
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Thiel, Katharina",
+          "memberSlug": null
+        },
+        {
+          "name": "Fritz, Thomas",
+          "memberSlug": null
+        },
+        {
+          "name": "Wulf, Volker",
+          "memberSlug": null
+        }
+      ],
+      "venue": "i-com",
+      "year": 2025,
+      "date": "2025-02",
+      "type": "Journal",
+      "status": "Published",
+      "url": "https://doi.org/10.1515/icom-2024-0044",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "schulz2025investigating",
+      "title": "Investigating the effects of embodiment on presence and perception in remote physician video consultations: a between-participants study comparing a tablet and a telepresence robot",
+      "authors": [
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Unbehaun, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Doernbach, Tobias",
+          "memberSlug": null
+        }
+      ],
+      "venue": "i-com",
+      "year": 2025,
+      "date": "2025-02",
+      "type": "Journal",
+      "status": "Published",
+      "url": "https://doi.org/10.1515/icom-2024-0045",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "szilagyi2025accelerating",
+      "title": "Accelerating Intelligent Vehicle Vision: A Hybrid Python-Rust Architecture with Partial-Blocking Inter-Process Communication",
+      "authors": [
+        {
+          "name": "Szilagyi, David",
+          "memberSlug": "szilagyi",
+          "institution": "UBB"
+        },
+        {
+          "name": "Filea, R.",
+          "memberSlug": null
+        },
+        {
+          "name": "Benta, K.I.",
+          "memberSlug": "benta"
+        }
+      ],
+      "venue": "Romanian Journal of Information Technology and Automatic Control",
+      "year": 2025,
+      "date": "2025-01",
+      "type": "Journal",
+      "status": "Published",
+      "url": "https://doi.org/10.33436/v35i3y202508",
+      "code": null,
+      "image": null,
+      "abstract": "A hybrid Python-Rust architecture for intelligent vehicle vision systems."
+    },
+    {
+      "id": "schulz2025designing",
+      "title": "Designing for Engagement and immersive Learning through Augmented Reality: A Participatory Design Case Study of Virtual Chemist App in an Educational Context",
+      "authors": [
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Alkountar, Dani",
+          "memberSlug": null
+        },
+        {
+          "name": "Dawod, Mohamed",
+          "memberSlug": null
+        },
+        {
+          "name": "Unbehaun, David",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Companion Proceedings of the 2025 ACM International Conference on Supporting Group Work",
+      "year": 2025,
+      "date": "2025-01",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1145/3688828.3699635",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "schulz2025supporting",
+      "title": "Supporting Healthcare Workflows with Smart Glasses: Insights from a Participatory Design Study on Post-Stroke Patient Positioning",
+      "authors": [
+        {
+          "name": "Schulz, Dominik",
+          "memberSlug": "dominik-schulz"
+        },
+        {
+          "name": "Kükemück, Silke",
+          "memberSlug": null
+        },
+        {
+          "name": "Beckmann, Julia",
+          "memberSlug": null
+        },
+        {
+          "name": "Thiel, Katharina",
+          "memberSlug": null
+        },
+        {
+          "name": "Schubert, Annalena",
+          "memberSlug": null
+        },
+        {
+          "name": "Jacobi, Timo",
+          "memberSlug": null
+        },
+        {
+          "name": "Prilla, Michael",
+          "memberSlug": null
+        },
+        {
+          "name": "Wulf, Volker",
+          "memberSlug": null
+        },
+        {
+          "name": "Unbehaun, David",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Proceedings of the 23rd EUSSET Conference on Computer Supported Cooperative Work",
+      "year": 2025,
+      "date": "2025-06",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.48340/ecscw2025_cp03",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
+      "id": "szilagyi2024benchmarking",
+      "title": "Benchmarking Autonomous Driving Systems using a Modular and Scalable Simulation Environment",
+      "authors": [
+        {
+          "name": "Szilagyi, David",
+          "memberSlug": "szilagyi",
+          "institution": "UBB"
+        },
+        {
+          "name": "Benta, K.I.",
+          "memberSlug": "benta"
+        },
+        {
+          "name": "Sacarea, Christian",
+          "memberSlug": "sacarea"
+        }
+      ],
+      "venue": "IEEE 36th ICTAI",
+      "year": 2024,
+      "date": "2024-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://doi.org/10.1109/ictai62512.2024.00067",
+      "code": null,
+      "image": null,
+      "abstract": null
+    },
+    {
       "id": "kolthoff2024self-elicitation",
       "title": "Self-Elicitation of Requirements with Automated GUI Prototyping",
       "authors": [
-        { "name": "Kolthoff, Kristian", "memberSlug": "kolthoff" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Ponzetto, Simone Paolo", "memberSlug": null },
-        { "name": "Schneider, Kurt", "memberSlug": null }
+        {
+          "name": "Kolthoff, Kristian",
+          "memberSlug": "kolthoff"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Ponzetto, Simone Paolo",
+          "memberSlug": null
+        },
+        {
+          "name": "Schneider, Kurt",
+          "memberSlug": null
+        }
       ],
       "venue": "ASE 2024",
       "year": 2024,
@@ -188,11 +2441,26 @@
       "id": "kolthoff2024interlinking",
       "title": "Interlinking User Stories and GUI Prototyping: A Semi-Automatic LLM-based Approach",
       "authors": [
-        { "name": "Kolthoff, Kristian", "memberSlug": "kolthoff" },
-        { "name": "Kretzer, Felix", "memberSlug": null },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Maedche, Alexander", "memberSlug": null },
-        { "name": "Ponzetto, Simone Paolo", "memberSlug": null }
+        {
+          "name": "Kolthoff, Kristian",
+          "memberSlug": "kolthoff"
+        },
+        {
+          "name": "Kretzer, Felix",
+          "memberSlug": null
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Maedche, Alexander",
+          "memberSlug": null
+        },
+        {
+          "name": "Ponzetto, Simone Paolo",
+          "memberSlug": null
+        }
       ],
       "venue": "RE 2024",
       "year": 2024,
@@ -205,166 +2473,25 @@
       "abstract": null
     },
     {
-      "id": "dcbm",
-      "title": "DCBM: Data-Efficient Visual Concept Bottleneck Models",
-      "authors": [
-        { "name": "Prasse, Katharina", "memberSlug": null },
-        { "name": "Knab, Patrick", "memberSlug": "knab" },
-        { "name": "Marton, Sascha", "memberSlug": "marton" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Keuper, Margret", "memberSlug": null }
-      ],
-      "venue": "ICML 2025",
-      "year": 2025,
-      "date": "2025-07",
-      "type": "Conference",
-      "status": "Published",
-      "url": "https://arxiv.org/abs/2412.11576",
-      "code": null,
-      "image": null,
-      "abstract": null
-    },
-    {
-      "id": "naacl2025",
-      "title": "Large Language Models Share Representations of Latent Grammatical Concepts Across Typologically Diverse Languages",
-      "authors": [
-        { "name": "Brinkmann, Jannik", "memberSlug": "brinkmann" },
-        { "name": "Wendler, Chris", "memberSlug": null },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Mueller, Aaron", "memberSlug": null }
-      ],
-      "venue": "NAACL 2025",
-      "year": 2025,
-      "date": "2025-05",
-      "type": "Conference",
-      "status": "Published",
-      "url": "https://arxiv.org/abs/2501.06346",
-      "code": null,
-      "image": "/papers/naacl2025.webp",
-      "abstract": null
-    },
-    {
-      "id": "zenkner2025shedding",
-      "title": "Shedding Light on Task Decomposition in Program Synthesis: The Driving Force of the Synthesizer Model",
-      "authors": [
-        { "name": "Zenkner, Janis", "memberSlug": "zenkner" },
-        { "name": "Sesterhenn, Tobias", "memberSlug": "sesterhenn" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
-      ],
-      "venue": "ICLR 2025 (DL4C Workshop)",
-      "year": 2025,
-      "date": "2025-03",
-      "type": "Workshop",
-      "status": "Published",
-      "url": "https://openreview.net/pdf?id=3vqnyd2Xe8",
-      "code": null,
-      "image": "/papers/accuracy_barplot_deepcoder.svg",
-      "abstract": null
-    },
-    {
-      "id": "dseg-lime",
-      "title": "Beyond Pixels: Enhancing LIME with Hierarchical Features and Segmentation Foundation Models",
-      "authors": [
-        { "name": "Knab, Patrick", "memberSlug": "knab" },
-        { "name": "Marton, Sascha", "memberSlug": "marton" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
-      ],
-      "venue": "ECAI 2025",
-      "year": 2025,
-      "date": "2025-10",
-      "type": "Conference",
-      "status": "Published",
-      "url": "https://arxiv.org/abs/2403.07733",
-      "code": "https://github.com/patrick-knab/DSEG-LIME",
-      "image": "/papers/DSEG.webp",
-      "abstract": "Presents DSEG-LIME framework for improved image explanation using foundation model integration."
-    },
-    {
-      "id": "lime-survey",
-      "title": "Which LIME should I trust? Concepts, Challenges, and Solutions",
-      "authors": [
-        { "name": "Knab, Patrick", "memberSlug": "knab" },
-        { "name": "Marton, Sascha", "memberSlug": "marton" },
-        { "name": "Schlegel, Udo", "memberSlug": null },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
-      ],
-      "venue": "xAI 2025",
-      "year": 2025,
-      "date": "2025-03",
-      "type": "Conference",
-      "status": "Published",
-      "url": "https://patrick-knab.github.io/which-lime-to-trust/",
-      "code": null,
-      "image": "/papers/LIME.webp",
-      "abstract": null
-    },
-    {
-      "id": "marton2025sympol",
-      "title": "Mitigating Information Loss in Tree-Based Reinforcement Learning via Direct Optimization",
-      "authors": [
-        { "name": "Marton, Sascha", "memberSlug": "marton" },
-        { "name": "Grams, Tim", "memberSlug": "grams" },
-        { "name": "Vogt, Florian", "memberSlug": null },
-        { "name": "Lüdtke, Stefan", "memberSlug": "ludtke" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Stuckenschmidt, Heiner", "memberSlug": null }
-      ],
-      "venue": "ICLR 2025",
-      "year": 2025,
-      "date": "2025-04",
-      "type": "Conference",
-      "status": "Published",
-      "url": "https://arxiv.org/pdf/2408.08761",
-      "code": null,
-      "image": "/papers/mitigating.webp",
-      "abstract": "Addresses how reinforcement learning has seen significant success across various domains, but its adoption is often limited by the black-box nature of neural network policies."
-    },
-    {
-      "id": "grams2025disentangling",
-      "title": "Disentangling Exploration of Large Language Models by Optimal Exploitation",
-      "authors": [
-        { "name": "Grams, Tim", "memberSlug": "grams" },
-        { "name": "Betz, Patrick", "memberSlug": null },
-        { "name": "Marton, Sascha", "memberSlug": "marton" },
-        { "name": "Lüdtke, Stefan", "memberSlug": "ludtke" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
-      ],
-      "venue": "ECAI 2025",
-      "year": 2025,
-      "date": "2025-10",
-      "type": "Conference",
-      "status": "Published",
-      "url": "https://arxiv.org/abs/2501.08925",
-      "code": null,
-      "image": "/papers/disentangling.webp",
-      "abstract": "Examines exploration as a crucial skill for in-context reinforcement learning in unknown environments and investigates whether large language models can effectively explore partially observable settings."
-    },
-    {
-      "id": "oesterle2024drama",
-      "title": "DRAMA at the PettingZoo: Dynamically Restricted Action Spaces for Multi-Agent Reinforcement Learning Frameworks",
-      "authors": [
-        { "name": "Oesterle, Michael", "memberSlug": null },
-        { "name": "Grams, Tim", "memberSlug": "grams" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
-      ],
-      "venue": "HICSS 2024",
-      "year": 2024,
-      "date": "2024-01",
-      "type": "Conference",
-      "status": "Published",
-      "url": "https://hdl.handle.net/10125/107324",
-      "code": null,
-      "image": "/papers/DRAMA.webp",
-      "abstract": null
-    },
-    {
       "id": "oesterle2024raise",
       "title": "RAISE the Bar: Restriction of Action Spaces for Improved Social Welfare and Equity in Traffic Management",
       "authors": [
-        { "name": "Oesterle, Michael", "memberSlug": null },
-        { "name": "Grams, Tim", "memberSlug": "grams" },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" },
-        { "name": "Stuckenschmidt, Heiner", "memberSlug": null }
+        {
+          "name": "Oesterle, Michael",
+          "memberSlug": null
+        },
+        {
+          "name": "Grams, Tim",
+          "memberSlug": "grams"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        },
+        {
+          "name": "Stuckenschmidt, Heiner",
+          "memberSlug": null
+        }
       ],
       "venue": "AAMAS 2024",
       "year": 2024,
@@ -377,95 +2504,31 @@
       "abstract": null
     },
     {
-      "id": "knab2026concepts",
-      "title": "Concepts in Motion: Temporal Concept Bottleneck Model for Interpretable Video Classification",
+      "id": "oesterle2024drama",
+      "title": "DRAMA at the PettingZoo: Dynamically Restricted Action Spaces for Multi-Agent Reinforcement Learning Frameworks",
       "authors": [
-        { "name": "Knab, Patrick", "memberSlug": "knab" },
-        { "name": "Marton, Sascha", "memberSlug": "marton" },
-        { "name": "Schubert, Philipp Johannes", "memberSlug": null },
-        { "name": "Guggiana Nilo, Drago Andres", "memberSlug": null },
-        { "name": "Bartelt, Christian", "memberSlug": "bartelt" }
+        {
+          "name": "Oesterle, Michael",
+          "memberSlug": null
+        },
+        {
+          "name": "Grams, Tim",
+          "memberSlug": "grams"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
       ],
-      "venue": "CVPR 2026 (XAI4CV Workshop) and ICML 2026 (CompLearn Workshop)",
-      "year": 2026,
-      "date": "2026-07",
-      "type": "Workshop",
-      "status": "Accepted",
-      "url": "https://arxiv.org/abs/2509.20899",
-      "code": "https://patrick-knab.github.io/MoTIF/",
-      "image": "/papers/concepts-in-motion.webp",
-      "abstract": "Introduces MoTIF, a transformer-based temporal concept bottleneck framework that discovers video concepts with vision-language models and models their temporal patterns for interpretable video classification."
-    },
-    {
-      "id": "szilagyi2025accelerating",
-      "title": "Accelerating Intelligent Vehicle Vision: A Hybrid Python-Rust Architecture with Partial-Blocking Inter-Process Communication",
-      "authors": [
-        { "name": "Szilagyi, David", "memberSlug": "szilagyi", "institution": "UBB" },
-        { "name": "Filea, R.", "memberSlug": null },
-        { "name": "Benta, K.I.", "memberSlug": "benta" }
-      ],
-      "venue": "Romanian Journal of Information Technology and Automatic Control",
-      "year": 2025,
-      "date": "2025-01",
-      "type": "Journal",
-      "status": "Published",
-      "url": "",
-      "code": null,
-      "image": null,
-      "abstract": "A hybrid Python-Rust architecture for intelligent vehicle vision systems."
-    },
-    {
-      "id": "szilagyi2024benchmarking",
-      "title": "Benchmarking Autonomous Driving Systems using a Modular and Scalable Simulation Environment",
-      "authors": [
-        { "name": "Szilagyi, David", "memberSlug": "szilagyi", "institution": "UBB" },
-        { "name": "Benta, K.I.", "memberSlug": "benta" },
-        { "name": "Sacarea, Christian", "memberSlug": "sacarea" }
-      ],
-      "venue": "IEEE 36th ICTAI",
+      "venue": "HICSS 2024",
       "year": 2024,
-      "date": "2024-10",
+      "date": "2024-01",
       "type": "Conference",
       "status": "Published",
-      "url": "",
+      "url": "https://hdl.handle.net/10125/107324",
       "code": null,
-      "image": null,
+      "image": "/papers/DRAMA.webp",
       "abstract": null
-    },
-    {
-      "id": "szilagyi2025scalable",
-      "title": "Scalable Aggregation Under Client-Side Compute Variability in Federated Learning",
-      "authors": [
-        { "name": "Szilagyi, David", "memberSlug": "szilagyi", "institution": "UBB" },
-        { "name": "Petec, R.G.", "memberSlug": null },
-        { "name": "Benta, K.I.", "memberSlug": "benta" }
-      ],
-      "venue": "IEEE 37th ICTAI",
-      "year": 2025,
-      "date": "2025-10",
-      "type": "Conference",
-      "status": "Published",
-      "url": "https://doi.ieeecomputersociety.org/10.1109/ICTAI66417.2025.00085",
-      "code": null,
-      "image": null,
-      "abstract": "Proposes FedCompAvg, a compute-aware aggregation strategy for Federated Learning."
-    },
-    {
-      "id": "nedungadi2019grasping",
-      "title": "Design of an Active-Reliable Grasping Mechanism for Autonomous Unmanned Aerial Vehicles",
-      "authors": [
-        { "name": "Nedungadi, Ashwin S.", "memberSlug": "nedungadi" },
-        { "name": "Saska, Martin", "memberSlug": null }
-      ],
-      "venue": "Modelling and Simulation for Autonomous Systems (MESAS)",
-      "year": 2019,
-      "date": "2019-10",
-      "type": "Conference",
-      "status": "Published",
-      "url": "",
-      "code": null,
-      "image": null,
-      "abstract": "Design of an active-reliable grasping mechanism for autonomous unmanned aerial vehicles."
     }
   ]
 }

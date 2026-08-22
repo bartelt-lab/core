@@ -1,101 +1,53 @@
 import ProjectLayout from '../../../components/tuc/ProjectLayout';
+import FinishedProjectContent from '../../../components/tuc/FinishedProjectContent';
 import assetUrl from '../../../utils/assetUrl';
+import { useLanguage } from '../../../i18n/useLanguage';
 
 const DynamoProject = () => {
-    const requirements = [
-        <><strong>Visible Effort:</strong> Regular demos, active experimentation, and a clear "trail of research" — we value the journey, not just the destination</>,
-        <><strong>AI Integrity & Understanding:</strong> AI tools (ChatGPT, Claude, Gemini) are welcome, but you must deeply understand the logic and be able to explain and troubleshoot any code you submit</>,
-        <><strong>Ambition:</strong> Readiness to tackle hard, undefined problems and document the scientific process — including why things failed</>,
-        <><strong>Activity:</strong> Consistent presence and participation in sprint cycles and team meetings</>,
-        <><strong>Team Spirit:</strong> Proactively helping to unblock teammates and contributing to collective progress</>,
-        <><strong>Technical Prerequisite:</strong> Basic Python programming and a proactive, self-driven approach to problem-solving</>
-    ];
-
-    const offerings = [
-        "Hands-on experience with cutting-edge technologies: NVIDIA Isaac Lab, Project GR00T, and Gemini API",
-        "Research autonomy to investigate state-of-the-art AI paradigms in robotic manipulation and navigation",
-        "A structured, collaborative team environment with clear interface contracts between sub-teams",
-        "Focus on the scientific method — hypothesizing, experimenting, iterating — over simple task execution"
-    ];
-
-    const features = [
-        { icon: "🚗", title: "Mobile Navigation & Logistics", description: "ROS 2 Navigation (Nav2), path planning, visual servoing, and human-aware pathing for autonomous mobile base operations." },
-        { icon: "🦾", title: "Advanced Manipulation", description: "Foundation models (GR00T), imitation learning (LeRobot, ACT, Diffusion Policy), VLAs (OpenVLA), and embodied reasoning via Gemini API." },
-        { icon: "🖥️", title: "Simulation & Orchestration", description: "NVIDIA Isaac Lab, virtual scene description (USD), synthetic data generation, and digital twin construction." },
-        { icon: "🔬", title: "Process > Product", description: "An agile 2-week sprint cycle with simulation-first methodology — grading is driven by the quality of your research journey, not just the final product." }
-    ];
+    const { pick } = useLanguage();
 
     return (
-        <ProjectLayout
-            title="DyNAMO"
-            subtitle="Dynamic Navigation & Autonomous Manipulation Operations"
-            status="Active"
-            tags={["Robotic Manipulation", "Simulation", "Embodied AI"]}
-            heroImage={assetUrl("/images/projects/dynamo/hero.webp")}
-            overview="DyNAMO is an ambitious, high-complexity research initiative where students tackle undefined problems in robotics — not follow a fixed tutorial. We physically decouple the Mobile Base (Logistics) from the Manipulator (Dexterity), allowing sub-teams to develop against agreed-upon interfaces. Operating on an agile 2-week sprint cycle with a simulation-first approach using NVIDIA Isaac Lab, teams iterate rapidly and safely before deploying to real hardware."
-            features={features}
-            requirements={requirements}
-            offerings={offerings}
-            downloadUrl={assetUrl("/documents/project-descriptions/DyNAMOv1.2.pdf")}
-        >
-            {/* Scientific Approach - shown first */}
-            <div id="science" className="py-12 border-t border-gray-100">
-                <h3 className="text-3xl font-bold text-gray-900 mb-12 text-center">Scientific Approach</h3>
-
-                <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
-                    <div className="text-lg text-gray-600 leading-relaxed space-y-6">
-                        <p>
-                            Current robotic systems often perform repetitive tasks with super-human precision but fail when faced with novel objects or unscripted environments. DyNAMO moves away from hard-coded behaviors towards learning-based approaches that emphasize true <strong>understanding</strong>.
-                        </p>
-                        <p>
-                            Our capstone goal is to construct an <strong>Integrated Test Environment</strong> where Ridgeback and G1 robots operate simultaneously amidst animated human characters in a unified simulation — then transfer those capabilities to the real world.
-                        </p>
-                        <div className="bg-primary-50 p-6 rounded-xl border-l-4 border-primary-500 mt-6">
-                            <h4 className="font-bold text-primary-900 mb-2">Key Challenges</h4>
-                            <ul className="list-disc list-inside text-primary-800 space-y-1 text-base">
-                                <li>Bridging simulation and reality (Sim2Real transfer)</li>
-                                <li>Grounding language models in physical robotic actions</li>
-                                <li>Coordinating autonomous navigation with dexterous manipulation</li>
-                                <li>Building robust digital twins for rapid iteration</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 group">
-                        <img
-                            src={assetUrl("/images/projects/dynamo/goal.webp")}
-                            alt="Dynamo Goal Illustration"
-                            loading="lazy"
-                            decoding="async"
-                            className="w-full h-auto transform transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                            <p className="text-white text-sm font-medium text-center">Sim2Real Transfer & Object Manipulation</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* System Architecture */}
-            <div id="architecture" className="py-12 border-t border-gray-100">
-                <div className="mb-20">
-                    <div className="text-center mb-10">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-2">System Architecture</h2>
-                        <p className="text-gray-500">Visual abstract of the end-to-end pipeline</p>
-                    </div>
-                    <div className="max-w-5xl mx-auto shadow-2xl rounded-2xl overflow-hidden bg-white border border-gray-100 relative group">
-                        <div className="absolute inset-0 bg-primary-900/5 group-hover:bg-transparent transition-colors duration-300 pointer-events-none"></div>
-                        <img
-                            src={assetUrl("/images/projects/dynamo/architecture.webp")}
-                            alt="Dynamo Visual Abstract"
-                            loading="lazy"
-                            decoding="async"
-                            className="w-full h-auto"
-                        />
-                    </div>
-                </div>
-            </div>
-        </ProjectLayout>
+    <ProjectLayout
+        title="DyNAMO"
+        subtitle="Dynamic Navigation & Autonomous Manipulation Operations"
+        tags={pick(['Robotic Manipulation', 'Simulation', 'Embodied AI'], ['Robotische Manipulation', 'Simulation', 'Verkörperte KI'])}
+        overview={pick('DyNAMO divides an autonomous robotics system into three connected parts: ROS 2 navigation for the Ridgeback mobile base, learned manipulation for the Unitree G1, and a shared Isaac Sim and Isaac Lab environment built with USD. Defined interfaces allow each subsystem to be developed independently before integration.', 'DyNAMO unterteilt ein autonomes Robotersystem in drei verbundene Bereiche: ROS-2-Navigation für die mobile Ridgeback-Basis, gelernte Manipulation mit dem Unitree G1 sowie eine gemeinsame, mit USD aufgebaute Isaac-Sim- und Isaac-Lab-Umgebung. Definierte Schnittstellen ermöglichen die unabhängige Entwicklung der Teilsysteme vor ihrer Integration.')}
+        features={[]}
+        showEvalSection={false}
+        compact
+    >
+        <FinishedProjectContent
+            showcase={{
+                title: 'DyNAMO',
+                subtitle: 'Dynamic Navigation & Autonomous Manipulation Operations',
+                eyebrow: pick('Robotics system architecture', 'Robotik-Systemarchitektur'),
+                heading: pick('Navigation, manipulation, and simulation under shared interfaces', 'Navigation, Manipulation und Simulation über gemeinsame Schnittstellen'),
+                body: pick('The Ridgeback handles mapping, path planning, obstacle avoidance, and docking. The G1 manipulation track studies learned pick-and-place policies, while the simulation track supplies shared robot assets, physics, environments, and synthetic data.', 'Der Ridgeback übernimmt Kartierung, Pfadplanung, Hindernisvermeidung und Andocken. Der G1-Manipulationsbereich untersucht gelernte Pick-and-Place-Strategien, während der Simulationsbereich gemeinsame Roboterassets, Physik, Umgebungen und synthetische Daten bereitstellt.'),
+                imageSrc: '/images/projects/dynamo/architecture.webp',
+                imageAlt: 'DyNAMO system architecture visual abstract'
+            }}
+            summary={{
+                title: pick('How the DyNAMO system is divided', 'Wie das DyNAMO-System aufgeteilt ist'),
+                paragraphs: [
+                    pick('The mobile-navigation track uses ROS 2 Nav2 for mapping and autonomous movement, then adds visual servoing and dynamic obstacle handling for precise positioning near the manipulator.', 'Der Bereich mobile Navigation nutzt ROS 2 Nav2 für Kartierung und autonome Bewegung und ergänzt visuelle Regelung sowie dynamische Hindernisbehandlung für die präzise Positionierung am Manipulator.'),
+                    pick('The manipulation track compares foundation models, imitation learning, vision-language-action models, and code-as-policy approaches. A shared Isaac Sim and Isaac Lab environment uses USD stages, digital twins, physics, and synthetic data to keep both robot subsystems compatible before hardware transfer.', 'Der Manipulationsbereich vergleicht Foundation Models, Imitation Learning, Vision-Language-Action-Modelle und Code-as-Policy-Ansätze. Eine gemeinsame Isaac-Sim- und Isaac-Lab-Umgebung nutzt USD-Stages, digitale Zwillinge, Physik und synthetische Daten, um beide Robotersysteme vor dem Hardwaretransfer kompatibel zu halten.')
+                ]
+            }}
+            focus={pick(
+                ['ROS 2 Nav2', 'NVIDIA Isaac Sim / Lab', 'USD environments', 'Visual servoing', 'Imitation learning', 'Vision-language-action models', 'Sim2Real transfer'],
+                ['ROS 2 Nav2', 'NVIDIA Isaac Sim / Lab', 'USD-Umgebungen', 'Visuelle Regelung', 'Imitation Learning', 'Vision-Language-Action-Modelle', 'Sim2Real-Transfer']
+            )}
+            artifacts={[
+                pick('ROS 2 navigation handles mapping, path planning, obstacle avoidance, and mobile-base docking', 'Die ROS-2-Navigation übernimmt Kartierung, Pfadplanung, Hindernisvermeidung und das Andocken der mobilen Basis'),
+                pick('Learning-based manipulation targets multi-object pick-and-place with the Unitree G1', 'Lernbasierte Manipulation zielt auf Pick-and-Place mehrerer Objekte mit dem Unitree G1'),
+                pick('Shared USD stages combine robot assets, physics, and synthetic-data generation in Isaac Sim and Isaac Lab', 'Gemeinsame USD-Stages verbinden Roboterassets, Physik und synthetische Datenerzeugung in Isaac Sim und Isaac Lab')
+            ]}
+            materialTitle={pick('Technical project document', 'Technisches Projektdokument')}
+            materialBody={pick('The document describes the subsystem interfaces, navigation and manipulation tracks, Isaac simulation environment, and intended integration workflow.', 'Das Dokument beschreibt die Schnittstellen der Teilsysteme, die Navigations- und Manipulationsbereiche, die Isaac-Simulationsumgebung und den vorgesehenen Integrationsworkflow.')}
+            materialHref={assetUrl('/documents/project-descriptions/DyNAMOv1.2.pdf')}
+            materialLabel={pick('Open technical document', 'Technisches Dokument öffnen')}
+        />
+    </ProjectLayout>
     );
 };
 
