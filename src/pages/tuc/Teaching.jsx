@@ -1006,9 +1006,11 @@ const Teaching = ({ initialSection }) => {
                             <summary>Assessment</summary>
                             <div className="teaching-guideline-body">
                                 <p>
-                                    The report remains the primary basis for grading. In addition, supervisors prepare
-                                    comprehension questions for the final presentation to verify topic understanding.
-                                    Internal grading uses the UMA grading template, adapted as needed by the supervising researcher.
+                                    The thesis report remains the primary basis for assessment, together with the submitted
+                                    artifacts, such as the source code or demonstrator. In addition, supervisors prepare
+                                    comprehension questions for the final presentation to assess the student’s understanding
+                                    of the topic. The final presentation is also evaluated based on its overall quality, the
+                                    presentation of the thesis work, and the student’s ability to answer questions.
                                 </p>
                             </div>
                         </details>
