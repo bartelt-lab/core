@@ -20,6 +20,7 @@ const ProjectLayout = ({
     introImageAlt = '',
     introImageFit = 'cover',
     introImageStyle,
+    introImageOverlay,
     introHeightClass = 'lg:h-[27rem]',
     showHeroTags = true,
     showHeroOverview = true,
@@ -107,6 +108,11 @@ const ProjectLayout = ({
                                     <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-slate-50 to-transparent lg:hidden" />
                                     <div className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-56 bg-gradient-to-r from-slate-50 via-slate-50/75 to-transparent lg:block" />
                                     <div className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-16 bg-gradient-to-l from-slate-50/70 via-slate-50/15 to-transparent lg:block" />
+                                    {introImageOverlay && (
+                                        <div className="absolute bottom-4 right-4 z-20 sm:bottom-5 sm:right-5">
+                                            {introImageOverlay}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
