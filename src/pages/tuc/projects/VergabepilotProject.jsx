@@ -17,6 +17,27 @@ const VergabepilotProject = () => {
         introBackgroundImage={assetUrl('/images/projects/vergabepilot/hero-workflow.webp')}
         introImageAlt={pick('Vergabepilot.AI workflow from tender discovery through cost-aware AI processing to decision-ready results', 'Vergabepilot.AI-Workflow von der Ausschreibungssuche über kostenbewusste KI-Verarbeitung bis zu entscheidungsreifen Ergebnissen')}
         introImageFit="contain"
+        introImageOverlay={
+            <a
+                href="https://www.ciconia-systems.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 rounded-xl border border-white/90 bg-white/90 px-3 py-2.5 shadow-[0_16px_45px_-24px_rgba(15,23,42,0.45)] backdrop-blur-md transition hover:-translate-y-0.5 hover:border-primary-200 hover:bg-white"
+                aria-label={pick('In collaboration with Ciconia Systems', 'In Zusammenarbeit mit Ciconia Systems')}
+            >
+                <span className="hidden text-[9px] font-bold uppercase leading-4 tracking-[0.16em] text-slate-500 sm:block">
+                    {pick('In collaboration with', 'In Zusammenarbeit mit')}
+                </span>
+                <img
+                    src={assetUrl('/logos/partners/ciconia-systems.webp')}
+                    alt="Ciconia Systems"
+                    width="500"
+                    height="192"
+                    className="h-7 w-auto rounded sm:h-8"
+                />
+                <FiExternalLink className="h-3 w-3 shrink-0 text-slate-400 transition-colors group-hover:text-primary-600" aria-hidden="true" />
+            </a>
+        }
         showEvalSection={false}
         softBackground
         compact
@@ -78,25 +99,6 @@ const VergabepilotProject = () => {
             }}
             showMaterial={false}
         />
-        <div className="mx-auto mt-12 flex max-w-6xl justify-center px-4">
-            <a
-                href="https://www.ciconia-systems.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-4 rounded-2xl border border-slate-200/70 bg-white/75 px-5 py-3 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.55)] backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_22px_55px_-38px_rgba(15,23,42,0.5)]"
-                aria-label={pick('Ciconia Systems website', 'Website von Ciconia Systems')}
-            >
-                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">{pick('In collaboration with', 'In Zusammenarbeit mit')}</span>
-                <img
-                    src={assetUrl('/logos/partners/ciconia-systems.webp')}
-                    alt="Ciconia Systems"
-                    width="500"
-                    height="192"
-                    className="h-9 w-auto rounded-md"
-                />
-                <FiExternalLink className="h-3.5 w-3.5 shrink-0 text-slate-400 transition-colors group-hover:text-primary-600" aria-hidden="true" />
-            </a>
-        </div>
     </ProjectLayout>
     );
 };

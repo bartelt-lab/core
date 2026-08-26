@@ -1,6 +1,8 @@
 import ProjectLayout from '../../../components/tuc/ProjectLayout';
 import FinishedProjectContent from '../../../components/tuc/FinishedProjectContent';
 import LazyVideo from '../../../components/common/LazyVideo';
+import { FaGithub } from 'react-icons/fa';
+import { FiExternalLink } from 'react-icons/fi';
 import assetUrl from '../../../utils/assetUrl';
 import { useLanguage } from '../../../i18n/useLanguage';
 
@@ -86,7 +88,7 @@ const DemonstratorVideos = ({ pick }) => (
                                 className="aspect-video max-h-full w-full rounded-[1.4rem] border border-slate-200/70 bg-slate-50 object-contain shadow-[0_18px_50px_-40px_rgba(15,23,42,0.55)]"
                             />
                         </div>
-                        <div className={`flex flex-col justify-center p-7 sm:p-8 lg:p-10 ${videoOnRight ? 'lg:order-1' : ''}`}>
+                        <div className={`flex flex-col justify-center p-7 sm:p-8 ${videoOnRight ? 'lg:order-1' : ''}`}>
                             <div className="flex items-center gap-3">
                                 <span className="font-mono text-sm font-bold text-primary-700">{String(index + 1).padStart(2, '0')}</span>
                                 <span className="h-px w-10 bg-primary-200" aria-hidden="true" />
@@ -110,7 +112,7 @@ const DemonstratorVideos = ({ pick }) => (
 );
 
 const TechnicalDetails = ({ pick }) => (
-    <section className="mx-auto max-w-6xl pt-2">
+    <section className="mx-auto max-w-6xl pt-8">
         <div className="grid gap-8 rounded-[2rem] border border-slate-200/70 bg-white/70 p-7 shadow-[0_24px_70px_-55px_rgba(15,23,42,0.5)] backdrop-blur-sm sm:grid-cols-2 sm:p-8">
             <div>
                 <h2 className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">{pick('Technical focus', 'Technischer Fokus')}</h2>
@@ -131,6 +133,41 @@ const TechnicalDetails = ({ pick }) => (
                     <li>{pick('Flask and Next.js connect the platform.', 'Flask und Next.js verbinden die Plattform.')}</li>
                 </ul>
             </div>
+        </div>
+    </section>
+);
+
+const GitHubSection = ({ pick }) => (
+    <section aria-labelledby="ai4bim-source" className="mx-auto max-w-6xl pt-8">
+        <div className="flex flex-col gap-5 rounded-[2rem] border border-slate-200/70 bg-white/75 p-6 shadow-[0_24px_70px_-55px_rgba(15,23,42,0.5)] backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div className="flex items-start gap-4 sm:items-center">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-950 text-white shadow-sm">
+                    <FaGithub className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">
+                        {pick('Source repository', 'Quellcode-Repository')}
+                    </p>
+                    <h2 id="ai4bim-source" className="mt-1.5 text-xl font-bold text-slate-950 sm:text-2xl">
+                        {pick('Explore AI4BIM on GitHub', 'AI4BIM auf GitHub entdecken')}
+                    </h2>
+                    <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+                        {pick(
+                            'View the implementation, project structure, and setup documentation for the AI4BIM platform.',
+                            'Implementierung, Projektstruktur und Einrichtungsdokumentation der AI4BIM-Plattform ansehen.'
+                        )}
+                    </p>
+                </div>
+            </div>
+            <a
+                href="https://github.com/Show2Instruct/AI4BIM"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md"
+            >
+                {pick('Open on GitHub', 'Auf GitHub öffnen')}
+                <FiExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
         </div>
     </section>
 );
@@ -166,6 +203,7 @@ const AI4AIProject = () => {
             />
             <DemonstratorVideos pick={pick} />
             <TechnicalDetails pick={pick} />
+            <GitHubSection pick={pick} />
         </ProjectLayout>
     );
 };
