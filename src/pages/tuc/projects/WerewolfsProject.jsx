@@ -97,7 +97,14 @@ const WerewolfsProject = () => {
             "Eine streamende Gradio-Oberfläche zeigt alle sechs Agenten, Phasen, Aktionen, Beobachtungen, Gewinner und Belohnungen",
           ),
         ]}
-        showMaterial={false}
+        materialTitle={pick("Project repository", "Projekt-Repository")}
+        materialBody={pick(
+          "Explore the source code and project materials on GitHub.",
+          "Quellcode und Projektmaterialien auf GitHub ansehen.",
+        )}
+        materialHref="https://github.com/fknuette/Teamproject_FSS2026"
+        materialLabel={pick("Open on GitHub", "Auf GitHub öffnen")}
+        materialIcon="github"
       />
     </ProjectLayout>
   );
