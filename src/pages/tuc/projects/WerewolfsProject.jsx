@@ -9,6 +9,7 @@ const WerewolfsProject = () => {
   return (
     <ProjectLayout
       title="The Village at Scale"
+      githubHref="https://github.com/fknuette/Teamproject_FSS2026"
       subtitle={pick(
         "LLM Agents Playing Werewolf - learning social reasoning through self-play",
         "LLM-Agenten spielen Werwolf – soziales Schlussfolgern durch Self-Play lernen",

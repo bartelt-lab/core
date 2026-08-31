@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiExternalLink } from 'react-icons/fi';
+import { FaGithub } from 'react-icons/fa';
 import LazyVideo from '../common/LazyVideo';
 import { useLanguage } from '../../i18n/useLanguage';
 
 const ProjectLayout = ({
     title,
     titleHref,
+    githubHref,
     subtitle,
     tags = [],
     heroImage,
@@ -76,6 +78,18 @@ const ProjectLayout = ({
                                                 <FiExternalLink className="mt-1.5 h-3.5 w-3.5 shrink-0 text-slate-400 transition-colors group-hover:text-primary-600" aria-hidden="true" />
                                             </a>
                                         ) : title}
+                                        {githubHref && (
+                                            <a
+                                                href={githubHref}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                aria-label={`${title} on GitHub`}
+                                                title="GitHub"
+                                                className="relative -top-3 ml-2 inline-flex align-middle text-slate-400 transition-colors hover:text-slate-950 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4"
+                                            >
+                                                <FaGithub className="h-4 w-4" aria-hidden="true" />
+                                            </a>
+                                        )}
                                     </h1>
                                     <p className="text-lg font-light leading-relaxed text-slate-500">{subtitle}</p>
                                     <p className="mt-6 max-w-2xl text-sm leading-6 text-slate-600 sm:text-[15px]">
@@ -137,6 +151,18 @@ const ProjectLayout = ({
                                         <FiExternalLink className="mt-1.5 h-3.5 w-3.5 shrink-0 text-slate-400 transition-colors group-hover:text-primary-600" aria-hidden="true" />
                                     </a>
                                 ) : title}
+                                {githubHref && (
+                                    <a
+                                        href={githubHref}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={`${title} on GitHub`}
+                                        title="GitHub"
+                                        className="relative -top-3 ml-2 inline-flex align-middle text-slate-400 transition-colors hover:text-slate-950 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4"
+                                    >
+                                        <FaGithub className="h-4 w-4" aria-hidden="true" />
+                                    </a>
+                                )}
                             </h1>
                             <p className={`${compact ? 'text-lg md:text-xl' : 'text-xl md:text-2xl'} font-light leading-relaxed text-gray-500`}>
                                 {subtitle}
