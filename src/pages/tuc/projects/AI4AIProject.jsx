@@ -177,6 +177,7 @@ const AI4AIProject = () => {
     return (
         <ProjectLayout
             title="AI4BIM"
+            githubHref="https://github.com/Show2Instruct/AI4BIM"
             subtitle={pick('AI-assisted Building Information Modeling for intelligent analysis, prediction, and design', 'KI-gestütztes Building Information Modeling für intelligente Analyse, Vorhersage und Gestaltung')}
             tags={pick(['IFC / BIM', 'Machine Learning', 'Generative AI'], ['IFC / BIM', 'Maschinelles Lernen', 'Generative KI'])}
             overview={pick(
