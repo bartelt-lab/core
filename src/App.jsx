@@ -16,6 +16,7 @@ const CoreLabs = lazy(() => import('./pages/CoreLabs'))
 const Demos = lazy(() => import('./pages/Demos'))
 const Dynamo = lazy(() => import('./pages/Dynamo'))
 const LeaderFollowing = lazy(() => import('./pages/LeaderFollowing'))
+const HumanAwarenessDetection = lazy(() => import('./pages/HumanAwarenessDetection'))
 const VialSort = lazy(() => import('./pages/VialSort'))
 const ComputeCluster = lazy(() => import('./pages/ComputeCluster'))
 const Publications = lazy(() => import('./pages/Publications'))
@@ -60,6 +61,7 @@ function CoreShell() {
             <Route path="/leader-following" element={<LeaderFollowing />} />
             <Route path="/vial-sort" element={<VialSort />} />
             <Route path="/ai-team-projects" element={<TucAiTeamProjects />} />
+            <Route path="/ai-team-projects/human-awareness-detection" element={<HumanAwarenessDetection />} />
             <Route path="/ai-team-projects/dynamo" element={<TucDynamoProject />} />
             <Route path="/ai-team-projects/ai4ai" element={<TucAI4AIProject />} />
             <Route path="/ai-team-projects/ai4bim" element={<TucAI4AIProject />} />
