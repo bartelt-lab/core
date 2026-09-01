@@ -12,21 +12,22 @@ const activeProjects = [
     tag: "Coming Soon",
     image: assetUrl("/logos/core/light-background/core.svg"),
     description:
-      "Placeholder for an upcoming AI Team Project. Details will be added once the project scope and public materials are ready.",
+      "Reserved for an upcoming AI Team Project. Details will follow when the scope and materials are ready.",
     descriptionDe:
       "Platzhalter fuer ein kommendes AI-Team-Projekt. Details werden ergaenzt, sobald Projektumfang und oeffentliche Materialien bereitstehen.",
     placeholder: true,
   },
   {
     id: "project-2",
-    title: "Project 2",
-    tag: "Coming Soon",
-    image: assetUrl("/logos/core/light-background/core.svg"),
+    title: "Visual Human Awareness Estimation for Mobile Robots",
+    tag: "AI Team / Cognitive Robotics",
+    image: assetUrl("/images/projects/human-awareness-detection/intro.webp"),
     description:
-      "Placeholder for an upcoming AI Team Project. Details will be added once the project scope and public materials are ready.",
+      "A vision-based system combining person tracking, gaze, head and body orientation, motion, and gestures to estimate whether nearby people appear aware of a mobile robot.",
     descriptionDe:
-      "Platzhalter fuer ein kommendes AI-Team-Projekt. Details werden ergaenzt, sobald Projektumfang und oeffentliche Materialien bereitstehen.",
-    placeholder: true,
+      "Ein visionsbasiertes Wahrnehmungssystem nutzt Blickrichtung, Kopf- und Koerperhaltung, Bewegung und Gesten, um einzuschaetzen, ob Personen einen mobilen Roboter wahrzunehmen scheinen. Das AI-Theme-Projekt entsteht in Zusammenarbeit mit dem CORE Robotics Lab der TU Clausthal.",
+    link: "/ai-team-projects/human-awareness-detection",
+    placeholder: false,
   },
   {
     id: "project-3",
@@ -34,7 +35,7 @@ const activeProjects = [
     tag: "Coming Soon",
     image: assetUrl("/logos/core/light-background/core.svg"),
     description:
-      "Placeholder for an upcoming AI Team Project. Details will be added once the project scope and public materials are ready.",
+      "Reserved for an upcoming AI Team Project. Details will follow when the scope and materials are ready.",
     descriptionDe:
       "Platzhalter fuer ein kommendes AI-Team-Projekt. Details werden ergaenzt, sobald Projektumfang und oeffentliche Materialien bereitstehen.",
     placeholder: true,
@@ -351,7 +352,7 @@ const AiTeamProjects = () => {
         </div>
       </section>
 
-      <section id="active-projects" className="bg-gray-50 py-16">
+      <section id="active-projects" className="bg-gray-50 py-12 md:py-14">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">
           <div className="mb-10 text-center">
             <h2 className="text-3xl font-light">
@@ -365,38 +366,63 @@ const AiTeamProjects = () => {
               )}
             </p>
           </div>
-          <div className="grid gap-7 md:grid-cols-3">
+          <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {activeProjects.map((project) => (
               <article
                 key={project.id}
-                className="group relative overflow-hidden rounded-lg border border-dashed border-slate-300 bg-white/70 shadow-lg shadow-slate-200/70"
+                className={`group relative flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-lg shadow-slate-200/70 ${
+                  project.placeholder
+                    ? "border border-dashed border-slate-300 bg-white/70"
+                    : "border border-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                }`}
               >
-                <div
-                  className="pointer-events-none absolute inset-0 z-10 bg-white/25 backdrop-blur-[1.5px]"
-                  aria-hidden="true"
-                />
-                <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                {project.placeholder && (
+                  <div
+                    className="pointer-events-none absolute inset-0 z-10 bg-white/25 backdrop-blur-[1.5px]"
+                    aria-hidden="true"
+                  />
+                )}
+                <div className="relative aspect-video overflow-hidden bg-slate-100">
                   <img
                     src={project.image}
                     alt={project.title}
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-full object-contain p-10 opacity-35 blur-[1px] grayscale transition duration-500"
+                    className={`h-full w-full transition duration-500 ${
+                      project.placeholder
+                        ? "object-contain p-10 opacity-35 blur-[1px] grayscale"
+                        : "object-cover group-hover:scale-105"
+                    }`}
                   />
                   <span className="absolute left-3 top-3 z-20 rounded-full bg-slate-950/75 px-3 py-1 text-xs font-bold text-white">
                     {project.tag}
                   </span>
-                  <span className="absolute bottom-3 right-3 z-20 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-slate-700 shadow-sm">
-                    {pick("Coming soon", "Demnaechst")}
-                  </span>
+                  {project.placeholder && (
+                    <span className="absolute bottom-3 right-3 z-20 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-slate-700 shadow-sm">
+                      {pick("Coming soon", "Demnaechst")}
+                    </span>
+                  )}
                 </div>
-                <div className="relative z-20 p-6">
-                  <h3 className="mb-3 text-xl font-bold text-primary-700">
-                    {project.title}
+                <div className="relative z-20 flex flex-1 flex-col p-5">
+                  <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-6 text-primary-700">
+                    {project.link ? (
+                      <Link to={project.link} className="transition hover:text-primary-900">
+                        {project.title}
+                      </Link>
+                    ) : project.title}
                   </h3>
-                  <p className="text-sm leading-7 text-slate-600">
+                  <p className="line-clamp-4 text-sm leading-6 text-slate-600">
                     {pick(project.description, project.descriptionDe)}
                   </p>
+                  {project.link && (
+                    <Link
+                      to={project.link}
+                      className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-bold text-primary-700 transition hover:text-primary-900"
+                    >
+                      {pick("View project", "Projekt ansehen")}
+                      <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+                    </Link>
+                  )}
                 </div>
               </article>
             ))}
