@@ -327,12 +327,6 @@ const Teaching = ({ initialSection }) => {
                     line-height: 1;
                     color: #1f2d3d;
                 }
-                .teaching-hero p {
-                    max-width: 860px;
-                    font-size: 1em;
-                    line-height: 1.55;
-                    color: #3d4e62;
-                }
                 .teaching-hero-content {
                     position: relative;
                     z-index: 1;
@@ -755,12 +749,6 @@ const Teaching = ({ initialSection }) => {
                 <div className="teaching-hero-content max-w-6xl mx-auto px-4 sm:px-6">
                     <div>
                         <h1>{pick('Teaching', 'Lehre')}</h1>
-                        <p>
-                            {pick(
-                                'This page gives an overview of our courses, seminars, and thesis opportunities, including the current seminar format and thesis process. It is meant to help students quickly see what we offer, how to apply, and which topics are available.',
-                                'Diese Seite gibt einen Überblick über unsere Kurse, Seminare und Abschlussarbeiten, einschließlich des aktuellen Seminarformats und des Prozesses für Abschlussarbeiten. Studierende sollen schnell erkennen, was wir anbieten, wie sie sich bewerben können und welche Themen verfügbar sind.'
-                            )}
-                        </p>
                     </div>
                     <div id="teaching-tabs" className="teaching-quick-links" role="tablist" aria-label="Teaching sections">
                         {quickLinks.map((item) => (
