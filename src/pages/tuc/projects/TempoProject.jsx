@@ -2,14 +2,146 @@ import ProjectLayout from "../../../components/tuc/ProjectLayout";
 import assetUrl from "../../../utils/assetUrl";
 import { useLanguage } from "../../../i18n/useLanguage";
 
+const TEMPO_DE = {
+  "A decision point with three outcomes: the drilled move, another move from the repertoire that the session follows, and a blunder that is punished before the position rewinds":
+    "Ein Entscheidungspunkt mit drei möglichen Ergebnissen: der trainierte Zug, ein anderer Zug aus dem Repertoire, dem die Sitzung folgt, oder ein Fehler, dessen Widerlegung ausgespielt wird, bevor die Stellung zurückgesetzt wird",
+  "A line of positions running left to right, each step signposted by an arrow; a wrong move branches off and is blocked before it is played, guiding the player back to the line":
+    "Eine von links nach rechts verlaufende Folge von Stellungen, bei der jeder Schritt durch einen Pfeil markiert ist; ein falscher Zug zweigt ab und wird vor der Ausführung blockiert, sodass die spielende Person zur Variante zurückgeführt wird",
+  "Opening TEMPO leads to a choice of mode. Learning Mode: you choose the line, the drill is guided, a wrong move is corrected and replayed. Repeating Mode: the recommender chooses the line, the drill is unassisted, and the pick is graded on whether it came too late. Both branches update the record of what you know. Everything feeds the recommender on the right, which holds your profile, your repertoire, what you know and past picks, plus the base model fine-tuned on you that returns the next line to repeat.":
+    "Beim Öffnen von TEMPO wählst du zunächst einen Modus. Lernmodus: Du wählst die Variante, das Training wird geführt und ein falscher Zug wird korrigiert und wiederholt. Wiederholmodus: Das Empfehlungsmodell wählt die Variante, das Training läuft ohne Hilfe und die Empfehlung wird danach bewertet, ob sie zu spät kam. Beide Wege aktualisieren den Wissensstand. Alles fließt in das Empfehlungsmodell rechts ein: dein Profil, dein Repertoire, dein Wissensstand, frühere Empfehlungen und das auf dich feinabgestimmte Basismodell, das die nächste zu wiederholende Variante liefert.",
+  "You open TEMPO": "Du öffnest TEMPO",
+  "Pick a mode": "Modus wählen",
+  learn: "lernen",
+  repeat: "wiederholen",
+  "Learning Mode": "Lernmodus",
+  "you choose the line": "du wählst die Variante",
+  "Guided drill": "Geführtes Training",
+  "arrows show every move": "Pfeile zeigen jeden Zug",
+  "Wrong move corrected": "Falscher Zug korrigiert",
+  "you replay it": "du wiederholst ihn",
+  "Repeating Mode": "Wiederholmodus",
+  "the recommender chooses": "das Modell wählt",
+  "Unassisted drill": "Training ohne Hilfe",
+  "no hints, no arrows": "keine Hinweise, keine Pfeile",
+  "Pick is graded": "Empfehlung bewertet",
+  "did it come too late?": "kam sie zu spät?",
+  "What you know is updated": "Wissensstand aktualisiert",
+  "every move counts": "jeder Zug zählt",
+  Recommender: "Empfehlungsmodell",
+  "your profile": "dein Profil",
+  "your repertoire": "dein Repertoire",
+  "what you know": "dein Wissensstand",
+  "past picks": "frühere Empfehlungen",
+  "Base model,": "Basismodell,",
+  "fine-tuned on you": "auf dich feinabgestimmt",
+  "returns the next line": "liefert die nächste Variante",
+  "an arrow shows the move to play, step by step":
+    "ein Pfeil zeigt Zug für Zug, was zu spielen ist",
+  "stray from it and you are guided back":
+    "bei Abweichung wirst du zurückgeführt",
+  "the drilled line": "die trainierte Variante",
+  "you play the drilled move": "du spielst den trainierten Zug",
+  "you play another move from": "anderer Repertoirezug",
+  "your repertoire — followed": "die Sitzung folgt ihm",
+  "you blunder — the opponent": "du patzt – der Gegner",
+  "plays the punishment out": "spielt die Widerlegung aus",
+  "then rewind": "danach zurücksetzen",
+  "Recommender Systems": "Empfehlungssysteme",
+  Personalisation: "Personalisierung",
+  "Learning from Feedback": "Lernen aus Feedback",
+  Chess: "Schach",
+  "You are comfortable writing Python":
+    "Du fühlst dich beim Programmieren mit Python sicher",
+  "You are comfortable with git and working in a shared repository":
+    "Du arbeitest sicher mit Git und in einem gemeinsam genutzten Repository",
+  "You enjoy working in a mixed international team, across two universities":
+    "Du arbeitest gern in einem gemischten internationalen Team über zwei Universitäten hinweg",
+  "Interest in machine learning helps — recommender systems, personalisation, or learning from user feedback":
+    "Interesse an maschinellem Lernen ist hilfreich – etwa an Empfehlungssystemen, Personalisierung oder dem Lernen aus Nutzerfeedback",
+  "Curiosity about how people learn and forget is worth as much as model experience — this is a memory model before it is a chess model":
+    "Neugier darauf, wie Menschen lernen und vergessen, ist ebenso wertvoll wie Modellerfahrung – dies ist zuerst ein Gedächtnismodell und erst danach ein Schachmodell",
+  "Chess knowledge is welcome for intuition, and is not required for most of the codebase":
+    "Schachkenntnisse helfen bei der Intuition, sind für den Großteil des Codes aber nicht erforderlich",
+  "AI Team Project": "AI-Team-Projekt",
+  "Trained Engine for Memory-Paced Openings":
+    "Trainiertes System für gedächtnisgesteuertes Eröffnungstraining",
+  "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. TEMPO answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every recommendation it makes.":
+    "Die schwierigste Frage beim Schachtraining ist nicht, wie eine Variante gespielt wird, sondern welche der bereits bekannten Varianten heute geübt werden muss. TEMPO beantwortet sie mit einem Modell, das als Basismodell bereitgestellt, auf das Spiel einer einzelnen Person feinabgestimmt und anhand jeder eigenen Empfehlung bewertet wird.",
+  Focus: "Schwerpunkt",
+  Team: "Team",
+  "A mixed international team of German and Romanian students, for one semester.":
+    "Ein gemischtes internationales Team aus deutschen und rumänischen Studierenden arbeitet ein Semester lang zusammen.",
+  "The recommender, drawn as a robot with a graph of chess lines lit up in its chest":
+    "Das Empfehlungsmodell, dargestellt als Roboter mit einem leuchtenden Graphen aus Schachvarianten in seiner Brust",
+  "The problem": "Das Problem",
+  "Deciding what to study is the hardest part of studying alone":
+    "Allein zu entscheiden, was als Nächstes geübt werden soll, ist der schwierigste Teil",
+  "Existing trainers answer that question with a fixed rule — the same rule for every user, for the life of the product. It cannot know that you hold a sharp tactical line for weeks and lose a quiet positional one in days.":
+    "Bestehende Trainer beantworten diese Frage mit einer festen Regel – derselben Regel für alle Nutzenden und über die gesamte Lebensdauer des Produkts. Sie können nicht wissen, dass du dir eine scharfe taktische Variante wochenlang merkst, eine ruhige positionelle aber schon nach wenigen Tagen vergisst.",
+  "Other systems": "Andere Systeme",
+  "One scheduling rule, identical for every player, fixed forever":
+    "Eine Planungsregel, für alle Spielenden gleich und dauerhaft unverändert",
+  "A model fine-tuned on your play, graded on its own decisions and user performance":
+    "Ein auf dein Spiel feinabgestimmtes Modell, bewertet anhand seiner eigenen Entscheidungen und deiner Leistung",
+  "Two modes": "Zwei Modi",
+  "Learn it with help, then prove it without":
+    "Mit Hilfe lernen und anschließend ohne Hilfe beweisen",
+  "You pick the line you want to learn, and it is walked through under full guidance — an arrow on the board shows the move to play. Stray from it and you are guided back before the move can land.":
+    "Du wählst die Variante, die du lernen möchtest, und spielst sie mit vollständiger Unterstützung durch. Ein Pfeil auf dem Brett zeigt den nächsten Zug. Weichst du davon ab, wirst du zurückgeführt, bevor der falsche Zug ausgeführt wird.",
+  "The line is the model's call, not yours. No hints. No arrows. Blunder, and nothing stops you — the opponent plays out the punishment on the board, you watch the piece go, and only then does the position rewind.":
+    "Die Variante wird vom Modell ausgewählt, nicht von dir. Keine Hinweise, keine Pfeile. Bei einem Fehler greift nichts ein: Der Gegner spielt die Widerlegung auf dem Brett aus, du siehst die Konsequenz und erst danach wird die Stellung zurückgesetzt.",
+  "Everything is logged": "Alles wird protokolliert",
+  "Every move attempt and every recommendation — including which branch the player took, and every position a punishment sequence passed through. That log is what the model learns from, and what the project's results are measured on.":
+    "Jeder Zugversuch und jede Empfehlung wird protokolliert – einschließlich des gewählten Variantenasts und jeder Stellung, die während einer Widerlegungssequenz durchlaufen wird. Aus diesem Protokoll lernt das Modell, und daran werden die Projektergebnisse gemessen.",
+  "The loop": "Der Kreislauf",
+  "One session, from the first move to the next recommendation":
+    "Eine Sitzung vom ersten Zug bis zur nächsten Empfehlung",
+  "Both modes write to the same record of what you know. The recommender — your profile, your repertoire, that record, its own past picks, and the model fine-tuned on all of it — reads what comes out and returns the line to repeat next.":
+    "Beide Modi schreiben in denselben Wissensstand. Das Empfehlungsmodell liest dein Profil, dein Repertoire, diesen Wissensstand, seine früheren Empfehlungen sowie das darauf feinabgestimmte Modell und liefert die Variante, die als Nächstes wiederholt werden soll.",
+  "How it works": "Funktionsweise",
+  "The recommender is graded on its own decisions":
+    "Das Empfehlungsmodell wird anhand seiner eigenen Entscheidungen bewertet",
+  "Which lines get learned is the player's own choice. The model's job starts afterwards: it reads their profile, their repertoire, the record of every line they have drilled so far and its own earlier suggestions, and returns the one line that should be repeated next.":
+    "Welche Varianten gelernt werden, entscheidet die spielende Person selbst. Die Aufgabe des Modells beginnt danach: Es liest ihr Profil, ihr Repertoire, den Lernstand jeder bisher trainierten Variante und seine eigenen früheren Vorschläge und liefert die eine Variante, die als Nächstes wiederholt werden sollte.",
+  "The suggestion is then measured against what actually happened in the session — what was recalled, what was missed, and how long it took the player to find the right move. That measurement is what the model is trained on next, so over time it builds a picture of one specific player's memory.":
+    "Die Empfehlung wird anschließend daran gemessen, was in der Sitzung tatsächlich geschah: was erinnert, was vergessen und wie schnell der richtige Zug gefunden wurde. Mit dieser Bewertung wird das Modell weitertrainiert, sodass mit der Zeit ein Bild vom Gedächtnis einer bestimmten Person entsteht.",
+  "A line the player has already forgotten is recorded as having arrived too late. That grade becomes training data, which is what separates the recommender from a scheduler that is never told whether it was right.":
+    "Eine Variante, die bereits vergessen wurde, gilt als zu spät empfohlen. Diese Bewertung wird zu Trainingsdaten. Genau das unterscheidet das Empfehlungsmodell von einer Planung, die nie erfährt, ob ihre Entscheidung richtig war.",
+  Scope: "Übertragbarkeit",
+  "The model reasons about learning, not about chess":
+    "Das Modell denkt über Lernen nach, nicht über Schach",
+  "The recommender solves a general problem: given a learner, a set of things they are trying to learn, and a history of how their practice went, decide what they should practise next. Its inputs and outputs are kept in a form that does not assume the material is chess.":
+    "Das Empfehlungsmodell löst ein allgemeines Problem: Für eine lernende Person, eine Menge von Lerninhalten und den bisherigen Übungsverlauf entscheidet es, was als Nächstes geübt werden sollte. Ein- und Ausgaben sind so gestaltet, dass sie nicht voraussetzen, dass der Lernstoff Schach ist.",
+  "Chess is where it is built and measured first. The domain supplies dense, cheap, objectively gradable outcomes — a move either is the repertoire move or it is not — which makes it a good place to find out whether the approach works at all.":
+    "Schach ist die erste Domäne, in der das Modell entwickelt und gemessen wird. Sie liefert viele kostengünstige und objektiv bewertbare Ergebnisse – ein Zug gehört entweder zum Repertoire oder nicht. Damit eignet sie sich gut, um grundsätzlich zu prüfen, ob der Ansatz funktioniert.",
+  "What goes in": "Eingaben",
+  "A learner, the things they are learning, and how practice has gone so far":
+    "Eine lernende Person, ihre Lerninhalte und der bisherige Übungsverlauf",
+  "The model": "Das Modell",
+  "Decides what to revisit next — and is graded on that decision":
+    "Entscheidet, was als Nächstes wiederholt wird, und wird daran bewertet",
+  "What comes out": "Ausgabe",
+  "The one item the learner should revisit next":
+    "Der eine Lerninhalt, der als Nächstes wiederholt werden sollte",
+  "Nothing in that exchange is chess-specific. Everything that is lives behind the domain layer.":
+    "An diesem Austausch ist nichts schachspezifisch. Alles Schachspezifische bleibt hinter der Domänenschicht.",
+  "For students": "Für Studierende",
+  "Thinking about joining?": "Möchtest du mitmachen?",
+  "What you walk away with": "Was du aus dem Projekt mitnimmst",
+  "The experience of carrying a genuine research question all the way to a working system and of doing it in a mixed team across two universities and one shared repository.":
+    "Die Erfahrung, eine echte Forschungsfrage bis zu einem funktionierenden System zu führen – in einem gemischten Team über zwei Universitäten und ein gemeinsames Repository hinweg.",
+};
+
 // What Learning Mode does: the drilled line runs straight through under full
 // guidance, and a wrong move is intercepted before it lands rather than punished.
-const LearningDiagram = () => (
+const LearningDiagram = ({ t }) => (
   <svg
     viewBox="0 0 445 200"
     className="h-auto w-full"
     role="img"
-    aria-label="A line of positions running left to right, each step signposted by an arrow; a wrong move branches off and is blocked before it is played, guiding the player back to the line"
+    aria-label={t(
+      "A line of positions running left to right, each step signposted by an arrow; a wrong move branches off and is blocked before it is played, guiding the player back to the line",
+    )}
   >
     <path
       d="M40 70 H380"
@@ -56,22 +188,24 @@ const LearningDiagram = () => (
     </g>
 
     <text x="40" y="46" className="fill-slate-500 text-[14px] font-semibold">
-      an arrow shows the move to play, step by step
+      {t("an arrow shows the move to play, step by step")}
     </text>
     <text x="152" y="186" className="fill-slate-500 text-[14px] font-semibold">
-      stray from it and you are guided back
+      {t("stray from it and you are guided back")}
     </text>
   </svg>
 );
 
 // What Repeating Mode does at a decision: three things can happen, and only one
 // of them ends the session where it started.
-const RepeatingDiagram = () => (
+const RepeatingDiagram = ({ t }) => (
   <svg
     viewBox="0 0 480 262"
     className="h-auto w-full"
     role="img"
-    aria-label="A decision point with three outcomes: the drilled move, another move from the repertoire that the session follows, and a blunder that is punished before the position rewinds"
+    aria-label={t(
+      "A decision point with three outcomes: the drilled move, another move from the repertoire that the session follows, and a blunder that is punished before the position rewinds",
+    )}
   >
     <defs>
       <marker
@@ -128,22 +262,22 @@ const RepeatingDiagram = () => (
     <circle cx="250" cy="205" r="6" className="fill-amber-400" />
 
     <text x="18" y="104" className="fill-slate-500 text-[14px] font-semibold">
-      the drilled line
+      {t("the drilled line")}
     </text>
     <text x="264" y="64" className="fill-slate-300 text-[14px] font-semibold">
-      you play the drilled move
+      {t("you play the drilled move")}
     </text>
     <text x="264" y="126" className="fill-slate-300 text-[14px] font-semibold">
-      you play another move from
+      {t("you play another move from")}
     </text>
     <text x="264" y="142" className="fill-slate-300 text-[14px] font-semibold">
-      your repertoire — followed
+      {t("your repertoire — followed")}
     </text>
     <text x="264" y="201" className="fill-slate-300 text-[14px] font-semibold">
-      you blunder — the opponent
+      {t("you blunder — the opponent")}
     </text>
     <text x="264" y="217" className="fill-slate-300 text-[14px] font-semibold">
-      plays the punishment out
+      {t("plays the punishment out")}
     </text>
     <text
       x="176"
@@ -151,7 +285,7 @@ const RepeatingDiagram = () => (
       textAnchor="middle"
       className="fill-slate-500 text-[14px] font-semibold"
     >
-      then rewind
+      {t("then rewind")}
     </text>
   </svg>
 );
@@ -159,14 +293,26 @@ const RepeatingDiagram = () => (
 // Box styles for the session-flow diagram: the two branches are told apart by
 // fill, and everything downstream of them is shared.
 const FLOW_TONES = {
-  dark: { rect: "fill-slate-800 stroke-slate-800", title: "fill-white", sub: "fill-slate-300" },
-  light: { rect: "fill-white stroke-slate-300", title: "fill-slate-800", sub: "fill-slate-500" },
+  dark: {
+    rect: "fill-slate-800 stroke-slate-800",
+    title: "fill-white",
+    sub: "fill-slate-300",
+  },
+  light: {
+    rect: "fill-white stroke-slate-300",
+    title: "fill-slate-800",
+    sub: "fill-slate-500",
+  },
   primary: {
     rect: "fill-primary-600 stroke-primary-600",
     title: "fill-white",
     sub: "fill-primary-100",
   },
-  chip: { rect: "fill-primary-50 stroke-primary-200", title: "fill-primary-700", sub: "" },
+  chip: {
+    rect: "fill-primary-50 stroke-primary-200",
+    title: "fill-primary-700",
+    sub: "",
+  },
   band: {
     rect: "fill-primary-700 stroke-primary-700",
     title: "fill-white",
@@ -257,7 +403,14 @@ const FlowDiagram = ({ t }) => (
       <path d="M1235 410 V422 H415 V328" />
     </g>
 
-    <FlowNode x={20} y={118} w={200} h={52} title={t("You open TEMPO")} tone="dark" />
+    <FlowNode
+      x={20}
+      y={118}
+      w={200}
+      h={52}
+      title={t("You open TEMPO")}
+      tone="dark"
+    />
 
     <path d="M120 186 L210 226 L120 266 L30 226 Z" className="fill-slate-900" />
     <text
@@ -352,10 +505,38 @@ const FlowDiagram = ({ t }) => (
       {t("Recommender")}
     </text>
 
-    <FlowNode x={1130} y={62} w={210} h={48} title={t("your profile")} tone="chip" />
-    <FlowNode x={1130} y={122} w={210} h={48} title={t("your repertoire")} tone="chip" />
-    <FlowNode x={1130} y={182} w={210} h={48} title={t("what you know")} tone="chip" />
-    <FlowNode x={1130} y={242} w={210} h={48} title={t("past picks")} tone="chip" />
+    <FlowNode
+      x={1130}
+      y={62}
+      w={210}
+      h={48}
+      title={t("your profile")}
+      tone="chip"
+    />
+    <FlowNode
+      x={1130}
+      y={122}
+      w={210}
+      h={48}
+      title={t("your repertoire")}
+      tone="chip"
+    />
+    <FlowNode
+      x={1130}
+      y={182}
+      w={210}
+      h={48}
+      title={t("what you know")}
+      tone="chip"
+    />
+    <FlowNode
+      x={1130}
+      y={242}
+      w={210}
+      h={48}
+      title={t("past picks")}
+      tone="chip"
+    />
 
     <path
       d="M1235 290 V310"
@@ -410,9 +591,7 @@ const Eyebrow = ({ children }) => (
 
 const TempoProject = () => {
   const { pick } = useLanguage();
-  // TODO(i18n): German copy pending. `t` falls back to English for both
-  // languages until the translation pass lands.
-  const t = (en, de) => pick(en, de ?? en);
+  const t = (en) => pick(en, TEMPO_DE[en]);
 
   const tags = [
     t("Recommender Systems"),
@@ -505,7 +684,9 @@ const TempoProject = () => {
           <div className="md:order-2 md:text-right">
             <Eyebrow>{t("The problem")}</Eyebrow>
             <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-gray-950">
-              {t("Deciding what to study is the hardest part of studying alone")}
+              {t(
+                "Deciding what to study is the hardest part of studying alone",
+              )}
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
               {t(
@@ -558,7 +739,7 @@ const TempoProject = () => {
                 )}
               </p>
               <div className="mt-5 rounded-xl border border-gray-200 bg-gray-50 p-4">
-                <LearningDiagram />
+                <LearningDiagram t={t} />
               </div>
             </div>
 
@@ -574,7 +755,7 @@ const TempoProject = () => {
                 )}
               </p>
               <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-4">
-                <RepeatingDiagram />
+                <RepeatingDiagram t={t} />
               </div>
             </div>
           </div>
