@@ -24,6 +24,7 @@ const ProjectLayout = ({
     introImageStyle,
     introImageOverlay,
     introHeightClass = 'lg:h-[27rem]',
+    showHero = true,
     showHeroTags = true,
     showHeroOverview = true,
     overview,
@@ -55,7 +56,7 @@ const ProjectLayout = ({
             {/* Hero Section */}
             <section id="hero" className={`relative ${compact ? 'pb-10 pt-8' : 'pb-20 pt-10'}`}>
                 <div className="container mx-auto px-4 md:px-8">
-                    {introBackgroundImage ? (
+                    {showHero && (introBackgroundImage ? (
                         <div className={`mx-auto max-w-6xl ${compact ? 'mb-12' : 'mb-14'}`}>
                             <div className={`grid items-stretch lg:grid-cols-[0.92fr_1.08fr] ${introHeightClass}`}>
                                 <div className="relative z-20 px-2 py-6 text-left sm:px-4 sm:py-8 lg:py-10 lg:pr-12">
@@ -181,7 +182,7 @@ const ProjectLayout = ({
                                 </a>
                             )}
                         </div>
-                    )}
+                    ))}
 
                     {/* Hero Media */}
                     {heroYouTubeId ? (
