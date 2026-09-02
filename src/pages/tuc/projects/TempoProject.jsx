@@ -75,7 +75,7 @@ const RepeatingDiagram = () => (
   >
     <defs>
       <marker
-        id="gambit-rewind"
+        id="tempo-rewind"
         viewBox="0 0 10 10"
         refX="8"
         refY="5"
@@ -118,7 +118,7 @@ const RepeatingDiagram = () => (
       strokeWidth="1.5"
       strokeDasharray="4 4"
       fill="none"
-      markerEnd="url(#gambit-rewind)"
+      markerEnd="url(#tempo-rewind)"
     />
 
     <circle cx="30" cy="130" r="5" className="fill-slate-600" />
@@ -220,12 +220,12 @@ const FlowDiagram = ({ t }) => (
     className="h-auto w-full"
     role="img"
     aria-label={t(
-      "Opening GAMBIT leads to a choice of mode. Learning Mode: you choose the line, the drill is guided, a wrong move is corrected and replayed. Repeating Mode: the recommender chooses the line, the drill is unassisted, and the pick is graded on whether it came too late. Both branches update the record of what you know. Everything feeds the recommender on the right, which holds your profile, your repertoire, what you know and past picks, plus the base model fine-tuned on you that returns the next line to repeat.",
+      "Opening TEMPO leads to a choice of mode. Learning Mode: you choose the line, the drill is guided, a wrong move is corrected and replayed. Repeating Mode: the recommender chooses the line, the drill is unassisted, and the pick is graded on whether it came too late. Both branches update the record of what you know. Everything feeds the recommender on the right, which holds your profile, your repertoire, what you know and past picks, plus the base model fine-tuned on you that returns the next line to repeat.",
     )}
   >
     <defs>
       <marker
-        id="gambit-flow-arrow"
+        id="tempo-flow-arrow"
         viewBox="0 0 10 10"
         refX="8"
         refY="5"
@@ -241,7 +241,7 @@ const FlowDiagram = ({ t }) => (
       className="stroke-slate-400"
       strokeWidth="1.5"
       fill="none"
-      markerEnd="url(#gambit-flow-arrow)"
+      markerEnd="url(#tempo-flow-arrow)"
     >
       <path d="M120 170 V186" />
       <path d="M210 226 H415 V108" />
@@ -257,7 +257,7 @@ const FlowDiagram = ({ t }) => (
       <path d="M1235 410 V422 H415 V328" />
     </g>
 
-    <FlowNode x={20} y={118} w={200} h={52} title={t("You open GAMBIT")} tone="dark" />
+    <FlowNode x={20} y={118} w={200} h={52} title={t("You open TEMPO")} tone="dark" />
 
     <path d="M120 186 L210 226 L120 266 L30 226 Z" className="fill-slate-900" />
     <text
@@ -408,7 +408,7 @@ const Eyebrow = ({ children }) => (
   </p>
 );
 
-const GambitProject = () => {
+const TempoProject = () => {
   const { pick } = useLanguage();
   // TODO(i18n): German copy pending. `t` falls back to English for both
   // languages until the translation pass lands.
@@ -440,7 +440,7 @@ const GambitProject = () => {
 
   return (
     <ProjectLayout
-      title="GAMBIT"
+      title="TEMPO"
       showHero={false}
       showEvalSection={false}
       compact
@@ -452,16 +452,14 @@ const GambitProject = () => {
           <div>
             <Eyebrow>{t("AI Team Project")}</Eyebrow>
             <h1 className="mt-4 text-5xl font-black leading-[0.95] tracking-tight text-slate-950 md:text-7xl">
-              GAMBIT
+              TEMPO
             </h1>
             <p className="mt-5 max-w-2xl text-xl font-light leading-relaxed text-slate-500">
-              {t(
-                "A chess opening trainer built around a recommendation model that learns you",
-              )}
+              {t("Trained Engine for Memory-Paced Openings")}
             </p>
             <p className="mt-6 max-w-2xl text-base leading-7 text-gray-600">
               {t(
-                "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. GAMBIT answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every recommendation it makes.",
+                "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. TEMPO answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every recommendation it makes.",
               )}
             </p>
 
@@ -491,14 +489,14 @@ const GambitProject = () => {
             </p>
 
             <img
-              src={assetUrl("/images/projects/gambit/recommender-robot.webp")}
+              src={assetUrl("/images/projects/tempo/recommender-robot.webp")}
               alt={t(
                 "The recommender, drawn as a robot with a graph of chess lines lit up in its chest",
               )}
               width={700}
               height={865}
               decoding="async"
-              className="mt-8 h-auto w-32 lg:w-full lg:max-w-[10rem]"
+              className="mt-8 h-auto w-48 lg:w-full lg:max-w-[15rem]"
             />
           </div>
         </section>
@@ -530,7 +528,7 @@ const GambitProject = () => {
             </div>
             <div className="rounded-xl border border-primary-200 bg-primary-50 p-4">
               <p className="text-xs font-black uppercase tracking-widest text-primary-600">
-                GAMBIT
+                TEMPO
               </p>
               <p className="mt-2 text-sm font-semibold leading-6 text-primary-900">
                 {t(
@@ -734,4 +732,4 @@ const GambitProject = () => {
   );
 };
 
-export default GambitProject;
+export default TempoProject;

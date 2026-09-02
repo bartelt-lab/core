@@ -7,15 +7,15 @@ import { useLanguage } from "../../i18n/useLanguage";
 
 const activeProjects = [
   {
-    id: "gambit",
-    title: "GAMBIT",
-    tag: "Coming Soon",
-    image: assetUrl("/images/projects/gambit/recommender-loop.webp"),
+    id: "tempo",
+    title: "TEMPO",
+    tag: "Recommender Systems / Chess",
+    image: assetUrl("/images/projects/tempo/recommender-loop.webp"),
     description:
       "A recommendation model that fine-tunes itself to each player's memory, learning to act as a personal guide to their opening repertoire.",
     descriptionDe:
       "Adaptiver Schacheroeffnungstrainer mit Spaced Repetition fuer ganze Varianten, dynamischer Repertoire-Zweiganpassung waehrend der Partie und Erklaerungsmodul.",
-    link: "/ai-team-projects/gambit",
+    link: "/ai-team-projects/tempo",
     placeholder: false,
   },
   {
