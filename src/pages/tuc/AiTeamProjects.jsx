@@ -9,36 +9,43 @@ const activeProjects = [
   {
     id: "tempo",
     title: "TEMPO",
+    titleDe: "TEMPO",
     tag: "Recommender Systems / Chess",
+    tagDe: "Empfehlungssysteme / Schach",
     image: assetUrl("/images/projects/tempo/recommender-loop.webp"),
     description:
       "A recommendation model that fine-tunes itself to each player's memory, learning to act as a personal guide to their opening repertoire.",
     descriptionDe:
-      "Adaptiver Schacheroeffnungstrainer mit Spaced Repetition fuer ganze Varianten, dynamischer Repertoire-Zweiganpassung waehrend der Partie und Erklaerungsmodul.",
+      "Ein Empfehlungsmodell, das sich auf das Gedächtnis jedes Spielers abstimmt und lernt, als persönlicher Leitfaden durch dessen Eröffnungsrepertoire zu dienen.",
     link: "/ai-team-projects/tempo",
     placeholder: false,
   },
   {
     id: "project-2",
     title: "Visual Human Awareness Estimation for Mobile Robots",
+    titleDe:
+      "Visuelle Schätzung menschlicher Aufmerksamkeit für mobile Roboter",
     tag: "AI Team / Cognitive Robotics",
+    tagDe: "AI-Team / Kognitive Robotik",
     image: assetUrl("/images/projects/human-awareness-detection/intro.webp"),
     description:
       "A vision-based system combining person tracking, gaze, head and body orientation, motion, and gestures to estimate whether nearby people appear aware of a mobile robot.",
     descriptionDe:
-      "Ein visionsbasiertes Wahrnehmungssystem nutzt Blickrichtung, Kopf- und Koerperhaltung, Bewegung und Gesten, um einzuschaetzen, ob Personen einen mobilen Roboter wahrzunehmen scheinen. Das AI-Theme-Projekt entsteht in Zusammenarbeit mit dem CORE Robotics Lab der TU Clausthal.",
+      "Ein visionsbasiertes System kombiniert Personenverfolgung, Blickrichtung, Kopf- und Körperorientierung, Bewegung und Gesten, um einzuschätzen, ob Menschen in der Nähe einen mobilen Roboter wahrzunehmen scheinen.",
     link: "/ai-team-projects/human-awareness-detection",
     placeholder: false,
   },
   {
     id: "project-3",
     title: "Project 3",
+    titleDe: "Projekt 3",
     tag: "Coming Soon",
+    tagDe: "Demnächst",
     image: assetUrl("/logos/core/light-background/core.svg"),
     description:
       "Reserved for an upcoming AI Team Project. Details will follow when the scope and materials are ready.",
     descriptionDe:
-      "Platzhalter fuer ein kommendes AI-Team-Projekt. Details werden ergaenzt, sobald Projektumfang und oeffentliche Materialien bereitstehen.",
+      "Reserviert für ein kommendes AI-Team-Projekt. Einzelheiten folgen, sobald Umfang und Materialien feststehen.",
     placeholder: true,
   },
 ];
@@ -47,7 +54,9 @@ const archiveProjects = [
   {
     id: "ai4ai",
     title: "AI4BIM",
+    titleDe: "AI4BIM",
     tag: "IFC / ML / Generative AI",
+    tagDe: "IFC / ML / Generative KI",
     video: assetUrl("/videos/ai-team-projects/ai4bim-platform-walkthrough.mp4"),
     poster: assetUrl(
       "/videos/ai-team-projects/ai4bim-platform-walkthrough-poster.webp",
@@ -55,13 +64,15 @@ const archiveProjects = [
     description:
       "Integrated web platform for IFC extraction, BIM question answering, XGBoost house-price prediction, room-image classification, and Stable Diffusion layout generation.",
     descriptionDe:
-      "Integrierte Webplattform fuer IFC-Extraktion, BIM-Fragen und Antworten, Hauspreisprognosen mit XGBoost, Raumklassifikation und Layout-Generierung mit Stable Diffusion.",
+      "Integrierte Webplattform für IFC-Extraktion, die Beantwortung von BIM-Fragen, Hauspreisprognosen mit XGBoost, die Klassifikation von Raumbildern und die Layout-Erzeugung mit Stable Diffusion.",
     link: "/ai-team-projects/ai4bim",
   },
   {
     id: "vergabepilot",
     title: "Vergabepilot.AI",
+    titleDe: "Vergabepilot.AI",
     tag: "LLMs / Web Automation",
+    tagDe: "LLMs / Webautomatisierung",
     video: assetUrl("/videos/ai-team-projects/vergabepilot-walkthrough.mp4"),
     poster: assetUrl(
       "/videos/ai-team-projects/vergabepilot-walkthrough-poster.webp",
@@ -69,46 +80,54 @@ const archiveProjects = [
     description:
       "Cost-aware tender data extraction across changing procurement portals, combining reusable scrapers, browser automation, AI-generated extraction, self-healing retries, and document processing.",
     descriptionDe:
-      "Kostenbewusste Ausschreibungsdatenextraktion fuer wechselnde Vergabeportale mit wiederverwendbaren Scrapern, Browser-Automatisierung, KI-generierter Extraktion, automatischen Korrekturversuchen und Dokumentverarbeitung.",
+      "Kostenbewusste Ausschreibungsdatenextraktion über wechselnde Vergabeportale hinweg, die wiederverwendbare Scraper, Browserautomatisierung, KI-generierte Extraktion, selbstkorrigierende Wiederholungsversuche und Dokumentverarbeitung verbindet.",
     link: "/ai-team-projects/vergabepilot",
   },
   {
     id: "werewolves",
     title: "The Village at Scale",
+    titleDe: "The Village at Scale",
     tag: "LLMs / Self-Play",
+    tagDe: "LLMs / Selbstspiel",
     image: assetUrl("/images/projects/werewolfs/showcase-background.webp"),
     description:
       "The Village at Scale trains LLM agents to reason and negotiate in Werewolf. It combines supervised fine-tuning from clean gameplay with reinforcement learning through self-play, while a live visualiser streams each six-agent match.",
     descriptionDe:
-      "The Village at Scale trainiert LLM-Agenten fuer Schlussfolgerung und Verhandlung in Werewolf. Supervised Fine-Tuning mit sauberem Spielverhalten wird mit Reinforcement Learning durch Self-Play kombiniert; ein Live-Visualisierer zeigt jedes Match mit sechs Agenten.",
+      "The Village at Scale trainiert LLM-Agenten für Schlussfolgerungen und Verhandlungen im Werwolf-Spiel. Überwachtes Feinabstimmen mit sauberen Spielverläufen wird mit bestärkendem Lernen durch Selbstspiel kombiniert; eine Live-Visualisierung überträgt jede Partie mit sechs Agenten.",
     link: "/ai-team-projects/werewolfs",
   },
   {
     id: "neurocore",
     title: "NeuroCore Dashboard",
+    titleDe: "NeuroCore-Dashboard",
     tag: "MLOps / Monitoring",
+    tagDe: "MLOps / Überwachung",
     video: assetUrl("/videos/demonstrations/neurocore/NeuroCore_demo.mp4"),
     description:
       "Next.js dashboard that queries cluster nodes over SSH, parses nvidia-smi and Slurm data, and displays GPU health, running jobs, storage, training metrics, and benchmark history.",
     descriptionDe:
-      "Next.js-Dashboard, das Cluster-Nodes per SSH abfragt, nvidia-smi- und Slurm-Daten auswertet und GPU-Zustand, Jobs, Speicher, Trainingsmetriken und Benchmark-Verlaeufe darstellt.",
+      "Next.js-Dashboard, das Clusterknoten per SSH abfragt, nvidia-smi- und Slurm-Daten auswertet und GPU-Zustand, laufende Aufträge, Speicher, Trainingsmetriken und den Benchmarkverlauf darstellt.",
     link: "/ai-team-projects/neurocore",
   },
   {
     id: "stratego",
     title: "Stratego - LLM Based Games",
+    titleDe: "Stratego – LLM-basierte Spiele",
     tag: "LLMs / Games",
+    tagDe: "LLMs / Spiele",
     video: assetUrl("/videos/demonstrations/stratego/stratego-demo-rp3.mp4"),
     description:
       "Python benchmark that runs Ollama or Hugging Face models against each other in Stratego and logs prompts, moves, invalid actions, timing, outcomes, and player-position effects.",
     descriptionDe:
-      "Python-Benchmark fuer Stratego-Matches zwischen Ollama- oder Hugging-Face-Modellen mit Protokollen fuer Prompts, Zuege, ungueltige Aktionen, Laufzeit, Ergebnisse und Spielerposition.",
+      "Python-Benchmark für Stratego-Partien zwischen Ollama- oder Hugging-Face-Modellen mit Protokollen zu Prompts, Zügen, ungültigen Aktionen, Laufzeiten, Ergebnissen und Einflüssen der Spielerposition.",
     link: "/ai-team-projects/stratego",
   },
   {
     id: "self-driving",
     title: "Self-Driving 1:10",
+    titleDe: "Autonomes Fahren 1:10",
     tag: "Autonomous Navigation",
+    tagDe: "Autonome Navigation",
     youtubeId: "wrY34WyTEzo",
     description:
       "A 1:10 vehicle testbed that combines SLAM, perception, path planning, feedback control, and autonomous parking in a compact end-to-end autonomy stack.",
@@ -119,14 +138,16 @@ const archiveProjects = [
   {
     id: "traffic-network",
     title: "Traffic Network Builder",
+    titleDe: "Verkehrsnetz-Editor",
     tag: "Simulation Tools",
+    tagDe: "Simulationswerkzeuge",
     video: assetUrl(
       "/videos/demonstrations/autonomous_driving/TrafficNetworkBuilder.mp4",
     ),
     description:
       "Unity editor for assembling road layouts from reusable pieces, exporting OpenDRIVE 1.4 files, and loading the generated maps into CARLA with Python helper scripts.",
     descriptionDe:
-      "Unity-Editor zum Aufbau von Strassennetzen aus wiederverwendbaren Elementen, zum Export als OpenDRIVE 1.4 und zum Laden der Karten in CARLA mit Python-Skripten.",
+      "Unity-Editor zum Aufbau von Straßennetzen aus wiederverwendbaren Elementen, zum Export von OpenDRIVE-1.4-Dateien und zum Laden der erzeugten Karten in CARLA mithilfe von Python-Skripten.",
     link: "/ai-team-projects/traffic-network",
   },
 ];
@@ -137,12 +158,12 @@ const testimonials = [
   assetUrl("/videos/testimonials/Student-Testim-3.mp4"),
 ];
 
-const Media = ({ project }) => {
+const Media = ({ project, title }) => {
   if (project.embedUrl) {
     return (
       <iframe
         src={project.embedUrl}
-        title={project.title}
+        title={title}
         className="h-full w-full"
         allow="autoplay; fullscreen"
         allowFullScreen
@@ -154,7 +175,7 @@ const Media = ({ project }) => {
     return (
       <iframe
         src={`https://drive.google.com/file/d/${project.driveId}/preview`}
-        title={project.title}
+        title={title}
         className="h-full w-full"
         allow="autoplay; fullscreen"
         allowFullScreen
@@ -166,7 +187,7 @@ const Media = ({ project }) => {
     return (
       <iframe
         src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${project.youtubeId}`}
-        title={project.title}
+        title={title}
         className="h-full w-full"
         allow="autoplay; encrypted-media; picture-in-picture"
         allowFullScreen
@@ -190,7 +211,7 @@ const Media = ({ project }) => {
   return (
     <img
       src={project.image}
-      alt={project.title}
+      alt={title}
       loading="lazy"
       decoding="async"
       className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
@@ -235,7 +256,7 @@ const AiTeamProjects = () => {
               {pick("Applied Intelligence", "Angewandte Intelligenz")}
             </span>
             <h1 className="font-heading text-5xl font-black leading-[0.98] text-slate-950 sm:text-6xl lg:text-[4.9rem] xl:text-[5.45rem]">
-              AI Team
+              {pick("AI Team", "AI-Team")}
               <span className="block bg-gradient-to-r from-primary-700 to-primary-500 bg-clip-text text-transparent">
                 {pick("Projects", "Projekte")}
               </span>
@@ -311,7 +332,10 @@ const AiTeamProjects = () => {
               {pick("The Experience", "Die Erfahrung")}
             </h2>
             <p className="mb-4 text-lg font-bold italic tracking-[0.12em]">
-              WORK HARD 💪PLAY HARD 🏀
+              {pick(
+                "WORK HARD 💪 PLAY HARD 🏀",
+                "GEMEINSAM ARBEITEN 💪 GEMEINSAM FEIERN 🏀",
+              )}
             </p>
             <p className="text-sm leading-7 text-slate-300">
               {pick(
@@ -324,19 +348,21 @@ const AiTeamProjects = () => {
             {[
               [
                 "LATEST",
+                "AKTUELL",
                 "/videos/demonstrations/autonomous_driving/CTP_Showcase.mp4",
               ],
               [
                 "ARCHIVE (2022)",
+                "ARCHIV (2022)",
                 "/videos/demonstrations/autonomous_driving/CTP_Showcase_2022.mp4",
               ],
-            ].map(([label, src]) => (
+            ].map(([label, labelDe, src]) => (
               <div
-                key={label}
+                key={src}
                 className="relative overflow-hidden rounded-lg shadow-2xl"
               >
                 <span className="absolute left-4 top-4 z-10 rounded-full bg-primary-600 px-3 py-1 text-xs font-bold">
-                  {label}
+                  {pick(label, labelDe)}
                 </span>
                 <LazyVideo
                   src={assetUrl(src)}
@@ -386,7 +412,7 @@ const AiTeamProjects = () => {
                 <div className="relative aspect-video overflow-hidden bg-slate-100">
                   <img
                     src={project.image}
-                    alt={project.title}
+                    alt={pick(project.title, project.titleDe)}
                     loading="lazy"
                     decoding="async"
                     className={`h-full w-full transition duration-500 ${
@@ -396,21 +422,26 @@ const AiTeamProjects = () => {
                     }`}
                   />
                   <span className="absolute left-3 top-3 z-20 rounded-full bg-slate-950/75 px-3 py-1 text-xs font-bold text-white">
-                    {project.tag}
+                    {pick(project.tag, project.tagDe)}
                   </span>
                   {project.placeholder && (
                     <span className="absolute bottom-3 right-3 z-20 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-slate-700 shadow-sm">
-                      {pick("Coming soon", "Demnaechst")}
+                      {pick("Coming soon", "Demnächst")}
                     </span>
                   )}
                 </div>
                 <div className="relative z-20 flex flex-1 flex-col p-5">
                   <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-6 text-primary-700">
                     {project.link ? (
-                      <Link to={project.link} className="transition hover:text-primary-900">
-                        {project.title}
+                      <Link
+                        to={project.link}
+                        className="transition hover:text-primary-900"
+                      >
+                        {pick(project.title, project.titleDe)}
                       </Link>
-                    ) : project.title}
+                    ) : (
+                      pick(project.title, project.titleDe)
+                    )}
                   </h3>
                   <p className="line-clamp-4 text-sm leading-6 text-slate-600">
                     {pick(project.description, project.descriptionDe)}
@@ -476,7 +507,10 @@ const AiTeamProjects = () => {
                 className={`grid items-center gap-10 md:grid-cols-2 ${index % 2 ? "md:[&>*:first-child]:order-2" : ""}`}
               >
                 <div className="aspect-video overflow-hidden rounded-lg bg-slate-950 shadow-2xl">
-                  <Media project={project} />
+                  <Media
+                    project={project}
+                    title={pick(project.title, project.titleDe)}
+                  />
                 </div>
                 <div>
                   <div className="mb-3 flex items-center gap-3">
@@ -484,10 +518,12 @@ const AiTeamProjects = () => {
                       {pick("Archive", "Archiv")}
                     </span>
                     <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-                      {project.tag}
+                      {pick(project.tag, project.tagDe)}
                     </span>
                   </div>
-                  <h3 className="mb-4 text-2xl font-bold">{project.title}</h3>
+                  <h3 className="mb-4 text-2xl font-bold">
+                    {pick(project.title, project.titleDe)}
+                  </h3>
                   <p className="mb-5 leading-7 text-slate-600">
                     {pick(project.description, project.descriptionDe)}
                   </p>
@@ -506,9 +542,10 @@ const AiTeamProjects = () => {
           </div>
           <div className="mt-16 border-t border-slate-200 pt-10 text-center">
             <p className="mx-auto mb-4 max-w-3xl text-sm leading-7 text-slate-500">
-              Looking for earlier iterations? These projects continue the
-              tradition of our team projects from the University of Mannheim,
-              where the same format ran under the European Master Team Project.
+              {pick(
+                "Looking for earlier iterations? These projects continue the tradition of our team projects from the University of Mannheim, where the same format ran under the European Master Team Project.",
+                "Du suchst frühere Durchläufe? Diese Projekte setzen die Tradition unserer Teamprojekte an der Universität Mannheim fort, wo dasselbe Format als European Master Team Project durchgeführt wurde.",
+              )}
             </p>
             <a
               href="https://www.uni-mannheim.de/en/ines/teaching/european-master-team-project/"
@@ -516,7 +553,10 @@ const AiTeamProjects = () => {
               rel="noreferrer"
               className="inline-flex items-center gap-2 text-sm font-bold text-primary-700"
             >
-              View previous projects at Uni Mannheim
+              {pick(
+                "View previous projects at Uni Mannheim",
+                "Frühere Projekte an der Universität Mannheim ansehen",
+              )}
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
             </a>
           </div>
