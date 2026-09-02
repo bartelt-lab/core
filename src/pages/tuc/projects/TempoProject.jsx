@@ -440,7 +440,6 @@ const TempoProject = () => {
 
   return (
     <ProjectLayout
-      title="TEMPO"
       showHero={false}
       showEvalSection={false}
       compact
