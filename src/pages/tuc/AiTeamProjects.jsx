@@ -7,15 +7,16 @@ import { useLanguage } from "../../i18n/useLanguage";
 
 const activeProjects = [
   {
-    id: "project-1",
-    title: "Project 1",
+    id: "gambit",
+    title: "GAMBIT",
     tag: "Coming Soon",
-    image: assetUrl("/logos/core/light-background/core.svg"),
+    image: assetUrl("/images/projects/gambit/recommender-loop.webp"),
     description:
-      "Reserved for an upcoming AI Team Project. Details will follow when the scope and materials are ready.",
+      "A recommendation model that fine-tunes itself to each player's memory, learning to act as a personal guide to their opening repertoire.",
     descriptionDe:
-      "Platzhalter fuer ein kommendes AI-Team-Projekt. Details werden ergaenzt, sobald Projektumfang und oeffentliche Materialien bereitstehen.",
-    placeholder: true,
+      "Adaptiver Schacheroeffnungstrainer mit Spaced Repetition fuer ganze Varianten, dynamischer Repertoire-Zweiganpassung waehrend der Partie und Erklaerungsmodul.",
+    link: "/ai-team-projects/gambit",
+    placeholder: false,
   },
   {
     id: "project-2",
@@ -495,7 +496,7 @@ const AiTeamProjects = () => {
                       to={project.link}
                       className="inline-flex items-center gap-2 text-sm font-bold text-primary-700"
                     >
-                      {pick("View Project Details", "Projektdetails ansehen")}
+                      {pick("View Project", "Projekt ansehen")}
                       <FaArrowRight className="h-3 w-3" aria-hidden="true" />
                     </Link>
                   )}
