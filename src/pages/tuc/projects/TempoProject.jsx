@@ -589,6 +589,16 @@ const Eyebrow = ({ children }) => (
   </p>
 );
 
+// The diagrams are drawn on wide viewBoxes, so on a phone a plain w-full SVG
+// scales their labels down past the point of being readable. Below the floor
+// width the diagram keeps its own size and the strip scrolls sideways instead.
+// widthClass must carry its own sm: reset so the diagram goes back to fitting.
+const DiagramScroller = ({ widthClass, children }) => (
+  <div className="-mx-4 min-w-0 overflow-x-auto px-4 sm:mx-0 sm:overflow-x-visible sm:px-0">
+    <div className={widthClass}>{children}</div>
+  </div>
+);
+
 const TempoProject = () => {
   const { pick } = useLanguage();
   const t = (en) => pick(en, TEMPO_DE[en]);
@@ -620,6 +630,7 @@ const TempoProject = () => {
   return (
     <ProjectLayout
       showHero={false}
+      showHeroOverview={false}
       showEvalSection={false}
       compact
       softBackground
@@ -727,7 +738,7 @@ const TempoProject = () => {
           </h2>
 
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
-            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm shadow-slate-100/80">
+            <div className="min-w-0 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm shadow-slate-100/80">
               <div className="flex items-center gap-3">
                 <span className="rounded-full bg-primary-50 px-3 py-1 text-xs font-black uppercase tracking-widest text-primary-700">
                   {t("Learning Mode")}
@@ -739,11 +750,13 @@ const TempoProject = () => {
                 )}
               </p>
               <div className="mt-5 rounded-xl border border-gray-200 bg-gray-50 p-4">
-                <LearningDiagram t={t} />
+                <DiagramScroller widthClass="min-w-[360px] sm:min-w-0">
+                  <LearningDiagram t={t} />
+                </DiagramScroller>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6 text-white shadow-xl">
+            <div className="min-w-0 rounded-2xl border border-slate-800 bg-slate-950 p-6 text-white shadow-xl">
               <div className="flex items-center gap-3">
                 <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-primary-300">
                   {t("Repeating Mode")}
@@ -755,7 +768,9 @@ const TempoProject = () => {
                 )}
               </p>
               <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-4">
-                <RepeatingDiagram t={t} />
+                <DiagramScroller widthClass="min-w-[390px] sm:min-w-0">
+                  <RepeatingDiagram t={t} />
+                </DiagramScroller>
               </div>
             </div>
           </div>
@@ -785,7 +800,9 @@ const TempoProject = () => {
           </p>
 
           <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-8">
-            <FlowDiagram t={t} />
+            <DiagramScroller widthClass="min-w-[900px] sm:min-w-0">
+              <FlowDiagram t={t} />
+            </DiagramScroller>
           </div>
         </section>
 
