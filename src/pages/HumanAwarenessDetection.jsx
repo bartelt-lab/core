@@ -148,8 +148,8 @@ const HumanAwarenessDetection = () => {
                     </div>
                     <p className="mt-3 max-w-3xl text-xs leading-5 text-slate-500">
                         {pick(
-                            'This clip is a reference example from related work, not output from this project. It illustrates the kind of person tracking and attention cues the project will investigate; the actual system remains to be built.',
-                            'Dieser Clip ist ein Referenzbeispiel aus verwandter Arbeit, kein Ergebnis dieses Projekts. Er veranschaulicht die Art von Personentracking und Aufmerksamkeitshinweisen, die im Projekt untersucht werden sollen; das eigentliche System ist noch zu entwickeln.',
+                            'This example illustrates the type of visual perception capabilities explored in the project, including human detection, tracking, and attention estimation.',
+                            'Dieses Beispiel veranschaulicht die Art von visuellen Wahrnehmungsfähigkeiten, die im Projekt untersucht werden, darunter Personenerkennung, Tracking und Aufmerksamkeitsschätzung.',
                         )}
                     </p>
                 </section>
@@ -158,12 +158,12 @@ const HumanAwarenessDetection = () => {
                     <div className="grid gap-4 lg:grid-cols-[0.65fr_1.35fr] lg:items-end">
                         <div>
                             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">{pick('Target output', 'Angestrebte Ausgabe')}</p>
-                            <h2 className="mt-2 text-2xl font-bold tracking-tight">{pick('Support for robot decisions, not just a yes/no', 'Unterstützung für Roboterentscheidungen statt nur Ja/Nein')}</h2>
+                            <h2 className="mt-2 text-2xl font-bold tracking-tight">{pick('Awareness information for safer robot behavior', 'Bewusstseinsinformationen für sichereres Roboterverhalten')}</h2>
                         </div>
                         <p className="max-w-3xl text-sm leading-7 text-slate-600">
                             {pick(
-                                'A simple binary answer is unlikely to be enough. The system should give the robot usable information for deciding whether to proceed, wait, stop, or signal its presence, including cases where the evidence is uncertain.',
-                                'Eine einfache Ja/Nein-Antwort dürfte nicht ausreichen. Das System soll dem Roboter nutzbare Informationen liefern, um zu entscheiden, ob er weiterfahren, warten, anhalten oder seine Anwesenheit signalisieren soll, auch bei unsicherer Evidenz.',
+                                'The system aims to estimate whether nearby people are aware of the robot and provide this information in a form that can support navigation and interaction decisions.',
+                                'Das System soll abschätzen, ob nahegelegene Personen sich des Roboters bewusst sind, und diese Information in einer Form bereitstellen, die Navigations- und Interaktionsentscheidungen unterstützen kann.',
                             )}
                         </p>
                     </div>
