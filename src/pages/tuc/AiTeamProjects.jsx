@@ -48,6 +48,19 @@ const activeProjects = [
       "Reserviert für ein kommendes AI-Team-Projekt. Einzelheiten folgen, sobald Umfang und Materialien feststehen.",
     placeholder: true,
   },
+  {
+    id: "project-4",
+    title: "Project 4",
+    titleDe: "Projekt 4",
+    tag: "Coming Soon",
+    tagDe: "Demnächst",
+    image: assetUrl("/logos/core/light-background/core.svg"),
+    description:
+      "Reserved for an upcoming AI Team Project. Details will follow when the scope and materials are ready.",
+    descriptionDe:
+      "Reserviert für ein kommendes AI-Team-Projekt. Einzelheiten folgen, sobald Umfang und Materialien feststehen.",
+    placeholder: true,
+  },
 ];
 
 const archiveProjects = [
