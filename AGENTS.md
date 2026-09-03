@@ -52,6 +52,16 @@ the existing two.
 `index.html` deliberately has no `<title>`/description/og tags — SeoHead owns
 them. Adding static copies back would leave two of each in the document.
 
+### Files that look deletable but are not
+
+- `public/google2e6aa57e94108948.html` — Google Search Console verification for
+  the `https://www.core-network.ai` URL prefix property. Serves at the site
+  root. Google re-checks it, so deleting it un-verifies the property. The
+  contents (`google-site-verification: <filename>`) are load-bearing; do not
+  reformat or add a trailing edit.
+- `public/tuc/iclr-2025/` — standalone static subsite, not linked from any
+  React page (see open issue 4).
+
 ### Source tree
 
 ```

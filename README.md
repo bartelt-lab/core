@@ -103,6 +103,23 @@ The prerender pass fails the build if a page comes back untitled, undersized, or
 carrying the wrong canonical URL — the signature of the SPA fallback being served
 in place of a real route.
 
+### Do not delete `public/google2e6aa57e94108948.html`
+
+That is the Google Search Console verification file for the
+`https://www.core-network.ai` URL prefix property. Vite copies `public/` to the
+site root verbatim, so it serves at `/google2e6aa57e94108948.html`, which is
+where Google looks.
+
+**Google re-checks it periodically — removing it silently un-verifies the
+property and Search Console stops reporting.** It looks like a stray file; it
+is not.
+
+A Domain property would cover every hostname at once, but it needs a DNS TXT
+record and the domain's DNS (Strato) is not ours to change. With Enforce HTTPS
+on, the apex and both `http://` variants all redirect to
+`https://www.core-network.ai`, so the single URL prefix property covers the
+whole site.
+
 ### Adding a route
 
 Add the `<Route>` to `src/App.jsx` **and** an entry to `src/routes.js`. Without
