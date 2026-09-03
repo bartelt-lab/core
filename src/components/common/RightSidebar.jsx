@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { normalizePath } from '../../routes';
 
 // Section configurations for each route (merged: core's existing routes + bartelt /tuc/* routes)
 const ROUTE_SECTIONS = {
@@ -70,18 +71,10 @@ const RightSidebar = () => {
     const [activeSection, setActiveSection] = useState('hero');
     const location = useLocation();
 
-    // Robust path resolution (HashRouter + GitHub Pages edge cases)
-    const resolvedPath = useMemo(() => {
-        if (ROUTE_SECTIONS[location.pathname]) return location.pathname;
-        if (typeof window !== 'undefined') {
-            const hash = (window.location.hash || '').replace(/^#/, '').split('?')[0];
-            if (hash) {
-                const path = hash.startsWith('/') ? hash : `/${hash}`;
-                if (ROUTE_SECTIONS[path]) return path;
-            }
-        }
-        return location.pathname;
-    }, [location.pathname]);
+    // The pathname is authoritative under BrowserRouter. Normalizing strips the
+    // trailing slash from the directory-style URLs GitHub Pages serves
+    // ('/core-labs/'), so they still match ROUTE_SECTIONS.
+    const resolvedPath = normalizePath(location.pathname);
 
     const sections = useMemo(() => ROUTE_SECTIONS[resolvedPath] || [], [resolvedPath]);
     const isVisible = sections.length > 0;

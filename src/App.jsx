@@ -1,10 +1,11 @@
 import { lazy, Suspense } from 'react'
-import { Routes, Route, HashRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Navbar from './components/common/Navbar'
 import RightSidebar from './components/common/RightSidebar'
 import Footer from './components/common/Footer'
 import ScrollToTop from './components/common/ScrollToTop'
 import ThemeToggle from './components/common/ThemeToggle'
+import SeoHead from './components/common/SeoHead'
 import LanguageToggle from './components/common/LanguageToggle'
 import { LanguageProvider } from './i18n/LanguageContext'
 import TucLayout from './components/tuc/Layout'
@@ -114,8 +115,9 @@ function UbbShell() {
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <LanguageProvider>
+        <SeoHead />
         <ScrollToTop />
         <ThemeToggle />
         <LanguageToggle />
@@ -125,7 +127,7 @@ function App() {
           <Route path="/*" element={<CoreShell />} />
         </Routes>
       </LanguageProvider>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
