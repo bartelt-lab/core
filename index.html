@@ -28,9 +28,13 @@
     <script>
       (function () {
         function rewriteLegacyHash() {
-          var hash = window.location.hash;
-          if (hash.indexOf("#/") === 0) {
-            window.location.replace(hash.slice(1));
+          var target = window.location.hash.slice(1);
+          var second = target.charAt(1);
+          // Only a single-slash absolute path is safe to hand to replace().
+          // "//host" and "/\host" are read as protocol-relative URLs by the
+          // browser, which would make this an open redirect off the site.
+          if (target.charAt(0) === "/" && second !== "/" && second !== "\\") {
+            window.location.replace(target);
           }
         }
         rewriteLegacyHash();
