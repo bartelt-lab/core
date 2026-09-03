@@ -18,6 +18,28 @@
       would leave two of each tag in the document, and crawlers read the first.
     -->
 
+    <!--
+      Legacy HashRouter links. Every URL this site published before the move to
+      real paths looked like /#/tuc/teaching, and those live on in bookmarks,
+      emails and papers. Translate them before anything renders, otherwise the
+      server serves "/" and the visitor silently lands on the homepage.
+      In-page anchors (#team) do not start with "#/" and are left alone.
+    -->
+    <script>
+      (function () {
+        function rewriteLegacyHash() {
+          var hash = window.location.hash;
+          if (hash.indexOf("#/") === 0) {
+            window.location.replace(hash.slice(1));
+          }
+        }
+        rewriteLegacyHash();
+        // Also covers pasting an old link while already on the site, which is a
+        // same-document change and would not re-run this script.
+        window.addEventListener("hashchange", rewriteLegacyHash);
+      })();
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
