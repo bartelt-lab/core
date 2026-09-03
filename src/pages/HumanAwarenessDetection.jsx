@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import LazyVideo from '../components/common/LazyVideo'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
 
@@ -98,6 +99,22 @@ const targetPlatforms = (pick) => [
         ],
     },
 ]
+
+const PlatformVisual = ({ platform }) => {
+    return (
+        <div className="relative aspect-[4/3] overflow-hidden bg-white">
+            <img
+                src={platform.image}
+                alt={platform.alt}
+                width={1200}
+                height={900}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-contain p-3"
+            />
+        </div>
+    )
+}
 
 const partners = (pick) => [
     {
@@ -335,17 +352,7 @@ const HumanAwarenessDetection = () => {
                                 key={platform.name}
                                 className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
                             >
-                                <div className="aspect-[4/3] bg-white">
-                                    <img
-                                        src={platform.image}
-                                        alt={platform.alt}
-                                        width={1200}
-                                        height={900}
-                                        loading="lazy"
-                                        decoding="async"
-                                        className="h-full w-full object-contain"
-                                    />
-                                </div>
+                                <PlatformVisual platform={platform} />
                                 <div className="border-t border-slate-100 p-5">
                                     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                                         <h3 className="text-lg font-bold tracking-tight text-slate-950">{platform.name}</h3>
@@ -404,7 +411,7 @@ const HumanAwarenessDetection = () => {
                 </section>
 
                 <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-                    <div className="grid gap-0 md:grid-cols-[1.05fr_0.95fr]">
+                    <div className="grid gap-0 md:grid-cols-[0.9fr_1.1fr]">
                         <div className="p-6 md:p-8">
                             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">{pick('Related work', 'Verwandte Arbeit')}</p>
                             <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-950">Leader Following</h2>
@@ -428,12 +435,14 @@ const HumanAwarenessDetection = () => {
                                 <FaArrowRight className="h-3 w-3 transition group-hover:translate-x-0.5" aria-hidden="true" />
                             </Link>
                         </div>
-                        <div className="relative min-h-[220px] bg-slate-100">
-                            <img
-                                src={assetUrl('/images/projects/leader-following/gazebo-ridgeback-yellow-human.webp')}
-                                alt={pick('The Ridgeback base following a person in a simulated scene', 'Die Ridgeback-Basis folgt einer Person in einer simulierten Szene')}
-                                loading="lazy"
-                                decoding="async"
+                        <div className="relative aspect-[4/3] overflow-hidden bg-slate-950 md:aspect-auto md:min-h-full">
+                            <LazyVideo
+                                src={assetUrl('/videos/ai-team-projects/leader-following-related-work.mp4')}
+                                poster={assetUrl('/videos/ai-team-projects/leader-following-related-work-poster.webp')}
+                                aria-label={pick('The Ridgeback following a selected person through a laboratory and corridor', 'Der Ridgeback folgt einer ausgewählten Person durch ein Labor und einen Korridor')}
+                                autoPlay
+                                muted
+                                loop
                                 className="absolute inset-0 h-full w-full object-cover"
                             />
                         </div>
