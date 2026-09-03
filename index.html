@@ -8,21 +8,20 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="CORE - Cognitive Software in Europe: A joint initiative by leading European universities advancing cognitive software, autonomous systems, and machine learning research." />
-    <meta name="keywords" content="cognitive software, autonomous systems, machine learning, Europe, artificial intelligence, robotics research" />
     <meta name="author" content="CORE Initiative" />
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="CORE - Cognitive Software in Europe" />
-    <meta property="og:description" content="Advancing cognitive software research through European collaboration" />
+    <!--
+      Title, description, canonical and Open Graph tags are intentionally NOT
+      here. src/components/common/SeoHead.jsx renders them per route (React 19
+      hoists document metadata into <head>), and scripts/prerender.mjs bakes the
+      result into the static HTML for each route. Adding static copies here
+      would leave two of each tag in the document, and crawlers read the first.
+    -->
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
-
-    <title>CORE - Cognitive Software in Europe</title>
   </head>
   <body>
     <div id="root"></div>

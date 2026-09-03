@@ -6,7 +6,7 @@ Merged to `main`; the old `merge/*` branches are gone. Deploys to GitHub Pages
 on push to `main` (`.github/workflows/deploy.yml`). This repo
 (`github.com/bartelt-lab/core`) is the merged home of two sites:
 
-- **CORE Network / CORE Labs** — React 19 + Vite 7 + Tailwind v3, HashRouter.
+- **CORE Network / CORE Labs** — React 19 + Vite 7 + Tailwind v3, BrowserRouter.
   Routes (all in `CoreShell`): `/` (CORE Network landing, `pages/Home.jsx`),
   `/network` (renders the same `Home.jsx`), `/core-labs` (`pages/CoreLabs.jsx`),
   `/demos`, `/dynamo`, `/publications`, `/compute-cluster`, `/ai-team-projects`
@@ -15,7 +15,7 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
   traffic-network,self-driving}` (`pages/tuc/projects/*Project.jsx`).
   CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
-  merged in under the hash prefix `/#/tuc/*` (`TucShell`). Routes: `/tuc`,
+  merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`,
   `/tuc/industry-projects`, `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses`,
   `/tuc/join-us`, `/tuc/projects`. TUC navbar links out to the CORE Network
   site for `/network` and `/publications` (no `/tuc/publications`).
@@ -26,6 +26,31 @@ Note: the AI Team Projects pages live in `pages/tuc/` but route under
 App is split via `<Routes>` in `src/App.jsx` between `CoreShell` (core's
 pill Navbar + Footer) and `TucShell` (bartelt-style Layout). Each subtree
 has its own header/footer.
+
+### Routing and prerendering — read before adding a route
+
+The site switched from `HashRouter` to `BrowserRouter` (2026-09). Every route
+is prerendered to static HTML at build time, because a client-rendered SPA
+serves an empty `<div id="root">` to anything that does not run JavaScript —
+crawlers, link unfurlers, and agents all saw a blank page before this.
+
+`src/routes.js` is the single source of truth. It feeds three consumers:
+
+- `src/components/common/SeoHead.jsx` — per-route `<title>`/`<meta>`/canonical,
+  using React 19 document-metadata hoisting (no helmet library).
+- `scripts/prerender.mjs` — headless Chromium renders each route and writes
+  `<path>.html` + `<path>/index.html`. Build fails on an untitled, undersized,
+  or wrong-canonical capture.
+- `scripts/seo-files.mjs` — `robots.txt`, `sitemap.xml`, `llms.txt`, `og-image.png`.
+
+**Adding a `<Route>` to `App.jsx` without adding it to `routes.js` leaves the
+page unindexed and un-prerendered.** Aliases (two paths, one page) get a
+`canonical` field pointing at the real path; they are prerendered but kept out
+of the sitemap. `/network` → `/` and `/ai-team-projects/ai4ai` → `/ai4bim` are
+the existing two.
+
+`index.html` deliberately has no `<title>`/description/og tags — SeoHead owns
+them. Adding static copies back would leave two of each in the document.
 
 ### Source tree
 
@@ -187,24 +212,24 @@ and is the better choice).
 ### 4. `tuc/iclr-2025/` orphan subsite
 Static page at `public/tuc/iclr-2025/index.html` (title: "CORE at ICLR
 2025"). Has its own `style.css` + `assets/`. **Not linked from any React
-page.** Reachable directly at `<domain>/tuc/iclr-2025/` (bypasses
-HashRouter — it's a real path served by the static file server, no `#`).
+page.** Reachable directly at `<domain>/tuc/iclr-2025/` (a real static file,
+untouched by the router or the prerender pass).
 Decide: keep as direct-link archive (do nothing) OR add a link from
 Publications/Home/News.
 
 ### 5. Manual browser smoke pass
 Build passes consistently but nobody has clicked through the app in a
 real browser since the restyle. Verify in dev (`npm run dev`):
-- `/#/` (core home, pill nav, hero video plays)
-- `/#/demos`, `/#/network`, `/#/dynamo` (core unaffected)
-- `/#/tuc` (bartelt home, members grid loads from team.js, CORE Network
+- `/` (core home, pill nav, hero video plays)
+- `/demos`, `/network`, `/dynamo` (core unaffected)
+- `/tuc` (bartelt home, members grid loads from team.js, CORE Network
   affiliation logo + contact links work)
-- `/#/tuc/teaching`, `/#/tuc/seminar`, `/#/tuc/theses` (teaching-* CSS
+- `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses` (teaching-* CSS
   still applies — those inline `<style>` blocks survived)
-- `/#/tuc/join-us` (disclosure pattern expands/collapses)
-- `/#/tuc/projects` (YouTube embed click-to-play)
-- `/#/ai-team-projects` (project tiles; sidebar Overview/Projects/Voices/Archive)
-- `/#/ai-team-projects/dynamo` (RightSidebar shows Overview/
+- `/tuc/join-us` (disclosure pattern expands/collapses)
+- `/tuc/projects` (YouTube embed click-to-play)
+- `/ai-team-projects` (project tiles; sidebar Overview/Projects/Voices/Archive)
+- `/ai-team-projects/dynamo` (RightSidebar shows Overview/
   Features/Evaluation/Science/Architecture, scroll-spy follows)
 - Network panel: zero 404s on `/members/*`, `/papers/*`, `/logos/*`,
   `/videos/*`, `/data/*`
