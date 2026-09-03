@@ -56,7 +56,7 @@ const Media = ({ media, title, active, playKey = 0 }) => {
                 muted
                 loop
                 playsInline
-                controls
+                controls={media.controls !== false}
                 preload="metadata"
             />
         )
