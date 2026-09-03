@@ -138,6 +138,9 @@ the bottom of the file tree). Read the relevant one before related work:
   project subpage. Reference impls: `Dynamo.jsx`, `VialSort.jsx`,
   `LeaderFollowing.jsx`.
 - `wiki/assets.md` — image/video loading, optimization, and ffmpeg pipeline.
+- `wiki/later.md` — **deferred work with the reasoning intact.** Video sitemap,
+  the orphaned `/ai-team-projects/dynamo` route, `hydrateRoot`, dropping the
+  Playwright dependency. Read before re-litigating any of those.
 - `wiki/navbar-scroll-hide.md` — how to make the navbar slide away past a scroll
   threshold on a route (removed from `/dynamo`, kept here for reuse).
 
