@@ -36,17 +36,18 @@ const activeProjects = [
     placeholder: false,
   },
   {
-    id: "project-3",
-    title: "Project 3",
-    titleDe: "Projekt 3",
-    tag: "Coming Soon",
-    tagDe: "Demnächst",
-    image: assetUrl("/logos/core/light-background/core.svg"),
+    id: "lectra",
+    title: "LECTRA",
+    titleDe: "LECTRA",
+    tag: "LLMs / Learning Technology",
+    tagDe: "LLMs / Lerntechnologie",
+    image: assetUrl("/images/projects/lectra/workspace.webp"),
     description:
-      "Reserved for an upcoming AI Team Project. Details will follow when the scope and materials are ready.",
+      "A planned learning-platform demonstrator that keeps course material visible beside a context-aware LLM assistant and adapts support from a lightweight topic-level learning-state model.",
     descriptionDe:
-      "Reserviert für ein kommendes AI-Team-Projekt. Einzelheiten folgen, sobald Umfang und Materialien feststehen.",
-    placeholder: true,
+      "Ein geplanter Lernplattform-Demonstrator, der Kursmaterial neben einem kontextbezogenen LLM-Assistenten sichtbar hält und Unterstützung mithilfe eines leichtgewichtigen themenbezogenen Lernstandsmodells anpasst.",
+    link: "/ai-team-projects/lectra",
+    placeholder: false,
   },
   {
     id: "project-4",

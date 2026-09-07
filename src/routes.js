@@ -99,6 +99,13 @@ export const routes = [
       "A recommendation model that fine-tunes itself to each chess player's memory, learning to act as a personal guide to their opening repertoire.",
   },
   {
+    path: '/ai-team-projects/lectra',
+    title: 'LECTRA | AI Team Projects',
+    description:
+      'A planned course learning-platform demonstrator that combines course-material retrieval, a context-aware LLM assistant, and a lightweight model of each student’s topic-level learning state.',
+    image: '/images/projects/lectra/workspace.webp',
+  },
+  {
     path: '/ai-team-projects/human-awareness-detection',
     title: 'Visual Human Awareness Estimation | AI Team Projects',
     description:
