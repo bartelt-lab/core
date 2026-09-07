@@ -106,6 +106,12 @@ export const routes = [
     image: '/images/projects/lectra/workspace.webp',
   },
   {
+    path: '/ai-team-projects/fastmile',
+    title: 'FastMile | AI Team Projects',
+    description:
+      'A planned real-time routing platform that merges data from several mobility providers into one intermodal journey, and uses language models to handle disruptions, cancellations, and events.',
+  },
+  {
     path: '/ai-team-projects/human-awareness-detection',
     title: 'Visual Human Awareness Estimation | AI Team Projects',
     description:

@@ -50,17 +50,18 @@ const activeProjects = [
     placeholder: false,
   },
   {
-    id: "project-4",
-    title: "Project 4",
-    titleDe: "Projekt 4",
-    tag: "Coming Soon",
-    tagDe: "Demnächst",
+    id: "fastmile",
+    title: "FastMile",
+    titleDe: "FastMile",
+    tag: "Intermodal Mobility / LLMs",
+    tagDe: "Intermodale Mobilität / LLMs",
     image: assetUrl("/logos/core/light-background/core.svg"),
     description:
-      "Reserved for an upcoming AI Team Project. Details will follow when the scope and materials are ready.",
+      "A planned real-time routing platform that merges data from several mobility providers into one door-to-door chain, and uses language models to handle disruptions, cancellations, and events.",
     descriptionDe:
-      "Reserviert für ein kommendes AI-Team-Projekt. Einzelheiten folgen, sobald Umfang und Materialien feststehen.",
-    placeholder: true,
+      "Eine geplante Echtzeit-Routing-Plattform, die Daten mehrerer Mobilitätsdienstleister zu einer durchgehenden Wegekette verbindet und Störungen, Ausfälle und Veranstaltungen mithilfe von Sprachmodellen behandelt.",
+    link: "/ai-team-projects/fastmile",
+    placeholder: false,
   },
 ];
 
