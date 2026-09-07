@@ -32,6 +32,7 @@ const TucProjects = lazy(() => import('./pages/tuc/Projects'))
 const TucAiTeamProjects = lazy(() => import('./pages/tuc/AiTeamProjects'))
 const TucDynamoProject = lazy(() => import('./pages/tuc/projects/DynamoProject'))
 const TucTempoProject = lazy(() => import('./pages/tuc/projects/TempoProject'))
+const TucLectraProject = lazy(() => import('./pages/tuc/projects/LectraProject'))
 const TucAI4AIProject = lazy(() => import('./pages/tuc/projects/AI4AIProject'))
 const TucVergabepilotProject = lazy(() => import('./pages/tuc/projects/VergabepilotProject'))
 const TucWerewolfsProject = lazy(() => import('./pages/tuc/projects/WerewolfsProject'))
@@ -65,6 +66,7 @@ function CoreShell() {
             <Route path="/ai-team-projects" element={<TucAiTeamProjects />} />
             <Route path="/ai-team-projects/human-awareness-detection" element={<HumanAwarenessDetection />} />
             <Route path="/ai-team-projects/tempo" element={<TucTempoProject />} />
+            <Route path="/ai-team-projects/lectra" element={<TucLectraProject />} />
             <Route path="/ai-team-projects/dynamo" element={<TucDynamoProject />} />
             <Route path="/ai-team-projects/ai4ai" element={<TucAI4AIProject />} />
             <Route path="/ai-team-projects/ai4bim" element={<TucAI4AIProject />} />
