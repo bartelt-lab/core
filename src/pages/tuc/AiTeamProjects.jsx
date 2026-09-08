@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaCalendarAlt,
+  FaExternalLinkAlt,
+  FaInfoCircle,
+} from "react-icons/fa";
 import assetUrl from "../../utils/assetUrl";
 import LazyVideo from "../../components/common/LazyVideo";
 import { useLanguage } from "../../i18n/useLanguage";
@@ -172,6 +177,30 @@ const testimonials = [
   assetUrl("/videos/testimonials/Student-Testim-2.mp4"),
   assetUrl("/videos/testimonials/Student-Testim-3.mp4"),
 ];
+
+const activeProjectGridClass = (count) => {
+  if (count === 1) return "mx-auto max-w-xl grid-cols-1";
+  if (count === 2 || count === 4) {
+    return "mx-auto max-w-[60rem] sm:grid-cols-2 lg:grid-cols-2";
+  }
+  return "sm:grid-cols-2 lg:grid-cols-6";
+};
+
+const activeProjectCardClass = (count, index) => {
+  if (count < 3 || count === 4) return "";
+
+  const remainder = count % 3;
+  if (remainder === 1 && index === count - 1) {
+    return "lg:col-span-2 lg:col-start-3";
+  }
+  if (remainder === 2 && index === count - 2) {
+    return "lg:col-span-2 lg:col-start-2";
+  }
+  if (remainder === 2 && index === count - 1) {
+    return "lg:col-span-2 lg:col-start-4";
+  }
+  return "lg:col-span-2";
+};
 
 const Media = ({ project, title }) => {
   if (project.embedUrl) {
@@ -396,7 +425,7 @@ const AiTeamProjects = () => {
 
       <section id="active-projects" className="bg-gray-50 py-12 md:py-14">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">
-          <div className="mb-10 text-center">
+          <div className="mb-8 text-center">
             <h2 className="text-3xl font-light">
               {pick("Active Projects", "Aktive Projekte")}
             </h2>
@@ -408,11 +437,14 @@ const AiTeamProjects = () => {
               )}
             </p>
           </div>
-          <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {activeProjects.map((project) => (
+
+          <div
+            className={`grid items-stretch gap-6 ${activeProjectGridClass(activeProjects.length)}`}
+          >
+            {activeProjects.map((project, index) => (
               <article
                 key={project.id}
-                className={`group relative flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-lg shadow-slate-200/70 ${
+                className={`group relative flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-lg shadow-slate-200/70 ${activeProjectCardClass(activeProjects.length, index)} ${
                   project.placeholder
                     ? "border border-dashed border-slate-300 bg-white/70"
                     : "border border-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
@@ -424,7 +456,7 @@ const AiTeamProjects = () => {
                     aria-hidden="true"
                   />
                 )}
-                <div className="relative aspect-video overflow-hidden bg-slate-100">
+                <div className="relative aspect-[16/6] overflow-hidden bg-slate-100">
                   <img
                     src={project.image}
                     alt={pick(project.title, project.titleDe)}
@@ -445,8 +477,8 @@ const AiTeamProjects = () => {
                     </span>
                   )}
                 </div>
-                <div className="relative z-20 flex flex-1 flex-col p-5">
-                  <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-6 text-primary-700">
+                <div className="relative z-20 flex flex-1 flex-col p-3.5">
+                  <h3 className="mb-1 line-clamp-2 text-lg font-bold leading-6 text-primary-700">
                     {project.link ? (
                       <Link
                         to={project.link}
@@ -458,13 +490,13 @@ const AiTeamProjects = () => {
                       pick(project.title, project.titleDe)
                     )}
                   </h3>
-                  <p className="line-clamp-4 text-sm leading-6 text-slate-600">
+                  <p className="line-clamp-2 text-sm leading-5 text-slate-600">
                     {pick(project.description, project.descriptionDe)}
                   </p>
                   {project.link && (
                     <Link
                       to={project.link}
-                      className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-bold text-primary-700 transition hover:text-primary-900"
+                      className="mt-auto inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary-700 transition hover:text-primary-900"
                     >
                       {pick("View project", "Projekt ansehen")}
                       <FaArrowRight className="h-3 w-3" aria-hidden="true" />
@@ -474,6 +506,127 @@ const AiTeamProjects = () => {
               </article>
             ))}
           </div>
+
+          <aside
+            aria-labelledby="registration-desk-title"
+            className="mx-auto mt-10 max-w-[60rem] rounded-xl border border-primary-200 bg-white px-5 py-4 shadow-md shadow-primary-100/40 sm:px-6"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-700 text-white">
+                  <FaInfoCircle className="h-3.5 w-3.5" aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-700">
+                    {pick("Student information", "Information für Studierende")}
+                  </p>
+                  <h3
+                    id="registration-desk-title"
+                    className="text-base font-bold text-slate-950 sm:text-lg"
+                  >
+                    {pick(
+                      "How to register for a project",
+                      "So meldet ihr euch für ein Projekt an",
+                    )}
+                  </h3>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-3 rounded-lg border border-primary-100 bg-primary-50/60 p-3">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h4 className="text-sm font-bold text-slate-950">
+                  {pick(
+                    "TU Clausthal students",
+                    "Studierende der TU Clausthal",
+                  )}
+                </h4>
+                <strong className="inline-flex items-center gap-2 self-start whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-sm text-primary-900 shadow-sm sm:self-auto">
+                  <FaCalendarAlt className="h-3 w-3" aria-hidden="true" />
+                  <time dateTime="2026-09-25">
+                    {pick(
+                      "Project pitches · 25 September 2026",
+                      "Projekt-Pitches · 25. September 2026",
+                    )}
+                  </time>
+                </strong>
+              </div>
+
+              <p className="mt-2 text-sm leading-5 text-slate-600">
+                {pick(
+                  "Complete these four steps on pitch day to register for this semester's project:",
+                  "Mit diesen vier Schritten meldet ihr euch am Pitch-Tag für ein Projekt in diesem Semester an:",
+                )}
+              </p>
+
+              <ol className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                {pick(
+                  [
+                    ["Collect your card", "At the reception desk"],
+                    ["See every pitch", "Explore all projects"],
+                    ["Rank your top three", "Write your preferences"],
+                    ["Submit your card", "At the same reception desk"],
+                  ],
+                  [
+                    ["Karte abholen", "Am Empfang"],
+                    ["Alle Pitches ansehen", "Alle Projekte kennenlernen"],
+                    ["Top drei ordnen", "Präferenzen eintragen"],
+                    ["Karte abgeben", "Am selben Empfang"],
+                  ],
+                ).map(([title, detail], index) => (
+                  <motion.li
+                    key={title}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{
+                      duration: 0.35,
+                      delay: index * 0.07,
+                      ease: "easeOut",
+                    }}
+                    className="flex items-center gap-3 rounded-lg border border-white bg-white/90 px-3 py-2 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-md"
+                  >
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-700 font-mono text-[11px] font-bold text-white">
+                      {index + 1}
+                    </span>
+                    <span>
+                      <span className="block text-xs font-bold text-slate-900">
+                        {title}
+                      </span>
+                      <span className="mt-0.5 block text-[11px] leading-4 text-slate-500">
+                        {detail}
+                      </span>
+                    </span>
+                  </motion.li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="mt-3 flex flex-col gap-2 border-t border-slate-200 pt-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h4 className="text-sm font-bold text-slate-950">
+                  {pick("UBB students", "Studierende der UBB")}
+                </h4>
+                <p className="mt-0.5 text-sm text-slate-600">
+                  {pick(
+                    "More registration information will follow.",
+                    "Weitere Informationen zur Anmeldung folgen.",
+                  )}
+                </p>
+              </div>
+              <div>
+                <a
+                  href="https://www.ubbcluj.ro/en/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-primary-700 transition hover:text-primary-900"
+                >
+                  {pick("UBB website", "UBB-Website")}
+                  <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
