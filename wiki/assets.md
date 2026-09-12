@@ -94,8 +94,24 @@ ffmpeg -i in.mp4 -vf "scale='min(1280,iw)':-2" -c:v libx264 -crf 28 -preset slow
 ffmpeg -i in.mp4 -ss 1 -frames:v 1 poster.png   # poster frame -> npm run optimize-images
 ```
 
-> Even compressed, the video lives in git. Consider Git LFS or external/CDN hosting for
-> `public/videos/**` as a follow-up if repo size becomes a problem.
+## Git LFS — testimonials only
+
+`.gitattributes` routes `public/videos/testimonials/*.mp4` through Git LFS. Everything else
+under `public/videos/**` is a normal git blob.
+
+Two rules come out of that split:
+
+- **Compress before adding, not after.** The LFS migration (`1a35c4b`) re-added the raw
+  camera originals — 1080p at ~18 Mbps, 196/197/162 MB — silently undoing the 5 MB
+  compressed versions from `f067308`, so the testimonials section cost ~555 MB to scroll
+  past. Run the 720p/CRF-28 pass first, then commit.
+- **CI must check out LFS.** `.github/workflows/deploy.yml` pins `lfs: true` on
+  `actions/checkout`. Vite copies `public/` into `dist/` verbatim, so without it the build
+  publishes 134-byte LFS pointer files named `.mp4` and those three videos are dead on the
+  live site (they were, between `1a35c4b` and this fix).
+
+GitHub Pages also hard-limits a published site to **1 GB**; `public/` is the bulk of `dist`,
+so keep an eye on `du -sh public` when adding clips.
 
 ## Checklist for a new asset
 
