@@ -137,8 +137,8 @@ for (const w of warnings) console.log(`  warn  ${w}`)
 /**
  * Whoever sees this failure has demonstrably not read the docs, so pointing at them
  * again is not a fix — print the rules themselves. They are read from
- * PROJECT_CONTEXT.md rather than copied here, so there is exactly one copy in the
- * repo and it cannot drift from what the pre-edit hook shows.
+ * PROJECT_CONTEXT.md rather than copied here, so the repo holds exactly one copy of
+ * them and this message cannot drift from what the agent-context files say.
  */
 const rulesPath = new URL('../PROJECT_CONTEXT.md', import.meta.url)
 const PRIMER = existsSync(rulesPath)

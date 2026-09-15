@@ -1,9 +1,12 @@
 # Project context — read before changing anything
 
 Canonical source for the rules that are expensive to get wrong. `CLAUDE.md` imports
-this file, `AGENTS.md` points at it, the pre-edit hook prints it, and
-`scripts/check-videos.mjs` prints it when it fails. **Do not copy these rules into
-another file** — update them here and every consumer follows. Detail lives in `wiki/`.
+this file, `AGENTS.md` points at it, and `scripts/check-videos.mjs` prints it when the
+build gate fails. **Do not copy these rules into another file** — update them here and
+every consumer follows. Detail lives in `wiki/`.
+
+(`.githooks/video-rule-notice.sh` can also print this file before any edit to a video,
+but it is not enabled — see the header of that script if you want it.)
 
 ## Video
 

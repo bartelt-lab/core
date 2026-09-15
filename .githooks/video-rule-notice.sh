@@ -1,6 +1,11 @@
 #!/bin/sh
 # PreToolUse hook: inject the project rules when an agent is about to touch a video
-# or the registry. Wired in .claude/settings.json.
+# or the registry.
+#
+# NOT ENABLED. To turn it on, add to .claude/settings.json alongside enabledPlugins:
+#   "hooks": { "PreToolUse": [ { "matcher": "Edit|Write|MultiEdit",
+#     "hooks": [ { "type": "command",
+#                  "command": "sh .githooks/video-rule-notice.sh", "timeout": 10 } ] } ] }
 #
 # wiki/video.md only helps agents that choose to read it. This fires whether or not
 # they did, at the moment it matters. Silent and exit 0 for every other path, so
