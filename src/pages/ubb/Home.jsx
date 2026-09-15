@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaArrowRight, FaBrain, FaFlask, FaLock, FaProjectDiagram, FaRobot } from 'react-icons/fa'
-import LazyVideo from '../../components/common/LazyVideo'
 import PublicationsSection from '../../components/publications/PublicationsSection'
 import { autonomousDemonstrations } from '../../data/demonstrations'
 import assetUrl from '../../utils/assetUrl'
@@ -207,7 +206,14 @@ const UbbHome = () => {
             {autonomousDemonstrations.map((demo) => (
               <article key={demo.id} className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden bg-slate-100">
-                  <LazyVideo src={assetUrl(demo.video)} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]" muted autoPlay loop />
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${demo.youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${demo.youtubeId}&playsinline=1&modestbranding=1&rel=0`}
+                    title={demo.title}
+                    loading="lazy"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    className="pointer-events-none h-full w-full"
+                  />
                 </div>
                 <div className="p-6">
                   <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-sky-700">{demo.category}</p>

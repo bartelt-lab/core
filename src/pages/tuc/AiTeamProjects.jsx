@@ -161,9 +161,7 @@ const archiveProjects = [
     titleDe: "Verkehrsnetz-Editor",
     tag: "Simulation Tools",
     tagDe: "Simulationswerkzeuge",
-    video: assetUrl(
-      "/videos/demonstrations/autonomous_driving/TrafficNetworkBuilder.mp4",
-    ),
+    youtubeId: "-dYcWwliIzw",
     description:
       "Unity editor for assembling road layouts from reusable pieces, exporting OpenDRIVE 1.4 files, and loading the generated maps into CARLA with Python helper scripts.",
     descriptionDe:

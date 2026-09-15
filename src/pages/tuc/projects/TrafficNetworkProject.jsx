@@ -11,7 +11,7 @@ const TrafficNetworkProject = () => {
         subtitle={pick('Unity map editing and OpenDRIVE export for autonomous-driving simulation', 'Unity-Kartenbearbeitung und OpenDRIVE-Export für autonome Fahrsimulationen')}
         tags={[pick('Simulation Tools', 'Simulationswerkzeuge'), 'OpenDRIVE', 'CARLA']}
         overview={pick('Traffic Network Builder lets a user assemble a road layout from reusable pieces in Unity and export the result as an OpenDRIVE 1.4 file. Python helper scripts then load the generated .xodr map into CARLA for autonomous-driving experiments.', 'Mit dem Traffic Network Builder lassen sich Straßennetze in Unity aus wiederverwendbaren Elementen zusammensetzen und als OpenDRIVE-1.4-Datei exportieren. Python-Hilfsskripte laden die erzeugte .xodr-Karte anschließend für autonome Fahrexperimente in CARLA.')}
-        heroVideo="/videos/demonstrations/autonomous_driving/TrafficNetworkBuilder.mp4"
+        heroYouTubeId="-dYcWwliIzw"
         heroCaption={pick('Unity road editing and OpenDRIVE export workflow', 'Unity-Straßenbearbeitung und OpenDRIVE-Exportworkflow')}
         showHeroTags={false}
         showHeroOverview={false}
