@@ -1,0 +1,14 @@
+#!/bin/sh
+# Video gate — see wiki/video.md. Enable with:
+#   git config core.hooksPath .githooks
+#
+# Only runs when the commit touches a video, its poster, or the registry, so normal
+# commits are not slowed down. Bypass with --no-verify if you really must.
+
+if git diff --cached --name-only | grep -qE '^public/videos/|^src/data/videos\.js$'; then
+    echo "pre-commit: video files touched, running check-videos"
+    node scripts/check-videos.mjs || {
+        echo "pre-commit: blocked. Fix the above, or commit with --no-verify to override."
+        exit 1
+    }
+fi

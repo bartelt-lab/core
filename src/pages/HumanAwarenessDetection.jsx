@@ -390,16 +390,15 @@ const HumanAwarenessDetection = () => {
                         <span className="hidden text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400 sm:block">{pick('Illustrative demo', 'Illustrative Demo')}</span>
                     </div>
                     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-2 shadow-xl shadow-slate-300/60">
-                        <video
+                        <LazyVideo
                             src={assetUrl('/videos/ai-team-projects/human-awareness-detection.mp4')}
+                            poster={assetUrl('/videos/ai-team-projects/human-awareness-detection-poster.webp')}
                             className="aspect-video w-full rounded-2xl bg-black object-contain"
                             aria-label={pick('Example of person tracking and gaze overlays illustrating the kind of system this project will develop', 'Beispiel für Personentracking und Blick-Overlays zur Veranschaulichung der Art von System, das in diesem Projekt entwickelt werden soll')}
                             autoPlay
                             muted
                             loop
-                            playsInline
                             controls
-                            preload="metadata"
                         />
                     </div>
                     <p className="mt-3 max-w-3xl text-xs leading-5 text-slate-500">

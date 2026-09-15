@@ -123,6 +123,9 @@ const archiveProjects = [
     tag: "MLOps / Monitoring",
     tagDe: "MLOps / Überwachung",
     video: assetUrl("/videos/demonstrations/neurocore/NeuroCore_demo.mp4"),
+    poster: assetUrl(
+      "/videos/demonstrations/neurocore/NeuroCore_demo-poster.webp",
+    ),
     description:
       "Next.js dashboard that queries cluster nodes over SSH, parses nvidia-smi and Slurm data, and displays GPU health, running jobs, storage, training metrics, and benchmark history.",
     descriptionDe:
@@ -136,6 +139,9 @@ const archiveProjects = [
     tag: "LLMs / Games",
     tagDe: "LLMs / Spiele",
     video: assetUrl("/videos/demonstrations/stratego/stratego-demo-rp3.mp4"),
+    poster: assetUrl(
+      "/videos/demonstrations/stratego/stratego-demo-rp3-poster.webp",
+    ),
     description:
       "Python benchmark that runs Ollama or Hugging Face models against each other in Stratego and logs prompts, moves, invalid actions, timing, outcomes, and player-position effects.",
     descriptionDe:
@@ -391,12 +397,12 @@ const AiTeamProjects = () => {
               [
                 "LATEST",
                 "AKTUELL",
-                "/videos/demonstrations/autonomous_driving/CTP_Showcase.mp4",
+                "/videos/ai-team-projects/ai-team-project-showcase.mp4",
               ],
               [
                 "ARCHIVE (2022)",
                 "ARCHIV (2022)",
-                "/videos/demonstrations/autonomous_driving/CTP_Showcase_2022.mp4",
+                "/videos/ai-team-projects/ai-team-project-showcase-2022.mp4",
               ],
             ].map(([label, labelDe, src]) => (
               <div

@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/seo-files.mjs && node scripts/prerender.mjs",
+    "build": "node scripts/check-videos.mjs && vite build && node scripts/seo-files.mjs && node scripts/prerender.mjs",
     "build:fast": "vite build",
     "prerender": "node scripts/seo-files.mjs && node scripts/prerender.mjs",
     "preview": "vite preview",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "check-videos": "node scripts/check-videos.mjs",
     "optimize-images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {

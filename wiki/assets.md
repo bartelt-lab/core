@@ -44,6 +44,11 @@ Always pass a `poster` so the slot paints instantly while the clip is gated. Use
 only for the one always-visible top-of-page hero (`HeroVideo`), and even there use
 `preload="none"` + a poster.
 
+> Everything else about video — encode buckets, the codec decision, the registry that makes
+> a clip shippable, and the gate that enforces it — lives in **[`video.md`](./video.md)**,
+> with the step-by-step guide in [`video-workflow.md`](./video-workflow.md). This section
+> covers only how a video is *loaded* once it exists.
+
 ## Image pipeline — `npm run optimize-images`
 
 `scripts/optimize-images.mjs` (uses `sharp`) walks `public/`, converts PNG/JPEG **larger than
@@ -60,58 +65,14 @@ re-running only touches new oversized assets.
 Workflow when adding a large image: drop it in `public/`, reference it, then run
 `npm run optimize-images` and commit the resulting `.webp` + the (auto-rewritten) refs.
 
-## Video pipeline — `scripts/compress-videos.ps1`
+## Video pipeline
 
-Needs `ffmpeg` on PATH (`winget install Gyan.FFmpeg`). The script re-encodes to web-friendly
-H.264 (libx264, `+faststart`, `yuv420p`), caps width, and writes `<name>.opt.mp4` next to each
-source — pass `-Replace` to overwrite in place.
+Moved. Encode buckets, the H.264-only decision, the registry that makes a clip shippable,
+Git LFS, the size budget and the `npm run check-videos` gate are all in
+**[`video.md`](./video.md)**. To add a clip, follow [`video-workflow.md`](./video-workflow.md).
 
-```powershell
-# Test one clip (writes Student-Testim-2.opt.mp4 alongside for review)
-./scripts/compress-videos.ps1 -Path public/videos/testimonials/Student-Testim-2.mp4
-
-# Replace in place, per the settings used for this repo:
-./scripts/compress-videos.ps1 -Path public/videos/testimonials      -MaxWidth 1280 -Crf 28 -Replace             # 720p, keep audio
-./scripts/compress-videos.ps1 -Path public/videos/demonstrations     -MaxWidth 1920 -Crf 23 -Replace             # 1080p, keep audio
-./scripts/compress-videos.ps1 -Path public/videos/core-labs-hero.mp4 -MaxWidth 1920 -Crf 23 -Replace -StripAudio # 1080p background, muted
-```
-
-Resolution rule: **talking-head testimonials → 720p (CRF 28); everything else
-(detail demos, background hero) → 1080p (CRF 23)**. `-StripAudio` for muted
-background/preview loops, keep audio where a clip plays with sound (testimonials, demo modal).
-
-**Codec — H.264 only.** HEVC/H.265 is ~40–50% smaller but doesn't play in a plain `<video>`
-on Firefox and often fails in Chrome (no reliable decoder); only Safari is dependable. A single
-H.264 MP4 plays everywhere. Use **CRF** (constant quality), not a fixed bitrate — CRF picks the
-bytes for you; ~21–25 is the 1080p web sweet spot (don't go as low as CRF 12 — near-lossless,
-huge files).
-
-Raw `ffmpeg` equivalents if you need them:
-
-```bash
-ffmpeg -i in.mp4 -vf "scale='min(1280,iw)':-2" -c:v libx264 -crf 28 -preset slow \
-       -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 96k out.mp4   # -an to drop audio
-ffmpeg -i in.mp4 -ss 1 -frames:v 1 poster.png   # poster frame -> npm run optimize-images
-```
-
-## Git LFS — testimonials only
-
-`.gitattributes` routes `public/videos/testimonials/*.mp4` through Git LFS. Everything else
-under `public/videos/**` is a normal git blob.
-
-Two rules come out of that split:
-
-- **Compress before adding, not after.** The LFS migration (`1a35c4b`) re-added the raw
-  camera originals — 1080p at ~18 Mbps, 196/197/162 MB — silently undoing the 5 MB
-  compressed versions from `f067308`, so the testimonials section cost ~555 MB to scroll
-  past. Run the 720p/CRF-28 pass first, then commit.
-- **CI must check out LFS.** `.github/workflows/deploy.yml` pins `lfs: true` on
-  `actions/checkout`. Vite copies `public/` into `dist/` verbatim, so without it the build
-  publishes 134-byte LFS pointer files named `.mp4` and those three videos are dead on the
-  live site (they were, between `1a35c4b` and this fix).
-
-GitHub Pages also hard-limits a published site to **1 GB**; `public/` is the bulk of `dist`,
-so keep an eye on `du -sh public` when adding clips.
+`scripts/compress-videos.ps1` still exists but is PowerShell-only and predates the bucket
+rules — prefer the `ffmpeg` invocations in the workflow doc, which run anywhere.
 
 ## Checklist for a new asset
 
@@ -119,5 +80,6 @@ so keep an eye on `du -sh public` when adding clips.
    `src/utils/assetUrl.js`).
 2. Image? Decide eager vs lazy by fold position (rule above); add `decoding="async"` and
    `width`/`height`. Then run `npm run optimize-images`.
-3. Video? Use `LazyVideo` with a `poster`; compress with `ffmpeg` first.
+3. Video? Follow [`video-workflow.md`](./video-workflow.md) — it must be encoded to its
+   bucket, postered, described and registered in `src/data/videos.js`, or the build fails.
 4. `npm run build` to confirm nothing references a missing file.

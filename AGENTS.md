@@ -117,15 +117,21 @@ public/
   documents/project-descriptions/  3 PDFs
   images/projects/{ai4ai,dynamo,neurocore,stratego,vergabepilot}/
   images/locations.png             /network page map
-  videos/hero.mp4 hero-poster.webp core hero (poster auto-WebP'd)
-  videos/demonstrations/{autonomous_driving,robotics,neurocore,stratego}/
-  videos/testimonials/             student testimonial mp4s
+  videos/core-labs-hero.mp4        core hero + shared hero-poster.webp
+  videos/ai-team-projects/         AI4BIM, Vergabepilot, programme showcases
+  videos/demonstrations/{dynamo,vial-sort,leader-following,neurocore,stratego,robotics}/
+  videos/testimonials/             student testimonial mp4s (Git LFS)
   tuc/iclr-2025/                   static subsite kept as-is (see issue 9)
 ```
 
-Asset loading rules, the `LazyVideo` component, `npm run optimize-images`, and the
-ffmpeg video pipeline are documented in `wiki/assets.md`. Large PNG/JPEG (>250 KB) are
-converted to WebP; `public/tuc/iclr-2025/` is excluded from that pipeline.
+Image loading rules, the `LazyVideo` component and `npm run optimize-images` are in
+`wiki/assets.md`. Large PNG/JPEG (>250 KB) are converted to WebP;
+`public/tuc/iclr-2025/` is excluded from that pipeline.
+
+**Video has its own rules and they are enforced.** Every clip needs an entry in
+`src/data/videos.js` carrying a written description, or `npm run build` fails via
+`scripts/check-videos.mjs`. Read `wiki/video.md` before touching any video, and follow
+`wiki/video-workflow.md` to add one.
 
 ## Wiki — `wiki/`
 
@@ -137,7 +143,14 @@ the bottom of the file tree). Read the relevant one before related work:
   intro, the milestone video browser. Read this before building or restyling any
   project subpage. Reference impls: `Dynamo.jsx`, `VialSort.jsx`,
   `LeaderFollowing.jsx`.
-- `wiki/assets.md` — image/video loading, optimization, and ffmpeg pipeline.
+- `wiki/assets.md` — image loading, optimization, and how video is *loaded*.
+- `wiki/video.md` — **video policy: encode buckets, H.264-only, the registry and the
+  gate.** A clip without a registry entry and a description does not ship. Read before
+  adding, re-encoding or deleting any video.
+- `wiki/video-workflow.md` — step-by-step for adding a clip, including handing a
+  Google Drive link to an agent and letting it do the whole job.
+- `wiki/video-frames/` — four-frame contact strip per video, for identifying a clip
+  without opening it. Not shipped to the site.
 - `wiki/later.md` — **deferred work with the reasoning intact.** Video sitemap,
   the orphaned `/ai-team-projects/dynamo` route, `hydrateRoot`, dropping the
   Playwright dependency. Read before re-litigating any of those.
