@@ -131,12 +131,21 @@ site limit**, which is comfortable; revisit the decision if it passes ~60%.
 
 - Soft cap: **25 MB per file.** Over that the gate warns rather than fails, because
   occasionally a long desktop capture genuinely justifies it.
-- Git LFS covers `public/videos/testimonials/*.mp4` only (see `.gitattributes`). Do not
-  extend it: CI must then check out LFS on every deploy, and GitHub's free LFS bandwidth
-  is small relative to this much video. `.github/workflows/deploy.yml` pins `lfs: true`
-  precisely because that path exists.
-- **Compress before committing, never after.** The 196 MB regression happened by adding
-  raw camera originals to LFS after the compressed versions already existed.
+- **Compress before committing, never after.** The worst regression in this repo's
+  history happened by adding raw 196 MB camera originals *after* compressed versions
+  already existed.
+
+### Git LFS: not used, deliberately
+
+The testimonials were once LFS-tracked and it caused every video outage this site has
+had. CI checked out without LFS, so the build published 134-byte pointer files named
+`.mp4` and three videos were dead on the live site. The pointers also made it easy to
+commit raw originals without noticing the size.
+
+Now that every clip is small enough to be an ordinary git blob, LFS buys nothing and
+costs a checkout flag, a bandwidth quota and a whole class of failure. **Do not
+reintroduce it.** If a file is big enough to tempt you toward LFS, it is big enough to
+re-encode or shorten instead.
 
 ## The registry
 

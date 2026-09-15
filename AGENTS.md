@@ -120,7 +120,7 @@ public/
   videos/core-labs-hero.mp4        core hero + shared hero-poster.webp
   videos/ai-team-projects/         AI4BIM, Vergabepilot, programme showcases
   videos/demonstrations/{dynamo,vial-sort,leader-following,neurocore,stratego,robotics}/
-  videos/testimonials/             student testimonial mp4s (Git LFS)
+  videos/testimonials/             student testimonial mp4s
   tuc/iclr-2025/                   static subsite kept as-is (see issue 9)
 ```
 
