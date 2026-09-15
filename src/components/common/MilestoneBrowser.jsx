@@ -11,6 +11,10 @@ const keyOf = (item) => item.media.id || item.media.src
 // One frame of a milestone's media, absolutely filling the player. `active` controls
 // visibility (we keep all visited media mounted so swapping never reloads). Supports a
 // Google Drive embed, a native local video, or a still image placeholder.
+//
+// Video controls default to ON and should stay on: these are minutes-long research
+// clips, so without them a viewer cannot scrub, pause or go fullscreen. Do not pass
+// `controls: false` — LeaderFollowing did and the clips were unskimmable.
 const Media = ({ media, title, active, playKey = 0 }) => {
     const videoRef = useRef(null)
     const cls = `absolute inset-0 h-full w-full transition-opacity duration-500 ${
