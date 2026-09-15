@@ -65,7 +65,7 @@ const Media = ({ media, title, active, playKey = 0 }) => {
                 src={assetUrl(media.src)}
                 poster={media.poster ? assetUrl(media.poster) : undefined}
                 title={media.title || title}
-                className={`${cls} object-cover`}
+                className={`${cls} ${media.fit === 'contain' ? 'object-contain' : 'object-cover'}`}
                 autoPlay
                 muted
                 loop
@@ -98,9 +98,9 @@ const Media = ({ media, title, active, playKey = 0 }) => {
 //   media: { type: 'video', src, poster } | { type: 'image', src, alt, placeholder, fit }
 //         | { type: 'drive', id }  — legacy; all milestone media is local now
 //
-// `fit: 'contain'` letterboxes an image instead of cropping it. Needed for figures whose
+// `fit: 'contain'` letterboxes the media instead of cropping it. Needed for anything whose
 // aspect is far from the player's 16:9 — a 5:1 filmstrip cropped to cover loses its outer
-// frames entirely.
+// frames entirely, and a 4.6:1 multi-pane clip cropped to cover shows only its middle pane.
 // aside: optional ReactNode or ({ run, activeRun }) => ReactNode below the list.
 const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone', autoCycleMs = 8000, aside = null }) => {
     const total = items.length

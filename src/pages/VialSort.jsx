@@ -7,6 +7,19 @@ import assetUrl from '../utils/assetUrl'
 
 const FIG = '/images/projects/vial-sort'
 
+// Inline jump to a section further down the page. `scroll-behavior: smooth` is set
+// globally in index.css and every target carries `scroll-mt-28` to clear the floating
+// navbar, so a plain anchor is enough — no handler, and it still works without JS.
+const Jump = ({ to, children }) => (
+    <a
+        href={`#${to}`}
+        className="font-semibold text-primary-700 underline decoration-primary-300 underline-offset-2 transition hover:text-primary-800 hover:decoration-primary-500"
+    >
+        {children}
+        <span aria-hidden="true"> &darr;</span>
+    </a>
+)
+
 // Chronological order (oldest first); the browser displays newest-first.
 //
 // Entries 01-03 are the exploratory run on an EARLIER dataset, before the rig was fixed
@@ -38,6 +51,9 @@ const milestones = [
             type: 'video',
             src: '/videos/demonstrations/vial-sort/policy-comparison.mp4',
             poster: '/videos/demonstrations/vial-sort/policy-comparison-poster.webp',
+            // 2020x440. Cropping this to fill a 16:9 player would show only the middle
+            // policy, which is the whole point of the clip.
+            fit: 'contain',
             title: 'Early policy comparison',
         },
     },
@@ -50,6 +66,8 @@ const milestones = [
             type: 'video',
             src: '/videos/demonstrations/vial-sort/depth-perception-comparison.mp4',
             poster: '/videos/demonstrations/vial-sort/depth-perception-comparison-poster.webp',
+            // 1920x522, three depth panes side by side — cover would crop the outer two.
+            fit: 'contain',
             title: 'Depth perception comparison',
         },
     },
@@ -59,13 +77,6 @@ const milestones = [
         summary: 'The SO-101 is an open 3D-printed six-DOF design. Six Feetech STS3215 serial-bus servos were assembled into the linkage and wired as a daisy chain, built as a matched pair — a leader arm for teleoperation and a follower that executes — with every joint range and zero position calibrated and a watchdog cutting torque on repeated temperature or current violations.',
         outcome: 'Cameras, racks and bin are pinned in place. When the top camera once drifted from its mounted pose, a working policy stopped working — its inputs had left the distribution it was trained on — so each camera is now re-anchored to a saved reference frame before recording.',
         media: { type: 'image', src: `${FIG}/rig-labeled.webp`, fit: 'contain', alt: 'The rig with the leader arm, follower arm, top and side cameras, racks and discard bin labeled', title: 'Labeled rig' },
-    },
-    {
-        operation: 'Control interface',
-        title: 'Everything behind one HTTP interface',
-        summary: 'The arm, the three cameras and the policy all live on the Jetson behind an inference server exposing five endpoints: /execute runs a commanded move for a fixed duration, /home returns the arm to the training start pose, /observe and /state stream frames and status, and /stop halts motion immediately. The operator-facing control panel runs on a separate workstation and talks only over HTTP.',
-        outcome: 'No client touches the hardware directly, so the browser panel, the built-in dashboard and the evaluation harness all drive the same robot through one surface.',
-        media: { type: 'image', src: `${FIG}/architecture.webp`, fit: 'contain', alt: 'System architecture: workstation control panel talking over HTTP to the Jetson-hosted inference server, policy, cameras and arm', title: 'System architecture' },
     },
     {
         operation: 'Scene grammar',
@@ -92,28 +103,42 @@ const milestones = [
         operation: 'Policy training',
         title: 'Frozen backbone, action expert only',
         summary: 'The deployed policy is pi0.5, a roughly three-billion-parameter vision-language-action flow model, fine-tuned from released base weights. The vision encoder and the language backbone are held fixed and only the action expert — the flow-matching head that produces motion — receives gradients. It emits an entire fifty-step action chunk in a single forward pass.',
-        outcome: 'Because the frozen majority runs forward-only, with no gradients, optimiser state or stored activations, the fine-tune fits in about 19 GB. The choice was empirical as much as principled: an unfrozen variant overfit and failed to grasp, while the frozen policy trained cleanly.',
+        outcome: (
+            <>
+                Because the frozen majority runs forward-only, with no gradients, optimiser state or stored
+                activations, the fine-tune fits in about 19 GB. The choice was empirical as much as principled: an
+                unfrozen variant overfit and failed to grasp, while the frozen policy trained cleanly.{' '}
+                <Jump to="system">Which checkpoint gets deployed, and why, is laid out below</Jump>.
+            </>
+        ),
         media: { type: 'image', src: `${FIG}/frozen-training.svg`, fit: 'contain', alt: 'The frozen SigLIP encoder and Gemma language model feeding a trainable action expert that emits a 50-step action chunk, with the training configuration', title: 'Frozen-backbone training' },
-    },
-    {
-        operation: 'Checkpoint study',
-        title: 'Between under-trained and over-fit',
-        summary: 'Checkpoints were written every 2,000 steps and compared on three behaviours. At 8,000 steps the policy does not yet follow the command at all. At 12,000 it follows, grasps and completes placements. By 16,000 it still parses the instruction but has lost the grasp.',
-        outcome: '12,000 steps is the deployed operating point, and every number on this page comes from that checkpoint. The usable window is narrow because the dataset is small — 104,421 frames means 12,000 steps at batch 16 is under two passes over the data.',
-        media: { type: 'image', src: `${FIG}/checkpoint-study.svg`, fit: 'contain', alt: 'The 8k, 12k and 16k checkpoints compared on following the command, grasping, and completing placement', title: 'Checkpoint study' },
     },
     {
         operation: 'Deployment',
         title: 'Driving the policy from the browser',
         summary: 'The checkpoint is served on the Jetson behind a control panel showing the three live camera feeds. The operator picks a source rack and slot and a destination, the matching instruction is composed underneath, and Execute issues it — with Home and an emergency stop available at all times.',
-        outcome: 'The arm homes to the demonstration start pose before every command. An early mismatch there produced an out-of-distribution transient in which the arm flailed before recovering; setting the home pose directly from the recorded data removed it.',
+        outcome: (
+            <>
+                The arm homes to the demonstration start pose before every command. An early mismatch there produced
+                an out-of-distribution transient in which the arm flailed before recovering; setting the home pose
+                directly from the recorded data removed it.{' '}
+                <Jump to="system">See how the panel, the server and the arm are wired together</Jump>.
+            </>
+        ),
         media: { type: 'image', src: `${FIG}/control-panel.webp`, fit: 'contain', alt: 'The deployment control panel with three live camera feeds, command entry, and Execute, Home and emergency stop controls', title: 'Deployment control panel' },
     },
     {
         operation: 'Results',
         title: 'Autonomous rollouts, and where they fail',
         summary: 'The deployed checkpoint was run autonomously across fifteen distinct source-to-destination commands, several rollouts each, with a human scoring every one as a missed pickup, a missed drop, a collision, or a complete success. A rollout that misses the first grasp but recovers and finishes within the time budget counts as a success.',
-        outcome: 'The system completes the full pick-and-place on a quarter of rollouts, and the failures are overwhelmingly one thing: the gripper missing the target vial on its first attempt. Once a grasp lands, transport, targeting and release usually finish.',
+        outcome: (
+            <>
+                The system completes the full pick-and-place on a quarter of rollouts, and the failures are
+                overwhelmingly one thing: the gripper missing the target vial on its first attempt. Once a grasp
+                lands, transport, targeting and release usually finish.{' '}
+                <Jump to="results">Every rate and the per-command breakdown are charted below</Jump>.
+            </>
+        ),
         media: {
             type: 'image',
             src: `${FIG}/complete-sort.webp`,
@@ -281,7 +306,59 @@ const VialSort = () => (
                 })}
             </section>
 
-            <section className="mt-8 rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm md:p-8">
+            <section id="system" className="mt-8 scroll-mt-28 rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm md:p-8">
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Built and trained</p>
+                <h2 className="text-2xl font-bold leading-tight md:text-3xl">How the pieces fit together.</h2>
+                <div className="mt-6 grid gap-5 lg:grid-cols-2">
+                    <figure className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                        <img
+                            src={assetUrl(`${FIG}/architecture.webp`)}
+                            alt="Workstation control panel talking over HTTP to the Jetson-hosted inference server, policy, cameras and arm"
+                            width={845}
+                            height={472}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-auto w-full bg-white object-contain"
+                        />
+                        <figcaption className="border-t border-slate-100 px-4 py-3">
+                            <p className="text-xs font-bold text-slate-800">One HTTP interface in front of the hardware</p>
+                            <p className="mt-1 text-xs leading-5 text-slate-500">
+                                The arm, the three cameras and the policy all sit on the Jetson behind an inference
+                                server: <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/execute</code> runs a
+                                commanded move, <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/home</code> returns
+                                the arm to the training start pose,{' '}
+                                <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/observe</code> and{' '}
+                                <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/state</code> stream frames and
+                                status, and <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/stop</code> halts
+                                motion. No client touches the hardware directly, so the browser panel and the
+                                evaluation harness drive the same robot through one surface.
+                            </p>
+                        </figcaption>
+                    </figure>
+                    <figure className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                        <img
+                            src={assetUrl(`${FIG}/checkpoint-study.svg`)}
+                            alt="The 8k, 12k and 16k checkpoints compared on following the command, grasping, and completing placement"
+                            width={1600}
+                            height={900}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-auto w-full bg-white object-contain"
+                        />
+                        <figcaption className="border-t border-slate-100 px-4 py-3">
+                            <p className="text-xs font-bold text-slate-800">Why 12,000 steps is the operating point</p>
+                            <p className="mt-1 text-xs leading-5 text-slate-500">
+                                Checkpoints were written every 2,000 steps. At 8,000 the policy does not yet follow the
+                                command; at 12,000 it follows, grasps and completes placements; by 16,000 it still
+                                parses the instruction but has lost the grasp. The usable window is narrow because the
+                                dataset is small — every number on this page comes from the 12,000-step checkpoint.
+                            </p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section id="results" className="mt-8 scroll-mt-28 rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm md:p-8">
                 <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Evaluation</p>
                 <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
                     <div>
