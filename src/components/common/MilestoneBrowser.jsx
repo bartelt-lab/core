@@ -37,9 +37,11 @@ const Media = ({ media, title, active, playKey = 0 }) => {
                     decoding="async"
                     className="h-full w-full object-cover"
                 />
-                <span className="absolute right-3 top-3 rounded-full bg-slate-950/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
-                    Placeholder
-                </span>
+                {media.placeholder && (
+                    <span className="absolute right-3 top-3 rounded-full bg-slate-950/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
+                        Placeholder
+                    </span>
+                )}
             </div>
         )
     }
@@ -81,7 +83,8 @@ const Media = ({ media, title, active, playKey = 0 }) => {
 // (01 = first ever).
 //
 // items: [{ media, operation?, title, summary, outcome? }]
-//   media: { type: 'drive', id } | { type: 'video', src } | { type: 'image', src, alt }
+//   media: { type: 'video', src, poster } | { type: 'image', src, alt, placeholder }
+//         | { type: 'drive', id }  — legacy; all milestone media is local now
 // aside: optional ReactNode or ({ run, activeRun }) => ReactNode below the list.
 const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone', autoCycleMs = 8000, aside = null }) => {
     const total = items.length

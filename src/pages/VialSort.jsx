@@ -13,28 +13,43 @@ const milestones = [
         title: 'SO-101 vial-sorting rig',
         summary: 'The SO-101 6-DOF arm runs on an NVIDIA Jetson Thor with two 6-slot racks arranged diagonally to the arm and a bin on the left. Three 640x480 camera views observe the tabletop while language commands specify which colored vial should move to which rack slot.',
         outcome: 'The physical workspace, camera layout, racks, bin, and language-conditioned task definition are fixed for the data-collection and policy runs.',
-        media: { type: 'drive', id: '1-jHS8TeIWsyKniH9FTj2ViHlYPo0KEsW', title: 'Vial Sort setup' },
+        media: { type: 'image', src: '/videos/demonstrations/vial-sort/setup.webp', alt: 'SO-101 arm with two vial racks and a bin on the tabletop', title: 'Vial Sort setup' },
     },
     {
         operation: 'Data collection',
         title: 'Teleoperated dataset episode',
         summary: 'A human drives the leader arm, the follower mirrors it, and each episode records camera streams, joint states, and the language instruction into a LeRobot dataset. The replay shows the synchronized cameras, joint trajectory, and prompt in the same timeline the policy trains on.',
         outcome: 'Each demonstration captures one atomic skill with distractor vials, so the model must follow the prompt rather than memorize a fixed scene.',
-        media: { type: 'drive', id: '13fSm6mxCNbBhC_LgIeBx6YqSSpP9mFCY', title: 'Data collection visualization' },
+        media: {
+            type: 'video',
+            src: '/videos/demonstrations/vial-sort/data-collection-viz.mp4',
+            poster: '/videos/demonstrations/vial-sort/data-collection-viz-poster.webp',
+            title: 'Data collection visualization',
+        },
     },
     {
         operation: 'Depth perception',
         title: 'RGB, Depth Anything V2, and RealSense comparison',
         summary: 'The depth comparison shows Depth Anything V2 capturing the tubes more clearly than the Intel RealSense sensor, which struggles with transparent glass. The current pi0.5 training remains RGB-first, with Depth Anything planned for the next training round.',
         outcome: 'RGB remains the primary VLA input, while learned depth becomes the candidate signal for the next dataset and policy iteration.',
-        media: { type: 'drive', id: '1D9lvUM2RohNmbwkyxsmtrwB2m7QzQxN-', title: 'Depth perception comparison' },
+        media: {
+            type: 'video',
+            src: '/videos/demonstrations/vial-sort/depth-perception-comparison.mp4',
+            poster: '/videos/demonstrations/vial-sort/depth-perception-comparison-poster.webp',
+            title: 'Depth perception comparison',
+        },
     },
     {
         operation: 'Autonomous inference',
         title: 'ACT, pi0, and pi0.5 policy runs',
         summary: 'The autonomous comparison shows the sequence of policies built so far: ACT as the pick-and-place baseline, pi0 as a stronger policy that did not reliably follow the language prompt, and pi0.5 as the current model with improved prompt-following.',
         outcome: 'Early tests on the previous dataset guide the retraining plan for the new dataset.',
-        media: { type: 'drive', id: '1rY4kOW3txd81okTD42vrPGUyVo6KQQBm', title: 'Autonomous inference policy comparison' },
+        media: {
+            type: 'video',
+            src: '/videos/demonstrations/vial-sort/policy-comparison.mp4',
+            poster: '/videos/demonstrations/vial-sort/policy-comparison-poster.webp',
+            title: 'Autonomous inference policy comparison',
+        },
     },
 ]
 
