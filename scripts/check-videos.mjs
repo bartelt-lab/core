@@ -10,7 +10,7 @@
  */
 
 import { execFileSync } from 'node:child_process'
-import { existsSync, openSync, readSync, closeSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, openSync, readSync, closeSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { videos } from '../src/data/videos.js'
 
@@ -134,10 +134,25 @@ if (!hasFfprobe) console.log('check-videos: ffprobe not found, skipping codec an
 
 for (const w of warnings) console.log(`  warn  ${w}`)
 
+/**
+ * Whoever sees this failure has demonstrably not read the docs, so pointing at them
+ * again is not a fix — print the rules themselves. They are read from
+ * PROJECT_CONTEXT.md rather than copied here, so there is exactly one copy in the
+ * repo and it cannot drift from what the pre-edit hook shows.
+ */
+const rulesPath = new URL('../PROJECT_CONTEXT.md', import.meta.url)
+const PRIMER = existsSync(rulesPath)
+    ? `\n${readFileSync(rulesPath, 'utf8')}`
+    : `
+A video ships only if src/data/videos.js has an entry for it carrying a written
+description. PROJECT_CONTEXT.md is missing, so the full rules could not be printed.
+Read wiki/video.md (policy) and wiki/video-workflow.md (step by step).
+`
+
 if (errors.length) {
     console.error(`\ncheck-videos: ${errors.length} problem(s) (${label})`)
     for (const e of errors) console.error(`  fail  ${e}`)
-    console.error('\nSee wiki/video.md for the rules, wiki/video-workflow.md for the fix.\n')
+    console.error(PRIMER)
     process.exit(1)
 }
 

@@ -1,5 +1,11 @@
 # Agent context — core repo
 
+> **Read `PROJECT_CONTEXT.md` first.** It holds the rules this repo enforces at build
+> time — most importantly that a video does not ship without a registry entry and a
+> written description. `npm run build` fails otherwise. This file is the repo map and
+> conventions; the enforced rules live there, in one copy, deliberately not repeated
+> here.
+
 ## Project state
 
 Merged to `main`; the old `merge/*` branches are gone. Deploys to GitHub Pages
