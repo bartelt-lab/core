@@ -1,4 +1,4 @@
-import { FaCamera, FaCheckCircle, FaCogs, FaRobot } from 'react-icons/fa'
+import { FaCamera, FaCogs, FaRobot } from 'react-icons/fa'
 import { MiniLabel } from '../components/common/Eyebrow'
 import BackToLabsPill from '../components/common/BackToLabsPill'
 import ResearchQuestionCard from '../components/common/ResearchQuestionCard'
@@ -6,32 +6,47 @@ import MilestoneBrowser from '../components/common/MilestoneBrowser'
 import ProjectPeople from '../components/common/ProjectPeople'
 import assetUrl from '../utils/assetUrl'
 
+const FIG = '/images/projects/vial-sort'
+
 // Chronological order (oldest first); the browser displays newest-first.
+//
+// Entries 01-03 are the exploratory run on an EARLIER dataset, before the rig was fixed
+// and the final dataset recorded. Do not describe them as results of the deployed policy
+// — none of those policies were carried through to deployment.
+//
+// Figures are lifted from the project report at native resolution and carry small text,
+// so every one is `fit: 'contain'`: the player is 16:9 and cropping a 5:1 filmstrip or a
+// 4:3 annotated scene to cover cuts the labels off.
 const milestones = [
     {
-        operation: 'Setup',
-        title: 'SO-101 vial-sorting rig',
-        summary: 'The SO-101 6-DOF arm runs on an NVIDIA Jetson Thor with two 6-slot racks arranged diagonally to the arm and a bin on the left. Three 640x480 camera views observe the tabletop while language commands specify which colored vial should move to which rack slot.',
-        outcome: 'The physical workspace, camera layout, racks, bin, and language-conditioned task definition are fixed for the data-collection and policy runs.',
-        media: { type: 'image', src: '/videos/demonstrations/vial-sort/setup.webp', alt: 'SO-101 arm with two vial racks and a bin on the tabletop', title: 'Vial Sort setup' },
-    },
-    {
-        operation: 'Data collection',
-        title: 'Teleoperated dataset episode',
-        summary: 'A human drives the leader arm, the follower mirrors it, and each episode records camera streams, joint states, and the language instruction into a LeRobot dataset. The replay shows the synchronized cameras, joint trajectory, and prompt in the same timeline the policy trains on.',
-        outcome: 'Each demonstration captures one atomic skill with distractor vials, so the model must follow the prompt rather than memorize a fixed scene.',
+        operation: 'Exploration',
+        title: 'What one recorded episode looks like',
+        summary: 'A replay of a single teleoperated entry from the earlier dataset, in the multi-pane viewer: a colormapped depth view, a side camera on the arm and rack, a wrist camera closing on a vial, and the joint signals plotted on a shared timeline.',
+        outcome: 'Fixes the recording format every later dataset uses — synchronized camera streams, joint trajectory and the language instruction on one timeline.',
         media: {
             type: 'video',
             src: '/videos/demonstrations/vial-sort/data-collection-viz.mp4',
             poster: '/videos/demonstrations/vial-sort/data-collection-viz-poster.webp',
-            title: 'Data collection visualization',
+            title: 'One recorded episode, replayed',
         },
     },
     {
-        operation: 'Depth perception',
-        title: 'RGB, Depth Anything V2, and RealSense comparison',
-        summary: 'The depth comparison shows Depth Anything V2 capturing the tubes more clearly than the Intel RealSense sensor, which struggles with transparent glass. The current pi0.5 training remains RGB-first, with Depth Anything planned for the next training round.',
-        outcome: 'RGB remains the primary VLA input, while learned depth becomes the candidate signal for the next dataset and policy iteration.',
+        operation: 'Exploration',
+        title: 'First policies, before the real dataset',
+        summary: 'Three early attempts run side by side on the earlier dataset — ACT as a motion baseline with no language conditioning, then pi0 and pi0.5 — each column showing the arm attempting the commanded arrangement under its own status overlay.',
+        outcome: 'None of these were carried through. ACT could not be commanded in language, pi0 was only ever driven with a single fixed instruction, and the run exposed how much the dataset itself had to change.',
+        media: {
+            type: 'video',
+            src: '/videos/demonstrations/vial-sort/policy-comparison.mp4',
+            poster: '/videos/demonstrations/vial-sort/policy-comparison-poster.webp',
+            title: 'Early policy comparison',
+        },
+    },
+    {
+        operation: 'Exploration',
+        title: 'Depth fails on transparent glass',
+        summary: 'A three-way comparison on the vial rack, panelled as RGB input, Depth Anything V2 and the Intel RealSense stream. The learned monocular depth resolves the tubes as continuous surfaces; the active-stereo RealSense output drops out to black across the glass.',
+        outcome: 'Settled the input question before any training: the policy reads RGB, and depth is recorded alongside as a reference channel rather than fed to the model.',
         media: {
             type: 'video',
             src: '/videos/demonstrations/vial-sort/depth-perception-comparison.mp4',
@@ -40,34 +55,143 @@ const milestones = [
         },
     },
     {
-        operation: 'Autonomous inference',
-        title: 'ACT, pi0, and pi0.5 policy runs',
-        summary: 'The autonomous comparison shows the sequence of policies built so far: ACT as the pick-and-place baseline, pi0 as a stronger policy that did not reliably follow the language prompt, and pi0.5 as the current model with improved prompt-following.',
-        outcome: 'Early tests on the previous dataset guide the retraining plan for the new dataset.',
+        operation: 'Assembly',
+        title: 'The rig, and why nothing on it may move',
+        summary: 'The SO-101 is an open 3D-printed six-DOF design. Six Feetech STS3215 serial-bus servos were assembled into the linkage and wired as a daisy chain, built as a matched pair — a leader arm for teleoperation and a follower that executes — with every joint range and zero position calibrated and a watchdog cutting torque on repeated temperature or current violations.',
+        outcome: 'Cameras, racks and bin are pinned in place. When the top camera once drifted from its mounted pose, a working policy stopped working — its inputs had left the distribution it was trained on — so each camera is now re-anchored to a saved reference frame before recording.',
+        media: { type: 'image', src: `${FIG}/rig-labeled.webp`, fit: 'contain', alt: 'The rig with the leader arm, follower arm, top and side cameras, racks and discard bin labeled', title: 'Labeled rig' },
+    },
+    {
+        operation: 'Control interface',
+        title: 'Everything behind one HTTP interface',
+        summary: 'The arm, the three cameras and the policy all live on the Jetson behind an inference server exposing five endpoints: /execute runs a commanded move for a fixed duration, /home returns the arm to the training start pose, /observe and /state stream frames and status, and /stop halts motion immediately. The operator-facing control panel runs on a separate workstation and talks only over HTTP.',
+        outcome: 'No client touches the hardware directly, so the browser panel, the built-in dashboard and the evaluation harness all drive the same robot through one surface.',
+        media: { type: 'image', src: `${FIG}/architecture.webp`, fit: 'contain', alt: 'System architecture: workstation control panel talking over HTTP to the Jetson-hosted inference server, policy, cameras and arm', title: 'System architecture' },
+    },
+    {
+        operation: 'Scene grammar',
+        title: 'Scenes generated under constraints',
+        summary: 'Every scene comes off a seeded layout sheet under rules with physical reasons. No two vials sit in adjacent slots, because the parallel-jaw gripper needs finger clearance on both sides. A destination slot and both its neighbours must be empty, since leaving only one side free turned out not to be enough. Racks hold at most three vials and at most three of any colour, and distractors are never the target colour, so the target is the unique vial of its colour.',
+        outcome: 'Targets originate only from slots 1, 3, 4 and 6 and are placed only into 1, 3 and 6 — slots 2, 4 and 5 are held out of training entirely to test whether the policy interpolates to positions it has never picked from.',
+        media: { type: 'image', src: `${FIG}/scene-grammar.webp`, fit: 'contain', alt: 'The vial-sorting scene from the side camera with the two racks, slots numbered 1 to 6, the discard bin and the target and distractor vials labeled', title: 'Scene grammar' },
+    },
+    {
+        operation: 'Prompt design',
+        title: 'One command, thousands of phrasings',
+        summary: 'Commands use a source-to-destination position grammar and the vial’s colour is deliberately never named — the high-level planner does the colour-to-position grounding, and the policy performs a purely spatial pick-and-place. Each instruction is composed by drawing independently from six verbs, four object nouns, five slot phrasings, four rack phrasings and four sentence templates.',
+        outcome: 'Roughly 3.8 x 10⁴ surface forms exist for a single rack-to-rack command, and the dataset draws from that space deterministically, so consecutive demonstrations of the same move are worded differently and the policy has to parse the language rather than latch onto one template.',
+        media: { type: 'image', src: `${FIG}/prompt-design.svg`, fit: 'contain', alt: 'The five prompt pools multiplied together to about 38,000 phrasings, with three differently worded realizations of the same move', title: 'Prompt design' },
+    },
+    {
+        operation: 'Dataset',
+        title: '150 demonstrations across 46 command pairs',
+        summary: 'Each demonstration is one atomic pick-and-place of roughly 23 seconds — about 700 frames at 30 Hz. Per timestep the dataset stores three RGB views, a colorized depth image, the seven-dimensional end-effector state and action, and the language string. The 150 episodes cover 46 distinct source-to-destination pairs, averaging 3.3 episodes per pair, split 120 rack placements to 30 bin discards.',
+        outcome: 'Coverage is deliberately uneven — the layout constraints forbid some combinations outright — and every colour is paired with every destination, so no colour correlates with a fixed slot and the instruction alone determines where the vial goes.',
+        media: { type: 'image', src: `${FIG}/dataset-coverage.webp`, fit: 'contain', alt: 'Heatmap of episode counts per source-to-destination pair, with the rack versus bin destination split', title: 'Dataset coverage' },
+    },
+    {
+        operation: 'Policy training',
+        title: 'Frozen backbone, action expert only',
+        summary: 'The deployed policy is pi0.5, a roughly three-billion-parameter vision-language-action flow model, fine-tuned from released base weights. The vision encoder and the language backbone are held fixed and only the action expert — the flow-matching head that produces motion — receives gradients. It emits an entire fifty-step action chunk in a single forward pass.',
+        outcome: 'Because the frozen majority runs forward-only, with no gradients, optimiser state or stored activations, the fine-tune fits in about 19 GB. The choice was empirical as much as principled: an unfrozen variant overfit and failed to grasp, while the frozen policy trained cleanly.',
+        media: { type: 'image', src: `${FIG}/frozen-training.svg`, fit: 'contain', alt: 'The frozen SigLIP encoder and Gemma language model feeding a trainable action expert that emits a 50-step action chunk, with the training configuration', title: 'Frozen-backbone training' },
+    },
+    {
+        operation: 'Checkpoint study',
+        title: 'Between under-trained and over-fit',
+        summary: 'Checkpoints were written every 2,000 steps and compared on three behaviours. At 8,000 steps the policy does not yet follow the command at all. At 12,000 it follows, grasps and completes placements. By 16,000 it still parses the instruction but has lost the grasp.',
+        outcome: '12,000 steps is the deployed operating point, and every number on this page comes from that checkpoint. The usable window is narrow because the dataset is small — 104,421 frames means 12,000 steps at batch 16 is under two passes over the data.',
+        media: { type: 'image', src: `${FIG}/checkpoint-study.svg`, fit: 'contain', alt: 'The 8k, 12k and 16k checkpoints compared on following the command, grasping, and completing placement', title: 'Checkpoint study' },
+    },
+    {
+        operation: 'Deployment',
+        title: 'Driving the policy from the browser',
+        summary: 'The checkpoint is served on the Jetson behind a control panel showing the three live camera feeds. The operator picks a source rack and slot and a destination, the matching instruction is composed underneath, and Execute issues it — with Home and an emergency stop available at all times.',
+        outcome: 'The arm homes to the demonstration start pose before every command. An early mismatch there produced an out-of-distribution transient in which the arm flailed before recovering; setting the home pose directly from the recorded data removed it.',
+        media: { type: 'image', src: `${FIG}/control-panel.webp`, fit: 'contain', alt: 'The deployment control panel with three live camera feeds, command entry, and Execute, Home and emergency stop controls', title: 'Deployment control panel' },
+    },
+    {
+        operation: 'Results',
+        title: 'Autonomous rollouts, and where they fail',
+        summary: 'The deployed checkpoint was run autonomously across fifteen distinct source-to-destination commands, several rollouts each, with a human scoring every one as a missed pickup, a missed drop, a collision, or a complete success. A rollout that misses the first grasp but recovers and finishes within the time budget counts as a success.',
+        outcome: 'The system completes the full pick-and-place on a quarter of rollouts, and the failures are overwhelmingly one thing: the gripper missing the target vial on its first attempt. Once a grasp lands, transport, targeting and release usually finish.',
         media: {
-            type: 'video',
-            src: '/videos/demonstrations/vial-sort/policy-comparison.mp4',
-            poster: '/videos/demonstrations/vial-sort/policy-comparison-poster.webp',
-            title: 'Autonomous inference policy comparison',
+            type: 'image',
+            src: `${FIG}/complete-sort.webp`,
+            fit: 'contain',
+            placeholder: true,
+            alt: 'Four frames of a complete autonomous rack-to-rack sort: approach, grasp at the source slot, transport, and release into the destination slot',
+            title: 'A complete autonomous sort',
         },
+    },
+]
+
+// Headline rates from the human-scored rollouts. The failure modes are not mutually
+// exclusive — a rollout can be scored for both a collision and a missed pickup — so these
+// deliberately do not sum to 100.
+const outcomeStats = [
+    { value: '25%', label: 'Complete success', note: 'full pick-and-place, no error', tone: 'success' },
+    { value: '54%', label: 'Missed pickup', note: 'the dominant failure mode', tone: 'bad' },
+    { value: '13%', label: 'Collision', note: 'never occurs on its own', tone: 'warn' },
+    { value: '8%', label: 'Wrong target or slot', note: 'command following is not the limit', tone: 'mild' },
+]
+
+const TONE = {
+    success: 'border-emerald-200 bg-emerald-50 text-emerald-700',
+    bad: 'border-red-200 bg-red-50 text-red-700',
+    warn: 'border-amber-200 bg-amber-50 text-amber-700',
+    mild: 'border-slate-200 bg-slate-50 text-slate-600',
+}
+
+// `width`/`height` are the figures' intrinsic pixel sizes. They are load-bearing: without
+// them an unloaded lazy image collapses to zero height, which both shifts the layout when
+// it arrives and keeps it out of the viewport that would trigger the load.
+const resultFigures = [
+    {
+        src: `${FIG}/outcomes.webp`,
+        width: 1357,
+        height: 702,
+        title: 'Outcome prevalence',
+        caption: 'Complete success against the failure rate, then the failures broken down by mode. A missed pickup occurs on 54% of rollouts, though a few of those recover and still complete the placement.',
+    },
+    {
+        src: `${FIG}/outcome-composition.webp`,
+        width: 1650,
+        height: 827,
+        title: 'What each scenario fails at',
+        caption: 'In almost every scenario the non-success mass is a single mode rather than a spread. Missed drops cluster on the bin commands; wrong-slot errors are confined to a handful of adjacent-slot cases.',
+    },
+    {
+        src: `${FIG}/per-scenario.webp`,
+        width: 1816,
+        height: 749,
+        title: 'Success per command',
+        caption: 'Success is very uneven across commands, ranging from none to four in five. The scenarios that fail completely do so almost entirely to a missed pickup of the source vial.',
+    },
+    {
+        src: `${FIG}/held-out-slots.webp`,
+        width: 1146,
+        height: 766,
+        title: 'Held-out source slots',
+        caption: 'Source slots never seen in training scored higher than trained ones — but on a handful of rollouts, with a confidence interval spanning the trained rate. The gap is within chance, and no generalization claim rests on it.',
     },
 ]
 
 const pipeline = [
     {
         icon: FaCogs,
-        title: 'Control Stack',
-        text: 'A seven-dimensional end-effector delta action space drives translation, rotation, and gripper commands.',
+        title: 'Control stack',
+        text: 'Actions and proprioceptive state live in the end-effector frame: recorded joint positions are mapped through forward kinematics to a seven-dimensional pose covering translation, rotation and the gripper.',
     },
     {
         icon: FaRobot,
-        title: 'VLA Training',
-        text: 'The vial dataset is converted into a VLA-compatible format and pi0 is fine-tuned with LoRA.',
+        title: 'Hierarchical instruction following',
+        text: 'A high-level planner grounds which vial goes where and emits an atomic source-to-destination command; the low-level flow policy executes the spatial pick-and-place at 30 Hz.',
     },
     {
         icon: FaCamera,
-        title: 'Robot Deployment',
-        text: 'Three RGB camera views and robot-side Jetson inference connect language instructions to pick-and-place actions.',
+        title: 'On-robot inference',
+        text: 'Camera capture, policy inference and motor control all run on the Jetson Thor beside the arm, so a command entered in the browser becomes motion without leaving the robot.',
     },
 ]
 
@@ -77,10 +201,9 @@ const aboutFacts = [
     { label: 'Workspace', value: '2 x 6-slot racks + bin' },
     { label: 'Cameras', value: '3 x RGB, 640x480 @ 30fps' },
     { label: 'Framework', value: 'LeRobot' },
-    { label: 'Policies', value: 'ACT, pi0, pi0.5' },
+    { label: 'Policy', value: 'pi0.5, frozen backbone' },
+    { label: 'Dataset', value: '150 teleoperated episodes' },
 ]
-
-const metrics = ['Task success rate', 'Scenario difficulty', 'Grip failures', 'Dropped vials', 'Wrong placement', 'Latency']
 
 const AboutCard = () => (
     <section className="rounded-2xl border border-slate-200 bg-white/70 p-4 shadow-sm backdrop-blur-sm">
@@ -120,10 +243,11 @@ const VialSort = () => (
                     </p>
                     <h1 className="text-4xl font-bold leading-none tracking-tight text-slate-950 md:text-5xl">Vial Sort</h1>
                     <p className="mt-3 max-w-2xl text-base leading-7 text-slate-700">
-                        A language-conditioned vial sorting project for the Waveshare SO-101 arm. The robot observes a
-                        tabletop scene with two 6x1 vial racks and three camera views, receives an instruction such as
-                        placing a red vial into a target rack position, and executes the corresponding pick-and-place
-                        behavior through a pi0 vision-language-action pipeline.
+                        A language-conditioned sorting system on a low-cost SO-101 arm. The robot reads a tabletop
+                        scene of two six-slot vial racks from three camera views, receives an instruction such as
+                        moving the vial in position 3 of the left rack to slot 6 of the right one, and carries out the
+                        pick-and-place through a frozen-backbone pi0.5 vision-language-action policy running on the
+                        robot itself.
                     </p>
                     <ProjectPeople
                         slugs={['szilagyi', 'sari-abdan']}
@@ -132,8 +256,8 @@ const VialSort = () => (
                     />
                 </div>
                 <ResearchQuestionCard
-                    question="Which training setup produces a higher success rate for VLA-based vial sorting on the SO-101 robot arm: a static tabletop dataset or a domain-randomized dataset?"
-                    tags={['SO-101', 'pi0 + LoRA', 'LeRobot', 'Jetson AGX Thor']}
+                    question="Can a vision-language-action policy fine-tuned on 150 teleoperated demonstrations - training only its action expert and leaving the vision and language backbones frozen - produce a deployable language-conditioned sorter, and what limits it?"
+                    tags={['SO-101', 'pi0.5 frozen backbone', 'LeRobot', 'Jetson Thor']}
                 />
             </div>
         </header>
@@ -157,34 +281,85 @@ const VialSort = () => (
                 })}
             </section>
 
-            <section className="mt-8 rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm">
+            <section className="mt-8 rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm md:p-8">
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Evaluation</p>
                 <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
                     <div>
-                        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Expected outcome</p>
                         <h2 className="text-2xl font-bold leading-tight md:text-3xl">
-                            A complete VLA pipeline for language-conditioned vial sorting.
+                            The limit is grasping, not language.
                         </h2>
                         <p className="mt-4 text-sm leading-7 text-slate-600">
-                            The project should produce documented components for end-effector control, inverse kinematics,
-                            dataset conversion, LoRA fine-tuning, deployment, and evaluation. The evaluation compares
-                            success rate, robustness, latency, and failure modes across controlled lab scenarios.
+                            Holding the scene fixed and changing only the destination clause sends the arm to a
+                            different target, and gross targeting errors account for a small minority of rollouts. So
+                            instruction following and slot targeting are largely solved. What fails is the first
+                            grasp — worst at the outermost slots, which sit at the extremes of the arm&rsquo;s reach.
+                            Collisions never stand alone; they accompany a missed grasp or drop at those same extremes.
+                        </p>
+                        <p className="mt-4 text-sm leading-7 text-slate-600">
+                            The policy also tolerated substantial nuisance variation. The background was not held
+                            constant during inference — people moved through the scene and the room changed — and the
+                            demonstrations themselves were recorded with the lights both on and off, with no material
+                            effect on behaviour.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                        {outcomeStats.map((stat) => (
+                            <div key={stat.label} className={`rounded-xl border p-4 ${TONE[stat.tone]}`}>
+                                <p className="text-3xl font-bold leading-none">{stat.value}</p>
+                                <p className="mt-2 text-xs font-bold">{stat.label}</p>
+                                <p className="mt-1 text-[11px] opacity-80">{stat.note}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="mt-8 grid gap-5 md:grid-cols-2">
+                    {resultFigures.map((figure) => (
+                        <figure key={figure.title} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                            <img
+                                src={assetUrl(figure.src)}
+                                alt={figure.title}
+                                width={figure.width}
+                                height={figure.height}
+                                loading="lazy"
+                                decoding="async"
+                                className="h-auto w-full bg-white object-contain"
+                            />
+                            <figcaption className="border-t border-slate-100 px-4 py-3">
+                                <p className="text-xs font-bold text-slate-800">{figure.title}</p>
+                                <p className="mt-1 text-xs leading-5 text-slate-500">{figure.caption}</p>
+                            </figcaption>
+                        </figure>
+                    ))}
+                </div>
+            </section>
+
+            <section className="mt-8 rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm md:p-8">
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Where it goes next</p>
+                <div className="grid gap-6 md:grid-cols-3">
+                    <div>
+                        <h3 className="text-base font-bold text-slate-950">Grasp reliability</h3>
+                        <p className="mt-2 text-sm leading-7 text-slate-600">
+                            More demonstrations per source slot, and closed-loop grasp correction — a shorter action
+                            horizon so the policy re-plans on a missed contact instead of committing a full fifty-step
+                            chunk.
                         </p>
                     </div>
                     <div>
-                        <div className="mb-3">
-                            <MiniLabel>Evaluation metrics</MiniLabel>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                            {metrics.map((metric) => (
-                                <span
-                                    key={metric}
-                                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700"
-                                >
-                                    <FaCheckCircle className="h-3 w-3 text-primary-600" aria-hidden="true" />
-                                    {metric}
-                                </span>
-                            ))}
-                        </div>
+                        <h3 className="text-base font-bold text-slate-950">Depth as an input</h3>
+                        <p className="mt-2 text-sm leading-7 text-slate-600">
+                            The system is RGB-only because active-stereo depth fails on transparent glass. Feeding a
+                            monocular depth estimator in as an extra channel is the natural next step for localizing
+                            grasps at the reach extremes.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 className="text-base font-bold text-slate-950">A cleaner generalization test</h3>
+                        <p className="mt-2 text-sm leading-7 text-slate-600">
+                            Train several policies, each holding out a different set of source positions, and evaluate
+                            each on its own held-out slots with a large rollout budget — enough to separate genuine
+                            position generalization from per-slot grasp difficulty.
+                        </p>
                     </div>
                 </div>
             </section>

@@ -39,7 +39,7 @@ const Media = ({ media, title, active, playKey = 0 }) => {
                     src={assetUrl(media.src)}
                     alt={media.alt || title}
                     decoding="async"
-                    className="h-full w-full object-cover"
+                    className={`h-full w-full ${media.fit === 'contain' ? 'object-contain' : 'object-cover'}`}
                 />
                 {media.placeholder && (
                     <span className="absolute right-3 top-3 rounded-full bg-slate-950/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
@@ -87,8 +87,12 @@ const Media = ({ media, title, active, playKey = 0 }) => {
 // (01 = first ever).
 //
 // items: [{ media, operation?, title, summary, outcome? }]
-//   media: { type: 'video', src, poster } | { type: 'image', src, alt, placeholder }
+//   media: { type: 'video', src, poster } | { type: 'image', src, alt, placeholder, fit }
 //         | { type: 'drive', id }  — legacy; all milestone media is local now
+//
+// `fit: 'contain'` letterboxes an image instead of cropping it. Needed for figures whose
+// aspect is far from the player's 16:9 — a 5:1 filmstrip cropped to cover loses its outer
+// frames entirely.
 // aside: optional ReactNode or ({ run, activeRun }) => ReactNode below the list.
 const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone', autoCycleMs = 8000, aside = null }) => {
     const total = items.length
@@ -140,7 +144,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
             <div className="mb-2.5 flex items-center justify-between gap-3 px-1">
                 <MiniLabel>{label}</MiniLabel>
                 <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
-                    {total} videos
+                    {total} entries
                 </span>
             </div>
             <div className="-mr-1 max-h-[23rem] space-y-1.5 overflow-y-auto pr-1 [scrollbar-color:#cbd5e1_transparent] [scrollbar-width:thin] lg:max-h-[calc(100vh-13rem)]">

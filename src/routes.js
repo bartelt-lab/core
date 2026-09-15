@@ -82,7 +82,7 @@ export const routes = [
     path: '/vial-sort',
     title: 'Vial Sort | CORE',
     description:
-      'A laboratory automation demonstrator: robotic perception and manipulation for identifying and sorting sample vials.',
+      'Language-conditioned laboratory vial sorting on a low-cost SO-101 arm, driven by a frozen-backbone pi0.5 vision-language-action policy trained from 150 teleoperated demonstrations.',
   },
 
   // ---------------------------------------------------- AI Team Projects ---

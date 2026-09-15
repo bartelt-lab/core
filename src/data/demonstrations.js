@@ -49,8 +49,8 @@ export const cognitiveProjects = [
   {
     id: 'vial-sort',
     title: "Vial Sort",
-    description: "Language-conditioned vial sorting on a Waveshare SO-101 arm using a pi0 vision-language-action model fine-tuned with LoRA. Two experiments compare static versus domain-randomized training data.",
-    content: "A VLA-based pick-and-place pipeline built with LeRobot: the robot receives a natural language instruction, observes the workspace from three RGB camera views, and executes the requested vial arrangement on Jetson inference. The project studies whether randomized training data improves transfer when lighting, rack placement, and vial colors change.",
+    description: "Language-conditioned vial sorting on a low-cost SO-101 arm, driven by a pi0.5 vision-language-action policy fine-tuned from 150 teleoperated demonstrations with its vision and language backbones frozen.",
+    content: "A hierarchical pick-and-place pipeline built with LeRobot: a planner grounds which vial goes where and emits a source-to-destination command, then the flow policy executes the spatial move from three RGB views, inferring on the Jetson beside the arm. Evaluation across autonomous rollouts localizes the limit at grasping rather than at language or targeting.",
     tags: ["VLA policy", "LeRobot", "Jetson inference"],
     people: ["szilagyi", "sari-abdan"],
     peopleLabel: "Team",

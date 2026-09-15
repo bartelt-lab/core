@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="Inter, system-ui, sans-serif">
+  <rect width="1600" height="900" fill="#ffffff"/>
+
+  <text x="64" y="86" font-size="34" font-weight="700" fill="#020617">One command, ~38,000 ways to say it</text>
+  <text x="64" y="126" font-size="21" fill="#64748b">Every instruction draws once from each pool. The vial's colour is never named &#8212; only its position.</text>
+
+  <!-- pools -->
+  <g>
+    <!-- verb -->
+    <rect x="64" y="172" width="252" height="286" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="88" y="212" font-size="15" font-weight="700" letter-spacing="2" fill="#2563eb">VERB</text>
+    <text x="292" y="212" font-size="22" font-weight="700" text-anchor="end" fill="#2563eb">6</text>
+    <g font-size="18" fill="#334155">
+      <text x="88" y="252">Move</text><text x="88" y="286">Take</text><text x="88" y="320">Transfer</text>
+      <text x="196" y="252">Bring</text><text x="196" y="286">Relocate</text><text x="196" y="320">Carry</text>
+    </g>
+
+    <!-- object noun -->
+    <rect x="344" y="172" width="252" height="286" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="368" y="212" font-size="15" font-weight="700" letter-spacing="2" fill="#0891b2">OBJECT NOUN</text>
+    <text x="572" y="212" font-size="22" font-weight="700" text-anchor="end" fill="#0891b2">4</text>
+    <g font-size="18" fill="#334155">
+      <text x="368" y="252">the vial</text><text x="368" y="286">the tube</text>
+      <text x="368" y="320">the test tube</text><text x="368" y="354">the sample tube</text>
+    </g>
+
+    <!-- slot -->
+    <rect x="624" y="172" width="252" height="286" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="648" y="212" font-size="15" font-weight="700" letter-spacing="2" fill="#7c3aed">SLOT PHRASING</text>
+    <text x="852" y="212" font-size="22" font-weight="700" text-anchor="end" fill="#7c3aed">5</text>
+    <g font-size="18" fill="#334155">
+      <text x="648" y="252">position n</text><text x="648" y="286">slot n</text><text x="648" y="320">the nth slot</text>
+      <text x="648" y="354">hole n</text><text x="648" y="388">spot n</text>
+    </g>
+
+    <!-- rack -->
+    <rect x="904" y="172" width="252" height="286" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="928" y="212" font-size="15" font-weight="700" letter-spacing="2" fill="#b45309">RACK PHRASING</text>
+    <text x="1132" y="212" font-size="22" font-weight="700" text-anchor="end" fill="#b45309">4</text>
+    <g font-size="18" fill="#334155">
+      <text x="928" y="252">the left rack</text><text x="928" y="286">the rack on the left</text>
+      <text x="928" y="320">the left-side rack</text><text x="928" y="354">the left tube rack</text>
+    </g>
+
+    <!-- template -->
+    <rect x="1184" y="172" width="252" height="286" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="1208" y="212" font-size="15" font-weight="700" letter-spacing="2" fill="#0f766e">TEMPLATE</text>
+    <text x="1412" y="212" font-size="22" font-weight="700" text-anchor="end" fill="#0f766e">4</text>
+    <g font-size="18" fill="#334155">
+      <text x="1208" y="252">&#8230;from S to D</text><text x="1208" y="286">&#8230;in S to D</text>
+      <text x="1208" y="320">&#8230;from S over to D</text><text x="1208" y="354">&#8230;at S to/into D</text>
+    </g>
+  </g>
+
+  <!-- multiplication chain -->
+  <g font-size="26" font-weight="700" fill="#94a3b8" text-anchor="middle">
+    <text x="330" y="510">&#215;</text><text x="610" y="510">&#215;</text><text x="890" y="510">&#215;</text><text x="1170" y="510">&#215;</text>
+  </g>
+  <g font-size="20" fill="#64748b" text-anchor="middle">
+    <text x="190" y="512">6</text><text x="470" y="512">4</text>
+    <text x="750" y="512">5 &#215; 4 slots/racks</text><text x="1030" y="512">5 &#215; 4 bin/rack</text><text x="1310" y="512">4</text>
+  </g>
+
+  <!-- result -->
+  <rect x="64" y="546" width="1372" height="112" rx="16" fill="#0f172a"/>
+  <text x="100" y="600" font-size="22" fill="#94a3b8">Distinct phrasings of a single rack-to-rack command</text>
+  <text x="100" y="634" font-size="17" fill="#64748b">about 10&#8308; for the bin variant</text>
+  <text x="1400" y="620" font-size="46" font-weight="700" text-anchor="end" fill="#ffffff">&#8776; 3.8 &#215; 10&#8308;</text>
+
+  <!-- example -->
+  <text x="64" y="716" font-size="15" font-weight="700" letter-spacing="2" fill="#94a3b8">ONE COMMAND, THREE DRAWS</text>
+  <g font-size="25">
+    <text x="64" y="762">
+      <tspan fill="#2563eb">Move</tspan><tspan fill="#334155"> </tspan><tspan fill="#0891b2">the vial</tspan><tspan fill="#334155"> from </tspan><tspan fill="#7c3aed">position 3</tspan><tspan fill="#334155"> of </tspan><tspan fill="#b45309">the left rack</tspan><tspan fill="#334155"> to </tspan><tspan fill="#7c3aed">slot 6</tspan><tspan fill="#334155"> of </tspan><tspan fill="#b45309">the right rack</tspan><tspan fill="#334155">.</tspan>
+    </text>
+    <text x="64" y="806">
+      <tspan fill="#2563eb">Take</tspan><tspan fill="#334155"> </tspan><tspan fill="#0891b2">the tube</tspan><tspan fill="#334155"> in </tspan><tspan fill="#7c3aed">slot 3</tspan><tspan fill="#334155"> of </tspan><tspan fill="#b45309">the rack on the left</tspan><tspan fill="#334155"> to </tspan><tspan fill="#7c3aed">the sixth slot</tspan><tspan fill="#334155"> of </tspan><tspan fill="#b45309">the right rack</tspan><tspan fill="#334155">.</tspan>
+    </text>
+    <text x="64" y="850">
+      <tspan fill="#2563eb">Transfer</tspan><tspan fill="#334155"> </tspan><tspan fill="#0891b2">the test tube</tspan><tspan fill="#334155"> from </tspan><tspan fill="#7c3aed">the third slot</tspan><tspan fill="#334155"> of </tspan><tspan fill="#b45309">the left-side rack</tspan><tspan fill="#334155"> over to </tspan><tspan fill="#7c3aed">hole 6</tspan><tspan fill="#334155"> of </tspan><tspan fill="#b45309">the right tube rack</tspan><tspan fill="#334155">.</tspan>
+    </text>
+  </g>
+  <text x="1400" y="806" font-size="19" text-anchor="end" fill="#94a3b8">same underlying move</text>
+</svg>
