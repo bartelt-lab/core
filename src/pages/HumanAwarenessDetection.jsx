@@ -384,17 +384,17 @@ const HumanAwarenessDetection = () => {
                 <section className="mx-auto max-w-3xl">
                     <div className="mb-4 flex items-end justify-between gap-5">
                         <div>
-                            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">{pick('Reference example', 'Referenzbeispiel')}</p>
-                            <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-slate-950">{pick('The kind of perception this project targets', 'Die Art von Wahrnehmung, die dieses Projekt anstrebt')}</h2>
+                            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">{pick('Quick in-house demo', 'Schnelle interne Demo')}</p>
+                            <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-slate-950">{pick('A rough look at the capability, recorded in our lab', 'Ein grober Blick auf die Fähigkeit, aufgenommen in unserem Labor')}</h2>
                         </div>
-                        <span className="hidden text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400 sm:block">{pick('Illustrative demo', 'Illustrative Demo')}</span>
+                        <span className="hidden text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400 sm:block">{pick('Not a prototype', 'Kein Prototyp')}</span>
                     </div>
                     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-2 shadow-xl shadow-slate-300/60">
                         <LazyVideo
                             src={assetUrl('/videos/ai-team-projects/human-awareness-detection.mp4')}
                             poster={assetUrl('/videos/ai-team-projects/human-awareness-detection-poster.webp')}
                             className="aspect-video w-full rounded-2xl bg-black object-contain"
-                            aria-label={pick('Example of person tracking and gaze overlays illustrating the kind of system this project will develop', 'Beispiel für Personentracking und Blick-Overlays zur Veranschaulichung der Art von System, das in diesem Projekt entwickelt werden soll')}
+                            aria-label={pick('Person tracking with per-person IDs, distance and gaze state, with pipeline latency shown', 'Personentracking mit IDs, Abstand und Blickzustand pro Person sowie eingeblendeter Pipeline-Latenz')}
                             autoPlay
                             muted
                             loop

@@ -23,7 +23,6 @@ const milestones = [
             src: '/videos/demonstrations/leader-following/leader-following-run-01.mp4',
             poster: '/videos/demonstrations/leader-following/leader-following-run-01-poster.webp',
             title: 'Leader Following',
-            controls: false,
         },
     },
     {
@@ -42,7 +41,6 @@ const milestones = [
             src: '/videos/demonstrations/leader-following/leader-following-run-02.mp4',
             poster: '/videos/demonstrations/leader-following/leader-following-run-02-poster.webp',
             title: 'Leader Following - 3D LiDAR',
-            controls: false,
         },
     },
     {
@@ -61,7 +59,6 @@ const milestones = [
             src: '/videos/demonstrations/leader-following/uni-navid-demo.mp4',
             poster: '/videos/demonstrations/leader-following/uni-navid-demo-poster.webp',
             title: 'Uni-NaVid Demo',
-            controls: false,
         },
     },
     {
@@ -80,7 +77,6 @@ const milestones = [
             src: '/videos/demonstrations/leader-following/omtrackvla-demo.mp4',
             poster: '/videos/demonstrations/leader-following/omtrackvla-demo-poster.webp',
             title: 'OmTrackVLA Demo',
-            controls: false,
         },
     },
     {
@@ -100,7 +96,6 @@ const milestones = [
             src: '/videos/demonstrations/leader-following/human-following-milestone-01.mp4',
             poster: '/videos/demonstrations/leader-following/human-following-milestone-01-poster.webp',
             title: 'Human Following - Milestone 1',
-            controls: false,
         },
     },
     {
@@ -120,7 +115,6 @@ const milestones = [
             src: '/videos/demonstrations/leader-following/human-following-milestone-02.mp4',
             poster: '/videos/demonstrations/leader-following/human-following-milestone-02-poster.webp',
             title: 'Human Following - Milestone 2',
-            controls: false,
         },
     },
 ]
