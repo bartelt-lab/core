@@ -1,5 +1,4 @@
 import { FaCamera, FaCogs, FaRobot } from 'react-icons/fa'
-import { MiniLabel } from '../components/common/Eyebrow'
 import BackToLabsPill from '../components/common/BackToLabsPill'
 import ResearchQuestionCard from '../components/common/ResearchQuestionCard'
 import MilestoneBrowser from '../components/common/MilestoneBrowser'
@@ -205,19 +204,19 @@ const aboutFacts = [
     { label: 'Dataset', value: '150 teleoperated episodes' },
 ]
 
-const AboutCard = () => (
-    <section className="rounded-2xl border border-slate-200 bg-white/70 p-4 shadow-sm backdrop-blur-sm">
-        <div className="mb-3">
-            <MiniLabel>About</MiniLabel>
-        </div>
-        <div className="space-y-3">
-            {aboutFacts.map((item) => (
-                <div key={item.label} className="flex items-center justify-between gap-3">
-                    <span className="text-xs text-slate-500">{item.label}</span>
-                    <span className="text-right text-xs font-bold text-slate-800">{item.value}</span>
-                </div>
-            ))}
-        </div>
+// The build facts used to sit in the milestone browser's sidebar, where they ate the
+// vertical space the milestone list needs. They read better as a full-width strip.
+const SpecStrip = () => (
+    <section className="mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+        {aboutFacts.map((item) => (
+            <div
+                key={item.label}
+                className="rounded-xl border border-slate-200 bg-white/70 px-4 py-3.5 shadow-sm backdrop-blur-sm transition duration-200 hover:border-primary-200 hover:shadow-md"
+            >
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">{item.label}</p>
+                <p className="mt-1.5 text-sm font-bold text-slate-800">{item.value}</p>
+            </div>
+        ))}
     </section>
 )
 
@@ -264,7 +263,8 @@ const VialSort = () => (
 
         <main className="container mx-auto max-w-6xl px-6 pb-20 pt-2 md:px-8 md:pt-3">
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Experiment log</p>
-            <MilestoneBrowser items={milestones} aside={<AboutCard />} />
+            <MilestoneBrowser items={milestones} />
+            <SpecStrip />
 
             <section className="mt-8 grid gap-5 md:grid-cols-3">
                 {pipeline.map((item) => {

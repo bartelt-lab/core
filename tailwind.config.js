@@ -74,6 +74,12 @@ export default {
           '0%': { transform: 'translateY(-20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
+        // Drives the auto-advance progress bar on the active milestone. Duration is set
+        // inline from the browser's autoCycleMs so the bar always matches the real timer.
+        sweep: {
+          '0%': { transform: 'scaleX(0)' },
+          '100%': { transform: 'scaleX(1)' },
+        },
       },
     },
   },

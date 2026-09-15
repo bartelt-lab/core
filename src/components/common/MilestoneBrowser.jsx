@@ -8,6 +8,14 @@ const drivePreview = (id, playKey = 0) =>
 const pad = (n) => String(n).padStart(2, '0')
 const keyOf = (item) => item.media.id || item.media.src
 
+// Thumbnail for a selector row: an image is its own thumbnail, a video uses its poster.
+// A Drive embed has neither, so those rows fall back to the number tile.
+const thumbOf = (media) => {
+    if (media.type === 'image') return media.src
+    if (media.type === 'video') return media.poster || null
+    return null
+}
+
 // One frame of a milestone's media, absolutely filling the player. `active` controls
 // visibility (we keep all visited media mounted so swapping never reloads). Supports a
 // Google Drive embed, a native local video, or a still image placeholder.
@@ -140,45 +148,94 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
     }
 
     const sidebar = (
-        <section className="flex flex-col rounded-2xl border border-slate-200 bg-white/80 p-2.5 shadow-sm backdrop-blur-sm lg:sticky lg:top-28 lg:max-h-[calc(100vh-9rem)]">
-            <div className="mb-2.5 flex items-center justify-between gap-3 px-1">
+        <section className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur-sm lg:flex-1">
+            <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-3.5 py-3">
                 <MiniLabel>{label}</MiniLabel>
-                <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
-                    {total} entries
+                <span className="font-mono text-[11px] font-bold tabular-nums text-slate-400">
+                    {pad(activeRun + 1)}
+                    <span className="text-slate-300">/{pad(total)}</span>
                 </span>
             </div>
-            <div className="-mr-1 max-h-[23rem] space-y-1.5 overflow-y-auto pr-1 [scrollbar-color:#cbd5e1_transparent] [scrollbar-width:thin] lg:max-h-[calc(100vh-13rem)]">
-                {displayOrder.map((idx) => {
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-1.5 [scrollbar-color:#cbd5e1_transparent] [scrollbar-width:thin] max-lg:max-h-[26rem]">
+                {displayOrder.map((idx, position) => {
                     const item = items[idx]
                     const isActive = idx === activeRun
+                    const thumb = thumbOf(item.media)
+                    // Operation labels repeat across consecutive milestones (several
+                    // "Exploration" entries in a row). Only the first of a run prints a
+                    // heading, which turns the flat list into visible phases.
+                    const prev = displayOrder[position - 1]
+                    const startsPhase = item.operation && (prev === undefined || items[prev].operation !== item.operation)
+
                     return (
-                        <button
-                            key={keyOf(item)}
-                            type="button"
-                            onClick={() => selectRun(idx)}
-                            className={`group w-full overflow-hidden rounded-xl text-left transition ${
-                                isActive
-                                    ? 'bg-primary-50 ring-2 ring-primary-500 ring-offset-1 ring-offset-white'
-                                    : 'hover:bg-slate-50'
-                            }`}
-                        >
-                            <div className="flex items-center gap-2.5 p-2.5">
-                                <div className="relative flex aspect-video w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100">
-                                    <span className="font-mono text-xs font-bold text-slate-400">{pad(idx + 1)}</span>
-                                    {isActive && <span className="absolute inset-0 bg-primary-600/10" />}
-                                </div>
-                                <div className="min-w-0">
-                                    {item.operation && (
-                                        <p className={`truncate text-[10px] font-bold uppercase tracking-[0.16em] ${isActive ? 'text-primary-700' : 'text-slate-400'}`}>
-                                            {item.operation}
-                                        </p>
+                        <div key={keyOf(item)}>
+                            {startsPhase && (
+                                <p className="px-2 pb-1.5 pt-3 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400 first:pt-1">
+                                    {item.operation}
+                                </p>
+                            )}
+                            <button
+                                type="button"
+                                onClick={() => selectRun(idx)}
+                                aria-current={isActive}
+                                className={`group relative flex w-full items-center gap-3 overflow-hidden rounded-xl p-2 text-left transition duration-200 ${
+                                    isActive
+                                        ? 'bg-gradient-to-r from-primary-50 to-white shadow-sm ring-1 ring-primary-300'
+                                        : 'hover:bg-slate-50'
+                                }`}
+                            >
+                                {/* accent rail on the active row */}
+                                <span
+                                    className={`absolute inset-y-1.5 left-0 w-[3px] rounded-full bg-primary-500 transition-opacity duration-200 ${
+                                        isActive ? 'opacity-100' : 'opacity-0'
+                                    }`}
+                                />
+
+                                <div
+                                    className={`relative aspect-video w-[72px] shrink-0 overflow-hidden rounded-lg bg-slate-900 ring-1 transition duration-200 ${
+                                        isActive ? 'ring-primary-300' : 'ring-slate-200 group-hover:ring-slate-300'
+                                    }`}
+                                >
+                                    {thumb ? (
+                                        <img
+                                            src={assetUrl(thumb)}
+                                            alt=""
+                                            loading="lazy"
+                                            decoding="async"
+                                            className={`h-full w-full object-cover transition duration-300 ${
+                                                isActive
+                                                    ? 'scale-105 opacity-100'
+                                                    : 'opacity-60 saturate-50 group-hover:scale-105 group-hover:opacity-90 group-hover:saturate-100'
+                                            }`}
+                                        />
+                                    ) : (
+                                        <span className="flex h-full w-full items-center justify-center bg-slate-100 font-mono text-xs font-bold text-slate-400">
+                                            {pad(idx + 1)}
+                                        </span>
                                     )}
-                                    <p className={`mt-0.5 line-clamp-2 text-[13px] font-semibold leading-5 ${isActive ? 'text-slate-900' : 'text-slate-700'}`}>
-                                        {item.title}
-                                    </p>
+                                    <span className="absolute bottom-0.5 left-0.5 rounded bg-slate-950/75 px-1 font-mono text-[9px] font-bold text-white/90 backdrop-blur-sm">
+                                        {pad(idx + 1)}
+                                    </span>
                                 </div>
-                            </div>
-                        </button>
+
+                                <p
+                                    className={`min-w-0 flex-1 line-clamp-2 text-[13px] font-semibold leading-5 transition-colors ${
+                                        isActive ? 'text-slate-900' : 'text-slate-600 group-hover:text-slate-900'
+                                    }`}
+                                >
+                                    {item.title}
+                                </p>
+
+                                {/* auto-advance timer; restarts with playKey, hidden once the user takes over */}
+                                {isActive && !paused && (
+                                    <span
+                                        key={playKey}
+                                        className="absolute inset-x-2 bottom-0.5 h-[2px] origin-left animate-[sweep_linear_forwards] rounded-full bg-primary-400/70"
+                                        style={{ animationDuration: `${autoCycleMs}ms` }}
+                                    />
+                                )}
+                            </button>
+                        </div>
                     )
                 })}
             </div>
@@ -250,15 +307,17 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
                 </div>
             </div>
 
-            {/* Sidebar: newest-first selector (+ optional aside card) */}
-            {aside ? (
-                <div className="flex flex-col gap-6">
+            {/* Sidebar: newest-first selector (+ optional aside card).
+                From lg up the column is pinned to the player's height: the cell is
+                `relative` and its contents `absolute inset-0`, so the list — however many
+                milestones it holds — contributes nothing to row height and scrolls inside
+                instead. Below lg it is ordinary flow under the player. */}
+            <div className="lg:relative">
+                <div className="flex flex-col gap-6 lg:absolute lg:inset-0 lg:overflow-y-auto">
                     {sidebar}
-                    {typeof aside === 'function' ? aside({ run, activeRun }) : aside}
+                    {aside && (typeof aside === 'function' ? aside({ run, activeRun }) : aside)}
                 </div>
-            ) : (
-                sidebar
-            )}
+            </div>
         </div>
     )
 }
