@@ -78,7 +78,7 @@ export const videos = [
         bucket: BUCKETS.INSTRUMENTED,
         duration: 37,
         description:
-            'Office scene with the perception stack running live. Several people are detected with coloured bounding boxes carrying per-person IDs and distances, plus a gaze state per subject such as NOT LOOKING AT PROCESS or GAZE UNKNOWN. A bottom overlay reports pipeline latency as current, average and maximum milliseconds for camera-to-output and processing.',
+            'Office scene with the perception stack running live. Several people are detected with coloured bounding boxes carrying per-person IDs and distances, plus a gaze state per subject such as NOT LOOKING AT PROCESS or GAZE UNKNOWN. A bottom overlay reports pipeline latency as current, average and maximum milliseconds for camera-to-output and processing. Our own footage, but a quick throwaway demo rather than a prototype — the project team starts from scratch, so treat it as showing the target capability only.',
         frames: 'wiki/video-frames/human-awareness-detection.jpg',
         usedOn: ['src/pages/HumanAwarenessDetection.jsx'],
     },
