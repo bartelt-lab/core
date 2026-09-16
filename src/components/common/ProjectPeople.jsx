@@ -1,10 +1,13 @@
 import { getMemberBySlug } from '../../data/team'
+import { features } from '../../config/features'
 import assetUrl from '../../utils/assetUrl'
 
+// Single choke point for the avatar rows: every call site (project pages and
+// DemonstrationsSection) renders through here, so the flag hides all of them.
 const ProjectPeople = ({ slugs, label = 'Team', variant = 'light', className = '' }) => {
   const members = slugs.map(getMemberBySlug).filter(Boolean)
 
-  if (!members.length) {
+  if (!features.showProjectPeople || !members.length) {
     return null
   }
 

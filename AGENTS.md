@@ -62,6 +62,24 @@ the existing two.
 `index.html` deliberately has no `<title>`/description/og tags — SeoHead owns
 them. Adding static copies back would leave two of each in the document.
 
+### Feature flags
+
+`src/config/features.js` holds build-time flags. They are plain module
+constants, not `import.meta.env` reads, on purpose: every route is prerendered
+to static HTML, so a runtime-only flag could make the prerendered markup and
+the hydrated client disagree. Flip the value and rebuild.
+
+- `showProjectPeople` — **currently `false`.** Gates the contributor avatar
+  rows (`components/common/ProjectPeople.jsx`) on `/dynamo`, `/vial-sort`,
+  `/leader-following` and the demo cards in `DemonstrationsSection` (which
+  renders two rows per card: an inline one under the CTA on mobile, an absolute
+  one bottom-right on desktop). Hidden on request 2026-09-17. `ProjectPeople`
+  is the single choke point — every call site goes through it — and the `slugs`
+  props are untouched at the call sites, so setting the flag back to `true`
+  restores every row with no other edit. `demonstrations.js` still carries
+  `people` / `peopleLabel` for the same reason; do not delete those fields as
+  "unused" while the flag is off.
+
 ### Files that look deletable but are not
 
 - `public/google2e6aa57e94108948.html` — Google Search Console verification for
@@ -94,6 +112,9 @@ src/
                                    /data/publications.json is gone, and with it
                                    the empty first render and the prerendered
                                    pages that shipped with no publications.
+  config/
+    features.js                    build-time feature flags (see Feature flags
+                                   below). Currently: showProjectPeople = false
   utils/
     assetUrl.js                    BASE_URL helper, used widely in /tuc/*
   components/
