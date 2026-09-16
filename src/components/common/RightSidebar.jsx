@@ -43,13 +43,6 @@ const ROUTE_SECTIONS = {
         { id: 'sites', label: 'Sites' },
         { id: 'policies', label: 'Policies' },
     ],
-    '/ai-team-projects/dynamo': [
-        { id: 'hero', label: 'Overview' },
-        { id: 'features', label: 'Features' },
-        { id: 'evaluation', label: 'Evaluation' },
-        { id: 'science', label: 'Science' },
-        { id: 'architecture', label: 'Architecture' },
-    ],
     '/ai-team-projects/ai4ai': [
         { id: 'hero', label: 'Overview' },
         { id: 'features', label: 'Features' },

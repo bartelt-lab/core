@@ -21,6 +21,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Full history: scripts/seo-files.mjs derives each sitemap <lastmod>
+          # from `git log -1` on the route's page component. The default shallow
+          # clone has no history to ask, so every date would silently go missing.
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4

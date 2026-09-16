@@ -15,10 +15,14 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
 - **CORE Network / CORE Labs** — React 19 + Vite 7 + Tailwind v3, BrowserRouter.
   Routes (all in `CoreShell`): `/` (CORE Network landing, `pages/Home.jsx`),
   `/network` (renders the same `Home.jsx`), `/core-labs` (`pages/CoreLabs.jsx`),
-  `/demos`, `/dynamo`, `/publications`, `/compute-cluster`, `/ai-team-projects`
-  (`pages/tuc/AiTeamProjects.jsx`) plus 7 project subpages under
-  `/ai-team-projects/{dynamo,ai4ai,vergabepilot,neurocore,stratego,
-  traffic-network,self-driving}` (`pages/tuc/projects/*Project.jsx`).
+  `/demos`, `/dynamo`, `/leader-following`, `/vial-sort`, `/publications`,
+  `/compute-cluster`, `/ubb`, `/ai-team-projects`
+  (`pages/tuc/AiTeamProjects.jsx`) plus 11 project subpages under
+  `/ai-team-projects/{tempo,lectra,fastmile,human-awareness-detection,ai4bim,
+  vergabepilot,werewolfs,neurocore,stratego,traffic-network,self-driving}`
+  (`pages/tuc/projects/*Project.jsx`), with `ai4ai` an alias of `ai4bim`.
+  There is no `/ai-team-projects/dynamo` — it was deleted as an orphan; the
+  DyNAMO page readers want is `/dynamo`.
   CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
   merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`,
@@ -164,8 +168,8 @@ the bottom of the file tree). Read the relevant one before related work:
 - `wiki/video-frames/` — four-frame contact strip per video, for identifying a clip
   without opening it. Not shipped to the site.
 - `wiki/later.md` — **deferred work with the reasoning intact.** Video sitemap,
-  the orphaned `/ai-team-projects/dynamo` route, `hydrateRoot`, dropping the
-  Playwright dependency. Read before re-litigating any of those.
+  `hydrateRoot`, dropping the Playwright dependency. Read before re-litigating
+  any of those.
 - `wiki/navbar-scroll-hide.md` — how to make the navbar slide away past a scroll
   threshold on a route (removed from `/dynamo`, kept here for reuse).
 
@@ -260,8 +264,6 @@ real browser since the restyle. Verify in dev (`npm run dev`):
 - `/tuc/join-us` (disclosure pattern expands/collapses)
 - `/tuc/projects` (YouTube embed click-to-play)
 - `/ai-team-projects` (project tiles; sidebar Overview/Projects/Voices/Archive)
-- `/ai-team-projects/dynamo` (RightSidebar shows Overview/
-  Features/Evaluation/Science/Architecture, scroll-spy follows)
 - Network panel: zero 404s on `/members/*`, `/papers/*`, `/logos/*`,
   `/videos/*`, `/data/*`
 - DevTools console: no React 19 deprecation warnings, no router v7

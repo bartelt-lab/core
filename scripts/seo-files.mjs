@@ -11,6 +11,7 @@
  * Run via `npm run build`, before scripts/prerender.mjs.
  */
 
+import { execFileSync } from 'node:child_process'
 import { writeFile, mkdir } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -43,17 +44,53 @@ function buildRobots() {
     ].join('\n')
 }
 
-function buildSitemap(lastmod) {
+/**
+ * When each route's page component was last committed, as YYYY-MM-DD.
+ *
+ * This used to be `new Date()` — one build timestamp stamped onto all 29 URLs,
+ * so every deploy told Google that the entire site had changed. Google only
+ * honours `lastmod` when it is "consistently and verifiably accurate", and a
+ * sitemap that cries wolf on every push gets the field ignored, which is the
+ * opposite of what a sitemap is for.
+ *
+ * Asking git is approximate — a page also changes when a shared component or a
+ * data file under it changes — but it is approximate in the honest direction:
+ * it under-reports rather than claiming edits that never happened.
+ *
+ * Routes whose date cannot be resolved (missing `source`, a file git has never
+ * seen, no git at all in the build environment) get no `<lastmod>` at all. An
+ * absent date costs nothing; a wrong one costs trust in every other date.
+ */
+function lastmodBySource() {
+    const dates = new Map()
+
+    for (const source of new Set(routes.map((route) => route.source).filter(Boolean))) {
+        try {
+            const date = execFileSync('git', ['log', '-1', '--format=%cs', '--', source], {
+                cwd: ROOT,
+                encoding: 'utf8',
+            }).trim()
+            if (/^\d{4}-\d{2}-\d{2}$/.test(date)) dates.set(source, date)
+        } catch {
+            // No git, shallow clone, or an untracked file — fall through to no date.
+        }
+    }
+
+    return dates
+}
+
+function buildSitemap(dates) {
     const entries = indexableRoutes
-        .map((route) =>
-            [
+        .map((route) => {
+            const lastmod = dates.get(route.source)
+            return [
                 '  <url>',
                 `    <loc>${escapeXml(urlFor(route.path))}</loc>`,
-                `    <lastmod>${lastmod}</lastmod>`,
+                ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
                 `    <priority>${route.path === '/' ? '1.0' : '0.7'}</priority>`,
                 '  </url>',
-            ].join('\n'),
-        )
+            ].join('\n')
+        })
         .join('\n')
 
     return [
@@ -89,7 +126,7 @@ function buildLlmsTxt() {
         group('Overview', (r) => r.path === '/' || ['/core-labs', '/publications', '/compute-cluster', '/demos'].includes(r.path)),
         group('Research demonstrators', (r) => ['/dynamo', '/leader-following', '/vial-sort'].includes(r.path)),
         group('AI Team Projects', (r) => r.path.startsWith('/ai-team-projects')),
-        group('Bartelt Lab (TU Clausthal)', (r) => r.path.startsWith('/tuc')),
+        group('Cognitive Software (TU Clausthal)', (r) => r.path.startsWith('/tuc')),
         group('Babeș-Bolyai University (Cluj-Napoca)', (r) => r.path.startsWith('/ubb')),
     ]
         .filter((section) => section !== null)
@@ -106,12 +143,12 @@ async function buildOgImage() {
 
 async function main() {
     await mkdir(DIST, { recursive: true })
-    const lastmod = new Date().toISOString().slice(0, 10)
+    const dates = lastmodBySource()
 
     const aliases = routes.length - indexableRoutes.length
 
     await writeFile(path.join(DIST, 'robots.txt'), buildRobots(), 'utf8')
-    await writeFile(path.join(DIST, 'sitemap.xml'), buildSitemap(lastmod), 'utf8')
+    await writeFile(path.join(DIST, 'sitemap.xml'), buildSitemap(dates), 'utf8')
     await writeFile(path.join(DIST, 'llms.txt'), buildLlmsTxt(), 'utf8')
     await buildOgImage()
 

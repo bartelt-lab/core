@@ -49,20 +49,16 @@ stays flat, video metadata will not rescue it.
 
 ---
 
-## `/ai-team-projects/dynamo` is orphaned
+## `/ai-team-projects/dynamo` is orphaned — RESOLVED, deleted
 
-**Status:** live, prerendered, in the sitemap, linked from nowhere.
+The route was live, prerendered and in the sitemap but linked from nowhere. It
+was deleted rather than linked: `/dynamo` already covers DyNAMO for readers, and
+the orphan's only distinct asset was the v1.2 technical PDF, which still serves
+at `/documents/project-descriptions/DyNAMOv1.2.pdf`.
 
-The route exists in `src/App.jsx` and has `ROUTE_SECTIONS` config in
-`RightSidebar.jsx`, but no page links to it — the AI Team Projects catalogue in
-`AiTeamProjects.jsx` does not list it. Reachable only by typing the URL.
-
-Note it is a *different page* from `/dynamo` (`pages/Dynamo.jsx` vs
-`pages/tuc/projects/DynamoProject.jsx`), so this is not simple duplication.
-
-**Decide:** link it from the AI Team Projects catalogue, or delete the route and
-its `routes.js` entry. Leaving it indexed but unreachable is the worst of both —
-Google may surface a page the site itself does not acknowledge.
+Kept here only as a warning: **a route in `routes.js` that nothing links to is
+worse than no route at all.** Google indexes it, then surfaces a page the site
+itself does not acknowledge.
 
 ---
 
