@@ -8,22 +8,17 @@ import DemonstrationsSection from '../components/demonstrations/DemonstrationsSe
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
 
-// Institutions card roster: member id -> role label shown under the name.
-// Ids 1/2/4 are the PIs; id 5 (David Szilagyi) runs operations and is the
-// contact point across TUC and UBB, which is not a PI role.
-const INSTITUTION_ROLES = [
-  { id: 1, role: ['Principal Investigator', 'Principal Investigator'] },
-  { id: 2, role: ['Principal Investigator', 'Principal Investigator'] },
-  { id: 4, role: ['Principal Investigator', 'Principal Investigator'] },
-  { id: 5, role: ['Operations Coordinator', 'Koordination & Betrieb'], allAffiliations: true },
-]
+// Institutions card: one PI per site (ids 1/2/4), then a separate contact
+// block below the divider. The contact is a PhD student running operations, so
+// the block is deliberately not part of the PI list — same card, own footing.
+const PI_IDS = [1, 2, 4]
+const OPERATIONS_CONTACT_ID = 5
 
 const CoreLabs = () => {
   const { pick } = useLanguage()
-  const roster = INSTITUTION_ROLES.map((entry) => {
-    const member = getNetworkMembers().find((m) => m.id === entry.id)
-    return member ? { ...entry, member } : null
-  }).filter(Boolean)
+  const members = getNetworkMembers()
+  const principalInvestigators = PI_IDS.map((id) => members.find((m) => m.id === id)).filter(Boolean)
+  const contact = members.find((m) => m.id === OPERATIONS_CONTACT_ID) || null
 
   return (
     <div className="min-h-screen bg-white">
@@ -84,23 +79,48 @@ const CoreLabs = () => {
                 )}
               </p>
               <div className="mt-6 space-y-5">
-                {roster.map(({ member, role, allAffiliations }) => (
-                  <div key={member.id} className="flex items-center gap-4 rounded-xl bg-white p-3 shadow-sm">
+                {principalInvestigators.map((pi) => (
+                  <div key={pi.id} className="flex items-center gap-4 rounded-xl bg-white p-3 shadow-sm">
                     <div className="h-14 w-14 overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
-                      <img src={assetUrl(member.photo)} alt={member.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                      <img src={assetUrl(pi.photo)} alt={pi.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-gray-950">{member.prefix ? `${member.prefix} ${member.name}` : member.name}</p>
-                      <p className="text-xs font-semibold text-primary-700">{pick(role[0], role[1])}</p>
-                      <p className="mt-0.5 text-xs font-semibold text-gray-400">
-                        {(allAffiliations ? member.affiliations : member.affiliations.slice(0, 1))
-                          .map((a) => a.institution.name)
-                          .join(' · ')}
-                      </p>
+                      <p className="text-sm font-bold text-gray-950">{pi.prefix ? `${pi.prefix} ${pi.name}` : pi.name}</p>
+                      <p className="text-xs font-semibold text-primary-700">{pick('Principal Investigator', 'Principal Investigator')}</p>
+                      <p className="mt-0.5 text-xs font-semibold text-gray-400">{pi.affiliations[0].institution.name}</p>
                     </div>
                   </div>
                 ))}
               </div>
+
+              {contact && (
+                <div className="mt-6 border-t border-dashed border-gray-300 pt-5">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-400">
+                    {pick('Operations & first point of contact', 'Betrieb & erste Ansprechstelle')}
+                  </p>
+                  <div className="mt-3 flex items-center gap-3">
+                    <div className="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-gray-200 bg-gray-100">
+                      <img src={assetUrl(contact.photo)} alt={contact.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold text-gray-950">{contact.name}</p>
+                      <p className="text-xs font-semibold text-gray-500">
+                        {pick('Operations Coordinator', 'Koordination & Betrieb')}
+                        <span className="text-gray-300"> · </span>
+                        {pick('PhD candidate', 'Doktorand')}
+                      </p>
+                      <p className="mt-0.5 truncate text-xs font-semibold text-gray-400">
+                        {contact.affiliations.map((a) => a.institution.name).join(' · ')}
+                      </p>
+                      {contact.email && (
+                        <a href={`mailto:${contact.email}`} className="mt-1 inline-block text-xs font-bold text-primary-700 underline decoration-primary-200 underline-offset-2 transition hover:decoration-primary-500">
+                          {contact.email}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -125,7 +145,7 @@ const CoreLabs = () => {
             </Link>
           </div>
           <div className="mx-auto w-full max-w-lg rounded-2xl border border-white bg-white/75 p-2 shadow-xl shadow-slate-200/70 ring-1 ring-slate-200/70 backdrop-blur">
-            <PublicationsSection limit={4} layout="rotator" title="" subtitle="" compact compactHeightClass="h-[220px]" />
+            <PublicationsSection limit={4} layout="rotator" title="" subtitle="" compact compactHeightClass="h-[220px]" sectionId={null} />
           </div>
         </div>
       </section>

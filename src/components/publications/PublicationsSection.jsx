@@ -198,6 +198,9 @@ const PublicationsSection = ({
   compact = false,
   compactHeightClass = 'h-[350px]',
   initialInstitution = 'all',
+  // Pages that embed this inside their own <section id="publications"> pass
+  // sectionId={null} — two elements with the same id break the scroll-spy.
+  sectionId = 'publications',
 }) => {
   const { pick } = useLanguage()
   const [activeIndex, setActiveIndex] = useState(0)
@@ -271,7 +274,7 @@ const PublicationsSection = ({
 
   return (
     <Section
-      id="publications"
+      id={sectionId || undefined}
       title={pick(title, title === 'Publications' ? 'Publikationen' : title)}
       subtitle={pick(subtitle, subtitle === 'Research Output' ? 'Forschungsergebnisse' : subtitle)}
       className={`bg-gray-50 ${compact ? '!py-0' : ''}`}

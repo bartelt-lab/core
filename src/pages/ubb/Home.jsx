@@ -236,7 +236,7 @@ const UbbHome = () => {
             <Link to="/publications?institution=UBB" className="text-sm font-bold text-sky-700 hover:text-sky-900">View all publications →</Link>
           </div>
           <div className="rounded-3xl border border-white bg-white/75 p-3 shadow-xl shadow-sky-100/60">
-            <PublicationsSection limit={3} layout="rotator" title="" subtitle="" compact initialInstitution="UBB" />
+            <PublicationsSection limit={3} layout="rotator" title="" subtitle="" compact initialInstitution="UBB" sectionId={null} />
           </div>
         </div>
       </section>
