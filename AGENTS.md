@@ -130,7 +130,8 @@ public/
   favicon.{ico,svg,png} +          generated from avocando-icon.svg
     apple-touch-icon.png
   papers/                          16 publication preview images
-  documents/project-descriptions/  3 PDFs
+  documents/project-descriptions/  2 PDFs, both currently unreferenced —
+                                   nothing in src/ links a .pdf any more
   images/projects/{ai4ai,dynamo,neurocore,stratego,vergabepilot}/
   images/locations.png             /network page map
   videos/core-labs-hero.mp4        core hero + shared hero-poster.webp

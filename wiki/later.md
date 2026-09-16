@@ -52,9 +52,9 @@ stays flat, video metadata will not rescue it.
 ## `/ai-team-projects/dynamo` is orphaned — RESOLVED, deleted
 
 The route was live, prerendered and in the sitemap but linked from nowhere. It
-was deleted rather than linked: `/dynamo` already covers DyNAMO for readers, and
-the orphan's only distinct asset was the v1.2 technical PDF, which still serves
-at `/documents/project-descriptions/DyNAMOv1.2.pdf`.
+was deleted rather than linked: `/dynamo` already covers DyNAMO for readers. The
+v1.2 technical PDF it linked went with it; `architecture.webp` stayed, because
+`/dynamo` renders it as Fig. 1.
 
 Kept here only as a warning: **a route in `routes.js` that nothing links to is
 worse than no route at all.** Google indexes it, then surfaces a page the site
