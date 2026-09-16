@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { FaArrowLeft, FaArrowRight, FaChevronDown } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
 import { MiniLabel } from './Eyebrow'
 
@@ -111,11 +111,71 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
     const [mounted, setMounted] = useState(() => new Set([total - 1]))
     const [playKey, setPlayKey] = useState(1)
     const activeRunRef = useRef(total - 1)
+    const listRef = useRef(null)
+    const contentRef = useRef(null)
+    const [edges, setEdges] = useState({ top: false, bottom: false })
 
     const run = items[activeRun]
 
     useEffect(() => {
         activeRunRef.current = activeRun
+    }, [activeRun])
+
+    // Which edges of the selector have content past them. Drives the two fades and the
+    // chevron; recomputed on scroll and whenever the list is resized (the column height
+    // is pinned to the player, so it changes with the viewport).
+    const syncEdges = useCallback(() => {
+        const el = listRef.current
+        if (!el) return
+        setEdges({
+            top: el.scrollTop > 4,
+            bottom: el.scrollTop + el.clientHeight < el.scrollHeight - 4,
+        })
+    }, [])
+
+    // Both boxes matter and they move independently. The viewport is the scroller, whose
+    // height is pinned to the player and so changes with the active milestone's text. The
+    // content is the row wrapper, which grows after mount as lazy thumbnails resolve — a
+    // change the scroller's own box never reflects, so observing only the scroller leaves
+    // the fades stuck at their first, pre-thumbnail measurement.
+    //
+    // The scroll listener is native rather than React's `onScroll`: `scroll` does not
+    // bubble, and the synthetic version did not fire here for programmatic scrolling.
+    useEffect(() => {
+        const el = listRef.current
+        const content = contentRef.current
+        if (!el || !content) return undefined
+        syncEdges()
+        const observer = new ResizeObserver(syncEdges)
+        observer.observe(el)
+        observer.observe(content)
+        el.addEventListener('scroll', syncEdges, { passive: true })
+        return () => {
+            observer.disconnect()
+            el.removeEventListener('scroll', syncEdges)
+        }
+    }, [syncEdges, total])
+
+    const pageDown = () => {
+        const el = listRef.current
+        if (el) el.scrollBy({ top: el.clientHeight * 0.8, behavior: 'smooth' })
+    }
+
+    // Keep the active row in view. Auto-advance walks the whole list, so this makes the
+    // column scroll itself in front of the viewer — the clearest signal that it scrolls.
+    // Measured with rects rather than offsetTop: the rows sit inside a wrapper div, so
+    // offsetParent is not guaranteed to be the scroll container.
+    useEffect(() => {
+        const el = listRef.current
+        const row = el?.querySelector('[data-active="true"]')
+        if (!el || !row) return
+        const rowBox = row.getBoundingClientRect()
+        const listBox = el.getBoundingClientRect()
+        if (rowBox.top < listBox.top) {
+            el.scrollTo({ top: el.scrollTop + rowBox.top - listBox.top - 12, behavior: 'smooth' })
+        } else if (rowBox.bottom > listBox.bottom) {
+            el.scrollTo({ top: el.scrollTop + rowBox.bottom - listBox.bottom + 12, behavior: 'smooth' })
+        }
     }, [activeRun])
 
     const show = (i) => {
@@ -151,12 +211,22 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
         <section className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur-sm lg:flex-1">
             <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-3.5 py-3">
                 <MiniLabel>{label}</MiniLabel>
-                <span className="font-mono text-[11px] font-bold tabular-nums text-slate-400">
+                <span className="rounded-full bg-slate-100 px-2.5 py-1 font-mono text-[10px] font-bold tabular-nums tracking-[0.14em] text-slate-500">
                     {pad(activeRun + 1)}
-                    <span className="text-slate-300">/{pad(total)}</span>
+                    <span className="text-slate-400">/{pad(total)}</span>
                 </span>
             </div>
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-1.5 [scrollbar-color:#cbd5e1_transparent] [scrollbar-width:thin] max-lg:max-h-[26rem]">
+
+            {/* The list scrolls, and that has to be obvious. Three affordances stack:
+                a permanently visible scrollbar, a fade at whichever edge has content
+                past it, and a click-to-page chevron on the bottom fade. The active row
+                is also kept in view (below), so auto-advance visibly scrolls the list. */}
+            <div className="relative flex min-h-0 flex-1 flex-col">
+                <div
+                    ref={listRef}
+                    className="min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-color:#94a3b8_#f1f5f9] [scrollbar-width:thin] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar]:w-1.5 max-lg:max-h-[26rem]"
+                >
+                <div ref={contentRef} className="p-1.5 pb-9">
                 {displayOrder.map((idx, position) => {
                     const item = items[idx]
                     const isActive = idx === activeRun
@@ -178,6 +248,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
                                 type="button"
                                 onClick={() => selectRun(idx)}
                                 aria-current={isActive}
+                                data-active={isActive}
                                 className={`group relative flex w-full items-center gap-3 overflow-hidden rounded-xl p-2 text-left transition duration-200 ${
                                     isActive
                                         ? 'bg-gradient-to-r from-primary-50 to-white shadow-sm ring-1 ring-primary-300'
@@ -238,6 +309,34 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
                         </div>
                     )
                 })}
+                </div>
+                </div>
+
+                {/* Edge fades — present only while there is content past that edge. */}
+                <span
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-white to-transparent transition-opacity duration-200 ${
+                        edges.top ? 'opacity-100' : 'opacity-0'
+                    }`}
+                />
+                <span
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white via-white/90 to-transparent transition-opacity duration-200 ${
+                        edges.bottom ? 'opacity-100' : 'opacity-0'
+                    }`}
+                />
+                <button
+                    type="button"
+                    onClick={pageDown}
+                    tabIndex={edges.bottom ? 0 : -1}
+                    aria-label={`Scroll to older ${label.toLowerCase()}`}
+                    className={`absolute bottom-1.5 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500 shadow-sm transition duration-200 hover:border-primary-300 hover:text-primary-700 ${
+                        edges.bottom ? 'opacity-100' : 'pointer-events-none opacity-0'
+                    }`}
+                >
+                    Scroll
+                    <FaChevronDown className="h-2 w-2" />
+                </button>
             </div>
         </section>
     )
