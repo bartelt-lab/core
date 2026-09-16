@@ -1,10 +1,28 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FiExternalLink } from 'react-icons/fi';
 import { FaGithub } from 'react-icons/fa';
 import LazyVideo from '../common/LazyVideo';
+import { routes } from '../../routes';
 import { useLanguage } from '../../i18n/useLanguage';
+
+/**
+ * The sibling project pages, for the cross-link strip at the foot of every one.
+ *
+ * Read from routes.js rather than a second hand-written list: that file already
+ * holds the path and title of every project page and is what anyone adding a
+ * project edits, so the strip cannot fall out of step with the routes. Aliases
+ * are skipped so `ai4ai` does not appear next to `ai4bim`.
+ *
+ * This exists for the link graph as much as for readers. Until now each project
+ * page had exactly one inbound internal link — the catalogue — which is a large
+ * part of why Search Console reported them as "Discovered – currently not
+ * indexed": a page one hop from a single link reads as unimportant.
+ */
+const SIBLING_PROJECTS = routes
+    .filter((route) => route.path.startsWith('/ai-team-projects/') && !route.canonical)
+    .map((route) => ({ path: route.path, name: route.title.split(' | ')[0] }));
 
 const ProjectLayout = ({
     title,
@@ -40,7 +58,9 @@ const ProjectLayout = ({
     children
 }) => {
     const { pick } = useLanguage();
+    const { pathname } = useLocation();
     const [activeTab, setActiveTab] = useState(tabs[0]?.id || '');
+    const siblings = SIBLING_PROJECTS.filter((project) => project.path !== pathname);
     const heroMediaClass = compact
         ? `max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-gray-100 relative group ${heroCaption ? 'mb-2' : 'mb-8'}`
         : `max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-gray-100 relative group ${heroCaption ? 'mb-3' : 'mb-20'}`;
@@ -351,11 +371,32 @@ const ProjectLayout = ({
                 </div>
             </section>
 
-            {/* Back to Projects */}
-            <div className={`container mx-auto px-4 ${compact ? 'py-8' : 'py-12'} text-center border-t border-gray-100`}>
-                <Link to="/ai-team-projects" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-600 transition-colors font-medium text-lg">
-                    ← {pick('Back to All Projects', 'Zurück zu allen Projekten')}
-                </Link>
+            {/* Other projects, then back to the catalogue. */}
+            <div className={`container mx-auto px-4 ${compact ? 'py-8' : 'py-12'} border-t border-gray-100`}>
+                {siblings.length > 0 && (
+                    <nav aria-label={pick('Other AI Team Projects', 'Weitere KI-Teamprojekte')} className="mx-auto mb-8 max-w-5xl">
+                        <h2 className="mb-4 text-center text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+                            {pick('Other AI Team Projects', 'Weitere KI-Teamprojekte')}
+                        </h2>
+                        <ul className="flex flex-wrap justify-center gap-2">
+                            {siblings.map((project) => (
+                                <li key={project.path}>
+                                    <Link
+                                        to={project.path}
+                                        className="inline-flex rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-gray-600 transition hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700"
+                                    >
+                                        {project.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                )}
+                <div className="text-center">
+                    <Link to="/ai-team-projects" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-600 transition-colors font-medium text-lg">
+                        ← {pick('Back to All Projects', 'Zurück zu allen Projekten')}
+                    </Link>
+                </div>
             </div>
         </div>
     );
