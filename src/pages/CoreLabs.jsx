@@ -15,6 +15,11 @@ import { useLanguage } from '../i18n/useLanguage'
 const PI_IDS = [1, 24, 2, 4]
 const OPERATIONS_CONTACT_ID = 5
 
+// Every person here links to their card in the CORE Network team grid, which
+// Home.jsx scrolls to and ring-highlights off this hash. There is still no
+// per-member detail route (see AGENTS.md issue 2), so the grid is the target.
+const memberLink = (member) => `/#member-${member.slug}`
+
 const CoreLabs = () => {
   const { pick } = useLanguage()
   const members = getNetworkMembers()
@@ -73,37 +78,31 @@ const CoreLabs = () => {
 
               {contact && (
                 // Affiliations are omitted on purpose — the institutions card
-                // beside this block already names TUC and UBB.
+                // beside this block already names TUC and UBB. The photo and
+                // the name link to the team grid; the mailto stays separate,
+                // since anchors cannot nest.
                 <div className="mt-6 flex max-w-md items-center gap-3 rounded-xl border border-gray-200 bg-white p-3.5 shadow-sm">
-                  <div className="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-gray-200 bg-gray-100">
+                  <Link to={memberLink(contact)} aria-label={contact.name} className="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-gray-200 bg-gray-100 transition hover:border-primary-300">
                     <img src={assetUrl(contact.photo)} alt={contact.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-                  </div>
+                  </Link>
                   <div className="min-w-0">
                     <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400">
                       {pick('Operations & contact', 'Betrieb & Kontakt')}
                     </p>
                     <p className="mt-0.5 text-sm font-bold leading-tight text-gray-950">
-                      {contact.name}
+                      <Link to={memberLink(contact)} className="transition hover:text-primary-700">{contact.name}</Link>
                       <span className="text-gray-300"> · </span>
                       <span className="text-xs font-semibold text-gray-500">{pick('PhD candidate', 'Doktorand')}</span>
                     </p>
                     {/* Research leads the title so the scientific side reads
                         first; "Coordinator" keeps it clear this is not a PI
-                        slot. The Scholar link carries the publication record
-                        by evidence rather than by adjective. */}
-                    {/* No "·" separators: the row wraps at narrow widths and a
-                        dangling separator at the break looks broken. Colour
-                        alone (gray role, green links) carries the split. */}
+                        slot. No "·" before the mailto: the row wraps at narrow
+                        widths and a dangling separator reads as a bug. */}
                     <p className="flex flex-wrap items-center gap-x-3 text-xs font-semibold text-gray-500">
                       <span>{pick('Research & Operations Coordinator', 'Forschung & Betrieb')}</span>
                       {contact.email && (
                         <a href={`mailto:${contact.email}`} className="font-bold text-primary-700 underline decoration-primary-200 underline-offset-2 transition hover:decoration-primary-500">
                           {pick('email', 'E-Mail')}
-                        </a>
-                      )}
-                      {contact.links?.scholar && (
-                        <a href={contact.links.scholar} target="_blank" rel="noreferrer" className="font-bold text-primary-700 underline decoration-primary-200 underline-offset-2 transition hover:decoration-primary-500">
-                          Scholar
                         </a>
                       )}
                     </p>
@@ -121,7 +120,11 @@ const CoreLabs = () => {
               </p>
               <div className="mt-6 space-y-5">
                 {principalInvestigators.map((pi) => (
-                  <div key={pi.id} className="flex items-center gap-4 rounded-xl bg-white p-3 shadow-sm">
+                  <Link
+                    key={pi.id}
+                    to={memberLink(pi)}
+                    className="flex items-center gap-4 rounded-xl bg-white p-3 shadow-sm transition hover:shadow-md hover:ring-1 hover:ring-primary-200"
+                  >
                     <div className="h-14 w-14 overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
                       <img src={assetUrl(pi.photo)} alt={pi.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                     </div>
@@ -130,7 +133,7 @@ const CoreLabs = () => {
                       <p className="text-xs font-semibold text-primary-700">{pick('Principal Investigator', 'Principal Investigator')}</p>
                       <p className="mt-0.5 text-xs font-semibold text-gray-400">{pi.affiliations[0].institution.name}</p>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

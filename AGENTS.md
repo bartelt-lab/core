@@ -80,6 +80,30 @@ the hydrated client disagree. Flip the value and rebuild.
   `people` / `peopleLabel` for the same reason; do not delete those fields as
   "unused" while the flag is off.
 
+### Member deep links — `/#member-<slug>`
+
+Until a per-member route exists (open issue 2), a person is linked as
+`/#member-<slug>`, pointing at their card in the CORE Network team grid.
+`pages/Home.jsx` owns both halves:
+
+- each grid card carries `id="member-<slug>"` (plus `scroll-mt-28`, so the pill
+  navbar does not cover it on a native hash jump), and
+- an effect reads the hash, scrolls the card to centre, and ring-highlights it
+  for 5 s. It scrolls twice — immediately and again at 600 ms — because the
+  lazy member photos resolve mid-scroll and drift the target out of view.
+
+The ring is *derived* from the hash; only its expiry is state, keyed by
+`location.key`. Keep it that way: storing the slug in state meant setting state
+from inside the effect, which `react-hooks/set-state-in-effect` fails the lint
+on. Keying the expiry by navigation is also what makes clicking the same person
+twice re-light the ring.
+
+Slugs come from `slug` in `team.js`, so a slug rename breaks every link that
+spells it out. The current callers are the five people on the `/core-labs`
+institutions card (`memberLink()` in `pages/CoreLabs.jsx`). Note the grid skips
+`research_assistant` and `support_staff`, so those members have no anchor to
+link to.
+
 ### Files that look deletable but are not
 
 - `public/google2e6aa57e94108948.html` — Google Search Console verification for
@@ -261,7 +285,9 @@ into `index.html`. The old `public/icons/avocado.png` has been removed.
 `publications.json` carries `authors[].memberSlug` and `team.js` carries
 `slug` per member. There is no `/network/member/:slug` route yet, so no
 component renders the link. Until that page exists, `PublicationItem`
-just shows the author name as text. Plan: add a `MemberDetail` page,
+just shows the author name as text, and anything that does want to point at a
+person uses the `/#member-<slug>` deep link into the team grid instead (see
+"Member deep links" above) — that is the migration target when the route lands. Plan: add a `MemberDetail` page,
 route it under both `/network/member/:slug` (core) and possibly
 `/tuc/member/:slug` (bartelt-style). When that exists, `PublicationItem`
 (both tuc shared one + core one) can wrap author names in `<Link>`.

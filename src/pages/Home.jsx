@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   FaArrowRight, FaBookOpen, FaBrain, FaEnvelope, FaExternalLinkAlt,
@@ -10,6 +11,9 @@ import { getNetworkMembers, institutions } from '../data/team'
 import { cognitiveProjects } from '../data/demonstrations'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
+
+// Deep-link prefix for a single team member, e.g. `/#member-szilagyi`.
+const MEMBER_HASH = '#member-'
 
 // Which project gets the homepage spotlight. Swap the id to feature a different one
 // (it must be a non-teaser entry in cognitiveProjects with an /images/projects/<id>/hero.webp).
@@ -66,6 +70,41 @@ const Home = () => {
     { name: 'UBB', src: '/logos/ubb-logo.webp', href: institutions.UBB.website },
     { name: 'University of Rostock', src: '/logos/rostock-logo.webp', href: institutions.ROSTOCK.website },
   ]
+
+  // Other pages deep-link a single person as `/#member-<slug>` (see the
+  // institutions card on /core-labs). The browser cannot honour that hash on a
+  // client-side navigation, so scroll and flag the card here.
+  const location = useLocation()
+  const requestedSlug = location.hash.startsWith(MEMBER_HASH) ? location.hash.slice(MEMBER_HASH.length) : ''
+  // The ring is derived from the hash, not stored — storing it would mean
+  // setting state straight from an effect. Only the *expiry* is state, keyed by
+  // the navigation it belongs to, so clicking the same link twice re-lights it.
+  const [expiredKey, setExpiredKey] = useState(null)
+  const highlightedSlug = requestedSlug && expiredKey !== location.key ? requestedSlug : null
+
+  useEffect(() => {
+    if (!requestedSlug) {
+      return
+    }
+
+    const scrollToCard = () =>
+      document.getElementById(`member-${requestedSlug}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+    // Twice on purpose: once as soon as the grid has laid out, once after the
+    // lazy member photos have had time to land. Without the second pass the
+    // card drifts out of view when images resolve mid-scroll.
+    const raf = requestAnimationFrame(scrollToCard)
+    const settle = setTimeout(scrollToCard, 600)
+    // Long enough to still be lit once the smooth scroll settles (~1s of that
+    // window is the scroll itself).
+    const fade = setTimeout(() => setExpiredKey(location.key), 5000)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      clearTimeout(settle)
+      clearTimeout(fade)
+    }
+  }, [requestedSlug, location.key])
 
   return (
     <div className="min-h-screen bg-white">
@@ -222,7 +261,19 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {members.map((member, i) => (
-              <motion.div key={member.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04, duration: 0.4 }} className="group relative grid h-[19rem] grid-rows-[5rem_4rem_2.5rem_4.5rem] justify-items-center gap-1 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition hover:border-primary-200 hover:shadow-md">
+              <motion.div
+                key={member.id}
+                id={`member-${member.slug}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.04, duration: 0.4 }}
+                className={`group relative grid h-[19rem] scroll-mt-28 grid-rows-[5rem_4rem_2.5rem_4.5rem] justify-items-center gap-1 overflow-hidden rounded-lg border bg-white p-4 shadow-sm transition hover:border-primary-200 hover:shadow-md ${
+                  highlightedSlug === member.slug
+                    ? 'border-primary-500 ring-2 ring-primary-400 ring-offset-2'
+                    : 'border-gray-200'
+                }`}
+              >
                 <div className="absolute left-0 top-3 flex flex-col gap-1">
                   {member.affiliations.map((a) => (
                     <span key={a.institution.shortName} className="rounded-r-md bg-primary-600 py-0.5 pl-1.5 pr-2 text-[9px] font-bold uppercase tracking-wide text-white shadow-sm">{a.institution.shortName}</span>
