@@ -334,6 +334,23 @@ checked-in copy could go.
 Once issue 10 is resolved, surface a "Download BibTeX" button on the
 Publications page that links to `/data/publications.bib`. Trivial.
 
+### 12. Deploy workflow pins actions that target deprecated Node 20
+Every run of `.github/workflows/deploy.yml` now ends with an annotation:
+
+> Node.js 20 is deprecated. The following actions target Node.js 20 but are
+> being forced to run on Node.js 24: `actions/cache@v4`, `actions/checkout@v4`,
+> `actions/configure-pages@v4`, `actions/setup-node@v4`,
+> `actions/upload-artifact@v4`.
+
+Builds still pass — GitHub is running them on Node 24 anyway — so this is a
+warning, not a failure. It becomes a failure whenever GitHub stops forcing the
+upgrade. Bump the five pins to `@v5` (`upload-pages-artifact` is at `@v3` and
+`deploy-pages` at `@v4`; check each repo for its current major rather than
+assuming they move together), push, and confirm the annotation is gone.
+
+Worth doing on a branch: a broken deploy workflow is only visible after it has
+already failed on `main`.
+
 ---
 
 ## How to work in this repo
