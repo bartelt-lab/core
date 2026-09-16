@@ -176,43 +176,43 @@ export const routes = [
   // ----------------------------------------------------------- TU Clausthal ---
   {
     path: '/tuc',
-    title: 'Bartelt Lab | TU Clausthal',
+    title: 'Cognitive Software | TU Clausthal',
     description:
       'Research group at the Institute for Software Systems Engineering (ISSE), TU Clausthal, exploring the intersection of artificial intelligence, cognitive computing, and software engineering.',
   },
   {
     path: '/tuc/projects',
-    title: 'Projects | Bartelt Lab',
+    title: 'Projects | Cognitive Software, TU Clausthal',
     description:
-      'Student research projects offered this semester at the Bartelt Lab, run on the Kaiser I cluster with travel, accommodation, and social event costs covered.',
+      'Student research projects offered this semester at TU Clausthal, run on the Kaiser I cluster with travel, accommodation, and social event costs covered.',
   },
   {
     path: '/tuc/industry-projects',
-    title: 'Industry Projects | Bartelt Lab',
+    title: 'Industry Projects | Cognitive Software, TU Clausthal',
     description:
-      'Transfer and publicly funded projects at the Bartelt Lab, including AI-BIM, an AI-supported copilot for sustainable architectural design under environmental standards.',
+      'Transfer and publicly funded projects of the Cognitive Software group, including AI-BIM, an AI-supported copilot for sustainable architectural design under environmental standards.',
   },
   {
     path: '/tuc/teaching',
-    title: 'Teaching | Bartelt Lab',
+    title: 'Teaching | Cognitive Software, TU Clausthal',
     description:
-      'Courses, seminars, and thesis topics offered by the Bartelt Lab at the Institute for Software Systems Engineering, TU Clausthal.',
+      'Courses, seminars, and thesis topics offered by the Cognitive Software group at the Institute for Software Systems Engineering, TU Clausthal.',
   },
   {
     path: '/tuc/seminar',
-    title: 'Seminars | Bartelt Lab',
+    title: 'Seminars | Cognitive Software, TU Clausthal',
     description:
-      'Seminar topics and application details at the Bartelt Lab — send your Transcript of Records and topic preferences to apply.',
+      'Seminar topics and application details at the Institute for Software Systems Engineering, TU Clausthal — send your Transcript of Records and topic preferences to apply.',
   },
   {
     path: '/tuc/theses',
-    title: 'Theses | Bartelt Lab',
+    title: 'Theses | Cognitive Software, TU Clausthal',
     description:
-      'Bachelor and master thesis topics in artificial intelligence, cognitive computing, and software engineering at the Bartelt Lab, TU Clausthal.',
+      'Bachelor and master thesis topics in artificial intelligence, cognitive computing, and software engineering at the Institute for Software Systems Engineering, TU Clausthal.',
   },
   {
     path: '/tuc/join-us',
-    title: 'Join Us | Bartelt Lab',
+    title: 'Join Us | Cognitive Software, TU Clausthal',
     description:
       'Open positions at the Institute for Software Systems Engineering (ISSE), TU Clausthal, for researchers with a strong background in computer science or mathematics.',
   },
