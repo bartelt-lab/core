@@ -320,10 +320,10 @@ const VialSort = () => (
                 <div className="mt-6 grid gap-5 lg:grid-cols-2">
                     <figure className="overflow-hidden rounded-xl border border-slate-200 bg-white">
                         <img
-                            src={assetUrl(`${FIG}/architecture.webp`)}
+                            src={assetUrl(`${FIG}/architecture.svg`)}
                             alt="Workstation control panel talking over HTTP to the Jetson-hosted inference server, policy, cameras and arm"
-                            width={845}
-                            height={472}
+                            width={1600}
+                            height={900}
                             loading="lazy"
                             decoding="async"
                             className="h-auto w-full bg-white object-contain"
