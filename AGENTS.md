@@ -83,6 +83,13 @@ src/
                                    once produced duplicate ids; grep before reuse.
     projects.js                    CORE Labs projects metadata
     demonstrations.js              demo cards
+    publications.json              canonical publications source, 21 entries
+    publications.js                imports that JSON at build time and exports
+                                   it sorted newest-first. Import from here —
+                                   the old runtime fetch of
+                                   /data/publications.json is gone, and with it
+                                   the empty first render and the prerendered
+                                   pages that shipped with no publications.
   utils/
     assetUrl.js                    BASE_URL helper, used widely in /tuc/*
   components/
@@ -107,7 +114,6 @@ src/
 
 public/
   data/
-    publications.json              canonical, 21 entries
     publications.bib               BibTeX export (download artifact)
   members/                         member photos, full-name scheme
                                    (photoless members → themed placeholder, see
@@ -234,13 +240,6 @@ route it under both `/network/member/:slug` (core) and possibly
 `/tuc/member/:slug` (bartelt-style). When that exists, `PublicationItem`
 (both tuc shared one + core one) can wrap author names in `<Link>`.
 
-### 3. Fetch path inconsistency for publications
-- `src/components/publications/PublicationsSection.jsx:11` —
-  `fetch(\`${import.meta.env.BASE_URL}data/publications.json\`)`
-- other call sites use `fetch(assetUrl('/data/publications.json'))`
-Same result, two patterns. Pick one (`assetUrl` is the project-wide helper
-and is the better choice).
-
 ### 4. `tuc/iclr-2025/` orphan subsite
 Static page at `public/tuc/iclr-2025/index.html` (title: "CORE at ICLR
 2025"). Has its own `style.css` + `assets/`. **Not linked from any React
@@ -324,10 +323,12 @@ shown on tuc Home (visual density / academic context).
 
 ### 10. `publications.bib` ↔ `publications.json` parity
 `public/data/publications.bib` is the BibTeX export (15 entries from
-bartelt source). `publications.json` has 21 entries (8 from old core
+bartelt source). `src/data/publications.json` has 21 entries (8 from old core
 publications.js merged in). The `.bib` is currently *behind* the JSON.
 Either regenerate the `.bib` from the JSON on every update (build-time
-script) or stop carrying the `.bib` separately.
+script) or stop carrying the `.bib` separately. Now that the JSON is a build-
+time import, a generator script could emit the `.bib` into `dist/` and the
+checked-in copy could go.
 
 ### 11. (Future) Publications page "Download BibTeX" link
 Once issue 10 is resolved, surface a "Download BibTeX" button on the
@@ -343,8 +344,8 @@ Publications page that links to `/data/publications.bib`. Trivial.
    it's fast (~2s) and catches missing imports / dead refs.
 3. When editing team membership, only touch `src/data/team.js`. Both core
    and tuc Home derive from it.
-4. When editing publications, only touch `public/data/publications.json`.
-   The components on both core and tuc sides fetch it.
+4. When editing publications, only touch `src/data/publications.json`. Every
+   consumer imports it through `src/data/publications.js`, at build time.
 5. Asset paths: write `/<bucket>/...` (e.g. `/members/foo.png`,
    `/logos/bar.svg`, `/papers/baz.png`). Use `assetUrl()` from
    `src/utils/assetUrl.js` so the base prefix is applied.

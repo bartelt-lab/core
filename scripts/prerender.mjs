@@ -3,9 +3,12 @@
  *
  * Why a real browser rather than renderToString: the app leans on browser APIs
  * throughout — localStorage (theme + language), IntersectionObserver (scroll
- * reveals), framer-motion, and a runtime fetch of /data/publications.json.
- * Driving headless Chromium renders all of it without sprinkling `typeof
- * window` guards across the component tree.
+ * reveals) and framer-motion. Driving headless Chromium renders all of it
+ * without sprinkling `typeof window` guards across the component tree.
+ * (A runtime fetch of the publications was a fourth reason until they became a
+ * build-time import — see src/data/publications.js, and the "Dropping
+ * Playwright" note in wiki/later.md for what is left before this script could
+ * be replaced.)
  *
  * Output per route: `<path>.html` and `<path>/index.html` (see outputFiles),
  * plus dist/index.html for '/' and dist/404.html as the SPA fallback.

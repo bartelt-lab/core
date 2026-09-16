@@ -1,41 +1,15 @@
-import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaArrowRight } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
+import { publicationsWithImages } from '../../data/publications'
 import { useLanguage } from '../../i18n/useLanguage'
 
-const fallbackImages = ['/papers/guide.webp', '/papers/trove.webp', '/papers/mitigating.webp']
+// Doubled so the marquee can loop seamlessly: the second pass scrolls in behind the
+// first. Eight is enough to fill the widest viewport before the seam comes round.
+const items = [...publicationsWithImages.slice(0, 8), ...publicationsWithImages.slice(0, 8)]
 
 const PublicationMiniCarousel = () => {
   const { pick } = useLanguage()
-  const [publications, setPublications] = useState([])
-
-  useEffect(() => {
-    fetch(assetUrl('/data/publications.json'))
-      .then((res) => res.json())
-      .then((data) => {
-        const withImages = data.publications
-          .filter((publication) => publication.image)
-          .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-          .slice(0, 8)
-        setPublications(withImages)
-      })
-      .catch((err) => console.error('Failed to load hero publication carousel', err))
-  }, [])
-
-  const items = useMemo(() => {
-    const source = publications.length
-      ? publications
-      : fallbackImages.map((image, index) => ({
-        id: `fallback-${index}`,
-        title: pick('CORE research output', 'CORE-Forschungsergebnisse'),
-        venue: pick('Publication preview', 'Publikationsvorschau'),
-        year: '',
-        image,
-      }))
-
-    return [...source, ...source]
-  }, [pick, publications])
 
   return (
     <div className="mt-6 w-full max-w-6xl overflow-hidden rounded-3xl border border-white/70 bg-white/88 p-4 shadow-2xl shadow-slate-200/70 backdrop-blur-xl">

@@ -1,14 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaArrowRight } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
+import { publicationsWithImages } from '../../data/publications'
 
-const fallbackImages = [
-  '/papers/guide.webp',
-  '/papers/trove.webp',
-  '/papers/mitigating.webp',
-  '/papers/DSEG.webp',
-]
+// Doubled so the marquee loops seamlessly — the second pass scrolls in behind the first.
+const carouselItems = [...publicationsWithImages, ...publicationsWithImages]
 
 const PublicationCarousel = ({
   title = 'Publication outputs from the network.',
@@ -17,36 +13,6 @@ const PublicationCarousel = ({
   viewAllLink = '/publications',
   className = 'bg-gray-50',
 }) => {
-  const [publications, setPublications] = useState([])
-
-  useEffect(() => {
-    fetch(assetUrl('/data/publications.json'))
-      .then((res) => res.json())
-      .then((data) => {
-        const withImages = data.publications
-          .filter((publication) => publication.image)
-          .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-        setPublications(withImages)
-      })
-      .catch((err) => {
-        console.error('Failed to load publication carousel', err)
-      })
-  }, [])
-
-  const carouselItems = useMemo(() => {
-    const source = publications.length > 0
-      ? publications
-      : fallbackImages.map((image, index) => ({
-        id: `fallback-${index}`,
-        title: 'CORE research output',
-        venue: 'Publication preview',
-        year: '',
-        image,
-      }))
-
-    return [...source, ...source]
-  }, [publications])
-
   return (
     <section id="publications" className={`py-16 md:py-20 overflow-hidden ${className}`}>
       <div className="container mx-auto max-w-7xl px-6 md:px-12 lg:px-20 mb-10">

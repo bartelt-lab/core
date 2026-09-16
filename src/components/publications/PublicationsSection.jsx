@@ -5,6 +5,7 @@ import Section from '../common/Section'
 import PublicationItem from './PublicationItem'
 import assetUrl from '../../utils/assetUrl'
 import { getMemberBySlug } from '../../data/team'
+import { publications } from '../../data/publications'
 import { useLanguage } from '../../i18n/useLanguage'
 
 const PublicationCard = ({ publication, featured = false, compact = false, compactHeightClass = 'h-[350px]' }) => {
@@ -167,6 +168,25 @@ const getPublicationInstitutions = (publication) => {
   return [...new Set(institutions)]
 }
 
+// Filter options and the year span are derived from the whole corpus, which is now a
+// build-time constant — so they are computed once per module rather than per mount.
+const FILTER_OPTIONS = {
+  types: getUnique(publications.map((publication) => publication.type)),
+  statuses: getUnique(publications.map((publication) => publication.status)),
+  // Only CORE members (authors linked to a team.js member via memberSlug), not external coauthors.
+  researchers: getUnique(
+    publications.flatMap((publication) =>
+      publication.authors.filter((author) => author.memberSlug).map((author) => author.name),
+    ),
+  ),
+  institutions: ['TUC', 'UBB', 'Rostock'],
+}
+
+const YEAR_BOUNDS = (() => {
+  const years = publications.map((publication) => Number(publication.year)).filter(Boolean)
+  return years.length ? [Math.min(...years), Math.max(...years)] : null
+})()
+
 const PublicationsSection = ({
   limit,
   viewAllLink,
@@ -180,49 +200,16 @@ const PublicationsSection = ({
   initialInstitution = 'all',
 }) => {
   const { pick } = useLanguage()
-  const [publications, setPublications] = useState([])
-  const [loading, setLoading] = useState(true)
   const [activeIndex, setActiveIndex] = useState(0)
   const [filters, setFilters] = useState({
     query: '',
     type: [],
     status: [],
-    yearRange: null,
+    // The full span, available on the first render now that the corpus is not fetched.
+    yearRange: YEAR_BOUNDS,
     researcher: 'all',
     institution: initialInstitution === 'all' ? [] : [initialInstitution],
   })
-
-  useEffect(() => {
-    fetch(assetUrl('/data/publications.json'))
-      .then((res) => res.json())
-      .then((data) => {
-        const sorted = [...data.publications].sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-        setPublications(sorted)
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.error('Failed to load publications', err)
-        setLoading(false)
-      })
-  }, [])
-
-  const options = useMemo(() => ({
-    types: getUnique(publications.map((publication) => publication.type)),
-    statuses: getUnique(publications.map((publication) => publication.status)),
-    // Only CORE members (authors linked to a team.js member via memberSlug), not external coauthors.
-    researchers: getUnique(
-      publications.flatMap((publication) =>
-        publication.authors.filter((author) => author.memberSlug).map((author) => author.name),
-      ),
-    ),
-    institutions: ['TUC', 'UBB', 'Rostock'],
-  }), [publications])
-
-  const yearBounds = useMemo(() => {
-    const years = publications.map((publication) => Number(publication.year)).filter(Boolean)
-    return years.length ? [Math.min(...years), Math.max(...years)] : null
-  }, [publications])
-
 
   const filteredPublications = useMemo(() => {
     const query = filters.query.trim().toLowerCase()
@@ -243,7 +230,7 @@ const PublicationsSection = ({
         (filters.institution.length === 0 || getPublicationInstitutions(publication).some((institution) => filters.institution.includes(institution)))
       )
     })
-  }, [filters, publications])
+  }, [filters])
 
   const displayPublications = limit ? filteredPublications.slice(0, limit) : filteredPublications
   const isRotator = layout === 'rotator'
@@ -257,11 +244,6 @@ const PublicationsSection = ({
 
     return () => window.clearInterval(timer)
   }, [displayPublications.length, isRotator])
-
-  // Initialise the year range to the full span once data has loaded.
-  if (yearBounds && !filters.yearRange) {
-    setFilters((current) => ({ ...current, yearRange: yearBounds }))
-  }
 
   // Reset the rotator/list to the first item when filters or limit change.
   const resetKey = `${JSON.stringify(filters)}|${limit}`
@@ -333,7 +315,7 @@ const PublicationsSection = ({
                 className="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-medium text-gray-700 outline-none transition focus:border-primary-500 focus:bg-white"
               >
                 <option value="all">{pick('All researchers', 'Alle Forschenden')}</option>
-                {options.researchers.map((value) => (
+                {FILTER_OPTIONS.researchers.map((value) => (
                   <option key={value} value={value}>{value}</option>
                 ))}
               </select>
@@ -343,29 +325,29 @@ const PublicationsSection = ({
           <div className="mt-5 grid gap-5 sm:grid-cols-2">
             <FilterPills
               label="Institution"
-              options={options.institutions}
+              options={FILTER_OPTIONS.institutions}
               selected={filters.institution}
               onToggle={(value) => toggleFilter('institution', value)}
               onClear={() => clearFilter('institution')}
             />
             <FilterPills
               label="Type"
-              options={options.types}
+              options={FILTER_OPTIONS.types}
               selected={filters.type}
               onToggle={(value) => toggleFilter('type', value)}
               onClear={() => clearFilter('type')}
             />
             <FilterPills
               label="Status"
-              options={options.statuses}
+              options={FILTER_OPTIONS.statuses}
               selected={filters.status}
               onToggle={(value) => toggleFilter('status', value)}
               onClear={() => clearFilter('status')}
             />
-            {filters.yearRange && yearBounds && yearBounds[0] !== yearBounds[1] && (
+            {filters.yearRange && YEAR_BOUNDS && YEAR_BOUNDS[0] !== YEAR_BOUNDS[1] && (
               <YearRangeSlider
-                min={yearBounds[0]}
-                max={yearBounds[1]}
+                min={YEAR_BOUNDS[0]}
+                max={YEAR_BOUNDS[1]}
                 value={filters.yearRange}
                 onChange={(range) => updateFilter('yearRange', range)}
               />
@@ -374,9 +356,7 @@ const PublicationsSection = ({
         </div>
       )}
 
-      {loading ? (
-        <div className="text-center text-gray-500">{pick('Loading publications...', 'Publikationen werden geladen...')}</div>
-      ) : isRotator ? (
+      {isRotator ? (
         <div className={`mx-auto ${compact ? 'max-w-2xl' : 'max-w-5xl'}`}>
           {displayPublications.length > 0 && (
             <PublicationCard publication={displayPublications[activeIndex]} featured compact={compact} compactHeightClass={compactHeightClass} />
@@ -461,7 +441,7 @@ const PublicationsSection = ({
         </div>
       )}
 
-      {!loading && displayPublications.length === 0 && (
+      {displayPublications.length === 0 && (
         <div className="mx-auto max-w-xl rounded-lg border border-dashed border-gray-300 bg-white p-8 text-center text-gray-500">
           {pick('No publications match the selected filters.', 'Keine Publikationen passen zu den ausgewählten Filtern.')}
         </div>

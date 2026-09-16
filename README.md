@@ -48,7 +48,8 @@ src/
   App.jsx              route gating: CoreShell vs TucShell (BrowserRouter)
   routes.js            canonical route table — paths + per-route title/meta
   index.css            Tailwind v3 entry + theme palettes (CSS vars)
-  data/                team.js, projects.js, demonstrations.js
+  data/                team.js, projects.js, demonstrations.js, videos.js,
+                       publications.json + publications.js (build-time import)
   utils/assetUrl.js    prefixes BASE_URL onto /public asset paths
   components/
     common/            Navbar, Footer, RightSidebar, ThemeToggle, ...
@@ -59,7 +60,7 @@ src/
     Publications.jsx AiTeamProjects.jsx
     tuc/               bartelt pages + tuc/projects/*Project.jsx
 public/
-  data/publications.json   canonical publications source
+  data/publications.bib    BibTeX export (download artifact)
   members/ logos/ papers/ images/ videos/ documents/ icons/
 ```
 
@@ -67,7 +68,8 @@ public/
 
 - **Team members** — `src/data/team.js` only. Both CORE and TUC pages derive
   from it (filtered by `roleCategory` / institution).
-- **Publications** — `public/data/publications.json` only (fetched at runtime).
+- **Publications** — `src/data/publications.json` only. Imported at build time
+  via `src/data/publications.js`; no runtime fetch.
 - **CORE Labs projects / demos** — `src/data/projects.js`, `demonstrations.js`.
 - **Asset paths** — write `/<bucket>/...` (e.g. `/members/foo.webp`) and wrap in
   `assetUrl()` so the base prefix is applied.

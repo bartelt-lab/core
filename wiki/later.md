@@ -93,21 +93,30 @@ console.
 
 ## Dropping Playwright
 
-**Status:** viable escape hatch, not currently worth taking.
+**Status:** one blocker left of the three. Still not worth taking on its own.
 
-Prerendering drives headless Chromium because the app's content genuinely does
-not exist without a browser: `PublicationsSection.jsx` fetches
-`/data/publications.json` in an effect (the 180 KB publications page would render
-empty under `renderToString`), and `react-intersection-observer` gates
-scroll-reveal content behind real layout that jsdom cannot provide.
+Prerendering drives headless Chromium because the app's content did not exist
+without a browser. Three reasons were on that list; two are now gone.
 
-**If the app is ever made SSR-safe** — publications loaded at build time, content
-not gated behind IntersectionObserver — `scripts/prerender.mjs` could be swapped
+- ~~**Publications fetched at runtime.**~~ Resolved: the corpus is a build-time
+  import (`src/data/publications.js`). It was never 180 KB either — 68 KB.
+- ~~**`localStorage` for theme and language.**~~ Already SSR-safe:
+  `LanguageContext.jsx` guards on `typeof localStorage === 'undefined'`, and
+  `ThemeToggle` only touches it inside `useLayoutEffect`.
+- **Scroll-reveal animations.** The one that remains, and the expensive one.
+  Roughly eight `whileInView` / `useInView` sites start at `opacity: 0` and only
+  reveal once IntersectionObserver fires against real layout. `prerender.mjs`
+  handles this by scrolling the page before capturing; `renderToString` cannot
+  scroll, so every one of those sites needs a different pattern first — and
+  getting it wrong ships HTML with `style="opacity:0"` on most of the content,
+  which is strictly worse than today.
+
+**If that last one is ever resolved**, `scripts/prerender.mjs` could be swapped
 for `renderToString` and the Playwright dependency dropped. `src/routes.js` and
 `SeoHead` would not change; only the renderer.
 
-That is a refactor of the app, not the build. Not worth doing on its own, but
-worth knowing if the components are being reworked anyway for other reasons.
+That is still a refactor of the app, not the build. Worth folding in if those
+components are being reworked anyway; not worth a dedicated pass.
 
 ---
 
