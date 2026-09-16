@@ -347,6 +347,17 @@ export const videos = [
         usedOn: ['src/pages/tuc/AiTeamProjects.jsx', 'src/pages/tuc/projects/StrategoProject.jsx'],
     },
     {
+        id: 'first-experiment-montage',
+        src: '/videos/demonstrations/vial-sort/first-experiment-montage.mp4',
+        poster: '/videos/demonstrations/vial-sort/first-experiment-montage-poster.webp',
+        bucket: BUCKETS.INSTRUMENTED,
+        duration: 34,
+        description:
+            'Montage of autonomous test-time rollouts of the vial-sorting policy, three camera views side by side across the full width: a side view of the SO-101 arm and the vial rack, an overhead view of the arm on the table, and the wrist camera. Twelve episodes play back to back, strictly alternating outcome, and the outcome is marked by the frame itself — a failed episode is bordered in red with no caption, a successful one drops the border and overlays the word "success" in green across all three panes. Coloured tubes (green, cyan, yellow, red) sit in a black rack; a person is visible at a desk behind the rig in some wrist-camera shots. The alternation is an editing choice, not the measured success rate — do not read a rate off this clip.',
+        frames: 'wiki/video-frames/first-experiment-montage.jpg',
+        usedOn: ['src/pages/VialSort.jsx'],
+    },
+    {
         id: 'data-collection-viz',
         src: '/videos/demonstrations/vial-sort/data-collection-viz.mp4',
         poster: '/videos/demonstrations/vial-sort/data-collection-viz-poster.webp',

@@ -140,12 +140,12 @@ const milestones = [
             </>
         ),
         media: {
-            type: 'image',
-            src: `${FIG}/complete-sort.webp`,
+            type: 'video',
+            src: '/videos/demonstrations/vial-sort/first-experiment-montage.mp4',
+            poster: '/videos/demonstrations/vial-sort/first-experiment-montage-poster.webp',
+            // 1440x360, three camera views side by side — cover would crop the outer two.
             fit: 'contain',
-            placeholder: true,
-            alt: 'Four frames of a complete autonomous rack-to-rack sort: approach, grasp at the source slot, transport, and release into the destination slot',
-            title: 'A complete autonomous sort',
+            title: 'Test-time rollouts, both outcomes',
         },
     },
 ]
