@@ -7,31 +7,56 @@ const TEMPO_DE = {
     "Ein Entscheidungspunkt mit drei möglichen Ergebnissen: der trainierte Zug, ein anderer Zug aus dem Repertoire, dem die Sitzung folgt, oder ein Fehler, dessen Widerlegung ausgespielt wird, bevor die Stellung zurückgesetzt wird",
   "A line of positions running left to right, each step signposted by an arrow; a wrong move branches off and is blocked before it is played, guiding the player back to the line":
     "Eine von links nach rechts verlaufende Folge von Stellungen, bei der jeder Schritt durch einen Pfeil markiert ist; ein falscher Zug zweigt ab und wird vor der Ausführung blockiert, sodass die spielende Person zur Variante zurückgeführt wird",
-  "Opening TEMPO leads to a choice of mode. Learning Mode: you choose the line, the drill is guided, a wrong move is corrected and replayed. Repeating Mode: the recommender chooses the line, the drill is unassisted, and the pick is graded on whether it came too late. Both branches update the record of what you know. Everything feeds the recommender on the right, which holds your profile, your repertoire, what you know and past picks, plus the base model fine-tuned on you that returns the next line to repeat.":
-    "Beim Öffnen von TEMPO wählst du zunächst einen Modus. Lernmodus: Du wählst die Variante, das Training wird geführt und ein falscher Zug wird korrigiert und wiederholt. Wiederholmodus: Das Empfehlungsmodell wählt die Variante, das Training läuft ohne Hilfe und die Empfehlung wird danach bewertet, ob sie zu spät kam. Beide Wege aktualisieren den Wissensstand. Alles fließt in das Empfehlungsmodell rechts ein: dein Profil, dein Repertoire, dein Wissensstand, frühere Empfehlungen und das auf dich feinabgestimmte Basismodell, das die nächste zu wiederholende Variante liefert.",
-  "You open TEMPO": "Du öffnest TEMPO",
+  "The user opens TEMPO and picks a mode. Learning Mode (top row, navy frame): the user chooses the line -> a guided drill shows every next move -> a wrong move is corrected and replayed -> the line ends up learned. The learned line is saved into the repertory store and also reported to the review planner as new knowledge. Repeating Mode (bottom row, teal frame): the review planner chooses the line -> the drill runs with no arrows -> a wrong move is not corrected, the line plays out -> and then the review itself is graded (did the repetition come too late?). Both the uncorrected move and the grade update the review planner's inputs. The openings store sits between the two rows and feeds lines to both: the Openings compartment feeds Learning Mode, the Repertory compartment feeds Repeating Mode. The review planner (green panel, right) is part of Repeating Mode — that is why the teal frame is L-shaped and encloses it. Its INPUT group holds user knowledge and past picks; both feed a base model fine-tuned on that one user, which hands back the next line to repeat.":
+    "Beim Öffnen von TEMPO wählst du einen Modus. Lernmodus (obere Zeile, dunkelblauer Rahmen): Der Nutzer wählt die Variante -> ein geführtes Training zeigt jeden nächsten Zug -> ein falscher Zug wird korrigiert und wiederholt -> die Variante gilt als gelernt. Die gelernte Variante wird im Repertoirespeicher abgelegt und dem Review-Planer als neues Wissen gemeldet. Wiederholmodus (untere Zeile, blaugrüner Rahmen): Der Review-Planer wählt die Variante -> das Training läuft ohne Pfeile -> ein falscher Zug bleibt unkorrigiert, die Variante wird ausgespielt -> das Review wird danach bewertet, ob es zu spät kam. Sowohl der unkorrigierte Zug als auch die Bewertung aktualisieren die Eingaben des Modells. Der Eröffnungsspeicher liegt zwischen den Zeilen und versorgt beide: Eröffnungen fließen in den Lernmodus, das Repertoire in den Wiederholmodus. Der Review-Planer (grünes Panel rechts) ist Teil des Wiederholmodus — daher umschließt der L-förmige Rahmen beides. Dessen Eingabegruppe hält Nutzerwissen und frühere Reviews; beide speisen das feinabgestimmte Basismodell, das die nächste zu wiederholende Variante liefert.",
+  "LEARNING MODE": "LERNMODUS",
+  "REPEATING MODE": "WIEDERHOLMODUS",
+  "Pick a": "Modus",
+  mode: "wählen",
   "Pick a mode": "Modus wählen",
   learn: "lernen",
   repeat: "wiederholen",
-  "Learning Mode": "Lernmodus",
-  "you choose the line": "du wählst die Variante",
+  "Choose line": "Variante wählen",
+  "by user": "durch Nutzer",
   "Guided drill": "Geführtes Training",
-  "arrows show every move": "Pfeile zeigen jeden Zug",
-  "Wrong move corrected": "Falscher Zug korrigiert",
-  "you replay it": "du wiederholst ihn",
-  "Repeating Mode": "Wiederholmodus",
-  "the recommender chooses": "das Modell wählt",
+  "arrows show next move": "Pfeile zeigen nächsten Zug",
+  "Wrong move": "Falscher Zug",
+  corrected: "korrigiert",
+  "user replays it": "Nutzer wiederholt ihn",
+  "Line learned": "Variante gelernt",
+  "by review planner": "durch Review-Planer",
   "Unassisted drill": "Training ohne Hilfe",
-  "no hints, no arrows": "keine Hinweise, keine Pfeile",
-  "Pick is graded": "Empfehlung bewertet",
+  "no arrows": "keine Pfeile",
+  uncorrected: "nicht korrigiert",
+  "line plays out": "Variante ausgespielt",
+  "Pick is graded": "Review bewertet",
   "did it come too late?": "kam sie zu spät?",
+  Openings: "Eröffnungen",
+  Repertory: "Repertoire",
+  "REVIEW PLANNER": "REVIEW-PLANER",
+  INPUT: "EINGABE",
+  "user knowledge": "Nutzerwissen",
+  "past picks": "frühere Reviews",
+  "base model": "Basismodell",
+  "fine-tuned on user": "auf Nutzer feinabgestimmt",
+  line: "Variante",
+  save: "speichern",
+  update: "aktualisieren",
+  "next review": "nächstes Review",
+  "review line": "Review-Variante",
+  "Learning Mode": "Lernmodus",
+  "Repeating Mode": "Wiederholmodus",
+  "Wrong move corrected": "Falscher Zug korrigiert",
+  "arrows show every move": "Pfeile zeigen jeden Zug",
+  "you replay it": "du wiederholst ihn",
+  "the review planner chooses": "der Review-Planer wählt",
+  "no hints, no arrows": "keine Hinweise, keine Pfeile",
   "What you know is updated": "Wissensstand aktualisiert",
   "every move counts": "jeder Zug zählt",
-  Recommender: "Empfehlungsmodell",
+  "Review Planner": "Review-Planer",
   "your profile": "dein Profil",
   "your repertoire": "dein Repertoire",
   "what you know": "dein Wissensstand",
-  "past picks": "frühere Empfehlungen",
   "Base model,": "Basismodell,",
   "fine-tuned on you": "auf dich feinabgestimmt",
   "returns the next line": "liefert die nächste Variante",
@@ -46,7 +71,7 @@ const TEMPO_DE = {
   "you blunder — the opponent": "du patzt – der Gegner",
   "plays the punishment out": "spielt die Widerlegung aus",
   "then rewind": "danach zurücksetzen",
-  "Recommender Systems": "Empfehlungssysteme",
+  "Review Planning Systems": "Review-Planungssysteme",
   Personalisation: "Personalisierung",
   "Learning from Feedback": "Lernen aus Feedback",
   Chess: "Schach",
@@ -56,8 +81,8 @@ const TEMPO_DE = {
     "Du arbeitest sicher mit Git und in einem gemeinsam genutzten Repository",
   "You enjoy working in a mixed international team, across two universities":
     "Du arbeitest gern in einem gemischten internationalen Team über zwei Universitäten hinweg",
-  "Interest in machine learning helps — recommender systems, personalisation, or learning from user feedback":
-    "Interesse an maschinellem Lernen ist hilfreich – etwa an Empfehlungssystemen, Personalisierung oder dem Lernen aus Nutzerfeedback",
+  "Interest in machine learning helps — review planning systems, personalisation, or learning from user feedback":
+    "Interesse an maschinellem Lernen ist hilfreich – etwa an Review-Planungssystemen, Personalisierung oder dem Lernen aus Nutzerfeedback",
   "Curiosity about how people learn and forget is worth as much as model experience — this is a memory model before it is a chess model":
     "Neugier darauf, wie Menschen lernen und vergessen, ist ebenso wertvoll wie Modellerfahrung – dies ist zuerst ein Gedächtnismodell und erst danach ein Schachmodell",
   "Chess knowledge is welcome for intuition, and is not required for most of the codebase":
@@ -65,14 +90,14 @@ const TEMPO_DE = {
   "AI Team Project": "AI-Team-Projekt",
   "Trained Engine for Memory-Paced Openings":
     "Trainiertes System für gedächtnisgesteuertes Eröffnungstraining",
-  "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. TEMPO answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every recommendation it makes.":
-    "Die schwierigste Frage beim Schachtraining ist nicht, wie eine Variante gespielt wird, sondern welche der bereits bekannten Varianten heute geübt werden muss. TEMPO beantwortet sie mit einem Modell, das als Basismodell bereitgestellt, auf das Spiel einer einzelnen Person feinabgestimmt und anhand jeder eigenen Empfehlung bewertet wird.",
+  "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. TEMPO answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every review it makes.":
+    "Die schwierigste Frage beim Schachtraining ist nicht, wie eine Variante gespielt wird, sondern welche der bereits bekannten Varianten heute geübt werden muss. TEMPO beantwortet sie mit einem Modell, das als Basismodell bereitgestellt, auf das Spiel einer einzelnen Person feinabgestimmt und anhand jedes eigenen Reviews bewertet wird.",
   Focus: "Schwerpunkt",
   Team: "Team",
   "A mixed international team of German and Romanian students, for one semester.":
     "Ein gemischtes internationales Team aus deutschen und rumänischen Studierenden arbeitet ein Semester lang zusammen.",
-  "The recommender, drawn as a robot with a graph of chess lines lit up in its chest":
-    "Das Empfehlungsmodell, dargestellt als Roboter mit einem leuchtenden Graphen aus Schachvarianten in seiner Brust",
+  "The review planner, drawn as a robot with a graph of chess lines lit up in its chest":
+    "Der Review-Planer, dargestellt als Roboter mit einem leuchtenden Graphen aus Schachvarianten in seiner Brust",
   "The problem": "Das Problem",
   "Deciding what to study is the hardest part of studying alone":
     "Allein zu entscheiden, was als Nächstes geübt werden soll, ist der schwierigste Teil",
@@ -91,27 +116,27 @@ const TEMPO_DE = {
   "The line is the model's call, not yours. No hints. No arrows. Blunder, and nothing stops you — the opponent plays out the punishment on the board, you watch the piece go, and only then does the position rewind.":
     "Die Variante wird vom Modell ausgewählt, nicht von dir. Keine Hinweise, keine Pfeile. Bei einem Fehler greift nichts ein: Der Gegner spielt die Widerlegung auf dem Brett aus, du siehst die Konsequenz und erst danach wird die Stellung zurückgesetzt.",
   "Everything is logged": "Alles wird protokolliert",
-  "Every move attempt and every recommendation — including which branch the player took, and every position a punishment sequence passed through. That log is what the model learns from, and what the project's results are measured on.":
-    "Jeder Zugversuch und jede Empfehlung wird protokolliert – einschließlich des gewählten Variantenasts und jeder Stellung, die während einer Widerlegungssequenz durchlaufen wird. Aus diesem Protokoll lernt das Modell, und daran werden die Projektergebnisse gemessen.",
+  "Every move attempt and every review — including which branch the player took, and every position a punishment sequence passed through. That log is what the model learns from, and what the project's results are measured on.":
+    "Jeder Zugversuch und jedes Review wird protokolliert – einschließlich des gewählten Variantenasts und jeder Stellung, die während einer Widerlegungssequenz durchlaufen wird. Aus diesem Protokoll lernt das Modell, und daran werden die Projektergebnisse gemessen.",
   "The loop": "Der Kreislauf",
-  "One session, from the first move to the next recommendation":
-    "Eine Sitzung vom ersten Zug bis zur nächsten Empfehlung",
-  "Both modes write to the same record of what you know. The recommender — your profile, your repertoire, that record, its own past picks, and the model fine-tuned on all of it — reads what comes out and returns the line to repeat next.":
-    "Beide Modi schreiben in denselben Wissensstand. Das Empfehlungsmodell liest dein Profil, dein Repertoire, diesen Wissensstand, seine früheren Empfehlungen sowie das darauf feinabgestimmte Modell und liefert die Variante, die als Nächstes wiederholt werden soll.",
+  "One session, from the first move to the next review":
+    "Eine Sitzung vom ersten Zug bis zum nächsten Review",
+  "Both modes write to the same record of what you know. The review planner — your repertoire, that record, its own past picks, and the model fine-tuned on all of it — reads what comes out and returns the line to repeat next.":
+    "Beide Modi schreiben in denselben Wissensstand. Der Review-Planer liest dein Repertoire, diesen Wissensstand, seine früheren Reviews sowie das darauf feinabgestimmte Modell und liefert die Variante, die als Nächstes wiederholt werden soll.",
   "How it works": "Funktionsweise",
-  "The recommender is graded on its own decisions":
-    "Das Empfehlungsmodell wird anhand seiner eigenen Entscheidungen bewertet",
+  "The review planner is graded on its own decisions":
+    "Der Review-Planer wird anhand seiner eigenen Entscheidungen bewertet",
   "Which lines get learned is the player's own choice. The model's job starts afterwards: it reads their profile, their repertoire, the record of every line they have drilled so far and its own earlier suggestions, and returns the one line that should be repeated next.":
     "Welche Varianten gelernt werden, entscheidet die spielende Person selbst. Die Aufgabe des Modells beginnt danach: Es liest ihr Profil, ihr Repertoire, den Lernstand jeder bisher trainierten Variante und seine eigenen früheren Vorschläge und liefert die eine Variante, die als Nächstes wiederholt werden sollte.",
   "The suggestion is then measured against what actually happened in the session — what was recalled, what was missed, and how long it took the player to find the right move. That measurement is what the model is trained on next, so over time it builds a picture of one specific player's memory.":
-    "Die Empfehlung wird anschließend daran gemessen, was in der Sitzung tatsächlich geschah: was erinnert, was vergessen und wie schnell der richtige Zug gefunden wurde. Mit dieser Bewertung wird das Modell weitertrainiert, sodass mit der Zeit ein Bild vom Gedächtnis einer bestimmten Person entsteht.",
-  "A line the player has already forgotten is recorded as having arrived too late. That grade becomes training data, which is what separates the recommender from a scheduler that is never told whether it was right.":
-    "Eine Variante, die bereits vergessen wurde, gilt als zu spät empfohlen. Diese Bewertung wird zu Trainingsdaten. Genau das unterscheidet das Empfehlungsmodell von einer Planung, die nie erfährt, ob ihre Entscheidung richtig war.",
+    "Das Review wird anschließend daran gemessen, was in der Sitzung tatsächlich geschah: was erinnert, was vergessen und wie schnell der richtige Zug gefunden wurde. Mit dieser Bewertung wird das Modell weitertrainiert, sodass mit der Zeit ein Bild vom Gedächtnis einer bestimmten Person entsteht.",
+  "A line the player has already forgotten is recorded as having arrived too late. That grade becomes training data, which is what separates the review planner from a scheduler that is never told whether it was right.":
+    "Eine Variante, die bereits vergessen wurde, gilt als zu spät wiederholt. Diese Bewertung wird zu Trainingsdaten. Genau das unterscheidet den Review-Planer von einer Planung, die nie erfährt, ob ihre Entscheidung richtig war.",
   Scope: "Übertragbarkeit",
   "The model reasons about learning, not about chess":
     "Das Modell denkt über Lernen nach, nicht über Schach",
-  "The recommender solves a general problem: given a learner, a set of things they are trying to learn, and a history of how their practice went, decide what they should practise next. Its inputs and outputs are kept in a form that does not assume the material is chess.":
-    "Das Empfehlungsmodell löst ein allgemeines Problem: Für eine lernende Person, eine Menge von Lerninhalten und den bisherigen Übungsverlauf entscheidet es, was als Nächstes geübt werden sollte. Ein- und Ausgaben sind so gestaltet, dass sie nicht voraussetzen, dass der Lernstoff Schach ist.",
+  "The review planner solves a general problem: given a learner, a set of things they are trying to learn, and a history of how their practice went, decide what they should practise next. Its inputs and outputs are kept in a form that does not assume the material is chess.":
+    "Der Review-Planer löst ein allgemeines Problem: Für eine lernende Person, eine Menge von Lerninhalten und den bisherigen Übungsverlauf entscheidet er, was als Nächstes geübt werden sollte. Ein- und Ausgaben sind so gestaltet, dass sie nicht voraussetzen, dass der Lernstoff Schach ist.",
   "Chess is where it is built and measured first. The domain supplies dense, cheap, objectively gradable outcomes — a move either is the repertoire move or it is not — which makes it a good place to find out whether the approach works at all.":
     "Schach ist die erste Domäne, in der das Modell entwickelt und gemessen wird. Sie liefert viele kostengünstige und objektiv bewertbare Ergebnisse – ein Zug gehört entweder zum Repertoire oder nicht. Damit eignet sie sich gut, um grundsätzlich zu prüfen, ob der Ansatz funktioniert.",
   "What goes in": "Eingaben",
@@ -290,39 +315,43 @@ const RepeatingDiagram = ({ t }) => (
   </svg>
 );
 
-// Box styles for the session-flow diagram: the two branches are told apart by
-// fill, and everything downstream of them is shared.
-const FLOW_TONES = {
-  dark: {
-    rect: "fill-slate-800 stroke-slate-800",
-    title: "fill-white",
-    sub: "fill-slate-300",
-  },
-  light: {
-    rect: "fill-white stroke-slate-300",
-    title: "fill-slate-800",
-    sub: "fill-slate-500",
-  },
-  primary: {
-    rect: "fill-primary-600 stroke-primary-600",
-    title: "fill-white",
-    sub: "fill-primary-100",
-  },
-  chip: {
-    rect: "fill-primary-50 stroke-primary-200",
-    title: "fill-primary-700",
-    sub: "",
-  },
-  band: {
-    rect: "fill-primary-700 stroke-primary-700",
-    title: "fill-white",
-    sub: "fill-primary-100",
-  },
-};
+// Database cylinder icon for the Openings/Repertory compartments
+const DatabaseCylinder = ({ x, y }) => (
+  <g
+    transform={`translate(${x}, ${y})`}
+    stroke="#0f172a"
+    strokeWidth="2.5"
+    fill="none"
+  >
+    <ellipse cx="15" cy="6" rx="15" ry="6" />
+    <line x1="0" y1="6" x2="0" y2="36" />
+    <line x1="30" y1="6" x2="30" y2="36" />
+    <path d="M 0 36 A 15 6 0 0 0 30 36" />
+    <path d="M 0 16 A 15 6 0 0 0 30 16" />
+    <path d="M 0 26 A 15 6 0 0 0 30 26" />
+  </g>
+);
 
-const FlowNode = ({ x, y, w, h = 68, title, sub, tone = "light" }) => {
-  const style = FLOW_TONES[tone];
+// Step box for Learning and Repeating modes
+const StepBox = ({
+  x,
+  y,
+  w,
+  h = 130,
+  title,
+  titleLines,
+  sub,
+  variant = "learning",
+}) => {
+  const isLearning = variant === "learning";
+  const fill = isLearning ? "#f8fafc" : "#f0fdfa";
+  const stroke = isLearning ? "#cbd5e1" : "#99f6e4";
+  const titleColor = isLearning ? "#0f172a" : "#115e59";
+  const subColor = isLearning ? "#64748b" : "#0d9488";
   const cx = x + w / 2;
+
+  const fontHeading = "Montserrat, Poppins, sans-serif";
+  const fontBody = "Inter, sans-serif";
 
   return (
     <g>
@@ -331,255 +360,671 @@ const FlowNode = ({ x, y, w, h = 68, title, sub, tone = "light" }) => {
         y={y}
         width={w}
         height={h}
-        rx="10"
-        className={style.rect}
-        strokeWidth="1.5"
+        rx="14"
+        fill={fill}
+        stroke={stroke}
+        strokeWidth="2.5"
       />
-      <text
-        x={cx}
-        y={sub ? y + h / 2 - 2 : y + h / 2 + 7}
-        textAnchor="middle"
-        className={`text-[18px] font-bold ${style.title}`}
-      >
-        {title}
-      </text>
-      {sub ? (
+      {titleLines ? (
+        <>
+          <text
+            x={cx}
+            y={y + 42}
+            textAnchor="middle"
+            fill={titleColor}
+            style={{
+              fontFamily: fontHeading,
+              fontWeight: 700,
+              fontSize: 24,
+            }}
+          >
+            {titleLines[0]}
+          </text>
+          <text
+            x={cx}
+            y={y + 68}
+            textAnchor="middle"
+            fill={titleColor}
+            style={{
+              fontFamily: fontHeading,
+              fontWeight: 700,
+              fontSize: 24,
+            }}
+          >
+            {titleLines[1]}
+          </text>
+          {sub ? (
+            <text
+              x={cx}
+              y={y + 102}
+              textAnchor="middle"
+              fill={subColor}
+              style={{
+                fontFamily: fontBody,
+                fontWeight: 400,
+                fontSize: 21,
+              }}
+            >
+              {sub}
+            </text>
+          ) : null}
+        </>
+      ) : sub ? (
+        <>
+          <text
+            x={cx}
+            y={y + 57}
+            textAnchor="middle"
+            fill={titleColor}
+            style={{
+              fontFamily: fontHeading,
+              fontWeight: 700,
+              fontSize: 25,
+            }}
+          >
+            {title}
+          </text>
+          <text
+            x={cx}
+            y={y + 96}
+            textAnchor="middle"
+            fill={subColor}
+            style={{
+              fontFamily: fontBody,
+              fontWeight: 400,
+              fontSize: 22,
+            }}
+          >
+            {sub}
+          </text>
+        </>
+      ) : (
         <text
           x={cx}
-          y={y + h / 2 + 20}
+          y={y + h / 2 + 9}
           textAnchor="middle"
-          className={`text-[14px] font-semibold ${style.sub}`}
+          fill={titleColor}
+          style={{
+            fontFamily: fontHeading,
+            fontWeight: 700,
+            fontSize: 26,
+          }}
         >
-          {sub}
+          {title}
         </text>
-      ) : null}
+      )}
     </g>
   );
 };
 
 // One session end to end, read left to right: the player picks a mode, each
-// branch drills, and both write into the recommender on the right — which
+// branch drills, and both write into the review planner on the right — which
 // returns the next line to repeat.
 const FlowDiagram = ({ t }) => (
   <svg
-    viewBox="0 0 1380 440"
-    className="h-auto w-full"
+    viewBox="-45 0 1790 780"
+    className="h-auto w-full overflow-visible"
     role="img"
     aria-label={t(
-      "Opening TEMPO leads to a choice of mode. Learning Mode: you choose the line, the drill is guided, a wrong move is corrected and replayed. Repeating Mode: the recommender chooses the line, the drill is unassisted, and the pick is graded on whether it came too late. Both branches update the record of what you know. Everything feeds the recommender on the right, which holds your profile, your repertoire, what you know and past picks, plus the base model fine-tuned on you that returns the next line to repeat.",
+      "The user opens TEMPO and picks a mode. Learning Mode (top row, navy frame): the user chooses the line -> a guided drill shows every next move -> a wrong move is corrected and replayed -> the line ends up learned. The learned line is saved into the repertory store and also reported to the review planner as new knowledge. Repeating Mode (bottom row, teal frame): the review planner chooses the line -> the drill runs with no arrows -> a wrong move is not corrected, the line plays out -> and then the review itself is graded (did the repetition come too late?). Both the uncorrected move and the grade update the review planner's inputs. The openings store sits between the two rows and feeds lines to both: the Openings compartment feeds Learning Mode, the Repertory compartment feeds Repeating Mode. The review planner (green panel, right) is part of Repeating Mode — that is why the teal frame is L-shaped and encloses it. Its INPUT group holds user knowledge and past picks; both feed a base model fine-tuned on that one user, which hands back the next line to repeat.",
     )}
   >
     <defs>
       <marker
-        id="tempo-flow-arrow"
-        viewBox="0 0 10 10"
-        refX="8"
-        refY="5"
-        markerWidth="6"
-        markerHeight="6"
-        orient="auto-start-reverse"
+        id="tempo-arrow-slate"
+        viewBox="0 0 21 17"
+        refX="21"
+        refY="8.5"
+        markerWidth="21"
+        markerHeight="17"
+        markerUnits="userSpaceOnUse"
+        orient="auto"
       >
-        <path d="M0 0 L10 5 L0 10 z" className="fill-slate-400" />
+        <polygon points="0 1, 21 8.5, 0 16" fill="#64748b" />
+      </marker>
+      <marker
+        id="tempo-arrow-teal"
+        viewBox="0 0 21 17"
+        refX="21"
+        refY="8.5"
+        markerWidth="21"
+        markerHeight="17"
+        markerUnits="userSpaceOnUse"
+        orient="auto"
+      >
+        <polygon points="0 1, 21 8.5, 0 16" fill="#0f766e" />
+      </marker>
+      <marker
+        id="tempo-arrow-green"
+        viewBox="0 0 21 17"
+        refX="21"
+        refY="8.5"
+        markerWidth="21"
+        markerHeight="17"
+        markerUnits="userSpaceOnUse"
+        orient="auto"
+      >
+        <polygon points="0 1, 21 8.5, 0 16" fill="#009020" />
       </marker>
     </defs>
 
-    <g
-      className="stroke-slate-400"
-      strokeWidth="1.5"
+    {/* Frames */}
+    {/* Learning Mode frame */}
+    <rect
+      x="165"
+      y="40"
+      width="1186"
+      height="296"
+      rx="22"
       fill="none"
-      markerEnd="url(#tempo-flow-arrow)"
+      stroke="#334155"
+      strokeWidth="3"
+    />
+    <text
+      x="758"
+      y="78"
+      textAnchor="middle"
+      fill="#334155"
+      style={{
+        fontFamily: "Montserrat, Poppins, sans-serif",
+        fontWeight: 800,
+        fontSize: 30,
+        letterSpacing: "0.14em",
+      }}
     >
-      <path d="M120 170 V186" />
-      <path d="M210 226 H415 V108" />
-      <path d="M415 226 V260" />
-      <path d="M530 74 H570" />
-      <path d="M800 74 H830" />
-      <path d="M530 294 H570" />
-      <path d="M800 294 H830" />
-      <path d="M955 108 V150" />
-      <path d="M685 260 V184 H830" />
-      <path d="M1080 184 H1110" />
-      <path d="M1080 294 H1110" />
-      <path d="M1235 410 V422 H415 V328" />
+      {t("LEARNING MODE")}
+    </text>
+
+    {/* Repeating Mode L-shaped frame */}
+    <path
+      d="M187 445 H1378 A22 22 0 0 0 1400 423 V130 A22 22 0 0 1 1422 108 H1710 A22 22 0 0 1 1732 130 V678 A22 22 0 0 1 1710 700 H187 A22 22 0 0 1 165 678 V467 A22 22 0 0 1 187 445 Z"
+      fill="none"
+      stroke="#0f766e"
+      strokeWidth="3"
+    />
+    <text
+      x="758"
+      y="483"
+      textAnchor="middle"
+      fill="#0f766e"
+      style={{
+        fontFamily: "Montserrat, Poppins, sans-serif",
+        fontWeight: 800,
+        fontSize: 30,
+        letterSpacing: "0.14em",
+      }}
+    >
+      {t("REPEATING MODE")}
+    </text>
+
+    {/* Mode Picker Diamond */}
+    <g transform="translate(45, 360)">
+      <rect
+        x="-55"
+        y="-55"
+        width="110"
+        height="110"
+        rx="10"
+        transform="rotate(45)"
+        fill="#0f172a"
+        stroke="#334155"
+        strokeWidth="2.5"
+      />
+      <text
+        x="0"
+        y="-4"
+        textAnchor="middle"
+        fill="#ffffff"
+        style={{
+          fontFamily: "Montserrat, Poppins, sans-serif",
+          fontWeight: 700,
+          fontSize: 22,
+        }}
+      >
+        {t("Pick a")}
+      </text>
+      <text
+        x="0"
+        y="22"
+        textAnchor="middle"
+        fill="#ffffff"
+        style={{
+          fontFamily: "Montserrat, Poppins, sans-serif",
+          fontWeight: 700,
+          fontSize: 22,
+        }}
+      >
+        {t("mode")}
+      </text>
     </g>
 
-    <FlowNode
-      x={20}
-      y={118}
-      w={200}
-      h={52}
-      title={t("You open TEMPO")}
-      tone="dark"
+    {/* Store */}
+    <rect
+      x="200"
+      y="282"
+      width="250"
+      height="213"
+      rx="16"
+      fill="#ffffff"
+      stroke="#0f172a"
+      strokeWidth="2.5"
     />
-
-    <path d="M120 186 L210 226 L120 266 L30 226 Z" className="fill-slate-900" />
+    {/* Openings compartment */}
+    <rect
+      x="216"
+      y="298"
+      width="218"
+      height="84"
+      rx="11"
+      fill="#f8fafc"
+      stroke="#cbd5e1"
+      strokeWidth="2"
+    />
+    <DatabaseCylinder x={232} y={319} />
     <text
-      x="120"
-      y="233"
-      textAnchor="middle"
-      className="fill-white text-[18px] font-bold"
+      x="274"
+      y="348"
+      fill="#0f172a"
+      style={{
+        fontFamily: "Montserrat, Poppins, sans-serif",
+        fontWeight: 700,
+        fontSize: 25,
+      }}
     >
-      {t("Pick a mode")}
-    </text>
-    <text x="428" y="190" className="fill-slate-400 text-[14px] font-semibold">
-      {t("learn")}
-    </text>
-    <text x="428" y="252" className="fill-slate-400 text-[14px] font-semibold">
-      {t("repeat")}
+      {t("Openings")}
     </text>
 
-    <FlowNode
-      x={300}
-      y={40}
-      w={230}
-      title={t("Learning Mode")}
-      sub={t("you choose the line")}
+    {/* Repertory compartment */}
+    <rect
+      x="216"
+      y="394"
+      width="218"
+      height="84"
+      rx="11"
+      fill="#f8fafc"
+      stroke="#cbd5e1"
+      strokeWidth="2"
     />
-    <FlowNode
-      x={570}
-      y={40}
-      w={230}
+    <DatabaseCylinder x={232} y={415} />
+    <text
+      x="274"
+      y="444"
+      fill="#0f172a"
+      style={{
+        fontFamily: "Montserrat, Poppins, sans-serif",
+        fontWeight: 700,
+        fontSize: 25,
+      }}
+    >
+      {t("Repertory")}
+    </text>
+
+    {/* Review Planner panel */}
+    <rect
+      x="1415"
+      y="118"
+      width="305"
+      height="572"
+      rx="20"
+      fill="#ffffff"
+      stroke="#009020"
+      strokeWidth="3"
+    />
+    <text
+      x="1436"
+      y="160"
+      fill="#009020"
+      style={{
+        fontFamily: "Montserrat, Poppins, sans-serif",
+        fontWeight: 800,
+        fontSize: 24,
+        letterSpacing: "0.04em",
+      }}
+    >
+      {t("REVIEW PLANNER")}
+    </text>
+
+    {/* INPUT group */}
+    <rect
+      x="1430"
+      y="217"
+      width="281"
+      height="172"
+      rx="14"
+      fill="#ECFDF1"
+      stroke="#9CD8A9"
+      strokeWidth="2"
+    />
+    <text
+      x="1448"
+      y="246"
+      fill="#0B5A22"
+      style={{
+        fontFamily: "Montserrat, Poppins, sans-serif",
+        fontWeight: 800,
+        fontSize: 22,
+        letterSpacing: "0.12em",
+      }}
+    >
+      {t("INPUT")}
+    </text>
+
+    {/* User knowledge item */}
+    <rect
+      x="1480"
+      y="259"
+      width="207"
+      height="54"
+      rx="10"
+      fill="#ffffff"
+      stroke="#9CD8A9"
+      strokeWidth="2"
+    />
+    <text
+      x="1583.5"
+      y="294"
+      textAnchor="middle"
+      fill="#0B5A22"
+      style={{
+        fontFamily: "Inter, sans-serif",
+        fontWeight: 600,
+        fontSize: 22,
+      }}
+    >
+      {t("user knowledge")}
+    </text>
+
+    {/* Past picks item */}
+    <rect
+      x="1480"
+      y="321"
+      width="207"
+      height="54"
+      rx="10"
+      fill="#ffffff"
+      stroke="#9CD8A9"
+      strokeWidth="2"
+    />
+    <text
+      x="1583.5"
+      y="356"
+      textAnchor="middle"
+      fill="#0B5A22"
+      style={{
+        fontFamily: "Inter, sans-serif",
+        fontWeight: 600,
+        fontSize: 22,
+      }}
+    >
+      {t("past picks")}
+    </text>
+
+    {/* Base model box */}
+    <rect
+      x="1429"
+      y="510"
+      width="283"
+      height="144"
+      rx="14"
+      fill="#ECFDF1"
+      stroke="#009020"
+      strokeWidth="2.5"
+    />
+    <text
+      x="1570.5"
+      y="566"
+      textAnchor="middle"
+      fill="#0B5A22"
+      style={{
+        fontFamily: "Montserrat, Poppins, sans-serif",
+        fontWeight: 700,
+        fontSize: 26,
+      }}
+    >
+      {t("base model")}
+    </text>
+    <text
+      x="1570.5"
+      y="606"
+      textAnchor="middle"
+      fill="#2F6B3F"
+      style={{
+        fontFamily: "Inter, sans-serif",
+        fontWeight: 400,
+        fontSize: 23,
+      }}
+    >
+      {t("fine-tuned on user")}
+    </text>
+
+    {/* Learning row steps */}
+    <StepBox
+      x={190}
+      y={112}
+      w={235}
+      title={t("Choose line")}
+      sub={t("by user")}
+      variant="learning"
+    />
+    <StepBox
+      x={470}
+      y={112}
+      w={270}
       title={t("Guided drill")}
-      sub={t("arrows show every move")}
+      sub={t("arrows show next move")}
+      variant="learning"
     />
-    <FlowNode
-      x={830}
-      y={40}
-      w={250}
-      title={t("Wrong move corrected")}
-      sub={t("you replay it")}
+    <StepBox
+      x={785}
+      y={112}
+      w={265}
+      titleLines={[t("Wrong move"), t("corrected")]}
+      sub={t("user replays it")}
+      variant="learning"
+    />
+    <StepBox
+      x={1090}
+      y={112}
+      w={230}
+      title={t("Line learned")}
+      variant="learning"
     />
 
-    <FlowNode
-      x={300}
-      y={260}
-      w={230}
-      title={t("Repeating Mode")}
-      sub={t("the recommender chooses")}
-      tone="primary"
+    {/* Repeating row steps */}
+    <StepBox
+      x={190}
+      y={530}
+      w={235}
+      title={t("Choose line")}
+      sub={t("by review planner")}
+      variant="repeating"
     />
-    <FlowNode
-      x={570}
-      y={260}
-      w={230}
+    <StepBox
+      x={470}
+      y={530}
+      w={270}
       title={t("Unassisted drill")}
-      sub={t("no hints, no arrows")}
-      tone="primary"
+      sub={t("no arrows")}
+      variant="repeating"
     />
-    <FlowNode
-      x={830}
-      y={260}
-      w={250}
+    <StepBox
+      x={785}
+      y={530}
+      w={265}
+      titleLines={[t("Wrong move"), t("uncorrected")]}
+      sub={t("line plays out")}
+      variant="repeating"
+    />
+    <StepBox
+      x={1090}
+      y={530}
+      w={230}
       title={t("Pick is graded")}
       sub={t("did it come too late?")}
-      tone="primary"
+      variant="repeating"
     />
 
-    <FlowNode
-      x={830}
-      y={150}
-      w={250}
-      title={t("What you know is updated")}
-      sub={t("every move counts")}
-      tone="dark"
-    />
-
-    {/* The recommender is one component: what it reads, stacked above the model
-        that reads it. Both branches feed it, and its output re-enters Repeating
-        Mode along the return line. */}
-    <rect
-      x={1110}
-      y={20}
-      width={250}
-      height={390}
-      rx="16"
-      className="fill-white stroke-primary-300"
-      strokeWidth="1.5"
-      strokeDasharray="6 5"
-    />
-    <text
-      x="1130"
-      y="48"
-      className="fill-primary-600 text-[13px] font-black uppercase tracking-widest"
-    >
-      {t("Recommender")}
-    </text>
-
-    <FlowNode
-      x={1130}
-      y={62}
-      w={210}
-      h={48}
-      title={t("your profile")}
-      tone="chip"
-    />
-    <FlowNode
-      x={1130}
-      y={122}
-      w={210}
-      h={48}
-      title={t("your repertoire")}
-      tone="chip"
-    />
-    <FlowNode
-      x={1130}
-      y={182}
-      w={210}
-      h={48}
-      title={t("what you know")}
-      tone="chip"
-    />
-    <FlowNode
-      x={1130}
-      y={242}
-      w={210}
-      h={48}
-      title={t("past picks")}
-      tone="chip"
-    />
-
-    <path
-      d="M1235 290 V310"
-      className="stroke-primary-300"
-      strokeWidth="1.5"
+    {/* Connectors (Edges) - rendered in front of boxes so all arrowheads are visible */}
+    {/* Learning Mode Edges (Slate) */}
+    <g
+      stroke="#64748b"
+      strokeWidth="3"
       fill="none"
-    />
+      markerEnd="url(#tempo-arrow-slate)"
+    >
+      {/* 1. pick_mode -> learn_choose */}
+      <polyline points="122,360 130,360 130,177 158,177" />
+      {/* 3. learn_step_1: learn_choose -> learn_drill */}
+      <polyline points="425,177 470,177" />
+      {/* 4. learn_step_2: learn_drill -> learn_wrong */}
+      <polyline points="740,177 785,177" />
+      {/* 5. learn_step_3: learn_wrong -> learn_done */}
+      <polyline points="1050,177 1090,177" />
+      {/* 9. openings -> learn_choose */}
+      <polyline points="360,296 360,242" />
+      {/* 11. save: learn_done -> repertory */}
+      <polyline points="1205,242 1205,366 465,366 465,436 434,436" />
+      {/* 12. learned_update: learn_done -> user_knowledge */}
+      <polyline points="1320,177 1345,177 1345,270 1480,270" />
+    </g>
 
-    {/* Written out by hand rather than as a FlowNode: the title needs two lines
-        to stay inside the panel. */}
-    <rect
-      x={1130}
-      y={310}
-      width={210}
-      height={80}
-      rx="10"
-      className="fill-primary-700 stroke-primary-700"
-      strokeWidth="1.5"
-    />
-    <text
-      x="1235"
-      y="338"
-      textAnchor="middle"
-      className="fill-white text-[17px] font-bold"
+    {/* Repeating Mode Edges (Deep Teal) */}
+    <g
+      stroke="#0f766e"
+      strokeWidth="3"
+      fill="none"
+      markerEnd="url(#tempo-arrow-teal)"
     >
-      {t("Base model,")}
-    </text>
-    <text
-      x="1235"
-      y="359"
-      textAnchor="middle"
-      className="fill-white text-[17px] font-bold"
+      {/* 2. pick_mode -> rep_choose */}
+      <polyline points="122,360 130,360 130,595 158,595" />
+      {/* 6. rep_step_1: rep_choose -> rep_drill */}
+      <polyline points="425,595 470,595" />
+      {/* 7. rep_step_2: rep_drill -> rep_wrong */}
+      <polyline points="740,595 785,595" />
+      {/* 8. rep_step_3: rep_wrong -> rep_graded */}
+      <polyline points="1050,595 1090,595" />
+      {/* 10. repertory -> rep_choose */}
+      <polyline points="300,481 300,530" />
+      {/* 13. uncorrected_update: rep_wrong -> user_knowledge */}
+      <polyline points="1030,530 1030,430 1370,430 1370,296 1480,296" />
+      {/* 14. graded_update: rep_graded -> past_picks */}
+      <polyline points="1320,595 1388,595 1388,345 1480,345" />
+    </g>
+
+    {/* Review Planner Edges (Green) */}
+    <g
+      stroke="#009020"
+      strokeWidth="3"
+      fill="none"
+      markerEnd="url(#tempo-arrow-green)"
     >
-      {t("fine-tuned on you")}
-    </text>
-    <text
-      x="1235"
-      y="379"
-      textAnchor="middle"
-      className="fill-primary-100 text-[14px] font-semibold"
-    >
-      {t("returns the next line")}
-    </text>
+      {/* 15. input_to_model: input_group -> base_model */}
+      <polyline points="1567,390 1567,510" />
+      {/* 16. review: base_model -> rep_choose */}
+      <polyline points="1567,651 1567,726 350,726 350,660" />
+    </g>
+
+    {/* Edge Labels */}
+    <g style={{ fontFamily: "Inter, sans-serif" }}>
+      {/* learn label */}
+      <text
+        x="115"
+        y="260"
+        textAnchor="end"
+        fill="#334155"
+        style={{ fontWeight: 600, fontSize: 24 }}
+      >
+        {t("learn")}
+      </text>
+
+      {/* repeat label */}
+      <text
+        x="115"
+        y="506"
+        textAnchor="end"
+        fill="#0f766e"
+        style={{ fontWeight: 600, fontSize: 24 }}
+      >
+        {t("repeat")}
+      </text>
+
+      {/* line label (openings -> learn_choose) */}
+      <text
+        x="372"
+        y="270"
+        textAnchor="start"
+        fill="#64748b"
+        style={{ fontWeight: 400, fontSize: 24 }}
+      >
+        {t("line")}
+      </text>
+
+      {/* line label (repertory -> rep_choose) */}
+      <text
+        x="316"
+        y="518"
+        textAnchor="start"
+        fill="#0f766e"
+        style={{ fontWeight: 400, fontSize: 24 }}
+      >
+        {t("line")}
+      </text>
+
+      {/* save label */}
+      <text
+        x="1195"
+        y="290"
+        textAnchor="end"
+        fill="#64748b"
+        style={{ fontWeight: 400, fontSize: 24 }}
+      >
+        {t("save")}
+      </text>
+
+      {/* learned_update label */}
+      <text
+        x="1250"
+        y="270"
+        textAnchor="start"
+        fill="#64748b"
+        style={{ fontWeight: 400, fontSize: 24 }}
+      >
+        {t("update")}
+      </text>
+
+      {/* uncorrected_update label */}
+      <text
+        x="1040"
+        y="420"
+        textAnchor="start"
+        fill="#0f766e"
+        style={{ fontWeight: 400, fontSize: 24 }}
+      >
+        {t("update")}
+      </text>
+
+      {/* graded_update label */}
+      <text
+        x="1328"
+        y="622"
+        textAnchor="start"
+        fill="#0f766e"
+        style={{ fontWeight: 400, fontSize: 24 }}
+      >
+        {t("update")}
+      </text>
+
+      {/* next review label */}
+      <text
+        x="1040"
+        y="758"
+        textAnchor="start"
+        fill="#009020"
+        style={{ fontWeight: 600, fontSize: 24 }}
+      >
+        {t("next review")}
+      </text>
+    </g>
   </svg>
 );
 
@@ -604,7 +1049,7 @@ const TempoProject = () => {
   const t = (en) => pick(en, TEMPO_DE[en]);
 
   const tags = [
-    t("Recommender Systems"),
+    t("Review Planning Systems"),
     t("Personalisation"),
     t("Learning from Feedback"),
     t("Chess"),
@@ -617,7 +1062,7 @@ const TempoProject = () => {
       "You enjoy working in a mixed international team, across two universities",
     ),
     t(
-      "Interest in machine learning helps — recommender systems, personalisation, or learning from user feedback",
+      "Interest in machine learning helps — review planning systems, personalisation, or learning from user feedback",
     ),
     t(
       "Curiosity about how people learn and forget is worth as much as model experience — this is a memory model before it is a chess model",
@@ -648,7 +1093,7 @@ const TempoProject = () => {
             </p>
             <p className="mt-6 max-w-2xl text-base leading-7 text-gray-600">
               {t(
-                "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. TEMPO answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every recommendation it makes.",
+                "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. TEMPO answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every review it makes.",
               )}
             </p>
 
@@ -680,7 +1125,7 @@ const TempoProject = () => {
             <img
               src={assetUrl("/images/projects/tempo/recommender-robot.webp")}
               alt={t(
-                "The recommender, drawn as a robot with a graph of chess lines lit up in its chest",
+                "The review planner, drawn as a robot with a graph of chess lines lit up in its chest",
               )}
               width={700}
               height={865}
@@ -781,7 +1226,7 @@ const TempoProject = () => {
             </p>
             <p className="mt-2 max-w-3xl text-sm leading-7 text-gray-600">
               {t(
-                "Every move attempt and every recommendation — including which branch the player took, and every position a punishment sequence passed through. That log is what the model learns from, and what the project's results are measured on.",
+                "Every move attempt and every review — including which branch the player took, and every position a punishment sequence passed through. That log is what the model learns from, and what the project's results are measured on.",
               )}
             </p>
           </div>
@@ -791,26 +1236,26 @@ const TempoProject = () => {
         <section>
           <Eyebrow>{t("The loop")}</Eyebrow>
           <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-gray-950">
-            {t("One session, from the first move to the next recommendation")}
+            {t("One session, from the first move to the next review")}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600">
             {t(
-              "Both modes write to the same record of what you know. The recommender — your profile, your repertoire, that record, its own past picks, and the model fine-tuned on all of it — reads what comes out and returns the line to repeat next.",
+              "Both modes write to the same record of what you know. The review planner — your repertoire, that record, its own past picks, and the model fine-tuned on all of it — reads what comes out and returns the line to repeat next.",
             )}
           </p>
 
-          <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-8">
+          <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 px-3 py-5 sm:px-6 sm:py-8">
             <DiagramScroller widthClass="min-w-[900px] sm:min-w-0">
               <FlowDiagram t={t} />
             </DiagramScroller>
           </div>
         </section>
 
-        {/* How the recommender learns */}
+        {/* How the review planner learns */}
         <section>
           <Eyebrow>{t("How it works")}</Eyebrow>
           <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-gray-950">
-            {t("The recommender is graded on its own decisions")}
+            {t("The review planner is graded on its own decisions")}
           </h2>
 
           <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm shadow-slate-100/80 sm:p-8">
@@ -828,7 +1273,7 @@ const TempoProject = () => {
             </div>
             <p className="mt-6 border-l-2 border-primary-300 pl-3 text-sm leading-6 text-gray-700">
               {t(
-                "A line the player has already forgotten is recorded as having arrived too late. That grade becomes training data, which is what separates the recommender from a scheduler that is never told whether it was right.",
+                "A line the player has already forgotten is recorded as having arrived too late. That grade becomes training data, which is what separates the review planner from a scheduler that is never told whether it was right.",
               )}
             </p>
           </div>
@@ -843,7 +1288,7 @@ const TempoProject = () => {
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
               {t(
-                "The recommender solves a general problem: given a learner, a set of things they are trying to learn, and a history of how their practice went, decide what they should practise next. Its inputs and outputs are kept in a form that does not assume the material is chess.",
+                "The review planner solves a general problem: given a learner, a set of things they are trying to learn, and a history of how their practice went, decide what they should practise next. Its inputs and outputs are kept in a form that does not assume the material is chess.",
               )}
             </p>
             <p className="mt-4 text-base leading-7 text-gray-600">
