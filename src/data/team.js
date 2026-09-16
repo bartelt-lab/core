@@ -107,10 +107,10 @@ export const teamMembers = [
     title: 'Professor',
     roleCategory: 'professor',
     affiliations: [
-      { institution: institutions.TUC, department: 'Graduate School of Media Design' }
+      { institution: institutions.TUC, department: 'Institute for Informatics' }
     ],
     photo: '/members/kai-kunze.webp',
-    bio: 'Professor at TUC University working on wearable computing, eyewear computing, human-computer interaction, and cognitive augmentation.',
+    bio: 'Professor at TU Clausthal working on wearable computing, eyewear computing, human-computer interaction, and cognitive augmentation.',
     email: '',
     links: {
       website: 'https://kaikunze.de/',

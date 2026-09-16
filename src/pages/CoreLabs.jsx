@@ -87,15 +87,24 @@ const CoreLabs = () => {
                       <span className="text-gray-300"> · </span>
                       <span className="text-xs font-semibold text-gray-500">{pick('PhD candidate', 'Doktorand')}</span>
                     </p>
-                    <p className="text-xs font-semibold text-gray-500">
-                      {pick('Operations Coordinator', 'Koordination & Betrieb')}
+                    {/* Research leads the title so the scientific side reads
+                        first; "Coordinator" keeps it clear this is not a PI
+                        slot. The Scholar link carries the publication record
+                        by evidence rather than by adjective. */}
+                    {/* No "·" separators: the row wraps at narrow widths and a
+                        dangling separator at the break looks broken. Colour
+                        alone (gray role, green links) carries the split. */}
+                    <p className="flex flex-wrap items-center gap-x-3 text-xs font-semibold text-gray-500">
+                      <span>{pick('Research & Operations Coordinator', 'Forschung & Betrieb')}</span>
                       {contact.email && (
-                        <>
-                          <span className="text-gray-300"> · </span>
-                          <a href={`mailto:${contact.email}`} className="font-bold text-primary-700 underline decoration-primary-200 underline-offset-2 transition hover:decoration-primary-500">
-                            {pick('email', 'E-Mail')}
-                          </a>
-                        </>
+                        <a href={`mailto:${contact.email}`} className="font-bold text-primary-700 underline decoration-primary-200 underline-offset-2 transition hover:decoration-primary-500">
+                          {pick('email', 'E-Mail')}
+                        </a>
+                      )}
+                      {contact.links?.scholar && (
+                        <a href={contact.links.scholar} target="_blank" rel="noreferrer" className="font-bold text-primary-700 underline decoration-primary-200 underline-offset-2 transition hover:decoration-primary-500">
+                          Scholar
+                        </a>
                       )}
                     </p>
                   </div>
