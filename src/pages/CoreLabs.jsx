@@ -2,43 +2,28 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaArrowRight } from 'react-icons/fa'
 import HeroVideo from '../components/hero/HeroVideo'
-import { getCoreLabsLeads, getNetworkMembers } from '../data/team'
+import { getNetworkMembers } from '../data/team'
 import PublicationsSection from '../components/publications/PublicationsSection'
 import DemonstrationsSection from '../components/demonstrations/DemonstrationsSection'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
 
-const leadDetails = {
-  'David Szilagyi': {
-    role: 'TUC & UBB Operations',
-    institution: 'TU Clausthal / Babeș-Bolyai University',
-    description: 'Leading operations fostering collaboration on autonomous systems and embodied robotics.',
-    focus: ['Physical AI', 'Embodied AI', 'Locomanipulation', 'Imitation Learning'],
-  },
-  'Ashwin Nedungadi': {
-    role: 'Rostock Operations',
-    institution: 'University of Rostock',
-    description: 'Leading robotics research at Rostock focusing on multi-modal egocentric perception, spatial reasoning, and robot learning.',
-    focus: ['Multi-Modal Perception', 'Spatial Reasoning', 'Robot Learning'],
-  },
-  'Patrick Knab': {
-    role: 'Multimodal Methods Lead',
-    institution: 'TU Clausthal',
-    description: 'Developing multimodal methods that fuse visual and language information to improve model robustness, generalization, and reasoning across diverse real-world tasks.',
-    focus: ['Multimodal Learning', 'Vision-Language Models', 'Cross-Modal Reasoning'],
-  },
-  'Tim Grams': {
-    role: 'Policy Learning Lead',
-    institution: 'TU Clausthal',
-    description: 'Researching Reinforcement Learning, Large Language Models, and Self-play algorithms for autonomous decision-making.',
-    focus: ['Reinforcement Learning', 'Imitation Learning', 'LLMs', 'Self-play'],
-  },
-}
+// Institutions card roster: member id -> role label shown under the name.
+// Ids 1/2/4 are the PIs; id 5 (David Szilagyi) runs operations and is the
+// contact point across TUC and UBB, which is not a PI role.
+const INSTITUTION_ROLES = [
+  { id: 1, role: ['Principal Investigator', 'Principal Investigator'] },
+  { id: 2, role: ['Principal Investigator', 'Principal Investigator'] },
+  { id: 4, role: ['Principal Investigator', 'Principal Investigator'] },
+  { id: 5, role: ['Operations Coordinator', 'Koordination & Betrieb'], allAffiliations: true },
+]
 
 const CoreLabs = () => {
   const { pick } = useLanguage()
-  const leads = getCoreLabsLeads()
-  const principalInvestigators = getNetworkMembers().filter((member) => [1, 2, 4].includes(member.id))
+  const roster = INSTITUTION_ROLES.map((entry) => {
+    const member = getNetworkMembers().find((m) => m.id === entry.id)
+    return member ? { ...entry, member } : null
+  }).filter(Boolean)
 
   return (
     <div className="min-h-screen bg-white">
@@ -99,64 +84,24 @@ const CoreLabs = () => {
                 )}
               </p>
               <div className="mt-6 space-y-5">
-                {principalInvestigators.map((pi) => (
-                  <div key={pi.id} className="flex items-center gap-4 rounded-xl bg-white p-3 shadow-sm">
+                {roster.map(({ member, role, allAffiliations }) => (
+                  <div key={member.id} className="flex items-center gap-4 rounded-xl bg-white p-3 shadow-sm">
                     <div className="h-14 w-14 overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
-                      <img src={assetUrl(pi.photo)} alt={pi.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                      <img src={assetUrl(member.photo)} alt={member.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-gray-950">{pi.prefix ? `${pi.prefix} ${pi.name}` : pi.name}</p>
-                      <p className="text-xs font-semibold text-primary-700">{pick('Principal Investigator', 'Principal Investigator')}</p>
-                      <p className="mt-0.5 text-xs font-semibold text-gray-400">{pi.affiliations[0].institution.name}</p>
+                      <p className="text-sm font-bold text-gray-950">{member.prefix ? `${member.prefix} ${member.name}` : member.name}</p>
+                      <p className="text-xs font-semibold text-primary-700">{pick(role[0], role[1])}</p>
+                      <p className="mt-0.5 text-xs font-semibold text-gray-400">
+                        {(allAffiliations ? member.affiliations : member.affiliations.slice(0, 1))
+                          .map((a) => a.institution.name)
+                          .join(' · ')}
+                      </p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="team" className="border-t border-gray-100 bg-white py-16 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-xl">
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Scientific Coordination', 'Wissenschaftliche Koordination')}</p>
-              <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">{pick('Lab leads', 'Laborleitungen')}</h2>
-              <p className="mt-3 text-base leading-7 text-gray-600">{pick('Our lab leads coordinate research and operational activities across our distributed locations.', 'Unsere Laborleitungen koordinieren Forschung und operative Aktivitäten über alle verteilten Standorte hinweg.')}</p>
-            </div>
-            <Link to="/#team" className="hidden items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-bold text-gray-600 shadow-sm transition hover:border-primary-300 hover:text-primary-700 md:inline-flex">
-              {pick('Meet the Full Team', 'Gesamtes Team ansehen')}
-              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {leads.map((lead, i) => {
-              const details = leadDetails[lead.name] || {
-                role: lead.coreLabsLead.role,
-                institution: lead.affiliations.map((a) => a.institution.name).join(' / '),
-                description: lead.coreLabsLead.shortDescription || lead.bio,
-                focus: lead.coreLabsLead.researchFocus || [],
-              }
-
-              return (
-                <motion.div key={lead.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.4 }} className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:border-primary-200 hover:shadow-md">
-                  <div className="mb-4 h-20 w-20 overflow-hidden rounded-xl border border-gray-100 bg-gray-100">
-                    <img src={assetUrl(lead.photo)} alt={lead.name} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
-                  </div>
-                  <h3 className="text-base font-bold leading-snug text-gray-950">{lead.name}</h3>
-                  <p className="mt-1 text-xs font-bold text-primary-700">{details.role}</p>
-                  <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-gray-400">{details.institution}</p>
-                  <p className="mt-4 text-sm leading-6 text-gray-600">{details.description}</p>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {details.focus.map((f) => (
-                      <span key={f} className="rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-600">{f}</span>
-                    ))}
-                  </div>
-                </motion.div>
-              )
-            })}
           </div>
         </div>
       </section>

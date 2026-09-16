@@ -16,7 +16,6 @@ const ROUTE_SECTIONS = {
     '/core-labs': [
         { id: 'hero', label: 'Overview' },
         { id: 'initiative', label: 'Initiative' },
-        { id: 'team', label: 'Team' },
         { id: 'dynamo', label: 'Dynamo' },
         { id: 'autonomous', label: 'Self-Driving' },
         { id: 'publications', label: 'Papers' },

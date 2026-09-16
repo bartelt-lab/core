@@ -293,7 +293,8 @@ won't highlight). Two traps:
 
 Current verified configs: `/` and `/network` →
 `hero, about, platform, team, contact`; `/core-labs` →
-`hero, initiative, team, dynamo, autonomous, publications`; `/ai-team-projects`
+`hero, initiative, dynamo, autonomous, publications` (the `#team` "Lab leads"
+grid was deleted 2026-09-16; its dot went with it); `/ai-team-projects`
 → `hero, active-projects, testimonials, archive`; `/compute-cluster` →
 `hero, purpose, capabilities, sites, policies`. Routes with `[]` (`/dynamo`,
 `/publications`) and unconfigured routes show no sidebar by design.
