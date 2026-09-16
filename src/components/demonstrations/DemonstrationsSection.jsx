@@ -5,14 +5,17 @@ import { autonomousDemonstrations, cognitiveProjects } from '../../data/demonstr
 import assetUrl from '../../utils/assetUrl'
 import ProjectPeople from '../common/ProjectPeople'
 
-const DemonstrationsSection = ({ priority = false }) => {
+// tightTop trims the first section's top padding for pages that already end
+// their previous section close to the fold (/core-labs). /demos opens with this
+// component, so it keeps the roomier default.
+const DemonstrationsSection = ({ priority = false, tightTop = false }) => {
   return (
     <div id="demonstrations" className="space-y-20">
       {/* Cognitive Robotics / Dynamo Section - Now First */}
       <Section
         id="dynamo"
         title="Cognitive Robotics"
-        className="bg-gray-50"
+        className={`bg-gray-50 ${tightTop ? '!pt-10 md:!pt-14' : ''}`}
       >
         <div className="max-w-5xl mx-auto space-y-12">
           {cognitiveProjects.map((project) => (
