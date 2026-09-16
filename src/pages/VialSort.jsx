@@ -245,9 +245,17 @@ const SpecStrip = () => (
     </section>
 )
 
+// Page shell width. The milestone player is the widest thing on the page and scales 16:9
+// with whatever the shell gives it, so a single cap wasted more than half the screen on a
+// large display. It steps up instead of stopping at one value. Widening is safe here
+// because every text block below is either multi-column or carries its own `max-w`, so
+// nothing stretches to an unreadable measure. Hero and main share the constant so their
+// edges stay aligned — they were 24px/32px apart before.
+const SHELL = 'mx-auto w-full max-w-6xl xl:max-w-7xl 2xl:max-w-[88rem] min-[1920px]:max-w-[96rem]'
+
 const VialSort = () => (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 font-sans text-slate-950">
-        <header className="relative overflow-hidden px-6 pb-3 pt-18 md:pb-4 md:pt-20">
+        <header className="relative overflow-hidden pb-3 pt-18 md:pb-4 md:pt-20">
             <div className="absolute inset-x-0 top-0 h-[25rem] opacity-30" aria-hidden="true">
                 <img
                     src={assetUrl('/images/projects/vial-sort/hero.webp')}
@@ -259,7 +267,7 @@ const VialSort = () => (
                 <div className="absolute inset-0 bg-gradient-to-b from-sky-50/35 via-sky-50/80 to-white" />
             </div>
 
-            <div className="container relative z-10 mx-auto grid max-w-6xl gap-6 md:grid-cols-[0.95fr_1.05fr] md:items-end">
+            <div className={`relative z-10 grid gap-6 px-6 md:grid-cols-[0.95fr_1.05fr] md:items-end md:px-8 ${SHELL}`}>
                 <div>
                     <BackToLabsPill className="mb-5" />
                     <p className="mb-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">
@@ -286,7 +294,7 @@ const VialSort = () => (
             </div>
         </header>
 
-        <main className="container mx-auto max-w-6xl px-6 pb-20 pt-2 md:px-8 md:pt-3">
+        <main className={`px-6 pb-20 pt-2 md:px-8 md:pt-3 ${SHELL}`}>
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">Experiment log</p>
             <MilestoneBrowser items={milestones} />
             <SpecStrip />

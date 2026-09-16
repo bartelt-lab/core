@@ -150,9 +150,13 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
         observer.observe(el)
         observer.observe(content)
         el.addEventListener('scroll', syncEdges, { passive: true })
+        // Belt and braces alongside the observer. The shell's width steps change the
+        // player, and so the height of the column pinned to it, on every viewport change.
+        window.addEventListener('resize', syncEdges)
         return () => {
             observer.disconnect()
             el.removeEventListener('scroll', syncEdges)
+            window.removeEventListener('resize', syncEdges)
         }
     }, [syncEdges, total])
 
@@ -169,6 +173,9 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
         const el = listRef.current
         const row = el?.querySelector('[data-active="true"]')
         if (!el || !row) return
+        // Each milestone's text is a different length, so the player — and the column
+        // pinned to it — changes height on every advance, with or without a scroll.
+        syncEdges()
         const rowBox = row.getBoundingClientRect()
         const listBox = el.getBoundingClientRect()
         if (rowBox.top < listBox.top) {
@@ -176,7 +183,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
         } else if (rowBox.bottom > listBox.bottom) {
             el.scrollTo({ top: el.scrollTop + rowBox.bottom - listBox.bottom + 12, behavior: 'smooth' })
         }
-    }, [activeRun])
+    }, [activeRun, syncEdges])
 
     const show = (i) => {
         activeRunRef.current = i
