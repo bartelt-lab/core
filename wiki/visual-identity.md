@@ -4,6 +4,9 @@ The colour, type and shape rules this site actually follows, and the reasoning t
 fixes them in place. Read this before changing a brand colour, adding a colour family,
 or "tidying" a palette — several of the values here look arbitrary and are not.
 
+For slides, roll-ups and anything printed, read `wiki/decks-and-print.md` alongside this
+— the rules below are written for a browser, and two of them change off-screen.
+
 ## Why this exists
 
 The palette and the logo drifted apart. The logo SVGs shipped `#01BC2B`, `#C8F200` and

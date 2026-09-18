@@ -233,6 +233,10 @@ Image loading rules, the `LazyVideo` component and `npm run optimize-images` are
 Longer-form conventions and parked techniques live in the `wiki/` folder (sorts to
 the bottom of the file tree). Read the relevant one before related work:
 
+- `wiki/decks-and-print.md` — **taking the brand off-screen: slides, roll-ups,
+  posters.** Which logo file for which background, clear space and size floors,
+  projector contrast, roll-up zones. Note it records that **no CMYK/Pantone
+  spec exists** — do not invent one. Read before making a deck or print asset.
 - `wiki/visual-identity.md` — **the colour, type and shape rules, and why the palette
   values are what they are.** The logo is the authority for brand colour; ramps are
   regenerated hue-only; `primary-600` is pinned above the AA floor on purpose. Read
