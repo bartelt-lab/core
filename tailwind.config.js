@@ -10,8 +10,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Brand colors are driven by CSS variables (see index.css) so the theme
-        // can be switched at runtime (avocado <-> original blue).
+        // Brand colors resolve through CSS variables declared in index.css, which
+        // raw CSS also reads directly (see the note there). Single palette now —
+        // the avocado/forest/blue runtime switcher was removed.
         primary: {
           50: 'rgb(var(--primary-50) / <alpha-value>)',
           100: 'rgb(var(--primary-100) / <alpha-value>)',

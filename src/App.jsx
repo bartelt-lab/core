@@ -4,7 +4,6 @@ import Navbar from './components/common/Navbar'
 import RightSidebar from './components/common/RightSidebar'
 import Footer from './components/common/Footer'
 import ScrollToTop from './components/common/ScrollToTop'
-import ThemeToggle from './components/common/ThemeToggle'
 import SeoHead from './components/common/SeoHead'
 import LanguageToggle from './components/common/LanguageToggle'
 import { LanguageProvider } from './i18n/LanguageContext'
@@ -121,7 +120,6 @@ function App() {
       <LanguageProvider>
         <SeoHead />
         <ScrollToTop />
-        <ThemeToggle />
         <LanguageToggle />
         <Routes>
           <Route path="/tuc/*" element={<TucShell />} />
