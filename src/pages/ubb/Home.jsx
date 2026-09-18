@@ -30,7 +30,10 @@ const UbbHome = () => {
             <p className="mt-9 text-xs font-semibold uppercase tracking-[0.24em] text-site-900">UBB × CORE Network</p>
             <h1 className="mt-4 max-w-2xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-slate-950 sm:text-6xl lg:text-[5.4rem]">
               CORE Labs
-              <span className="wordmark-partnership block bg-clip-text text-transparent">Cluj</span>
+              {/* w-fit matters: bg-clip-text masks the gradient with the glyphs, but the
+                  gradient is sized to the BOX. Left as a full-width block, "Cluj" covers
+                  only the first ~30% of the sweep and never reaches the green end. */}
+              <span className="wordmark-partnership block w-fit bg-clip-text text-transparent">Cluj</span>
             </h1>
             <p className="mt-7 max-w-xl text-xl font-medium leading-8 text-slate-700">
               A new home for cognitive robotics and embodied intelligence.
