@@ -121,13 +121,13 @@ const TechnicalDetails = ({ pick }) => (
                         ['IFC processing', 'BIM Q&A', 'XGBoost', 'Room classification', 'Stable Diffusion', 'Flask / Next.js'],
                         ['IFC-Verarbeitung', 'BIM-Fragen und Antworten', 'XGBoost', 'Raumklassifikation', 'Stable Diffusion', 'Flask / Next.js']
                     ).map((item) => (
-                        <li key={item} className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-bold text-gray-700">{item}</li>
+                        <li key={item} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-700">{item}</li>
                     ))}
                 </ul>
             </div>
-            <div className="border-gray-200 sm:border-l sm:pl-8">
+            <div className="border-slate-200 sm:border-l sm:pl-8">
                 <h2 className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">{pick('Implementation', 'Implementierung')}</h2>
-                <ul className="mt-3 space-y-2 text-sm font-semibold leading-6 text-gray-700">
+                <ul className="mt-3 space-y-2 text-sm font-semibold leading-6 text-slate-700">
                     <li>{pick('IfcOpenShell structures building data.', 'IfcOpenShell strukturiert Gebäudedaten.')}</li>
                     <li>{pick('ML models provide predictions and generation.', 'ML-Modelle liefern Vorhersagen und generative Ergebnisse.')}</li>
                     <li>{pick('Flask and Next.js connect the platform.', 'Flask und Next.js verbinden die Plattform.')}</li>

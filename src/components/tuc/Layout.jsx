@@ -21,12 +21,12 @@ const NETWORK_NAV = [
 
 const navClass = ({ isActive }) =>
     `text-sm font-medium transition-colors ${
-        isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
+        isActive ? 'text-slate-900' : 'text-slate-500 hover:text-slate-900'
     }`;
 
 const mobileNavClass = ({ isActive }) =>
     `px-3 py-2 rounded text-sm font-medium ${
-        isActive ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+        isActive ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
     }`;
 
 const Layout = ({ children }) => {
@@ -42,8 +42,8 @@ const Layout = ({ children }) => {
     }
 
     return (
-        <div className="min-h-screen flex flex-col bg-white text-gray-900">
-            <header className="fixed top-0 inset-x-0 z-30 bg-white border-b border-gray-200">
+        <div className="min-h-screen flex flex-col bg-white text-slate-900">
+            <header className="fixed top-0 inset-x-0 z-30 bg-white border-b border-slate-200">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
                     <Link to="/tuc" className="flex items-center gap-3">
                         <img
@@ -59,7 +59,7 @@ const Layout = ({ children }) => {
                                 {pick(item.label, item.label === 'Industry Projects' ? 'Industrieprojekte' : item.label === 'Teaching' ? 'Lehre' : 'Mitmachen')}
                             </NavLink>
                         ))}
-                        <span className="h-5 w-px bg-gray-300" aria-hidden="true" />
+                        <span className="h-5 w-px bg-slate-300" aria-hidden="true" />
                         {NETWORK_NAV.map((item) => (
                             <NavLink key={item.to} to={item.to} className={navClass}>
                                 {pick(item.label, item.label === 'Publications' ? 'Publikationen' : item.label === 'AI Team Projects' ? 'AI-Team-Projekte' : item.label)}
@@ -70,7 +70,7 @@ const Layout = ({ children }) => {
                     <button
                         type="button"
                         onClick={() => setIsNavOpen((v) => !v)}
-                        className="md:hidden p-2 text-gray-700 hover:text-gray-900"
+                        className="md:hidden p-2 text-slate-700 hover:text-slate-900"
                         aria-label={isNavOpen ? 'Close menu' : 'Open menu'}
                         aria-expanded={isNavOpen}
                     >
@@ -79,15 +79,15 @@ const Layout = ({ children }) => {
                 </div>
 
                 {isNavOpen && (
-                    <div className="md:hidden border-t border-gray-200 bg-white">
+                    <div className="md:hidden border-t border-slate-200 bg-white">
                         <nav className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
                             {TUC_NAV.map((item) => (
                                 <NavLink key={item.to} to={item.to} className={mobileNavClass}>
                                     {pick(item.label, item.label === 'Industry Projects' ? 'Industrieprojekte' : item.label === 'Teaching' ? 'Lehre' : 'Mitmachen')}
                                 </NavLink>
                             ))}
-                            <div className="my-2 border-t border-gray-200" />
-                            <p className="px-3 pb-1 text-xs uppercase tracking-widest text-gray-400">CORE Network</p>
+                            <div className="my-2 border-t border-slate-200" />
+                            <p className="px-3 pb-1 text-xs uppercase tracking-widest text-slate-400">CORE Network</p>
                             {NETWORK_NAV.map((item) => (
                                 <NavLink key={item.to} to={item.to} className={mobileNavClass}>
                                     {pick(item.label, item.label === 'Publications' ? 'Publikationen' : item.label === 'AI Team Projects' ? 'AI-Team-Projekte' : item.label)}

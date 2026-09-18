@@ -427,7 +427,7 @@ const AiTeamProjects = () => {
         </div>
       </section>
 
-      <section id="active-projects" className="bg-gray-50 py-12 md:py-14">
+      <section id="active-projects" className="bg-slate-50 py-12 md:py-14">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">
           <div className="mb-8 text-center">
             <h2 className="text-3xl font-light">

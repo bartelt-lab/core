@@ -15,7 +15,7 @@ const DemonstrationsSection = ({ priority = false, tightTop = false }) => {
       <Section
         id="dynamo"
         title="Cognitive Robotics"
-        className={`bg-gray-50 ${tightTop ? '!pt-10 md:!pt-14' : ''}`}
+        className={`bg-slate-50 ${tightTop ? '!pt-10 md:!pt-14' : ''}`}
       >
         <div className="max-w-5xl mx-auto space-y-12">
           {cognitiveProjects.map((project) => (
@@ -37,11 +37,11 @@ const DemonstrationsSection = ({ priority = false, tightTop = false }) => {
                       }`}
                       style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-900/88 to-gray-900/20"></div>
-                    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-gray-950/70 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/88 to-slate-900/20"></div>
+                    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-950/70 to-transparent"></div>
                   </>
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-gray-950 via-slate-900 to-black"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-black"></div>
                 )}
               </div>
 
@@ -57,7 +57,7 @@ const DemonstrationsSection = ({ priority = false, tightTop = false }) => {
                     <h3 className="text-3xl font-heading font-bold text-white/30 blur-[6px] select-none">
                       {project.title}
                     </h3>
-                    <p className="text-lg text-gray-400 leading-relaxed font-light border-l-2 border-primary-500/50 pl-4">
+                    <p className="text-lg text-slate-400 leading-relaxed font-light border-l-2 border-primary-500/50 pl-4">
                       {project.description}
                     </p>
                   </div>
@@ -76,18 +76,18 @@ const DemonstrationsSection = ({ priority = false, tightTop = false }) => {
                         {project.title}
                       </Link>
                     </h3>
-                    <p className="text-lg text-gray-100 leading-8 mb-6 font-light md:text-xl">
+                    <p className="text-lg text-slate-100 leading-8 mb-6 font-light md:text-xl">
                       {project.description}
                     </p>
                     <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mb-8 shadow-2xl shadow-black/20">
-                      <p className="text-sm leading-7 text-gray-100 md:text-base">
+                      <p className="text-sm leading-7 text-slate-100 md:text-base">
                         {project.content}
                       </p>
                     </div>
                     <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                       <Link
                         to={project.link}
-                        className="inline-flex w-fit items-center px-6 py-3 bg-white text-gray-950 rounded-full font-bold transition-colors shadow-lg hover:bg-primary-50"
+                        className="inline-flex w-fit items-center px-6 py-3 bg-white text-slate-950 rounded-full font-bold transition-colors shadow-lg hover:bg-primary-50"
                       >
                         View Technical Overview &rarr;
                       </Link>
@@ -114,7 +114,7 @@ const DemonstrationsSection = ({ priority = false, tightTop = false }) => {
         id="autonomous"
         title="Autonomous Driving"
       >
-        <p className="text-gray-600 text-lg max-w-3xl mx-auto text-center mb-12">
+        <p className="text-slate-600 text-lg max-w-3xl mx-auto text-center mb-12">
           Our autonomous driving research combines cutting-edge algorithms with practical
           implementation, resulting in robust solutions for real-world scenarios.
         </p>

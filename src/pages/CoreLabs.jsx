@@ -47,7 +47,7 @@ const CoreLabs = () => {
                 'Gemeinsame Forschungsinfrastruktur, gemeinsame Projekte und ein internationales Team zur Weiterentwicklung kognitiver autonomer Systeme.',
               )}
             </p>
-            <a href="#initiative" className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-gray-950 shadow-lg transition hover:bg-primary-50">
+            <a href="#initiative" className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition hover:bg-primary-50">
               {pick('Explore the labs', 'Labore erkunden')}
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
             </a>
@@ -55,21 +55,21 @@ const CoreLabs = () => {
         </div>
       </section>
 
-      <section id="initiative" className="border-t border-gray-100 bg-white pb-8 pt-14 md:pb-10 md:pt-20">
+      <section id="initiative" className="border-t border-slate-100 bg-white pb-8 pt-14 md:pb-10 md:pt-20">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="grid gap-10 lg:grid-cols-[1fr_.95fr] lg:items-start">
             <div>
               <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-primary-700">{pick('The Initiative', 'Die Initiative')}</p>
-              <h2 className="mb-5 text-4xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-5xl">
+              <h2 className="mb-5 text-4xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-5xl">
                 {pick('One lab across three cities', 'Ein Labor über drei Städte hinweg')}
               </h2>
-              <p className="text-base leading-7 text-gray-700 md:text-lg md:leading-8">
+              <p className="text-base leading-7 text-slate-700 md:text-lg md:leading-8">
                 {pick(
                   'CORE Labs runs shared laboratories in Goslar, Cluj-Napoca, and Rostock as a single facility. A joint compute cluster, common datasets, and a co-supervised student project programme let teams collaborate across borders.',
                   'CORE Labs betreibt gemeinsame Labore in Goslar, Cluj-Napoca und Rostock als eine zusammenhängende Einrichtung. Ein gemeinsamer Rechencluster, gemeinsame Datensätze und co-betreute Studierendenprojekte ermöglichen grenzüberschreitende Zusammenarbeit.',
                 )}
               </p>
-              <p className="mt-4 text-base leading-7 text-gray-700 md:text-lg md:leading-8">
+              <p className="mt-4 text-base leading-7 text-slate-700 md:text-lg md:leading-8">
                 {pick(
                   'This shared infrastructure turns three institutions into one coherent scientific platform for cognitive systems research.',
                   'Diese gemeinsame Infrastruktur macht aus drei Institutionen eine kohärente wissenschaftliche Plattform für Forschung an kognitiven Systemen.',
@@ -81,24 +81,24 @@ const CoreLabs = () => {
                 // beside this block already names TUC and UBB. The photo and
                 // the name link to the team grid; the mailto stays separate,
                 // since anchors cannot nest.
-                <div className="mt-6 flex max-w-md items-center gap-3 rounded-xl border border-gray-200 bg-white p-3.5 shadow-sm">
-                  <Link to={memberLink(contact)} aria-label={contact.name} className="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-gray-200 bg-gray-100 transition hover:border-primary-300">
+                <div className="mt-6 flex max-w-md items-center gap-3 rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm">
+                  <Link to={memberLink(contact)} aria-label={contact.name} className="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-slate-200 bg-slate-100 transition hover:border-primary-300">
                     <img src={assetUrl(contact.photo)} alt={contact.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                   </Link>
                   <div className="min-w-0">
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
                       {pick('Operations & contact', 'Betrieb & Kontakt')}
                     </p>
-                    <p className="mt-0.5 text-sm font-bold leading-tight text-gray-950">
+                    <p className="mt-0.5 text-sm font-bold leading-tight text-slate-950">
                       <Link to={memberLink(contact)} className="transition hover:text-primary-700">{contact.name}</Link>
-                      <span className="text-gray-300"> · </span>
-                      <span className="text-xs font-semibold text-gray-500">{pick('PhD candidate', 'Doktorand')}</span>
+                      <span className="text-slate-300"> · </span>
+                      <span className="text-xs font-semibold text-slate-500">{pick('PhD candidate', 'Doktorand')}</span>
                     </p>
                     {/* Research leads the title so the scientific side reads
                         first; "Coordinator" keeps it clear this is not a PI
                         slot. No "·" before the mailto: the row wraps at narrow
                         widths and a dangling separator reads as a bug. */}
-                    <p className="flex flex-wrap items-center gap-x-3 text-xs font-semibold text-gray-500">
+                    <p className="flex flex-wrap items-center gap-x-3 text-xs font-semibold text-slate-500">
                       <span>{pick('Research & Operations Coordinator', 'Forschung & Betrieb')}</span>
                       {contact.email && (
                         <a href={`mailto:${contact.email}`} className="font-bold text-primary-700 underline decoration-primary-200 underline-offset-2 transition hover:decoration-primary-500">
@@ -110,9 +110,9 @@ const CoreLabs = () => {
                 </div>
               )}
             </div>
-            <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm">
-              <h3 className="text-2xl font-bold text-gray-950">{pick('Participating Institutions', 'Beteiligte Institutionen')}</h3>
-              <p className="mt-3 text-sm leading-6 text-gray-600">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+              <h3 className="text-2xl font-bold text-slate-950">{pick('Participating Institutions', 'Beteiligte Institutionen')}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600">
                 {pick(
                   'Our labs operate as a unified distributed entity, sharing resources, data, and expertise to accelerate discovery.',
                   'Unsere Labore arbeiten als verteilte Einheit, die Ressourcen, Daten und Expertise teilt, um Forschung zu beschleunigen.',
@@ -125,13 +125,13 @@ const CoreLabs = () => {
                     to={memberLink(pi)}
                     className="flex items-center gap-4 rounded-xl bg-white p-3 shadow-sm transition hover:shadow-md hover:ring-1 hover:ring-primary-200"
                   >
-                    <div className="h-14 w-14 overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
+                    <div className="h-14 w-14 overflow-hidden rounded-lg border border-slate-200 bg-slate-100">
                       <img src={assetUrl(pi.photo)} alt={pi.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-gray-950">{pi.prefix ? `${pi.prefix} ${pi.name}` : pi.name}</p>
+                      <p className="text-sm font-bold text-slate-950">{pi.prefix ? `${pi.prefix} ${pi.name}` : pi.name}</p>
                       <p className="text-xs font-semibold text-primary-700">{pick('Principal Investigator', 'Principal Investigator')}</p>
-                      <p className="mt-0.5 text-xs font-semibold text-gray-400">{pi.affiliations[0].institution.name}</p>
+                      <p className="mt-0.5 text-xs font-semibold text-slate-400">{pi.affiliations[0].institution.name}</p>
                     </div>
                   </Link>
                 ))}
@@ -143,18 +143,18 @@ const CoreLabs = () => {
 
       <DemonstrationsSection priority tightTop />
 
-      <section id="publications" className="border-t border-gray-100 bg-gradient-to-br from-white via-slate-50 to-white py-10 md:py-14">
+      <section id="publications" className="border-t border-slate-100 bg-gradient-to-br from-white via-slate-50 to-white py-10 md:py-14">
         <div className="container mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1fr_0.82fr] md:items-center md:px-12 lg:px-20">
           <div>
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">CORE Labs</p>
-            <h2 className="mb-4 text-3xl font-heading font-bold leading-tight tracking-tight text-gray-950 md:text-4xl">{pick('Research publications', 'Forschungspublikationen')}</h2>
-            <p className="text-sm leading-6 text-gray-600">
+            <h2 className="mb-4 text-3xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">{pick('Research publications', 'Forschungspublikationen')}</h2>
+            <p className="text-sm leading-6 text-slate-600">
               {pick(
                 'A rotating preview of recent publications connected to CORE Labs. Open the archive for the full publication list across the CORE Network.',
                 'Eine rotierende Vorschau aktueller Publikationen mit Bezug zu CORE Labs. Öffnen Sie das Archiv für die vollständige Publikationsliste des CORE Network.',
               )}
             </p>
-            <Link to="/publications" className="mt-6 inline-flex items-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700">
+            <Link to="/publications" className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700">
               {pick('View all publications', 'Alle Publikationen ansehen')}
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
             </Link>

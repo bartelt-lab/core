@@ -62,8 +62,8 @@ const ProjectLayout = ({
     const [activeTab, setActiveTab] = useState(tabs[0]?.id || '');
     const siblings = SIBLING_PROJECTS.filter((project) => project.path !== pathname);
     const heroMediaClass = compact
-        ? `max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-gray-100 relative group ${heroCaption ? 'mb-2' : 'mb-8'}`
-        : `max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-gray-100 relative group ${heroCaption ? 'mb-3' : 'mb-20'}`;
+        ? `max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-slate-100 relative group ${heroCaption ? 'mb-2' : 'mb-8'}`
+        : `max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-slate-100 relative group ${heroCaption ? 'mb-3' : 'mb-20'}`;
     const currentTab = tabs.find((tab) => tab.id === activeTab) || tabs[0];
 
     return (
@@ -160,7 +160,7 @@ const ProjectLayout = ({
                                     </span>
                                 ))}
                             </div>}
-                            <h1 className={`${compact ? 'mb-4 text-4xl md:text-5xl' : 'mb-6 text-5xl md:text-7xl'} font-black leading-tight tracking-tight text-gray-900`}>
+                            <h1 className={`${compact ? 'mb-4 text-4xl md:text-5xl' : 'mb-6 text-5xl md:text-7xl'} font-black leading-tight tracking-tight text-slate-900`}>
                                 {titleHref ? (
                                     <a
                                         href={titleHref}
@@ -185,7 +185,7 @@ const ProjectLayout = ({
                                     </a>
                                 )}
                             </h1>
-                            <p className={`${compact ? 'text-lg md:text-xl' : 'text-xl md:text-2xl'} font-light leading-relaxed text-gray-500`}>
+                            <p className={`${compact ? 'text-lg md:text-xl' : 'text-xl md:text-2xl'} font-light leading-relaxed text-slate-500`}>
                                 {subtitle}
                             </p>
                             {downloadUrl && (
@@ -262,7 +262,7 @@ const ProjectLayout = ({
 
                     {/* Overview & Features */}
                     {((!introBackgroundImage && showHeroOverview) || tabs.length > 0 || features.length > 0) && <div id="features" className={`max-w-4xl mx-auto text-center ${compact ? 'mb-8' : 'mb-24'}`}>
-                        {!introBackgroundImage && showHeroOverview && <p className={`${compact ? 'mb-8 text-base leading-7' : 'mb-16 text-lg leading-8'} text-gray-700 text-left md:text-center`}>
+                        {!introBackgroundImage && showHeroOverview && <p className={`${compact ? 'mb-8 text-base leading-7' : 'mb-16 text-lg leading-8'} text-slate-700 text-left md:text-center`}>
                             {overview}
                         </p>}
 
@@ -274,20 +274,20 @@ const ProjectLayout = ({
                                             key={tab.id}
                                             type="button"
                                             onClick={() => setActiveTab(tab.id)}
-                                            className={`shrink-0 rounded-lg border px-4 py-3 text-left text-sm font-bold transition ${currentTab?.id === tab.id ? 'border-primary-600 bg-primary-600 text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-primary-200 hover:text-primary-700'}`}
+                                            className={`shrink-0 rounded-lg border px-4 py-3 text-left text-sm font-bold transition ${currentTab?.id === tab.id ? 'border-primary-600 bg-primary-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-primary-200 hover:text-primary-700'}`}
                                         >
                                             {tab.label}
                                         </button>
                                     ))}
                                 </div>
-                                <div className="min-h-56 rounded-xl border border-gray-200 bg-gray-50 p-5">
+                                <div className="min-h-56 rounded-xl border border-slate-200 bg-slate-50 p-5">
                                     <p className="text-xs font-black uppercase tracking-widest text-primary-600">{currentTab?.eyebrow}</p>
-                                    <h3 className="mt-2 text-xl font-bold text-gray-900">{currentTab?.title}</h3>
-                                    <p className="mt-3 text-sm leading-6 text-gray-600">{currentTab?.body}</p>
+                                    <h3 className="mt-2 text-xl font-bold text-slate-900">{currentTab?.title}</h3>
+                                    <p className="mt-3 text-sm leading-6 text-slate-600">{currentTab?.body}</p>
                                     {currentTab?.items?.length > 0 && (
                                         <ul className="mt-5 grid gap-2 sm:grid-cols-2">
                                             {currentTab.items.map((item) => (
-                                                <li key={item} className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-semibold leading-5 text-gray-700">
+                                                <li key={item} className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-semibold leading-5 text-slate-700">
                                                     {item}
                                                 </li>
                                             ))}
@@ -298,10 +298,10 @@ const ProjectLayout = ({
                         ) : features.length > 0 ? (
                             <div className={`grid md:grid-cols-2 ${compact ? 'gap-4' : 'gap-8'} text-left`}>
                                 {features.map((feature, idx) => (
-                                    <div key={idx} className={`bg-gray-50 ${compact ? 'p-5 rounded-xl' : 'p-8 rounded-2xl'} border border-gray-100 hover:shadow-lg transition-shadow`}>
+                                    <div key={idx} className={`bg-slate-50 ${compact ? 'p-5 rounded-xl' : 'p-8 rounded-2xl'} border border-slate-100 hover:shadow-lg transition-shadow`}>
                                         <div className={`${compact ? 'text-sm font-black tracking-widest text-primary-600' : 'text-3xl'} mb-3`}>{feature.icon}</div>
-                                        <h3 className={`${compact ? 'text-lg' : 'text-xl'} font-bold text-gray-900 mb-2`}>{feature.title}</h3>
-                                        <p className={`${compact ? 'text-sm leading-6' : ''} text-gray-600`}>{feature.description}</p>
+                                        <h3 className={`${compact ? 'text-lg' : 'text-xl'} font-bold text-slate-900 mb-2`}>{feature.title}</h3>
+                                        <p className={`${compact ? 'text-sm leading-6' : ''} text-slate-600`}>{feature.description}</p>
                                     </div>
                                 ))}
                             </div>
@@ -316,7 +316,7 @@ const ProjectLayout = ({
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-gray-900 text-white rounded-3xl p-10 md:p-12 shadow-2xl relative overflow-hidden"
+                                className="bg-slate-900 text-white rounded-3xl p-10 md:p-12 shadow-2xl relative overflow-hidden"
                             >
                                 <div className="absolute top-0 right-0 p-8 opacity-10 font-black text-9xl leading-none select-none pointer-events-none">
                                     REQ
@@ -328,7 +328,7 @@ const ProjectLayout = ({
                                     {requirements.map((req, i) => (
                                         <li key={i} className="flex items-start gap-4">
                                             <span className="w-6 h-6 rounded-full bg-primary-500 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
-                                            <span className="text-gray-300 leading-relaxed font-light text-lg">
+                                            <span className="text-slate-300 leading-relaxed font-light text-lg">
                                                 {req}
                                             </span>
                                         </li>
@@ -372,10 +372,10 @@ const ProjectLayout = ({
             </section>
 
             {/* Other projects, then back to the catalogue. */}
-            <div className={`container mx-auto px-4 ${compact ? 'py-8' : 'py-12'} border-t border-gray-100`}>
+            <div className={`container mx-auto px-4 ${compact ? 'py-8' : 'py-12'} border-t border-slate-100`}>
                 {siblings.length > 0 && (
                     <nav aria-label={pick('Other AI Team Projects', 'Weitere KI-Teamprojekte')} className="mx-auto mb-8 max-w-5xl">
-                        <h2 className="mb-4 text-center text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+                        <h2 className="mb-4 text-center text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
                             {pick('Other AI Team Projects', 'Weitere KI-Teamprojekte')}
                         </h2>
                         <ul className="flex flex-wrap justify-center gap-2">
@@ -383,7 +383,7 @@ const ProjectLayout = ({
                                 <li key={project.path}>
                                     <Link
                                         to={project.path}
-                                        className="inline-flex rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-gray-600 transition hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700"
+                                        className="inline-flex rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-slate-600 transition hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700"
                                     >
                                         {project.name}
                                     </Link>
@@ -393,7 +393,7 @@ const ProjectLayout = ({
                     </nav>
                 )}
                 <div className="text-center">
-                    <Link to="/ai-team-projects" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-600 transition-colors font-medium text-lg">
+                    <Link to="/ai-team-projects" className="inline-flex items-center gap-2 text-slate-500 hover:text-primary-600 transition-colors font-medium text-lg">
                         ← {pick('Back to All Projects', 'Zurück zu allen Projekten')}
                     </Link>
                 </div>

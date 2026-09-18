@@ -28,7 +28,7 @@ const Section = ({
     <section
       id={id}
       ref={ref}
-      className={`py-16 md:py-24 ${dark ? 'bg-gray-900 text-white' : 'bg-white'} ${className}`}
+      className={`py-16 md:py-24 ${dark ? 'bg-slate-900 text-white' : 'bg-white'} ${className}`}
     >
       <motion.div
         variants={variants}

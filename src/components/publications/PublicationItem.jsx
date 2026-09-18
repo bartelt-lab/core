@@ -14,7 +14,7 @@ const PublicationItem = ({ publication }) => {
       'Under Review': 'bg-yellow-100 text-yellow-800',
       'In Press': 'bg-primary-100 text-primary-800',
     }
-    return colors[status] || 'bg-gray-100 text-gray-800'
+    return colors[status] || 'bg-slate-100 text-slate-800'
   }
 
   return (
@@ -23,11 +23,11 @@ const PublicationItem = ({ publication }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="bg-white border border-gray-200 rounded-lg p-6 hover:bg-gray-50 transition-colors"
+      className="bg-white border border-slate-200 rounded-lg p-6 hover:bg-slate-50 transition-colors"
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex-grow">
-          <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-primary-600 transition-colors">
+          <h3 className="text-xl font-semibold text-slate-900 mb-2 hover:text-primary-600 transition-colors">
             {hasUrl ? (
               <a href={publication.url} target="_blank" rel="noopener noreferrer">
                 {publication.title}
@@ -40,7 +40,7 @@ const PublicationItem = ({ publication }) => {
         </span>
       </div>
 
-      <p className="text-gray-700 mb-3">
+      <p className="text-slate-700 mb-3">
         {publication.authors.map((a) => a.name).join(', ')}
       </p>
 
@@ -49,7 +49,7 @@ const PublicationItem = ({ publication }) => {
           <span className={`font-medium ${getTypeColor(publication.type)}`}>
             {publication.type}
           </span>
-          <span className="text-gray-600">
+          <span className="text-slate-600">
             {publication.venue}, {publication.year}
           </span>
         </div>
@@ -71,7 +71,7 @@ const PublicationItem = ({ publication }) => {
               href={publication.code}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-accent-500 hover:text-accent-600 font-medium"
+              className="flex items-center space-x-2 text-secondary-700 hover:text-secondary-800 font-medium"
             >
               <FaCode className="text-sm" />
               <span>Code</span>
@@ -81,7 +81,7 @@ const PublicationItem = ({ publication }) => {
       </div>
 
       {publication.abstract && (
-        <p className="mt-4 text-sm text-gray-600 line-clamp-2">
+        <p className="mt-4 text-sm text-slate-600 line-clamp-2">
           {publication.abstract}
         </p>
       )}

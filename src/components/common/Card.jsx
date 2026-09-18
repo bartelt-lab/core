@@ -12,7 +12,7 @@ const Card = ({ children, className = '', hover = true, ...props }) => {
       initial="initial"
       animate="animate"
       transition={{ duration: 0.3 }}
-      className={`bg-white rounded-xl border border-gray-200 ${hover ? 'hover:border-gray-300' : ''} transition-colors overflow-hidden ${className}`}
+      className={`bg-white rounded-xl border border-slate-200 ${hover ? 'hover:border-slate-300' : ''} transition-colors overflow-hidden ${className}`}
       {...props}
     >
       {children}

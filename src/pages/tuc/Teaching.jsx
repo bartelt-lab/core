@@ -234,7 +234,7 @@ const SectionBlock = ({ title, intro, topContent, children, id }) => (
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
-                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{title}</h1>
+                    <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">{title}</h1>
                 </div>
                 <div className="md:col-span-3">
                     {topContent}

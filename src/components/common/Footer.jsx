@@ -10,7 +10,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="border-t border-gray-200 bg-white py-12 text-gray-950">
+    <footer className="border-t border-slate-200 bg-white py-12 text-slate-950">
       <div className="container mx-auto max-w-7xl px-4 md:pr-20 lg:pr-24">
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-4">
           <div className="md:col-span-3">
@@ -22,7 +22,7 @@ const Footer = () => {
                   href={logo.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex min-h-24 min-w-48 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 px-5 py-4 transition hover:border-primary-200 hover:bg-white hover:shadow-md"
+                  className="flex min-h-24 min-w-48 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-primary-200 hover:bg-white hover:shadow-md"
                 >
                   <img
                     src={assetUrl(logo.src)}
@@ -41,14 +41,14 @@ const Footer = () => {
 
           <div className="md:col-span-1 md:pr-6 md:text-right lg:pr-10">
             <h3 className="mb-2 text-2xl font-heading font-bold text-tertiary-600">CORE</h3>
-            <p className="mb-4 text-gray-600">{pick('Cognitive Software in Europe', 'Kognitive Software in Europa')}</p>
-            <p className="text-sm text-gray-500">
+            <p className="mb-4 text-slate-600">{pick('Cognitive Software in Europe', 'Kognitive Software in Europa')}</p>
+            <p className="text-sm text-slate-500">
               © {new Date().getFullYear()} CORE Initiative. All rights reserved.
             </p>
           </div>
         </div>
 
-        <div className="mt-8 border-t border-gray-200 pt-8 text-center text-sm text-gray-500">
+        <div className="mt-8 border-t border-slate-200 pt-8 text-center text-sm text-slate-500">
           <p>{pick('Advancing cognitive software research through European collaboration', 'Wir fördern Forschung zu kognitiver Software durch europäische Zusammenarbeit')}</p>
         </div>
       </div>

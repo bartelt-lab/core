@@ -10,7 +10,7 @@ const DemoCard = ({ demo }) => {
   return (
     <>
       <Card className="h-full flex flex-col cursor-pointer group" onClick={() => setIsVideoOpen(true)}>
-        <div className="relative overflow-hidden bg-gray-900 aspect-video">
+        <div className="relative overflow-hidden bg-slate-900 aspect-video">
           {/* YouTube, GIF, or Video Preview */}
           {demo.youtubeId ? (
             <div className="w-full h-full pointer-events-none">
@@ -66,17 +66,17 @@ const DemoCard = ({ demo }) => {
 
           {/* Category Badge */}
           <div className="absolute top-4 left-4 z-10">
-            <span className="bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+            <span className="bg-primary-700 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
               {demo.category}
             </span>
           </div>
         </div>
 
         <div className="p-6 flex-grow">
-          <h3 className="text-2xl font-heading font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+          <h3 className="text-2xl font-heading font-bold text-slate-900 mb-3 group-hover:text-primary-600 transition-colors">
             {demo.title}
           </h3>
-          <p className="text-gray-600">
+          <p className="text-slate-600">
             {demo.description}
           </p>
         </div>

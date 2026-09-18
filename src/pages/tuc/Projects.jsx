@@ -5,13 +5,13 @@ const YOUTUBE_THUMB = `https://img.youtube.com/vi/${YOUTUBE_ID}/maxresdefault.jp
 const YOUTUBE_EMBED = `https://www.youtube.com/embed/${YOUTUBE_ID}?start=5&autoplay=1`;
 
 const Section = ({ id, title, subtitle, children }) => (
-    <section id={id} className="border-b border-gray-200 last:border-b-0">
+    <section id={id} className="border-b border-slate-200 last:border-b-0">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-1">
-                <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
-                {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
+                <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
+                {subtitle && <p className="text-sm text-slate-500 mt-1">{subtitle}</p>}
             </div>
-            <div className="md:col-span-3 prose prose-gray max-w-none prose-headings:text-gray-900">
+            <div className="md:col-span-3 prose prose-gray max-w-none prose-headings:text-slate-900">
                 {children}
             </div>
         </div>
@@ -23,9 +23,9 @@ const Projects = () => {
 
     return (
         <>
-            <section id="intro-ai" className="border-b border-gray-200">
+            <section id="intro-ai" className="border-b border-slate-200">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-                    <p className="text-gray-700 leading-relaxed max-w-3xl">
+                    <p className="text-slate-700 leading-relaxed max-w-3xl">
                         The European Master Team Project offers an exciting opportunity for students to collaborate
                         internationally while working on real-world challenges. This long-standing program is a
                         partnership between the Technical University of Clausthal and Babeș-Bolyai University in
@@ -53,7 +53,7 @@ const Projects = () => {
                                     />
                                     <span className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
                                         <span className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-lg">
-                                            <span className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-gray-900 ml-1" />
+                                            <span className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-slate-900 ml-1" />
                                         </span>
                                     </span>
                                 </button>

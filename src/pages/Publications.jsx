@@ -9,7 +9,7 @@ const Publications = () => {
     : 'all'
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-50">
       {/* ── Publications list with filters ── */}
       <PublicationsSection
         key={institution}

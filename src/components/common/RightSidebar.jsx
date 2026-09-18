@@ -139,9 +139,9 @@ const RightSidebar = () => {
     // Theme: light sidebar (white dots/labels) when over a dark hero of a core page; otherwise dark sidebar.
     const isDarkBackground = DARK_HERO_ROUTES.has(resolvedPath) && activeSection === 'hero';
     const useDarkSidebar = !isDarkBackground;
-    const lineColor = useDarkSidebar ? 'bg-gray-300' : 'bg-white/30';
-    const dotBaseClass = useDarkSidebar ? 'bg-transparent border-gray-400 border-2' : 'bg-white/50 border-white';
-    const dotHoverClass = useDarkSidebar ? 'group-hover:bg-gray-600' : 'group-hover:bg-white';
+    const lineColor = useDarkSidebar ? 'bg-slate-300' : 'bg-white/30';
+    const dotBaseClass = useDarkSidebar ? 'bg-transparent border-slate-400 border-2' : 'bg-white/50 border-white';
+    const dotHoverClass = useDarkSidebar ? 'group-hover:bg-slate-600' : 'group-hover:bg-white';
     const activeDotClass = useDarkSidebar ? 'bg-primary-600' : 'bg-white';
     return (
         <AnimatePresence>

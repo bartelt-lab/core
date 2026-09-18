@@ -3,22 +3,22 @@ import { FiChevronDown } from 'react-icons/fi';
 import { useLanguage } from '../../i18n/useLanguage';
 
 const Expandable = ({ id, title, open, onToggle, children }) => (
-    <div className="overflow-hidden rounded-md border border-gray-200">
+    <div className="overflow-hidden rounded-md border border-slate-200">
         <button
             type="button"
             onClick={() => onToggle(id)}
             aria-expanded={open}
-            className="flex w-full items-center justify-between bg-gray-50 px-5 py-4 text-left transition-colors hover:bg-gray-100"
+            className="flex w-full items-center justify-between bg-slate-50 px-5 py-4 text-left transition-colors hover:bg-slate-100"
         >
-            <h3 className="m-0 text-lg font-semibold text-gray-900">{title}</h3>
+            <h3 className="m-0 text-lg font-semibold text-slate-900">{title}</h3>
             <FiChevronDown
-                className={`text-gray-500 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+                className={`text-slate-500 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
                 size={20}
             />
         </button>
         <div className={`grid transition-[grid-template-rows] duration-500 ease-in-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
             <div className="overflow-hidden">
-                <div className="prose prose-gray max-w-none px-5 py-4 prose-a:text-gray-900 prose-a:underline prose-a:decoration-gray-300 prose-headings:text-gray-900 hover:prose-a:decoration-gray-900">
+                <div className="prose prose-gray max-w-none px-5 py-4 prose-a:text-slate-900 prose-a:underline prose-a:decoration-slate-300 prose-headings:text-slate-900 hover:prose-a:decoration-slate-900">
                     {children}
                 </div>
             </div>
@@ -35,11 +35,11 @@ const JoinUs = () => {
         <section id="join-us">
             <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-4">
                 <div className="md:col-span-1">
-                    <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">Join Us</h1>
+                    <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">Join Us</h1>
                 </div>
                 <div className="space-y-6 md:col-span-3">
-                    <div className="border-l-4 border-gray-900 bg-gray-50 px-5 py-4">
-                        <p className="m-0 text-gray-700">
+                    <div className="border-l-4 border-slate-900 bg-slate-50 px-5 py-4">
+                        <p className="m-0 text-slate-700">
                             {pick(
                                 <>We currently have open positions for PhD candidates and research assistants in our research group <em>Cognitive Software</em> at the Institute for Software Systems Engineering (ISSE) at TU Clausthal. Explore the opportunities below to find the position that best fits your career goals.</>,
                                 <>Wir haben derzeit offene Stellen für Promovierende und wissenschaftliche Hilfskräfte in unserer Forschungsgruppe <em>Cognitive Software</em> am Institute for Software Systems Engineering (ISSE) der TU Clausthal. Die folgenden Möglichkeiten helfen dir, die passende Position für deine Ziele zu finden.</>
@@ -110,7 +110,7 @@ const JoinUs = () => {
                         </ul>
                     </Expandable>
 
-                    <div className="prose prose-gray max-w-none rounded-md border border-gray-200 bg-gray-50 p-5 prose-a:text-gray-900 prose-a:underline">
+                    <div className="prose prose-gray max-w-none rounded-md border border-slate-200 bg-slate-50 p-5 prose-a:text-slate-900 prose-a:underline">
                         <h4 className="mt-0">{pick('Interested?', 'Interessiert?')}</h4>
                         <p>
                             <strong>{pick('For PhD Position applications:', 'Für Bewerbungen auf die Promotionsstelle:')}</strong><br />

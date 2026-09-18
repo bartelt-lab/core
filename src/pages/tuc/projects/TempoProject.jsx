@@ -1091,7 +1091,7 @@ const TempoProject = () => {
             <p className="mt-5 max-w-2xl text-xl font-light leading-relaxed text-slate-500">
               {t("Trained Engine for Memory-Paced Openings")}
             </p>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-gray-600">
+            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600">
               {t(
                 "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. TEMPO answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every review it makes.",
               )}
@@ -1112,11 +1112,11 @@ const TempoProject = () => {
             </ul>
           </div>
 
-          <div className="lg:border-l lg:border-gray-200 lg:pl-8 lg:pt-2">
+          <div className="lg:border-l lg:border-slate-200 lg:pl-8 lg:pt-2">
             <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
               {t("Team")}
             </p>
-            <p className="mt-2 text-sm leading-6 text-gray-600">
+            <p className="mt-2 text-sm leading-6 text-slate-600">
               {t(
                 "A mixed international team of German and Romanian students, for one semester.",
               )}
@@ -1136,15 +1136,15 @@ const TempoProject = () => {
         </section>
 
         {/* The problem */}
-        <section className="grid gap-8 border-t border-gray-100 pt-12 md:grid-cols-[0.8fr_1fr] md:gap-10">
+        <section className="grid gap-8 border-t border-slate-100 pt-12 md:grid-cols-[0.8fr_1fr] md:gap-10">
           <div className="md:order-2 md:text-right">
             <Eyebrow>{t("The problem")}</Eyebrow>
-            <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-gray-950">
+            <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-950">
               {t(
                 "Deciding what to study is the hardest part of studying alone",
               )}
             </h2>
-            <p className="mt-4 text-base leading-7 text-gray-600">
+            <p className="mt-4 text-base leading-7 text-slate-600">
               {t(
                 "Existing trainers answer that question with a fixed rule — the same rule for every user, for the life of the product. It cannot know that you hold a sharp tactical line for weeks and lose a quiet positional one in days.",
               )}
@@ -1152,11 +1152,11 @@ const TempoProject = () => {
           </div>
 
           <div className="grid gap-3 self-center md:order-1">
-            <div className="rounded-xl border border-gray-200 bg-white p-4">
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
               <p className="text-xs font-black uppercase tracking-widest text-slate-400">
                 {t("Other systems")}
               </p>
-              <p className="mt-2 text-sm font-semibold leading-6 text-gray-600">
+              <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
                 {t(
                   "One scheduling rule, identical for every player, fixed forever",
                 )}
@@ -1178,23 +1178,23 @@ const TempoProject = () => {
         {/* The two modes */}
         <section>
           <Eyebrow>{t("Two modes")}</Eyebrow>
-          <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-gray-950">
+          <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-950">
             {t("Learn it with help, then prove it without")}
           </h2>
 
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
-            <div className="min-w-0 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm shadow-slate-100/80">
+            <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-100/80">
               <div className="flex items-center gap-3">
                 <span className="rounded-full bg-primary-50 px-3 py-1 text-xs font-black uppercase tracking-widest text-primary-700">
                   {t("Learning Mode")}
                 </span>
               </div>
-              <p className="mt-4 text-sm leading-7 text-gray-600">
+              <p className="mt-4 text-sm leading-7 text-slate-600">
                 {t(
                   "You pick the line you want to learn, and it is walked through under full guidance — an arrow on the board shows the move to play. Stray from it and you are guided back before the move can land.",
                 )}
               </p>
-              <div className="mt-5 rounded-xl border border-gray-200 bg-gray-50 p-4">
+              <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4">
                 <DiagramScroller widthClass="min-w-[360px] sm:min-w-0">
                   <LearningDiagram t={t} />
                 </DiagramScroller>
@@ -1220,11 +1220,11 @@ const TempoProject = () => {
             </div>
           </div>
 
-          <div className="mt-5 rounded-2xl border border-gray-200 bg-gray-50 p-5">
+          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5">
             <p className="text-xs font-black uppercase tracking-widest text-slate-500">
               {t("Everything is logged")}
             </p>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-gray-600">
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600">
               {t(
                 "Every move attempt and every review — including which branch the player took, and every position a punishment sequence passed through. That log is what the model learns from, and what the project's results are measured on.",
               )}
@@ -1235,16 +1235,16 @@ const TempoProject = () => {
         {/* One session, end to end */}
         <section>
           <Eyebrow>{t("The loop")}</Eyebrow>
-          <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-gray-950">
+          <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-950">
             {t("One session, from the first move to the next review")}
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600">
+          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
             {t(
               "Both modes write to the same record of what you know. The review planner — your repertoire, that record, its own past picks, and the model fine-tuned on all of it — reads what comes out and returns the line to repeat next.",
             )}
           </p>
 
-          <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 px-3 py-5 sm:px-6 sm:py-8">
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-5 sm:px-6 sm:py-8">
             <DiagramScroller widthClass="min-w-[900px] sm:min-w-0">
               <FlowDiagram t={t} />
             </DiagramScroller>
@@ -1254,24 +1254,24 @@ const TempoProject = () => {
         {/* How the review planner learns */}
         <section>
           <Eyebrow>{t("How it works")}</Eyebrow>
-          <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-gray-950">
+          <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-950">
             {t("The review planner is graded on its own decisions")}
           </h2>
 
-          <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm shadow-slate-100/80 sm:p-8">
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-100/80 sm:p-8">
             <div className="grid gap-x-8 gap-y-3 lg:grid-cols-2">
-              <p className="text-sm leading-7 text-gray-600">
+              <p className="text-sm leading-7 text-slate-600">
                 {t(
                   "Which lines get learned is the player's own choice. The model's job starts afterwards: it reads their profile, their repertoire, the record of every line they have drilled so far and its own earlier suggestions, and returns the one line that should be repeated next.",
                 )}
               </p>
-              <p className="text-sm leading-7 text-gray-600">
+              <p className="text-sm leading-7 text-slate-600">
                 {t(
                   "The suggestion is then measured against what actually happened in the session — what was recalled, what was missed, and how long it took the player to find the right move. That measurement is what the model is trained on next, so over time it builds a picture of one specific player's memory.",
                 )}
               </p>
             </div>
-            <p className="mt-6 border-l-2 border-primary-300 pl-3 text-sm leading-6 text-gray-700">
+            <p className="mt-6 border-l-2 border-primary-300 pl-3 text-sm leading-6 text-slate-700">
               {t(
                 "A line the player has already forgotten is recorded as having arrived too late. That grade becomes training data, which is what separates the review planner from a scheduler that is never told whether it was right.",
               )}
@@ -1280,18 +1280,18 @@ const TempoProject = () => {
         </section>
 
         {/* Domain independence */}
-        <section className="grid gap-8 border-t border-gray-100 pt-12 md:grid-cols-[0.8fr_1fr] md:gap-10">
+        <section className="grid gap-8 border-t border-slate-100 pt-12 md:grid-cols-[0.8fr_1fr] md:gap-10">
           <div className="md:order-2 md:text-right">
             <Eyebrow>{t("Scope")}</Eyebrow>
-            <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-gray-950">
+            <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-950">
               {t("The model reasons about learning, not about chess")}
             </h2>
-            <p className="mt-4 text-base leading-7 text-gray-600">
+            <p className="mt-4 text-base leading-7 text-slate-600">
               {t(
                 "The review planner solves a general problem: given a learner, a set of things they are trying to learn, and a history of how their practice went, decide what they should practise next. Its inputs and outputs are kept in a form that does not assume the material is chess.",
               )}
             </p>
-            <p className="mt-4 text-base leading-7 text-gray-600">
+            <p className="mt-4 text-base leading-7 text-slate-600">
               {t(
                 "Chess is where it is built and measured first. The domain supplies dense, cheap, objectively gradable outcomes — a move either is the repertoire move or it is not — which makes it a good place to find out whether the approach works at all.",
               )}
@@ -1301,11 +1301,11 @@ const TempoProject = () => {
           {/* In, model, out — stacked, with the model as the emphasised middle
               band. Nothing in the exchange is chess-specific. */}
           <div className="grid gap-3 self-center md:order-1">
-            <div className="rounded-xl border border-gray-200 bg-white p-4">
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
               <p className="text-xs font-black uppercase tracking-widest text-slate-400">
                 {t("What goes in")}
               </p>
-              <p className="mt-2 text-sm font-semibold leading-6 text-gray-600">
+              <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
                 {t(
                   "A learner, the things they are learning, and how practice has gone so far",
                 )}
@@ -1321,15 +1321,15 @@ const TempoProject = () => {
                 )}
               </p>
             </div>
-            <div className="rounded-xl border border-gray-200 bg-white p-4">
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
               <p className="text-xs font-black uppercase tracking-widest text-slate-400">
                 {t("What comes out")}
               </p>
-              <p className="mt-2 text-sm font-semibold leading-6 text-gray-600">
+              <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
                 {t("The one item the learner should revisit next")}
               </p>
             </div>
-            <p className="px-1 text-xs leading-5 text-gray-500">
+            <p className="px-1 text-xs leading-5 text-slate-500">
               {t(
                 "Nothing in that exchange is chess-specific. Everything that is lives behind the domain layer.",
               )}
@@ -1340,16 +1340,16 @@ const TempoProject = () => {
         {/* For students */}
         <section>
           <Eyebrow>{t("For students")}</Eyebrow>
-          <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-gray-950">
+          <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-950">
             {t("Thinking about joining?")}
           </h2>
 
-          <div className="mt-6 rounded-2xl border border-gray-200 bg-white p-8 shadow-sm shadow-slate-100/80 sm:p-10">
+          <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-8 shadow-sm shadow-slate-100/80 sm:p-10">
             <ul className="grid gap-3 md:grid-cols-2 md:gap-x-10">
               {joining.map((item) => (
                 <li
                   key={item}
-                  className="flex gap-3 text-sm leading-6 text-gray-600"
+                  className="flex gap-3 text-sm leading-6 text-slate-600"
                 >
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" />
                   <span>{item}</span>

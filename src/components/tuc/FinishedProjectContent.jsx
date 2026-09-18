@@ -40,7 +40,7 @@ const FinishedProjectContent = ({
 
   return (
     <div
-      className={`space-y-8 ${isMediaOnly ? "pt-1" : "border-t border-gray-100 pt-6"}`}
+      className={`space-y-8 ${isMediaOnly ? "pt-1" : "border-t border-slate-100 pt-6"}`}
     >
       {showShowcase && showcase && (
         <section
@@ -168,7 +168,7 @@ const FinishedProjectContent = ({
       )}
 
       {benchmark && (
-        <section className="mx-auto max-w-6xl border-y border-gray-200 py-6">
+        <section className="mx-auto max-w-6xl border-y border-slate-200 py-6">
           <div className="grid gap-6 lg:grid-cols-[30rem_1fr] lg:items-center">
             <figure className="mx-auto w-full max-w-[30rem] lg:mx-0">
               <img
@@ -177,10 +177,10 @@ const FinishedProjectContent = ({
                 width={benchmark.image.width}
                 height={benchmark.image.height}
                 decoding="async"
-                className="h-auto w-full rounded-lg border border-gray-800 bg-black"
+                className="h-auto w-full rounded-lg border border-slate-800 bg-black"
               />
               {benchmark.image.caption && (
-                <figcaption className="mt-2 flex gap-2 border-l-2 border-primary-300 pl-3 text-xs italic leading-5 text-gray-500">
+                <figcaption className="mt-2 flex gap-2 border-l-2 border-primary-300 pl-3 text-xs italic leading-5 text-slate-500">
                   <span className="shrink-0 font-mono font-bold not-italic uppercase text-primary-700">
                     {pick("Figure", "Abbildung")}
                   </span>
@@ -193,20 +193,20 @@ const FinishedProjectContent = ({
               <p className="text-xs font-black uppercase tracking-widest text-primary-600">
                 {benchmark.eyebrow}
               </p>
-              <h3 className="mt-2 text-2xl font-black leading-tight text-gray-950">
+              <h3 className="mt-2 text-2xl font-black leading-tight text-slate-950">
                 {benchmark.title}
               </h3>
-              <p className="mt-3 text-sm leading-6 text-gray-600">
+              <p className="mt-3 text-sm leading-6 text-slate-600">
                 {benchmark.description}
               </p>
 
               <dl className="mt-5 grid grid-cols-2 gap-x-5 gap-y-4">
                 {benchmark.highlights.map((item) => (
                   <div key={item.label}>
-                    <dt className="text-xs font-bold uppercase tracking-wide text-gray-500">
+                    <dt className="text-xs font-bold uppercase tracking-wide text-slate-500">
                       {item.label}
                     </dt>
-                    <dd className="mt-1 text-base font-black text-gray-950">
+                    <dd className="mt-1 text-base font-black text-slate-950">
                       {item.value}
                     </dd>
                   </div>
@@ -225,16 +225,16 @@ const FinishedProjectContent = ({
             className={
               isMediaOnly
                 ? "rounded-[2rem] border border-slate-200/70 bg-white/75 p-7 shadow-[0_24px_70px_-55px_rgba(15,23,42,0.5)] backdrop-blur-sm sm:p-8"
-                : "rounded-2xl border border-gray-200 bg-white p-6 shadow-sm shadow-slate-100/80"
+                : "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-100/80"
             }
           >
-            <h3 className="text-2xl font-bold leading-tight text-gray-950">
+            <h3 className="text-2xl font-bold leading-tight text-slate-950">
               {summary.title}
             </h3>
             {summary.paragraphs.map((paragraph, index) => (
               <p
                 key={typeof paragraph === "string" ? paragraph : index}
-                className="mt-4 text-base leading-7 text-gray-600"
+                className="mt-4 text-base leading-7 text-slate-600"
               >
                 {paragraph}
               </p>
@@ -248,10 +248,10 @@ const FinishedProjectContent = ({
                   height={summary.image.height}
                   loading="lazy"
                   decoding="async"
-                  className="aspect-video w-full rounded-lg border border-gray-200 bg-white object-contain"
+                  className="aspect-video w-full rounded-lg border border-slate-200 bg-white object-contain"
                 />
                 {summary.image.caption && (
-                  <figcaption className="mt-2 flex gap-2 border-l-2 border-primary-300 pl-3 text-xs italic leading-5 text-gray-500">
+                  <figcaption className="mt-2 flex gap-2 border-l-2 border-primary-300 pl-3 text-xs italic leading-5 text-slate-500">
                     <span className="shrink-0 font-mono font-bold not-italic uppercase text-primary-700">
                       {pick("Figure", "Abbildung")}
                     </span>
@@ -267,7 +267,7 @@ const FinishedProjectContent = ({
               className={
                 isMediaOnly
                   ? "rounded-[2rem] border border-slate-200/70 bg-white/75 p-7 shadow-[0_24px_70px_-55px_rgba(15,23,42,0.5)] backdrop-blur-sm"
-                  : "rounded-2xl border border-gray-200 bg-white p-6 shadow-sm shadow-slate-100/80"
+                  : "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-100/80"
               }
             >
               <div className="mb-4 flex items-center justify-between gap-4">
@@ -282,7 +282,7 @@ const FinishedProjectContent = ({
                 {focus.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm font-semibold text-gray-700 shadow-sm shadow-white"
+                    className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-slate-700 shadow-sm shadow-white"
                   >
                     {item}
                   </span>
@@ -294,7 +294,7 @@ const FinishedProjectContent = ({
               className={
                 isMediaOnly
                   ? "rounded-[2rem] border border-slate-200/70 bg-white/75 p-7 shadow-[0_24px_70px_-55px_rgba(15,23,42,0.5)] backdrop-blur-sm"
-                  : "rounded-2xl border border-gray-200 bg-white p-6 shadow-sm shadow-slate-100/80"
+                  : "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-100/80"
               }
             >
               <div className="mb-4 flex items-center justify-between gap-4">
@@ -309,7 +309,7 @@ const FinishedProjectContent = ({
                 {artifacts.map((item, index) => (
                   <li
                     key={typeof item === "string" ? item : index}
-                    className="flex gap-3 text-sm font-semibold leading-6 text-gray-700"
+                    className="flex gap-3 text-sm font-semibold leading-6 text-slate-700"
                   >
                     <FaCheckCircle
                       className="mt-1 h-4 w-4 shrink-0 text-primary-600"
@@ -325,17 +325,17 @@ const FinishedProjectContent = ({
       )}
 
       {showMaterial && (
-        <section className="mx-auto max-w-6xl rounded-xl border border-gray-200 bg-white p-5 shadow-sm shadow-slate-100/80">
+        <section className="mx-auto max-w-6xl rounded-xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-100/80">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-50 text-gray-700 ring-1 ring-gray-200">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-slate-700 ring-1 ring-slate-200">
                 <MaterialIcon className="h-4 w-4" aria-hidden="true" />
               </div>
               <div>
-                <h3 className="text-xl font-black text-gray-950">
+                <h3 className="text-xl font-black text-slate-950">
                   {materialTitle}
                 </h3>
-                <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-600">
+                <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-600">
                   {materialBody}
                 </p>
               </div>
@@ -346,7 +346,7 @@ const FinishedProjectContent = ({
                 href={materialHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-gray-950 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-black hover:shadow-md"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-black hover:shadow-md"
               >
                 {materialLabel}
                 <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />

@@ -168,7 +168,7 @@ const domainClass = (domain) => {
         case 'Sicherheit & IoT':
             return 'border-slate-300 bg-slate-100 text-slate-800';
         default:
-            return 'border-gray-200 bg-gray-50 text-gray-700';
+            return 'border-slate-200 bg-slate-50 text-slate-700';
     }
 };
 
@@ -217,7 +217,7 @@ const PartnerLogo = ({ partner, compact = false }) => {
     const logo = PARTNER_LOGOS[partner];
 
     if (!logo) {
-        return <span className={`text-xs font-semibold text-gray-700 ${compact ? 'block max-w-full truncate text-center' : ''}`}>{partner}</span>;
+        return <span className={`text-xs font-semibold text-slate-700 ${compact ? 'block max-w-full truncate text-center' : ''}`}>{partner}</span>;
     }
 
     const logoImage = (
@@ -261,15 +261,15 @@ const IndustryProjects = () => {
 
     return (
         <>
-            <section className="border-b border-gray-200 bg-white">
+            <section className="border-b border-slate-200 bg-white">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-                    <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-500">
+                    <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-500">
                         {pick('Transfer & public funding', 'Transfer & öffentliche Förderung')}
                     </p>
-                    <h1 className="max-w-3xl text-3xl font-bold leading-tight text-gray-900 sm:text-5xl">
+                    <h1 className="max-w-3xl text-3xl font-bold leading-tight text-slate-900 sm:text-5xl">
                         {pick('Industry Projects', 'Industrieprojekte')}
                     </h1>
-                    <p className="mt-5 max-w-3xl text-base leading-8 text-gray-600 sm:text-lg">
+                    <p className="mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
                         {pick(
                             'We develop applied AI systems in publicly funded and industry-oriented transfer projects. The focus is on robust demonstrators, understandable AI architectures, and solutions that must work in real processes across construction, healthcare, circular economy, retail, and IoT security.',
                             'Wir entwickeln angewandte KI-Systeme in öffentlich geförderten und industrienahen Transferprojekten. Im Mittelpunkt stehen robuste Demonstratoren, nachvollziehbare KI-Architekturen und Lösungen, die in realen Abläufen von Bauwesen, Gesundheit, Kreislaufwirtschaft, Handel und IoT-Sicherheit bestehen müssen.',
@@ -282,8 +282,8 @@ const IndustryProjects = () => {
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                         {projects.map((project) => (
-                            <article key={project.slug} className="flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-                                <div className="aspect-[16/9] overflow-hidden bg-gray-100">
+                            <article key={project.slug} className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+                                <div className="aspect-[16/9] overflow-hidden bg-slate-100">
                                     <ProjectVisual project={project} pick={pick} />
                                 </div>
                                 <div className="flex flex-1 flex-col p-5">
@@ -293,27 +293,27 @@ const IndustryProjects = () => {
                                         </span>
                                     </div>
 
-                                    <h2 className="text-xl font-bold text-gray-900">{project.title}</h2>
+                                    <h2 className="text-xl font-bold text-slate-900">{project.title}</h2>
                                     <p className="mt-2 text-sm font-semibold text-primary-700">{txt(pick, project.topic)}</p>
-                                    <div className="mt-4 space-y-3 text-sm leading-6 text-gray-600">
+                                    <div className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
                                         <p>{txt(pick, project.summary)}</p>
                                         <p>{txt(pick, project.contribution)}</p>
                                     </div>
 
                                     <PartnerLogoStrip partners={project.partners} />
 
-                                    <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-gray-200 pt-5 text-xs">
+                                    <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-slate-200 pt-5 text-xs">
                                         <div>
-                                            <dt className="font-semibold uppercase tracking-wide text-gray-400">{pick('Funding', 'Förderung')}</dt>
-                                            <dd className="mt-1 font-semibold text-gray-800">{txt(pick, project.fundingProgram)}</dd>
+                                            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Funding', 'Förderung')}</dt>
+                                            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.fundingProgram)}</dd>
                                         </div>
                                         <div>
-                                            <dt className="font-semibold uppercase tracking-wide text-gray-400">Budget</dt>
-                                            <dd className="mt-1 font-semibold text-gray-800">{txt(pick, project.budget)}</dd>
+                                            <dt className="font-semibold uppercase tracking-wide text-slate-400">Budget</dt>
+                                            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.budget)}</dd>
                                         </div>
                                         <div>
-                                            <dt className="font-semibold uppercase tracking-wide text-gray-400">{pick('Duration', 'Laufzeit')}</dt>
-                                            <dd className="mt-1 font-semibold text-gray-800">{txt(pick, project.duration)}</dd>
+                                            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Duration', 'Laufzeit')}</dt>
+                                            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.duration)}</dd>
                                         </div>
                                     </dl>
                                 </div>
@@ -325,13 +325,13 @@ const IndustryProjects = () => {
 
             <section className="bg-white">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-                    <div className="grid gap-6 rounded-lg border border-gray-200 bg-gray-900 p-6 text-white sm:p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+                    <div className="grid gap-6 rounded-lg border border-slate-200 bg-slate-900 p-6 text-white sm:p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
                         <div>
-                            <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">
+                            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
                                 {pick('Transfer with public and industry partners', 'Transfer mit öffentlichen und industriellen Partnern')}
                             </p>
                             <h2 className="mt-2 text-2xl font-bold">{pick('Interested in a transfer project?', 'Interesse an einem Transferprojekt?')}</h2>
-                            <p className="mt-3 max-w-2xl text-sm leading-7 text-gray-300">
+                            <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
                                 {pick(
                                     'We support partners from feasibility studies through publicly funded collaborative projects to robust AI demonstrators.',
                                     'Wir begleiten Partner von der Machbarkeitsstudie über öffentlich geförderte Verbundprojekte bis zum belastbaren KI-Demonstrator.',
@@ -340,7 +340,7 @@ const IndustryProjects = () => {
                         </div>
                         <a
                             href="mailto:bartelt@isse.tu-clausthal.de"
-                            className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:bg-primary-100"
+                            className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-primary-100"
                         >
                             <FiMail className="h-4 w-4" aria-hidden="true" />
                             {pick('Get in touch', 'Kontakt aufnehmen')}

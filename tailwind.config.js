@@ -43,11 +43,6 @@ export default {
           600: 'rgb(var(--tertiary-600) / <alpha-value>)',
           700: 'rgb(var(--tertiary-700) / <alpha-value>)',
         },
-        accent: {
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

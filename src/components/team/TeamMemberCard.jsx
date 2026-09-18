@@ -35,7 +35,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
       </div>
 
       {/* Name */}
-      <h3 className="text-xl font-heading font-bold text-gray-900 mb-1">
+      <h3 className="text-xl font-heading font-bold text-slate-900 mb-1">
         {member.name}
       </h3>
 
@@ -63,7 +63,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
           {member.email && (
             <a
               href={`mailto:${member.email}`}
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-slate-600 hover:text-primary-600 transition-colors"
               title="Email"
             >
               <FaEnvelope className="text-xl" />
@@ -74,7 +74,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.scholar}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-slate-600 hover:text-primary-600 transition-colors"
               title="Google Scholar"
             >
               <SiGooglescholar className="text-xl" />
@@ -85,7 +85,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-slate-600 hover:text-primary-600 transition-colors"
               title="GitHub"
             >
               <FaGithub className="text-xl" />
@@ -96,7 +96,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-slate-600 hover:text-primary-600 transition-colors"
               title="Twitter"
             >
               <FaTwitter className="text-xl" />
@@ -107,7 +107,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-slate-600 hover:text-primary-600 transition-colors"
               title="LinkedIn"
             >
               <FaLinkedin className="text-xl" />
@@ -118,7 +118,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-slate-600 hover:text-primary-600 transition-colors"
               title="Website"
             >
               <FaGlobe className="text-xl" />

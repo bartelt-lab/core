@@ -32,8 +32,8 @@ const VideoPlayer = ({
 
   if (error) {
     return (
-      <div className={`bg-gray-200 flex items-center justify-center ${className}`}>
-        <p className="text-gray-500">Video unavailable</p>
+      <div className={`bg-slate-200 flex items-center justify-center ${className}`}>
+        <p className="text-slate-500">Video unavailable</p>
       </div>
     )
   }
