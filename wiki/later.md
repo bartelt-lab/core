@@ -97,8 +97,9 @@ without a browser. Three reasons were on that list; two are now gone.
 - ~~**Publications fetched at runtime.**~~ Resolved: the corpus is a build-time
   import (`src/data/publications.js`). It was never 180 KB either — 68 KB.
 - ~~**`localStorage` for theme and language.**~~ Already SSR-safe:
-  `LanguageContext.jsx` guards on `typeof localStorage === 'undefined'`, and
-  `ThemeToggle` only touches it inside `useLayoutEffect`.
+  `LanguageContext.jsx` guards on `typeof localStorage === 'undefined'`. The theme
+  half of this is moot — `ThemeToggle` and the runtime palette switcher were
+  removed; there is one palette now (`wiki/visual-identity.md`).
 - **Scroll-reveal animations.** The one that remains, and the expensive one.
   Roughly eight `whileInView` / `useInView` sites start at `opacity: 0` and only
   reveal once IntersectionObserver fires against real layout. `prerender.mjs`

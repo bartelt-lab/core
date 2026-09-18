@@ -120,7 +120,10 @@ link to.
 src/
   App.jsx                          route gating
   main.jsx
-  index.css                        tailwind v3 entry, no @import anymore
+  index.css                        tailwind v3 entry, no @import anymore.
+                                   Also the single definition of the brand
+                                   palette (:root vars) — see
+                                   wiki/visual-identity.md before editing it
   data/
     team.js                        20 members + 4 institutions + helpers
                                    (getCoreLabsLeads, getMembersByInstitution,
@@ -200,6 +203,10 @@ Image loading rules, the `LazyVideo` component and `npm run optimize-images` are
 Longer-form conventions and parked techniques live in the `wiki/` folder (sorts to
 the bottom of the file tree). Read the relevant one before related work:
 
+- `wiki/visual-identity.md` — **the colour, type and shape rules, and why the palette
+  values are what they are.** The logo is the authority for brand colour; ramps are
+  regenerated hue-only; `primary-600` is pinned above the AA floor on purpose. Read
+  before changing a brand colour or adding a colour family.
 - `wiki/project-subsites.md` — **how CORE Labs project subpages (e.g. `/dynamo`)
   should look and behave.** Visual language, hero forms, the research-question
   intro, the milestone video browser. Read this before building or restyling any
