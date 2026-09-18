@@ -11,10 +11,28 @@ into an email, or there will be two versions of the rules.
 This file holds only what does **not** belong in a document handed to outsiders: how the
 PDF is produced, where its numbers came from, and what is still undecided.
 
-## Regenerating
+## The kit we actually send
+
+`npm run brand-kit` rebuilds the PDF and packs `brand/CORE-Brand-Kit.zip` — 16 logo SVGs
+plus 2000 px transparent PNGs of each, the avocado in four formats, `Colours.txt`, a
+fonts pointer, and a plain-English `READ ME FIRST.txt`. That zip is the thing to hand
+someone; the bare PDF is for when they only need the rules.
+
+**The zip is gitignored on purpose.** Every byte of it is derived from
+`public/logos/core/` and the PDF, so a committed copy would go stale the moment a logo
+changes and nobody would notice. Rebuild and re-send rather than editing its contents.
+
+Filenames are rewritten on the way in — `core_ura.svg` becomes
+`CORE-Uni-Rostock.svg`, `dark-background/` becomes `for-dark-backgrounds/`. Nobody
+outside the team should have to guess what "ura" means.
+
+Fonts are **not** bundled: the kit links to Google Fonts instead, so recipients get the
+current version with its licence intact rather than whatever we happened to vendor.
+
+## Regenerating the PDF alone
 
 ```bash
-node scripts/brand-guide.mjs
+npm run brand-guide      # node scripts/brand-guide.mjs
 ```
 
 Renders an HTML document to A4 with Playwright — the same Chromium the prerender pass

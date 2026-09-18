@@ -27,3 +27,8 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+# Brand kit zip — fully derived from public/logos + the guidelines PDF.
+# Rebuild with `npm run brand-kit`; a stale copy in git would disagree with the logos.
+brand/CORE-Brand-Kit.zip
+brand/CORE-Brand-Kit/

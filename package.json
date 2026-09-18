@@ -11,7 +11,9 @@
     "preview": "vite preview",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "check-videos": "node scripts/check-videos.mjs",
-    "optimize-images": "node scripts/optimize-images.mjs"
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "brand-guide": "node scripts/brand-guide.mjs",
+    "brand-kit": "node scripts/brand-guide.mjs && node scripts/brand-kit.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.34.0",
