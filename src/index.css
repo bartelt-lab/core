@@ -50,6 +50,54 @@
   --tertiary-500: 98 54 0;
   --tertiary-600: 76 48 6;
   --tertiary-700: 58 30 0;
+
+  /* Site accent — the colour of the institution hosting a lab. Defaults to the
+     CORE green, so an unscoped text-site-* is on brand rather than broken. A
+     host that wants its own colour rebinds these under a .theme-* class below;
+     opting in is a choice, not an obligation. See wiki/visual-identity.md. */
+  --site-100: 214 247 213;
+  --site-200: 175 237 175;
+  --site-300: 127 224 129;
+  --site-900: 19 78 24;
+}
+
+/* CORE Labs Cluj. Anchored on the Babeș-Bolyai seal blue #034E84, which
+   --site-900 IS exactly; the other three are Tailwind sky rotated hue-only to
+   248.3deg, the same technique the brand ramps use. Four steps, not eleven: the
+   seal is a dark colour, so the light half of a full ramp drifts into a generic
+   blue that reads as Tailwind rather than as UBB. Fewer steps also means fewer
+   ways for the accent to end up on a button, which it must never do. */
+.theme-ubb {
+  --site-100: 226 241 255; /* #E2F1FF */
+  --site-200: 194 226 255; /* #C2E2FF */
+  --site-300: 145 205 255; /* #91CDFF — 11.9:1 on slate-950 */
+  --site-900: 3 78 132;    /* #034E84 — the seal; 8.7:1 on white */
+}
+
+/* The partnership gradient — host's mark sweeping to CORE's, on the place word
+   of a lab wordmark and nowhere else. Endpoints are tokens, not literals, so a
+   palette change carries. Both ends clear AA (8.7:1 and 5.7:1 on white), which
+   is why the green end is primary-700 and not the 2.6:1 logo green.
+
+   Two declarations on purpose: an unsupported `in oklch` invalidates the whole
+   rule, and with bg-clip-text that means invisible text rather than a degraded
+   gradient. The sRGB line below catches it — muddier through the middle, never
+   blank. Do not collapse them into one. */
+.wordmark-partnership {
+  background-image: linear-gradient(to right, rgb(var(--site-900)), rgb(var(--primary-700)));
+  background-image: linear-gradient(in oklch to right, rgb(var(--site-900)), rgb(var(--primary-700)));
+}
+
+/* Hero wash for a lab landing page: host's tint top-left, CORE's bottom-right,
+   same two-institution reading as the wordmark. Lives here rather than in a
+   bg-[radial-gradient(...)] arbitrary value because that form can only hold raw
+   rgba literals — which a grep for `sky-200` does not find, so it survives a
+   palette audit untouched. That is exactly how it shipped the first time. */
+.lab-hero-wash {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgb(var(--site-200) / 0.65), transparent 30%),
+    radial-gradient(circle at 88% 78%, rgb(var(--primary-200) / 0.5), transparent 32%),
+    linear-gradient(135deg, #f8fbff 0%, #ffffff 48%, #f4fbf8 100%);
 }
 
 @layer base {

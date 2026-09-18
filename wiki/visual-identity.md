@@ -106,17 +106,46 @@ They were previously mixed — 403 gray against 492 slate, colliding *inside* si
 `slate`; pairing them in one card gives subtly mismatched borders and body copy. There
 was no core/tuc split to preserve — both ramps appeared throughout both subtrees.
 
-### There is no accent family
+### Site accents — the host institution's colour
 
-An amber `accent` triplet was removed, not renamed. It was hardcoded rather than
-themeable, bore no relationship to the logo, and **every shade failed AA** — its two call
-sites ran white-on-amber at 2.19:1 and amber-on-white at 2.15:1, with no darker step in
-the family to escape to.
+A lab page may carry the colour of the university hosting it. Four tokens,
+`--site-{100,200,300,900}`, declared green in `:root` and rebound under a `.theme-*`
+class for a host that wants its own. **Opting in is a choice, not an obligation** — a
+host that does not override inherits the CORE green and the page is still correct.
 
-If something needs to read as "not the primary green", reach for `secondary-700`
-(4.60:1) — that is what the `PublicationItem` code link uses to stay distinct from the
-green paper link beside it. Do not reintroduce a colour family that sits outside the
-logo.
+![The four site accent steps shown twice: the root defaults in CORE green and the theme-ubb override in Babeș-Bolyai blue, with step 900 outlined as the seal](visual-identity/site-accent.svg)
+
+**The division of labour is the whole point:**
+
+- **Green owns action** — buttons, links, active states, focus rings. On every lab page,
+  without exception.
+- **The site accent owns place** — kicker labels, section rules, institutional marks,
+  tint washes. Never anything clickable.
+
+A visitor moving between labs then meets identical interaction affordances and a
+changing sense of locale. Put the accent on a button and the labs stop behaving like one
+network.
+
+The one live instance is `.theme-ubb`, anchored on the Babeș-Bolyai seal `#034E84` —
+which `--site-900` **is**, exactly, the same way the brand ramps carry their logo hex.
+The other three steps are Tailwind `sky` rotated hue-only to 248.3°.
+
+Four steps rather than eleven, for two reasons. The seal is a dark colour, so the light
+half of a full ramp drifts into a generic blue that reads as Tailwind rather than as the
+institution. And a small palette is a small attack surface: there is no mid-weight
+`site-500` sitting around inviting someone to make a blue button out of it.
+
+The class goes on the subtree root — `UbbLayout`'s outermost `div` — and is static in
+the markup, so the prerendered HTML and the hydrated client resolve the same colours.
+This is the second legitimate reason the `rgb(var(--x))` indirection exists, alongside
+the ten raw-CSS readers above.
+
+**This is not the old `accent` family returning.** That one was an amber triplet,
+hardcoded rather than themeable, unrelated to any logo, and **every shade failed AA** —
+white-on-amber at 2.19:1, amber-on-white at 2.15:1, with no darker step to escape to. It
+was deleted. If something merely needs to read as "not the primary green" and carries no
+institutional meaning, reach for `secondary-700` (4.60:1), which is what the
+`PublicationItem` code link uses.
 
 ## Typography
 
@@ -138,8 +167,44 @@ Project subpages deliberately narrow this further — Inter only, no Poppins, pl
 - **Hover is colour-first**: `transition-colors` at 200–300 ms, often with
   `group-hover:scale-*` on an image inside the card.
 - Gradients are used as scrims and tints (`to-br`, `to-t`), never as brand fills — the
-  brand colour is flat.
+  brand colour is flat. **One exception, below.**
 - Framer Motion appears in 10 files, for entrance animation only.
+
+### The partnership gradient
+
+The single sanctioned brand-fill gradient: `.wordmark-partnership` in `index.css`, host's
+mark sweeping to CORE's, **on the place word of a lab wordmark and nowhere else.** On
+`/ubb` it runs the seal `#034E84` to `primary-700` across the word "Cluj".
+
+It earns the exception because it is not decoration — it is the joint venture drawn. The
+gradient that shipped before it was `sky-700 → cyan-700 → emerald-600`: three colours,
+none of which were UBB's or CORE's. It looked like the partnership without containing
+either institution. Endpoints must be real marks or it means nothing.
+
+Rules if you add one for another lab:
+
+- **Endpoints are tokens, never literals**, so a palette change carries.
+- **Both ends must clear AA** on the background. The green end is `primary-700` and not
+  the logo green precisely because `#01BC2B` sits at 2.55:1 — under the 3:1 floor even
+  for display type. A hero headline nobody can read is the worse brand statement.
+- **Keep both `background-image` declarations.** An unsupported `in oklch` invalidates
+  the whole rule, and with `bg-clip-text` that renders the word *invisible* rather than
+  merely ugly. The sRGB line above it is the catch. Do not collapse them.
+- **One per page.** Scarcity is what keeps it meaningful.
+
+Everything else stays flat: no gradient buttons, no gradient icon tiles. A hero wash is
+still fine — that is a tint, and `.lab-hero-wash` is the token-driven version of one.
+
+### Watch for colour hiding in arbitrary values
+
+`bg-[radial-gradient(...)]` can only hold raw `rgba()` literals. The `/ubb` hero wash sat
+there carrying `rgba(186,230,253)` and `rgba(167,243,208)` — sky-200 and emerald-200 —
+and **survived a full palette audit untouched**, because grepping for `sky-200` does not
+find them. It shipped that way.
+
+Anything longer than a couple of stops belongs in `index.css` as a named class reading
+`rgb(var(--token))`. Grep `rgba\?\([0-9]` across `src/` when auditing colour, not just
+class names.
 
 ## Changing a brand colour — procedure
 
@@ -157,10 +222,17 @@ Project subpages deliberately narrow this further — Inter only, no Poppins, pl
    ```
 
    The script reads the palette straight out of `index.css`, so the figures cannot
-   disagree with what ships — but only if it is re-run. If you add a family or a step,
-   the anchor table in `scripts/palette-figures.mjs` needs the new entry too.
+   disagree with what ships — but only if it is re-run. Adding a family or a step needs
+   a matching entry in the script: `LOGO` for a brand ramp, `SITES` plus `themes` for a
+   host accent.
 7. Verify in a browser, not just `npm run build`. Read the computed value of the
    variables off `document.documentElement`; a build pass proves nothing about colour.
+   For a scoped accent read it off the themed node instead — `.theme-ubb` — since
+   `document.documentElement` only ever shows the defaults.
+
+Note that `tailwind.config.js` changes do **not** hot-reload. A dev server started before
+the edit serves a stylesheet with the new utilities missing entirely, so the page renders
+as though every one of them were a typo. Restart it before concluding anything.
 
 ## Gotcha: classes Tailwind never emits
 

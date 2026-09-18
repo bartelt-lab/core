@@ -17,7 +17,10 @@ const UbbLayout = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen bg-white text-slate-950">
+    // theme-ubb rebinds --site-* to the Babeș-Bolyai seal blue for this subtree
+    // (index.css). Static class, so the prerendered HTML and the hydrated client
+    // resolve the same colours.
+    <div className="theme-ubb min-h-screen bg-white text-slate-950">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5 md:px-8">
           <Link to="/ubb" className="flex items-center gap-3" aria-label="CORE Labs Cluj home">
@@ -40,10 +43,10 @@ const UbbLayout = ({ children }) => {
               </button>
             ))}
             <span className="h-5 w-px bg-slate-200" aria-hidden="true" />
-            <Link to="/publications?institution=UBB" className="text-sm font-semibold text-slate-600 transition hover:text-sky-700">
+            <Link to="/publications?institution=UBB" className="text-sm font-semibold text-slate-600 transition hover:text-primary-700">
               Publications
             </Link>
-            <Link to="/" className="rounded-full bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-700">
+            <Link to="/" className="rounded-full bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-700">
               CORE Network
             </Link>
           </nav>

@@ -53,17 +53,35 @@ const ROOT = path.resolve(import.meta.dirname, '..')
 const OUT = path.join(ROOT, 'wiki', 'visual-identity')
 
 const css = fs.readFileSync(path.join(ROOT, 'src', 'index.css'), 'utf8')
-const root = css.slice(css.indexOf(':root'), css.indexOf('@layer base'))
-const pal = {}
-for (const m of root.matchAll(/--([a-z]+)-(\d+):\s*(\d+) (\d+) (\d+)/g)) {
-  ;(pal[m[1]] ??= {})[m[2]] = [+m[3], +m[4], +m[5]]
+
+// Read one rule's declarations. Stop at the rule's own closing brace — slicing
+// to the next @layer would swallow the .theme-* blocks that follow :root, and
+// their --site-* values would silently overwrite the defaults parsed here.
+function block(selector) {
+  const start = css.indexOf(selector)
+  if (start === -1) throw new Error(`palette-figures: no ${selector} in index.css`)
+  const body = css.slice(start, css.indexOf('}', start))
+  const out = {}
+  for (const m of body.matchAll(/--([a-z]+)-(\d+):\s*(\d+) (\d+) (\d+)/g)) {
+    ;(out[m[1]] ??= {})[m[2]] = [+m[3], +m[4], +m[5]]
+  }
+  return out
 }
+
+const pal = block(':root')
+const themes = { ubb: block('.theme-ubb') }
 
 // The logo SVGs are the authority; these are the hexes they carry.
 const LOGO = {
   primary: { rgb: [1, 188, 43], anchor: '500', label: 'avocado green' },
   secondary: { rgb: [200, 242, 0], anchor: '300', label: 'lime' },
   tertiary: { rgb: [76, 48, 6], anchor: '600', label: 'pit brown' },
+}
+
+// Site accents: a host institution's own mark, rebound under a .theme-* class.
+// Anchored the same way the brand ramps are — one step IS the seal exactly.
+const SITES = {
+  ubb: { rgb: [3, 78, 132], anchor: '900', label: 'Babeș-Bolyai seal', where: '/ubb' },
 }
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -222,6 +240,53 @@ function figureContrast() {
     'A bar per step of the primary ramp showing its contrast ratio on white, with the 4.5 to 1 AA floor drawn as a dashed line. Step 600 sits just above the floor and step 500, the logo colour, sits well below it.')
 }
 
+// ─── figure 4: site accents, default against each host override ────────────
+
+function figureSiteAccent() {
+  const steps = Object.keys(pal.site).sort((a, b) => +a - +b)
+  const rows = [{ key: null, label: ':root default — the CORE green', note: 'what an unscoped text-site-* resolves to' },
+    ...Object.entries(SITES).map(([k, v]) => ({ key: k, label: `.theme-${k} — ${v.label}`, note: `applied on ${v.where}` }))]
+
+  const PAD = 22, X0 = 250, SW = 118, GAP = 12, SH = 54
+  const W = X0 + steps.length * (SW + GAP) + PAD
+  const ROW = 104
+  const H = 78 + rows.length * ROW + 66
+
+  let s = `<text x="${PAD}" y="30" font-family="${FONT}" font-size="15" fill="${INK}">Site accent — one token set, rebound per host institution</text>`
+  s += `<text x="${PAD}" y="48" font-family="${FONT}" font-size="12" fill="${MUTED}">a host that wants no colour of its own simply does not override; the defaults are already on brand</text>`
+
+  steps.forEach((step, j) => {
+    s += `<text x="${X0 + j * (SW + GAP) + SW / 2}" y="74" text-anchor="middle" font-family="${FONT}" font-size="11" fill="${MUTED}">site-${step}</text>`
+  })
+
+  rows.forEach((row, i) => {
+    const y = 88 + i * ROW
+    const source = row.key ? themes[row.key].site : pal.site
+    s += `<text x="${PAD}" y="${y + 24}" font-family="${FONT}" font-size="12" fill="${INK}">${esc(row.label)}</text>`
+    s += `<text x="${PAD}" y="${y + 42}" font-family="${FONT}" font-size="11" fill="${MUTED}">${esc(row.note)}</text>`
+
+    steps.forEach((step, j) => {
+      const c = source[step]
+      const x = X0 + j * (SW + GAP)
+      const isAnchor = row.key && step === SITES[row.key].anchor
+      s += `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="7" fill="${hex(c)}"/>`
+      s += `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="7" fill="none" stroke="${isAnchor ? INK : HAIR}" stroke-width="${isAnchor ? 2 : 0.5}"/>`
+      if (isAnchor) {
+        s += `<text x="${x + SW / 2}" y="${y + 32}" text-anchor="middle" font-family="${FONT}" font-size="10" font-weight="700" fill="#ffffff">THE SEAL</text>`
+      }
+      s += `<text x="${x + SW / 2}" y="${y + SH + 16}" text-anchor="middle" font-family="${MONO}" font-size="9" fill="${MUTED}">${hex(c).toUpperCase()}</text>`
+    })
+  })
+
+  const y = 88 + rows.length * ROW + 18
+  s += `<line x1="${PAD}" y1="${y - 14}" x2="${W - PAD}" y2="${y - 14}" stroke="${HAIR}" stroke-width="0.5"/>`
+  s += `<text x="${PAD}" y="${y + 8}" font-family="${FONT}" font-size="12" fill="${INK}">Green owns action — buttons, links, active states, focus rings — on every lab page.</text>`
+  s += `<text x="${PAD}" y="${y + 26}" font-family="${FONT}" font-size="12" fill="${INK}">The site accent owns place — kickers, rules, institutional marks, tints. Never anything clickable.</text>`
+
+  return svg(W, H, s, 'Site accent tokens and their per-host overrides',
+    'The four site accent steps shown twice: the root defaults in CORE green, and the theme-ubb override in Babes-Bolyai blue with step 900 outlined as the seal colour.')
+}
+
 // ─── write ─────────────────────────────────────────────────────────────────
 
 fs.mkdirSync(OUT, { recursive: true })
@@ -229,6 +294,7 @@ const figures = {
   'ramps.svg': figureRamps(),
   'hue-vs-chroma.svg': figureHueVsChroma(),
   'contrast.svg': figureContrast(),
+  'site-accent.svg': figureSiteAccent(),
 }
 for (const [name, body] of Object.entries(figures)) {
   fs.writeFileSync(path.join(OUT, name), body)

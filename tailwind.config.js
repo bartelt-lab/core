@@ -43,6 +43,15 @@ export default {
           600: 'rgb(var(--tertiary-600) / <alpha-value>)',
           700: 'rgb(var(--tertiary-700) / <alpha-value>)',
         },
+        // Host institution's colour, rebound per lab by a .theme-* class in
+        // index.css and green everywhere else. Marks place, never action —
+        // buttons, links and active states stay primary on every lab page.
+        site: {
+          100: 'rgb(var(--site-100) / <alpha-value>)',
+          200: 'rgb(var(--site-200) / <alpha-value>)',
+          300: 'rgb(var(--site-300) / <alpha-value>)',
+          900: 'rgb(var(--site-900) / <alpha-value>)',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

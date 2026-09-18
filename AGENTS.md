@@ -62,6 +62,26 @@ the existing two.
 `index.html` deliberately has no `<title>`/description/og tags — SeoHead owns
 them. Adding static copies back would leave two of each in the document.
 
+### Site accents — per-host colour on a lab page
+
+A lab page can carry its host university's colour through four tokens,
+`--site-{100,200,300,900}`. They are declared green in `:root` and rebound by a
+`.theme-*` class on the subtree root; `.theme-ubb` on `UbbLayout`'s outer `div`
+is the only live one, anchored on the Babeș-Bolyai seal `#034E84`.
+
+**A host does not have to opt in.** No override means the tokens stay green and
+the page is still correct — `/tuc` uses no accent at all.
+
+The rule that keeps three labs looking like one network: **green owns action**
+(buttons, links, active states, focus rings, everywhere), **the site accent owns
+place** (kickers, rules, institutional marks, tints, never anything clickable).
+Full reasoning, the AA numbers and the partnership-gradient exception are in
+`wiki/visual-identity.md` — read it before adding a lab accent or touching
+`/ubb`'s colour.
+
+Note `tailwind.config.js` does not hot-reload. Restart the dev server after
+adding a colour family, or every new utility silently renders as nothing.
+
 ### Feature flags
 
 `src/config/features.js` holds build-time flags. They are plain module
@@ -122,7 +142,10 @@ src/
   main.jsx
   index.css                        tailwind v3 entry, no @import anymore.
                                    Also the single definition of the brand
-                                   palette (:root vars) — see
+                                   palette (:root vars), the per-host site
+                                   accents (.theme-ubb) and the two named
+                                   gradient classes (.wordmark-partnership,
+                                   .lab-hero-wash) — see
                                    wiki/visual-identity.md before editing it
   data/
     team.js                        20 members + 4 institutions + helpers
@@ -153,6 +176,10 @@ src/
       ProjectLayout.jsx            outer chrome for /tuc/core-team-projects/*
       ProjectRow.jsx
       PublicationItem.jsx          publication row (tuc-style)
+    ubb/
+      Layout.jsx                   /ubb header + footer. Its root div carries
+                                   `theme-ubb`, which rebinds --site-* to the
+                                   Babeș-Bolyai blue for the whole subtree
   pages/
     Home.jsx CoreLabs.jsx Demos.jsx Dynamo.jsx   core
                                    (Home.jsx = CORE Network landing,
@@ -163,6 +190,9 @@ src/
       Teaching.jsx                   teaching subtree (/seminar, /theses route to it)
       JoinUs.jsx Projects.jsx AiTeamProjects.jsx
       projects/{AI4AI,Dynamo,NeuroCore,SelfDriving,Stratego,TrafficNetwork,Vergabepilot}Project.jsx
+    ubb/
+      Home.jsx                     CORE Labs Cluj (/ubb), third shell. Carries
+                                   the only site accent — see below
 
 public/
   data/
