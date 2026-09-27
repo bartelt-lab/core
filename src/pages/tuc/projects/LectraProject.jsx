@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FiArrowLeft, FiArrowRight, FiBookOpen, FiCheckCircle, FiFileText, FiMessageSquare } from 'react-icons/fi'
+import { FiArrowLeft, FiArrowRight, FiBookOpen, FiCheckCircle, FiDownload, FiFileText, FiMessageSquare } from 'react-icons/fi'
 import assetUrl from '../../../utils/assetUrl'
 import { useLanguage } from '../../../i18n/useLanguage'
 
@@ -47,6 +47,15 @@ const LectraProject = () => {
               <p className="mt-5 max-w-xl text-base leading-7 text-slate-600">
                 {pick('LECTRA is a planned interactive learning platform where students keep course material visible while working with a context-aware LLM assistant. It is designed to provide grounded answers, explanations, examples, practice questions, feedback, and a visible adaptive next step.', 'LECTRA ist eine geplante interaktive Lernplattform, auf der Studierende Kursmaterial sichtbar halten und gleichzeitig mit einem kontextbezogenen LLM-Assistenten arbeiten. Sie soll fundierte Antworten, Erklärungen, Beispiele, Übungsfragen, Feedback und einen sichtbaren adaptiven nächsten Schritt bieten.')}
               </p>
+              <a
+                href={assetUrl('/documents/project-descriptions/lectra-project-pitch.pdf')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-primary-700"
+              >
+                <FiDownload className="h-4 w-4" aria-hidden="true" />
+                {pick('Download project pitch (PDF)', 'Projekt-Pitch herunterladen (PDF)')}
+              </a>
             </div>
             <figure className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-2 shadow-2xl shadow-slate-300/50">
               <img src={assetUrl('/images/projects/lectra/workspace.webp')} alt={pick('Conceptual learning workspace with course material, notebook, and context-aware chat side by side', 'Konzeptioneller Lernarbeitsbereich mit Kursmaterial, Notebook und kontextbezogenem Chat nebeneinander')} width="1200" height="676" fetchPriority="high" decoding="async" className="aspect-video w-full rounded-2xl object-cover" />

@@ -1,3 +1,4 @@
+import { FiDownload } from "react-icons/fi";
 import ProjectLayout from "../../../components/tuc/ProjectLayout";
 import assetUrl from "../../../utils/assetUrl";
 import { useLanguage } from "../../../i18n/useLanguage";
@@ -88,6 +89,7 @@ const TEMPO_DE = {
   "Chess knowledge is welcome for intuition, and is not required for most of the codebase":
     "Schachkenntnisse helfen bei der Intuition, sind für den Großteil des Codes aber nicht erforderlich",
   "AI Team Project": "AI-Team-Projekt",
+  "Download project pitch (PDF)": "Projekt-Pitch herunterladen (PDF)",
   "Trained Engine for Memory-Paced Openings":
     "Trainiertes System für gedächtnisgesteuertes Eröffnungstraining",
   "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. TEMPO answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every review it makes.":
@@ -1096,6 +1098,16 @@ const TempoProject = () => {
                 "A player's hardest question is not how to play a line — it is which of the lines they already know needs work today. TEMPO answers it with a model that ships as a base model, is fine-tuned on one player's own play, and is graded on every review it makes.",
               )}
             </p>
+
+            <a
+              href={assetUrl("/documents/project-descriptions/tempo-project-pitch.pdf")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-primary-700"
+            >
+              <FiDownload className="h-4 w-4" aria-hidden="true" />
+              {t("Download project pitch (PDF)")}
+            </a>
 
             <p className="mt-7 text-[10px] font-black uppercase tracking-widest text-slate-400">
               {t("Focus")}

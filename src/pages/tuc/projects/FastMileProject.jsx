@@ -7,9 +7,11 @@ import {
   FiCheckCircle,
   FiCpu,
   FiDatabase,
+  FiDownload,
   FiRepeat,
   FiSliders,
 } from 'react-icons/fi'
+import assetUrl from '../../../utils/assetUrl'
 import { useLanguage } from '../../../i18n/useLanguage'
 
 const FastMileProject = () => {
@@ -136,6 +138,16 @@ const FastMileProject = () => {
               'Eine Echtzeit-Routing-Plattform, die Daten verschiedener Mobilitätsdienstleister zusammenführt und Reisende auf Knopfdruck ans Ziel bringt – über die Verkehrsträger, die gerade passen. Das studentische Team baut das Routing selbst: den Regelfall und vor allem die Situationen, in denen der Plan nicht mehr stimmt.',
             )}
           </p>
+
+          <a
+            href={assetUrl('/documents/project-descriptions/fastmile-project-pitch.pdf')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-primary-700"
+          >
+            <FiDownload className="h-4 w-4" aria-hidden="true" />
+            {pick('Download project pitch (PDF)', 'Projekt-Pitch herunterladen (PDF)')}
+          </a>
 
         </div>
       </header>

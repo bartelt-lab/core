@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   FaArrowRight,
   FaCalendarAlt,
+  FaDownload,
   FaExternalLinkAlt,
   FaInfoCircle,
 } from "react-icons/fa";
@@ -23,6 +24,7 @@ const activeProjects = [
     descriptionDe:
       "Ein Empfehlungsmodell, das sich auf das Gedächtnis jedes Spielers abstimmt und lernt, als persönlicher Leitfaden durch dessen Eröffnungsrepertoire zu dienen.",
     link: "/ai-team-projects/tempo",
+    pdfUrl: assetUrl("/documents/project-descriptions/tempo-project-pitch.pdf"),
     placeholder: false,
   },
   {
@@ -52,6 +54,7 @@ const activeProjects = [
     descriptionDe:
       "Ein geplanter Lernplattform-Demonstrator, der Kursmaterial neben einem kontextbezogenen LLM-Assistenten sichtbar hält und Unterstützung mithilfe eines leichtgewichtigen themenbezogenen Lernstandsmodells anpasst.",
     link: "/ai-team-projects/lectra",
+    pdfUrl: assetUrl("/documents/project-descriptions/lectra-project-pitch.pdf"),
     placeholder: false,
   },
   {
@@ -66,6 +69,7 @@ const activeProjects = [
     descriptionDe:
       "Eine geplante Echtzeit-Routing-Plattform, die Daten mehrerer Mobilitätsdienstleister zu einer durchgehenden Wegekette verbindet und Störungen, Ausfälle und Veranstaltungen mithilfe von Sprachmodellen behandelt.",
     link: "/ai-team-projects/fastmile",
+    pdfUrl: assetUrl("/documents/project-descriptions/fastmile-project-pitch.pdf"),
     placeholder: false,
   },
 ];
@@ -269,6 +273,7 @@ const Media = ({ project, title }) => {
 
 const AiTeamProjects = () => {
   const { pick } = useLanguage();
+  const navigate = useNavigate();
   const scrollToSection = (id) => {
     document
       .getElementById(id)
@@ -305,7 +310,7 @@ const AiTeamProjects = () => {
             </span>
             <h1 className="font-heading text-5xl font-black leading-[0.98] text-slate-950 sm:text-6xl lg:text-[4.9rem] xl:text-[5.45rem]">
               {pick("AI Team", "AI-Team")}
-              <span className="block bg-gradient-to-r from-primary-700 to-primary-500 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-primary-700 to-primary-500 bg-clip-text pb-2 leading-[1.15] text-transparent">
                 {pick("Projects", "Projekte")}
               </span>
             </h1>
@@ -448,10 +453,15 @@ const AiTeamProjects = () => {
             {activeProjects.map((project, index) => (
               <article
                 key={project.id}
+                onClick={(event) => {
+                  if (project.placeholder || !project.link) return
+                  if (event.target.closest("a")) return
+                  navigate(project.link)
+                }}
                 className={`group relative flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-lg shadow-slate-200/70 ${activeProjectCardClass(activeProjects.length, index)} ${
                   project.placeholder
                     ? "border border-dashed border-slate-300 bg-white/70"
-                    : "border border-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    : `border border-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl ${project.link ? "cursor-pointer" : ""}`
                 }`}
               >
                 {project.placeholder && (
@@ -497,15 +507,29 @@ const AiTeamProjects = () => {
                   <p className="line-clamp-2 text-sm leading-5 text-slate-600">
                     {pick(project.description, project.descriptionDe)}
                   </p>
-                  {project.link && (
-                    <Link
-                      to={project.link}
-                      className="mt-auto inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary-700 transition hover:text-primary-900"
-                    >
-                      {pick("View project", "Projekt ansehen")}
-                      <FaArrowRight className="h-3 w-3" aria-hidden="true" />
-                    </Link>
-                  )}
+                  <div className="mt-auto flex items-center justify-between gap-2 pt-2">
+                    {project.link && (
+                      <Link
+                        to={project.link}
+                        className="inline-flex items-center gap-2 text-sm font-bold text-primary-700 transition hover:text-primary-900"
+                      >
+                        {pick("View project", "Projekt ansehen")}
+                        <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+                      </Link>
+                    )}
+                    {project.pdfUrl && (
+                      <a
+                        href={project.pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={pick("Download project pitch (PDF)", "Projekt-Pitch herunterladen (PDF)")}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-1 text-xs font-bold text-slate-600 transition hover:border-primary-300 hover:text-primary-700"
+                      >
+                        <FaDownload className="h-3 w-3" aria-hidden="true" />
+                        PDF
+                      </a>
+                    )}
+                  </div>
                 </div>
               </article>
             ))}
