@@ -10,9 +10,14 @@ const Section = ({
   subtitle,
   dark = false,
 }) => {
+  // threshold is a fraction of this section's own height, not the viewport's —
+  // a ratio-based threshold never fires for a section taller than ~10x the
+  // viewport (e.g. the mobile publications list, single-column and 27,000px
+  // tall), leaving it permanently at opacity:0. Any-pixel-visible is robust
+  // to section height.
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0,
   })
 
   const variants = {
