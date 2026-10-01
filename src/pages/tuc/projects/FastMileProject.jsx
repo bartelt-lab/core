@@ -13,9 +13,11 @@ import {
 } from 'react-icons/fi'
 import assetUrl from '../../../utils/assetUrl'
 import { useLanguage } from '../../../i18n/useLanguage'
+import useInstitution from '../../../hooks/useInstitution'
 
 const FastMileProject = () => {
   const { pick } = useLanguage()
+  const { withInstitution } = useInstitution()
 
   const scenarios = [
     {
@@ -113,7 +115,7 @@ const FastMileProject = () => {
         />
         <div className="mx-auto max-w-6xl">
           <Link
-            to="/ai-team-projects"
+            to={withInstitution('/teaching#student-projects')}
             className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/85 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-600 shadow-sm backdrop-blur transition hover:border-primary-200 hover:text-primary-700"
           >
             <FiArrowLeft className="h-3 w-3" aria-hidden="true" />
@@ -387,7 +389,7 @@ const FastMileProject = () => {
 
         <section className="border-t border-slate-100 pt-10">
           <Link
-            to="/ai-team-projects"
+            to={withInstitution('/teaching#student-projects')}
             className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
           >
             {pick('Explore all AI Team Projects', 'Alle KI-Teamprojekte ansehen')}

@@ -3,38 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { normalizePath } from '../../routes';
 
-// Section configurations for each route (merged: core's existing routes + bartelt /tuc/* routes)
+// Keep only verified detail-page anchors. The new shared hubs use their own
+// navigation and filters, so they do not inherit the retired pages' dots.
 const ROUTE_SECTIONS = {
-    // CORE routes
-    '/': [
-        { id: 'hero', label: 'Home' },
-        { id: 'about', label: 'About' },
-        { id: 'platform', label: 'Platform' },
-        { id: 'team', label: 'Team' },
-        { id: 'contact', label: 'Contact' },
-    ],
-    '/core-labs': [
-        { id: 'hero', label: 'Overview' },
-        { id: 'initiative', label: 'Initiative' },
-        { id: 'dynamo', label: 'Dynamo' },
-        { id: 'autonomous', label: 'Self-Driving' },
-        { id: 'publications', label: 'Papers' },
-    ],
-    '/dynamo': [],
-    '/network': [
-        { id: 'hero', label: 'Network' },
-        { id: 'about', label: 'About' },
-        { id: 'platform', label: 'Platform' },
-        { id: 'team', label: 'Team' },
-        { id: 'contact', label: 'Contact' },
-    ],
-    '/publications': [],
-    '/ai-team-projects': [
-        { id: 'hero', label: 'Overview' },
-        { id: 'active-projects', label: 'Projects' },
-        { id: 'testimonials', label: 'Voices' },
-        { id: 'archive', label: 'Archive' },
-    ],
     '/compute-cluster': [
         { id: 'hero', label: 'Overview' },
         { id: 'purpose', label: 'Purpose' },
@@ -42,7 +13,7 @@ const ROUTE_SECTIONS = {
         { id: 'sites', label: 'Sites' },
         { id: 'policies', label: 'Policies' },
     ],
-    '/ai-team-projects/ai4ai': [
+    '/ai-team-projects/ai4bim': [
         { id: 'hero', label: 'Overview' },
         { id: 'features', label: 'Features' },
         { id: 'evaluation', label: 'Evaluation' },
@@ -57,7 +28,7 @@ const ROUTE_SECTIONS = {
 };
 
 // Routes with dark hero — sidebar uses light theme over the hero section
-const DARK_HERO_ROUTES = new Set(['/core-labs', '/dynamo', '/compute-cluster']);
+const DARK_HERO_ROUTES = new Set(['/compute-cluster']);
 
 const RightSidebar = () => {
     const [activeSection, setActiveSection] = useState('hero');

@@ -1,16 +1,19 @@
 # CORE
 
 Website for the **CORE** initiative (Cognitive Software / Cognitive Robotics in
-Europe). One React app hosts two sites behind a `BrowserRouter`:
+Europe). One React app provides five shared sections:
 
-- **CORE Network / CORE Labs** — `/`, `/core-labs`, `/network`, `/publications`,
-  `/demos`, `/dynamo`, `/compute-cluster`, and the AI Team Projects pages under
-  `/ai-team-projects/*`.
-- **Bartelt Lab** (TU Clausthal group) — everything under `/tuc/*`.
+- **Research** — topics and publications.
+- **Projects** — research and industry projects.
+- **Teaching** — courses, seminars, theses, and student team projects.
+- **Labs** — physical laboratories and shared compute infrastructure.
+- **Team** — people, contacts, and openings.
 
-`src/App.jsx` splits the two into `CoreShell` (pill navbar + footer) and
-`TucShell` (minimal sticky header). See `AGENTS.md` for the full route map and
-architecture notes.
+All pages share one header and footer. Institutions — TUC, MDS (Rostock), and
+UBB — are a URL-based filter that follows navigation. The network homepage stays
+at `/`; existing project URLs and old institutional links remain reachable.
+See [wiki/navigation.md](wiki/navigation.md) for routes and filter behavior, and
+[AGENTS.md](AGENTS.md) for the repository map and working rules.
 
 ## Tech stack
 
@@ -22,65 +25,98 @@ architecture notes.
 
 ## Getting started
 
-Requires Node.js 20+ and npm.
+Requires Node.js 22.12+ (or 20.19+ on the 20.x line) and npm.
 
 ```bash
-npm install
-npm run dev      # vite dev server at http://localhost:5173
+npm ci
+npx playwright install chromium
+npm run dev
 ```
+
+The dev server starts at `http://localhost:5173`. Chromium is needed for the full
+production build and browser tests. The browser test script starts its own Vite
+server; a separate running dev server is unnecessary.
 
 ### Scripts
 
 | Script | Purpose |
-|--------|---------|
-| `npm run dev` | Start the Vite dev server (HMR). |
-| `npm run build` | Production build to `dist/`, then prerender every route to static HTML. ~60s. |
-| `npm run build:fast` | Vite build only, no prerender (~6s). For quick dead-ref checks. |
-| `npm run prerender` | Re-run the SEO + prerender passes over an existing `dist/`. |
+| --- | --- |
+| `npm run dev` | Start the Vite dev server with hot reload. |
+| `npm test` | Test route redirects and institution filter rules with Node. |
+| `npm run test:browser` | Run Chromium navigation, filter, and accessibility checks; starts Vite automatically. |
+| `npm run lint` | Run ESLint with zero warnings allowed. |
+| `npm run build` | Check video rules, build to `dist/`, generate SEO files, and prerender all routes. |
+| `npm run build:fast` | Run only the Vite build for a quick import check. |
+| `npm run prerender` | Regenerate SEO files and static pages from an existing `dist/`. |
 | `npm run preview` | Serve the built `dist/` locally. |
-| `npm run lint` | ESLint (flat config), zero warnings allowed. |
-| `npm run optimize-images` | Convert large PNG/JPEG in `public/` to WebP (see `wiki/assets.md`). |
+| `npm run check-videos` | Check registered videos against the video policy. |
+| `npm run optimize-images` | Convert large PNG/JPEG files to WebP; see `wiki/assets.md`. |
 
 ## Project structure
 
 ```
 src/
-  App.jsx              route gating: CoreShell vs TucShell (BrowserRouter)
-  routes.js            canonical route table — paths + per-route title/meta
-  index.css            Tailwind v3 entry + theme palettes (CSS vars)
-  data/                team.js, projects.js, demonstrations.js, videos.js,
-                       publications.json + publications.js (build-time import)
-  utils/assetUrl.js    prefixes BASE_URL onto /public asset paths
+  App.jsx                    shared shell and live BrowserRouter routes
+  routes.js                  route metadata, navigation sections, old URL redirects
+  index.css                  Tailwind entry, CORE palette, lab accent tokens
+  hooks/useInstitution.js     URL-based institution filter
+  utils/                     asset paths, institution and publication helpers
+  data/                      team, researchThemes, projectCatalog, demonstrations,
+                             videos, publications.json + its build-time import
   components/
-    common/            Navbar, Footer, RightSidebar, ThemeToggle, ...
-    tuc/               TucShell Layout + ProjectLayout
-    about/ demonstrations/ hero/ network/ publications/ team/
+    common/                  Navbar, Footer, LegacyRedirect, SeoHead, project/media UI
+    demonstrations/ hero/ publications/ team/
+    tuc/                     shared student project layout and content
   pages/
-    Home.jsx CoreLabs.jsx Demos.jsx Dynamo.jsx ComputeCluster.jsx
-    Publications.jsx AiTeamProjects.jsx
-    tuc/               bartelt pages + tuc/projects/*Project.jsx
+    Home.jsx                 network homepage
+    Research.jsx Projects.jsx Teaching.jsx Labs.jsx Team.jsx
+    Dynamo.jsx LeaderFollowing.jsx VialSort.jsx
+    ComputeCluster.jsx HumanAwarenessDetection.jsx
+    labs/                    RoboticsLab.jsx and ClujLab.jsx
+    tuc/                     embedded teaching, student catalogue, and openings
+      projects/              retained student project detail pages
 public/
-  data/publications.bib    BibTeX export (download artifact)
-  members/ logos/ papers/ images/ videos/ documents/ icons/
+  data/publications.bib       separate BibTeX download artifact
+  members/ logos/ papers/ images/ videos/ documents/
+  tuc/iclr-2025/             standalone static archive
+tests/
+  navigation.test.mjs        pure routing and filter regression tests
+  navigation.browser.mjs     Chromium UI checks
 ```
 
 ## Editing content
 
-- **Team members** — `src/data/team.js` only. Both CORE and TUC pages derive
-  from it (filtered by `roleCategory` / institution).
-- **Publications** — `src/data/publications.json` only. Imported at build time
-  via `src/data/publications.js`; no runtime fetch.
-- **CORE Labs projects / demos** — `src/data/projects.js`, `demonstrations.js`.
-- **Asset paths** — write `/<bucket>/...` (e.g. `/members/foo.webp`) and wrap in
-  `assetUrl()` so the base prefix is applied.
+- **People** — edit `src/data/team.js`. Team and other member displays derive
+  their roles and affiliations from this source.
+- **Research topics** — edit `src/data/researchThemes.js`.
+- **Research and industry projects** — edit `src/data/projectCatalog.js`.
+  Shared demo media remains in `src/data/demonstrations.js`.
+- **Publications** — edit `src/data/publications.json`. Consumers import it
+  through `src/data/publications.js`; no runtime fetch is needed.
+- **Teaching** — courses, seminars, and theses are in
+  `src/pages/tuc/Teaching.jsx`; the student catalogue and archive are in
+  `src/pages/tuc/AiTeamProjects.jsx`. Both are embedded in the shared Teaching page.
+- **Labs** — overview cards are in `src/pages/Labs.jsx`; lab detail pages are in
+  `src/pages/labs/`. The compute detail keeps `src/pages/ComputeCluster.jsx`.
+- **Assets** — use `/<bucket>/...` paths and `assetUrl()` for the base prefix.
+  Read `PROJECT_CONTEXT.md` before adding videos: every clip needs a registry
+  entry and a written description.
 
-## Theming
+Use `useInstitution().withInstitution(to)` for internal navigation so the filter
+survives. Membership belongs in the content's institution metadata, not in
+separate institutional page trees.
 
-Themes are `[data-theme]` attributes on `<html>` (`ThemeToggle`) backed by
-`--primary-*` / `--secondary-*` CSS variables in `src/index.css`. Tailwind color
-classes (`primary-600`, …) resolve those vars, so theme-aware UI must use
-Tailwind color classes or `currentColor` — a static `<img>`/SVG file cannot pick
-up the theme.
+## Colours and lab accents
+
+`src/index.css` defines the shared CORE palette with CSS variables;
+Tailwind's `primary-*`, `secondary-*`, and `tertiary-*` classes use those values.
+There is no theme switcher. Use the existing classes instead of adding unrelated
+colour palettes.
+
+Lab pages may use scoped `--site-*` accents. `ClujLab.jsx` applies `.theme-ubb`
+at `/labs/cluj` for the Babeș-Bolyai blue; other pages inherit the green defaults.
+Green remains the colour for actions and focus, while the lab accent identifies
+place. See [wiki/visual-identity.md](wiki/visual-identity.md) before changing colours.
 
 ## Deployment
 
@@ -124,7 +160,10 @@ whole site.
 
 ### Adding a route
 
-Add the `<Route>` to `src/App.jsx` **and** an entry to `src/routes.js`. Without
-the second one the page still works, but it ships with the default title and
-never reaches the sitemap or the prerenderer — i.e. it stays invisible.
-Prerendering needs a browser locally: `npx playwright install chromium`.
+Add the `<Route>` to `src/App.jsx` **and** an entry to `src/routes.js`, including
+its `section`, current `source` file, title, and description. Without the metadata
+entry, a page misses its navigation category, sitemap entry, and prerender.
+
+When moving content, preserve its old address with `redirectTo` and a query-free
+`canonical` destination. Extend the navigation tests and run `npm test`,
+`npm run test:browser`, `npm run lint`, and `npm run build`.

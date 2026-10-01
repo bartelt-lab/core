@@ -8,76 +8,75 @@
 
 ## Project state
 
-Merged to `main`; the old `merge/*` branches are gone. Deploys to GitHub Pages
-on push to `main` (`.github/workflows/deploy.yml`). This repo
-(`github.com/bartelt-lab/core`) is the merged home of two sites:
+`main` is the live branch; a push deploys to GitHub Pages through
+`.github/workflows/deploy.yml`. The merged CORE Network site uses React 19,
+Vite 7, Tailwind v3, and `BrowserRouter`.
 
-- **CORE Network / CORE Labs** — React 19 + Vite 7 + Tailwind v3, BrowserRouter.
-  Routes (all in `CoreShell`): `/` (CORE Network landing, `pages/Home.jsx`),
-  `/network` (renders the same `Home.jsx`), `/core-labs` (`pages/CoreLabs.jsx`),
-  `/demos`, `/dynamo`, `/leader-following`, `/vial-sort`, `/publications`,
-  `/compute-cluster`, `/ubb`, `/ai-team-projects`
-  (`pages/tuc/AiTeamProjects.jsx`) plus 11 project subpages under
-  `/ai-team-projects/{tempo,lectra,fastmile,human-awareness-detection,ai4bim,
-  vergabepilot,werewolfs,neurocore,stratego,traffic-network,self-driving}`
-  (`pages/tuc/projects/*Project.jsx`), with `ai4ai` an alias of `ai4bim`.
-  There is no `/ai-team-projects/dynamo` — it was deleted as an orphan; the
-  DyNAMO page readers want is `/dynamo`.
-  CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
-- **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
-  merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`,
-  `/tuc/industry-projects`, `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses`,
-  `/tuc/join-us`, `/tuc/projects`. TUC navbar links out to the CORE Network
-  site for `/network` and `/publications` (no `/tuc/publications`).
+All pages now share `CoreShell`, one Navbar, and one Footer. The header has five
+sections, in this order:
 
-Note: the AI Team Projects pages live in `pages/tuc/` but route under
-`/ai-team-projects/*` in `CoreShell` (not `/tuc/*`).
+| Route | Content |
+| --- | --- |
+| `/research` | Research topics and publications |
+| `/projects` | Research and industry projects |
+| `/teaching` | Courses, seminars, theses, and student team projects |
+| `/labs` | Robotics Lab, Cluj Lab, and Kaiser compute infrastructure |
+| `/team` | All team roles, contacts, and openings |
 
-App is split via `<Routes>` in `src/App.jsx` between `CoreShell` (core's
-pill Navbar + Footer) and `TucShell` (bartelt-style Layout). Each subtree
-has its own header/footer.
+`/` remains the network homepage. Institutions are a shared filter, not separate
+sites: All, TUC, MDS (Rostock), and UBB. The query parameter carries the selection
+between pages; see `wiki/navigation.md`.
+
+Lab details live at `/labs/robotics` and `/labs/cluj`; `/compute-cluster` remains
+under Labs. Research detail URLs `/dynamo`, `/leader-following`, and `/vial-sort`
+stay under Projects. Existing `/ai-team-projects/*` detail URLs stay under
+Teaching, even though their files live in `pages/tuc/projects/`.
+
+Old institutional and overview addresses redirect to the shared sections.
+Examples: `/tuc` → `/research?institution=TUC`, `/ubb` →
+`/labs?institution=UBB`, `/core-labs` → `/labs`, and `/ai-team-projects` →
+`/teaching#student-projects`. The old TUC/UBB layouts and landing pages are removed.
+CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
 
 ### Routing and prerendering — read before adding a route
 
-The site switched from `HashRouter` to `BrowserRouter` (2026-09). Every route
-is prerendered to static HTML at build time, because a client-rendered SPA
-serves an empty `<div id="root">` to anything that does not run JavaScript —
-crawlers, link unfurlers, and agents all saw a blank page before this.
+Every public route is prerendered to static HTML at build time. `src/routes.js`
+is the shared route metadata and legacy redirect table:
 
-`src/routes.js` is the single source of truth. It feeds three consumers:
+- `section` selects Research, Projects, Teaching, Labs, or Team in the Navbar,
+  including on detail pages whose URLs do not start with that section.
+- `source` points to the current page file for sitemap modification dates.
+- Old paths have `redirectTo` and a query-free `canonical` destination. They stay
+  reachable and prerendered but are excluded from the sitemap.
 
-- `src/components/common/SeoHead.jsx` — per-route `<title>`/`<meta>`/canonical,
-  using React 19 document-metadata hoisting (no helmet library).
-- `scripts/prerender.mjs` — headless Chromium renders each route and writes
-  `<path>.html` + `<path>/index.html`. Build fails on an untitled, undersized,
-  or wrong-canonical capture.
-- `scripts/seo-files.mjs` — `robots.txt`, `sitemap.xml`, `llms.txt`, `og-image.png`.
+`App.jsx` declares live routes. `LegacyRedirect.jsx` replaces retired addresses
+before mounting page content. `SeoHead.jsx` owns titles, descriptions, canonical
+links, and social metadata. `scripts/prerender.mjs` writes `<path>.html` and
+`<path>/index.html`; `scripts/seo-files.mjs` writes the sitemap, robots, `llms.txt`,
+and social image.
 
-**Adding a `<Route>` to `App.jsx` without adding it to `routes.js` leaves the
-page unindexed and un-prerendered.** Aliases (two paths, one page) get a
-`canonical` field pointing at the real path; they are prerendered but kept out
-of the sitemap. `/network` → `/` and `/ai-team-projects/ai4ai` → `/ai4bim` are
-the existing two.
-
-`index.html` deliberately has no `<title>`/description/og tags — SeoHead owns
-them. Adding static copies back would leave two of each in the document.
+**Add new routes to both `App.jsx` and `routes.js`.** Filtered URLs use the
+unfiltered page canonical. `index.html` preserves historic `/#/...` links and
+intentionally contains no duplicate title, description, or social metadata.
+See `wiki/navigation.md` for the URL contract and `tests/navigation.test.mjs`
+for migration regression checks.
 
 ### Site accents — per-host colour on a lab page
 
 A lab page can carry its host university's colour through four tokens,
 `--site-{100,200,300,900}`. They are declared green in `:root` and rebound by a
-`.theme-*` class on the subtree root; `.theme-ubb` on `UbbLayout`'s outer `div`
-is the only live one, anchored on the Babeș-Bolyai seal `#034E84`.
+`.theme-*` class on the subtree root; `.theme-ubb` on `pages/labs/ClujLab.jsx`
+is the live blue variant, anchored on the Babeș-Bolyai seal `#034E84`.
 
 **A host does not have to opt in.** No override means the tokens stay green and
-the page is still correct — `/tuc` uses no accent at all.
+the page is still correct — the Robotics Lab uses the default green tokens.
 
 The rule that keeps three labs looking like one network: **green owns action**
 (buttons, links, active states, focus rings, everywhere), **the site accent owns
 place** (kickers, rules, institutional marks, tints, never anything clickable).
 Full reasoning, the AA numbers and the partnership-gradient exception are in
 `wiki/visual-identity.md` — read it before adding a lab accent or touching
-`/ubb`'s colour.
+`/labs/cluj`'s colour.
 
 Note `tailwind.config.js` does not hot-reload. Restart the dev server after
 adding a colour family, or every new utility silently renders as nothing.
@@ -89,40 +88,27 @@ constants, not `import.meta.env` reads, on purpose: every route is prerendered
 to static HTML, so a runtime-only flag could make the prerendered markup and
 the hydrated client disagree. Flip the value and rebuild.
 
-- `showProjectPeople` — **currently `false`.** Gates the contributor avatar
-  rows (`components/common/ProjectPeople.jsx`) on `/dynamo`, `/vial-sort`,
-  `/leader-following` and the demo cards in `DemonstrationsSection` (which
-  renders two rows per card: an inline one under the CTA on mobile, an absolute
-  one bottom-right on desktop). Hidden on request 2026-09-17. `ProjectPeople`
-  is the single choke point — every call site goes through it — and the `slugs`
-  props are untouched at the call sites, so setting the flag back to `true`
-  restores every row with no other edit. `demonstrations.js` still carries
-  `people` / `peopleLabel` for the same reason; do not delete those fields as
-  "unused" while the flag is off.
+- `showProjectPeople` — **currently `false`.** Gates contributor avatar rows in
+  `components/common/ProjectPeople.jsx`, used by research details and retained
+  demo components. Hidden on request 2026-09-17. Keep the caller's `slugs` and
+  `demonstrations.js`'s `people` / `peopleLabel` fields so the flag can restore
+  rows wherever those components render. Do not delete them as "unused" merely
+  because the flag is off.
 
-### Member deep links — `/#member-<slug>`
+### Member deep links — `/team#member-<slug>`
 
-Until a per-member route exists (open issue 2), a person is linked as
-`/#member-<slug>`, pointing at their card in the CORE Network team grid.
-`pages/Home.jsx` owns both halves:
+`pages/Team.jsx` renders a stable `member-<slug>` id for every member, including
+research assistants and support staff. A direct person link scrolls to the card
+and highlights it for 5 seconds. If the active institution filter hides that
+person, Team clears the filter with a history replacement first.
 
-- each grid card carries `id="member-<slug>"` (plus `scroll-mt-28`, so the pill
-  navbar does not cover it on a native hash jump), and
-- an effect reads the hash, scrolls the card to centre, and ring-highlights it
-  for 5 s. It scrolls twice — immediately and again at 600 ms — because the
-  lazy member photos resolve mid-scroll and drift the target out of view.
+Old `/#member-<slug>` and `/network#member-<slug>` links redirect here. Build new
+links with `useInstitution().withInstitution('/team#member-…')`. Slugs come from
+`src/data/team.js`; renaming one breaks existing person links.
 
-The ring is *derived* from the hash; only its expiry is state, keyed by
-`location.key`. Keep it that way: storing the slug in state meant setting state
-from inside the effect, which `react-hooks/set-state-in-effect` fails the lint
-on. Keying the expiry by navigation is also what makes clicking the same person
-twice re-light the ring.
-
-Slugs come from `slug` in `team.js`, so a slug rename breaks every link that
-spells it out. The current callers are the five people on the `/core-labs`
-institutions card (`memberLink()` in `pages/CoreLabs.jsx`). Note the grid skips
-`research_assistant` and `support_staff`, so those members have no anchor to
-link to.
+Highlighting is derived from the hash; only its expiry is state, keyed by
+`location.key`. Keep that pattern so repeated navigation highlights the card
+again without setting state directly inside the effect.
 
 ### Files that look deletable but are not
 
@@ -138,85 +124,56 @@ link to.
 
 ```
 src/
-  App.jsx                          route gating
+  App.jsx                          shared shell and live routes
+  routes.js                        metadata, categories, legacy redirects
   main.jsx
-  index.css                        tailwind v3 entry, no @import anymore.
-                                   Also the single definition of the brand
-                                   palette (:root vars), the per-host site
-                                   accents (.theme-ubb) and the two named
-                                   gradient classes (.wordmark-partnership,
-                                   .lab-hero-wash) — see
-                                   wiki/visual-identity.md before editing it
-  data/
-    team.js                        20 members + 4 institutions + helpers
-                                   (getCoreLabsLeads, getMembersByInstitution,
-                                    getMemberBySlug, getMembersGroupedByRole)
-                                   NOTE: member `id` must be unique — a merge
-                                   once produced duplicate ids; grep before reuse.
-    projects.js                    CORE Labs projects metadata
-    demonstrations.js              demo cards
-    publications.json              canonical publications source, 21 entries
-    publications.js                imports that JSON at build time and exports
-                                   it sorted newest-first. Import from here —
-                                   the old runtime fetch of
-                                   /data/publications.json is gone, and with it
-                                   the empty first render and the prerendered
-                                   pages that shipped with no publications.
-  config/
-    features.js                    build-time feature flags (see Feature flags
-                                   below). Currently: showProjectPeople = false
+  index.css                        Tailwind, brand palette, site accents,
+                                   partnership gradient, and lab hero wash
+  hooks/useInstitution.js           URL-based shared filter
   utils/
-    assetUrl.js                    BASE_URL helper, used widely in /tuc/*
+    institutions.js                filter values, matching, link helpers
+    publicationInstitutions.js      publication affiliation rules
+    assetUrl.js                    BASE_URL asset helper
+  data/
+    team.js                        canonical members, affiliations, and helpers
+                                   Member ids and slugs must stay unique.
+    researchThemes.js              research topics and institutions
+    projectCatalog.js              research/industry projects and partners
+    demonstrations.js              research demos and shared project media
+    publications.json              canonical publication source
+    publications.js                build-time import, sorted newest-first
+    videos.js                      enforced video registry and descriptions
+  config/features.js               build-time flags; showProjectPeople = false
   components/
-    common/                        core Navbar/Footer/RightSidebar/Card/...
-    about/ demonstrations/ hero/ network/ publications/ team/   core
-    tuc/                           tuc-specific shells
-      Layout.jsx                   minimal Tailwind sticky header + footer
-      ProjectCard.jsx
-      ProjectLayout.jsx            outer chrome for /tuc/core-team-projects/*
-      ProjectRow.jsx
-      PublicationItem.jsx          publication row (tuc-style)
-    ubb/
-      Layout.jsx                   /ubb header + footer. Its root div carries
-                                   `theme-ubb`, which rebinds --site-* to the
-                                   Babeș-Bolyai blue for the whole subtree
+    common/                        Navbar, Footer, LegacyRedirect, SeoHead,
+                                   RightSidebar, video/project components
+    demonstrations/ hero/ publications/ team/
+    tuc/                           retained student-project content components
+      ProjectLayout.jsx            shared /ai-team-projects/* detail layout
+      FinishedProjectContent.jsx
   pages/
-    Home.jsx CoreLabs.jsx Demos.jsx Dynamo.jsx   core
-                                   (Home.jsx = CORE Network landing,
-                                    CoreLabs.jsx = CORE Labs page)
-    ComputeCluster.jsx Publications.jsx   core
+    Home.jsx                       network homepage
+    Research.jsx Projects.jsx Teaching.jsx Labs.jsx Team.jsx
+    Dynamo.jsx LeaderFollowing.jsx VialSort.jsx
+    HumanAwarenessDetection.jsx    student project, category Teaching
+    ComputeCluster.jsx             existing Labs detail URL
+    labs/RoboticsLab.jsx ClujLab.jsx
     tuc/
-      Home.jsx                     bartelt landing (hero + members + contact)
-      Teaching.jsx                   teaching subtree (/seminar, /theses route to it)
-      JoinUs.jsx Projects.jsx AiTeamProjects.jsx
-      projects/{AI4AI,Dynamo,NeuroCore,SelfDriving,Stratego,TrafficNetwork,Vergabepilot}Project.jsx
-    ubb/
-      Home.jsx                     CORE Labs Cluj (/ubb), third shell. Carries
-                                   the only site accent — see below
+      Teaching.jsx                 embedded courses, seminars, and theses
+      AiTeamProjects.jsx           embedded student catalogue and archive
+      JoinUs.jsx                   embedded openings on Team
+      projects/*Project.jsx        retained student detail pages
 
 public/
-  data/
-    publications.bib               BibTeX export (download artifact)
-  members/                         member photos, full-name scheme
-                                   (photoless members → themed placeholder, see
-                                    TeamMemberCard)
-  logos/                           partner logos (flat, kebab-case) +
-                                   logos/core/ CORE brand SVGs in 4 bg variants
-                                   (white/light/dark/black-background) +
-                                   logos/core/legacy/ old raster logos +
-                                   logos/core/avocando-icon.svg (mascot)
-  favicon.{ico,svg,png} +          generated from avocando-icon.svg
-    apple-touch-icon.png
-  papers/                          16 publication preview images
-  documents/project-descriptions/  2 PDFs, both currently unreferenced —
-                                   nothing in src/ links a .pdf any more
-  images/projects/{ai4ai,dynamo,neurocore,stratego,vergabepilot}/
-  images/locations.png             /network page map
-  videos/core-labs-hero.mp4        core hero + shared hero-poster.webp
-  videos/ai-team-projects/         AI4BIM, Vergabepilot, programme showcases
-  videos/demonstrations/{dynamo,vial-sort,leader-following,neurocore,stratego,robotics}/
-  videos/testimonials/             student testimonial mp4s
-  tuc/iclr-2025/                   static subsite kept as-is (see issue 9)
+  data/publications.bib             separate BibTeX download artifact
+  members/                         member photos; TeamMemberCard has fallbacks
+  logos/                           partner logos and CORE SVG brand variants
+  favicon.* apple-touch-icon.png    generated from the CORE mascot
+  papers/                          publication preview images
+  documents/project-descriptions/  project briefs and pitch PDFs
+  images/projects/                 project imagery
+  videos/                          registered H.264 videos and WebP posters
+  tuc/iclr-2025/                   standalone static archive (issue 4)
 ```
 
 Image loading rules, the `LazyVideo` component and `npm run optimize-images` are in
@@ -233,6 +190,8 @@ Image loading rules, the `LazyVideo` component and `npm run optimize-images` are
 Longer-form conventions and parked techniques live in the `wiki/` folder (sorts to
 the bottom of the file tree). Read the relevant one before related work:
 
+- `wiki/navigation.md` — five shared sections, filter URLs, preserved detail
+  routes, redirects, and navigation checks. Read before changing navigation.
 - `wiki/decks-and-print.md` — **repo side of the brand-for-print work.** The
   rules themselves live in `brand/CORE-Brand-Guidelines.pdf` (built by
   `scripts/brand-guide.mjs`), which is what gets sent to partners, designers and
@@ -244,7 +203,7 @@ the bottom of the file tree). Read the relevant one before related work:
   values are what they are.** The logo is the authority for brand colour; ramps are
   regenerated hue-only; `primary-600` is pinned above the AA floor on purpose. Read
   before changing a brand colour or adding a colour family.
-- `wiki/project-subsites.md` — **how CORE Labs project subpages (e.g. `/dynamo`)
+- `wiki/project-subsites.md` — **how research project subpages (e.g. `/dynamo`)
   should look and behave.** Visual language, hero forms, the research-question
   intro, the milestone video browser. Read this before building or restyling any
   project subpage. Reference impls: `Dynamo.jsx`, `VialSort.jsx`,
@@ -297,11 +256,12 @@ Currently the value is written but not yet rendered as a link (issue 2).
 - All `/tuc/*` pages restyled to minimal neutral Tailwind (grays, no brand
   palette). Bootstrap grid classes (`col-xs-*`, `col-md-*`, `row`,
   `container`) eliminated.
-- Single team source of truth: `src/data/team.js` with 20 members carrying
-  `slug` fields. Tuc Home pulls members via `getMemberBySlug` over a fixed
-  slug order.
+- Single team source of truth: `src/data/team.js`; the shared Team page groups
+  all members by role and applies the global institution filter.
+- Navigation consolidation (2026-10): five shared sections replace the separate
+  institutional sites. Published URLs remain reachable through redirects.
 
-## Package versions (locked by `merge/tuc` branch)
+## Package versions (exact versions in `package-lock.json`)
 
 ```
 react 19.2 / react-dom 19.2 / react-router-dom 7.13 / vite 7.3 /
@@ -326,15 +286,11 @@ Multi-resolution favicon set (`favicon.ico/.svg`, `favicon-16/32.png`,
 into `index.html`. The old `public/icons/avocado.png` has been removed.
 
 ### 2. Member detail pages — `memberSlug` lookup target
-`publications.json` carries `authors[].memberSlug` and `team.js` carries
-`slug` per member. There is no `/network/member/:slug` route yet, so no
-component renders the link. Until that page exists, `PublicationItem`
-just shows the author name as text, and anything that does want to point at a
-person uses the `/#member-<slug>` deep link into the team grid instead (see
-"Member deep links" above) — that is the migration target when the route lands. Plan: add a `MemberDetail` page,
-route it under both `/network/member/:slug` (core) and possibly
-`/tuc/member/:slug` (bartelt-style). When that exists, `PublicationItem`
-(both tuc shared one + core one) can wrap author names in `<Link>`.
+
+`publications.json` carries `authors[].memberSlug`, and `team.js` carries each
+member's `slug`. There are no individual profile pages yet. Until those exist,
+link people to `/team#member-<slug>`. A future profile feature should stay under
+the shared Team section; it should not recreate institution-specific sites.
 
 ### 4. `tuc/iclr-2025/` orphan subsite
 Static page at `public/tuc/iclr-2025/index.html` (title: "CORE at ICLR
@@ -344,82 +300,55 @@ untouched by the router or the prerender pass).
 Decide: keep as direct-link archive (do nothing) OR add a link from
 Publications/Home/News.
 
-### 5. Manual browser smoke pass
-Build passes consistently but nobody has clicked through the app in a
-real browser since the restyle. Verify in dev (`npm run dev`):
-- `/` (core home, pill nav, hero video plays)
-- `/demos`, `/network`, `/dynamo` (core unaffected)
-- `/tuc` (bartelt home, members grid loads from team.js, CORE Network
-  affiliation logo + contact links work)
-- `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses` (teaching-* CSS
-  still applies — those inline `<style>` blocks survived)
-- `/tuc/join-us` (disclosure pattern expands/collapses)
-- `/tuc/projects` (YouTube embed click-to-play)
-- `/ai-team-projects` (project tiles; sidebar Overview/Projects/Voices/Archive)
-- Network panel: zero 404s on `/members/*`, `/papers/*`, `/logos/*`,
-  `/videos/*`, `/data/*`
-- DevTools console: no React 19 deprecation warnings, no router v7
-  future-flag warnings, no missing-key warnings
+### 5. Browser smoke checklist
 
-### 6. RightSidebar `ROUTE_SECTIONS` — keep in sync (audited 2026-06)
-**Recurring gotcha — read before touching sections or the sidebar.**
-`src/components/common/RightSidebar.jsx` `ROUTE_SECTIONS` maps each route to
-the dots shown in the right scroll-spy nav. Every `{ id }` MUST match an
-element actually rendered for that route, or the dot is dead (won't scroll /
-won't highlight). Two traps:
+After navigation changes, verify in dev (`npm run dev`):
 
-1. **Ids can come from child components, not just the page file.** Grep the
-   rendered children too:
-   - `/core-labs` gets `#dynamo` and `#autonomous` from
-     `components/demonstrations/DemonstrationsSection.jsx`, not `CoreLabs.jsx`.
-   - project pages get `#hero #features #evaluation #extra` from
-     `components/tuc/ProjectLayout.jsx`; the page's own sections (e.g. Dynamo's
-     `#science #architecture`) render inside `#extra` as children.
-   - `ProjectLayout` only renders `#evaluation` when `showEvalSection !== false`
-     (neurocore/stratego/traffic-network/self-driving pass `false`).
-   - `/` and `/network` render the same `Home.jsx`; it has NO `#partners` or
-     `#publications` (it uses `PublicationMiniCarousel`, which has no id).
-2. **Dot order should follow DOM order**, or scroll-spy highlights the wrong
-   dot. On `/core-labs` the demos render before `#publications`.
+- `/` and the five header destinations, on desktop and mobile.
+- All/TUC/MDS/UBB filters across section links, reload, and Back/Forward.
+- `/teaching#seminars`, `#theses`, and `#student-projects`, including the archive.
+- `/labs/robotics`, `/labs/cluj`, `/compute-cluster`, and retained project details.
+- `/team#member-knab`, including a filter that would otherwise hide the person.
+- Old `/tuc`, `/ubb`, `/core-labs`, `/publications`, `/ai-team-projects`, and
+  nested historic links such as `/#/tuc/teaching#theses`.
+- No missing assets or console errors; videos and embeds still play.
 
-Current verified configs: `/` and `/network` →
-`hero, about, platform, team, contact`; `/core-labs` →
-`hero, initiative, dynamo, autonomous, publications` (the `#team` "Lab leads"
-grid was deleted 2026-09-16; its dot went with it); `/ai-team-projects`
-→ `hero, active-projects, testimonials, archive`; `/compute-cluster` →
-`hero, purpose, capabilities, sites, policies`. Routes with `[]` (`/dynamo`,
-`/publications`) and unconfigured routes show no sidebar by design.
+`npm test` covers pure routing/filter rules. `npm run test:browser` starts Vite
+and runs Chromium UI checks. Install it with `npx playwright install chromium`.
+Also inspect visual layout and media manually.
 
-Gap (not broken, just no nav): the 4 `showEvalSection={false}` project pages,
-`/demos`, and all `/tuc/*` pages have no `ROUTE_SECTIONS` entry. Add configs if
-they should get a side nav.
+### 6. RightSidebar `ROUTE_SECTIONS` — keep in sync
 
-### 7. Publications page filtering / grouping
-`pages/Publications.jsx` (core, `/publications`) renders all 21 entries
-flat, sorted by date. With hundreds of entries planned, add: year grouping,
-type/venue filter, member filter (powered by `memberSlug`), search
-box. Defer until count ≥ 30. (The tuc-specific `/tuc/publications` page was
-removed — TUC now links to the core publications page.)
+Every sidebar id must match a rendered element, in DOM order. Check child
+components too: `ProjectLayout` supplies `hero`, `features`, `evaluation`, and
+`extra`, and it omits evaluation when `showEvalSection={false}`.
 
-### 8. `AiTeamProjects.jsx` audit
-381 lines. Restyle pass left it alone because it was Tailwind already.
-Worth a once-over for: residual bartelt-only inline styles, motion
-animations that might fight with the new minimal Layout, refs to removed
-classes. Scroll-spy ids (now in sync, see issue 6): `hero`,
-`active-projects`, `testimonials`, `archive`.
+Only verified detail pages currently have dots:
 
-### 9. Helper consolidation for Tuc social icons
-`pages/tuc/Home.jsx` has a `SOCIAL_ICON` map and `socialEntries(member)`
-helper inline. `team.js` has `links: { scholar, github, twitter,
-linkedin, website, ... }` but the Home page only renders
-`email/scholar/website`. Other icons unused. Either expand the icon map
-to cover all of `team.js` keys OR document why only those three are
-shown on tuc Home (visual density / academic context).
+- `/compute-cluster`: `hero, purpose, capabilities, sites, policies`.
+- `/ai-team-projects/ai4bim` and `/ai-team-projects/vergabepilot`:
+  `hero, features, evaluation, extra`.
+
+The homepage, shared hubs, lab details, and other project pages intentionally
+have no sidebar. Retired pages must not leave stale sidebar configurations.
+
+### 7. Publications grouping
+
+Research embeds `PublicationsSection` with the global institution filter. Search,
+type, status, researcher, and year-range controls already exist. Consider year
+grouping and a venue filter when the corpus warrants them. Avoid adding a second
+institution control to Research.
+
+### 8. `AiTeamProjects.jsx` maintenance
+
+This catalogue is embedded in Teaching's `student-projects` tab. Keep its project
+links, institution matching, testimonials, and archive together when changing it.
+The nested anchors `active-projects`, `testimonials`, and `archive` remain useful;
+they do not imply a separate institution page or a site sidebar.
 
 ### 10. `publications.bib` ↔ `publications.json` parity
-`public/data/publications.bib` is the BibTeX export (15 entries from
-bartelt source). `src/data/publications.json` has 21 entries (8 from old core
-publications.js merged in). The `.bib` is currently *behind* the JSON.
+`public/data/publications.bib` is maintained separately from
+`src/data/publications.json` and has fallen behind the JSON.
 Either regenerate the `.bib` from the JSON on every update (build-time
 script) or stop carrying the `.bib` separately. Now that the JSON is a build-
 time import, a generator script could emit the `.bib` into `dist/` and the
@@ -427,7 +356,7 @@ checked-in copy could go.
 
 ### 11. (Future) Publications page "Download BibTeX" link
 Once issue 10 is resolved, surface a "Download BibTeX" button on the
-Publications page that links to `/data/publications.bib`. Trivial.
+Research publications section that links to `/data/publications.bib`. Trivial.
 
 ### 12. Deploy workflow pins actions that target deprecated Node 20
 Every run of `.github/workflows/deploy.yml` now ends with an annotation:
@@ -452,18 +381,18 @@ already failed on `main`.
 
 1. `main` is the live branch — pushing to it deploys to GitHub Pages. Do
    feature work on a branch and merge when ready. Ask before pushing.
-2. After any change touching pages/routes/styles, run `npm run build` —
-   it's fast (~2s) and catches missing imports / dead refs.
-3. When editing team membership, only touch `src/data/team.js`. Both core
-   and tuc Home derive from it.
+2. After changes, run `npm run lint` and `npm run build`. The full build includes
+   video checks and browser prerendering. For navigation/filter changes, also run
+   `npm test` and `npm run test:browser` (Chromium required).
+3. When editing team membership, only touch `src/data/team.js`. Team and other
+   member displays derive from it.
 4. When editing publications, only touch `src/data/publications.json`. Every
    consumer imports it through `src/data/publications.js`, at build time.
 5. Asset paths: write `/<bucket>/...` (e.g. `/members/foo.png`,
    `/logos/bar.svg`, `/papers/baz.png`). Use `assetUrl()` from
    `src/utils/assetUrl.js` so the base prefix is applied.
-6. Never re-introduce Hugo CSS, Bootstrap classes, or `font-awesome`/
-   `academicons` icon classes in `/tuc/*` pages. Use `react-icons` for
-   icons.
+6. Never re-introduce Hugo CSS, Bootstrap, or `font-awesome`/`academicons`
+   icon libraries. Use Tailwind and `react-icons`.
 7. The original bartelt-lab repo is preserved at
    `D:/Programming/Websites/tuc/bartelt-lab.github.io` — read-only
    reference, do not edit or delete.

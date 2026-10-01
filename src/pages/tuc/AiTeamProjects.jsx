@@ -10,6 +10,8 @@ import {
 import assetUrl from "../../utils/assetUrl";
 import LazyVideo from "../../components/common/LazyVideo";
 import { useLanguage } from "../../i18n/useLanguage";
+import useInstitution from "../../hooks/useInstitution";
+import { matchesInstitution } from "../../utils/institutions";
 
 const activeProjects = [
   {
@@ -271,18 +273,41 @@ const Media = ({ project, title }) => {
   );
 };
 
-const AiTeamProjects = () => {
+const AiTeamProjects = ({ embedded = false }) => {
+  const { institution, withInstitution } = useInstitution();
   const { pick } = useLanguage();
   const navigate = useNavigate();
   const scrollToSection = (id) => {
     document
       .getElementById(id)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      ?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? "auto" : "smooth", block: "start" });
   };
 
   return (
     <div className="min-h-screen bg-white text-slate-950">
-      <section
+      {embedded && (
+        <section className="border-b border-slate-200 bg-white py-12 md:py-16">
+          <div className="mx-auto max-w-6xl px-6 md:px-10">
+            <p className="text-sm font-semibold text-primary-700">TU Clausthal · Babeș-Bolyai University</p>
+            <h2 className="mt-3 text-3xl font-bold md:text-4xl">AI Team Projects</h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+              {pick(
+                "In this semester-long programme, international teams from Clausthal University of Technology and Babeș-Bolyai University build practical AI systems together, with onsite weeks in Goslar and Cluj.",
+                "In diesem semesterlangen Programm entwickeln internationale Teams der TU Clausthal und der Babeș-Bolyai University gemeinsam praktische KI-Systeme, mit Vor-Ort-Wochen in Goslar und Cluj.",
+              )}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-4">
+              <button type="button" onClick={() => scrollToSection("active-projects")} className="rounded-full bg-primary-700 px-5 py-3 text-sm font-semibold text-white hover:bg-primary-800">
+                {pick("Current projects & registration", "Aktuelle Projekte & Anmeldung")}
+              </button>
+              <button type="button" onClick={() => scrollToSection("archive")} className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 hover:border-primary-600 hover:text-primary-700">
+                {pick("Project archive", "Projektarchiv")}
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+      {!embedded && <section
         id="hero"
         className="relative isolate overflow-hidden border-b border-slate-200 bg-white pb-16 pt-32 sm:pb-18 sm:pt-36 lg:flex lg:min-h-screen lg:items-center lg:pb-8 lg:pt-32"
       >
@@ -376,7 +401,7 @@ const AiTeamProjects = () => {
             />
           </motion.div>
         </div>
-      </section>
+      </section>}
 
       <section className="bg-slate-950 py-16 text-white">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">
@@ -432,7 +457,7 @@ const AiTeamProjects = () => {
         </div>
       </section>
 
-      <section id="active-projects" className="bg-slate-50 py-12 md:py-14">
+      <section id="active-projects" className="scroll-mt-28 bg-slate-50 py-12 md:py-14">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">
           <div className="mb-8 text-center">
             <h2 className="text-3xl font-light">
@@ -456,7 +481,7 @@ const AiTeamProjects = () => {
                 onClick={(event) => {
                   if (project.placeholder || !project.link) return
                   if (event.target.closest("a")) return
-                  navigate(project.link)
+                  navigate(withInstitution(project.link))
                 }}
                 className={`group relative flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-lg shadow-slate-200/70 ${activeProjectCardClass(activeProjects.length, index)} ${
                   project.placeholder
@@ -495,7 +520,7 @@ const AiTeamProjects = () => {
                   <h3 className="mb-1 line-clamp-2 text-lg font-bold leading-6 text-primary-700">
                     {project.link ? (
                       <Link
-                        to={project.link}
+                        to={withInstitution(project.link)}
                         className="transition hover:text-primary-900"
                       >
                         {pick(project.title, project.titleDe)}
@@ -510,7 +535,7 @@ const AiTeamProjects = () => {
                   <div className="mt-auto flex items-center justify-between gap-2 pt-2">
                     {project.link && (
                       <Link
-                        to={project.link}
+                        to={withInstitution(project.link)}
                         className="inline-flex items-center gap-2 text-sm font-bold text-primary-700 transition hover:text-primary-900"
                       >
                         {pick("View project", "Projekt ansehen")}
@@ -561,7 +586,7 @@ const AiTeamProjects = () => {
               </div>
             </div>
 
-            <div className="mt-3 rounded-lg border border-primary-100 bg-primary-50/60 p-3">
+            {matchesInstitution(['TUC'], institution) && <div className="mt-3 rounded-lg border border-primary-100 bg-primary-50/60 p-3">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <h4 className="text-sm font-bold text-slate-950">
                   {pick(
@@ -569,9 +594,9 @@ const AiTeamProjects = () => {
                     "Studierende der TU Clausthal",
                   )}
                 </h4>
-                <strong className="inline-flex items-center gap-2 self-start whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-sm text-primary-900 shadow-sm sm:self-auto">
-                  <FaCalendarAlt className="h-3 w-3" aria-hidden="true" />
-                  <time dateTime="2026-09-25">
+                <strong className="inline-flex max-w-full items-center gap-2 self-start rounded-2xl bg-white px-3 py-1.5 text-sm text-primary-900 shadow-sm sm:self-auto sm:rounded-full">
+                  <FaCalendarAlt className="h-3 w-3 shrink-0" aria-hidden="true" />
+                  <time dateTime="2026-09-25" className="min-w-0">
                     {pick(
                       "Project pitches · 25 September 2026",
                       "Projekt-Pitches · 25. September 2026",
@@ -628,9 +653,9 @@ const AiTeamProjects = () => {
                   </motion.li>
                 ))}
               </ol>
-            </div>
+            </div>}
 
-            <div className="mt-3 flex flex-col gap-2 border-t border-slate-200 pt-3 sm:flex-row sm:items-center sm:justify-between">
+            {matchesInstitution(['UBB'], institution) && <div className="mt-3 flex flex-col gap-2 border-t border-slate-200 pt-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h4 className="text-sm font-bold text-slate-950">
                   {pick("UBB students", "Studierende der UBB")}
@@ -653,12 +678,12 @@ const AiTeamProjects = () => {
                   <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
                 </a>
               </div>
-            </div>
+            </div>}
           </aside>
         </div>
       </section>
 
-      <section id="testimonials" className="bg-white py-16">
+      <section id="testimonials" className="scroll-mt-28 bg-white py-16">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">
           <div className="mb-10 text-center">
             <h2 className="text-3xl font-light">
@@ -688,7 +713,7 @@ const AiTeamProjects = () => {
         </div>
       </section>
 
-      <section id="archive" className="bg-white py-16">
+      <section id="archive" className="scroll-mt-28 bg-white py-16">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">
           <div className="mb-10 text-center">
             <h2 className="text-3xl font-light">
@@ -696,6 +721,43 @@ const AiTeamProjects = () => {
             </h2>
             <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-primary-600" />
           </div>
+          <details className="mb-12 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+            <summary className="cursor-pointer px-6 py-5 text-lg font-semibold text-slate-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700">
+              {pick('2025/26 cohort archive', 'Archiv des Jahrgangs 2025/26')}
+            </summary>
+            <div className="space-y-5 border-t border-slate-200 px-6 py-6 text-sm leading-7 text-slate-600">
+              <p className="font-semibold text-slate-800">
+                {pick('Programme dates:', 'Programmzeitraum:')}{' '}
+                <time dateTime="2025-10-10">{pick('10 October 2025', '10. Oktober 2025')}</time>
+                {' – '}
+                <time dateTime="2026-01-30">{pick('30 January 2026', '30. Januar 2026')}</time>.
+              </p>
+              <p>
+                {pick(
+                  'The published programme brought students from TU Clausthal and Babeș-Bolyai University together in interdisciplinary teams. Collaboration was planned primarily online, with regular team meetings, milestone reviews, and mentor check-ins, plus two onsite project weeks:',
+                  'Das veröffentlichte Programm brachte Studierende der TU Clausthal und der Babeș-Bolyai University in interdisziplinären Teams zusammen. Die Zusammenarbeit war überwiegend online geplant, mit regelmäßigen Teamtreffen, Meilenstein-Reviews und Mentoring sowie zwei Projektwochen vor Ort:',
+                )}
+              </p>
+              <ul className="list-disc space-y-2 pl-5">
+                <li>Cluj-Napoca, {pick('Romania: week of', 'Rumänien: Woche vom')}{' '}<time dateTime="2025-11-09">{pick('9 November 2025', '9. November 2025')}</time></li>
+                <li>Goslar, {pick('Germany: week of', 'Deutschland: Woche vom')}{' '}<time dateTime="2025-11-30">{pick('30 November 2025', '30. November 2025')}</time></li>
+              </ul>
+              <p>
+                {pick(
+                  'The offer for this cohort covered travel, accommodation, and social event costs. These archived arrangements apply to the 2025/26 programme; current registration information appears with the active projects above.',
+                  'Die damalige Ausschreibung sah die Übernahme der Kosten für Reise, Unterkunft und gemeinsame Veranstaltungen vor. Diese archivierten Angaben gelten für das Programm 2025/26; aktuelle Informationen zur Anmeldung stehen bei den aktiven Projekten oben.',
+                )}
+              </p>
+              <p>
+                {pick('The European Master Team Project was led by', 'Das European Master Team Project wurde geleitet von')}{' '}
+                <Link to={withInstitution('/team#member-bartelt')} className="font-semibold text-primary-700 hover:underline">Prof. Dr. Christian Bartelt</Link>.
+              </p>
+              <div className="max-w-2xl">
+                <h3 className="mb-3 text-base font-bold text-slate-950">{pick('Earlier programme film: 2022', 'Früherer Programmfilm: 2022')}</h3>
+                <iframe src="https://www.youtube.com/embed/Q7sZvdIEC0Y?start=5" title="International Master Team Project 2022" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="aspect-video w-full rounded-xl border-0 bg-slate-950" />
+              </div>
+            </div>
+          </details>
           <div className="space-y-16">
             {archiveProjects.map((project, index) => (
               <div
@@ -725,7 +787,7 @@ const AiTeamProjects = () => {
                   </p>
                   {project.link && (
                     <Link
-                      to={project.link}
+                      to={withInstitution(project.link)}
                       className="inline-flex items-center gap-2 text-sm font-bold text-primary-700"
                     >
                       {pick("View Project", "Projekt ansehen")}

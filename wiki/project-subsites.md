@@ -1,13 +1,14 @@
 # Project subsites — design conventions
 
-How a CORE Labs project subpage (e.g. `/dynamo`) should look and behave. The goal
+How a research project subpage (e.g. `/dynamo`) should look and behave. The goal
 is that every project page feels like the same family without being a copy-paste.
 
 **Shared components** (`src/components/common/`) — build with these, don't re-roll them:
 
 - `Eyebrow.jsx` → `Label` (hairline section eyebrow) and `MiniLabel` (sidebar/quiet eyebrow).
-- `BackToLabsPill.jsx` → back-to-CORE-Labs pill; `variant="dark"` (on a dark hero) or
-  `variant="light"` (light header).
+- `BackToLabsPill.jsx` → back-to-Projects pill (the filename is retained);
+  `variant="dark"` (on a dark hero) or `variant="light"` (light header).
+  It preserves the active institution filter.
 - `ResearchQuestionCard.jsx` → the primary-tinted question + tags card.
 - `ResearchQuestionIntro.jsx` → two-column objective + `ResearchQuestionCard` (use below a hero).
 - `MilestoneBrowser.jsx` → the player + newest-first selector (autocycle, mount-once media).
@@ -61,26 +62,27 @@ Two acceptable forms:
    (`rounded-3xl bg-slate-950`, `object-cover` photo, left-to-right + bottom
    gradients) sitting on the light page. Inside: uppercase tag pills, a big bold
    title, a **thin one-paragraph subtitle**, an optional frosted glass blurb card,
-   and the back-to-labs pill at the **bottom** of the hero.
+   and the back-to-Projects pill at the **bottom** of the hero.
 2. **Light header** (VialSort / LeaderFollowing) — title + thin subtitle on the
    light background, tags or a research-question card to the side. No hero photo.
 
 Keep the subtitle thin (one paragraph). Fold the "what is this" into it rather than
 adding a separate Objective section up top.
 
-### Back-to-labs pill (steal this)
+### Back-to-Projects pill
 
-A white pill, primary text, top of the page or bottom of the hero — links to
-`/core-labs`:
+A white pill with primary text, at the top of the page or bottom of the hero.
+Use the shared component so the link to `/projects` keeps the selected institution:
 
 ```jsx
-<Link to="/core-labs"
-  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/90 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700 shadow-lg shadow-slate-950/30 backdrop-blur transition hover:-translate-y-0.5 hover:bg-white hover:text-primary-900">
-  <FaArrowLeft className="h-3 w-3" /> CORE Labs
-</Link>
+import BackToLabsPill from '../components/common/BackToLabsPill'
+
+<BackToLabsPill variant="dark" className="mb-5" />
 ```
 
-On a light header use `border-primary-200 shadow-primary-100/60` instead (VialSort).
+For a light header, omit `variant` (VialSort). Student project pages use
+`ProjectLayout`'s return link to `/teaching#student-projects`. See
+[navigation.md](navigation.md) for routing and filter rules.
 
 ## Research-question intro
 

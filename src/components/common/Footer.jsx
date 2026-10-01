@@ -1,8 +1,11 @@
 import assetUrl from '../../utils/assetUrl'
 import { useLanguage } from '../../i18n/useLanguage'
+import { Link } from 'react-router-dom'
+import useInstitution from '../../hooks/useInstitution'
 
 const Footer = () => {
   const { pick } = useLanguage()
+  const { withInstitution } = useInstitution()
   const logos = [
     { src: 'logos/clausthal-logo.webp', alt: 'TU Clausthal', url: 'https://www.tu-clausthal.de', className: 'h-16' },
     { src: 'logos/ubb-logo.webp', alt: 'Babes-Bolyai University', url: 'https://www.ubbcluj.ro', className: 'h-20' },
@@ -12,6 +15,12 @@ const Footer = () => {
   return (
     <footer className="border-t border-slate-200 bg-white py-12 text-slate-950">
       <div className="container mx-auto max-w-7xl px-4 md:pr-20 lg:pr-24">
+        <nav aria-label={pick('Footer navigation', 'Navigation im Footer')} className="mb-9 flex flex-wrap gap-x-7 gap-y-3 border-b border-slate-200 pb-6 text-sm font-semibold text-slate-700">
+          {['Research', 'Projects', 'Teaching', 'Labs', 'Team'].map((label) => (
+            <Link key={label} to={withInstitution(`/${label.toLowerCase()}`)} className="hover:text-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-700">{label}</Link>
+          ))}
+          <Link to={withInstitution('/team#contact')} className="hover:text-primary-700">{pick('Contact', 'Kontakt')}</Link>
+        </nav>
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-4">
           <div className="md:col-span-3">
             <h3 className="mb-4 text-lg font-semibold">{pick('Partner Institutions', 'Partnerinstitutionen')}</h3>

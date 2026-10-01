@@ -138,7 +138,7 @@ half of a full ramp drifts into a generic blue that reads as Tailwind rather tha
 institution. And a small palette is a small attack surface: there is no mid-weight
 `site-500` sitting around inviting someone to make a blue button out of it.
 
-The class goes on the subtree root — `UbbLayout`'s outermost `div` — and is static in
+The class goes on the subtree root — `ClujLab`'s outermost `div` at `/labs/cluj` — and is static in
 the markup, so the prerendered HTML and the hydrated client resolve the same colours.
 This is the second legitimate reason the `rgb(var(--x))` indirection exists, alongside
 the ten raw-CSS readers above.
@@ -177,7 +177,7 @@ Project subpages deliberately narrow this further — Inter only, no Poppins, pl
 
 The single sanctioned brand-fill gradient: `.wordmark-partnership` in `index.css`, host's
 mark sweeping to CORE's, **on the place word of a lab wordmark and nowhere else.** On
-`/ubb` it runs the seal `#034E84` to `primary-700` across the word "Cluj".
+`/labs/cluj` it runs the seal `#034E84` to `primary-700` across the word "Cluj".
 
 It earns the exception because it is not decoration — it is the joint venture drawn. The
 gradient that shipped before it was `sky-700 → cyan-700 → emerald-600`: three colours,
@@ -200,7 +200,7 @@ still fine — that is a tint, and `.lab-hero-wash` is the token-driven version 
 
 ### Watch for colour hiding in arbitrary values
 
-`bg-[radial-gradient(...)]` can only hold raw `rgba()` literals. The `/ubb` hero wash sat
+`bg-[radial-gradient(...)]` can only hold raw `rgba()` literals. The former `/ubb` hero wash sat
 there carrying `rgba(186,230,253)` and `rgba(167,243,208)` — sky-200 and emerald-200 —
 and **survived a full palette audit untouched**, because grepping for `sky-200` does not
 find them. It shipped that way.

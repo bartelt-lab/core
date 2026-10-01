@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../i18n/useLanguage';
+import useInstitution from '../../hooks/useInstitution';
 
 const taughtCourses = [
     {
@@ -22,7 +23,7 @@ const taughtCourses = [
         title: 'European AI Team Projects',
         semester: 'Summer Semester 2025',
         tone: 'Cross-institutional AI projects with applied and research-driven tracks.',
-        link: '/ai-team-projects',
+        link: '/teaching#student-projects',
         cta: 'Open project page'
     }
 ];
@@ -234,7 +235,7 @@ const SectionBlock = ({ title, intro, topContent, children, id }) => (
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
-                    <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">{title}</h1>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">{title}</h2>
                 </div>
                 <div className="md:col-span-3">
                     {topContent}
@@ -246,9 +247,10 @@ const SectionBlock = ({ title, intro, topContent, children, id }) => (
     </section>
 );
 
-const Teaching = ({ initialSection }) => {
+const Teaching = ({ initialSection, embedded = false }) => {
     const location = useLocation();
     const { pick } = useLanguage();
+    const { withInstitution } = useInstitution();
     const normalizeSection = (value) => (
         quickLinks.some((item) => item.id === value) ? value : 'courses-overview'
     );
@@ -266,7 +268,7 @@ const Teaching = ({ initialSection }) => {
     };
 
     useEffect(() => {
-        const targetId = location.hash ? location.hash.slice(1) : initialSection;
+        const targetId = embedded ? initialSection : location.hash ? location.hash.slice(1) : initialSection;
 
         if (!targetId) {
             return;
@@ -274,11 +276,11 @@ const Teaching = ({ initialSection }) => {
 
         const frame = window.requestAnimationFrame(() => {
             setActiveSection(normalizeSection(targetId));
-            scrollToSection(normalizeSection(targetId));
+            if (!embedded) scrollToSection(normalizeSection(targetId));
         });
 
         return () => window.cancelAnimationFrame(frame);
-    }, [initialSection, location.hash]);
+    }, [initialSection, location.hash, embedded]);
 
     const selectSection = (targetId) => {
         setActiveSection(targetId);
@@ -383,6 +385,7 @@ const Teaching = ({ initialSection }) => {
                 .teaching-section {
                     padding-top: 32px;
                     padding-bottom: 48px;
+                    scroll-margin-top: 7rem;
                 }
                 .teaching-intro {
                     max-width: 760px;
@@ -745,7 +748,7 @@ const Teaching = ({ initialSection }) => {
                 }
             `}</style>
 
-            <section className="teaching-hero">
+            {!embedded && <section className="teaching-hero">
                 <div className="teaching-hero-content max-w-6xl mx-auto px-4 sm:px-6">
                     <div>
                         <h1>{pick('Teaching', 'Lehre')}</h1>
@@ -765,15 +768,15 @@ const Teaching = ({ initialSection }) => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section>}
 
             {activeSection === 'courses-overview' && (
                 <SectionBlock
                     id="courses-overview"
                     title={pick('Courses', 'Kurse')}
                     intro={pick(
-                        'Our teaching spans foundational courses, project-based formats, seminars, and supervised theses. The sections below combine the practical information that used to be spread across multiple subpages.',
-                        'Unsere Lehre umfasst Grundlagenveranstaltungen, projektbasierte Formate, Seminare und betreute Abschlussarbeiten. Die folgenden Bereiche bündeln praktische Informationen, die zuvor auf mehrere Unterseiten verteilt waren.'
+                        'Courses at Clausthal University of Technology cover computer science foundations, artificial intelligence, and supervised research projects.',
+                        'Die Lehrveranstaltungen der TU Clausthal umfassen Grundlagen der Informatik, künstliche Intelligenz und betreute Forschungsprojekte.'
                     )}
                 >
                     <ul className="teaching-simple-list">
@@ -782,7 +785,7 @@ const Teaching = ({ initialSection }) => {
                                 <strong>{course.title}</strong> ({course.semester})<br />
                                 {course.tone}
                                 {course.link && (
-                                    <Link className="teaching-inline-link" to={course.link}>
+                                    <Link className="teaching-inline-link" to={withInstitution(course.link)}>
                                         {course.cta}
                                     </Link>
                                 )}

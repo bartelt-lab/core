@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import useInstitution from '../../hooks/useInstitution';
 import { FiExternalLink } from 'react-icons/fi';
 import { FaGithub } from 'react-icons/fa';
 import LazyVideo from '../common/LazyVideo';
@@ -59,6 +60,7 @@ const ProjectLayout = ({
 }) => {
     const { pick } = useLanguage();
     const { pathname } = useLocation();
+    const { withInstitution } = useInstitution();
     const [activeTab, setActiveTab] = useState(tabs[0]?.id || '');
     const siblings = SIBLING_PROJECTS.filter((project) => project.path !== pathname);
     const heroMediaClass = compact
@@ -382,7 +384,7 @@ const ProjectLayout = ({
                             {siblings.map((project) => (
                                 <li key={project.path}>
                                     <Link
-                                        to={project.path}
+                                        to={withInstitution(project.path)}
                                         className="inline-flex rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-slate-600 transition hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700"
                                     >
                                         {project.name}
@@ -393,8 +395,8 @@ const ProjectLayout = ({
                     </nav>
                 )}
                 <div className="text-center">
-                    <Link to="/ai-team-projects" className="inline-flex items-center gap-2 text-slate-500 hover:text-primary-600 transition-colors font-medium text-lg">
-                        ← {pick('Back to All Projects', 'Zurück zu allen Projekten')}
+                    <Link to={withInstitution('/teaching#student-projects')} className="inline-flex items-center gap-2 text-slate-500 hover:text-primary-600 transition-colors font-medium text-lg">
+                        ← {pick('Back to student projects', 'Zurück zu den studentischen Projekten')}
                     </Link>
                 </div>
             </div>

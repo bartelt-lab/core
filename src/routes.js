@@ -21,6 +21,8 @@
  *   description  meta description / og:description (aim for 150-160 chars)
  *   canonical    optional — this path is an alias; point crawlers at that path
  *                instead, and leave it out of the sitemap
+ *   redirectTo   optional — old URL replaced by this path/query/anchor
+ *   section      optional — active main navigation category, including details
  *   image        optional — og:image override, as a /public path
  */
 
@@ -48,30 +50,90 @@ export const routes = [
     title: SITE_NAME,
     description: DEFAULT_ROUTE_META.description,
     canonical: '/',
+    redirectTo: '/',
+  },
+  {
+    path: '/research',
+    source: 'src/pages/Research.jsx',
+    section: 'research',
+    title: 'Research | CORE',
+    description: 'Explore research topics and publications across the CORE Network, from cognitive software and machine learning to autonomous systems and embodied intelligence.',
+  },
+  {
+    path: '/projects',
+    source: 'src/pages/Projects.jsx',
+    section: 'projects',
+    title: 'Projects | CORE',
+    description: 'Research and industry projects across the CORE Network: autonomous robotics, cognitive software, and AI systems developed with academic and industry partners.',
+  },
+  {
+    path: '/teaching',
+    source: 'src/pages/Teaching.jsx',
+    section: 'teaching',
+    title: 'Teaching | CORE',
+    description: 'Courses, seminars, thesis topics, and student team projects across the CORE Network, with information on participation and supervision.',
+  },
+  {
+    path: '/labs',
+    source: 'src/pages/Labs.jsx',
+    section: 'labs',
+    title: 'Labs | CORE',
+    description: 'Explore the CORE Network laboratories and shared infrastructure: robotics in Goslar, humanoid and autonomous driving research in Cluj, and the Kaiser compute cluster.',
+  },
+  {
+    path: '/team',
+    source: 'src/pages/Team.jsx',
+    section: 'team',
+    title: 'Team | CORE',
+    description: 'Meet the researchers, student assistants, and support teams across the CORE Network, find contact information, and explore opportunities to join us.',
+  },
+  {
+    path: '/labs/robotics',
+    source: 'src/pages/labs/RoboticsLab.jsx',
+    section: 'labs',
+    title: 'Robotics Lab | CORE',
+    description: 'The TU Clausthal robotics laboratory in Goslar: mobile manipulation, perception, robot learning, and physical platforms for autonomous systems research.',
+  },
+  {
+    path: '/labs/cluj',
+    source: 'src/pages/labs/ClujLab.jsx',
+    section: 'labs',
+    title: 'Cluj Lab | CORE',
+    description: 'The CORE laboratory at Babeș-Bolyai University in Cluj-Napoca brings together humanoid robotics, autonomous driving, intelligent simulation, and robot learning.',
   },
   {
     path: '/core-labs',
-    source: 'src/pages/CoreLabs.jsx',
+    section: 'labs',
+    redirectTo: '/labs',
+    canonical: '/labs',
+    source: 'src/pages/Labs.jsx',
     title: 'CORE Labs',
     description:
       'The laboratories behind the CORE Network: robotics, multi-modal egocentric perception, spatial reasoning, and robot learning across Goslar, Cluj-Napoca, and Rostock.',
   },
   {
     path: '/demos',
-    source: 'src/pages/Demos.jsx',
+    section: 'projects',
+    redirectTo: '/projects#research-projects',
+    canonical: '/projects',
+    source: 'src/pages/Projects.jsx',
     title: 'Demonstrations | CORE',
     description:
       'Video demonstrations of CORE research systems, from autonomous navigation and mobile manipulation to laboratory automation.',
   },
   {
     path: '/publications',
-    source: 'src/pages/Publications.jsx',
+    section: 'research',
+    redirectTo: '/research#publications',
+    canonical: '/research',
+    source: 'src/pages/Research.jsx',
     title: 'Publications | CORE',
     description:
       'Peer-reviewed publications from the research groups of the CORE Network on cognitive software, autonomous systems, and machine learning.',
   },
   {
     path: '/compute-cluster',
+    section: 'labs',
     source: 'src/pages/ComputeCluster.jsx',
     title: 'Compute Cluster | CORE',
     description:
@@ -79,6 +141,7 @@ export const routes = [
   },
   {
     path: '/dynamo',
+    section: 'projects',
     source: 'src/pages/Dynamo.jsx',
     title: 'DyNAMO | CORE',
     description:
@@ -86,6 +149,7 @@ export const routes = [
   },
   {
     path: '/leader-following',
+    section: 'projects',
     source: 'src/pages/LeaderFollowing.jsx',
     title: 'Leader Following | CORE',
     description:
@@ -93,6 +157,7 @@ export const routes = [
   },
   {
     path: '/vial-sort',
+    section: 'projects',
     source: 'src/pages/VialSort.jsx',
     title: 'Vial Sort | CORE',
     description:
@@ -102,13 +167,17 @@ export const routes = [
   // ---------------------------------------------------- AI Team Projects ---
   {
     path: '/ai-team-projects',
-    source: 'src/pages/tuc/AiTeamProjects.jsx',
+    section: 'teaching',
+    redirectTo: '/teaching#student-projects',
+    canonical: '/teaching',
+    source: 'src/pages/Teaching.jsx',
     title: 'AI Team Projects | CORE',
     description:
       'Semester-long applied AI projects built by mixed international student teams — recommender systems, cognitive robotics, LLM agents, MLOps, and simulation tooling.',
   },
   {
     path: '/ai-team-projects/tempo',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/TempoProject.jsx',
     title: 'TEMPO | AI Team Projects',
     description:
@@ -116,6 +185,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/lectra',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/LectraProject.jsx',
     title: 'LECTRA | AI Team Projects',
     description:
@@ -124,6 +194,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/fastmile',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/FastMileProject.jsx',
     title: 'FastMile | AI Team Projects',
     description:
@@ -131,6 +202,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/human-awareness-detection',
+    section: 'teaching',
     source: 'src/pages/HumanAwarenessDetection.jsx',
     title: 'Visual Human Awareness Estimation | AI Team Projects',
     description:
@@ -138,6 +210,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/ai4bim',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/AI4AIProject.jsx',
     title: 'AI4BIM | AI Team Projects',
     description:
@@ -145,6 +218,8 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/ai4ai',
+    section: 'teaching',
+    redirectTo: '/ai-team-projects/ai4bim',
     source: 'src/pages/tuc/projects/AI4AIProject.jsx',
     title: 'AI4BIM | AI Team Projects',
     description:
@@ -153,6 +228,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/vergabepilot',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/VergabepilotProject.jsx',
     title: 'Vergabepilot.AI | AI Team Projects',
     description:
@@ -160,6 +236,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/werewolfs',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/WerewolfsProject.jsx',
     title: 'The Village at Scale | AI Team Projects',
     description:
@@ -167,6 +244,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/neurocore',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/NeuroCoreProject.jsx',
     title: 'NeuroCore Dashboard | AI Team Projects',
     description:
@@ -174,6 +252,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/stratego',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/StrategoProject.jsx',
     title: 'Stratego — LLM Based Games | AI Team Projects',
     description:
@@ -181,6 +260,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/traffic-network',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/TrafficNetworkProject.jsx',
     title: 'Traffic Network Builder | AI Team Projects',
     description:
@@ -188,6 +268,7 @@ export const routes = [
   },
   {
     path: '/ai-team-projects/self-driving',
+    section: 'teaching',
     source: 'src/pages/tuc/projects/SelfDrivingProject.jsx',
     title: 'Self-Driving 1:10 | AI Team Projects',
     description:
@@ -197,49 +278,70 @@ export const routes = [
   // ----------------------------------------------------------- TU Clausthal ---
   {
     path: '/tuc',
-    source: 'src/pages/tuc/Home.jsx',
+    section: 'research',
+    redirectTo: '/research?institution=TUC',
+    canonical: '/research',
+    source: 'src/pages/Research.jsx',
     title: 'Cognitive Software | TU Clausthal',
     description:
       'Research group at the Institute for Software Systems Engineering (ISSE), TU Clausthal, exploring the intersection of artificial intelligence, cognitive computing, and software engineering.',
   },
   {
     path: '/tuc/projects',
-    source: 'src/pages/tuc/Projects.jsx',
+    section: 'teaching',
+    redirectTo: '/teaching?institution=TUC#student-projects',
+    canonical: '/teaching',
+    source: 'src/pages/Teaching.jsx',
     title: 'Projects | Cognitive Software, TU Clausthal',
     description:
       'Student research projects offered this semester at TU Clausthal, run on the Kaiser I cluster with travel, accommodation, and social event costs covered.',
   },
   {
     path: '/tuc/industry-projects',
-    source: 'src/pages/tuc/IndustryProjects.jsx',
+    section: 'projects',
+    redirectTo: '/projects?institution=TUC#industry-projects',
+    canonical: '/projects',
+    source: 'src/pages/Projects.jsx',
     title: 'Industry Projects | Cognitive Software, TU Clausthal',
     description:
       'Transfer and publicly funded projects of the Cognitive Software group, including AI-BIM, an AI-supported copilot for sustainable architectural design under environmental standards.',
   },
   {
     path: '/tuc/teaching',
-    source: 'src/pages/tuc/Teaching.jsx',
+    section: 'teaching',
+    redirectTo: '/teaching?institution=TUC',
+    canonical: '/teaching',
+    source: 'src/pages/Teaching.jsx',
     title: 'Teaching | Cognitive Software, TU Clausthal',
     description:
       'Courses, seminars, and thesis topics offered by the Cognitive Software group at the Institute for Software Systems Engineering, TU Clausthal.',
   },
   {
     path: '/tuc/seminar',
-    source: 'src/pages/tuc/Teaching.jsx',
+    section: 'teaching',
+    redirectTo: '/teaching?institution=TUC#seminars',
+    canonical: '/teaching',
+    source: 'src/pages/Teaching.jsx',
     title: 'Seminars | Cognitive Software, TU Clausthal',
     description:
       'Seminar topics and application details at the Institute for Software Systems Engineering, TU Clausthal — send your Transcript of Records and topic preferences to apply.',
   },
   {
     path: '/tuc/theses',
-    source: 'src/pages/tuc/Teaching.jsx',
+    section: 'teaching',
+    redirectTo: '/teaching?institution=TUC#theses',
+    canonical: '/teaching',
+    source: 'src/pages/Teaching.jsx',
     title: 'Theses | Cognitive Software, TU Clausthal',
     description:
       'Bachelor and master thesis topics in artificial intelligence, cognitive computing, and software engineering at the Institute for Software Systems Engineering, TU Clausthal.',
   },
   {
     path: '/tuc/join-us',
-    source: 'src/pages/tuc/JoinUs.jsx',
+    section: 'team',
+    redirectTo: '/team?institution=TUC#join-us',
+    canonical: '/team',
+    source: 'src/pages/Team.jsx',
     title: 'Join Us | Cognitive Software, TU Clausthal',
     description:
       'Open positions at the Institute for Software Systems Engineering (ISSE), TU Clausthal, for researchers with a strong background in computer science or mathematics.',
@@ -248,10 +350,31 @@ export const routes = [
   // -------------------------------------------------------------- UBB Cluj ---
   {
     path: '/ubb',
-    source: 'src/pages/ubb/Home.jsx',
+    section: 'labs',
+    redirectTo: '/labs?institution=UBB',
+    canonical: '/labs',
+    source: 'src/pages/Labs.jsx',
     title: 'UBB Cluj-Napoca | CORE',
     description:
       'A joint research initiative with Babeș-Bolyai University in autonomous systems, intelligent simulation, and robot learning — a new home for cognitive robotics and embodied intelligence.',
+  },
+  {
+    path: '/ai-team-projects/dynamo',
+    source: 'src/pages/Dynamo.jsx',
+    section: 'projects',
+    title: 'DyNAMO | CORE',
+    description: 'Dynamic Navigation & Autonomous Manipulation Operations: autonomous mobile robotics research in the CORE Network.',
+    redirectTo: '/dynamo',
+    canonical: '/dynamo',
+  },
+  {
+    path: '/tuc/publications',
+    source: 'src/pages/Research.jsx',
+    section: 'research',
+    title: 'Research | CORE',
+    description: 'Research topics and publications from TU Clausthal in the CORE Network.',
+    redirectTo: '/research?institution=TUC#publications',
+    canonical: '/research',
   },
 ]
 
@@ -266,6 +389,47 @@ export const normalizePath = (pathname) =>
 
 /** Metadata for a pathname, or undefined when the route is unknown. */
 export const findRoute = (pathname) => byPath.get(normalizePath(pathname))
+
+// Some old anchors identify content that has moved to a different section.
+// Keep these alongside route aliases so both old plain paths and /#/ links
+// (rewritten by index.html) arrive at the same destination.
+const legacyAnchors = {
+  '/#team': '/team',
+  '/network#team': '/team',
+  '/tuc#members': '/team?institution=TUC',
+  '/tuc#contact': '/team?institution=TUC#contact',
+  '/tuc#overview': '/research?institution=TUC',
+  '/core-labs#hero': '/labs',
+  '/core-labs#initiative': '/labs',
+  '/core-labs#team': '/team',
+  '/core-labs#dynamo': '/projects#research-projects',
+  '/core-labs#demonstrations': '/projects#research-projects',
+  '/core-labs#autonomous': '/labs/cluj?institution=UBB#autonomous',
+  '/core-labs#publications': '/research#publications',
+  '/demos#autonomous': '/labs/cluj?institution=UBB#autonomous',
+  '/ubb#humanoid': '/labs/cluj?institution=UBB#humanoid',
+  '/ubb#autonomous': '/labs/cluj?institution=UBB#autonomous',
+  '/ubb#research': '/research?institution=UBB',
+  '/ubb#publications': '/research?institution=UBB#publications',
+}
+
+/** Destination for a retired URL; null means the current URL is already live. */
+export const legacyRedirect = (pathname, search = '', hash = '') => {
+  const path = normalizePath(pathname)
+  const memberLink = (path === '/' || path === '/network') && hash.startsWith('#member-')
+  const anchorTarget = legacyAnchors[path + hash]
+  const destination = memberLink ? '/team' : anchorTarget ?? findRoute(path)?.redirectTo
+  if (!destination) return null
+
+  const target = new URL(destination, SITE_URL)
+  const params = new URLSearchParams(search)
+  // An institution implied by an old institutional address takes precedence.
+  for (const [key, value] of target.searchParams) params.set(key, value)
+
+  const query = params.toString()
+  const targetHash = anchorTarget ? target.hash : target.hash || hash
+  return target.pathname + (query ? `?${query}` : '') + targetHash
+}
 
 /**
  * The URL crawlers should treat as canonical.

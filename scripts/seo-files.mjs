@@ -123,11 +123,12 @@ function buildLlmsTxt() {
         '> University Cluj-Napoca, and partners — advancing cognitive software, autonomous',
         '> systems, and machine learning research.',
         '',
-        group('Overview', (r) => r.path === '/' || ['/core-labs', '/publications', '/compute-cluster', '/demos'].includes(r.path)),
-        group('Research demonstrators', (r) => ['/dynamo', '/leader-following', '/vial-sort'].includes(r.path)),
-        group('AI Team Projects', (r) => r.path.startsWith('/ai-team-projects')),
-        group('Cognitive Software (TU Clausthal)', (r) => r.path.startsWith('/tuc')),
-        group('Babeș-Bolyai University (Cluj-Napoca)', (r) => r.path.startsWith('/ubb')),
+        group('Overview', (r) => r.path === '/'),
+        group('Research', (r) => r.section === 'research'),
+        group('Projects', (r) => r.section === 'projects'),
+        group('Teaching', (r) => r.section === 'teaching'),
+        group('Labs', (r) => r.section === 'labs'),
+        group('Team', (r) => r.section === 'team'),
     ]
         .filter((section) => section !== null)
         .join('\n')

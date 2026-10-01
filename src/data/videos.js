@@ -135,7 +135,7 @@ export const videos = [
         description:
             'Ambient hero loop of the CORE lab: a benchtop robot arm beside a rack of coloured vials, then a humanoid robot working at a bench alongside a researcher in a lab coat with sample trays and an anatomical model. Silent, and it plays behind a dark overlay, so it is never the subject of attention.',
         frames: 'wiki/video-frames/core-labs-hero.jpg',
-        usedOn: ['src/pages/CoreLabs.jsx'],
+        usedOn: ['src/pages/labs/RoboticsLab.jsx'],
     },
     {
         id: 'g1-teleoperation',

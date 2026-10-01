@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom'
 import { FiArrowLeft, FiArrowRight, FiBookOpen, FiCheckCircle, FiDownload, FiFileText, FiMessageSquare } from 'react-icons/fi'
 import assetUrl from '../../../utils/assetUrl'
 import { useLanguage } from '../../../i18n/useLanguage'
+import useInstitution from '../../../hooks/useInstitution'
 
 const LectraProject = () => {
   const { pick } = useLanguage()
+  const { withInstitution } = useInstitution()
 
   const workspace = [
     [FiFileText, pick('Course material', 'Kursmaterial'), pick('Slides, PDFs, and a rendered Jupyter notebook stay visible while the student works.', 'Folien, PDFs und ein gerendertes Jupyter-Notebook bleiben sichtbar, während die Studierenden arbeiten.')],
@@ -32,7 +34,7 @@ const LectraProject = () => {
       <header className="relative isolate overflow-hidden border-b border-slate-200 bg-white px-6 pb-10 pt-24 md:px-10 md:pt-28">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_14%_14%,rgba(220,252,231,0.72),transparent_28%),radial-gradient(circle_at_88%_65%,rgba(224,231,255,0.58),transparent_30%),linear-gradient(135deg,#ffffff_0%,#fbfffc_55%,#f7f9ff_100%)]" aria-hidden="true" />
         <div className="mx-auto max-w-6xl">
-          <Link to="/ai-team-projects" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/85 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-600 shadow-sm backdrop-blur transition hover:border-primary-200 hover:text-primary-700">
+          <Link to={withInstitution('/teaching#student-projects')} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/85 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-600 shadow-sm backdrop-blur transition hover:border-primary-200 hover:text-primary-700">
             <FiArrowLeft className="h-3 w-3" aria-hidden="true" />
             {pick('AI Team Projects', 'KI-Teamprojekte')}
           </Link>
@@ -88,7 +90,7 @@ const LectraProject = () => {
 
         <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-9"><p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">{pick('What the demonstrator must cover', 'Was der Demonstrator abdecken muss')}</p><div className="mt-6 grid gap-x-8 gap-y-4 md:grid-cols-2">{scope.map((item) => <div key={item} className="flex gap-3 text-sm leading-6 text-slate-700"><FiCheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary-600" aria-hidden="true" />{item}</div>)}</div></section>
 
-        <section className="rounded-3xl bg-slate-950 px-6 py-9 text-white sm:px-9"><p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-300">{pick('Final demonstration', 'Abschlussdemonstration')}</p><p className="mt-4 max-w-4xl text-xl font-semibold leading-8 text-slate-100">{pick('A student opens lecture material and a related notebook, follows references from the chat, requests a simpler explanation and examples, answers a generated question, receives targeted feedback, and sees an adaptive follow-up recommendation.', 'Eine studentische Person öffnet Vorlesungsmaterial und ein zugehöriges Notebook, folgt Quellenverweisen aus dem Chat, fordert eine einfachere Erklärung und Beispiele an, beantwortet eine generierte Frage, erhält gezieltes Feedback und sieht eine adaptive Folgeempfehlung.')}</p><Link to="/ai-team-projects" className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-900 transition hover:bg-primary-50">{pick('Explore all AI Team Projects', 'Alle KI-Teamprojekte ansehen')}<FiArrowRight className="h-4 w-4" aria-hidden="true" /></Link></section>
+        <section className="rounded-3xl bg-slate-950 px-6 py-9 text-white sm:px-9"><p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-300">{pick('Final demonstration', 'Abschlussdemonstration')}</p><p className="mt-4 max-w-4xl text-xl font-semibold leading-8 text-slate-100">{pick('A student opens lecture material and a related notebook, follows references from the chat, requests a simpler explanation and examples, answers a generated question, receives targeted feedback, and sees an adaptive follow-up recommendation.', 'Eine studentische Person öffnet Vorlesungsmaterial und ein zugehöriges Notebook, folgt Quellenverweisen aus dem Chat, fordert eine einfachere Erklärung und Beispiele an, beantwortet eine generierte Frage, erhält gezieltes Feedback und sieht eine adaptive Folgeempfehlung.')}</p><Link to={withInstitution('/teaching#student-projects')} className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-900 transition hover:bg-primary-50">{pick('Explore all AI Team Projects', 'Alle KI-Teamprojekte ansehen')}<FiArrowRight className="h-4 w-4" aria-hidden="true" /></Link></section>
 
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-9">
           <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">

@@ -1,110 +1,28 @@
-import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import {
-  FaArrowRight, FaBookOpen, FaBrain, FaEnvelope, FaExternalLinkAlt,
-  FaFlask, FaGlobe, FaGithub, FaLinkedin, FaServer, FaTwitter,
-} from 'react-icons/fa'
-import { SiGooglescholar } from 'react-icons/si'
+import { Link } from 'react-router-dom'
+import { FaArrowRight, FaBookOpen, FaBrain, FaExternalLinkAlt, FaFlask, FaGraduationCap, FaUsers } from 'react-icons/fa'
 import PublicationMiniCarousel from '../components/publications/PublicationMiniCarousel'
-import { getNetworkMembers, institutions } from '../data/team'
 import { cognitiveProjects } from '../data/demonstrations'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
-
-// Deep-link prefix for a single team member, e.g. `/#member-szilagyi`.
-const MEMBER_HASH = '#member-'
-
-// Which project gets the homepage spotlight. Swap the id to feature a different one
-// (it must be a non-teaser entry in cognitiveProjects with an /images/projects/<id>/hero.webp).
-const FEATURED_PROJECT_ID = 'dynamo'
+import useInstitution from '../hooks/useInstitution'
 
 const pillars = [
-  { to: '/core-labs', icon: FaFlask, eyebrow: 'Research Labs', title: 'CORE Labs', body: 'Joint laboratory infrastructure spanning Goslar, Cluj-Napoca, and Rostock.' },
-  { to: '/ai-team-projects', icon: FaBrain, eyebrow: 'Education & Projects', title: 'AI Team Projects', body: 'Semester-long, cross-national student projects jointly run by TU Clausthal and Babeș-Bolyai University.' },
-  { to: '/compute-cluster', icon: FaServer, eyebrow: 'Infrastructure', title: 'Compute Cluster', body: 'Shared GPU infrastructure, dataset storage, and simulation environments for CORE researchers.' },
-  { to: '/publications', icon: FaBookOpen, eyebrow: 'Research Output', title: 'Publications', body: 'Peer-reviewed papers, preprints, and workshop contributions from the CORE Network.' },
+  { to: '/research', icon: FaBookOpen, title: 'Research', body: ['Our research themes, papers, and results.', 'Unsere Forschungsthemen, Publikationen und Ergebnisse.'] },
+  { to: '/projects', icon: FaBrain, title: 'Projects', body: ['Research systems and industry collaborations.', 'Forschungssysteme und Kooperationen mit der Industrie.'] },
+  { to: '/teaching', icon: FaGraduationCap, title: 'Teaching', body: ['Courses, seminars, theses, and international student projects.', 'Kurse, Seminare, Abschlussarbeiten und internationale Studierendenprojekte.'] },
+  { to: '/labs', icon: FaFlask, title: 'Labs', body: ['Robotics, autonomous driving, and shared computing infrastructure.', 'Robotik, autonomes Fahren und gemeinsame Recheninfrastruktur.'] },
+  { to: '/team', icon: FaUsers, title: 'Team', body: ['Meet our people and find ways to work with us.', 'Unser Team kennenlernen und mit uns zusammenarbeiten.'] },
 ]
-
-const LinkIcons = ({ member }) => (
-  <div className="flex max-w-[10rem] flex-wrap items-center justify-center gap-1.5 self-center">
-    {member.email && (
-      <a href={`mailto:${member.email}`} title="Email" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaEnvelope className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.scholar && (
-      <a href={member.links.scholar} target="_blank" rel="noopener noreferrer" title="Google Scholar" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <SiGooglescholar className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.github && (
-      <a href={member.links.github} target="_blank" rel="noopener noreferrer" title="GitHub" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaGithub className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.twitter && (
-      <a href={member.links.twitter} target="_blank" rel="noopener noreferrer" title="Twitter" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaTwitter className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.linkedin && (
-      <a href={member.links.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaLinkedin className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.website && (
-      <a href={member.links.website} target="_blank" rel="noopener noreferrer" title="Website" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaGlobe className="h-3.5 w-3.5" />
-      </a>
-    )}
-  </div>
-)
 
 const Home = () => {
   const { pick } = useLanguage()
-  const members = getNetworkMembers().filter((m) => !['research_assistant', 'support_staff'].includes(m.roleCategory))
-  const featured = cognitiveProjects.find((project) => project.id === FEATURED_PROJECT_ID)
+  const { institution, withInstitution } = useInstitution()
+  const featured = ['all', 'TUC'].includes(institution) ? cognitiveProjects.find((project) => project.id === 'dynamo') : null
   const partnerLogos = [
-    { name: 'TU Clausthal', src: '/logos/clausthal-logo.webp', to: '/tuc' },
-    { name: 'UBB', src: '/logos/ubb-logo.webp', href: institutions.UBB.website },
-    { name: 'University of Rostock', src: '/logos/rostock-logo.webp', href: institutions.ROSTOCK.website },
+    { name: 'TU Clausthal', src: '/logos/clausthal-logo.webp', to: '/research?institution=TUC' },
+    { name: 'UBB', src: '/logos/ubb-logo.webp', to: '/research?institution=UBB' },
+    { name: 'University of Rostock', src: '/logos/rostock-logo.webp', to: '/research?institution=Rostock' },
   ]
-
-  // Other pages deep-link a single person as `/#member-<slug>` (see the
-  // institutions card on /core-labs). The browser cannot honour that hash on a
-  // client-side navigation, so scroll and flag the card here.
-  const location = useLocation()
-  const requestedSlug = location.hash.startsWith(MEMBER_HASH) ? location.hash.slice(MEMBER_HASH.length) : ''
-  // The ring is derived from the hash, not stored — storing it would mean
-  // setting state straight from an effect. Only the *expiry* is state, keyed by
-  // the navigation it belongs to, so clicking the same link twice re-lights it.
-  const [expiredKey, setExpiredKey] = useState(null)
-  const highlightedSlug = requestedSlug && expiredKey !== location.key ? requestedSlug : null
-
-  useEffect(() => {
-    if (!requestedSlug) {
-      return
-    }
-
-    const scrollToCard = () =>
-      document.getElementById(`member-${requestedSlug}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-
-    // Twice on purpose: once as soon as the grid has laid out, once after the
-    // lazy member photos have had time to land. Without the second pass the
-    // card drifts out of view when images resolve mid-scroll.
-    const raf = requestAnimationFrame(scrollToCard)
-    const settle = setTimeout(scrollToCard, 600)
-    // Long enough to still be lit once the smooth scroll settles (~1s of that
-    // window is the scroll itself).
-    const fade = setTimeout(() => setExpiredKey(location.key), 5000)
-
-    return () => {
-      cancelAnimationFrame(raf)
-      clearTimeout(settle)
-      clearTimeout(fade)
-    }
-  }, [requestedSlug, location.key])
 
   return (
     <div className="min-h-screen bg-white">
@@ -134,7 +52,7 @@ const Home = () => {
 
               {featured && (
                 <Link
-                  to={featured.link}
+                  to={withInstitution(featured.link)}
                   aria-label={`Featured project: ${featured.title}`}
                   className="group relative block w-44 shrink-0 overflow-hidden rounded-3xl border border-white/70 shadow-2xl shadow-slate-300/50 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl sm:w-52"
                 >
@@ -193,7 +111,7 @@ const Home = () => {
                     </div>
                   )
                   return logo.to ? (
-                    <Link key={logo.name} to={logo.to} aria-label={`Open ${logo.name} lab page`}>{content}</Link>
+                    <Link key={logo.name} to={logo.to} aria-label={`View research from ${logo.name}`}>{content}</Link>
                   ) : (
                     <a key={logo.name} href={logo.href} target="_blank" rel="noreferrer" aria-label={`Open ${logo.name} website`}>{content}</a>
                   )
@@ -216,76 +134,17 @@ const Home = () => {
         </div>
       </section>
 
-      <section id="platform" className="border-t border-slate-100 bg-white py-16 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-          <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick("What's in the Network", 'Was zum Netzwerk gehört')}</p>
-            <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">{pick('Four pillars of the CORE platform', 'Vier Säulen der CORE-Plattform')}</h2>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {pillars.map(({ to, icon: Icon, eyebrow, title, body }) => (
-              <Link key={to} to={to} className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-lg">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-slate-950 text-white transition group-hover:bg-secondary-500 group-hover:text-slate-950">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary-700">{pick(eyebrow, {
-                  'Research Labs': 'Forschungslabore',
-                  'Education & Projects': 'Lehre & Projekte',
-                  Infrastructure: 'Infrastruktur',
-                  'Research Output': 'Forschungsergebnisse',
-                }[eyebrow] || eyebrow)}</p>
-                <h3 className="mb-2 text-base font-bold text-slate-950 group-hover:text-primary-700 transition-colors">{pick(title, {
-                  'AI Team Projects': 'AI-Team-Projekte',
-                  'Compute Cluster': 'Rechencluster',
-                  Publications: 'Publikationen',
-                }[title] || title)}</h3>
-                <p className="flex-1 text-sm leading-6 text-slate-600">{pick(body, {
-                  'CORE Labs': 'Gemeinsame Laborinfrastruktur über Goslar, Cluj-Napoca und Rostock hinweg.',
-                  'AI Team Projects': 'Semesterlange, internationale Studierendenprojekte, gemeinsam durchgeführt von der TU Clausthal und der Babes-Bolyai University.',
-                  'Compute Cluster': 'Gemeinsame GPU-Infrastruktur, Datenspeicher und Simulationsumgebungen für CORE-Forschende.',
-                  Publications: 'Begutachtete Artikel, Preprints und Workshop-Beiträge aus dem CORE Network.',
-                }[title] || body)}</p>
-                <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary-700">{pick('Explore', 'Entdecken')} <FaArrowRight className="h-2.5 w-2.5" aria-hidden="true" /></div>
+      <section id="platform" className="border-t border-slate-100 bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
+          <h2 className="mb-8 text-3xl font-bold text-slate-950">{pick('Explore CORE', 'CORE entdecken')}</h2>
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-5">
+            {pillars.map(({ to, icon: Icon, title, body }) => (
+              <Link key={to} to={withInstitution(to)} className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-primary-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-700">
+                <Icon className="mb-5 h-6 w-6 text-primary-700" aria-hidden="true" />
+                <h3 className="mb-2 text-lg font-bold text-slate-950 group-hover:text-primary-700">{title}</h3>
+                <p className="flex-1 text-sm leading-6 text-slate-600">{pick(...body)}</p>
+                <FaArrowRight className="mt-5 h-3 w-3 text-primary-700" aria-hidden="true" />
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="team" className="border-t border-slate-100 bg-slate-50 py-16 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-          <div className="mb-12 max-w-xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('People', 'Menschen')}</p>
-            <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">{pick('Research team', 'Forschungsteam')}</h2>
-            <p className="mt-3 text-base leading-7 text-slate-600">{pick('Faculty, postdoctoral researchers, and PhD students across all three CORE institutions.', 'Professorinnen und Professoren, Postdocs und Promovierende an allen drei CORE-Institutionen.')}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {members.map((member, i) => (
-              <motion.div
-                key={member.id}
-                id={`member-${member.slug}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04, duration: 0.4 }}
-                className={`group relative grid h-[19rem] scroll-mt-28 grid-rows-[5rem_4rem_2.5rem_4.5rem] justify-items-center gap-1 overflow-hidden rounded-lg border bg-white p-4 shadow-sm transition hover:border-primary-200 hover:shadow-md ${
-                  highlightedSlug === member.slug
-                    ? 'border-primary-500 ring-2 ring-primary-400 ring-offset-2'
-                    : 'border-slate-200'
-                }`}
-              >
-                <div className="absolute left-0 top-3 flex flex-col gap-1">
-                  {member.affiliations.map((a) => (
-                    <span key={a.institution.shortName} className="rounded-r-md bg-primary-600 py-0.5 pl-1.5 pr-2 text-[9px] font-bold uppercase tracking-wide text-white shadow-sm">{a.institution.shortName}</span>
-                  ))}
-                </div>
-                <div className="h-20 w-20 overflow-hidden rounded-full border border-slate-200 bg-slate-100">
-                  <img src={assetUrl(member.photo)} alt={member.name} loading="lazy" className="h-full w-full object-cover" />
-                </div>
-                <p className="flex h-full items-center text-center text-sm font-bold leading-5 text-slate-950">{member.prefix ? `${member.prefix} ` : ''}{member.name}</p>
-                <p className="flex h-full items-center text-center text-xs font-semibold leading-5 text-primary-700">{member.title}</p>
-                <LinkIcons member={member} />
-              </motion.div>
             ))}
           </div>
         </div>
@@ -306,7 +165,7 @@ const Home = () => {
               bartelt@isse.tu-clausthal.de
               <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
             </a>
-            <Link to="/publications" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-bold text-white transition hover:border-white/50">
+            <Link to={withInstitution('/research#publications')} className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-bold text-white transition hover:border-white/50">
               {pick('Browse publications', 'Publikationen ansehen')}
               <FaArrowRight className="h-3 w-3" aria-hidden="true" />
             </Link>

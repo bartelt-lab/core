@@ -12,6 +12,7 @@ import {
 import PublicationCarousel from '../components/publications/PublicationCarousel'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
+import useInstitution from '../hooks/useInstitution'
 
 // ─── Data ──────────────────────────────────────────────────────────────────
 
@@ -223,6 +224,7 @@ const SiteColorMap = {
 
 const ComputeCluster = () => {
   const { pick } = useLanguage()
+  const { withInstitution } = useInstitution()
   const t = (text) => pick(text, de[text] || text)
 
   return (
@@ -245,7 +247,7 @@ const ComputeCluster = () => {
           <div className="max-w-2xl">
             {/* Breadcrumb */}
             <nav className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-400" aria-label="Breadcrumb">
-              <Link to="/" className="hover:text-primary-600 transition-colors">CORE Network</Link>
+              <Link to={withInstitution('/labs')} className="hover:text-primary-600 transition-colors">Labs</Link>
               <span>/</span>
               <span className="text-slate-600">{pick('Compute Cluster', 'Rechencluster')}</span>
             </nav>

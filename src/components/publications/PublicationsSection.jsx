@@ -4,7 +4,8 @@ import { FaArrowRight, FaExternalLinkAlt, FaFilter, FaSearch } from 'react-icons
 import Section from '../common/Section'
 import PublicationItem from './PublicationItem'
 import assetUrl from '../../utils/assetUrl'
-import { getMemberBySlug } from '../../data/team'
+import { getPublicationInstitutions } from '../../utils/publicationInstitutions'
+import useInstitution from '../../hooks/useInstitution'
 import { publications } from '../../data/publications'
 import { useLanguage } from '../../i18n/useLanguage'
 
@@ -146,28 +147,6 @@ const YearRangeSlider = ({ min, max, value, onChange }) => {
   )
 }
 
-// Default institution for a member when a publication doesn't override it per-author.
-// szilagyi is affiliated with both TUC and UBB; default his output to TUC unless a
-// publication's author entry specifies otherwise (see the `institution` field in publications.json).
-const memberInstitutionDefaults = {
-  szilagyi: ['TUC'],
-}
-
-const getPublicationInstitutions = (publication) => {
-  if (Array.isArray(publication.institutions)) return publication.institutions
-
-  const institutions = publication.authors.flatMap((author) => {
-    if (!author.memberSlug) return []
-    if (author.institution) return [author.institution]
-    if (memberInstitutionDefaults[author.memberSlug]) return memberInstitutionDefaults[author.memberSlug]
-
-    const member = getMemberBySlug(author.memberSlug)
-    return member?.affiliations.map(({ institution }) => institution.shortName) || []
-  })
-
-  return [...new Set(institutions)]
-}
-
 // Filter options and the year span are derived from the whole corpus, which is now a
 // build-time constant — so they are computed once per module rather than per mount.
 const FILTER_OPTIONS = {
@@ -198,11 +177,13 @@ const PublicationsSection = ({
   compact = false,
   compactHeightClass = 'h-[350px]',
   initialInstitution = 'all',
+  institution,
   // Pages that embed this inside their own <section id="publications"> pass
   // sectionId={null} — two elements with the same id break the scroll-spy.
   sectionId = 'publications',
 }) => {
   const { pick } = useLanguage()
+  const { setInstitution } = useInstitution()
   const [activeIndex, setActiveIndex] = useState(0)
   const [filters, setFilters] = useState({
     query: '',
@@ -216,6 +197,7 @@ const PublicationsSection = ({
 
   const filteredPublications = useMemo(() => {
     const query = filters.query.trim().toLowerCase()
+    const institutionFilter = institution === undefined ? filters.institution : institution === 'all' ? [] : [institution]
 
     const yearRange = filters.yearRange
 
@@ -230,10 +212,10 @@ const PublicationsSection = ({
         (filters.status.length === 0 || filters.status.includes(publication.status)) &&
         (!yearRange || (year >= yearRange[0] && year <= yearRange[1])) &&
         (filters.researcher === 'all' || publication.authors.some((author) => author.name === filters.researcher)) &&
-        (filters.institution.length === 0 || getPublicationInstitutions(publication).some((institution) => filters.institution.includes(institution)))
+        (institutionFilter.length === 0 || getPublicationInstitutions(publication).some((id) => institutionFilter.includes(id)))
       )
     })
-  }, [filters])
+  }, [filters, institution])
 
   const displayPublications = limit ? filteredPublications.slice(0, limit) : filteredPublications
   const isRotator = layout === 'rotator'
@@ -249,7 +231,7 @@ const PublicationsSection = ({
   }, [displayPublications.length, isRotator])
 
   // Reset the rotator/list to the first item when filters or limit change.
-  const resetKey = `${JSON.stringify(filters)}|${limit}`
+  const resetKey = `${JSON.stringify(filters)}|${limit}|${institution}`
   const [prevResetKey, setPrevResetKey] = useState(resetKey)
   if (prevResetKey !== resetKey) {
     setPrevResetKey(resetKey)
@@ -277,7 +259,7 @@ const PublicationsSection = ({
       id={sectionId || undefined}
       title={pick(title, title === 'Publications' ? 'Publikationen' : title)}
       subtitle={pick(subtitle, subtitle === 'Research Output' ? 'Forschungsergebnisse' : subtitle)}
-      className={`bg-slate-50 ${compact ? '!py-0' : ''}`}
+      className={`scroll-mt-28 bg-slate-50 ${compact ? '!py-0' : ''}`}
       contentClassName={compact ? '!max-w-none !px-0' : ''}
     >
       {intro && (
@@ -294,7 +276,7 @@ const PublicationsSection = ({
             </div>
             <div>
               <h3 className="text-base font-bold text-slate-950">{pick('Filter publications', 'Publikationen filtern')}</h3>
-              <p className="text-sm text-slate-500">{pick(`${displayPublications.length} results from ${publications.length} records`, `${displayPublications.length} Ergebnisse aus ${publications.length} Einträgen`)}</p>
+              <p aria-live="polite" className="text-sm text-slate-500">{pick(`${displayPublications.length} results from ${publications.length} records`, `${displayPublications.length} Ergebnisse aus ${publications.length} Einträgen`)}</p>
             </div>
           </div>
 
@@ -326,13 +308,13 @@ const PublicationsSection = ({
           </div>
 
           <div className="mt-5 grid gap-5 sm:grid-cols-2">
-            <FilterPills
+            {institution === undefined && <FilterPills
               label="Institution"
               options={FILTER_OPTIONS.institutions}
               selected={filters.institution}
               onToggle={(value) => toggleFilter('institution', value)}
               onClear={() => clearFilter('institution')}
-            />
+            />}
             <FilterPills
               label="Type"
               options={FILTER_OPTIONS.types}
@@ -447,6 +429,12 @@ const PublicationsSection = ({
       {displayPublications.length === 0 && (
         <div className="mx-auto max-w-xl rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center text-slate-500">
           {pick('No publications match the selected filters.', 'Keine Publikationen passen zu den ausgewählten Filtern.')}
+          <button type="button" onClick={() => {
+            setFilters({ query: '', type: [], status: [], yearRange: YEAR_BOUNDS, researcher: 'all', institution: [] })
+            if (institution !== undefined) setInstitution('all')
+          }} className="mx-auto mt-4 block rounded-full border border-primary-200 px-4 py-2 text-sm font-semibold text-primary-700 hover:bg-primary-50">
+            {pick('Clear filters', 'Filter zurücksetzen')}
+          </button>
         </div>
       )}
     </Section>

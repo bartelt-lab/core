@@ -3,6 +3,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import LazyVideo from '../components/common/LazyVideo'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
+import useInstitution from '../hooks/useInstitution'
 
 // The cues named in the project summary, each described only as what it is —
 // what any one of them is worth to the estimate is what the project has to
@@ -164,6 +165,7 @@ const robotActions = (pick) => [
 
 const HumanAwarenessDetection = () => {
     const { pick } = useLanguage()
+  const { withInstitution } = useInstitution()
     const plannedActions = robotActions(pick)
     const cues = visualCues(pick)
     const pipeline = pipelineStages(pick)
@@ -179,7 +181,7 @@ const HumanAwarenessDetection = () => {
             />
             <div className="mx-auto max-w-5xl">
                 <Link
-                    to="/ai-team-projects"
+                    to={withInstitution('/teaching#student-projects')}
                     className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/85 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-600 shadow-sm backdrop-blur transition hover:border-primary-200 hover:text-primary-700"
                 >
                     <FaArrowLeft className="h-3 w-3" aria-hidden="true" />
@@ -252,7 +254,7 @@ const HumanAwarenessDetection = () => {
                 </div>
 
                 <Link
-                    to="/core-labs"
+                    to={withInstitution('/labs/robotics')}
                     className="group mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-2xl border border-primary-200 bg-primary-50/70 px-5 py-4 shadow-sm transition hover:border-primary-300 hover:bg-primary-50"
                 >
                     <span className="block">
@@ -427,7 +429,7 @@ const HumanAwarenessDetection = () => {
                                 )}
                             </p>
                             <Link
-                                to="/leader-following"
+                                to={withInstitution('/leader-following')}
                                 className="group mt-5 inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700 transition hover:border-primary-300 hover:bg-primary-100"
                             >
                                 {pick('View Leader Following', 'Leader Following ansehen')}

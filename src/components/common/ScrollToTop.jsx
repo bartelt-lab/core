@@ -12,26 +12,46 @@ const ScrollToTop = () => {
             window.history.scrollRestoration = 'manual'
         }
 
-        if (hash) {
-            // Scroll to id
-            const id = hash.replace('#', '')
-            const element = document.getElementById(id)
-            if (element) {
-                setTimeout(() => {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }, 300)
-            }
-        } else {
-            // Default to top
+        if (!hash) {
             window.scrollTo(0, 0)
+            return
         }
 
-        // Double check for race conditions or if hash failed
-        const timeout = setTimeout(() => {
-            if (!hash) window.scrollTo(0, 0)
-        }, 0)
+        let id = hash.slice(1)
+        try {
+            id = decodeURIComponent(id)
+        } catch {
+            // A malformed escaped fragment can still be a literal element id.
+        }
 
-        return () => clearTimeout(timeout)
+        let frame
+        let observer
+        const scrollWhenReady = () => {
+            const element = document.getElementById(id)
+            if (!element) return false
+            observer?.disconnect()
+            frame = requestAnimationFrame(() => {
+                element.scrollIntoView({
+                    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+                    block: id.startsWith('member-') ? 'center' : 'start',
+                })
+            })
+            return true
+        }
+
+        // Route chunks and Teaching tabs may commit after this layout effect.
+        // Observe until the actual target appears instead of guessing a delay.
+        if (!scrollWhenReady()) {
+            observer = new MutationObserver(scrollWhenReady)
+            observer.observe(document.getElementById('root'), { childList: true, subtree: true })
+        }
+        const timeout = setTimeout(() => observer?.disconnect(), 10_000)
+
+        return () => {
+            clearTimeout(timeout)
+            cancelAnimationFrame(frame)
+            observer?.disconnect()
+        }
     }, [pathname, hash])
 
     useEffect(() => {

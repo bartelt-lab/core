@@ -21,7 +21,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
 import { preview } from 'vite'
-import { canonicalUrl, routes } from '../src/routes.js'
+import { canonicalUrl, legacyRedirect, normalizePath, routes } from '../src/routes.js'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DIST = path.join(ROOT, 'dist')
@@ -71,6 +71,20 @@ async function renderRoute(context, routePath) {
     try {
         const url = `http://localhost:${PORT}${routePath}`
         await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45_000 })
+
+        // Retired addresses render the shared destination, including the
+        // institution and selected Teaching tab. Wait for replacement before
+        // treating a temporarily mounted shell as the finished page.
+        const redirect = legacyRedirect(routePath)
+        if (redirect) {
+            const target = new URL(redirect, url)
+            await page.waitForURL(
+                (current) => normalizePath(current.pathname) === target.pathname
+                    && current.search === target.search
+                    && current.hash === target.hash,
+                { timeout: 45_000 },
+            )
+        }
 
         // App mounted, and the lazy route chunk has replaced LoadingFallback.
         await page.waitForFunction(

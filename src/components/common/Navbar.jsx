@@ -1,180 +1,106 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FaBookOpen, FaBrain, FaFlask, FaServer } from "react-icons/fa";
-import assetUrl from "../../utils/assetUrl";
-import { useLanguage } from "../../i18n/useLanguage";
+import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { FiMenu, FiX } from 'react-icons/fi'
+import assetUrl from '../../utils/assetUrl'
+import { useLanguage } from '../../i18n/useLanguage'
+import useInstitution from '../../hooks/useInstitution'
+import { INSTITUTION_OPTIONS } from '../../utils/institutions'
+import { findRoute } from '../../routes'
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-  const { pick } = useLanguage();
+const items = [
+  { id: 'research', label: 'Research' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'teaching', label: 'Teaching' },
+  { id: 'labs', label: 'Labs' },
+  { id: 'team', label: 'Team' },
+]
 
-  // Shrink the bar slightly once scrolled. (To make the bar hide entirely past a
-  // scroll threshold on a specific route, see wiki/navbar-scroll-hide.md.)
+export default function Navbar() {
+  const location = useLocation()
+  const { pick } = useLanguage()
+  const { institution, setInstitution, withInstitution } = useInstitution()
+  const [openAt, setOpenAt] = useState(null)
+  const menuButton = useRef(null)
+  const menuOpen = openAt === location.key
+  const section = findRoute(location.pathname)?.section
+  const isDetail = section && location.pathname.replace(/\/$/, '') !== `/${section}`
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    if (!menuOpen) return
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setOpenAt(null)
+        menuButton.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
 
-  const labSites = [
-    { initials: "TUC", to: "/tuc", title: "TU Clausthal lab" },
-    {
-      initials: "MDS",
-      href: "https://www.mds-lab.de/",
-      title: "MDS Lab, Rostock",
-    },
-    { initials: "UBB", to: "/ubb", title: "Babeș-Bolyai lab" },
-  ];
-
-  const navItems = [
-    {
-      to: "/publications",
-      label: "Publications",
-      icon: FaBookOpen,
-      isActive: location.pathname === "/publications",
-    },
-    {
-      to: "/core-labs",
-      label: "CORE Labs",
-      icon: FaFlask,
-      isActive: location.pathname.startsWith("/core-labs"),
-    },
-    {
-      to: "/ai-team-projects",
-      label: "AI Team Projects",
-      icon: FaBrain,
-      isActive: location.pathname.startsWith("/ai-team-projects"),
-    },
-    {
-      to: "/compute-cluster",
-      label: "Compute Cluster",
-      icon: FaServer,
-      isActive: location.pathname === "/compute-cluster",
-    },
-  ];
+  const chooseInstitution = (value) => {
+    const to = isDetail
+      ? `/${section}${section === 'teaching' ? '#student-projects' : ''}`
+      : location.hash.startsWith('#member-') ? `${location.pathname}${location.search}` : undefined
+    setInstitution(value, { to })
+    setOpenAt(null)
+  }
 
   return (
-    <header
-      className={`fixed inset-x-3 top-3 z-[60] mx-auto max-w-[94rem] transition-all duration-300 sm:inset-x-5 sm:top-4 ${
-        isScrolled ? "scale-[0.985] opacity-100" : "scale-100 opacity-100"
-      }`}
-    >
-      <div className="flex h-[3.75rem] items-center gap-2 rounded-[1.5rem] border border-white/90 bg-white/90 p-2.5 shadow-[0_18px_55px_-24px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:h-[4.5rem] sm:gap-4 sm:p-3">
-        <Link
-          to="/"
-          aria-label="CORE Network home"
-          className="flex h-full w-14 shrink-0 items-center justify-center rounded-2xl transition hover:bg-slate-50 sm:w-[7.5rem] lg:w-[9rem]"
-        >
-          <img
-            src={assetUrl("/logos/core/light-background/core.svg")}
-            alt="CORE Network"
-            className="h-9 max-w-[3.25rem] object-contain sm:h-12 sm:max-w-[6.75rem]"
-          />
-        </Link>
+    <header className="fixed inset-x-3 top-3 z-[60] mx-auto max-w-[94rem] sm:inset-x-5 sm:top-4">
+      <a href="#main-content" onClick={(event) => {
+        event.preventDefault()
+        const main = document.getElementById('main-content')
+        main?.focus({ preventScroll: true })
+        main?.scrollIntoView({ behavior: 'instant' })
+      }} className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-2 focus:z-10 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-primary-700">
+        {pick('Skip to content', 'Zum Inhalt')}
+      </a>
+      <div className="rounded-3xl border border-white/90 bg-white/95 p-2.5 shadow-[0_18px_55px_-24px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:p-3">
+        <div className="flex h-11 items-center gap-3 sm:h-12 lg:gap-5">
+          <Link to={withInstitution('/')} aria-label="CORE Network home" className="flex h-full w-16 shrink-0 items-center justify-center rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 sm:w-24">
+            <img src={assetUrl('/logos/core/light-background/core.svg')} alt="CORE Network" className="h-10 w-full object-contain sm:h-12" />
+          </Link>
 
-        <div
-          className="hidden h-10 w-px shrink-0 bg-slate-200 lg:block"
-          aria-hidden="true"
-        />
-
-        <nav className="relative flex h-full min-w-0 flex-1 items-center justify-center overflow-hidden rounded-[1.4rem] border border-slate-700/40 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 px-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_30px_-18px_rgba(15,23,42,0.9)] sm:px-3">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={`group relative flex h-full min-w-0 flex-1 items-center justify-center gap-2 px-0 text-xs font-semibold whitespace-nowrap transition-colors duration-200 sm:gap-2.5 sm:px-3 sm:text-sm lg:text-[15px] ${
-                  item.isActive
-                    ? "text-white"
-                    : "text-slate-300 hover:text-white"
-                }`}
-              >
-                <Icon
-                  className={`h-4 w-4 shrink-0 transition-colors sm:h-[1.1rem] sm:w-[1.1rem] ${
-                    item.isActive
-                      ? "text-primary-400"
-                      : "text-slate-300 group-hover:text-primary-300"
-                  }`}
-                  aria-hidden="true"
-                />
-                <span className="hidden lg:inline">
-                  {pick(
-                    item.label,
-                    item.label === "Publications"
-                      ? "Publikationen"
-                      : item.label === "AI Team Projects"
-                        ? "AI-Team-Projekte"
-                        : item.label === "Compute Cluster"
-                          ? "Rechencluster"
-                          : item.label,
-                  )}
-                </span>
-                {item.isActive && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute bottom-0 h-[3px] w-6 rounded-t-full bg-primary-400 shadow-[0_-2px_12px_rgba(74,222,128,0.42)] sm:w-16"
-                    transition={{ type: "spring", stiffness: 360, damping: 32 }}
-                  />
-                )}
+          <nav aria-label={pick('Main navigation', 'Hauptnavigation')} className="hidden h-full min-w-0 flex-1 items-center rounded-2xl bg-slate-900 px-2 lg:flex">
+            {items.map((item) => (
+              <Link key={item.id} to={withInstitution(`/${item.id}`)} aria-current={section === item.id ? 'page' : undefined}
+                className={`relative flex h-full flex-1 items-center justify-center rounded-xl px-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-300 ${section === item.id ? 'text-white' : 'text-slate-300 hover:text-white'}`}>
+                {item.label}
+                {section === item.id && <span className="absolute bottom-0 h-[3px] w-8 rounded-t-full bg-primary-400" />}
               </Link>
-            );
-          })}
-        </nav>
+            ))}
+          </nav>
 
-        <div
-          className="hidden h-10 w-px shrink-0 bg-slate-200 sm:block"
-          aria-hidden="true"
-        />
+          <div className="ml-auto hidden shrink-0 lg:block">
+            <span className="mb-0.5 block pl-2 text-[10px] font-medium text-slate-500">{pick('Institution', 'Institution')}</span>
+            <div role="group" aria-label={pick('Filter by institution', 'Nach Institution filtern')} className="flex gap-0.5 rounded-full bg-slate-100 p-0.5">
+              {INSTITUTION_OPTIONS.map((option) => (
+                <button key={option.value} type="button" onClick={() => chooseInstitution(option.value)} aria-pressed={institution === option.value} title={option.name}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-700 ${institution === option.value ? 'bg-primary-700 text-white' : 'text-slate-600 hover:bg-white hover:text-primary-700'}`}>
+                  {pick(option.label, option.labelDe ?? option.label)}
+                </button>
+              ))}
+            </div>
+          </div>
 
-        <div
-          className="flex h-9 w-[5.5rem] shrink-0 items-center rounded-full border border-slate-200/80 bg-slate-50/80 p-0.5 sm:h-10 sm:w-auto sm:px-1"
-          aria-label="Partner institutions"
-        >
-          {labSites.map((lab) => {
-            const isTucActive =
-              lab.initials === "TUC" && location.pathname.startsWith("/tuc");
-            const isUbbActive =
-              lab.initials === "UBB" && location.pathname.startsWith("/ubb");
-            const isPrimaryLab = lab.initials === "TUC" && !isUbbActive;
-            const cls = `flex h-7 min-w-0 flex-1 items-center justify-center rounded-full px-1 text-[9px] font-bold tracking-[0.04em] transition duration-200 sm:h-8 sm:min-w-11 sm:px-2.5 sm:text-xs sm:font-semibold sm:tracking-wide lg:min-w-12 lg:px-3 ${
-              isTucActive || isUbbActive || isPrimaryLab
-                ? "bg-white text-primary-700 shadow-sm"
-                : "text-slate-600 hover:bg-white hover:text-slate-900"
-            }`;
-            return lab.to ? (
-              <Link
-                key={lab.initials}
-                to={lab.to}
-                title={lab.title}
-                aria-label={lab.title}
-                className={cls}
-              >
-                {lab.initials}
-              </Link>
-            ) : (
-              <a
-                key={lab.initials}
-                href={lab.href}
-                target="_blank"
-                rel="noreferrer"
-                title={lab.title}
-                aria-label={lab.title}
-                className={cls}
-              >
-                {lab.initials}
-              </a>
-            );
-          })}
+          <label className="ml-auto flex min-w-0 max-w-44 flex-col gap-0.5 lg:hidden">
+            <span className="pl-2 text-[10px] font-medium text-slate-500">{pick('Institution', 'Institution')}</span>
+            <select value={institution} onChange={(event) => chooseInstitution(event.target.value)} className="w-full rounded-full border-slate-200 bg-slate-50 py-1 pl-3 pr-8 text-xs font-semibold text-slate-700 focus:border-primary-700 focus:ring-primary-700">
+              {INSTITUTION_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.value === 'Rostock' ? 'MDS (Rostock)' : pick(option.label, option.labelDe ?? option.label)}</option>)}
+            </select>
+          </label>
+
+          <button ref={menuButton} type="button" aria-controls="mobile-navigation" aria-expanded={menuOpen} aria-label={menuOpen ? pick('Close menu', 'Menü schließen') : pick('Open menu', 'Menü öffnen')} onClick={() => setOpenAt(menuOpen ? null : location.key)} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-900 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 lg:hidden">
+            {menuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+          </button>
         </div>
+
+        {menuOpen && (
+          <nav id="mobile-navigation" aria-label={pick('Main navigation', 'Hauptnavigation')} className="mt-3 grid gap-1 border-t border-slate-200 pt-3 lg:hidden">
+            {items.map((item) => <Link key={item.id} to={withInstitution(`/${item.id}`)} onClick={() => setOpenAt(null)} aria-current={section === item.id ? 'page' : undefined} className={`rounded-xl px-4 py-3 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-700 ${section === item.id ? 'bg-primary-700 text-white' : 'text-slate-700 hover:bg-slate-100'}`}>{item.label}</Link>)}
+          </nav>
+        )}
       </div>
     </header>
-  );
-};
-
-export default Navbar;
+  )
+}

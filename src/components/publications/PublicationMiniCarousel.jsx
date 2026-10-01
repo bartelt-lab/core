@@ -3,13 +3,16 @@ import { FaArrowRight } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
 import { publicationsWithImages } from '../../data/publications'
 import { useLanguage } from '../../i18n/useLanguage'
-
-// Doubled so the marquee can loop seamlessly: the second pass scrolls in behind the
-// first. Eight is enough to fill the widest viewport before the seam comes round.
-const items = [...publicationsWithImages.slice(0, 8), ...publicationsWithImages.slice(0, 8)]
+import useInstitution from '../../hooks/useInstitution'
+import { matchesInstitution } from '../../utils/institutions'
+import { getPublicationInstitutions } from '../../utils/publicationInstitutions'
 
 const PublicationMiniCarousel = () => {
   const { pick } = useLanguage()
+  const { institution, withInstitution } = useInstitution()
+  const recent = publicationsWithImages.filter((publication) => matchesInstitution(getPublicationInstitutions(publication), institution)).slice(0, 8)
+  const items = [...recent, ...recent]
+  if (items.length === 0) return null
 
   return (
     <div className="mt-6 w-full max-w-6xl overflow-hidden rounded-3xl border border-white/70 bg-white/88 p-4 shadow-2xl shadow-slate-200/70 backdrop-blur-xl">
@@ -17,7 +20,7 @@ const PublicationMiniCarousel = () => {
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Latest publications', 'Neueste Publikationen')}</p>
         </div>
-        <Link to="/publications" className="inline-flex items-center gap-2 rounded-full border border-primary-100 bg-primary-50 px-4 py-2 text-xs font-bold text-primary-700 transition hover:border-primary-200 hover:bg-primary-700 hover:text-white">
+        <Link to={withInstitution('/research#publications')} className="inline-flex items-center gap-2 rounded-full border border-primary-100 bg-primary-50 px-4 py-2 text-xs font-bold text-primary-700 transition hover:border-primary-200 hover:bg-primary-700 hover:text-white">
           {pick('All publications', 'Alle Publikationen')}
           <FaArrowRight className="h-3 w-3" aria-hidden="true" />
         </Link>

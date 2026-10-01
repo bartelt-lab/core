@@ -26,16 +26,17 @@ const Expandable = ({ id, title, open, onToggle, children }) => (
     </div>
 );
 
-const JoinUs = () => {
+const JoinUs = ({ embedded = false }) => {
     const [expanded, setExpanded] = useState({});
     const { pick } = useLanguage();
     const toggle = (id) => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
+    const Heading = embedded ? 'h2' : 'h1';
 
     return (
-        <section id="join-us">
+        <section id="join-us" className="scroll-mt-40">
             <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-4">
                 <div className="md:col-span-1">
-                    <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">Join Us</h1>
+                    <Heading className="text-3xl font-bold text-slate-900 sm:text-4xl">{pick('Join us', 'Mitmachen')}</Heading>
                 </div>
                 <div className="space-y-6 md:col-span-3">
                     <div className="border-l-4 border-slate-900 bg-slate-50 px-5 py-4">

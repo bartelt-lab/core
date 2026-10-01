@@ -1,10 +1,30 @@
-import { FiArrowUpRight, FiMail, FiShield } from 'react-icons/fi';
-import assetUrl from '../../utils/assetUrl';
-import { useLanguage } from '../../i18n/useLanguage';
+import assetUrl from '../utils/assetUrl'
+import { cognitiveProjects } from './demonstrations'
 
-const projects = [
+// The cognitive robotics projects belong to the TUC programme. A contributor's
+// second affiliation does not automatically change the project's institution.
+export const researchProjects = [
+  ...cognitiveProjects
+    .filter((project) => !project.isTeaser)
+    .map((project) => ({ ...project, institutionIds: ['TUC'] })),
+  {
+    id: 'autonomous-driving',
+    title: 'Autonomous Driving',
+    institutionIds: ['UBB'],
+    description: 'The Cluj research programme connects intelligent vehicle vision, modular simulation, scenario generation, planning, and physical 1:10-scale platforms. Explore its four research demonstrations.',
+    descriptionDe: 'Das Forschungsprogramm in Cluj verbindet intelligente Fahrzeugwahrnehmung, modulare Simulation, Szenarien, Planung und reale Plattformen im Maßstab 1:10. Entdecke die vier Forschungsdemonstrationen.',
+    image: '/logos/ubb-logo.webp',
+    imageFit: 'contain',
+    link: '/labs/cluj#autonomous',
+  },
+]
+
+// Content preserved from the TUC industry-projects page. Show2Instruct explicitly
+// includes the University of Rostock among its research partners.
+export const industryProjects = [
     {
         slug: 'ai-bim',
+        institutionIds: ['TUC'],
         title: 'AI-BIM',
         domain: ['Bau & BIM', 'Construction & BIM'],
         topic: ['KI-Co-Pilot für nachhaltige Architekturplanung', 'AI copilot for sustainable architectural planning'],
@@ -24,6 +44,7 @@ const projects = [
     },
     {
         slug: 'show2instruct',
+        institutionIds: ['TUC', 'Rostock'],
         title: 'Show2Instruct',
         domain: ['Bau & BIM', 'Construction & BIM'],
         topic: ['Multimodaler BIM-Copilot für maschinenlesbare Anweisungen', 'Multimodal BIM copilot for machine-readable instructions'],
@@ -43,6 +64,7 @@ const projects = [
     },
     {
         slug: 'lelamar',
+        institutionIds: ['TUC'],
         title: 'LeLaMar',
         domain: ['Gesundheit & Einsatzsysteme', 'Healthcare & emergency response systems'],
         topic: ['KI-Prototypen für Rettungsleitstellen', 'AI prototypes for emergency dispatch centers'],
@@ -62,6 +84,7 @@ const projects = [
     },
     {
         slug: 'medicar',
+        institutionIds: ['TUC'],
         title: 'MediCar 4.0',
         domain: ['Gesundheit & Einsatzsysteme', 'Healthcare & emergency response systems'],
         topic: ['Autonome On-Demand-Transportsysteme für Kliniken', 'Autonomous on-demand transport systems for hospitals'],
@@ -81,6 +104,7 @@ const projects = [
     },
     {
         slug: 'maas-cu',
+        institutionIds: ['TUC'],
         title: 'MaaS-CU',
         domain: ['Kreislaufwirtschaft & Handel', 'Circular economy & retail'],
         topic: ['Optimierung von Mehrwegkreisläufen', 'Optimization of reusable packaging cycles'],
@@ -100,6 +124,7 @@ const projects = [
     },
     {
         slug: 'maimuse',
+        institutionIds: ['TUC'],
         title: 'mAImuse',
         domain: ['Kreislaufwirtschaft & Handel', 'Circular economy & retail'],
         topic: ['Personalisierte virtuelle Anprobe', 'Personalized virtual try-on'],
@@ -119,6 +144,7 @@ const projects = [
     },
     {
         slug: 'physical-guards',
+        institutionIds: ['TUC'],
         title: 'Physical Guards',
         domain: ['Sicherheit & IoT', 'Security & IoT'],
         topic: ['Intrusion Detection aus physikalischen Signalparametern', 'Intrusion detection from physical signal parameters'],
@@ -138,7 +164,7 @@ const projects = [
     },
 ];
 
-const PARTNER_LOGOS = {
+export const industryPartnerLogos = {
     neoBIM: { src: assetUrl('/logos/partners/neobim.svg'), alt: 'neoBIM logo', href: 'https://neobim.ai/' },
     'Cogintal Ltd.': { src: assetUrl('/logos/partners/cogintal.svg'), alt: 'Cogintal Ltd. logo' },
     'Ramblr GmbH': { src: assetUrl('/logos/partners/ramblr.svg'), alt: 'Ramblr logo', href: 'https://ramblr.ai/' },
@@ -156,201 +182,3 @@ const PARTNER_LOGOS = {
     M2M: { src: assetUrl('/logos/partners/m2m-germany.svg'), alt: 'M2M Germany logo', href: 'https://www.m2mgermany.de/' },
     Osapiens: { src: assetUrl('/logos/partners/osapiens.svg'), alt: 'osapiens logo', href: 'https://osapiens.com/' },
 };
-
-const domainClass = (domain) => {
-    switch (domain) {
-        case 'Bau & BIM':
-            return 'border-emerald-200 bg-emerald-50 text-emerald-800';
-        case 'Gesundheit & Einsatzsysteme':
-            return 'border-sky-200 bg-sky-50 text-sky-800';
-        case 'Kreislaufwirtschaft & Handel':
-            return 'border-amber-200 bg-amber-50 text-amber-800';
-        case 'Sicherheit & IoT':
-            return 'border-slate-300 bg-slate-100 text-slate-800';
-        default:
-            return 'border-slate-200 bg-slate-50 text-slate-700';
-    }
-};
-
-const txt = (pick, pair) => pick(pair[1], pair[0]);
-
-const PhysicalSignalVisual = ({ pick }) => (
-    <div className="flex h-full min-h-[220px] flex-col justify-between bg-slate-950 p-6 text-white">
-        <div>
-            <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-slate-300">
-                <FiShield className="h-4 w-4" aria-hidden="true" />
-                {pick('Signal fingerprint', 'Signal-Fingerabdruck')}
-            </div>
-            <p className="max-w-sm text-sm leading-6 text-slate-300">
-                {pick(
-                    'Sensors are evaluated as a connected physical system so manipulated individual signals become visible in spatial context.',
-                    'Sensoren werden als verbundenes physikalisches System bewertet, sodass manipulierte Einzelsignale im Raumkontext auffallen.',
-                )}
-            </p>
-        </div>
-        <div className="grid grid-cols-4 items-end gap-3">
-            {[72, 46, 88, 58, 64, 36, 80, 52].map((height, index) => (
-                <div key={height + index} className="flex flex-col items-center gap-2">
-                    <div className={`w-full rounded-sm ${index === 5 ? 'bg-rose-400' : 'bg-primary-400'}`} style={{ height }} />
-                    <span className={`h-2 w-2 rounded-full ${index === 5 ? 'bg-rose-400' : 'bg-slate-500'}`} />
-                </div>
-            ))}
-        </div>
-    </div>
-);
-
-const ProjectVisual = ({ project, pick }) => {
-    if (!project.visual) return <PhysicalSignalVisual pick={pick} />;
-
-    return (
-        <img
-            src={project.visual}
-            alt={pick(`Project visualization for ${project.title}`, `Projektvisualisierung zu ${project.title}`)}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover"
-        />
-    );
-};
-
-const PartnerLogo = ({ partner, compact = false }) => {
-    const logo = PARTNER_LOGOS[partner];
-
-    if (!logo) {
-        return <span className={`text-xs font-semibold text-slate-700 ${compact ? 'block max-w-full truncate text-center' : ''}`}>{partner}</span>;
-    }
-
-    const logoImage = (
-        <img
-            src={logo.src}
-            alt={logo.alt}
-            loading="lazy"
-            decoding="async"
-            className={`h-auto w-auto object-contain ${compact ? 'max-h-7 max-w-[4.75rem] sm:max-w-[5.25rem]' : 'max-h-8 max-w-[7rem]'}`}
-        />
-    );
-
-    const className = compact
-        ? 'inline-flex h-9 w-[4.75rem] shrink-0 items-center justify-center transition hover:opacity-80 sm:w-[5.25rem]'
-        : 'inline-flex items-center justify-center transition hover:opacity-80';
-
-    if (!logo.href) return <span className={className} title={partner}>{logoImage}</span>;
-
-    return (
-        <a href={logo.href} target="_blank" rel="noreferrer" className={className} title={partner} aria-label={`${partner} website`}>
-            {logoImage}
-        </a>
-    );
-};
-
-const PartnerLogoStrip = ({ partners }) => {
-    const isCompact = partners.length >= 3;
-    const className = isCompact
-        ? 'mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-3'
-        : 'mt-5 flex flex-wrap items-center justify-center gap-3';
-
-    return (
-        <div className={className} aria-label="Project partners">
-            {partners.map((partner) => <PartnerLogo key={partner} partner={partner} compact={isCompact} />)}
-        </div>
-    );
-};
-
-const IndustryProjects = () => {
-    const { pick } = useLanguage();
-
-    return (
-        <>
-            <section className="border-b border-slate-200 bg-white">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-                    <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-500">
-                        {pick('Transfer & public funding', 'Transfer & öffentliche Förderung')}
-                    </p>
-                    <h1 className="max-w-3xl text-3xl font-bold leading-tight text-slate-900 sm:text-5xl">
-                        {pick('Industry Projects', 'Industrieprojekte')}
-                    </h1>
-                    <p className="mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
-                        {pick(
-                            'We develop applied AI systems in publicly funded and industry-oriented transfer projects. The focus is on robust demonstrators, understandable AI architectures, and solutions that must work in real processes across construction, healthcare, circular economy, retail, and IoT security.',
-                            'Wir entwickeln angewandte KI-Systeme in öffentlich geförderten und industrienahen Transferprojekten. Im Mittelpunkt stehen robuste Demonstratoren, nachvollziehbare KI-Architekturen und Lösungen, die in realen Abläufen von Bauwesen, Gesundheit, Kreislaufwirtschaft, Handel und IoT-Sicherheit bestehen müssen.',
-                        )}
-                    </p>
-                </div>
-            </section>
-
-            <section className="bg-white">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {projects.map((project) => (
-                            <article key={project.slug} className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-                                <div className="aspect-[16/9] overflow-hidden bg-slate-100">
-                                    <ProjectVisual project={project} pick={pick} />
-                                </div>
-                                <div className="flex flex-1 flex-col p-5">
-                                    <div className="mb-4">
-                                        <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${domainClass(project.domain[0])}`}>
-                                            {txt(pick, project.domain)}
-                                        </span>
-                                    </div>
-
-                                    <h2 className="text-xl font-bold text-slate-900">{project.title}</h2>
-                                    <p className="mt-2 text-sm font-semibold text-primary-700">{txt(pick, project.topic)}</p>
-                                    <div className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
-                                        <p>{txt(pick, project.summary)}</p>
-                                        <p>{txt(pick, project.contribution)}</p>
-                                    </div>
-
-                                    <PartnerLogoStrip partners={project.partners} />
-
-                                    <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-slate-200 pt-5 text-xs">
-                                        <div>
-                                            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Funding', 'Förderung')}</dt>
-                                            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.fundingProgram)}</dd>
-                                        </div>
-                                        <div>
-                                            <dt className="font-semibold uppercase tracking-wide text-slate-400">Budget</dt>
-                                            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.budget)}</dd>
-                                        </div>
-                                        <div>
-                                            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Duration', 'Laufzeit')}</dt>
-                                            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.duration)}</dd>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="bg-white">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-                    <div className="grid gap-6 rounded-lg border border-slate-200 bg-slate-900 p-6 text-white sm:p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
-                        <div>
-                            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-                                {pick('Transfer with public and industry partners', 'Transfer mit öffentlichen und industriellen Partnern')}
-                            </p>
-                            <h2 className="mt-2 text-2xl font-bold">{pick('Interested in a transfer project?', 'Interesse an einem Transferprojekt?')}</h2>
-                            <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
-                                {pick(
-                                    'We support partners from feasibility studies through publicly funded collaborative projects to robust AI demonstrators.',
-                                    'Wir begleiten Partner von der Machbarkeitsstudie über öffentlich geförderte Verbundprojekte bis zum belastbaren KI-Demonstrator.',
-                                )}
-                            </p>
-                        </div>
-                        <a
-                            href="mailto:bartelt@isse.tu-clausthal.de"
-                            className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-primary-100"
-                        >
-                            <FiMail className="h-4 w-4" aria-hidden="true" />
-                            {pick('Get in touch', 'Kontakt aufnehmen')}
-                            <FiArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </>
-    );
-};
-
-export default IndustryProjects;
