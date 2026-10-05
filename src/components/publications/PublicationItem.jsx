@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { FaExternalLinkAlt, FaCode } from 'react-icons/fa'
+import formatAuthorName from '../../utils/formatAuthorName'
 
 const PublicationItem = ({ publication }) => {
   const hasUrl = publication.url && publication.url !== '#'
@@ -41,7 +42,7 @@ const PublicationItem = ({ publication }) => {
       </div>
 
       <p className="text-slate-700 mb-3">
-        {publication.authors.map((a) => a.name).join(', ')}
+        {publication.authors.map((a) => formatAuthorName(a.name)).join(', ')}
       </p>
 
       <div className="flex items-center justify-between text-sm">

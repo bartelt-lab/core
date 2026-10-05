@@ -4,6 +4,7 @@ import { FaArrowRight, FaExternalLinkAlt, FaFilter, FaSearch } from 'react-icons
 import Section from '../common/Section'
 import PublicationItem from './PublicationItem'
 import assetUrl from '../../utils/assetUrl'
+import formatAuthorName from '../../utils/formatAuthorName'
 import { getMemberBySlug } from '../../data/team'
 import { publications } from '../../data/publications'
 import { useLanguage } from '../../i18n/useLanguage'
@@ -53,7 +54,7 @@ const PublicationCard = ({ publication, featured = false, compact = false, compa
           {publication.title}
         </h3>
         <p className={`${featured ? (compact ? 'text-xs leading-5 line-clamp-2' : 'text-base leading-7') : 'text-sm leading-6 line-clamp-2'} mb-1.5 text-slate-600`}>
-          {publication.authors.map((a) => a.name).join(', ')}
+          {publication.authors.map((a) => formatAuthorName(a.name)).join(', ')}
         </p>
         <div className={`${compact ? 'border-t border-slate-100 pt-2.5' : ''} mt-auto flex flex-wrap items-center justify-between gap-2`}>
           <span className={`text-xs font-semibold text-slate-700 ${compact ? 'line-clamp-1' : 'line-clamp-2'}`}>{publication.venue}</span>
@@ -220,7 +221,7 @@ const PublicationsSection = ({
     const yearRange = filters.yearRange
 
     return publications.filter((publication) => {
-      const authorNames = publication.authors.map((author) => author.name).join(' ')
+      const authorNames = publication.authors.map((author) => formatAuthorName(author.name)).join(' ')
       const searchable = `${publication.title} ${publication.venue} ${authorNames}`.toLowerCase()
       const year = Number(publication.year)
 
@@ -319,7 +320,7 @@ const PublicationsSection = ({
               >
                 <option value="all">{pick('All researchers', 'Alle Forschenden')}</option>
                 {FILTER_OPTIONS.researchers.map((value) => (
-                  <option key={value} value={value}>{value}</option>
+                  <option key={value} value={value}>{formatAuthorName(value)}</option>
                 ))}
               </select>
             </label>

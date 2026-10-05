@@ -188,11 +188,14 @@ const HumanAwarenessDetection = () => {
 
                 <div className="mt-5 grid gap-7 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
                     <div className="relative z-10">
-                        <div className="mb-4 flex items-center gap-3">
+                        <div className="mb-4 flex flex-wrap items-center gap-3">
                             <span className="h-2.5 w-2.5 rounded-full bg-primary-600 shadow-[0_0_0_5px_rgba(22,163,74,0.12)]" />
                             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">
                                 {pick('AI Team Project / Human-robot interaction', 'KI-Teamprojekt / Mensch-Roboter-Interaktion')}
                             </p>
+                            <span className="rounded-full bg-primary-700 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white">
+                                {pick('Coming next semester', 'Ab nächstem Semester')}
+                            </span>
                         </div>
                         <h1 className="max-w-2xl font-heading text-4xl font-black leading-[1.05] tracking-tight text-slate-950 lg:text-[2.75rem]">
                             {pick('Visual Human Awareness Estimation', 'Visuelle Schätzung menschlicher Aufmerksamkeit')}
