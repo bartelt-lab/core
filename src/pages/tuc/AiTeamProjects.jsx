@@ -356,7 +356,7 @@ const AiTeamProjects = () => {
             initial={{ opacity: 0, scale: 0.94, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-            className="relative mx-auto flex min-h-[19rem] w-full max-w-[28rem] items-center justify-center sm:min-h-[22rem] lg:min-h-[29rem] lg:max-w-[33rem] xl:min-h-[31rem]"
+            className="relative mx-auto hidden w-full items-center justify-center lg:flex lg:min-h-[29rem] lg:max-w-[33rem] xl:min-h-[31rem]"
             aria-hidden="true"
           >
             <div className="absolute h-[17rem] w-[17rem] rounded-full border border-dashed border-primary-200/80 bg-white/20 sm:h-[20rem] sm:w-[20rem] lg:h-[25rem] lg:w-[25rem] xl:h-[27rem] xl:w-[27rem]" />
