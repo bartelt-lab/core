@@ -248,6 +248,17 @@ export const videos = [
         usedOn: ['src/pages/Dynamo.jsx'],
     },
     {
+        id: 'g1-dex3-towel-pick-place',
+        src: '/videos/demonstrations/dynamo/g1-dex3-towel-pick-place.mp4',
+        poster: '/videos/demonstrations/dynamo/g1-dex3-towel-pick-place-poster.webp',
+        bucket: BUCKETS.CAMERA,
+        duration: 26,
+        description:
+            'Single fixed camera, no overlays or HUD, on the G1 humanoid (a CORE logo on its chest, hung from a harness) at a white table with a pink towel and a blue box. The right hand with three fingers reaches the towel, grasps it, lifts it, swings the arm over the blue box and drops the towel in; the left arm stays at its side. The clip is an edit of one longer run: four segments joined by jump cuts, sped up 1.5x to 2x, with the long holds between them removed.',
+        frames: 'wiki/video-frames/g1-dex3-towel-pick-place.jpg',
+        usedOn: ['src/pages/Dynamo.jsx'],
+    },
+    {
         id: 'g1-ridgeback-teleoperation-sim',
         src: '/videos/demonstrations/dynamo/g1-ridgeback-teleoperation-sim.mp4',
         poster: '/videos/demonstrations/dynamo/g1-ridgeback-teleoperation-sim-poster.webp',
