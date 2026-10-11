@@ -138,18 +138,6 @@ const experimentResults = [
         },
     },
     {
-        operation: 'Zero-shot hand transfer',
-        title: 'Towel pick and place on three-finger hands',
-        summary: 'The same pipeline runs on a soft, deformable object, a towel, with the G1 fitted with three-finger Dex3 hands. The simulation only ever modelled two-finger hands, so the policy has never seen this hand. The clip is shortened and sped up 1.5 to 2 times.',
-        outcome: 'The G1 picks the towel up and drops it into a box with no fine-tuning for the new hand: a zero-shot transfer to three fingers. It does not hold for every task. The cube task does not transfer zero-shot to the three-finger hand.',
-        media: {
-            type: 'video',
-            src: '/videos/demonstrations/dynamo/g1-dex3-towel-pick-place.mp4',
-            poster: '/videos/demonstrations/dynamo/g1-dex3-towel-pick-place-poster.webp',
-            title: 'Towel pick and place on three-finger hands',
-        },
-    },
-    {
         operation: 'Simulation teleoperation',
         title: 'G1 and Ridgeback teleoperation in simulation',
         summary: 'The G1 upper body with Dex1 dexterous hands and the Ridgeback are loaded into one NVIDIA Isaac Sim scene. The operator teleoperates the G1 to perform manipulation next to the Ridgeback.',
@@ -159,6 +147,18 @@ const experimentResults = [
             src: '/videos/demonstrations/dynamo/g1-ridgeback-teleoperation-sim.mp4',
             poster: '/videos/demonstrations/dynamo/g1-ridgeback-teleoperation-sim-poster.webp',
             title: 'G1 and Ridgeback teleoperation in simulation',
+        },
+    },
+    {
+        operation: 'Zero-shot hand transfer',
+        title: 'Towel pick and place on three-finger hands',
+        summary: 'The same pipeline runs on a soft, deformable object, a towel, with the G1 fitted with three-finger Dex3 hands. The simulation only ever modelled two-finger hands, so the policy has never seen this hand. The clip is shortened and sped up 1.5 to 2 times.',
+        outcome: 'The G1 picks the towel up and drops it into a box with no fine-tuning for the new hand: a zero-shot transfer to three fingers. It does not hold for every task. The cube task does not transfer zero-shot to the three-finger hand.',
+        media: {
+            type: 'video',
+            src: '/videos/demonstrations/dynamo/g1-dex3-towel-pick-place.mp4',
+            poster: '/videos/demonstrations/dynamo/g1-dex3-towel-pick-place-poster.webp',
+            title: 'Towel pick and place on three-finger hands',
         },
     },
 ]
