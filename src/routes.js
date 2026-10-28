@@ -324,7 +324,7 @@ export const routes = [
     source: 'src/pages/Teaching.jsx',
     title: 'Seminars | Cognitive Software, TU Clausthal',
     description:
-      'Seminar topics and application details at the Institute for Software Systems Engineering, TU Clausthal — send your Transcript of Records and topic preferences to apply.',
+      'Seminars at TU Clausthal: all winter 2026/27 places are filled, and all listed topics have been assigned. Applications are closed.',
   },
   {
     path: '/tuc/theses',
