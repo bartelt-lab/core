@@ -4,26 +4,51 @@ import { useLanguage } from '../../i18n/useLanguage';
 
 const taughtCourses = [
     {
-        title: '"Grundlagen der Kuenstlichen Intelligenz" @ TU Clausthal',
-        semester: 'Winter Semester 2025-2026',
-        tone: 'Foundations, methods, and applications of modern AI.'
-    },
-    {
         title: '"Grundlagen der Informatik" @ TU Clausthal (DigiTec)',
-        semester: 'Winter Semester 2025-2026',
-        tone: 'Core concepts for students building their CS fundamentals.'
+        semester: 'Winter Semester 2026/27',
+        semesterDe: 'Wintersemester 2026/27',
+        tone: 'An introduction to programming for first-semester Digital Technologies students. Learn to turn simple problems into Python programs using data types, conditions, loops, and functions. Written and practical tasks build your problem-solving skills and introduce software development tools. No prior knowledge is required.',
+        toneDe: 'Ein Einstieg in die Programmierung für Erstsemester im Bachelor Digital Technologies. Sie setzen einfache Aufgaben in Python-Programme um und lernen dabei Datentypen, Bedingungen, Schleifen und Funktionen kennen. Schriftliche und praktische Aufgaben vermitteln Lösungsstrategien und den Umgang mit Entwicklungswerkzeugen. Vorkenntnisse sind nicht erforderlich.',
+        link: 'https://digitecstudieren.de/downloads/ba/MHB_BSc_DT_WiSe26.pdf#page=6',
+        cta: 'Module description (B.Sc. Digital Technologies, PDF)',
+        ctaDe: 'Modulbeschreibung (B.Sc. Digital Technologies, PDF)'
     },
     {
         title: 'Research Projects',
-        semester: 'Summer Semester 2025',
-        tone: 'Hands-on project work with active research questions and supervision.'
+        titleDe: 'Forschungsprojekte',
+        semester: 'Ongoing offering',
+        semesterDe: 'Fortlaufendes Angebot',
+        tone: 'Work with a supervisor on a current research question from our group, or propose your own topic. Depending on the project, compare methods, develop a prototype, or run experiments. Agree with your supervisor on the scope and how you will document and present your findings.',
+        toneDe: 'Sie bearbeiten mit wissenschaftlicher Betreuung eine aktuelle Forschungsfrage unserer Gruppe oder schlagen ein eigenes Thema vor. Je nach Projekt vergleichen Sie Methoden, entwickeln einen Prototyp oder führen Experimente durch. Umfang, Dokumentation und Präsentation Ihrer Ergebnisse stimmen Sie mit Ihrer Betreuung ab.',
+        link: 'https://www.isse.tu-clausthal.de/lehre/lehrveranstaltungen',
+        cta: 'Project supervision at ISSE',
+        ctaDe: 'Projektbetreuung am ISSE'
+    },
+    {
+        title: 'Practical Courses and Projects (Bachelor’s and Master’s)',
+        titleDe: 'Praktika und Projekte (Bachelor und Master)',
+        tone: 'Apply your course knowledge to a software project drawn from research or industry. Analyse requirements, design and implement a solution, test it, and document the result. Practise coordinating work and presenting what you built. The scope depends on your degree programme and module.',
+        toneDe: 'Sie wenden Ihr Wissen in einem Softwareprojekt aus Forschung oder Praxis an: Anforderungen analysieren, eine Lösung entwerfen und programmieren, sie testen und das Ergebnis dokumentieren. Dabei üben Sie, Aufgaben abzustimmen und Ihre Ergebnisse vorzustellen. Der Umfang richtet sich nach Ihrem Studiengang und Modul.',
+        link: 'https://www.isse.tu-clausthal.de/lehre/lehrveranstaltungen',
+        cta: 'Practical courses and projects at ISSE',
+        ctaDe: 'Praktika und Projekte am ISSE'
+    },
+    {
+        title: 'Proseminar (Bachelor)',
+        tone: 'Read and analyse research papers on a computer science topic with guidance from a supervisor. Write a seminar paper, present your findings, and discuss the results with the group.',
+        toneDe: 'Sie erarbeiten unter Betreuung ein Informatikthema anhand wissenschaftlicher Literatur, verfassen eine Seminararbeit und stellen Ihre Ergebnisse in einem Vortrag mit Diskussion vor.',
+        link: 'https://www.studiengaenge.tu-clausthal.de/fileadmin/Sites/Studiengaenge/Documents/Studiengaenge/Modulhandbuecher/Neu_in_2021-22/MHB_Informatik_B.Sc._2020_16_12_2021.pdf#page=136',
+        cta: 'Module description (B.Sc. Informatik, PDF)',
+        ctaDe: 'Modulbeschreibung (B.Sc. Informatik, PDF)'
     },
     {
         title: 'European AI Team Projects',
-        semester: 'Summer Semester 2025',
-        tone: 'Cross-institutional AI projects with applied and research-driven tracks.',
+        titleDe: 'Europäische AI-Team-Projekte',
+        tone: 'Work for one semester in an international team of TU Clausthal and Babeș-Bolyai University students. Develop a practical AI system, such as a recommender, learning assistant, or robotics application. Two onsite weeks in Goslar and Cluj combine coding, teamwork, and cultural exchange.',
+        toneDe: 'Studierende der TU Clausthal und der Babeș-Bolyai University arbeiten ein Semester lang in internationalen Teams. Sie entwickeln ein praktisches KI-System, etwa ein Empfehlungssystem, einen Lernassistenten oder eine Robotikanwendung. Zwei Vor-Ort-Wochen in Goslar und Cluj verbinden gemeinsames Programmieren mit Teamarbeit und kulturellem Austausch.',
         link: '/ai-team-projects',
-        cta: 'Open project page'
+        cta: 'Open project page',
+        ctaDe: 'Projektseite öffnen'
     }
 ];
 
@@ -448,11 +473,11 @@ const Teaching = ({ initialSection }) => {
                 .teaching-simple-list strong {
                     color: #1f2d3d;
                 }
-                .teaching-inline-link {
-                    margin-left: 8px;
+                .teaching-course-link {
+                    display: block;
+                    margin-top: 4px;
                     color: rgb(var(--primary-700));
                     font-weight: 700;
-                    white-space: nowrap;
                 }
                 .teaching-bands {
                     display: grid;
@@ -772,18 +797,20 @@ const Teaching = ({ initialSection }) => {
                     id="courses-overview"
                     title={pick('Courses', 'Kurse')}
                     intro={pick(
-                        'Our teaching spans foundational courses, project-based formats, seminars, and supervised theses. The sections below combine the practical information that used to be spread across multiple subpages.',
-                        'Unsere Lehre umfasst Grundlagenveranstaltungen, projektbasierte Formate, Seminare und betreute Abschlussarbeiten. Die folgenden Bereiche bündeln praktische Informationen, die zuvor auf mehrere Unterseiten verteilt waren.'
+                        'Teaching at Clausthal University of Technology includes computer science foundations, practical courses, projects, and seminars.',
+                        'Das Lehrangebot der TU Clausthal umfasst Grundlagen der Informatik, Praktika, Projekte und Seminare.'
                     )}
                 >
                     <ul className="teaching-simple-list">
                         {taughtCourses.map((course) => (
                             <li key={course.title}>
-                                <strong>{course.title}</strong> ({course.semester})<br />
-                                {course.tone}
+                                <strong>{pick(course.title, course.titleDe ?? course.title)}</strong>
+                                {course.semester && <> ({pick(course.semester, course.semesterDe)})</>}
+                                <br />
+                                {pick(course.tone, course.toneDe)}
                                 {course.link && (
-                                    <Link className="teaching-inline-link" to={course.link}>
-                                        {course.cta}
+                                    <Link className="teaching-course-link" to={course.link}>
+                                        {pick(course.cta, course.ctaDe)}
                                     </Link>
                                 )}
                             </li>
@@ -798,14 +825,12 @@ const Teaching = ({ initialSection }) => {
                     title={pick('Seminars', 'Seminare')}
                     topContent={
                         <div className="teaching-note">
-                            <p><strong>{pick('Apply for a seminar', 'Für ein Seminar bewerben')}</strong></p>
+                            <p><strong>{pick('Seminar applications closed', 'Seminarbewerbung geschlossen')}</strong></p>
                             <p>
-                                {pick('Send your Transcript of Records and your topic preferences to', 'Senden Sie Ihren Notenspiegel und Ihre Themenpräferenzen an')}{' '}
-                                <a href="mailto:patrick.knab@tu-clausthal.de">patrick.knab@tu-clausthal.de</a>.
-                                {' '}{pick('You can also include a short CV if relevant.', 'Optional können Sie einen kurzen Lebenslauf beifügen.')}
-                            </p>
-                            <p>
-                                {pick('Please allow 2-3 weeks for a response after your initial request.', 'Bitte rechnen Sie nach der ersten Anfrage mit 2-3 Wochen Bearbeitungszeit.')}
+                                {pick(
+                                    'All seminar places for winter semester 2026/27 are filled, and all listed topics have already been assigned. We are no longer accepting applications.',
+                                    'Alle Seminarplätze für das Wintersemester 2026/27 sind belegt, und alle aufgeführten Themen sind bereits vergeben. Wir nehmen keine weiteren Bewerbungen an.'
+                                )}
                             </p>
                         </div>
                     }
