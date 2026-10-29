@@ -14,15 +14,15 @@ const taughtCourses = [
         ctaDe: 'Modulbeschreibung (B.Sc. Digital Technologies, PDF)'
     },
     {
-        title: 'Research Projects',
-        titleDe: 'Forschungsprojekte',
+        title: 'Research Project (Master, 30 ECTS)',
+        titleDe: 'Forschungsprojekt (Master, 30 LP)',
         semester: 'Ongoing offering',
         semesterDe: 'Fortlaufendes Angebot',
-        tone: 'Work with a supervisor on a current research question from our group, or propose your own topic. Depending on the project, compare methods, develop a prototype, or run experiments. Agree with your supervisor on the scope and how you will document and present your findings.',
-        toneDe: 'Sie bearbeiten mit wissenschaftlicher Betreuung eine aktuelle Forschungsfrage unserer Gruppe oder schlagen ein eigenes Thema vor. Je nach Projekt vergleichen Sie Methoden, entwickeln einen Prototyp oder führen Experimente durch. Umfang, Dokumentation und Präsentation Ihrer Ergebnisse stimmen Sie mit Ihrer Betreuung ab.',
-        link: 'https://www.isse.tu-clausthal.de/lehre/lehrveranstaltungen',
-        cta: 'Project supervision at ISSE',
-        ctaDe: 'Projektbetreuung am ISSE'
+        tone: 'A full-semester research project in the Research Track for master’s students in Informatik and Digital Technologies. Work within a research group on a defined question, develop or evaluate methods, and write a research paper. Give at least two presentations: on your aims and methods, and on your results.',
+        toneDe: 'Im Research Track der Masterstudiengänge Informatik und Digital Technologies bearbeiten Sie ein Semester lang eine Forschungsfrage in einer Arbeitsgruppe. Sie entwickeln oder untersuchen Methoden und verfassen eine Forschungsarbeit. In mindestens zwei Vorträgen stellen Sie zunächst Ziele und Vorgehen, später Ihre Ergebnisse vor.',
+        link: 'https://digitecstudieren.de/downloads/ms/26%20WiSe%20MHB_MSc.pdf#page=145',
+        cta: 'Module description: Forschungsarbeit (DigiTec Master, PDF)',
+        ctaDe: 'Modulbeschreibung: Forschungsarbeit (DigiTec-Master, PDF)'
     },
     {
         title: 'Practical Courses and Projects (Bachelor’s and Master’s)',
@@ -34,12 +34,27 @@ const taughtCourses = [
         ctaDe: 'Praktika und Projekte am ISSE'
     },
     {
-        title: 'Proseminar (Bachelor)',
-        tone: 'Read and analyse research papers on a computer science topic with guidance from a supervisor. Write a seminar paper, present your findings, and discuss the results with the group.',
-        toneDe: 'Sie erarbeiten unter Betreuung ein Informatikthema anhand wissenschaftlicher Literatur, verfassen eine Seminararbeit und stellen Ihre Ergebnisse in einem Vortrag mit Diskussion vor.',
-        link: 'https://www.studiengaenge.tu-clausthal.de/fileadmin/Sites/Studiengaenge/Documents/Studiengaenge/Modulhandbuecher/Neu_in_2021-22/MHB_Informatik_B.Sc._2020_16_12_2021.pdf#page=136',
-        cta: 'Module description (B.Sc. Informatik, PDF)',
-        ctaDe: 'Modulbeschreibung (B.Sc. Informatik, PDF)'
+        title: 'Seminars (Bachelor’s and Master’s)',
+        titleDe: 'Seminare (Bachelor und Master)',
+        tone: 'Seminar formats for students in Informatik and Digital Technologies. Read and critically compare research papers with guidance from a supervisor, write a seminar paper, and present and discuss your findings. The module name, credits, and expected depth depend on your degree programme:',
+        toneDe: 'Seminarangebote für Studierende der Informatik und Digital Technologies. Sie erarbeiten und vergleichen unter Betreuung wissenschaftliche Literatur, verfassen eine Seminararbeit und stellen Ihre Ergebnisse in einem Vortrag mit Diskussion vor. Modulname, Leistungspunkte und fachliche Tiefe richten sich nach Ihrem Studiengang:',
+        links: [
+            {
+                url: 'https://www.studiengaenge.tu-clausthal.de/fileadmin/Sites/Studiengaenge/Documents/Studiengaenge/Modulhandbuecher/Neu_in_2021-22/MHB_Informatik_B.Sc._2020_16_12_2021.pdf#page=136',
+                label: 'Informatik B.Sc.: Proseminar — 3 ECTS (PDF)',
+                labelDe: 'Informatik B.Sc.: Proseminar — 3 LP (PDF)'
+            },
+            {
+                url: 'https://www.studiengaenge.tu-clausthal.de/fileadmin/Sites/Studiengaenge/Documents/Studiengaenge/Modulhandbuecher/Neu_in_2021-22/MHB_Informatik_M.Sc._2020_16_12_2021.pdf#page=237',
+                label: 'Informatik M.Sc.: Hauptseminar — 4 ECTS (PDF)',
+                labelDe: 'Informatik M.Sc.: Hauptseminar — 4 LP (PDF)'
+            },
+            {
+                url: 'https://digitecstudieren.de/downloads/ms/26%20WiSe%20MHB_MSc.pdf#page=147',
+                label: 'DigiTec M.Sc.: Wissenschaftliche Praxis — 5 ECTS (PDF)',
+                labelDe: 'DigiTec M.Sc.: Wissenschaftliche Praxis — 5 LP (PDF)'
+            }
+        ]
     },
     {
         title: 'European AI Team Projects',
@@ -813,6 +828,11 @@ const Teaching = ({ initialSection }) => {
                                         {pick(course.cta, course.ctaDe)}
                                     </Link>
                                 )}
+                                {course.links?.map((link) => (
+                                    <Link key={link.url} className="teaching-course-link" to={link.url}>
+                                        {pick(link.label, link.labelDe)}
+                                    </Link>
+                                ))}
                             </li>
                         ))}
                     </ul>
