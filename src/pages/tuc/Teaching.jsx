@@ -14,26 +14,6 @@ const taughtCourses = [
         ctaDe: 'Modulbeschreibung (B.Sc. Digital Technologies, PDF)'
     },
     {
-        title: 'Research Project (Master, 30 ECTS)',
-        titleDe: 'Forschungsprojekt (Master, 30 LP)',
-        semester: 'Ongoing offering',
-        semesterDe: 'Fortlaufendes Angebot',
-        tone: 'A full-semester research project in the Research Track for master’s students in Informatik and Digital Technologies. Work within a research group on a defined question, develop or evaluate methods, and write a research paper. Give at least two presentations: on your aims and methods, and on your results.',
-        toneDe: 'Im Research Track der Masterstudiengänge Informatik und Digital Technologies bearbeiten Sie ein Semester lang eine Forschungsfrage in einer Arbeitsgruppe. Sie entwickeln oder untersuchen Methoden und verfassen eine Forschungsarbeit. In mindestens zwei Vorträgen stellen Sie zunächst Ziele und Vorgehen, später Ihre Ergebnisse vor.',
-        link: 'https://digitecstudieren.de/downloads/ms/26%20WiSe%20MHB_MSc.pdf#page=145',
-        cta: 'Module description: Forschungsarbeit (DigiTec Master, PDF)',
-        ctaDe: 'Modulbeschreibung: Forschungsarbeit (DigiTec-Master, PDF)'
-    },
-    {
-        title: 'Practical Courses and Projects (Bachelor’s and Master’s)',
-        titleDe: 'Praktika und Projekte (Bachelor und Master)',
-        tone: 'Apply your course knowledge to a software project drawn from research or industry. Analyse requirements, design and implement a solution, test it, and document the result. Practise coordinating work and presenting what you built. The scope depends on your degree programme and module.',
-        toneDe: 'Sie wenden Ihr Wissen in einem Softwareprojekt aus Forschung oder Praxis an: Anforderungen analysieren, eine Lösung entwerfen und programmieren, sie testen und das Ergebnis dokumentieren. Dabei üben Sie, Aufgaben abzustimmen und Ihre Ergebnisse vorzustellen. Der Umfang richtet sich nach Ihrem Studiengang und Modul.',
-        link: 'https://www.isse.tu-clausthal.de/lehre/lehrveranstaltungen',
-        cta: 'Practical courses and projects at ISSE',
-        ctaDe: 'Praktika und Projekte am ISSE'
-    },
-    {
         title: 'Seminars (Bachelor’s and Master’s)',
         titleDe: 'Seminare (Bachelor und Master)',
         tone: 'Seminar formats for students in Informatik and Digital Technologies. Read and critically compare research papers with guidance from a supervisor, write a seminar paper, and present and discuss your findings. The module name, credits, and expected depth depend on your degree programme:',
@@ -57,13 +37,56 @@ const taughtCourses = [
         ]
     },
     {
-        title: 'European AI Team Projects',
-        titleDe: 'Europäische AI-Team-Projekte',
-        tone: 'Work for one semester in an international team of TU Clausthal and Babeș-Bolyai University students. Develop a practical AI system, such as a recommender, learning assistant, or robotics application. Two onsite weeks in Goslar and Cluj combine coding, teamwork, and cultural exchange.',
-        toneDe: 'Studierende der TU Clausthal und der Babeș-Bolyai University arbeiten ein Semester lang in internationalen Teams. Sie entwickeln ein praktisches KI-System, etwa ein Empfehlungssystem, einen Lernassistenten oder eine Robotikanwendung. Zwei Vor-Ort-Wochen in Goslar und Cluj verbinden gemeinsames Programmieren mit Teamarbeit und kulturellem Austausch.',
-        link: '/ai-team-projects',
-        cta: 'Open project page',
-        ctaDe: 'Projektseite öffnen'
+        title: 'Practical Courses and Projects (Bachelor’s and Master’s)',
+        titleDe: 'Praktika und Projekte (Bachelor und Master)',
+        tone: 'Apply your course knowledge to a software project drawn from research or industry. Analyse requirements, design and implement a solution, test it, and document the result. Practise coordinating work and presenting what you built. The scope depends on your degree programme and module.',
+        toneDe: 'Sie wenden Ihr Wissen in einem Softwareprojekt aus Forschung oder Praxis an: Anforderungen analysieren, eine Lösung entwerfen und programmieren, sie testen und das Ergebnis dokumentieren. Dabei üben Sie, Aufgaben abzustimmen und Ihre Ergebnisse vorzustellen. Der Umfang richtet sich nach Ihrem Studiengang und Modul.',
+        links: [
+            {
+                url: 'https://www.isse.tu-clausthal.de/lehre/lehrveranstaltungen',
+                label: 'Practical courses and projects at ISSE',
+                labelDe: 'Praktika und Projekte am ISSE'
+            },
+            {
+                url: '/ai-team-projects',
+                label: 'European AI Team Projects',
+                labelDe: 'Europäische AI-Team-Projekte'
+            }
+        ]
+    },
+    {
+        title: 'DigiTec Project (Bachelor’s and Master’s)',
+        titleDe: 'DigiTec-Projekt (Bachelor und Master)',
+        tone: 'Work in an interdisciplinary team on a practical digitalisation problem, combining computer science with an application field. Plan tasks, develop and test a prototype, and present your results. Each project module carries 10 ECTS and lasts one semester. Master’s projects place greater emphasis on scientific methods.',
+        toneDe: 'In den interdisziplinären Digitalisierungsprojekten verbinden Sie Informatik mit einem Anwendungsgebiet. Sie planen im Team Aufgaben, entwickeln und testen einen Prototyp und präsentieren Ihre Ergebnisse. Jedes Projektmodul umfasst 10 LP und dauert ein Semester. Im Master liegt mehr Gewicht auf wissenschaftlichen Methoden.',
+        links: [
+            {
+                url: 'https://digitecstudieren.de/downloads/ba/MHB_BSc_DT_WiSe26.pdf#page=131',
+                label: 'Project modules (DigiTec Bachelor, PDF)',
+                labelDe: 'Projektmodule (DigiTec-Bachelor, PDF)'
+            },
+            {
+                url: 'https://digitecstudieren.de/downloads/ms/26%20WiSe%20MHB_MSc.pdf#page=139',
+                label: 'Project modules (DigiTec Master, PDF)',
+                labelDe: 'Projektmodule (DigiTec-Master, PDF)'
+            },
+            {
+                url: '/ai-team-projects',
+                label: 'European AI Team Projects',
+                labelDe: 'Europäische AI-Team-Projekte'
+            }
+        ]
+    },
+    {
+        title: 'Research Project (Master, 30 ECTS)',
+        titleDe: 'Forschungsprojekt (Master, 30 LP)',
+        semester: 'Ongoing offering',
+        semesterDe: 'Fortlaufendes Angebot',
+        tone: 'A full-semester research project in the Research Track for master’s students in Informatik and Digital Technologies. Work within a research group on a defined question, develop or evaluate methods, and write a research paper. Give at least two presentations: on your aims and methods, and on your results. An exposé (research proposal) is required. Please contact us early and allow extra lead time to agree on the topic, supervision, and proposal.',
+        toneDe: 'Im Research Track der Masterstudiengänge Informatik und Digital Technologies bearbeiten Sie ein Semester lang eine Forschungsfrage in einer Arbeitsgruppe. Sie entwickeln oder untersuchen Methoden und verfassen eine Forschungsarbeit. In mindestens zwei Vorträgen stellen Sie zunächst Ziele und Vorgehen, später Ihre Ergebnisse vor. Ein Exposé ist erforderlich. Bitte nehmen Sie frühzeitig Kontakt auf und planen Sie längeren Vorlauf für die Abstimmung von Thema, Betreuung und Exposé ein.',
+        link: 'https://digitecstudieren.de/downloads/ms/26%20WiSe%20MHB_MSc.pdf#page=145',
+        cta: 'Module description: Forschungsarbeit (DigiTec Master, PDF)',
+        ctaDe: 'Modulbeschreibung: Forschungsarbeit (DigiTec-Master, PDF)'
     }
 ];
 
