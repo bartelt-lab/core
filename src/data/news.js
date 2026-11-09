@@ -117,6 +117,168 @@ export const news = [
         logo: { src: '/logos/partners/nvidia.svg', alt: 'NVIDIA' },
         people: ['marton', 'bartelt'],
     },
+    {
+        slug: 'ecml-pkdd-2026-transduction-induction',
+        date: '2026-09',
+        tag: ['Publikationen', 'Publications'],
+        title: [
+            'Paper auf der ECML PKDD 2026 angenommen: Transduktion und Induktion im Zusammenspiel',
+            'Paper accepted at ECML PKDD 2026: transduction and induction working together',
+        ],
+        teaser: [
+            'Janis Zenkner, Tobias Sesterhenn und Christian Bartelt stellen TIIPS vor: ein Verfahren, in dem sich Transduktion und Induktion bei der Programmsynthese gegenseitig leiten.',
+            'Janis Zenkner, Tobias Sesterhenn and Christian Bartelt introduce TIIPS, a method in which transduction and induction guide each other during program synthesis.',
+        ],
+        lead: [
+            'Unser Paper [Beyond Either-Or Reasoning: Transduction and Induction as Cooperative Problem-Solving Paradigms](https://arxiv.org/abs/2505.14744) wurde auf der ECML PKDD 2026 angenommen.',
+            'Our paper [Beyond Either-Or Reasoning: Transduction and Induction as Cooperative Problem-Solving Paradigms](https://arxiv.org/abs/2505.14744) has been accepted at ECML PKDD 2026.',
+        ],
+        body: [
+            [
+                'Beim Programming by Example sieht ein System wenige Ein- und Ausgabepaare und soll ein Programm finden, das sie erklärt. Bisher wird meist eines von zwei Vorgehen gewählt: Induktion schreibt das Programm, Transduktion sagt die Ausgaben direkt vorher. TIIPS verschränkt beide, sodass sie die Programmsynthese gemeinsam leiten und das Verhalten der gefundenen Lösungen verbessern.',
+                'In programming by example, a system sees a few input–output pairs and has to find a program that explains them. Usually one of two approaches is chosen: induction writes the program, transduction predicts the outputs directly. TIIPS interleaves the two, so that together they guide program synthesis and improve how the resulting solutions behave.',
+            ],
+        ],
+        cta: {
+            heading: ['Alle Publikationen', 'All publications'],
+            text: [
+                'Paper, Preprints und Workshop-Beiträge aus dem Netzwerk stehen auf der [Publikationsseite](/publications).',
+                'Papers, preprints and workshop contributions from the network are on the [publications page](/publications).',
+            ],
+            href: '/publications',
+            label: ['Publikationen ansehen', 'Browse publications'],
+        },
+        image: '/papers/tiips.webp',
+        imageAlt: ['Abbildung aus dem TIIPS-Paper', 'Figure from the TIIPS paper'],
+        people: ['zenkner', 'sesterhenn', 'bartelt'],
+    },
+    {
+        slug: 'icml-cvpr-2026-workshops',
+        date: '2026-07',
+        tag: ['Publikationen', 'Publications'],
+        title: [
+            'Zwei Paper auf Workshops der ICML und CVPR 2026: egozentrisches Video und erklärbare KI',
+            'Two papers at ICML and CVPR 2026 workshops: egocentric video and explainable AI',
+        ],
+        teaser: [
+            'BARISTA, ein Benchmark für egozentrisches Videoverstehen, und Concepts in Motion, ein erklärbares Modell zur Videoklassifikation, wurden auf drei Workshops angenommen.',
+            'BARISTA, a benchmark for egocentric video understanding, and Concepts in Motion, an interpretable model for video classification, were accepted at three workshops.',
+        ],
+        lead: [
+            'Zwei Paper mit Patrick Knab als Erstautor wurden im Juli 2026 auf Workshops der ICML und der CVPR angenommen.',
+            'Two papers with Patrick Knab as first author were accepted at ICML and CVPR workshops in July 2026.',
+        ],
+        body: [
+            [
+                '[BARISTA: A Multi-Task Egocentric Benchmark for Compositional Visual Understanding](https://openreview.net/forum?id=xtnrFDmu1O) ist ein Benchmark mit mehreren Aufgaben für das Verstehen von Videos aus der Ich-Perspektive. Angenommen auf dem ICML-2026-Workshop Combining Theory and Benchmarks.',
+                '[BARISTA: A Multi-Task Egocentric Benchmark for Compositional Visual Understanding](https://openreview.net/forum?id=xtnrFDmu1O) is a multi-task benchmark for understanding video from the first-person view. Accepted at the ICML 2026 workshop Combining Theory and Benchmarks.',
+            ],
+            [
+                '[Concepts in Motion: Temporal Concept Bottleneck Model for Interpretable Video Classification](https://arxiv.org/abs/2509.20899) stellt MoTIF vor: Das Modell findet mit Vision-Language-Modellen Konzepte in Videos und modelliert, wie sie sich über die Zeit verändern. So lässt sich jede Klassifikation über diese Konzepte nachvollziehen. Angenommen auf dem CVPR-2026-Workshop XAI4CV und dem ICML-2026-Workshop CompLearn; [Projektseite](https://patrick-knab.github.io/MoTIF/).',
+                '[Concepts in Motion: Temporal Concept Bottleneck Model for Interpretable Video Classification](https://arxiv.org/abs/2509.20899) introduces MoTIF. It discovers concepts in videos with vision-language models and models how they change over time, so each classification can be traced back to those concepts. Accepted at the CVPR 2026 XAI4CV workshop and the ICML 2026 CompLearn workshop; [project page](https://patrick-knab.github.io/MoTIF/).',
+            ],
+        ],
+        image: '/papers/barista.webp',
+        imageAlt: ['Abbildung aus dem BARISTA-Paper', 'Figure from the BARISTA paper'],
+        people: ['knab', 'marton', 'bartelt'],
+    },
+    {
+        slug: 'tmlr-2026-concept-bottleneck-survey',
+        date: '2026-05',
+        tag: ['Publikationen', 'Publications'],
+        title: [
+            'Übersichtsarbeit in TMLR: eine Roadmap für Concept Bottleneck Models',
+            'Survey in TMLR: a roadmap for concept bottleneck models',
+        ],
+        teaser: [
+            'Concept Bottleneck Models treffen Vorhersagen über verständliche Konzepte. Eine Übersichtsarbeit in Transactions on Machine Learning Research ordnet das Feld und zeigt, wo es hingehen kann.',
+            'Concept bottleneck models make predictions through human-understandable concepts. A survey in Transactions on Machine Learning Research maps the field and where it can go next.',
+        ],
+        lead: [
+            '[What’s in the Bottle? A Survey and Roadmap of Concept Bottleneck Models](https://openreview.net/forum?id=IF5vnqxBEW) ist in Transactions on Machine Learning Research (TMLR) erschienen, mit Patrick Knab als Erstautor und Christian Bartelt als Koautor.',
+            '[What’s in the Bottle? A Survey and Roadmap of Concept Bottleneck Models](https://openreview.net/forum?id=IF5vnqxBEW) has been published in Transactions on Machine Learning Research (TMLR), with Patrick Knab as first author and Christian Bartelt as co-author.',
+        ],
+        body: [
+            [
+                'Ein Concept Bottleneck Model sagt nicht direkt das Ergebnis vorher, sondern zuerst Konzepte, die Menschen verstehen, und entscheidet dann auf deren Grundlage. So bleibt sichtbar, worauf eine Entscheidung beruht. Die Übersichtsarbeit benennt die Kernbausteine und offenen Probleme solcher Modelle und schlägt eine einheitliche Taxonomie und eine Roadmap für künftige Forschung vor.',
+                'A concept bottleneck model does not predict the result directly: it first predicts concepts that people understand, then decides on that basis, so it stays visible what a decision rests on. The survey names the core components and open problems of these models and proposes a unified taxonomy and a roadmap for future research.',
+            ],
+            [
+                'Die Arbeit knüpft an unsere eigenen Modelle an, etwa [DCBM](https://arxiv.org/abs/2412.11576) für dateneffiziente visuelle Concept Bottleneck Models auf der ICML 2025.',
+                'It builds on our own models, such as [DCBM](https://arxiv.org/abs/2412.11576), data-efficient visual concept bottleneck models at ICML 2025.',
+            ],
+        ],
+        image: '/papers/whats-in-the-bottle.webp',
+        imageAlt: ['Abbildung aus der Übersichtsarbeit zu Concept Bottleneck Models', 'Figure from the concept bottleneck model survey'],
+        people: ['knab', 'bartelt'],
+    },
+    {
+        slug: 'iclr-icse-2025',
+        date: '2025-04',
+        tag: ['Publikationen', 'Publications'],
+        title: ['Sechs Paper auf der ICLR und ICSE 2025', 'Six papers at ICLR and ICSE 2025'],
+        teaser: [
+            'Sechs Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der ICLR 2025 in Singapur und der ICSE 2025 in Seoul angenommen, auf den Hauptkonferenzen und auf Workshops.',
+            'Six papers authored or co-authored by CORE members were accepted at ICLR 2025 in Singapore and ICSE 2025 in Seoul, at the main conferences and at workshops.',
+        ],
+        lead: [
+            'Sechs Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der International Conference on Learning Representations (ICLR 2025) in Singapur und der International Conference on Software Engineering (ICSE 2025) in Seoul angenommen.',
+            'Six papers authored or co-authored by CORE members were accepted at the International Conference on Learning Representations (ICLR 2025) in Singapore and the International Conference on Software Engineering (ICSE 2025) in Seoul.',
+        ],
+        body: [
+            [
+                'Auf der ICLR-Hauptkonferenz stellt [SYMPOL](https://arxiv.org/pdf/2408.08761) eine Methode vor, die Entscheidungsbäume direkt in gängigen On-Policy-Verfahren des Reinforcement Learning optimiert. Die Policy bleibt so als Baum lesbar, ohne den Informationsverlust, der entsteht, wenn man ein neuronales Netz nachträglich in einen Baum übersetzt. Ebenfalls auf der ICLR: NNsight und NDIF, die Forschenden Zugang zum Innenleben großer Open-Weight-Modelle geben.',
+                'At the ICLR main conference, [SYMPOL](https://arxiv.org/pdf/2408.08761) optimises decision trees directly inside standard on-policy reinforcement learning algorithms. The policy stays readable as a tree, without the information loss of translating a neural network into one afterwards. Also at ICLR: NNsight and NDIF, which give researchers access to the internals of large open-weight models.',
+            ],
+            [
+                'Auf der ICSE-Hauptkonferenz zeigt GUIDE, wie große Sprachmodelle aus Textbeschreibungen Prototypen von Benutzeroberflächen erzeugen. Alle sechs Paper stehen auf unserer [Seite zur ICLR und ICSE 2025](https://www.core-network.ai/tuc/iclr-2025/).',
+                'At the ICSE main conference, GUIDE shows how large language models generate user interface prototypes from text descriptions. All six papers are on our [ICLR and ICSE 2025 page](https://www.core-network.ai/tuc/iclr-2025/).',
+            ],
+        ],
+        image: '/papers/mitigating.webp',
+        imageAlt: ['Abbildung aus dem SYMPOL-Paper', 'Figure from the SYMPOL paper'],
+        people: ['marton', 'grams', 'ludtke', 'bartelt'],
+    },
+    {
+        slug: 'genai-cluster',
+        // Month the cluster page gives for commissioning ("by Sep 1, 2025"), not a
+        // confirmed go-live date. Correct it if the cluster started later.
+        date: '2025-09',
+        tag: ['Infrastruktur', 'Infrastructure'],
+        title: [
+            'GenAI-Cluster: eigene GPUs zum Trainieren und Evaluieren von Modellen',
+            'GenAI-Cluster: our own GPUs for training and evaluating models',
+        ],
+        teaser: [
+            'Mit über 400.000 Euro aus Mitteln der EU und Niedersachsens hat das CORE-Netzwerk einen eigenen GPU-Cluster: 20 NVIDIA-GPUs, davon 8 vom Typ H200.',
+            'With more than €400,000 from the EU and Lower Saxony, the CORE network has its own GPU cluster: 20 NVIDIA GPUs, 8 of them H200.',
+        ],
+        lead: [
+            'Mit über 400.000 Euro aus Mitteln der EU und Niedersachsens hat das CORE-Netzwerk einen eigenen [GPU-Cluster](/compute-cluster) für Forschung und Lehre.',
+            'With more than €400,000 from the EU and Lower Saxony, the CORE network has its own [GPU cluster](/compute-cluster) for research and teaching.',
+        ],
+        body: [
+            [
+                'Zwei Hochleistungsknoten mit NVIDIA-H200-NVL-GPUs, verbunden über NVLink, sind für das Feintuning von Modellen bis 70 Milliarden Parametern und für die Inferenz offener Modelle wie Llama 3, Qwen 3 und Gemma 3 ausgelegt. Zwei weitere Knoten mit 12 NVIDIA RTX PRO 6000 Blackwell eignen sich für das ressourcenschonende Training kleinerer Modelle und für Vision-Modelle.',
+                'Two high-performance nodes with NVIDIA H200 NVL GPUs, connected via NVLink, are built for fine-tuning models up to 70 billion parameters and for inference of open models such as Llama 3, Qwen 3 and Gemma 3. Two further nodes with 12 NVIDIA RTX PRO 6000 Blackwell GPUs handle resource-efficient training of smaller models and vision models.',
+            ],
+            [
+                'Weil die Daten auf eigener Infrastruktur bleiben, lassen sich Modelle jederzeit anpassen und Experimente ohne Wartezeit starten. Das nutzt etwa das Projekt [MediCar 4.0](/tuc/industry-projects/medicar). Regelmäßige Workshops stellen den Cluster Wissenschaft, Start-ups und Industrie vor.',
+                'Because data stays on our own infrastructure, models can be adapted at any time and experiments start without waiting. The [MediCar 4.0](/tuc/industry-projects/medicar) project, for example, relies on it. Regular workshops introduce the cluster to researchers, start-ups and industry.',
+            ],
+        ],
+        cta: {
+            heading: ['Mehr zum Cluster', 'More on the cluster'],
+            text: [
+                'Hardware, Standorte und Nutzungsregeln stehen auf der [Seite zum Rechencluster](/compute-cluster).',
+                'Hardware, sites and usage policies are on the [compute cluster page](/compute-cluster).',
+            ],
+            href: '/compute-cluster',
+            label: ['Zum Cluster', 'See the cluster'],
+        },
+        image: '/images/hero/compute-cluster-hero.webp',
+        imageAlt: ['Illustration von Server-Racks', 'Illustration of server racks'],
+    },
 ]
 
 export const newsByDate = [...news].sort((a, b) => b.date.localeCompare(a.date))

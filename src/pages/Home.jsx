@@ -40,11 +40,12 @@ const highlights = [
   },
   {
     title: ['Autonomes Fahren', 'Autonomous Driving'],
-    to: '/ai-team-projects/self-driving',
+    // The autonomous driving section of the CORE Labs page (DemonstrationsSection).
+    to: '/core-labs#autonomous',
     // Thumbnail of the group's own 1:10 field-test video (YouTube wrY34WyTEzo).
     image: '/images/projects/self-driving/hero.webp',
     focus: '28% 70%',
-    summary: ['1:10-Testfahrzeug: SLAM, Planung und autonomes Einparken', '1:10 test vehicle: SLAM, planning and autonomous parking'],
+    summary: ['Fahrzeuge im Maßstab 1:10, Simulation und Benchmarks', '1:10 scale vehicles, simulation and benchmarks'],
   },
   {
     title: ['AI-Team-Projekte', 'AI Team Projects'],
