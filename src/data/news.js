@@ -13,13 +13,15 @@
  * `date` is 'YYYY-MM': news shows month and year only. Newest first is not
  * required: consumers sort by `date`.
  *
- * Optional per item: `logo` ({ src, alt }) for an organisation badge,
+ * Optional per item: `featured: true` puts the item on the homepage ahead of
+ * newer ones (the homepage shows two), `logo` ({ src, alt }) for an organisation badge,
  * `imageFocus` (CSS object-position), `cta`, `people` (team.js slugs).
  */
 
 export const news = [
     {
         slug: 'medicar-field-trial-freiburg',
+        featured: true,
         // Field trial month, as given by the project team. The detail text
         // comes from the MediCar page (src/pages/tuc/industry/MediCar.jsx).
         date: '2026-07',
@@ -69,6 +71,7 @@ export const news = [
     },
     {
         slug: 'sascha-marton-nvidia',
+        featured: true,
         date: '2026-11',
         tag: ['Team', 'Team'],
         title: [
@@ -282,5 +285,8 @@ export const news = [
 ]
 
 export const newsByDate = [...news].sort((a, b) => b.date.localeCompare(a.date))
+
+/** Homepage order: featured items first (newest first), then everything else by date. */
+export const homepageNews = [...newsByDate.filter((item) => item.featured), ...newsByDate.filter((item) => !item.featured)]
 
 export const findNews = (slug) => news.find((item) => item.slug === slug)

@@ -9,7 +9,7 @@ import { formatNewsDate } from '../components/news/newsText'
 import PublicationMiniCarousel from '../components/publications/PublicationMiniCarousel'
 import { getNetworkMembers, institutions } from '../data/team'
 import { cognitiveProjects } from '../data/demonstrations'
-import { newsByDate } from '../data/news'
+import { homepageNews } from '../data/news'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
 
@@ -94,7 +94,7 @@ const LinkIcons = ({ member }) => {
 const Home = () => {
   const { pick, language } = useLanguage()
   const members = getNetworkMembers().filter((m) => !['research_assistant', 'support_staff'].includes(m.roleCategory))
-  const [leadNews, ...moreNews] = newsByDate
+  const [leadNews, ...moreNews] = homepageNews
 
   // Other pages deep-link a single person as `/#member-<slug>` (see the
   // institutions card on /core-labs). The browser cannot honour that hash on a
