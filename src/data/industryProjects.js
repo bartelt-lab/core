@@ -72,15 +72,16 @@ export const projects = [
         topic: ['Autonome On-Demand-Transportsysteme für Kliniken', 'Autonomous on-demand transport systems for hospitals'],
         // Consortium per medicar40.de/konsortium (bridgingIT leads) and fzi.de/project/medicar-40,
         // plus the pilot hospital, which is the field-trial site rather than a consortium member.
+        // Order is deliberate: lead, pilot hospital, SEW, TU Clausthal, then the rest.
         partners: [
             'bridgingIT',
+            'University Medical Center Freiburg',
             'SEW-Eurodrive',
+            'TU Clausthal',
             'Things Alive Robotics',
             'insensiv',
-            'TU Clausthal',
             'FZI',
             'Fraunhofer IML',
-            'University Medical Center Freiburg',
         ],
         duration: ['3 Jahre', '3 years'],
         fundingProgram: ['BMFTR', 'BMFTR'],
@@ -163,6 +164,11 @@ export const PARTNER_LOGOS = {
     'University of Rostock': { src: assetUrl('/logos/rostock-logo.webp'), alt: 'University of Rostock logo', href: 'https://www.uni-rostock.de/en/' },
     'ILS Mannheim gGmbH': { src: assetUrl('/logos/partners/ils-mannheim.jpg'), alt: 'ILS Mannheim logo', href: 'https://www.ils-mannheim.de/' },
     bridgingIT: { src: assetUrl('/logos/partners/bridgingit.png'), alt: 'bridgingIT logo', href: 'https://www.bridging-it.de/' },
+    'University Medical Center Freiburg': {
+        src: assetUrl('/logos/partners/uniklinik-freiburg.webp'),
+        alt: 'Universitätsklinikum Freiburg logo',
+        href: 'https://www.uniklinik-freiburg.de/',
+    },
     'SEW-Eurodrive': { src: assetUrl('/logos/partners/sew-eurodrive.png'), alt: 'SEW-Eurodrive logo', href: 'https://www.sew-eurodrive.de/' },
     'Things Alive Robotics': { src: assetUrl('/logos/partners/things-alive-robotics.svg'), alt: 'Things Alive Robotics logo', href: 'https://thingsalive.de/' },
     insensiv: { src: assetUrl('/logos/partners/insensiv.png'), alt: 'insensiv logo', href: 'https://insensiv.de/' },
