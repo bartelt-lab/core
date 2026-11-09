@@ -9,7 +9,7 @@
  * still build. The registry checks — including the description requirement — never skip.
  */
 
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { existsSync, openSync, readSync, closeSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { videos } from '../src/data/videos.js'
@@ -115,14 +115,18 @@ for (const v of videos) {
 
     const audioCodec = probe(file, ['-select_streams', 'a', '-show_entries', 'stream=codec_name'])
     if (audioCodec) {
-        const out = execFileSync(
+        // volumedetect reports on stderr. execFileSync returns only stdout, which is why
+        // this check used to read nothing and pass every file; spawnSync hands us stderr.
+        const { stderr: out } = spawnSync(
             'ffmpeg',
             ['-nostdin', '-v', 'info', '-t', '20', '-i', file, '-vn', '-af', 'volumedetect', '-f', 'null', '-'],
             { encoding: 'utf8', stdio: ['ignore', 'ignore', 'pipe'] },
         )
-        const mean = Number(/mean_volume: (-?[\d.]+)/.exec(out)?.[1] ?? 0)
-        const max = Number(/max_volume: (-?[\d.]+)/.exec(out)?.[1] ?? 0)
-        if (mean <= -80 && max <= -80) {
+        const mean = Number(/mean_volume: (-?[\d.]+)/.exec(out ?? '')?.[1])
+        const max = Number(/max_volume: (-?[\d.]+)/.exec(out ?? '')?.[1])
+        if (!Number.isFinite(mean) || !Number.isFinite(max)) {
+            warn(v.id, 'could not measure the audio track (ffmpeg volumedetect gave no reading)')
+        } else if (mean <= -80 && max <= -80) {
             fail(v.id, `audio track is digital silence (${mean} dB) — strip it with -an`)
         }
     }

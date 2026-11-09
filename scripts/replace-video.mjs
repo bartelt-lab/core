@@ -16,7 +16,7 @@
  * the new duration so you can copy it in.
  */
 
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { existsSync, mkdtempSync, renameSync, rmSync, statSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
@@ -68,13 +68,16 @@ if (!s) {
 const hasAudio = run('ffprobe', ['-v', 'error', '-select_streams', 'a', '-show_entries', 'stream=codec_name', '-of', 'csv=p=0', input]).trim() !== ''
 let keepAudio = s.audio && hasAudio
 if (keepAudio) {
-    // Drop digital silence even in buckets that keep audio.
-    const log = execFileSync('ffmpeg', ['-nostdin', '-i', input, '-vn', '-af', 'volumedetect', '-f', 'null', '-'], {
+    // Drop digital silence even in buckets that keep audio. Same test as the gate in
+    // scripts/check-videos.mjs. volumedetect reports on stderr, so read stderr:
+    // execFileSync returns only stdout and would always see an empty string.
+    const { stderr: log } = spawnSync('ffmpeg', ['-nostdin', '-i', input, '-vn', '-af', 'volumedetect', '-f', 'null', '-'], {
         encoding: 'utf8',
-        stdio: ['ignore', 'pipe', 'pipe'],
+        stdio: ['ignore', 'ignore', 'pipe'],
     })
-    const meanDb = Number((/mean_volume: (-?[\d.]+) dB/.exec(log) || [])[1])
-    if (Number.isFinite(meanDb) && meanDb < -60) keepAudio = false
+    const meanDb = Number(/mean_volume: (-?[\d.]+) dB/.exec(log ?? '')?.[1])
+    const maxDb = Number(/max_volume: (-?[\d.]+) dB/.exec(log ?? '')?.[1])
+    if (meanDb <= -80 && maxDb <= -80) keepAudio = false
 }
 
 const out = 'public' + entry.src
