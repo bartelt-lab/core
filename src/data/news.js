@@ -13,7 +13,8 @@
  * `date` is 'YYYY-MM': news shows month and year only. Newest first is not
  * required: consumers sort by `date`.
  *
- * Optional per item: `featured: true` puts the item on the homepage ahead of
+ * Optional per item: `imageCredit` ([de, en] caption under the article photo),
+ * `featured: true` puts the item on the homepage ahead of
  * newer ones (the homepage shows two), `logo` ({ src, alt }) for an organisation badge,
  * `imageFocus` (CSS object-position), `cta`, `people` (team.js slugs).
  */
@@ -281,6 +282,89 @@ export const news = [
         },
         image: '/images/hero/compute-cluster-hero.webp',
         imageAlt: ['Illustration von Server-Racks', 'Illustration of server racks'],
+    },
+    {
+        slug: 'core-labs-opening-tu-clausthal',
+        // Month of the TU Clausthal press release (3 July 2026); the release
+        // does not date the kick-off event itself.
+        date: '2026-07',
+        tag: ['Netzwerk', 'Network'],
+        title: ['Erstes CORE Lab an der TU Clausthal eröffnet', 'First CORE Lab opens at TU Clausthal'],
+        teaser: [
+            'Mit der Babeș-Bolyai-Universität Cluj und der Universität Rostock hat die TU Clausthal das erste Labor des europäischen CORE-Labs-Netzwerks in Betrieb genommen: eine Plattform für Embodied AI.',
+            'Together with Babeș-Bolyai University in Cluj and the University of Rostock, TU Clausthal has put the first lab of the European CORE Labs network into operation: a platform for embodied AI.',
+        ],
+        lead: [
+            'Bei einer Auftaktveranstaltung ging an der TU Clausthal das erste Labor der [CORE Labs](/core-labs) offiziell in Betrieb. Die Forschungsgruppe CORE am ISSE hat die Initiative gemeinsam mit der Babeș-Bolyai-Universität in Cluj und der Universität Rostock gestartet ([Pressemitteilung der TU Clausthal](https://www.tu-clausthal.de/pressemitteilungen/pressemitteilungendetail/europaeisches-robotiknetzwerk-fuer-embodied-ai-startet-an-der-tu-clausthal)).',
+            'At a kick-off event, the first lab of the [CORE Labs](/core-labs) went into official operation at TU Clausthal. The CORE research group at the ISSE started the initiative together with Babeș-Bolyai University in Cluj and the University of Rostock ([TU Clausthal press release](https://www.tu-clausthal.de/pressemitteilungen/pressemitteilungendetail/europaeisches-robotiknetzwerk-fuer-embodied-ai-startet-an-der-tu-clausthal), in German).',
+        ],
+        body: [
+            [
+                'Ziel ist eine verteilte Laborplattform für Embodied AI, also für KI, die über Roboter in der realen Welt wahrnimmt, entscheidet und handelt. Im Clausthaler Labor stehen ein humanoider Roboter, ein autonomer Transportroboter und eine Testumgebung, die Augmented Reality mit robotischen Greifarmen verbindet. Weitere Labore entstehen in Cluj ([CORE Labs Cluj](/ubb)) und in Rostock.',
+                'The aim is a distributed lab platform for embodied AI: AI that perceives, decides and acts through robots in the real world. The Clausthal lab has a humanoid robot, an autonomous transport robot and a test setup that combines augmented reality with robotic gripper arms. Further labs are being set up in Cluj ([CORE Labs Cluj](/ubb)) and Rostock.',
+            ],
+            [
+                'Ein erstes Anwendungsfeld ist die Krankenhauslogistik im Projekt [MediCar 4.0](/tuc/industry-projects/medicar). Die Labore dienen auch der Lehre: Die Universitäten verbinden sie über gemeinsame Experimente, technische Plattformen und Lehrformate, und sie passen zum neuen Bachelorstudiengang AI Engineering an der TU Clausthal, der im Wintersemester 2026/27 startet.',
+                'A first application area is hospital logistics in the [MediCar 4.0](/tuc/industry-projects/medicar) project. The labs also serve teaching: the universities connect them through shared experiments, technical platforms and teaching formats, and they fit the new AI Engineering bachelor’s programme at TU Clausthal, which starts in the winter semester 2026/27.',
+            ],
+        ],
+        cta: {
+            heading: ['Mehr zu den CORE Labs', 'More on CORE Labs'],
+            text: [
+                'Laborausstattung, Demonstrationen und Projekte stehen auf der [Seite der CORE Labs](/core-labs).',
+                'Equipment, demonstrations and projects are on the [CORE Labs page](/core-labs).',
+            ],
+            href: '/core-labs',
+            label: ['Zu den CORE Labs', 'See CORE Labs'],
+        },
+        image: '/images/news/core-labs-opening.webp',
+        imageAlt: [
+            'Gruppenbild zur Eröffnung der CORE Labs mit einem humanoiden Roboter im Clausthaler Labor',
+            'Group photo at the CORE Labs opening with a humanoid robot in the Clausthal lab',
+        ],
+        imageFocus: '45% 50%',
+        imageCredit: [
+            'Von links: Dr. Christian Săcărea und Dr. Brigitte Breckner (Babeș-Bolyai-Universität), Prof. Joachim Deubener, Sari Abdan, David Szilagyi, Prof. Kai Kunze und Prof. Christian Bartelt (TU Clausthal). Foto: Christian Ernst, CORE',
+            'From left: Dr. Christian Săcărea and Dr. Brigitte Breckner (Babeș-Bolyai University), Prof. Joachim Deubener, Sari Abdan, David Szilagyi, Prof. Kai Kunze and Prof. Christian Bartelt (TU Clausthal). Photo: Christian Ernst, CORE',
+        ],
+        people: ['bartelt', 'sacarea', 'ludtke', 'kai-kunze', 'szilagyi', 'sari-abdan'],
+    },
+    {
+        slug: 'goslar-christmas-market-robot',
+        // Visit at the start of the Goslar Christmas market season, late November
+        // 2025; the TU Clausthal press release followed on 2 December 2025.
+        date: '2025-11',
+        tag: ['Robotik', 'Robotics'],
+        title: [
+            'Humanoider Roboter „Thorsten“ auf dem Goslarer Weihnachtsmarkt',
+            'Humanoid robot “Thorsten” at the Goslar Christmas market',
+        ],
+        teaser: [
+            'Als Nikolaus verkleidet verteilte der humanoide Roboter RO101 „Thorsten“ Geschenke auf dem Goslarer Weihnachtsmarkt: sein erster öffentlicher Auftritt und der Start des neuen Labors für kognitive Robotik.',
+            'Dressed as Saint Nicholas, the humanoid robot RO101 “Thorsten” handed out gifts at the Goslar Christmas market: its first public appearance, and the start of the new lab for cognitive robotics.',
+        ],
+        lead: [
+            'Zum Start der Weihnachtsmarktsaison war die Forschungsgruppe CORE mit ihrem humanoiden Roboter RO101 „Thorsten“ auf dem Goslarer Weihnachtsmarkt unterwegs ([Pressemitteilung der TU Clausthal](https://www.tu-clausthal.de/pressemitteilungen/pressemitteilungendetail/forschende-mit-humanoidem-kognitivem-roboter-auf-dem-weihnachtsmarkt)).',
+            'At the start of the Christmas market season, the CORE research group took its humanoid robot RO101 “Thorsten” to the Goslar Christmas market ([TU Clausthal press release](https://www.tu-clausthal.de/pressemitteilungen/pressemitteilungendetail/forschende-mit-humanoidem-kognitivem-roboter-auf-dem-weihnachtsmarkt), in German).',
+        ],
+        body: [
+            [
+                'Als Nikolaus verkleidet verteilte Thorsten Geschenke, lief über das unebene Pflaster und applaudierte dem Publikum: seine ersten Begegnungen mit der Öffentlichkeit. Dabei waren Studierende der Digitalen Technologien, Austauschstudierende der Babeș-Bolyai-Universität in Cluj-Napoca und Schülerinnen und Schüler des Ratsgymnasiums Goslar, die ein Schnupperstudium an der TU Clausthal planen.',
+                'Dressed as Saint Nicholas, Thorsten handed out gifts, walked across the uneven paving and applauded the crowd: his first encounters with the public. Students of Digital Technologies, exchange students from Babeș-Bolyai University in Cluj-Napoca and pupils of the Ratsgymnasium Goslar, who are planning a taster study period at TU Clausthal, came along.',
+            ],
+            [
+                'Der Auftritt markierte den Start des neuen Labors für kognitive Robotik unter Leitung von Prof. Christian Bartelt. Dort erforscht die Gruppe Methoden, mit denen Roboter aus ihrer Umgebung und aus der Interaktion mit Menschen lernen, um sich in den Alltag einzufügen. Ende November 2025 gründete die Gruppe mit der Babeș-Bolyai-Universität außerdem die europäische Initiative [CORE Labs](/core-labs).',
+                'The appearance marked the start of the new lab for cognitive robotics led by Prof. Christian Bartelt. There the group researches methods that let robots learn from their surroundings and from interaction with people, so they can fit into everyday life. At the end of November 2025 the group also founded the European [CORE Labs](/core-labs) initiative with Babeș-Bolyai University.',
+            ],
+        ],
+        image: '/images/news/goslar-christmas-market.webp',
+        imageAlt: [
+            'Humanoider Roboter im Nikolauskostüm läuft über den Goslarer Weihnachtsmarkt',
+            'Humanoid robot in a Saint Nicholas costume walking across the Goslar Christmas market',
+        ],
+        imageFocus: '45% 50%',
+        imageCredit: ['Foto: CORE', 'Photo: CORE'],
+        people: ['bartelt', 'szilagyi'],
     },
 ]
 

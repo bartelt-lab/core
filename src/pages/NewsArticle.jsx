@@ -28,7 +28,7 @@ const NewsArticle = () => {
             {pick('All news', 'Alle Neuigkeiten')}
           </Link>
 
-          <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,1fr)_13rem] md:items-end">
+          <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,1fr)_16rem] md:items-end">
             <div>
               <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
                 <span className="rounded-full bg-primary-50 px-2.5 py-0.5 text-primary-700">{txt(pick, item.tag)}</span>
@@ -46,7 +46,7 @@ const NewsArticle = () => {
                   alt={txt(pick, item.imageAlt)}
                   decoding="async"
                   style={item.imageFocus ? { objectPosition: item.imageFocus } : undefined}
-                  className="aspect-square w-full object-cover"
+                  className="aspect-[4/3] w-full object-cover"
                 />
               </figure>
             )}
@@ -55,6 +55,7 @@ const NewsArticle = () => {
       </header>
 
       <div className="container mx-auto max-w-3xl px-6 py-12 md:px-12 md:py-16">
+        {item.imageCredit && <p className="mb-8 text-xs leading-5 text-slate-500">{txt(pick, item.imageCredit)}</p>}
         <p className="text-lg font-medium leading-8 text-slate-900 md:text-xl md:leading-9">
           <RichText text={txt(pick, item.lead)} />
         </p>
