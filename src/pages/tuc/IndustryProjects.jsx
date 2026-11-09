@@ -49,7 +49,7 @@ const ProjectVisual = ({ project, pick }) => {
 const formatDuration = (seconds) => `${Math.floor(seconds / 60)}:${String(Math.round(seconds % 60)).padStart(2, '0')}`;
 
 const ProjectFacts = ({ project, pick, className = '' }) => (
-    <dl className={`grid grid-cols-3 gap-3 border-t border-slate-200 pt-5 text-xs ${className}`}>
+    <dl className={`grid grid-cols-3 gap-3 text-xs ${className}`}>
         <div>
             <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Funding', 'Förderung')}</dt>
             <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.fundingProgram)}</dd>
@@ -95,9 +95,9 @@ const FeaturedProject = ({ project, pick }) => {
     const film = project.feature.film && videos.find((v) => v.id === project.feature.film);
 
     return (
-        <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.45)] focus-within:ring-2 focus-within:ring-primary-500 lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-            <div className="grid grid-cols-3 gap-1.5 bg-slate-950 p-1.5 sm:gap-2 sm:p-2 lg:order-2 lg:grid-rows-[minmax(0,1fr)_auto]">
-                <GalleryTile image={main} pick={pick} className="col-span-3 aspect-[16/9] lg:aspect-auto lg:min-h-[18rem]">
+        <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.45)] focus-within:ring-2 focus-within:ring-primary-500 lg:grid lg:grid-cols-2">
+            <div className="grid grid-cols-3 gap-1.5 bg-slate-950 p-1.5 sm:gap-2 sm:p-2 lg:order-2 lg:grid-cols-[minmax(0,3fr)_minmax(0,1fr)] lg:grid-rows-3">
+                <GalleryTile image={main} pick={pick} className="col-span-3 aspect-[16/9] lg:col-span-1 lg:row-span-3 lg:aspect-auto">
                     {film && (
                         <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-900 shadow-sm backdrop-blur sm:left-4 sm:top-4">
                             <FiPlay className="h-3.5 w-3.5 text-primary-700" aria-hidden="true" />
@@ -106,11 +106,11 @@ const FeaturedProject = ({ project, pick }) => {
                     )}
                 </GalleryTile>
                 {thumbs.map((image) => (
-                    <GalleryTile key={image.src} image={image} pick={pick} className="aspect-[4/3]" />
+                    <GalleryTile key={image.src} image={image} pick={pick} className="aspect-[4/3] lg:aspect-auto" />
                 ))}
             </div>
 
-            <div className="flex flex-col p-6 sm:p-8 lg:order-1">
+            <div className="flex flex-col p-6 sm:p-7 lg:order-1">
                 <div className="flex flex-wrap gap-2">
                     <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${domainClass(project.domain[0])}`}>
                         {txt(pick, project.domain)}
@@ -121,7 +121,7 @@ const FeaturedProject = ({ project, pick }) => {
                     </span>
                 </div>
 
-                <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900">
                     <Link
                         to={project.href}
                         className="transition-colors after:absolute after:inset-0 after:content-[''] focus:outline-none group-hover:text-primary-700"
@@ -129,22 +129,20 @@ const FeaturedProject = ({ project, pick }) => {
                         {project.title}
                     </Link>
                 </h2>
-                <p className="mt-2 text-base font-semibold text-primary-700">{txt(pick, project.topic)}</p>
-                <div className="mt-4 space-y-3 text-sm leading-7 text-slate-600">
-                    <p>{txt(pick, project.summary)}</p>
-                    <p>{txt(pick, project.contribution)}</p>
-                </div>
+                <p className="mt-1 text-sm font-semibold text-primary-700">{txt(pick, project.topic)}</p>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{txt(pick, project.contribution)}</p>
 
-                <div className="relative z-10">
+                <div className="relative z-10 mb-4 [&>div]:mt-4 [&>div]:justify-start">
                     <PartnerLogoStrip partners={project.partners} />
                 </div>
 
-                <ProjectFacts project={project} pick={pick} className="mt-5" />
-
-                <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-primary-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition group-hover:bg-primary-800">
-                    {pick('Explore the project', 'Zum Projekt')}
-                    <FiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                </span>
+                <div className="mt-auto flex flex-wrap items-end justify-between gap-x-6 gap-y-4 border-t border-slate-200 pt-4">
+                    <ProjectFacts project={project} pick={pick} className="min-w-[15rem] flex-1" />
+                    <span className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-primary-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition group-hover:bg-primary-800">
+                        {pick('Explore the project', 'Zum Projekt')}
+                        <FiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                    </span>
+                </div>
             </div>
         </article>
     );
@@ -235,7 +233,7 @@ const IndustryProjects = () => {
                                         <PartnerLogoStrip partners={project.partners} />
                                     </div>
 
-                                    <ProjectFacts project={project} pick={pick} className="mt-4" />
+                                    <ProjectFacts project={project} pick={pick} className="mt-4 border-t border-slate-200 pt-5" />
 
                                     {project.href && (
                                         <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700">
