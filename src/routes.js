@@ -207,7 +207,7 @@ export const routes = [
     source: 'src/pages/tuc/Projects.jsx',
     title: 'Projects | Cognitive Software, TU Clausthal',
     description:
-      'Student research projects offered this semester at TU Clausthal, run on the Kaiser I cluster with travel, accommodation, and social event costs covered.',
+      'Student research projects offered this semester at TU Clausthal, run on the GenAI-Cluster with travel, accommodation, and social event costs covered.',
   },
   {
     path: '/tuc/industry-projects',
@@ -215,6 +215,14 @@ export const routes = [
     title: 'Industry Projects | Cognitive Software, TU Clausthal',
     description:
       'Transfer and publicly funded projects of the Cognitive Software group, including AI-BIM, an AI-supported copilot for sustainable architectural design under environmental standards.',
+  },
+  {
+    path: '/tuc/industry-projects/medicar',
+    source: 'src/pages/tuc/industry/MediCar.jsx',
+    title: 'MediCar 4.0 | Cognitive Software, TU Clausthal',
+    description:
+      'MediCar 4.0: autonomous hospital transport, tested at the University Medical Center Freiburg. Our part: LLM-based adaptive routing and robotics, trained on the GenAI-Cluster.',
+    image: '/images/projects/industry/medicar/corridor.webp',
   },
   {
     path: '/tuc/teaching',

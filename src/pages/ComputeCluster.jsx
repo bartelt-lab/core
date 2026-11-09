@@ -17,7 +17,7 @@ import { useLanguage } from '../i18n/useLanguage'
 
 const clusterStats = [
   { label: 'Total Nodes', value: '5', icon: FaNetworkWired, description: '1 Login, 4 Workers' },
-  { label: 'NVIDIA GPUs', value: '16', icon: FaMicrochip, description: '8x H200, 8x RTX 6000' },
+  { label: 'NVIDIA GPUs', value: '20', icon: FaMicrochip, description: '8x H200, 12x RTX 6000' },
   { label: 'Funding', value: '€400k+', icon: FaUniversity, description: 'EU & Niedersachsen' },
   { label: 'Scheduler', value: 'Slurm', icon: FaCogs, description: 'Resource manager' },
 ]
@@ -36,7 +36,7 @@ const capabilities = [
     title: 'Mid-Performance Nodes',
     tag: '2 Nodes · RTX 6000 GPUs',
     description:
-      'Two mid-performance worker nodes hosting up to 8 NVIDIA RTX PRO 6000 Blackwell Max-Q GPUs. Tailored for resource-efficient training and vision models.',
+      'Two mid-performance worker nodes hosting 12 NVIDIA RTX PRO 6000 Blackwell Max-Q GPUs in total. Tailored for resource-efficient training and vision models.',
     points: ['Blackwell Max-Q GPU architecture', 'Optimized for training models < 3B', 'Supports vision models (SAM, CLIP)'],
   },
   {
@@ -117,24 +117,24 @@ const de = {
   'Scheduler': 'Scheduler',
   'Resource manager': 'Ressourcenverwaltung',
   'High-Performance Nodes': 'High-Performance-Knoten',
-  '2 Nodes Â· H200 GPUs': '2 Knoten · H200-GPUs',
+  '2 Nodes · H200 GPUs': '2 Knoten · H200-GPUs',
   'Two high-performance worker nodes, each hosting up to 8 NVIDIA H200 NVL GPUs (minimum 8 H200 GPUs total) interconnected via NVLink for maximum data throughput.':
     'Zwei High-Performance-Worker-Knoten mit jeweils bis zu 8 NVIDIA H200 NVL GPUs (mindestens 8 H200 GPUs insgesamt), verbunden über NVLink für maximalen Datendurchsatz.',
   'Up to 8 H200 NVL per node': 'Bis zu 8 H200 NVL pro Knoten',
   'Optimized for model fine-tuning up to 70B': 'Optimiert für Modell-Fine-Tuning bis 70B',
   'Inference of Llama 3, Qwen 3, Gemma 3': 'Inference für Llama 3, Qwen 3, Gemma 3',
   'Mid-Performance Nodes': 'Mid-Performance-Knoten',
-  '2 Nodes Â· RTX 6000 GPUs': '2 Knoten · RTX-6000-GPUs',
-  'Two mid-performance worker nodes hosting up to 8 NVIDIA RTX PRO 6000 Blackwell Max-Q GPUs. Tailored for resource-efficient training and vision models.':
-    'Zwei Mid-Performance-Worker-Knoten mit bis zu 8 NVIDIA RTX PRO 6000 Blackwell Max-Q GPUs. Ausgelegt für ressourceneffizientes Training und Vision-Modelle.',
+  '2 Nodes · RTX 6000 GPUs': '2 Knoten · RTX-6000-GPUs',
+  'Two mid-performance worker nodes hosting 12 NVIDIA RTX PRO 6000 Blackwell Max-Q GPUs in total. Tailored for resource-efficient training and vision models.':
+    'Zwei Mid-Performance-Worker-Knoten mit insgesamt 12 NVIDIA RTX PRO 6000 Blackwell Max-Q GPUs. Ausgelegt für ressourceneffizientes Training und Vision-Modelle.',
   'Blackwell Max-Q GPU architecture': 'Blackwell Max-Q GPU-Architektur',
   'Optimized for training models < 3B': 'Optimiert für das Training von Modellen < 3B',
   'Supports vision models (SAM, CLIP)': 'Unterstützt Vision-Modelle (SAM, CLIP)',
   'Storage & Master Node': 'Storage- & Master-Knoten',
-  'Fileserver Â· â‰¥ 150 TB': 'Fileserver · ≥ 150 TB',
-  'A master node and fileserver equipped with â‰¥ 150 TB of high-speed persistent storage to manage large datasets, model checkpoints, and evaluation runs.':
+  'Fileserver · ≥ 150 TB': 'Fileserver · ≥ 150 TB',
+  'A master node and fileserver equipped with ≥ 150 TB of high-speed persistent storage to manage large datasets, model checkpoints, and evaluation runs.':
     'Ein Master-Knoten und Fileserver mit ≥ 150 TB schnellem persistentem Speicher für große Datensätze, Modell-Checkpoints und Evaluationsläufe.',
-  'â‰¥ 150 TB persistent storage capacity': '≥ 150 TB persistente Speicherkapazität',
+  '≥ 150 TB persistent storage capacity': '≥ 150 TB persistente Speicherkapazität',
   'Centralized checkpoint registry': 'Zentrale Checkpoint-Verwaltung',
   'Secure, high-availability backups': 'Sichere, hochverfügbare Backups',
   'InfiniBand Network Interconnect': 'InfiniBand-Netzwerkverbindung',
@@ -181,9 +181,9 @@ const de = {
     'Vollständiger Wartungs- und Ersatzteilservice für fünf Jahre garantiert.',
   'For collaboration inquiries, contact bartelt@isse.tu-clausthal.de.':
     'Für Kooperationsanfragen kontaktieren Sie bartelt@isse.tu-clausthal.de.',
-  'Kaiser I funded by the European Union & Land Niedersachsen (EFRE/ESF/ELER)':
-    'Kaiser I wird von der Europäischen Union und dem Land Niedersachsen (EFRE/ESF/ELER) gefördert',
-  'Located at Rechenzentrum der TU Clausthal, ErzstraÃŸe 18':
+  'GenAI-Cluster funded by the European Union & Land Niedersachsen (EFRE/ESF/ELER)':
+    'Der GenAI-Cluster wird von der Europäischen Union und dem Land Niedersachsen (EFRE/ESF/ELER) gefördert',
+  'Located at Rechenzentrum der TU Clausthal, Erzstraße 18':
     'Standort im Rechenzentrum der TU Clausthal, Erzstraße 18',
   'Led by Prof. Dr. Christian Bartelt (ISSE)': 'Leitung durch Prof. Dr. Christian Bartelt (ISSE)',
   'Open workshops and innovation hub access for industry partners':
@@ -257,7 +257,7 @@ const ComputeCluster = () => {
 
             {/* Title */}
             <h1 className="mb-4 text-4xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-5xl lg:text-6xl">
-              Kaiser I
+              GenAI-Cluster
             </h1>
 
             {/* Funding Logo */}
@@ -273,8 +273,8 @@ const ComputeCluster = () => {
             {/* Description */}
             <p className="mb-8 max-w-xl text-lg leading-8 text-slate-600 md:text-xl">
               {pick(
-                'Kaiser I is our scalable, high-performance GPU computing cluster designed to advance generative AI models, cognitive robotics, and circular systems engineering.',
-                'Kaiser I ist unser skalierbarer High-Performance-GPU-Cluster zur Weiterentwicklung generativer KI-Modelle, kognitiver Robotik und zirkulärer Systemtechnik.'
+                'The GenAI-Cluster is our scalable, high-performance GPU computing cluster designed to advance generative AI models, cognitive robotics, and circular systems engineering.',
+                'Der GenAI-Cluster ist unser skalierbarer High-Performance-GPU-Cluster zur Weiterentwicklung generativer KI-Modelle, kognitiver Robotik und zirkulärer Systemtechnik.'
               )}
             </p>
 
@@ -321,18 +321,18 @@ const ComputeCluster = () => {
             <div>
               <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Project Description', 'Projektbeschreibung')}</p>
               <h2 className="mb-5 text-3xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">
-                {pick('The Kaiser I GPU Cluster', 'Der Kaiser I GPU-Cluster')}
+                {pick('The GenAI-Cluster', 'Der GenAI-Cluster')}
               </h2>
               <p className="mb-6 text-base leading-8 text-slate-600">
                 {pick(
-                  'The Kaiser I cluster is established as the central digital platform at the Technical University of Clausthal to unlock the full potential of Generative Artificial Intelligence (GenAI) for systems engineering. The goal is to both advance fundamental AI methods and drive concrete engineering applications - ranging from resource-efficient design and circular production to cognitive robotics and sustainable mobility.',
-                  'Der Kaiser I Cluster wird als zentrale digitale Plattform der Technischen Universität Clausthal aufgebaut, um das Potenzial generativer Künstlicher Intelligenz (GenAI) für das Systems Engineering nutzbar zu machen. Ziel ist es, sowohl grundlegende KI-Methoden weiterzuentwickeln als auch konkrete Engineering-Anwendungen voranzutreiben - von ressourceneffizientem Design und zirkulärer Produktion bis hin zu kognitiver Robotik und nachhaltiger Mobilität.'
+                  'The GenAI-Cluster is established as the central digital platform at the Technical University of Clausthal to unlock the full potential of Generative Artificial Intelligence (GenAI) for systems engineering. The goal is to both advance fundamental AI methods and drive concrete engineering applications - ranging from resource-efficient design and circular production to cognitive robotics and sustainable mobility.',
+                  'Der GenAI-Cluster wird als zentrale digitale Plattform der Technischen Universität Clausthal aufgebaut, um das Potenzial generativer Künstlicher Intelligenz (GenAI) für das Systems Engineering nutzbar zu machen. Ziel ist es, sowohl grundlegende KI-Methoden weiterzuentwickeln als auch konkrete Engineering-Anwendungen voranzutreiben - von ressourceneffizientem Design und zirkulärer Produktion bis hin zu kognitiver Robotik und nachhaltiger Mobilität.'
                 )}
               </p>
               <p className="text-base leading-8 text-slate-600">
                 {pick(
-                  'Led by Prof. Dr. Christian Bartelt at the Institute for Software and Systems Engineering (ISSE), Kaiser I provides a scalable, high-performance environment that strengthens research, teaching, and technology transfer while fostering regional and international innovation partnerships.',
-                  'Unter der Leitung von Prof. Dr. Christian Bartelt am Institute for Software and Systems Engineering (ISSE) bietet Kaiser I eine skalierbare High-Performance-Umgebung, die Forschung, Lehre und Technologietransfer stärkt und regionale sowie internationale Innovationspartnerschaften fördert.'
+                  'Led by Prof. Dr. Christian Bartelt at the Institute for Software and Systems Engineering (ISSE), the GenAI-Cluster provides a scalable, high-performance environment that strengthens research, teaching, and technology transfer while fostering regional and international innovation partnerships.',
+                  'Unter der Leitung von Prof. Dr. Christian Bartelt am Institute for Software and Systems Engineering (ISSE) bietet der GenAI-Cluster eine skalierbare High-Performance-Umgebung, die Forschung, Lehre und Technologietransfer stärkt und regionale sowie internationale Innovationspartnerschaften fördert.'
                 )}
               </p>
             </div>
@@ -341,20 +341,20 @@ const ComputeCluster = () => {
               <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm">
                 <img
                   src={assetUrl('/images/genai-lab-opening.jpg')}
-                  alt="Inauguration of Kaiser I"
+                  alt="Inauguration of the GenAI-Cluster"
                   className="w-full object-cover"
                   loading="lazy"
                 />
                 <div className="p-4 text-xs font-semibold text-slate-500 leading-normal text-center bg-white border-t border-slate-100">
                   {pick(
-                    'Prof. Dr. Christian Bartelt and researchers powering up the new Kaiser I GPU Cluster at TU Clausthal.',
-                    'Prof. Dr. Christian Bartelt und Forschende bei der Inbetriebnahme des neuen Kaiser I GPU-Clusters an der TU Clausthal.'
+                    'Prof. Dr. Christian Bartelt and researchers powering up the new GenAI-Cluster at TU Clausthal.',
+                    'Prof. Dr. Christian Bartelt und Forschende bei der Inbetriebnahme des neuen GenAI-Clusters an der TU Clausthal.'
                   )}
                 </div>
               </div>
               <div className="space-y-4">
                 {[
-                  { icon: FaCheckCircle, text: 'Kaiser I funded by the European Union & Land Niedersachsen (EFRE/ESF/ELER)' },
+                  { icon: FaCheckCircle, text: 'GenAI-Cluster funded by the European Union & Land Niedersachsen (EFRE/ESF/ELER)' },
                   { icon: FaCheckCircle, text: 'Located at Rechenzentrum der TU Clausthal, Erzstraße 18' },
                   { icon: FaCheckCircle, text: 'Led by Prof. Dr. Christian Bartelt (ISSE)' },
                   { icon: FaCheckCircle, text: 'Open workshops and innovation hub access for industry partners' },
@@ -499,8 +499,8 @@ const ComputeCluster = () => {
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
               {pick(
-                'Use of the Kaiser I GPU Cluster is governed by account groups and limits designed to share compute resources fairly.',
-                'Die Nutzung des Kaiser I GPU-Clusters wird durch Account-Gruppen und Limits geregelt, damit Compute-Ressourcen fair geteilt werden.'
+                'Use of the GenAI-Cluster is governed by account groups and limits designed to share compute resources fairly.',
+                'Die Nutzung des GenAI-Clusters wird durch Account-Gruppen und Limits geregelt, damit Compute-Ressourcen fair geteilt werden.'
               )}
             </p>
           </div>

@@ -434,6 +434,20 @@ export const videos = [
         frames: 'wiki/video-frames/Student-Testim-3.jpg',
         usedOn: ['src/pages/tuc/AiTeamProjects.jsx'],
     },
+    {
+        // Swappable on purpose: replace the file with
+        //   npm run replace-video -- medicar <new.mp4> --poster-at <seconds>
+        // The URL stays the same. Update duration/description if the content changes.
+        id: 'medicar',
+        src: '/videos/industry-projects/medicar.mp4',
+        poster: '/videos/industry-projects/medicar-poster.webp',
+        bucket: BUCKETS.CAMERA,
+        duration: 204,
+        description:
+            'MediCar 4.0 project film with speech audio, shot largely at a university hospital. To-camera interview segments (lower-third captions give speaker and organisation: Uniklinikum Freiburg, bridgingIT, TU Clausthal, SEW Eurodrive, Fraunhofer IML) alternate with footage: staff taking a blood bag from a fridge and cycling a cooler box across the campus (the manual status quo); a white SEW autonomous transport robot carrying blue boxes through corridors, into lifts, across an outdoor yard and in front of the "Frauenklinik" entrance (the poster frame, at 2:06); a laptop dispatch UI; a chat-style routing screen headed "Übersicht"; a campus route-graph map and a zoomed floor-plan map with a marker labelled "Transportbox01"; a lidar point-cloud overlay and a circular local-map inset; a second wheeled transport platform; and a humanoid robot at a lab bench with sample tubes, a cooler box and an anatomical heart model. Ends with two presenters walking toward the camera along a flowered path.',
+        frames: 'wiki/video-frames/medicar.jpg',
+        usedOn: ['src/pages/tuc/industry/MediCar.jsx'],
+    },
 ]
 
 /** Look up an entry by its public path, e.g. videoBySrc['/videos/core-labs-hero.mp4']. */
