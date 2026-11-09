@@ -33,10 +33,10 @@ const highlights = [
     summary: ['Dynamische Manipulation für kognitive Roboter', 'Dynamic manipulation for cognitive robots'],
   },
   {
-    title: ['Industrieprojekte', 'Industry Projects'],
-    to: '/tuc/industry-projects',
-    image: '/images/projects/industry/ai-bim.webp',
-    summary: ['Angewandte KI mit Partnern aus Bau, Gesundheit und Handel', 'Applied AI with partners in construction, healthcare and retail'],
+    title: ['CORE Labs Cluj', 'CORE Labs Cluj'],
+    to: '/ubb',
+    image: '/images/ubb/unitree-r1-lab-wide.webp',
+    summary: ['Bald in Cluj-Napoca, mit der Babeș-Bolyai-Universität', 'Opening soon in Cluj-Napoca, with Babeș-Bolyai University'],
   },
   {
     title: ['AI-Team-Projekte', 'AI Team Projects'],
@@ -202,16 +202,17 @@ const Home = () => {
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </Link>
             </div>
-            <div className={moreNews.length > 0 ? 'grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]' : ''}>
+            {/* One story gets the wide lead card; with more, the two newest sit
+                side by side as rows and the rest wait on /news. */}
+            {moreNews.length === 0 ? (
               <NewsCard item={leadNews} variant="lead" />
-              {moreNews.length > 0 && (
-                <div className="flex flex-col gap-4">
-                  {moreNews.slice(0, 3).map((item) => (
-                    <NewsCard key={item.slug} item={item} variant="compact" />
-                  ))}
-                </div>
-              )}
-            </div>
+            ) : (
+              <div className="grid gap-4 md:grid-cols-2">
+                {[leadNews, moreNews[0]].map((item) => (
+                  <NewsCard key={item.slug} item={item} variant="row" />
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}

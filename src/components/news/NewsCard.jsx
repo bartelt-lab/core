@@ -39,6 +39,7 @@ const Image = ({ item, pick, badge = false, fill = false }) => (
  * One news item as a card. The title link is stretched over the whole card.
  *   lead     large, image beside the text from md up
  *   tile     image on top, for grids
+ *   row      small image beside title and teaser, for the homepage pair
  *   compact  small thumbnail and title, for side lists
  */
 const NewsCard = ({ item, variant = 'tile' }) => {
@@ -60,6 +61,31 @@ const NewsCard = ({ item, variant = 'tile' }) => {
           <h3 className="mt-1.5 line-clamp-2 text-sm font-bold leading-5 text-slate-950">
             <Link to={href} className={`${stretched} transition-colors group-hover:text-primary-700`}>{title}</Link>
           </h3>
+        </div>
+      </article>
+    )
+  }
+
+  if (variant === 'row') {
+    return (
+      <article className={`${shell} grid grid-cols-[6.5rem_minmax(0,1fr)] sm:grid-cols-[10rem_minmax(0,1fr)]`}>
+        <div className="relative min-h-[8.5rem] overflow-hidden bg-slate-100">
+          <Image item={item} pick={pick} fill />
+          {item.logo && (
+            <span className="absolute bottom-2 left-2 rounded-md bg-white/95 px-2 py-1 shadow-sm">
+              <img src={assetUrl(item.logo.src)} alt={item.logo.alt} loading="lazy" decoding="async" className="h-3.5 w-auto" />
+            </span>
+          )}
+        </div>
+        <div className="flex flex-col justify-center p-4 sm:p-5">
+          <Meta item={item} pick={pick} language={language} />
+          <h3 className="mt-2 text-base font-bold leading-snug text-slate-950 sm:text-lg">
+            <Link to={href} className={`${stretched} transition-colors group-hover:text-primary-700`}>{title}</Link>
+          </h3>
+          {/* line-clamp sets its own display, so the breakpoint toggle lives on a wrapper */}
+          <div className="mt-1.5 hidden sm:block">
+            <p className="line-clamp-2 text-sm leading-6 text-slate-600">{plainText(txt(pick, item.teaser))}</p>
+          </div>
         </div>
       </article>
     )

@@ -10,7 +10,8 @@
  * Body paragraphs may contain links written as [label](href). An href starting
  * with "/" stays inside the site; anything else opens in a new tab.
  *
- * Newest first is not required: consumers sort by `date`.
+ * `date` is 'YYYY-MM': news shows month and year only. Newest first is not
+ * required: consumers sort by `date`.
  *
  * Optional per item: `logo` ({ src, alt }) for an organisation badge,
  * `imageFocus` (CSS object-position), `cta`, `people` (team.js slugs).
@@ -18,8 +19,57 @@
 
 export const news = [
     {
+        slug: 'medicar-field-trial-freiburg',
+        // Field trial month, as given by the project team. The detail text
+        // comes from the MediCar page (src/pages/tuc/industry/MediCar.jsx).
+        date: '2026-07',
+        tag: ['Projekte', 'Projects'],
+        title: [
+            'MediCar 4.0: Autonomer Transport im Feldversuch am Universitätsklinikum Freiburg',
+            'MediCar 4.0: autonomous hospital transport in a field trial at the University Medical Center Freiburg',
+        ],
+        teaser: [
+            'Im Juli 2026 wurde MediCar 4.0 am Universitätsklinikum Freiburg im Feldversuch erprobt. Unser Teil: Sprachmodelle, die Routen live anpassen, und Roboter, die Transportboxen selbst be- und entladen.',
+            'In July 2026, MediCar 4.0 was tested in a field trial at the University Medical Center Freiburg. Our part: language models that adapt routes live, and robots that load and unload the transport boxes themselves.',
+        ],
+        lead: [
+            'Blutproben, Medikamente, Material: [MediCar 4.0](/tuc/industry-projects/medicar) bringt sie im Krankenhaus mit autonomen Transportfahrzeugen bedarfsgerecht ans Ziel. Im Juli 2026 wurde das System am Universitätsklinikum Freiburg im Feldversuch erprobt.',
+            'Blood samples, medication, supplies: [MediCar 4.0](/tuc/industry-projects/medicar) gets them where they are needed in the hospital, with autonomous transport vehicles. In July 2026 the system was tested in a field trial at the University Medical Center Freiburg.',
+        ],
+        body: [
+            [
+                'Klassische Routenführung kennt nur, was vorab definiert wurde. Eine blockierte Zufahrt, ein Unfall auf dem Parkplatz oder eine Baustelle bringen sie aus dem Takt. Bei MediCar 4.0 werten große Sprachmodelle die Meldungen von Klinikmitarbeitenden aus und erzeugen kleine Programme, die einzelne Wegabschnitte in Echtzeit neu bewerten. Ein Routenalgorithmus berechnet daraus laufend die beste Strecke, und das Klinikpersonal sieht auf der Karte, warum sich eine Route geändert hat.',
+                'Classic route guidance only knows what was defined in advance. A blocked access road, an accident in the car park or a construction site throws it off. In MediCar 4.0, large language models evaluate reports from hospital staff and generate small programs that re-score individual path segments in real time. A routing algorithm continuously computes the best route from them, and staff can see on the map why a route has changed.',
+            ],
+            [
+                'Bislang be- und entladen Menschen die Transportboxen. Wir erproben Roboter, die Objekte erkennen, greifen und ablegen: Ein Sprachmodell zerlegt jede Aufgabe in einzelne Schritte, eine trainierte Steuerung führt die Greifbewegungen aus. Trainiert und getestet wird zunächst in virtuellen, zufällig variierten Krankenhausräumen. So lassen sich viele Situationen sicher durchspielen, bevor ein Roboter in der realen Welt arbeitet. Beide Bausteine brauchen viel Rechenleistung: Auf dem [GenAI-Cluster](/compute-cluster) der TU Clausthal trainieren wir Sprachmodelle und evaluieren das Routing in zahlreichen Szenarien.',
+                'Today, people still load and unload the transport boxes. We are testing robots that recognise, grasp and place objects: a language model breaks each task into individual steps, and a trained controller carries out the grasping motions. Training and testing start in virtual, randomly varied hospital rooms, so many situations can be played through safely before a robot works in the real world. Both building blocks need a lot of computing power: on the TU Clausthal [GenAI-Cluster](/compute-cluster) we train language models and evaluate the routing across many scenarios.',
+            ],
+            [
+                'Unsere Komponenten wurden mit den Systemen der Projektpartner zusammengeführt und am Universitätsklinikum Freiburg im Feldversuch erprobt. Sie sind modular aufgebaut und lassen sich nach dem Plug&Work-Prinzip in bestehende Systeme einbinden. Künftig sollen auch Pflege- und Betreuungseinrichtungen profitieren.',
+                'Our components were integrated with the partners’ systems and tested in the field trial at the University Medical Center Freiburg. They are modular and plug into existing systems following the plug-and-work principle. In future, care and nursing facilities are meant to benefit as well.',
+            ],
+        ],
+        cta: {
+            heading: ['Mehr zu MediCar 4.0', 'More on MediCar 4.0'],
+            text: [
+                'Projektfilm, Partner und Details zu unserem Beitrag stehen auf der [MediCar-Projektseite](/tuc/industry-projects/medicar).',
+                'The project film, the partners and details of our contribution are on the [MediCar project page](/tuc/industry-projects/medicar).',
+            ],
+            href: '/tuc/industry-projects/medicar',
+            label: ['Zum Projekt', 'Explore the project'],
+        },
+        image: '/images/projects/industry/medicar/corridor.webp',
+        imageAlt: [
+            'MediCar-Transportroboter mit blauen Transportboxen im Foyer einer Klinik',
+            'MediCar transport robot carrying blue transport boxes in a hospital lobby',
+        ],
+        imageFocus: '61% 50%',
+        people: ['bartelt'],
+    },
+    {
         slug: 'sascha-marton-nvidia',
-        date: '2026-11-09',
+        date: '2026-11',
         tag: ['Team', 'Team'],
         title: [
             'Von CORE zu NVIDIA: Sascha Marton forscht künftig an Tabular Foundation Models bei NVIDIA',
