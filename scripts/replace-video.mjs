@@ -1,7 +1,7 @@
 /**
  * Swap the file behind an existing registry entry, keeping its path and URL.
  *
- *   npm run replace-video -- <id> <path/to/new.mp4> [--poster-at <seconds>]
+ *   npm run replace-video -- <id> <path/to/new.mp4> [--poster-at <seconds>] [--crf <n>] [--max-width <px>]
  *
  * Example:
  *   npm run replace-video -- medicar ~/Downloads/Medicar-final.mp4
@@ -10,6 +10,11 @@
  * the entry's bucket (wiki/video.md), and overwrites the .mp4, its <name>-poster.webp
  * and the frame strip in place. Every link to the video keeps working, because
  * the file name does not change.
+ *
+ * --crf and --max-width override the bucket's defaults, for a long clip that would
+ * otherwise get too large. Keep the whole site well under a few hundred MB:
+ * GitHub Pages cancels any deploy that takes longer than 10 minutes, and that limit
+ * cannot be raised (actions/deploy-pages caps its timeout at 600000 ms).
  *
  * What it cannot do for you: if the new clip shows something different, update the
  * `description` and `duration` of the entry in src/data/videos.js. The script prints
@@ -24,12 +29,17 @@ import sharp from 'sharp'
 import { videos, BUCKETS } from '../src/data/videos.js'
 
 const args = process.argv.slice(2)
-const posterFlag = args.indexOf('--poster-at')
-const posterAt = posterFlag === -1 ? 3 : Number(args.splice(posterFlag, 2)[1])
+const takeFlag = (name) => {
+    const i = args.indexOf(name)
+    return i === -1 ? undefined : Number(args.splice(i, 2)[1])
+}
+const posterAt = takeFlag('--poster-at') ?? 3
+const crfOverride = takeFlag('--crf')
+const maxWidthOverride = takeFlag('--max-width')
 const [id, input] = args
 
 if (!id || !input) {
-    console.error('Usage: npm run replace-video -- <id> <path/to/new.mp4> [--poster-at <seconds>]')
+    console.error('Usage: npm run replace-video -- <id> <path/to/new.mp4> [--poster-at <seconds>] [--crf <n>] [--max-width <px>]')
     console.error('Known ids: ' + videos.map((v) => v.id).join(', '))
     process.exit(1)
 }
@@ -59,10 +69,14 @@ const SETTINGS = {
     [BUCKETS.CAMERA]: { maxWidth: 1920, crf: 23, audio: true },
     [BUCKETS.BACKGROUND_LOOP]: { maxWidth: null, crf: 22, audio: false },
 }
-const s = SETTINGS[entry.bucket]
-if (!s) {
+if (!SETTINGS[entry.bucket]) {
     console.error(`Unknown bucket "${entry.bucket}" on ${id}.`)
     process.exit(1)
+}
+const s = {
+    ...SETTINGS[entry.bucket],
+    ...(crfOverride !== undefined && { crf: crfOverride }),
+    ...(maxWidthOverride !== undefined && { maxWidth: maxWidthOverride }),
 }
 
 const hasAudio = run('ffprobe', ['-v', 'error', '-select_streams', 'a', '-show_entries', 'stream=codec_name', '-of', 'csv=p=0', input]).trim() !== ''
@@ -83,7 +97,7 @@ const work = mkdtempSync(join(tmpdir(), 'replace-video-'))
 const tmpOut = join(work, 'out.mp4')
 
 const vf = s.maxWidth ? ['-vf', `scale='min(${s.maxWidth},iw)':-2`] : []
-const audio = keepAudio ? ['-c:a', 'aac', '-b:a', '128k'] : ['-an']
+const audio = keepAudio ? ['-c:a', 'aac', '-b:a', '96k'] : ['-an']
 
 console.log(`Encoding ${input} → ${out}  (bucket ${entry.bucket}, CRF ${s.crf}, audio ${keepAudio ? 'kept' : 'stripped'})`)
 console.log('This can take a few minutes for a long clip.')
@@ -132,6 +146,10 @@ if (Math.round(duration) !== entry.duration) {
 }
 console.log('→ If the clip shows something new, update its description in src/data/videos.js.')
 console.log('→ Then run: npm run check-videos')
-if (statSync(out).size > 95 * 1048576) {
+const outMb = statSync(out).size / 1048576
+if (outMb > 95) {
     console.log('\nWARNING: over 95 MB. GitHub rejects files over 100 MB, so this push would fail.')
+} else if (outMb > 40) {
+    console.log(`\nWARNING: ${outMb.toFixed(0)} MB is large for this site. Big clips slow the GitHub Pages deploy,`)
+    console.log('which is cancelled after 10 minutes. Try a higher --crf (+2 roughly cuts the size by a fifth) or --max-width 1280.')
 }

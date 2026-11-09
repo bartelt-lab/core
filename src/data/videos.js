@@ -436,11 +436,13 @@ export const videos = [
     },
     {
         // Swappable on purpose: replace the file with
-        //   npm run replace-video -- medicar <new.mp4> --poster-at <seconds>
+        //   npm run replace-video -- medicar <new.mp4> --crf 28 --poster-at 126
         // The URL stays the same. Update duration/description if the content changes.
         id: 'medicar',
         src: '/videos/industry-projects/medicar.mp4',
         poster: '/videos/industry-projects/medicar-poster.webp',
+        // CRF 28 on purpose: at the camera default (CRF 23) the film was 77 MB and the
+        // Pages deploy timed out. At CRF 28 it is 38 MB; map and UI text stay legible.
         bucket: BUCKETS.CAMERA,
         duration: 204,
         description:

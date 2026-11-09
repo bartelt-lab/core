@@ -131,6 +131,13 @@ site limit**, which is comfortable; revisit the decision if it passes ~60%.
 
 - Soft cap: **25 MB per file.** Over that the gate warns rather than fails, because
   occasionally a long desktop capture genuinely justifies it.
+- **The deploy has a 10-minute ceiling.** `actions/deploy-pages` cancels any deploy
+  still syncing after 600 000 ms, and that is a hard maximum: a larger `timeout:` input
+  is silently capped. On 2026-11-09 a single 77 MB clip (the MediCar film at 1080p)
+  took the artifact from ~300 to 378 MB and the deploy timed out in `syncing_files`.
+  Re-encoded at 1080p / CRF 28 it is 38 MB (720p / CRF 26 would be 25 MB). For long
+  films, raise the CRF or drop to 720p before committing, and check legibility on a
+  still of the most detailed scene.
 - **Compress before committing, never after.** The worst regression in this repo's
   history happened by adding raw 196 MB camera originals *after* compressed versions
   already existed.

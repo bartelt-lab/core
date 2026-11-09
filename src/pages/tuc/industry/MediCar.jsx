@@ -10,7 +10,8 @@ import { useLanguage } from '../../../i18n/useLanguage';
 const project = projects.find((p) => p.slug === 'medicar');
 
 // The film is swapped by replacing the file at this path
-// (`npm run replace-video -- medicar <new.mp4>`), so the URL never changes.
+// (`npm run replace-video -- medicar <new.mp4> --crf 28 --poster-at 126`),
+// so the URL never changes.
 const film = videos.find((v) => v.id === 'medicar');
 
 const IMG = '/images/projects/industry/medicar';
