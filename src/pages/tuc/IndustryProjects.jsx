@@ -75,6 +75,7 @@ const GalleryTile = ({ image, pick, className = '', children }) => (
             height="900"
             loading="lazy"
             decoding="async"
+            style={image.focus ? { objectPosition: image.focus } : undefined}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-slate-950/80 via-slate-950/25 to-transparent" />

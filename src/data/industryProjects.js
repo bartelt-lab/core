@@ -104,6 +104,8 @@ export const projects = [
             gallery: [
                 {
                     src: assetUrl('/images/projects/industry/medicar/corridor.webp'),
+                    // object-position: the robot sits right of centre in this frame
+                    focus: '61% 50%',
                     label: ['Im Klinikbetrieb', 'On duty'],
                     alt: [
                         'MediCar-Transportroboter mit blauen Transportboxen im Foyer einer Klinik',
@@ -119,11 +121,13 @@ export const projects = [
                     ],
                 },
                 {
-                    src: assetUrl('/images/projects/industry/medicar/lidar.webp'),
-                    label: ['Lokale Karte', 'Local map'],
+                    // Still from the project film at 1:47.5 (public/videos/industry-projects/medicar.mp4)
+                    src: assetUrl('/images/projects/industry/medicar/lidar-pointcloud.webp'),
+                    focus: '68% 60%',
+                    label: ['Lidar-Sicht', 'Lidar view'],
                     alt: [
-                        'Transportroboter im Klinikflur, mit eingeblendeter lokaler Karte',
-                        'Transport robot in a hospital corridor, with an inset of its local map',
+                        'Transportroboter auf einem Klinikhof, daneben eine farbige Lidar-Punktwolke der Umgebung',
+                        'Transport robot in a hospital courtyard, next to a coloured lidar point cloud of its surroundings',
                     ],
                 },
                 {
