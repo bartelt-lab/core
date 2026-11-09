@@ -25,7 +25,7 @@ const VergabepilotProject = () => {
                 className="group flex items-center gap-3 rounded-xl border border-white/90 bg-white/90 px-3 py-2.5 shadow-[0_16px_45px_-24px_rgba(15,23,42,0.45)] backdrop-blur-md transition hover:-translate-y-0.5 hover:border-primary-200 hover:bg-white"
                 aria-label={pick('In collaboration with Ciconia Systems', 'In Zusammenarbeit mit Ciconia Systems')}
             >
-                <span className="hidden text-[9px] font-bold uppercase leading-4 tracking-[0.16em] text-slate-500 sm:block">
+                <span className="hidden text-[10px] font-bold uppercase leading-4 tracking-[0.16em] text-slate-500 sm:block">
                     {pick('In collaboration with', 'In Zusammenarbeit mit')}
                 </span>
                 <img
@@ -35,7 +35,7 @@ const VergabepilotProject = () => {
                     height="192"
                     className="h-7 w-auto rounded sm:h-8"
                 />
-                <FiExternalLink className="h-3 w-3 shrink-0 text-slate-400 transition-colors group-hover:text-primary-600" aria-hidden="true" />
+                <FiExternalLink className="h-3 w-3 shrink-0 text-slate-500 transition-colors group-hover:text-primary-600" aria-hidden="true" />
             </a>
         }
         showEvalSection={false}

@@ -101,7 +101,7 @@ const MediCar = () => {
                     <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 text-sm sm:grid-cols-4">
                         {facts.map((f) => (
                             <div key={f.label}>
-                                <dt className="text-xs font-semibold uppercase tracking-wide text-slate-400">{f.label}</dt>
+                                <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">{f.label}</dt>
                                 <dd className="mt-1 font-semibold text-slate-800">{f.value}</dd>
                             </div>
                         ))}

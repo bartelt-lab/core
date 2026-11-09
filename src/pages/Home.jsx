@@ -74,7 +74,7 @@ const LINK_ICONS = [
 ]
 
 const LinkIcons = ({ member }) => {
-  const iconClass = 'flex h-7 w-7 items-center justify-center rounded-full text-slate-400 transition hover:bg-primary-50 hover:text-primary-700'
+  const iconClass = 'flex h-7 w-7 items-center justify-center rounded-full text-slate-500 transition hover:bg-primary-50 hover:text-primary-700'
   return (
     <div className="flex flex-wrap items-center justify-center gap-0.5">
       {member.email && (
@@ -210,7 +210,7 @@ const Home = () => {
             {moreNews.length === 0 ? (
               <NewsCard item={leadNews} variant="lead" />
             ) : (
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 lg:grid-cols-2">
                 {[leadNews, moreNews[0]].map((item) => (
                   <NewsCard key={item.slug} item={item} variant="row" />
                 ))}
@@ -329,7 +329,7 @@ const Home = () => {
               >
                 <div className="absolute left-0 top-2.5 flex flex-col gap-1">
                   {member.affiliations.map((a) => (
-                    <span key={a.institution.shortName} className="rounded-r-md bg-primary-600 py-0.5 pl-1.5 pr-2 text-[9px] font-bold uppercase tracking-wide text-white shadow-sm">{a.institution.shortName}</span>
+                    <span key={a.institution.shortName} className="rounded-r-md bg-primary-600 py-0.5 pl-1.5 pr-2 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">{a.institution.shortName}</span>
                   ))}
                 </div>
                 <img src={assetUrl(member.photo)} alt={member.name} loading="lazy" decoding="async" className="h-16 w-16 rounded-full border border-slate-200 bg-slate-100 object-cover" />
@@ -347,7 +347,7 @@ const Home = () => {
       {/* ── Join and collaborate ── */}
       <section id="contact" className="border-t border-slate-200 bg-slate-950 py-16 text-white md:py-20">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-5 lg:grid-cols-2">
             <div className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
               <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-300">{pick('PhD and research', 'Promotion und Forschung')}</p>
               <h2 className="font-heading text-2xl font-bold md:text-3xl">{pick('Do a PhD with us', 'Promovieren bei CORE')}</h2>

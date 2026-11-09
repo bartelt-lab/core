@@ -222,7 +222,7 @@ const HumanAwarenessDetection = () => {
                                 decoding="async"
                                 className="aspect-[16/9] w-full rounded-2xl object-cover"
                             />
-                            <div className="px-3 pb-1 pt-3 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
+                            <div className="px-3 pb-1 pt-3 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
                                 <span>{pick('Illustrative reference, not project output', 'Illustrative Referenz, kein Projektergebnis')}</span>
                             </div>
                         </div>
@@ -246,9 +246,9 @@ const HumanAwarenessDetection = () => {
                             [pick('Target platforms', 'Zielplattformen'), 'Ridgeback · Unitree As2', 'ROS 2'],
                         ].map(([label, value, note]) => (
                             <div key={label} className="flex flex-col justify-center bg-white/90 p-3">
-                                <dt className="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-400">{label}</dt>
+                                <dt className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">{label}</dt>
                                 <dd className="mt-1.5 text-xs font-bold text-slate-800">{value}</dd>
-                                {note ? <dd className="mt-0.5 text-[10px] font-semibold text-slate-400">{note}</dd> : null}
+                                {note ? <dd className="mt-0.5 text-[10px] font-semibold text-slate-500">{note}</dd> : null}
                             </div>
                         ))}
                     </dl>
@@ -259,7 +259,7 @@ const HumanAwarenessDetection = () => {
                     className="group mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-2xl border border-primary-200 bg-primary-50/70 px-5 py-4 shadow-sm transition hover:border-primary-300 hover:bg-primary-50"
                 >
                     <span className="block">
-                        <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-primary-600">
+                        <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-primary-700">
                             {pick('Part of', 'Teil von')}
                         </span>
                         <span className="mt-1 block text-base font-bold text-primary-900">CORE Labs</span>
@@ -326,7 +326,7 @@ const HumanAwarenessDetection = () => {
                                         : 'border-slate-200 bg-white'
                                 }`}
                             >
-                                <p className={`text-[9px] font-bold uppercase tracking-[0.18em] ${stage.emphasis ? 'text-primary-600' : 'text-slate-400'}`}>
+                                <p className={`text-[10px] font-bold uppercase tracking-[0.18em] ${stage.emphasis ? 'text-primary-700' : 'text-slate-500'}`}>
                                     {index + 1}. {stage.step}
                                 </p>
                                 <p className={`mt-2 text-sm font-bold ${stage.emphasis ? 'text-primary-900' : 'text-slate-900'}`}>{stage.name}</p>
@@ -364,7 +364,7 @@ const HumanAwarenessDetection = () => {
                                     <dl className="mt-4 space-y-1.5">
                                         {platform.specs.map(([label, value]) => (
                                             <div key={label} className="flex justify-between gap-4 border-b border-dashed border-slate-100 pb-1.5 last:border-0">
-                                                <dt className="text-xs font-semibold uppercase tracking-wider text-slate-400">{label}</dt>
+                                                <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">{label}</dt>
                                                 <dd className="text-xs font-bold text-slate-700">{value}</dd>
                                             </div>
                                         ))}
@@ -373,7 +373,7 @@ const HumanAwarenessDetection = () => {
                             </article>
                         ))}
                     </div>
-                    <p className="mt-3 text-xs leading-5 text-slate-400">
+                    <p className="mt-3 text-xs leading-5 text-slate-500">
                         {pick('Product images and figures: ', 'Produktbilder und Angaben: ')}
                         {platforms.map((platform, index) => (
                             <span key={platform.maker}>
@@ -390,7 +390,7 @@ const HumanAwarenessDetection = () => {
                             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">{pick('Quick in-house demo', 'Schnelle interne Demo')}</p>
                             <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-slate-950">{pick('A rough look at the capability, recorded in our lab', 'Ein grober Blick auf die Fähigkeit, aufgenommen in unserem Labor')}</h2>
                         </div>
-                        <span className="hidden text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400 sm:block">{pick('Not a prototype', 'Kein Prototyp')}</span>
+                        <span className="hidden text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 sm:block">{pick('Not a prototype', 'Kein Prototyp')}</span>
                     </div>
                     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-2 shadow-xl shadow-slate-300/60">
                         <LazyVideo
@@ -506,7 +506,7 @@ const HumanAwarenessDetection = () => {
                                     partner.lead ? 'border-primary-200 bg-primary-50/70' : 'border-slate-200 bg-white'
                                 }`}
                             >
-                                <p className={`text-[9px] font-bold uppercase tracking-[0.18em] ${partner.lead ? 'text-primary-600' : 'text-slate-400'}`}>
+                                <p className={`text-[10px] font-bold uppercase tracking-[0.18em] ${partner.lead ? 'text-primary-700' : 'text-slate-500'}`}>
                                     {partner.role}
                                 </p>
                                 <p className={`mt-2 text-sm font-bold ${partner.lead ? 'text-primary-900' : 'text-slate-900'}`}>{partner.name}</p>

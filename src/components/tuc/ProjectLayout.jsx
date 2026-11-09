@@ -96,7 +96,7 @@ const ProjectLayout = ({
                                                 className="group inline-flex items-start gap-2 transition-colors hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4"
                                             >
                                                 {title}
-                                                <FiExternalLink className="mt-1.5 h-3.5 w-3.5 shrink-0 text-slate-400 transition-colors group-hover:text-primary-600" aria-hidden="true" />
+                                                <FiExternalLink className="mt-1.5 h-3.5 w-3.5 shrink-0 text-slate-500 transition-colors group-hover:text-primary-600" aria-hidden="true" />
                                             </a>
                                         ) : title}
                                         {githubHref && (
@@ -106,7 +106,7 @@ const ProjectLayout = ({
                                                 rel="noopener noreferrer"
                                                 aria-label={`${title} on GitHub`}
                                                 title="GitHub"
-                                                className="relative -top-3 ml-2 inline-flex align-middle text-slate-400 transition-colors hover:text-slate-950 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4"
+                                                className="relative -top-3 ml-2 inline-flex align-middle after:absolute after:-inset-1.5 after:content-[''] text-slate-500 transition-colors hover:text-slate-950 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4"
                                             >
                                                 <FaGithub className="h-4 w-4" aria-hidden="true" />
                                             </a>
@@ -169,7 +169,7 @@ const ProjectLayout = ({
                                         className="group inline-flex items-start justify-center gap-2 transition-colors hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4"
                                     >
                                         {title}
-                                        <FiExternalLink className="mt-1.5 h-3.5 w-3.5 shrink-0 text-slate-400 transition-colors group-hover:text-primary-600" aria-hidden="true" />
+                                        <FiExternalLink className="mt-1.5 h-3.5 w-3.5 shrink-0 text-slate-500 transition-colors group-hover:text-primary-600" aria-hidden="true" />
                                     </a>
                                 ) : title}
                                 {githubHref && (
@@ -179,7 +179,7 @@ const ProjectLayout = ({
                                         rel="noopener noreferrer"
                                         aria-label={`${title} on GitHub`}
                                         title="GitHub"
-                                        className="relative -top-3 ml-2 inline-flex align-middle text-slate-400 transition-colors hover:text-slate-950 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4"
+                                        className="relative -top-3 ml-2 inline-flex align-middle after:absolute after:-inset-1.5 after:content-[''] text-slate-500 transition-colors hover:text-slate-950 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4"
                                     >
                                         <FaGithub className="h-4 w-4" aria-hidden="true" />
                                     </a>
@@ -313,8 +313,8 @@ const ProjectLayout = ({
                         <div id="evaluation" className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto mb-24">
                             {/* Student Requirements */}
                             <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                initial={{ x: -20 }}
+                                whileInView={{ x: 0 }}
                                 viewport={{ once: true }}
                                 className="bg-slate-900 text-white rounded-3xl p-10 md:p-12 shadow-2xl relative overflow-hidden"
                             >
@@ -338,8 +338,8 @@ const ProjectLayout = ({
 
                             {/* What We Offer */}
                             <motion.div
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                initial={{ x: 20 }}
+                                whileInView={{ x: 0 }}
                                 viewport={{ once: true }}
                                 className="bg-primary-600 text-white rounded-3xl p-10 md:p-12 shadow-2xl relative overflow-hidden"
                             >
@@ -375,7 +375,7 @@ const ProjectLayout = ({
             <div className={`container mx-auto px-4 ${compact ? 'py-8' : 'py-12'} border-t border-slate-100`}>
                 {siblings.length > 0 && (
                     <nav aria-label={pick('Other AI Team Projects', 'Weitere KI-Teamprojekte')} className="mx-auto mb-8 max-w-5xl">
-                        <h2 className="mb-4 text-center text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
+                        <h2 className="mb-4 text-center text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
                             {pick('Other AI Team Projects', 'Weitere KI-Teamprojekte')}
                         </h2>
                         <ul className="flex flex-wrap justify-center gap-2">

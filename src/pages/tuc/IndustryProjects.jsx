@@ -51,15 +51,15 @@ const formatDuration = (seconds) => `${Math.floor(seconds / 60)}:${String(Math.r
 const ProjectFacts = ({ project, pick, className = '' }) => (
     <dl className={`grid grid-cols-3 gap-3 text-xs ${className}`}>
         <div>
-            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Funding', 'Förderung')}</dt>
+            <dt className="font-semibold uppercase tracking-wide text-slate-500">{pick('Funding', 'Förderung')}</dt>
             <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.fundingProgram)}</dd>
         </div>
         <div>
-            <dt className="font-semibold uppercase tracking-wide text-slate-400">Budget</dt>
+            <dt className="font-semibold uppercase tracking-wide text-slate-500">Budget</dt>
             <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.budget)}</dd>
         </div>
         <div>
-            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Duration', 'Laufzeit')}</dt>
+            <dt className="font-semibold uppercase tracking-wide text-slate-500">{pick('Duration', 'Laufzeit')}</dt>
             <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.duration)}</dd>
         </div>
     </dl>

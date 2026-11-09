@@ -86,7 +86,7 @@ const CoreLabs = () => {
                     <img src={assetUrl(contact.photo)} alt={contact.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                   </Link>
                   <div className="min-w-0">
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
                       {pick('Operations & contact', 'Betrieb & Kontakt')}
                     </p>
                     <p className="mt-0.5 text-sm font-bold leading-tight text-slate-950">
@@ -131,7 +131,7 @@ const CoreLabs = () => {
                     <div>
                       <p className="text-sm font-bold text-slate-950">{pi.prefix ? `${pi.prefix} ${pi.name}` : pi.name}</p>
                       <p className="text-xs font-semibold text-primary-700">{pick('Principal Investigator', 'Principal Investigator')}</p>
-                      <p className="mt-0.5 text-xs font-semibold text-slate-400">{pi.affiliations[0].institution.name}</p>
+                      <p className="mt-0.5 text-xs font-semibold text-slate-500">{pi.affiliations[0].institution.name}</p>
                     </div>
                   </Link>
                 ))}

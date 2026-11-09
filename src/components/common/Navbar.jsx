@@ -142,7 +142,7 @@ const Navbar = () => {
             const isUbbActive =
               lab.initials === "UBB" && location.pathname.startsWith("/ubb");
             const isPrimaryLab = lab.initials === "TUC" && !isUbbActive;
-            const cls = `flex h-7 min-w-0 flex-1 items-center justify-center rounded-full px-1 text-[9px] font-bold tracking-[0.04em] transition duration-200 sm:h-8 sm:min-w-11 sm:px-2.5 sm:text-xs sm:font-semibold sm:tracking-wide lg:min-w-12 lg:px-3 ${
+            const cls = `flex h-7 min-w-0 flex-1 items-center justify-center rounded-full px-1 text-[10px] font-bold tracking-[0.04em] transition duration-200 sm:h-8 sm:min-w-11 sm:px-2.5 sm:text-xs sm:font-semibold sm:tracking-wide lg:min-w-12 lg:px-3 ${
               isTucActive || isUbbActive || isPrimaryLab
                 ? "bg-white text-primary-700 shadow-sm"
                 : "text-slate-600 hover:bg-white hover:text-slate-900"

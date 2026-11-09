@@ -552,8 +552,8 @@ const AiTeamProjects = () => {
             {testimonials.map((src, index) => (
               <motion.div
                 key={src}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 20 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
                 className="overflow-hidden rounded-lg bg-slate-950 shadow-xl"
@@ -595,7 +595,7 @@ const AiTeamProjects = () => {
                     <span className="rounded-full bg-primary-50 px-3 py-1 text-xs font-bold uppercase text-primary-700">
                       {pick("Archive", "Archiv")}
                     </span>
-                    <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-slate-500">
                       {pick(project.tag, project.tagDe)}
                     </span>
                   </div>

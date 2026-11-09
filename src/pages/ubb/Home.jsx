@@ -61,7 +61,7 @@ const UbbHome = () => {
               <img src={assetUrl('/logos/ubb-logo-only.webp')} alt="" className="h-10 w-10 object-contain opacity-80" />
               <div className="h-8 w-px bg-slate-200" aria-hidden="true" />
               <img src={assetUrl('/logos/core/avocando-icon.svg')} alt="" className="h-9 w-9 object-contain opacity-80" />
-              <p className="max-w-[12rem] text-xs leading-5 text-slate-400">A joint research initiative in the CORE Network.</p>
+              <p className="max-w-[12rem] text-xs leading-5 text-slate-500">A joint research initiative in the CORE Network.</p>
             </div>
           </motion.div>
 
@@ -105,7 +105,7 @@ const UbbHome = () => {
                   </span>
                   <span>
                     <span className="block text-sm font-bold text-slate-950">{item.label}</span>
-                    <span className="block text-xs font-semibold text-slate-400">{item.detail}</span>
+                    <span className="block text-xs font-semibold text-slate-500">{item.detail}</span>
                   </span>
                 </motion.div>
               )
@@ -175,7 +175,7 @@ const UbbHome = () => {
             <div className="grid gap-5 md:grid-cols-3 blur-[5px] select-none" aria-hidden="true">
               {upcomingAreas.map((area, index) => (
                 <div key={area} className={`h-64 rounded-3xl border p-7 ${index === 0 ? 'border-site-200 bg-site-100' : index === 1 ? 'border-primary-200 bg-primary-50' : 'border-slate-200 bg-slate-50'}`}>
-                  <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Research area 0{index + 1}</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-slate-600">Research area 0{index + 1}</span>
                   <h3 className="mt-24 text-2xl font-bold text-slate-800">{area}</h3>
                 </div>
               ))}

@@ -218,9 +218,9 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
         <section className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur-sm lg:flex-1">
             <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-3.5 py-3">
                 <MiniLabel>{label}</MiniLabel>
-                <span className="rounded-full bg-slate-100 px-2.5 py-1 font-mono text-[10px] font-bold tabular-nums tracking-[0.14em] text-slate-500">
+                <span className="rounded-full bg-slate-100 px-2.5 py-1 font-mono text-[10px] font-bold tabular-nums tracking-[0.14em] text-slate-600">
                     {pad(activeRun + 1)}
-                    <span className="text-slate-400">/{pad(total)}</span>
+                    <span className="text-slate-600">/{pad(total)}</span>
                 </span>
             </div>
 
@@ -287,11 +287,11 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
                                             }`}
                                         />
                                     ) : (
-                                        <span className="flex h-full w-full items-center justify-center bg-slate-100 font-mono text-xs font-bold text-slate-400">
+                                        <span className="flex h-full w-full items-center justify-center bg-slate-100 font-mono text-xs font-bold text-slate-600">
                                             {pad(idx + 1)}
                                         </span>
                                     )}
-                                    <span className="absolute bottom-0.5 left-0.5 rounded bg-slate-950/75 px-1 font-mono text-[9px] font-bold text-white/90 backdrop-blur-sm">
+                                    <span className="absolute bottom-0.5 left-0.5 rounded bg-slate-950/75 px-1 font-mono text-[10px] font-bold text-white/90 backdrop-blur-sm">
                                         {pad(idx + 1)}
                                     </span>
                                 </div>
@@ -374,7 +374,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
                                 {pillLabel} {pad(activeRun + 1)}
                             </span>
                             {run.operation && (
-                                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">
+                                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">
                                     {run.operation}
                                 </span>
                             )}
@@ -398,7 +398,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
                         >
                             <FaArrowLeft className="h-3 w-3" />
                         </button>
-                        <span className="w-9 text-center font-mono text-xs font-bold text-slate-400">
+                        <span className="w-9 text-center font-mono text-xs font-bold text-slate-500">
                             {pad(activeRun + 1)}/{pad(total)}
                         </span>
                         <button

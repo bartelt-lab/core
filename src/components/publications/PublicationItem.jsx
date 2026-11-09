@@ -20,8 +20,8 @@ const PublicationItem = ({ publication }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 20 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
       className="bg-white border border-slate-200 rounded-lg p-6 hover:bg-slate-50 transition-colors"

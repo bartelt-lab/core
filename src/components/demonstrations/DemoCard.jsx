@@ -61,18 +61,14 @@ const DemoCard = ({ demo }) => {
             <div className="w-full h-full bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center">
             </div>
           )}
-
-
-
-          {/* Category Badge */}
-          <div className="absolute top-4 left-4 z-10">
-            <span className="bg-primary-700 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
-              {demo.category}
-            </span>
-          </div>
         </div>
 
         <div className="p-6 flex-grow">
+          {/* Category sits in the card body: over the video it covered the
+              YouTube title bar, which the embed draws in the same corner. */}
+          <span className="mb-3 inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold text-primary-700">
+            {demo.category}
+          </span>
           <h3 className="text-2xl font-heading font-bold text-slate-900 mb-3 group-hover:text-primary-600 transition-colors">
             {demo.title}
           </h3>

@@ -1031,7 +1031,7 @@ const FlowDiagram = ({ t }) => (
 );
 
 const Eyebrow = ({ children }) => (
-  <p className="text-xs font-black uppercase tracking-widest text-primary-600">
+  <p className="text-xs font-black uppercase tracking-widest text-primary-700">
     {children}
   </p>
 );
@@ -1165,7 +1165,7 @@ const TempoProject = () => {
 
           <div className="grid gap-3 self-center md:order-1">
             <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <p className="text-xs font-black uppercase tracking-widest text-slate-400">
+              <p className="text-xs font-black uppercase tracking-widest text-slate-500">
                 {t("Other systems")}
               </p>
               <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
@@ -1175,7 +1175,7 @@ const TempoProject = () => {
               </p>
             </div>
             <div className="rounded-xl border border-primary-200 bg-primary-50 p-4">
-              <p className="text-xs font-black uppercase tracking-widest text-primary-600">
+              <p className="text-xs font-black uppercase tracking-widest text-primary-700">
                 TEMPO
               </p>
               <p className="mt-2 text-sm font-semibold leading-6 text-primary-900">
@@ -1314,7 +1314,7 @@ const TempoProject = () => {
               band. Nothing in the exchange is chess-specific. */}
           <div className="grid gap-3 self-center md:order-1">
             <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <p className="text-xs font-black uppercase tracking-widest text-slate-400">
+              <p className="text-xs font-black uppercase tracking-widest text-slate-500">
                 {t("What goes in")}
               </p>
               <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
@@ -1324,7 +1324,7 @@ const TempoProject = () => {
               </p>
             </div>
             <div className="rounded-xl border border-primary-300 bg-primary-50 p-4">
-              <p className="text-xs font-black uppercase tracking-widest text-primary-600">
+              <p className="text-xs font-black uppercase tracking-widest text-primary-700">
                 {t("The model")}
               </p>
               <p className="mt-2 text-sm font-semibold leading-6 text-primary-900">
@@ -1334,7 +1334,7 @@ const TempoProject = () => {
               </p>
             </div>
             <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <p className="text-xs font-black uppercase tracking-widest text-slate-400">
+              <p className="text-xs font-black uppercase tracking-widest text-slate-500">
                 {t("What comes out")}
               </p>
               <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
@@ -1370,7 +1370,7 @@ const TempoProject = () => {
             </ul>
 
             <div className="mt-8 rounded-xl border border-primary-200 bg-primary-50 p-5 sm:p-6">
-              <p className="text-xs font-black uppercase tracking-widest text-primary-600">
+              <p className="text-xs font-black uppercase tracking-widest text-primary-700">
                 {t("What you walk away with")}
               </p>
               <p className="mt-2 text-sm font-semibold leading-6 text-primary-900">

@@ -20,7 +20,7 @@ const NETWORK_NAV = [
 ];
 
 const navClass = ({ isActive }) =>
-    `text-sm font-medium transition-colors ${
+    `whitespace-nowrap text-sm font-medium transition-colors ${
         isActive ? 'text-slate-900' : 'text-slate-500 hover:text-slate-900'
     }`;
 
@@ -53,7 +53,7 @@ const Layout = ({ children }) => {
                         />
                     </Link>
 
-                    <nav className="hidden md:flex items-center gap-6">
+                    <nav className="hidden lg:flex items-center gap-6">
                         {TUC_NAV.map((item) => (
                             <NavLink key={item.to} to={item.to} className={navClass}>
                                 {pick(item.label, item.label === 'Industry Projects' ? 'Industrieprojekte' : item.label === 'Teaching' ? 'Lehre' : 'Mitmachen')}
@@ -70,7 +70,7 @@ const Layout = ({ children }) => {
                     <button
                         type="button"
                         onClick={() => setIsNavOpen((v) => !v)}
-                        className="md:hidden p-2 text-slate-700 hover:text-slate-900"
+                        className="lg:hidden p-2 text-slate-700 hover:text-slate-900"
                         aria-label={isNavOpen ? 'Close menu' : 'Open menu'}
                         aria-expanded={isNavOpen}
                     >
@@ -79,7 +79,7 @@ const Layout = ({ children }) => {
                 </div>
 
                 {isNavOpen && (
-                    <div className="md:hidden border-t border-slate-200 bg-white">
+                    <div className="lg:hidden border-t border-slate-200 bg-white">
                         <nav className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
                             {TUC_NAV.map((item) => (
                                 <NavLink key={item.to} to={item.to} className={mobileNavClass}>

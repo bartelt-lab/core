@@ -59,7 +59,7 @@ const LectraProject = () => {
             </div>
             <figure className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-2 shadow-2xl shadow-slate-300/50">
               <img src={assetUrl('/images/projects/lectra/workspace.webp')} alt={pick('Conceptual learning workspace with course material, notebook, and context-aware chat side by side', 'Konzeptioneller Lernarbeitsbereich mit Kursmaterial, Notebook und kontextbezogenem Chat nebeneinander')} width="1200" height="676" fetchPriority="high" decoding="async" className="aspect-video w-full rounded-2xl object-cover" />
-              <figcaption className="px-3 pb-1 pt-3 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">{pick('Illustration of the planned demonstrator', 'Illustration des geplanten Demonstrators')}</figcaption>
+              <figcaption className="px-3 pb-1 pt-3 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">{pick('Illustration of the planned demonstrator', 'Illustration des geplanten Demonstrators')}</figcaption>
             </figure>
           </div>
         </div>

@@ -245,7 +245,7 @@ const ComputeCluster = () => {
           <div className="max-w-2xl">
             {/* Breadcrumb */}
             <nav className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-400" aria-label="Breadcrumb">
-              <Link to="/" className="hover:text-primary-600 transition-colors">CORE Network</Link>
+              <Link to="/" className="py-1.5 hover:text-primary-600 transition-colors">CORE Network</Link>
               <span>/</span>
               <span className="text-slate-600">{pick('Compute Cluster', 'Rechencluster')}</span>
             </nav>
@@ -305,7 +305,7 @@ const ComputeCluster = () => {
                     <Icon className="mb-2 h-4 w-4 text-primary-600" aria-hidden="true" />
                     <p className="text-2xl font-bold text-slate-950">{s.value}</p>
                     <p className="text-xs font-semibold text-slate-700 leading-5">{t(s.label)}</p>
-                    <p className="mt-0.5 text-xs text-slate-400">{t(s.description)}</p>
+                    <p className="mt-0.5 text-xs text-slate-500">{t(s.description)}</p>
                   </div>
                 )
               })}
@@ -452,7 +452,7 @@ const ComputeCluster = () => {
                     </span>
                   </div>
                   <h3 className="mb-1 text-lg font-bold text-slate-950">{t(site.site)}</h3>
-                  <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-slate-400">{t(site.location)}</p>
+                  <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-slate-500">{t(site.location)}</p>
                   <ul className="space-y-2">
                     {site.specs.map((spec) => (
                       <li key={spec} className="flex items-start gap-2 text-sm text-slate-600">

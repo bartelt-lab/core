@@ -99,7 +99,7 @@ const Home = () => {
                     <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6">{pick('Contact', 'Kontakt')}</h2>
                     <ul className="space-y-3 text-slate-700 list-none p-0">
                         <li className="flex items-start gap-3">
-                            <FiMail className="mt-1 text-slate-400" size={18} />
+                            <FiMail className="mt-1 text-slate-500" size={18} />
                             <span>
                                 Christian Bartelt:{' '}
                                 <a className="underline decoration-slate-300 underline-offset-4 hover:decoration-slate-900" href="mailto:bartelt@isse.tu-clausthal.de">
@@ -108,7 +108,7 @@ const Home = () => {
                             </span>
                         </li>
                         <li className="flex items-start gap-3">
-                            <FiMapPin className="mt-1 text-slate-400" size={18} />
+                            <FiMapPin className="mt-1 text-slate-500" size={18} />
                             <a
                                 href="https://maps.app.goo.gl/ZeN3Gz2aWHZDJxc8A"
                                 target="_blank"

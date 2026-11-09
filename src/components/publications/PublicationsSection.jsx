@@ -39,7 +39,7 @@ const PublicationCard = ({ publication, featured = false, compact = false, compa
       </div>
       <div className={`${featured ? (compact ? 'p-4' : 'p-7 md:p-8') : 'p-4'} flex flex-1 flex-col`}>
         {compact && <div className="mb-2.5 h-1 w-12 rounded-full bg-primary-600" />}
-        <div className={`${compact ? 'mb-2.5 text-[9px]' : 'mb-2 text-[11px]'} flex flex-wrap items-center gap-2 font-bold uppercase tracking-widest text-primary-700`}>
+        <div className={`${compact ? 'mb-2.5 text-[10px]' : 'mb-2 text-[11px]'} flex flex-wrap items-center gap-2 font-bold uppercase tracking-widest text-primary-700`}>
           <span>{publication.type}</span>
           <span className="h-1 w-1 rounded-full bg-slate-300" />
           <span>{publication.year}</span>
@@ -302,7 +302,7 @@ const PublicationsSection = ({
           <div className="grid gap-3 md:grid-cols-2">
             <label className="relative block">
               <span className="sr-only">{pick('Search publications', 'Publikationen suchen')}</span>
-              <FaSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
+              <FaSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" aria-hidden="true" />
               <input
                 value={filters.query}
                 onChange={(event) => updateFilter('query', event.target.value)}
@@ -372,7 +372,7 @@ const PublicationsSection = ({
                   key={publication.id}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className={`h-2.5 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-primary-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
+                  className={`relative h-2.5 rounded-full transition-all after:absolute after:-inset-x-1 after:-inset-y-2 after:content-[''] ${index === activeIndex ? 'w-8 bg-primary-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
                   aria-label={`Show publication ${index + 1}`}
                 />
               ))}

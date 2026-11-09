@@ -63,7 +63,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
           {member.email && (
             <a
               href={`mailto:${member.email}`}
-              className="text-slate-600 hover:text-primary-600 transition-colors"
+              className="relative text-slate-600 transition-colors hover:text-primary-600 after:absolute after:-inset-1 after:content-['']"
               title="Email"
             >
               <FaEnvelope className="text-xl" />
@@ -74,7 +74,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.scholar}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-600 hover:text-primary-600 transition-colors"
+              className="relative text-slate-600 transition-colors hover:text-primary-600 after:absolute after:-inset-1 after:content-['']"
               title="Google Scholar"
             >
               <SiGooglescholar className="text-xl" />
@@ -85,7 +85,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-600 hover:text-primary-600 transition-colors"
+              className="relative text-slate-600 transition-colors hover:text-primary-600 after:absolute after:-inset-1 after:content-['']"
               title="GitHub"
             >
               <FaGithub className="text-xl" />
@@ -96,7 +96,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-600 hover:text-primary-600 transition-colors"
+              className="relative text-slate-600 transition-colors hover:text-primary-600 after:absolute after:-inset-1 after:content-['']"
               title="Twitter"
             >
               <FaTwitter className="text-xl" />
@@ -107,7 +107,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-600 hover:text-primary-600 transition-colors"
+              className="relative text-slate-600 transition-colors hover:text-primary-600 after:absolute after:-inset-1 after:content-['']"
               title="LinkedIn"
             >
               <FaLinkedin className="text-xl" />
@@ -118,7 +118,7 @@ const TeamMemberCard = ({ member, showAffiliations = true }) => {
               href={member.links.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-600 hover:text-primary-600 transition-colors"
+              className="relative text-slate-600 transition-colors hover:text-primary-600 after:absolute after:-inset-1 after:content-['']"
               title="Website"
             >
               <FaGlobe className="text-xl" />

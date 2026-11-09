@@ -249,7 +249,7 @@ const Dynamo = () => (
                             />
                         </div>
                         <figcaption className="mt-3 px-1 text-xs leading-5 text-slate-500">
-                            <span className="font-mono text-slate-400">Fig. 1</span>
+                            <span className="font-mono text-slate-500">Fig. 1</span>
                             <span className="mx-1.5">·</span>
                             Interfaces between navigation, manipulation, perception, and scene state.
                         </figcaption>

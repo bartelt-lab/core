@@ -27,7 +27,7 @@ const UbbLayout = ({ children }) => {
             <img src={assetUrl('/logos/ubb-logo-only.webp')} alt="" className="h-10 w-10 object-contain" />
             <div className="leading-tight">
               <p className="text-sm font-bold tracking-tight text-slate-950">CORE Labs Cluj</p>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">Babeș-Bolyai University</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">Babeș-Bolyai University</p>
             </div>
           </Link>
 

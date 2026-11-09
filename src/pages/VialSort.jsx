@@ -238,7 +238,7 @@ const SpecStrip = () => (
                 key={item.label}
                 className="rounded-xl border border-slate-200 bg-white/70 px-4 py-3.5 shadow-sm backdrop-blur-sm transition duration-200 hover:border-primary-200 hover:shadow-md"
             >
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">{item.label}</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">{item.label}</p>
                 <p className="mt-1.5 text-sm font-bold text-slate-800">{item.value}</p>
             </div>
         ))}
@@ -332,12 +332,12 @@ const VialSort = () => (
                             <p className="text-xs font-bold text-slate-800">One HTTP interface in front of the hardware</p>
                             <p className="mt-1 text-xs leading-5 text-slate-500">
                                 The arm, the three cameras and the policy all sit on the Jetson behind an inference
-                                server: <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/execute</code> runs a
-                                commanded move, <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/home</code> returns
+                                server: <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px] text-slate-700">/execute</code> runs a
+                                commanded move, <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px] text-slate-700">/home</code> returns
                                 the arm to the training start pose,{' '}
-                                <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/observe</code> and{' '}
-                                <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/state</code> stream frames and
-                                status, and <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px]">/stop</code> halts
+                                <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px] text-slate-700">/observe</code> and{' '}
+                                <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px] text-slate-700">/state</code> stream frames and
+                                status, and <code className="rounded bg-slate-100 px-1 py-0.5 text-[11px] text-slate-700">/stop</code> halts
                                 motion. No client touches the hardware directly, so the browser panel and the
                                 evaluation harness drive the same robot through one surface.
                             </p>

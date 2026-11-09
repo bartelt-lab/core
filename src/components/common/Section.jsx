@@ -20,10 +20,12 @@ const Section = ({
     threshold: 0,
   })
 
+  // Slide only, never fade from 0: the prerendered HTML is captured before any
+  // section below the fold scrolls into view, and a 0-opacity start shipped
+  // those sections blank to crawlers, link previews and readers without JS.
   const variants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { y: 24 },
     visible: {
-      opacity: 1,
       y: 0,
       transition: { duration: 0.6, ease: 'easeOut' }
     },
