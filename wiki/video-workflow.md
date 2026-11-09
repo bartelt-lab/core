@@ -4,7 +4,9 @@ Step-by-step for getting a clip onto the site. The reasoning behind every rule h
 [`video.md`](./video.md) — read that if you want to know *why*, read this if you just want
 it done.
 
-There are three routes. Pick by how much you want to do yourself.
+There are three routes. Pick by how much you want to do yourself. Swapping a clip that
+is already on the site for a new cut is simpler: see
+[Replacing a clip already on the site](#replacing-a-clip-already-on-the-site).
 
 ---
 
@@ -63,7 +65,8 @@ ffprobe -v error -select_streams v:0 \
   -show_entries stream=codec_name,width,height,bit_rate,r_frame_rate \
   -show_entries format=duration,bit_rate -of default=nw=1 in.mp4
 
-# is the audio real, or digital silence? read mean_volume; -91 dB is silence
+# is the audio real, or digital silence? read mean_volume and max_volume;
+# -91 dB on both is silence, and the gate fails at -80 dB or below on both
 ffmpeg -i in.mp4 -vn -af volumedetect -f null -
 ```
 
@@ -163,6 +166,37 @@ npm run lint
 
 Fix anything it fails on. Size warnings are allowed through, but if a clip is over 25 MB,
 consider whether it needs to be that long before shipping it.
+
+---
+
+## Replacing a clip already on the site
+
+For a new cut of a video that is already registered, keep its file name so every link
+and call site keeps working:
+
+```bash
+npm run replace-video -- <id> <path/to/new.mp4> [--poster-at <seconds>]
+# e.g. npm run replace-video -- medicar ~/Downloads/Medicar-final.mp4 --poster-at 126
+```
+
+[`scripts/replace-video.mjs`](../scripts/replace-video.mjs) looks the `id` up in
+`src/data/videos.js` and encodes with that entry's bucket settings. It strips a silent
+track and falls back to a remux if the re-encode is not smaller. Then it overwrites the
+`.mp4`, its poster and the frame strip in place. The poster is taken at 3 s unless you
+pass `--poster-at`.
+
+What it does not do:
+
+- **Update the registry.** It prints the new duration. If the new cut shows something
+  different, rewrite `description` too: a stale description is the failure the gate
+  exists to prevent.
+- **Free any space.** Without LFS, the old file stays in Git history for good, so every
+  swap of an 80 MB film adds another 80 MB to every clone. Swap for a real new cut, not
+  for each trim.
+- **Track the wiki.** Its encode settings are a copy of the bucket table in
+  [`video.md`](./video.md#encode-buckets). Change both together.
+
+Then run the gate as in step 7.
 
 ---
 

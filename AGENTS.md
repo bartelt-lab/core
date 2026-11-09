@@ -26,8 +26,8 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
   CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
   merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`,
-  `/tuc/industry-projects`, `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses`,
-  `/tuc/join-us`, `/tuc/projects`. TUC navbar links out to the CORE Network
+  `/tuc/industry-projects`, `/tuc/industry-projects/medicar`, `/tuc/teaching`,
+  `/tuc/seminar`, `/tuc/theses`, `/tuc/join-us`, `/tuc/projects`. TUC navbar links out to the CORE Network
   site for `/network` and `/publications` (no `/tuc/publications`).
 
 Note: the AI Team Projects pages live in `pages/tuc/` but route under
@@ -154,6 +154,13 @@ src/
                                    NOTE: member `id` must be unique — a merge
                                    once produced duplicate ids; grep before reuse.
     projects.js                    CORE Labs projects metadata
+    industryProjects.js            /tuc/industry-projects tiles: `projects`
+                                   (text fields are [German, English] pairs;
+                                   an entry with `href` gets a clickable tile
+                                   and a detail page — only MediCar today),
+                                   PARTNER_LOGOS, domainClass()
+    videos.js                      video registry — every clip needs an entry
+                                   with a description (see Video below)
     demonstrations.js              demo cards
     publications.json              canonical publications source, 21 entries
     publications.js                imports that JSON at build time and exports
@@ -162,6 +169,10 @@ src/
                                    /data/publications.json is gone, and with it
                                    the empty first render and the prerendered
                                    pages that shipped with no publications.
+  i18n/                            EN/DE switch: LanguageProvider wraps every
+                                   shell in App.jsx, useLanguage() reads it.
+                                   Choice is kept in localStorage; default EN,
+                                   so prerendered HTML is English
   config/
     features.js                    build-time feature flags (see Feature flags
                                    below). Currently: showProjectPeople = false
@@ -172,10 +183,10 @@ src/
     about/ demonstrations/ hero/ network/ publications/ team/   core
     tuc/                           tuc-specific shells
       Layout.jsx                   minimal Tailwind sticky header + footer
-      ProjectCard.jsx
-      ProjectLayout.jsx            outer chrome for /tuc/core-team-projects/*
-      ProjectRow.jsx
-      PublicationItem.jsx          publication row (tuc-style)
+      ProjectLayout.jsx            outer chrome for /ai-team-projects/* subpages
+      FinishedProjectContent.jsx   body shared by the finished-project subpages
+      PartnerLogoStrip.jsx         partner logo row, reads PARTNER_LOGOS;
+                                   falls back to the name when no logo exists
     ubb/
       Layout.jsx                   /ubb header + footer. Its root div carries
                                    `theme-ubb`, which rebinds --site-* to the
@@ -189,7 +200,11 @@ src/
       Home.jsx                     bartelt landing (hero + members + contact)
       Teaching.jsx                   teaching subtree (/seminar, /theses route to it)
       JoinUs.jsx Projects.jsx AiTeamProjects.jsx
-      projects/{AI4AI,Dynamo,NeuroCore,SelfDriving,Stratego,TrafficNetwork,Vergabepilot}Project.jsx
+      IndustryProjects.jsx         /tuc/industry-projects, data from industryProjects.js
+      industry/MediCar.jsx         /tuc/industry-projects/medicar
+      projects/{AI4AI,FastMile,Lectra,NeuroCore,SelfDriving,Stratego,Tempo,
+                TrafficNetwork,Vergabepilot,Werewolfs}Project.jsx
+                                   routed under /ai-team-projects/*
     ubb/
       Home.jsx                     CORE Labs Cluj (/ubb), third shell. Carries
                                    the only site accent — see below
@@ -210,12 +225,15 @@ public/
   papers/                          16 publication preview images
   documents/project-descriptions/  2 PDFs, both currently unreferenced —
                                    nothing in src/ links a .pdf any more
-  images/projects/{ai4ai,dynamo,neurocore,stratego,vergabepilot}/
+  images/projects/<project>/       one folder per project subpage;
+                                   industry/ holds the industry tiles and
+                                   industry/medicar/
   images/locations.png             /network page map
   videos/core-labs-hero.mp4        core hero + shared hero-poster.webp
   videos/ai-team-projects/         AI4BIM, Vergabepilot, programme showcases
   videos/demonstrations/{dynamo,vial-sort,leader-following,neurocore,stratego,robotics}/
   videos/testimonials/             student testimonial mp4s
+  videos/industry-projects/        MediCar 4.0 project film
   tuc/iclr-2025/                   static subsite kept as-is (see issue 9)
 ```
 

@@ -103,7 +103,8 @@ tracks measuring −91 dB mean *and* max — digital silence — four of them en
 - Silent or muted-by-design: `-an`. Not "quiet", removed.
 - Real speech: AAC 96–128 kbps.
 - Check before deciding: `ffmpeg -i in.mp4 -vn -af volumedetect -f null -` and read
-  `mean_volume`. −91 dB means silence.
+  `mean_volume` and `max_volume` (ffmpeg prints them on stderr). −91 dB on both means
+  silence. The gate fails a track when both are at or below −80 dB.
 
 ## Faststart
 
