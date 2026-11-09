@@ -24,6 +24,8 @@
  *   image        optional — og:image override, as a /public path
  */
 
+import { news } from './data/news.js'
+
 export const SITE_URL = 'https://www.core-network.ai'
 export const SITE_NAME = 'CORE — Cognitive Software in Europe'
 export const DEFAULT_OG_IMAGE = '/og-image.png'
@@ -49,6 +51,22 @@ export const routes = [
     description: DEFAULT_ROUTE_META.description,
     canonical: '/',
   },
+  {
+    path: '/news',
+    source: 'src/data/news.js',
+    title: 'News | CORE',
+    description:
+      'News from the CORE Network: people, projects and results from the Cognitive Software research group at TU Clausthal and its partner universities.',
+  },
+  // One page per item in src/data/news.js. `source` is the data file, so
+  // <lastmod> moves when an article is edited, not when the page layout is.
+  ...news.map((item) => ({
+    path: `/news/${item.slug}`,
+    source: 'src/data/news.js',
+    title: `${item.title[1]} | CORE`,
+    description: item.teaser[1],
+    image: item.image,
+  })),
   {
     path: '/core-labs',
     source: 'src/pages/CoreLabs.jsx',

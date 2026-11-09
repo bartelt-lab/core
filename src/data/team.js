@@ -22,7 +22,13 @@ export const institutions = {
     name: 'University of Mannheim',
     shortName: 'Mannheim',
     location: 'Mannheim, Germany'
-   }
+   },
+  // Employer of a network member, not a member university.
+  NVIDIA: {
+    name: 'NVIDIA',
+    shortName: 'NVIDIA',
+    website: 'https://www.nvidia.com/'
+  }
 }
 
 // Team members with new schema
@@ -123,14 +129,16 @@ export const teamMembers = [
     name: 'Sascha Marton',
     slug: 'marton',
     prefix: 'Dr.',
-    title: 'Postdoc',
-    roleCategory: 'postdoc',
+    // Postdoc at TU Clausthal until he joined NVIDIA in November 2026; stays in
+    // the network (see src/data/news.js, 'sascha-marton-nvidia'). The TU email
+    // is dropped because the account goes with the position.
+    title: 'Network member, NVIDIA',
+    roleCategory: 'network_member',
     affiliations: [
-      { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
+      { institution: institutions.NVIDIA }
     ],
     photo: '/members/sascha-marton.webp',
-    bio: 'Postdoctoral researcher at TU Clausthal.',
-    email: 'sascha.marton@tu-clausthal.de',
+    bio: 'Researches tabular foundation models at NVIDIA. Former postdoc in the CORE group at TU Clausthal.',
     links: {
       scholar: 'https://scholar.google.com/citations?user=5PQJ3sEAAAAJ',
       github: 'https://github.com/s-marton',

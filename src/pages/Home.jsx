@@ -1,75 +1,99 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import {
-  FaArrowRight, FaBookOpen, FaBrain, FaEnvelope, FaExternalLinkAlt,
-  FaFlask, FaGlobe, FaGithub, FaLinkedin, FaServer, FaTwitter,
+  FaArrowRight, FaEnvelope, FaGithub, FaGlobe, FaLinkedin, FaTwitter,
 } from 'react-icons/fa'
 import { SiGooglescholar } from 'react-icons/si'
+import NewsCard from '../components/news/NewsCard'
+import { formatNewsDate } from '../components/news/newsText'
 import PublicationMiniCarousel from '../components/publications/PublicationMiniCarousel'
 import { getNetworkMembers, institutions } from '../data/team'
 import { cognitiveProjects } from '../data/demonstrations'
+import { projects as industryProjects } from '../data/industryProjects'
+import { newsByDate } from '../data/news'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
 
 // Deep-link prefix for a single team member, e.g. `/#member-szilagyi`.
 const MEMBER_HASH = '#member-'
 
-// Which project gets the homepage spotlight. Swap the id to feature a different one
-// (it must be a non-teaser entry in cognitiveProjects with an /images/projects/<id>/hero.webp).
-const FEATURED_PROJECT_ID = 'dynamo'
+const txt = (pick, pair) => pick(pair[1], pair[0])
 
-const pillars = [
-  { to: '/core-labs', icon: FaFlask, eyebrow: 'Research Labs', title: 'CORE Labs', body: 'Joint laboratory infrastructure spanning Goslar, Cluj-Napoca, and Rostock.' },
-  { to: '/ai-team-projects', icon: FaBrain, eyebrow: 'Education & Projects', title: 'AI Team Projects', body: 'Semester-long, cross-national student projects jointly run by TU Clausthal and Babeș-Bolyai University.' },
-  { to: '/compute-cluster', icon: FaServer, eyebrow: 'Infrastructure', title: 'Compute Cluster', body: 'Shared GPU infrastructure, dataset storage, and simulation environments for CORE researchers.' },
-  { to: '/publications', icon: FaBookOpen, eyebrow: 'Research Output', title: 'Publications', body: 'Peer-reviewed papers, preprints, and workshop contributions from the CORE Network.' },
+const eyebrow = 'mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700'
+const sectionTitle = 'font-heading text-3xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl'
+
+// Research highlights: the page each card opens, its photo and a one-line
+// summary. Titles and links come from the project data so a rename follows.
+const medicar = industryProjects.find((p) => p.slug === 'medicar')
+const project = (id) => cognitiveProjects.find((p) => p.id === id)
+const highlights = [
+  {
+    title: project('dynamo').title,
+    to: project('dynamo').link,
+    image: '/images/projects/dynamo/hero.webp',
+    summary: ['Dynamische Manipulation für kognitive Roboter', 'Dynamic manipulation for cognitive robots'],
+  },
+  {
+    title: medicar.title,
+    to: medicar.href,
+    image: '/images/projects/industry/medicar/corridor.webp',
+    focus: '61% 50%',
+    summary: ['Autonomer Transport im Krankenhaus, mit LLM-Routing', 'Autonomous hospital transport with LLM routing'],
+  },
+  {
+    title: project('vial-sort').title,
+    to: project('vial-sort').link,
+    image: '/images/projects/vial-sort/hero.webp',
+    summary: ['Sprachgesteuertes Sortieren mit einer VLA-Policy', 'Language-conditioned sorting with a VLA policy'],
+  },
+  {
+    title: project('leader-following').title,
+    to: project('leader-following').link,
+    image: '/images/projects/leader-following/hero.webp',
+    summary: ['Personenverfolgung auf einer mobilen Roboterbasis', 'Person tracking on a mobile robot base'],
+  },
 ]
 
-const LinkIcons = ({ member }) => (
-  <div className="flex max-w-[10rem] flex-wrap items-center justify-center gap-1.5 self-center">
-    {member.email && (
-      <a href={`mailto:${member.email}`} title="Email" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaEnvelope className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.scholar && (
-      <a href={member.links.scholar} target="_blank" rel="noopener noreferrer" title="Google Scholar" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <SiGooglescholar className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.github && (
-      <a href={member.links.github} target="_blank" rel="noopener noreferrer" title="GitHub" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaGithub className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.twitter && (
-      <a href={member.links.twitter} target="_blank" rel="noopener noreferrer" title="Twitter" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaTwitter className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.linkedin && (
-      <a href={member.links.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaLinkedin className="h-3.5 w-3.5" />
-      </a>
-    )}
-    {member.links?.website && (
-      <a href={member.links.website} target="_blank" rel="noopener noreferrer" title="Website" className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-300 hover:text-primary-600">
-        <FaGlobe className="h-3.5 w-3.5" />
-      </a>
-    )}
-  </div>
-)
+// Member universities of the network, in display order. `to` stays on this
+// site, `href` leaves it.
+const sites = [
+  { institution: institutions.TUC, logo: '/logos/clausthal-logo.webp', to: '/tuc', lab: ['Cognitive Software, ISSE', 'Cognitive Software, ISSE'] },
+  { institution: institutions.UBB, logo: '/logos/ubb-logo.webp', to: '/ubb', lab: ['CORE Labs Cluj', 'CORE Labs Cluj'] },
+  { institution: institutions.ROSTOCK, logo: '/logos/rostock-logo.webp', href: institutions.ROSTOCK.website, lab: ['MDS Lab', 'MDS Lab'] },
+]
+
+const COUNT_WORDS = { 2: ['Zwei', 'Two'], 3: ['Drei', 'Three'], 4: ['Vier', 'Four'], 5: ['Fünf', 'Five'] }
+
+const LINK_ICONS = [
+  { key: 'scholar', icon: SiGooglescholar, title: 'Google Scholar' },
+  { key: 'github', icon: FaGithub, title: 'GitHub' },
+  { key: 'linkedin', icon: FaLinkedin, title: 'LinkedIn' },
+  { key: 'twitter', icon: FaTwitter, title: 'Twitter' },
+  { key: 'website', icon: FaGlobe, title: 'Website' },
+]
+
+const LinkIcons = ({ member }) => {
+  const iconClass = 'flex h-7 w-7 items-center justify-center rounded-full text-slate-400 transition hover:bg-primary-50 hover:text-primary-700'
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-0.5">
+      {member.email && (
+        <a href={`mailto:${member.email}`} title="Email" aria-label={`Email ${member.name}`} className={iconClass}>
+          <FaEnvelope className="h-3.5 w-3.5" />
+        </a>
+      )}
+      {LINK_ICONS.filter(({ key }) => member.links?.[key]).map(({ key, icon: Icon, title }) => (
+        <a key={key} href={member.links[key]} target="_blank" rel="noopener noreferrer" title={title} aria-label={`${member.name} on ${title}`} className={iconClass}>
+          <Icon className="h-3.5 w-3.5" />
+        </a>
+      ))}
+    </div>
+  )
+}
 
 const Home = () => {
-  const { pick } = useLanguage()
+  const { pick, language } = useLanguage()
   const members = getNetworkMembers().filter((m) => !['research_assistant', 'support_staff'].includes(m.roleCategory))
-  const featured = cognitiveProjects.find((project) => project.id === FEATURED_PROJECT_ID)
-  const partnerLogos = [
-    { name: 'TU Clausthal', src: '/logos/clausthal-logo.webp', to: '/tuc' },
-    { name: 'UBB', src: '/logos/ubb-logo.webp', href: institutions.UBB.website },
-    { name: 'University of Rostock', src: '/logos/rostock-logo.webp', href: institutions.ROSTOCK.website },
-  ]
+  const [leadNews, ...moreNews] = newsByDate
 
   // Other pages deep-link a single person as `/#member-<slug>` (see the
   // institutions card on /core-labs). The browser cannot honour that hash on a
@@ -108,208 +132,269 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <section id="hero" className="relative min-h-screen overflow-hidden bg-[#f7fafc] text-slate-950">
+      {/* ── Hero ── */}
+      <section id="hero" className="relative overflow-hidden bg-[#f7fafc] text-slate-950">
         <img src={assetUrl('/images/hero/core-network-hero.webp')} alt="" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover object-center opacity-60" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#f7fafc] via-[#f7fafc]/95 via-[40%] to-[#f7fafc]/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/40" />
 
-        <div className="container relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-6 pb-14 pt-28 md:px-12 lg:px-20">
-          <div className="w-full max-w-6xl">
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-              <div className="max-w-2xl">
-                <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Research Network', 'Forschungsnetzwerk')}</p>
-                <h1 className="mb-6 text-4xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-5xl lg:text-6xl">
-                  {pick(
-                    <>Cognitive Software<br className="hidden md:block" /> in Europe.</>,
-                    <>Kognitive Software<br className="hidden md:block" /> in Europa.</>,
-                  )}
-                </h1>
-                <p className="mb-4 max-w-xl text-lg leading-8 text-slate-600 md:text-xl">
-                  {pick(
-                    'Shared labs, shared compute, one mission: cognitive systems that perceive, reason, and act.',
-                    'Gemeinsame Labore, gemeinsame Rechenleistung, eine Mission: kognitive Systeme, die wahrnehmen, schlussfolgern und handeln.',
-                  )}
-                </p>
-              </div>
-
-              {featured && (
-                <Link
-                  to={featured.link}
-                  aria-label={`Featured project: ${featured.title}`}
-                  className="group relative block w-44 shrink-0 overflow-hidden rounded-3xl border border-white/70 shadow-2xl shadow-slate-300/50 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl sm:w-52"
-                >
-                  <div className="relative aspect-square">
-                    <img
-                      src={assetUrl(`/images/projects/${featured.id}/hero.webp`)}
-                      alt={featured.title}
-                      decoding="async"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-300">{pick('Featured project', 'Ausgewähltes Projekt')}</p>
-                      <div className="mt-1 flex items-center justify-between gap-2">
-                        <h3 className="font-heading text-lg font-bold leading-tight">{featured.title}</h3>
-                        <FaArrowRight className="h-3.5 w-3.5 shrink-0 -rotate-45 transition group-hover:rotate-0" aria-hidden="true" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              )}
-            </div>
-
-            <PublicationMiniCarousel />
-          </div>
-        </div>
-      </section>
-
-      <section id="about" className="border-t border-slate-100 bg-white py-16 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-          <div className="mb-12 max-w-3xl">
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('The Network', 'Das Netzwerk')}</p>
-              <h2 className="mb-5 text-4xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-5xl">
+        <div className="container relative z-10 mx-auto flex max-w-6xl items-center px-6 pb-16 pt-32 md:px-12 md:pb-20 lg:min-h-[78vh] lg:px-20">
+          <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
+            <div className="max-w-2xl">
+              <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Research Network', 'Forschungsnetzwerk')}</p>
+              <h1 className="mb-6 text-4xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-5xl lg:text-6xl">
                 {pick(
-                  <>Three universities,<br className="hidden sm:block" /> one research platform</>,
-                  <>Drei Universitäten,<br className="hidden sm:block" /> eine Forschungsplattform</>,
+                  <>Cognitive Software<br className="hidden md:block" /> in Europe.</>,
+                  <>Kognitive Software<br className="hidden md:block" /> in Europa.</>,
                 )}
-              </h2>
-              <p className="text-lg leading-8 text-slate-600">
+              </h1>
+              <p className="max-w-xl text-lg leading-8 text-slate-600 md:text-xl">
                 {pick(
-                  'CORE unites TU Clausthal, the University of Rostock, and Babeș-Bolyai University into a single distributed entity spanning Germany and Romania.',
-                  'CORE verbindet die TU Clausthal, die Universität Rostock und die Babeș-Bolyai University zu einer verteilten Einheit über Deutschland und Rumänien hinweg.',
+                  'Shared labs, shared compute, one mission: cognitive systems that perceive, reason, and act.',
+                  'Gemeinsame Labore, gemeinsame Rechenleistung, eine Mission: kognitive Systeme, die wahrnehmen, schlussfolgern und handeln.',
                 )}
               </p>
-          </div>
-
-          <div className="grid gap-6 lg:grid-cols-[260px_1fr] lg:items-stretch">
-            <div className="flex flex-col">
-              <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Member Institutions', 'Mitgliedsinstitutionen')}</p>
-              <div className="grid flex-1 gap-4">
-                {partnerLogos.map((logo) => {
-                  const content = (
-                    <div className="group relative flex h-full cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-1 shadow-sm ring-primary-100 transition hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md hover:ring-4">
-                      <img src={assetUrl(logo.src)} alt={logo.name} loading="lazy" decoding="async" className={`object-contain ${logo.name === 'UBB' ? 'max-h-[6.5rem] max-w-full' : 'max-h-[5.5rem] max-w-[90%]'}`} />
-                      <FaArrowRight className="absolute right-3 top-3 h-3 w-3 -rotate-45 text-secondary-600 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
-                    </div>
-                  )
-                  return logo.to ? (
-                    <Link key={logo.name} to={logo.to} aria-label={`Open ${logo.name} lab page`}>{content}</Link>
-                  ) : (
-                    <a key={logo.name} href={logo.href} target="_blank" rel="noreferrer" aria-label={`Open ${logo.name} website`}>{content}</a>
-                  )
-                })}
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#research" className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700">
+                  {pick('See our research', 'Unsere Forschung')}
+                  <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+                </a>
+                <Link to="/tuc/join-us" className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-sm font-bold text-slate-900 backdrop-blur transition hover:border-primary-400 hover:text-primary-700">
+                  {pick('Join us', 'Mitmachen')}
+                </Link>
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl">
-              <div className="relative h-full min-h-[340px]">
-                <img src={assetUrl('/images/locations.webp')} alt="CORE Network Map" loading="lazy" decoding="async" className="h-full w-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 text-white">
-                  <p className="text-sm font-bold uppercase tracking-widest text-primary-200">{pick('CORE Network Map', 'CORE-Netzwerkkarte')}</p>
-                  <h3 className="mt-2 text-2xl font-bold">{pick('Distributed Research Network', 'Verteiltes Forschungsnetzwerk')}</h3>
-                  <p className="mt-1 text-sm text-slate-200">{pick('Connecting innovation hubs across Germany and Romania.', 'Wir verbinden Innovationsstandorte in Deutschland und Rumänien.')}</p>
-                </div>
-              </div>
-            </div>
+            {leadNews && (
+              <Link
+                to={`/news/${leadNews.slug}`}
+                className="group flex items-center gap-4 rounded-2xl border border-white/70 bg-white/85 p-3 shadow-xl shadow-slate-300/40 backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-primary-200"
+              >
+                <img
+                  src={assetUrl(leadNews.image)}
+                  alt=""
+                  decoding="async"
+                  style={leadNews.imageFocus ? { objectPosition: leadNews.imageFocus } : undefined}
+                  className="h-20 w-20 shrink-0 rounded-xl object-cover"
+                />
+                <span className="min-w-0">
+                  <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary-500" aria-hidden="true" />
+                    {pick('Latest news', 'Neuigkeit')}
+                  </span>
+                  <span className="mt-1 line-clamp-3 block text-sm font-bold leading-5 text-slate-950 transition-colors group-hover:text-primary-700">{txt(pick, leadNews.title)}</span>
+                  <span className="mt-1 block text-xs font-semibold text-slate-500">{formatNewsDate(leadNews.date, language)}</span>
+                </span>
+              </Link>
+            )}
           </div>
         </div>
       </section>
 
-      <section id="platform" className="border-t border-slate-100 bg-white py-16 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-          <div className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick("What's in the Network", 'Was zum Netzwerk gehört')}</p>
-            <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">{pick('Four pillars of the CORE platform', 'Vier Säulen der CORE-Plattform')}</h2>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {pillars.map(({ to, icon: Icon, eyebrow, title, body }) => (
-              <Link key={to} to={to} className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-lg">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-slate-950 text-white transition group-hover:bg-secondary-500 group-hover:text-slate-950">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
+      {/* ── News ── */}
+      {leadNews && (
+        <section id="news" className="border-t border-slate-100 bg-white py-16 md:py-20">
+          <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className={eyebrow}>{pick('News', 'Neuigkeiten')}</p>
+                <h2 className={sectionTitle}>{pick('What is happening at CORE', 'Was bei CORE passiert')}</h2>
+              </div>
+              <Link to="/news" className="inline-flex items-center gap-2 text-sm font-bold text-primary-700 transition hover:text-primary-800">
+                {pick('All news', 'Alle Neuigkeiten')}
+                <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+              </Link>
+            </div>
+            <div className={moreNews.length > 0 ? 'grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]' : ''}>
+              <NewsCard item={leadNews} variant="lead" />
+              {moreNews.length > 0 && (
+                <div className="flex flex-col gap-4">
+                  {moreNews.slice(0, 3).map((item) => (
+                    <NewsCard key={item.slug} item={item} variant="compact" />
+                  ))}
                 </div>
-                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary-700">{pick(eyebrow, {
-                  'Research Labs': 'Forschungslabore',
-                  'Education & Projects': 'Lehre & Projekte',
-                  Infrastructure: 'Infrastruktur',
-                  'Research Output': 'Forschungsergebnisse',
-                }[eyebrow] || eyebrow)}</p>
-                <h3 className="mb-2 text-base font-bold text-slate-950 group-hover:text-primary-700 transition-colors">{pick(title, {
-                  'AI Team Projects': 'AI-Team-Projekte',
-                  'Compute Cluster': 'Rechencluster',
-                  Publications: 'Publikationen',
-                }[title] || title)}</h3>
-                <p className="flex-1 text-sm leading-6 text-slate-600">{pick(body, {
-                  'CORE Labs': 'Gemeinsame Laborinfrastruktur über Goslar, Cluj-Napoca und Rostock hinweg.',
-                  'AI Team Projects': 'Semesterlange, internationale Studierendenprojekte, gemeinsam durchgeführt von der TU Clausthal und der Babes-Bolyai University.',
-                  'Compute Cluster': 'Gemeinsame GPU-Infrastruktur, Datenspeicher und Simulationsumgebungen für CORE-Forschende.',
-                  Publications: 'Begutachtete Artikel, Preprints und Workshop-Beiträge aus dem CORE Network.',
-                }[title] || body)}</p>
-                <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary-700">{pick('Explore', 'Entdecken')} <FaArrowRight className="h-2.5 w-2.5" aria-hidden="true" /></div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── Research highlights ── */}
+      <section id="research" className="scroll-mt-24 border-t border-slate-100 bg-slate-50 py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <p className={eyebrow}>{pick('Research', 'Forschung')}</p>
+              <h2 className={sectionTitle}>{pick('Robots and AI systems we build', 'Roboter und KI-Systeme, die wir bauen')}</h2>
+            </div>
+            <Link to="/core-labs" className="inline-flex items-center gap-2 text-sm font-bold text-primary-700 transition hover:text-primary-800">
+              {pick('All of CORE Labs', 'Zu CORE Labs')}
+              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+            {highlights.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.55)]"
+              >
+                <img
+                  src={assetUrl(item.image)}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  style={item.focus ? { objectPosition: item.focus } : undefined}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                <div className="relative p-3 text-white sm:p-5">
+                  <h3 className="flex items-center justify-between gap-2 font-heading text-base font-bold leading-tight sm:text-xl">
+                    {item.title}
+                    <FaArrowRight className="h-3.5 w-3.5 shrink-0 -rotate-45 transition group-hover:rotate-0" aria-hidden="true" />
+                  </h3>
+                  <p className="mt-1 text-xs leading-4 text-slate-200 sm:text-sm sm:leading-5">{txt(pick, item.summary)}</p>
+                </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="team" className="border-t border-slate-100 bg-slate-50 py-16 md:py-24">
+      {/* ── Publications ── */}
+      <section id="publications" className="border-t border-slate-100 bg-white py-16 md:py-20">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-          <div className="mb-12 max-w-xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">{pick('People', 'Menschen')}</p>
-            <h2 className="text-3xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">{pick('Research team', 'Forschungsteam')}</h2>
-            <p className="mt-3 text-base leading-7 text-slate-600">{pick('Faculty, postdoctoral researchers, and PhD students across all three CORE institutions.', 'Professorinnen und Professoren, Postdocs und Promovierende an allen drei CORE-Institutionen.')}</p>
+          <h2 className="sr-only">{pick('Latest publications', 'Neueste Publikationen')}</h2>
+          <PublicationMiniCarousel />
+        </div>
+      </section>
+
+      {/* ── Network ── */}
+      <section id="network" className="border-t border-slate-100 bg-white py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-center">
+            <div>
+              <p className={eyebrow}>{pick('The Network', 'Das Netzwerk')}</p>
+              <h2 className={sectionTitle}>
+                {pick(
+                  `${txt(pick, COUNT_WORDS[sites.length])} universities, one research platform`,
+                  `${txt(pick, COUNT_WORDS[sites.length])} Universitäten, eine Forschungsplattform`,
+                )}
+              </h2>
+              <p className="mt-4 text-base leading-7 text-slate-600">
+                {pick(
+                  'CORE connects labs, compute and people across its member universities. Projects, students and researchers move between the sites.',
+                  'CORE verbindet Labore, Rechenleistung und Menschen an seinen Mitgliedsuniversitäten. Projekte, Studierende und Forschende wechseln zwischen den Standorten.',
+                )}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
+                <Link to="/compute-cluster" className="inline-flex items-center gap-1.5 text-primary-700 transition hover:text-primary-800">
+                  {pick('Compute Cluster', 'Rechencluster')} <FaArrowRight className="h-2.5 w-2.5" aria-hidden="true" />
+                </Link>
+                <Link to="/ai-team-projects" className="inline-flex items-center gap-1.5 text-primary-700 transition hover:text-primary-800">
+                  {pick('AI Team Projects', 'AI-Team-Projekte')} <FaArrowRight className="h-2.5 w-2.5" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+            <ul className="grid gap-4 sm:grid-cols-3">
+              {sites.map(({ institution, logo, to, href, lab }) => {
+                const content = (
+                  <>
+                    <div className="flex h-14 w-28 shrink-0 items-center justify-center sm:h-24 sm:w-auto">
+                      <img src={assetUrl(logo)} alt={institution.name} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain sm:max-h-20 sm:max-w-[85%]" />
+                    </div>
+                    <div className="min-w-0 sm:mt-3 sm:border-t sm:border-slate-100 sm:pt-3">
+                      <p className="text-sm font-bold text-slate-950 transition-colors group-hover:text-primary-700">{txt(pick, lab)}</p>
+                      <p className="mt-0.5 text-xs text-slate-500">{institution.location}</p>
+                    </div>
+                  </>
+                )
+                const className = 'group flex h-full items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md sm:block'
+                return (
+                  <li key={institution.shortName}>
+                    {to ? (
+                      <Link to={to} className={className}>{content}</Link>
+                    ) : (
+                      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
           </div>
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {members.map((member, i) => (
-              <motion.div
+        </div>
+      </section>
+
+      {/* ── People ── */}
+      <section id="team" className="border-t border-slate-100 bg-slate-50 py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <div className="mb-8 max-w-xl">
+            <p className={eyebrow}>{pick('People', 'Menschen')}</p>
+            <h2 className={sectionTitle}>{pick('Research team', 'Forschungsteam')}</h2>
+            <p className="mt-3 text-base leading-7 text-slate-600">{pick('Faculty, postdoctoral researchers, PhD students and network members across the CORE institutions.', 'Professorinnen und Professoren, Postdocs, Promovierende und Netzwerkmitglieder an den CORE-Institutionen.')}</p>
+          </div>
+          {/* No entrance animation: the prerendered HTML must show every card
+              without JavaScript (it shipped at opacity 0 before). */}
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {members.map((member) => (
+              <li
                 key={member.id}
                 id={`member-${member.slug}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04, duration: 0.4 }}
-                className={`group relative grid h-[19rem] scroll-mt-28 grid-rows-[5rem_4rem_2.5rem_4.5rem] justify-items-center gap-1 overflow-hidden rounded-lg border bg-white p-4 shadow-sm transition hover:border-primary-200 hover:shadow-md ${
+                className={`relative flex scroll-mt-28 flex-col items-center rounded-xl border bg-white px-3 pb-3 pt-5 text-center shadow-sm transition hover:border-primary-200 hover:shadow-md ${
                   highlightedSlug === member.slug
                     ? 'border-primary-500 ring-2 ring-primary-400 ring-offset-2'
                     : 'border-slate-200'
                 }`}
               >
-                <div className="absolute left-0 top-3 flex flex-col gap-1">
+                <div className="absolute left-0 top-2.5 flex flex-col gap-1">
                   {member.affiliations.map((a) => (
                     <span key={a.institution.shortName} className="rounded-r-md bg-primary-600 py-0.5 pl-1.5 pr-2 text-[9px] font-bold uppercase tracking-wide text-white shadow-sm">{a.institution.shortName}</span>
                   ))}
                 </div>
-                <div className="h-20 w-20 overflow-hidden rounded-full border border-slate-200 bg-slate-100">
-                  <img src={assetUrl(member.photo)} alt={member.name} loading="lazy" className="h-full w-full object-cover" />
+                <img src={assetUrl(member.photo)} alt={member.name} loading="lazy" decoding="async" className="h-16 w-16 rounded-full border border-slate-200 bg-slate-100 object-cover" />
+                <p className="mt-3 text-sm font-bold leading-5 text-slate-950">{member.prefix ? `${member.prefix} ` : ''}{member.name}</p>
+                <p className="mt-0.5 text-xs font-semibold leading-5 text-primary-700">{member.title}</p>
+                <div className="mt-auto pt-2">
+                  <LinkIcons member={member} />
                 </div>
-                <p className="flex h-full items-center text-center text-sm font-bold leading-5 text-slate-950">{member.prefix ? `${member.prefix} ` : ''}{member.name}</p>
-                <p className="flex h-full items-center text-center text-xs font-semibold leading-5 text-primary-700">{member.title}</p>
-                <LinkIcons member={member} />
-              </motion.div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      <section id="contact" className="border-t border-slate-200 bg-slate-950 py-16 text-white">
-        <div className="container mx-auto max-w-4xl px-6 text-center md:px-12">
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-300">{pick('Get in touch', 'Kontakt')}</p>
-          <h2 className="mb-4 text-3xl font-heading font-bold md:text-4xl">{pick('Collaborate with the CORE Network', 'Mit dem CORE Network zusammenarbeiten')}</h2>
-          <p className="mx-auto mb-8 max-w-xl text-base leading-7 text-slate-300">
-            {pick(
-              'We welcome collaboration proposals from researchers and institutions interested in cognitive software, autonomous systems, and AI research.',
-              'Wir freuen uns über Kooperationsvorschläge von Forschenden und Institutionen mit Interesse an kognitiver Software, autonomen Systemen und KI-Forschung.',
-            )}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="mailto:bartelt@isse.tu-clausthal.de" className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition hover:bg-primary-50">
-              bartelt@isse.tu-clausthal.de
-              <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
-            </a>
-            <Link to="/publications" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-bold text-white transition hover:border-white/50">
-              {pick('Browse publications', 'Publikationen ansehen')}
-              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
-            </Link>
+      {/* ── Join and collaborate ── */}
+      <section id="contact" className="border-t border-slate-200 bg-slate-950 py-16 text-white md:py-20">
+        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <div className="grid gap-5 md:grid-cols-2">
+            <div className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-300">{pick('PhD and research', 'Promotion und Forschung')}</p>
+              <h2 className="font-heading text-2xl font-bold md:text-3xl">{pick('Do a PhD with us', 'Promovieren bei CORE')}</h2>
+              <p className="mt-3 text-base leading-7 text-slate-300">
+                {pick(
+                  'Fundamental research, practical applications and exchange with international research and industry partners.',
+                  'Grundlagenforschung, praktische Anwendungen und Austausch mit internationalen Forschungs- und Industriepartnern.',
+                )}
+              </p>
+              <Link to="/tuc/join-us" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-950 shadow-lg transition hover:bg-primary-100">
+                {pick('Open positions', 'Offene Stellen')}
+                <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-300">{pick('Get in touch', 'Kontakt')}</p>
+              <h2 className="font-heading text-2xl font-bold md:text-3xl">{pick('Collaborate with the CORE Network', 'Mit dem CORE Network zusammenarbeiten')}</h2>
+              <p className="mt-3 text-base leading-7 text-slate-300">
+                {pick(
+                  'We welcome collaboration proposals from researchers and institutions interested in cognitive software, autonomous systems, and AI research.',
+                  'Wir freuen uns über Kooperationsvorschläge von Forschenden und Institutionen mit Interesse an kognitiver Software, autonomen Systemen und KI-Forschung.',
+                )}
+              </p>
+              <a href="mailto:bartelt@isse.tu-clausthal.de" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-bold text-white transition hover:border-white/60">
+                <FaEnvelope className="h-3.5 w-3.5" aria-hidden="true" />
+                bartelt@isse.tu-clausthal.de
+              </a>
+            </div>
           </div>
         </div>
       </section>

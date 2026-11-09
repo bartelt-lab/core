@@ -16,6 +16,7 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
   Routes (all in `CoreShell`): `/` (CORE Network landing, `pages/Home.jsx`),
   `/network` (renders the same `Home.jsx`), `/core-labs` (`pages/CoreLabs.jsx`),
   `/demos`, `/dynamo`, `/leader-following`, `/vial-sort`, `/publications`,
+  `/news`, `/news/<slug>` (`pages/News.jsx`, `pages/NewsArticle.jsx`),
   `/compute-cluster`, `/ubb`, `/ai-team-projects`
   (`pages/tuc/AiTeamProjects.jsx`) plus 11 project subpages under
   `/ai-team-projects/{tempo,lectra,fastmile,human-awareness-detection,ai4bim,
@@ -148,7 +149,8 @@ src/
                                    .lab-hero-wash) — see
                                    wiki/visual-identity.md before editing it
   data/
-    team.js                        20 members + 4 institutions + helpers
+    team.js                        20 members + 5 institutions (NVIDIA is an
+                                   employer, not a member university) + helpers
                                    (getCoreLabsLeads, getMembersByInstitution,
                                     getMemberBySlug, getMembersGroupedByRole)
                                    NOTE: member `id` must be unique — a merge
@@ -163,6 +165,10 @@ src/
                                    with a description (see Video below)
     demonstrations.js              demo cards
     publications.json              canonical publications source, 21 entries
+    news.js                        News items ([German, English] text, links as
+                                   [label](href)). routes.js imports it, so each
+                                   item gets a prerendered /news/<slug> page;
+                                   keep it free of bundler imports
     publications.js                imports that JSON at build time and exports
                                    it sorted newest-first. Import from here —
                                    the old runtime fetch of
@@ -395,13 +401,15 @@ won't highlight). Two traps:
      `#science #architecture`) render inside `#extra` as children.
    - `ProjectLayout` only renders `#evaluation` when `showEvalSection !== false`
      (neurocore/stratego/traffic-network/self-driving pass `false`).
-   - `/` and `/network` render the same `Home.jsx`; it has NO `#partners` or
-     `#publications` (it uses `PublicationMiniCarousel`, which has no id).
+   - `/` and `/network` render the same `Home.jsx`. Its `#publications` is the
+     section wrapping `PublicationMiniCarousel`; the carousel itself has no id.
 2. **Dot order should follow DOM order**, or scroll-spy highlights the wrong
    dot. On `/core-labs` the demos render before `#publications`.
 
 Current verified configs: `/` and `/network` →
-`hero, about, platform, team, contact`; `/core-labs` →
+`hero, news, research, publications, network, team, contact` (rebuilt
+2026-11, when News was added); `#news` only renders while `news.js` has an
+item; `/core-labs` →
 `hero, initiative, dynamo, autonomous, publications` (the `#team` "Lab leads"
 grid was deleted 2026-09-16; its dot went with it); `/ai-team-projects`
 → `hero, active-projects, testimonials, archive`; `/compute-cluster` →

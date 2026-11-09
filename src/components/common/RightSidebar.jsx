@@ -8,10 +8,12 @@ const ROUTE_SECTIONS = {
     // CORE routes
     '/': [
         { id: 'hero', label: 'Home' },
-        { id: 'about', label: 'About' },
-        { id: 'platform', label: 'Platform' },
+        { id: 'news', label: 'News' },
+        { id: 'research', label: 'Research' },
+        { id: 'publications', label: 'Papers' },
+        { id: 'network', label: 'Network' },
         { id: 'team', label: 'Team' },
-        { id: 'contact', label: 'Contact' },
+        { id: 'contact', label: 'Join us' },
     ],
     '/core-labs': [
         { id: 'hero', label: 'Overview' },
@@ -23,10 +25,12 @@ const ROUTE_SECTIONS = {
     '/dynamo': [],
     '/network': [
         { id: 'hero', label: 'Network' },
-        { id: 'about', label: 'About' },
-        { id: 'platform', label: 'Platform' },
+        { id: 'news', label: 'News' },
+        { id: 'research', label: 'Research' },
+        { id: 'publications', label: 'Papers' },
+        { id: 'network', label: 'Network' },
         { id: 'team', label: 'Team' },
-        { id: 'contact', label: 'Contact' },
+        { id: 'contact', label: 'Join us' },
     ],
     '/publications': [],
     '/ai-team-projects': [

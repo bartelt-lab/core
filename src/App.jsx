@@ -12,6 +12,8 @@ import UbbLayout from './components/ubb/Layout'
 
 // CORE pages
 const Home = lazy(() => import('./pages/Home'))
+const News = lazy(() => import('./pages/News'))
+const NewsArticle = lazy(() => import('./pages/NewsArticle'))
 const CoreLabs = lazy(() => import('./pages/CoreLabs'))
 const Demos = lazy(() => import('./pages/Demos'))
 const Dynamo = lazy(() => import('./pages/Dynamo'))
@@ -60,6 +62,8 @@ function CoreShell() {
             <Route path="/demos" element={<Demos />} />
             <Route path="/network" element={<Home />} />
             <Route path="/publications" element={<Publications />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:slug" element={<NewsArticle />} />
             <Route path="/dynamo" element={<Dynamo />} />
             <Route path="/leader-following" element={<LeaderFollowing />} />
             <Route path="/vial-sort" element={<VialSort />} />
