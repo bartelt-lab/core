@@ -79,8 +79,8 @@ export const projects = [
             'MediCar 4.0 develops highly automated electric vehicle systems and modular containers for safe on-demand transport processes in hospitals.',
         ],
         contribution: [
-            'Unser Beitrag ist die robuste Multi-Agenten-Koordination autonomer Fahrzeugflotten sowie die Absicherung ihres Verhaltens in dynamischen Klinikfluren mit Menschen, Übergabepunkten und wechselnden Transportaufträgen.',
-            'Our contribution is robust multi-agent coordination of autonomous vehicle fleets and safeguarding their behavior in dynamic hospital corridors with people, handover points, and changing transport tasks.',
+            'Wir entwickeln lernfähiges Routing mit großen Sprachmodellen, das Meldungen aus dem Klinikbetrieb in Echtzeit in neue Routen übersetzt, sowie Roboter, die Transportboxen autonom be- und entladen. Trainiert und abgesichert wird auf dem GenAI-Cluster der TU Clausthal.',
+            'We develop adaptive routing with large language models that turns reports from hospital staff into new routes in real time, and robots that load and unload transport boxes autonomously. Training and validation run on the TU Clausthal GenAI-Cluster.',
         ],
         visual: assetUrl('/images/projects/industry/medicar.webp'),
     },

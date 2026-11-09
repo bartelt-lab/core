@@ -221,7 +221,7 @@ export const routes = [
     source: 'src/pages/tuc/industry/MediCar.jsx',
     title: 'MediCar 4.0 | Cognitive Software, TU Clausthal',
     description:
-      'MediCar 4.0 develops autonomous transport robots for hospitals, piloted at the University Medical Center Freiburg. Project film, idea, and our role in fleet coordination.',
+      'MediCar 4.0: autonomous hospital transport, tested at the University Medical Center Freiburg. Our part: LLM-based adaptive routing and robotics, trained on the GenAI-Cluster.',
     image: '/images/projects/industry/medicar/corridor.webp',
   },
   {

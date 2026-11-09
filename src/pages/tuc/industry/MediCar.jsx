@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiArrowLeft, FiArrowUpRight, FiDownload, FiMail } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiArrowUpRight, FiCpu, FiDownload, FiMail } from 'react-icons/fi';
 import LazyVideo from '../../../components/common/LazyVideo';
 import PartnerLogoStrip from '../../../components/tuc/PartnerLogoStrip';
 import { projects, domainClass } from '../../../data/industryProjects';
@@ -15,26 +15,30 @@ const film = videos.find((v) => v.id === 'medicar');
 
 const IMG = '/images/projects/industry/medicar';
 
-const gallery = [
+// Text pairs are [German, English], like in src/data/industryProjects.js.
+const contributions = [
     {
-        src: `${IMG}/lidar.webp`,
+        image: `${IMG}/routing-severity.webp`,
+        title: ['Lernfähiges Routing mit Sprachmodellen', 'Adaptive routing with language models'],
+        body: [
+            'Klassische Routenführung kennt nur, was vorab definiert wurde. Eine blockierte Zufahrt, ein Unfall auf dem Parkplatz oder eine Baustelle bringen sie aus dem Takt. Bei MediCar 4.0 werten große Sprachmodelle die Meldungen von Klinikmitarbeitenden aus und erzeugen kleine Programme, die einzelne Wegabschnitte in Echtzeit neu bewerten. Ein Routenalgorithmus berechnet daraus laufend die beste Strecke, und das Klinikpersonal sieht auf der Karte, warum sich eine Route geändert hat.',
+            'Classic route guidance only knows what was defined in advance. A blocked access road, an accident in the car park or a construction site throws it off. In MediCar 4.0, large language models evaluate reports from hospital staff and generate small programs that re-score individual path segments in real time. A routing algorithm continuously computes the best route from them, and staff can see on the map why a route has changed.',
+        ],
         caption: [
-            'Unterwegs im Klinikflur: Der Roboter gleicht seine Sensordaten laufend mit einer Karte ab.',
-            'In a hospital corridor: the robot continuously matches its sensor data against a map.',
+            'Wegabschnitte auf dem Klinikcampus, eingefärbt nach Schweregrad der Beeinträchtigung.',
+            'Path segments on the hospital campus, coloured by how severely they are affected.',
         ],
     },
     {
-        src: `${IMG}/routing.webp`,
-        caption: [
-            'Das Wegenetz des Klinikcampus ist die Grundlage für die Routenplanung.',
-            'The route network of the hospital campus is the basis for route planning.',
+        image: `${IMG}/humanoid.webp`,
+        title: ['Robotik: von der Simulation in die Praxis', 'Robotics: from simulation to practice'],
+        body: [
+            'Bislang be- und entladen Menschen die Transportboxen. Wir erproben Roboter, die Objekte erkennen, greifen und ablegen: Ein Sprachmodell zerlegt jede Aufgabe in einzelne Schritte, eine trainierte Steuerung führt die Greifbewegungen aus. Trainiert und getestet wird zunächst in virtuellen, zufällig variierten Krankenhausräumen. So lassen sich viele Situationen sicher durchspielen, bevor ein Roboter in der realen Welt arbeitet. Die Übertragung auf reale Hardware ist der nächste Schritt.',
+            'Today, people still load and unload the transport boxes. We are testing robots that recognise, grasp and place objects: a language model breaks each task into individual steps, and a trained controller carries out the grasping motions. Training and testing start in virtual, randomly varied hospital rooms, so many situations can be played through safely before a robot works in the real world. Transferring this to real hardware is the next step.',
         ],
-    },
-    {
-        src: `${IMG}/outdoor.webp`,
         caption: [
-            'Auch zwischen den Gebäuden unterwegs: Transporte über das Klinikgelände.',
-            'Between buildings, too: transport runs across the hospital grounds.',
+            'Humanoider Roboter im Labor an einem Tisch mit Kühlbox und Probenröhrchen.',
+            'Humanoid robot in the lab at a bench with a cooler box and sample tubes.',
         ],
     },
 ];
@@ -73,8 +77,8 @@ const MediCar = () => {
                             <p className="mt-3 text-base font-semibold text-primary-700 sm:text-lg">{txt(pick, project.topic)}</p>
                             <p className="mt-6 text-base leading-8 text-slate-600 sm:text-lg">
                                 {pick(
-                                    'Blood samples, medication, lab supplies: in a hospital, nursing staff cover many kilometres a day just carrying things. MediCar 4.0 develops autonomous transport robots that take over these trips, safely and in the middle of everyday clinical life. That leaves more time for what matters most: caring for patients.',
-                                    'Blutproben, Medikamente, Laborbedarf: Im Krankenhaus legen Pflegekräfte täglich viele Wege nur für Transporte zurück. MediCar 4.0 entwickelt autonome Transportroboter, die diese Fahrten übernehmen, sicher und mitten im Klinikalltag. So bleibt mehr Zeit für das Wichtigste: die Versorgung der Patientinnen und Patienten.',
+                                    'Blood samples, medication, supplies: MediCar 4.0 gets them where they are needed in the hospital, with autonomous transport vehicles. TU Clausthal develops the system together with the University Medical Center Freiburg and technology partners for autonomous driving. Our part: AI that adapts routes live, and robots that load and unload the transport boxes themselves.',
+                                    'Blutproben, Medikamente, Material: MediCar 4.0 bringt sie im Krankenhaus bedarfsgerecht ans Ziel, mit autonomen Transportfahrzeugen. Die TU Clausthal entwickelt das System gemeinsam mit dem Universitätsklinikum Freiburg und Technologiepartnern für autonomes Fahren. Unser Teil: KI, die Routen live anpasst, und Roboter, die Transportboxen selbst be- und entladen.',
                                 )}
                             </p>
                         </div>
@@ -139,10 +143,10 @@ const MediCar = () => {
                 </div>
             </section>
 
-            {/* ── Idea + contribution ── */}
+            {/* ── The idea ── */}
             <section className="bg-white">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-                    <div className="grid gap-10 md:grid-cols-2">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16">
+                    <div className="grid gap-10 md:grid-cols-2 md:items-center">
                         <div>
                             <h2 className="text-2xl font-bold text-slate-900">{pick('The idea', 'Die Idee')}</h2>
                             <div className="mt-4 space-y-4 text-base leading-8 text-slate-600">
@@ -154,47 +158,115 @@ const MediCar = () => {
                                 </p>
                                 <p>
                                     {pick(
-                                        'An urgent blood sample, for example, is placed in a handover box. A robot collects it, reports its position along the way and hands it over at its destination. The system is being tested at the University Medical Center Freiburg.',
-                                        'Eine eilige Blutprobe etwa wird in eine Übergabebox gelegt. Ein Roboter holt sie ab, meldet unterwegs seine Position und übergibt sie am Ziel. Erprobt wird das System im Universitätsklinikum Freiburg.',
+                                        'An urgent blood sample, for example, is placed in a handover box. A robot collects it, reports its position along the way and hands it over at its destination.',
+                                        'Eine eilige Blutprobe etwa wird in eine Übergabebox gelegt. Ein Roboter holt sie ab, meldet unterwegs seine Position und übergibt sie am Ziel.',
                                     )}
                                 </p>
                             </div>
                         </div>
-                        <div>
-                            <h2 className="text-2xl font-bold text-slate-900">{pick('Our contribution', 'Unser Beitrag')}</h2>
-                            <div className="mt-4 space-y-4 text-base leading-8 text-slate-600">
-                                <p>
-                                    {pick(
-                                        'We work on coordinating whole fleets: which robot takes which job, how vehicles make way for each other and for people, and how their behaviour stays safe when the situation and the orders keep changing.',
-                                        'Wir arbeiten an der Koordination ganzer Flotten: Welcher Roboter übernimmt welchen Auftrag, wie weichen Fahrzeuge einander und Menschen aus, und wie bleibt ihr Verhalten sicher, wenn sich Lage und Aufträge laufend ändern?',
-                                    )}
-                                </p>
-                                <p>
-                                    {pick(
-                                        'The goal: robust multi-agent coordination that holds up in a real hospital, with people in the corridors, handover points and urgent orders arriving at any time.',
-                                        'Das Ziel: eine robuste Multi-Agenten-Koordination, die im echten Klinikbetrieb besteht, mit Menschen auf den Fluren, Übergabepunkten und eiligen Aufträgen zu jeder Zeit.',
-                                    )}
-                                </p>
+                        <figure className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+                            <img
+                                src={assetUrl(`${IMG}/lidar.webp`)}
+                                alt={pick(
+                                    'Transport robot in a hospital corridor, with an inset of its local map',
+                                    'Transportroboter im Klinikflur, mit eingeblendeter lokaler Karte',
+                                )}
+                                width="1600"
+                                height="900"
+                                loading="lazy"
+                                decoding="async"
+                                className="aspect-[16/10] w-full object-cover"
+                            />
+                            <figcaption className="p-4 text-xs leading-5 text-slate-500">
+                                {pick(
+                                    'In a hospital corridor: the robot continuously matches its sensor data against a map.',
+                                    'Unterwegs im Klinikflur: Der Roboter gleicht seine Sensordaten laufend mit einer Karte ab.',
+                                )}
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Our contribution ── */}
+            <section className="bg-white">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-slate-500">TU Clausthal</p>
+                    <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">{pick('Our contribution', 'Unser Beitrag')}</h2>
+                    <p className="mt-3 max-w-3xl text-base leading-8 text-slate-600">
+                        {pick(
+                            'The team led by Prof. Dr. Christian Bartelt at the Institute for Software and Systems Engineering contributes two building blocks to MediCar 4.0.',
+                            'Das Team um Prof. Dr. Christian Bartelt am Institut für Software and Systems Engineering bringt zwei Bausteine in MediCar 4.0 ein.',
+                        )}
+                    </p>
+
+                    <div className="mt-8 grid gap-6 md:grid-cols-2">
+                        {contributions.map((c) => (
+                            <article key={c.image} className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+                                <figure>
+                                    <img
+                                        src={assetUrl(c.image)}
+                                        alt={txt(pick, c.caption)}
+                                        width="1600"
+                                        height="900"
+                                        loading="lazy"
+                                        decoding="async"
+                                        className="aspect-[16/9] w-full object-cover"
+                                    />
+                                    <figcaption className="border-b border-slate-100 px-5 py-2.5 text-xs leading-5 text-slate-500">
+                                        {txt(pick, c.caption)}
+                                    </figcaption>
+                                </figure>
+                                <div className="p-5 sm:p-6">
+                                    <h3 className="text-lg font-bold text-slate-900">{txt(pick, c.title)}</h3>
+                                    <p className="mt-3 text-sm leading-7 text-slate-600">{txt(pick, c.body)}</p>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+
+                    <div className="mt-6 grid gap-6 md:grid-cols-2">
+                        <div className="rounded-lg border border-slate-200 bg-slate-50 p-5 sm:p-6">
+                            <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
+                                <FiCpu className="h-4 w-4 text-primary-700" aria-hidden="true" />
+                                {pick('Computing power from the GenAI-Cluster', 'Rechenleistung aus dem GenAI-Cluster')}
                             </div>
+                            <p className="mt-3 text-sm leading-7 text-slate-600">
+                                {pick(
+                                    'Both building blocks need a lot of computing power. On the GenAI-Cluster at TU Clausthal we train language models, generate and refine test datasets, and evaluate the routing across many scenarios. Because this runs on our own infrastructure, we can adapt models at any time and start experiments without waiting, and sensitive data never leaves the university, which matters especially in healthcare.',
+                                    'Beide Bausteine brauchen viel Rechenleistung. Auf dem GenAI-Cluster der TU Clausthal trainieren wir Sprachmodelle, erzeugen und verbessern Testdatensätze und evaluieren das Routing in zahlreichen Szenarien. Weil das auf eigener Infrastruktur läuft, können wir Modelle jederzeit anpassen und Experimente ohne Wartezeiten starten, und sensible Daten verlassen die Universität nicht. Im Gesundheitsbereich ist das besonders wichtig.',
+                                )}
+                            </p>
+                            <Link
+                                to="/compute-cluster"
+                                className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 hover:text-primary-800"
+                            >
+                                {pick('About the GenAI-Cluster', 'Zum GenAI-Cluster')}
+                                <FiArrowRight className="h-4 w-4" aria-hidden="true" />
+                            </Link>
+                        </div>
+                        <div className="rounded-lg border border-slate-200 bg-slate-50 p-5 sm:p-6">
+                            <p className="text-sm font-bold text-slate-900">{pick('Tested in the hospital', 'Erprobt im Klinikum')}</p>
+                            <p className="mt-3 text-sm leading-7 text-slate-600">
+                                {pick(
+                                    'Our components were integrated with the partners’ systems and tested in a field trial at the University Medical Center Freiburg. They are modular and plug into existing systems following the plug-and-work principle. In future, care and nursing facilities are meant to benefit as well. Several students have already worked on the topic in research projects and theses.',
+                                    'Unsere Komponenten wurden mit den Systemen der Projektpartner zusammengeführt und am Universitätsklinikum Freiburg in einem Feldversuch erprobt. Sie sind modular aufgebaut und lassen sich nach dem Plug&Work-Prinzip in bestehende Systeme einbinden. Künftig sollen auch Pflege- und Betreuungseinrichtungen profitieren. Mehrere Studierende haben bereits in Forschungsprojekten und Abschlussarbeiten mitgearbeitet.',
+                                )}
+                            </p>
                         </div>
                     </div>
 
-                    <div className="mt-12 grid gap-6 sm:grid-cols-3">
-                        {gallery.map((g) => (
-                            <figure key={g.src} className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-                                <img
-                                    src={assetUrl(g.src)}
-                                    alt={txt(pick, g.caption)}
-                                    width="1600"
-                                    height="900"
-                                    loading="lazy"
-                                    decoding="async"
-                                    className="aspect-[16/10] w-full object-cover"
-                                />
-                                <figcaption className="p-4 text-xs leading-5 text-slate-500">{txt(pick, g.caption)}</figcaption>
-                            </figure>
-                        ))}
-                    </div>
+                    <blockquote className="mt-10 border-l-4 border-primary-500 pl-5 sm:pl-6">
+                        <p className="text-lg font-semibold leading-8 text-slate-800 sm:text-xl">
+                            {pick(
+                                '“With the GPU cluster, we can not only develop AI applications like MediCar 4.0, but also validate them thoroughly. That is what it takes for such systems to earn trust in a hospital.”',
+                                '„Mit dem GPU-Cluster können wir KI-Anwendungen wie in MediCar 4.0 nicht nur entwickeln, sondern auch gründlich absichern. Das ist die Voraussetzung dafür, dass solche Systeme im Krankenhaus Vertrauen gewinnen.“',
+                            )}
+                        </p>
+                        <footer className="mt-3 text-sm text-slate-500">
+                            Prof. Dr. Christian Bartelt, {pick('project lead, Institute for Software and Systems Engineering', 'Projektleiter, Institut für Software and Systems Engineering')}
+                        </footer>
+                    </blockquote>
                 </div>
             </section>
 
@@ -223,8 +295,8 @@ const MediCar = () => {
                             <h2 className="text-2xl font-bold">{pick('Questions about MediCar 4.0?', 'Fragen zu MediCar 4.0?')}</h2>
                             <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
                                 {pick(
-                                    'We are happy to talk about autonomous hospital logistics and fleet coordination.',
-                                    'Wir sprechen gern über autonome Kliniklogistik und Flottenkoordination.',
+                                    'We are happy to talk about AI for hospital logistics, adaptive routing and robotics.',
+                                    'Wir sprechen gern über KI für die Krankenhauslogistik, lernfähiges Routing und Robotik.',
                                 )}
                             </p>
                         </div>
