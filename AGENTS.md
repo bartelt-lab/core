@@ -401,13 +401,13 @@ won't highlight). Two traps:
      `#science #architecture`) render inside `#extra` as children.
    - `ProjectLayout` only renders `#evaluation` when `showEvalSection !== false`
      (neurocore/stratego/traffic-network/self-driving pass `false`).
-   - `/` and `/network` render the same `Home.jsx`. Its `#publications` is the
-     section wrapping `PublicationMiniCarousel`; the carousel itself has no id.
+   - `/` and `/network` render the same `Home.jsx`; it has NO `#publications`
+     (`PublicationMiniCarousel` sits inside `#hero` and has no id).
 2. **Dot order should follow DOM order**, or scroll-spy highlights the wrong
    dot. On `/core-labs` the demos render before `#publications`.
 
 Current verified configs: `/` and `/network` →
-`hero, news, research, publications, network, team, contact` (rebuilt
+`hero, news, research, network, team, contact` (rebuilt
 2026-11, when News was added); `#news` only renders while `news.js` has an
 item; `/core-labs` →
 `hero, initiative, dynamo, autonomous, publications` (the `#team` "Lab leads"

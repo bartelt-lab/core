@@ -9,7 +9,6 @@ import { formatNewsDate } from '../components/news/newsText'
 import PublicationMiniCarousel from '../components/publications/PublicationMiniCarousel'
 import { getNetworkMembers, institutions } from '../data/team'
 import { cognitiveProjects } from '../data/demonstrations'
-import { projects as industryProjects } from '../data/industryProjects'
 import { newsByDate } from '../data/news'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
@@ -23,34 +22,33 @@ const eyebrow = 'mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary
 const sectionTitle = 'font-heading text-3xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl'
 
 // Research highlights: the page each card opens, its photo and a one-line
-// summary. Titles and links come from the project data so a rename follows.
-const medicar = industryProjects.find((p) => p.slug === 'medicar')
-const project = (id) => cognitiveProjects.find((p) => p.id === id)
+// summary. One robotics card only (DyNAMO); the rest show the software,
+// industry and teaching side of the network.
+const dynamo = cognitiveProjects.find((p) => p.id === 'dynamo')
 const highlights = [
   {
-    title: project('dynamo').title,
-    to: project('dynamo').link,
+    title: [dynamo.title, dynamo.title],
+    to: dynamo.link,
     image: '/images/projects/dynamo/hero.webp',
     summary: ['Dynamische Manipulation für kognitive Roboter', 'Dynamic manipulation for cognitive robots'],
   },
   {
-    title: medicar.title,
-    to: medicar.href,
-    image: '/images/projects/industry/medicar/corridor.webp',
-    focus: '61% 50%',
-    summary: ['Autonomer Transport im Krankenhaus, mit LLM-Routing', 'Autonomous hospital transport with LLM routing'],
+    title: ['Industrieprojekte', 'Industry Projects'],
+    to: '/tuc/industry-projects',
+    image: '/images/projects/industry/ai-bim.webp',
+    summary: ['Angewandte KI mit Partnern aus Bau, Gesundheit und Handel', 'Applied AI with partners in construction, healthcare and retail'],
   },
   {
-    title: project('vial-sort').title,
-    to: project('vial-sort').link,
-    image: '/images/projects/vial-sort/hero.webp',
-    summary: ['Sprachgesteuertes Sortieren mit einer VLA-Policy', 'Language-conditioned sorting with a VLA policy'],
+    title: ['AI-Team-Projekte', 'AI Team Projects'],
+    to: '/ai-team-projects',
+    image: '/videos/ai-team-projects/ai-team-project-showcase-poster.webp',
+    summary: ['Studierendenprojekte zwischen TU Clausthal und UBB', 'Student projects across TU Clausthal and UBB'],
   },
   {
-    title: project('leader-following').title,
-    to: project('leader-following').link,
-    image: '/images/projects/leader-following/hero.webp',
-    summary: ['Personenverfolgung auf einer mobilen Roboterbasis', 'Person tracking on a mobile robot base'],
+    title: ['GenAI-Cluster', 'GenAI-Cluster'],
+    to: '/compute-cluster',
+    image: '/images/hero/compute-cluster-hero.webp',
+    summary: ['Eigene GPUs zum Trainieren und Evaluieren von Modellen', 'Our own GPUs for training and evaluating models'],
   },
 ]
 
@@ -138,7 +136,7 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#f7fafc] via-[#f7fafc]/95 via-[40%] to-[#f7fafc]/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/40" />
 
-        <div className="container relative z-10 mx-auto flex max-w-6xl items-center px-6 pb-16 pt-32 md:px-12 md:pb-20 lg:min-h-[78vh] lg:px-20">
+        <div className="container relative z-10 mx-auto max-w-6xl px-6 pb-12 pt-32 md:px-12 md:pb-16 lg:px-20">
           <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
             <div className="max-w-2xl">
               <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Research Network', 'Forschungsnetzwerk')}</p>
@@ -188,18 +186,17 @@ const Home = () => {
               </Link>
             )}
           </div>
+
+          <PublicationMiniCarousel />
         </div>
       </section>
 
       {/* ── News ── */}
       {leadNews && (
-        <section id="news" className="border-t border-slate-100 bg-white py-16 md:py-20">
+        <section id="news" className="border-t border-slate-100 bg-white py-10 md:py-12">
           <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className={eyebrow}>{pick('News', 'Neuigkeiten')}</p>
-                <h2 className={sectionTitle}>{pick('What is happening at CORE', 'Was bei CORE passiert')}</h2>
-              </div>
+            <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
+              <h2 className="font-heading text-2xl font-bold tracking-tight text-slate-950">{pick('News', 'Neuigkeiten')}</h2>
               <Link to="/news" className="inline-flex items-center gap-2 text-sm font-bold text-primary-700 transition hover:text-primary-800">
                 {pick('All news', 'Alle Neuigkeiten')}
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
@@ -225,12 +222,8 @@ const Home = () => {
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
               <p className={eyebrow}>{pick('Research', 'Forschung')}</p>
-              <h2 className={sectionTitle}>{pick('Robots and AI systems we build', 'Roboter und KI-Systeme, die wir bauen')}</h2>
+              <h2 className={sectionTitle}>{pick('Research and projects', 'Forschung und Projekte')}</h2>
             </div>
-            <Link to="/core-labs" className="inline-flex items-center gap-2 text-sm font-bold text-primary-700 transition hover:text-primary-800">
-              {pick('All of CORE Labs', 'Zu CORE Labs')}
-              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
-            </Link>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
             {highlights.map((item) => (
@@ -250,7 +243,7 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
                 <div className="relative p-3 text-white sm:p-5">
                   <h3 className="flex items-center justify-between gap-2 font-heading text-base font-bold leading-tight sm:text-xl">
-                    {item.title}
+                    {txt(pick, item.title)}
                     <FaArrowRight className="h-3.5 w-3.5 shrink-0 -rotate-45 transition group-hover:rotate-0" aria-hidden="true" />
                   </h3>
                   <p className="mt-1 text-xs leading-4 text-slate-200 sm:text-sm sm:leading-5">{txt(pick, item.summary)}</p>
@@ -258,14 +251,6 @@ const Home = () => {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── Publications ── */}
-      <section id="publications" className="border-t border-slate-100 bg-white py-16 md:py-20">
-        <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-          <h2 className="sr-only">{pick('Latest publications', 'Neueste Publikationen')}</h2>
-          <PublicationMiniCarousel />
         </div>
       </section>
 
@@ -287,14 +272,6 @@ const Home = () => {
                   'CORE verbindet Labore, Rechenleistung und Menschen an seinen Mitgliedsuniversitäten. Projekte, Studierende und Forschende wechseln zwischen den Standorten.',
                 )}
               </p>
-              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
-                <Link to="/compute-cluster" className="inline-flex items-center gap-1.5 text-primary-700 transition hover:text-primary-800">
-                  {pick('Compute Cluster', 'Rechencluster')} <FaArrowRight className="h-2.5 w-2.5" aria-hidden="true" />
-                </Link>
-                <Link to="/ai-team-projects" className="inline-flex items-center gap-1.5 text-primary-700 transition hover:text-primary-800">
-                  {pick('AI Team Projects', 'AI-Team-Projekte')} <FaArrowRight className="h-2.5 w-2.5" aria-hidden="true" />
-                </Link>
-              </div>
             </div>
             <ul className="grid gap-4 sm:grid-cols-3">
               {sites.map(({ institution, logo, to, href, lab }) => {

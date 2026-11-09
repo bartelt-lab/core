@@ -15,8 +15,10 @@ const Meta = ({ item, pick, language, light = false }) => (
   </div>
 )
 
-const Image = ({ item, pick, badge = false }) => (
-  <div className="relative h-full w-full">
+// `fill`: cover the positioned parent instead of sizing it, so a tall image
+// cannot set the height of the row it sits in.
+const Image = ({ item, pick, badge = false, fill = false }) => (
+  <div className={fill ? 'absolute inset-0' : 'relative h-full w-full'}>
     <img
       src={assetUrl(item.image)}
       alt={txt(pick, item.imageAlt)}
@@ -63,19 +65,21 @@ const NewsCard = ({ item, variant = 'tile' }) => {
     )
   }
 
+  // Lead: one row on md+, small image beside the text, so a single story stays
+  // about as tall as its image (~12rem) instead of a full-height feature block.
   if (variant === 'lead') {
     return (
-      <article className={`${shell} grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]`}>
-        <div className="aspect-[16/10] overflow-hidden bg-slate-100 md:aspect-auto md:min-h-[18rem]">
-          <Image item={item} pick={pick} badge />
+      <article className={`${shell} grid sm:grid-cols-[14rem_minmax(0,1fr)] md:grid-cols-[18rem_minmax(0,1fr)]`}>
+        <div className="relative h-40 overflow-hidden bg-slate-100 sm:h-auto sm:min-h-[11rem]">
+          <Image item={item} pick={pick} badge fill />
         </div>
-        <div className="flex flex-col p-6 sm:p-8">
+        <div className="flex flex-col justify-center p-5 sm:p-6">
           <Meta item={item} pick={pick} language={language} />
-          <h3 className="mt-3 font-heading text-2xl font-bold leading-tight tracking-tight text-slate-950 sm:text-3xl">
+          <h3 className="mt-2 font-heading text-xl font-bold leading-snug tracking-tight text-slate-950 md:text-2xl">
             <Link to={href} className={`${stretched} transition-colors group-hover:text-primary-700`}>{title}</Link>
           </h3>
-          <p className="mt-3 text-base leading-7 text-slate-600">{plainText(txt(pick, item.teaser))}</p>
-          <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-bold text-primary-700">
+          <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">{plainText(txt(pick, item.teaser))}</p>
+          <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-primary-700">
             {pick('Read the story', 'Weiterlesen')}
             <FaArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
           </span>
