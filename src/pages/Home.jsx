@@ -39,10 +39,12 @@ const highlights = [
     summary: ['Dynamische Manipulation für kognitive Roboter', 'Dynamic manipulation for cognitive robots'],
   },
   {
-    title: [project('vial-sort').title, project('vial-sort').title],
-    to: project('vial-sort').link,
-    image: '/images/projects/vial-sort/hero.webp',
-    summary: ['Sprachgesteuertes Sortieren mit einer VLA-Policy', 'Language-conditioned sorting with a VLA policy'],
+    title: ['Autonomes Fahren', 'Autonomous Driving'],
+    to: '/ai-team-projects/self-driving',
+    // Thumbnail of the group's own 1:10 field-test video (YouTube wrY34WyTEzo).
+    image: '/images/projects/self-driving/hero.webp',
+    focus: '28% 70%',
+    summary: ['1:10-Testfahrzeug: SLAM, Planung und autonomes Einparken', '1:10 test vehicle: SLAM, planning and autonomous parking'],
   },
   {
     title: ['AI-Team-Projekte', 'AI Team Projects'],
