@@ -95,6 +95,47 @@ export const projects = [
             'We develop adaptive routing with large language models that turns reports from hospital staff into new routes in real time, and robots that load and unload transport boxes autonomously. Training and validation run on the TU Clausthal GenAI-Cluster.',
         ],
         visual: assetUrl('/images/projects/industry/medicar.webp'),
+        // `feature` puts the project in the large card above the grid on
+        // /tuc/industry-projects. The images are the ones its detail page shows.
+        feature: {
+            badge: ['Feldversuch am Universitätsklinikum Freiburg', 'Field trial at the University Medical Center Freiburg'],
+            // id in src/data/videos.js; the card shows that the detail page carries the film
+            film: 'medicar',
+            gallery: [
+                {
+                    src: assetUrl('/images/projects/industry/medicar/corridor.webp'),
+                    label: ['Im Klinikbetrieb', 'On duty'],
+                    alt: [
+                        'MediCar-Transportroboter mit blauen Transportboxen im Foyer einer Klinik',
+                        'MediCar transport robot carrying blue transport boxes in a hospital lobby',
+                    ],
+                },
+                {
+                    src: assetUrl('/images/projects/industry/medicar/routing-severity.webp'),
+                    label: ['LLM-Routing', 'LLM routing'],
+                    alt: [
+                        'Wegabschnitte auf dem Klinikcampus, eingefärbt nach Schweregrad der Beeinträchtigung',
+                        'Path segments on the hospital campus, coloured by how severely they are affected',
+                    ],
+                },
+                {
+                    src: assetUrl('/images/projects/industry/medicar/lidar.webp'),
+                    label: ['Lokale Karte', 'Local map'],
+                    alt: [
+                        'Transportroboter im Klinikflur, mit eingeblendeter lokaler Karte',
+                        'Transport robot in a hospital corridor, with an inset of its local map',
+                    ],
+                },
+                {
+                    src: assetUrl('/images/projects/industry/medicar/humanoid.webp'),
+                    label: ['Robotik', 'Robotics'],
+                    alt: [
+                        'Humanoider Roboter im Labor an einem Tisch mit Kühlbox und Probenröhrchen',
+                        'Humanoid robot in the lab at a bench with a cooler box and sample tubes',
+                    ],
+                },
+            ],
+        },
     },
     {
         slug: 'maas-cu',

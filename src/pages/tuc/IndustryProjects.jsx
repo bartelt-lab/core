@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { FiArrowRight, FiArrowUpRight, FiMail, FiShield } from 'react-icons/fi';
+import { FiArrowRight, FiArrowUpRight, FiMail, FiMapPin, FiPlay, FiShield } from 'react-icons/fi';
 import { useLanguage } from '../../i18n/useLanguage';
 import { projects, domainClass } from '../../data/industryProjects';
+import { videos } from '../../data/videos';
 import PartnerLogoStrip from '../../components/tuc/PartnerLogoStrip';
 
 const txt = (pick, pair) => pick(pair[1], pair[0]);
@@ -45,6 +46,113 @@ const ProjectVisual = ({ project, pick }) => {
     );
 };
 
+const formatDuration = (seconds) => `${Math.floor(seconds / 60)}:${String(Math.round(seconds % 60)).padStart(2, '0')}`;
+
+const ProjectFacts = ({ project, pick, className = '' }) => (
+    <dl className={`grid grid-cols-3 gap-3 border-t border-slate-200 pt-5 text-xs ${className}`}>
+        <div>
+            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Funding', 'Förderung')}</dt>
+            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.fundingProgram)}</dd>
+        </div>
+        <div>
+            <dt className="font-semibold uppercase tracking-wide text-slate-400">Budget</dt>
+            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.budget)}</dd>
+        </div>
+        <div>
+            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Duration', 'Laufzeit')}</dt>
+            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.duration)}</dd>
+        </div>
+    </dl>
+);
+
+/** One image in the featured card's mosaic. Zooms slightly while the card is hovered. */
+const GalleryTile = ({ image, pick, className = '', children }) => (
+    <figure className={`relative overflow-hidden rounded-lg bg-slate-800 ${className}`}>
+        <img
+            src={image.src}
+            alt={txt(pick, image.alt)}
+            width="1600"
+            height="900"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+        />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-slate-950/80 via-slate-950/25 to-transparent" />
+        <figcaption className="absolute bottom-2 left-2.5 right-2.5 text-[11px] font-semibold leading-4 text-white sm:bottom-3 sm:left-3 sm:text-xs">
+            {txt(pick, image.label)}
+        </figcaption>
+        {children}
+    </figure>
+);
+
+/**
+ * Large card above the grid for the project whose data carries `feature`.
+ * Same stretched-link pattern as the tiles: the title link covers the card,
+ * the partner logos sit above it (z-10) and keep their own links.
+ */
+const FeaturedProject = ({ project, pick }) => {
+    const [main, ...thumbs] = project.feature.gallery;
+    const film = project.feature.film && videos.find((v) => v.id === project.feature.film);
+
+    return (
+        <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.45)] focus-within:ring-2 focus-within:ring-primary-500 lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+            <div className="grid grid-cols-3 gap-1.5 bg-slate-950 p-1.5 sm:gap-2 sm:p-2 lg:order-2 lg:grid-rows-[minmax(0,1fr)_auto]">
+                <GalleryTile image={main} pick={pick} className="col-span-3 aspect-[16/9] lg:aspect-auto lg:min-h-[18rem]">
+                    {film && (
+                        <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-900 shadow-sm backdrop-blur sm:left-4 sm:top-4">
+                            <FiPlay className="h-3.5 w-3.5 text-primary-700" aria-hidden="true" />
+                            {pick('Project film', 'Projektfilm')} · {formatDuration(film.duration)}
+                        </span>
+                    )}
+                </GalleryTile>
+                {thumbs.map((image) => (
+                    <GalleryTile key={image.src} image={image} pick={pick} className="aspect-[4/3]" />
+                ))}
+            </div>
+
+            <div className="flex flex-col p-6 sm:p-8 lg:order-1">
+                <div className="flex flex-wrap gap-2">
+                    <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${domainClass(project.domain[0])}`}>
+                        {txt(pick, project.domain)}
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-600">
+                        <FiMapPin className="h-3 w-3" aria-hidden="true" />
+                        {txt(pick, project.feature.badge)}
+                    </span>
+                </div>
+
+                <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                    <Link
+                        to={project.href}
+                        className="transition-colors after:absolute after:inset-0 after:content-[''] focus:outline-none group-hover:text-primary-700"
+                    >
+                        {project.title}
+                    </Link>
+                </h2>
+                <p className="mt-2 text-base font-semibold text-primary-700">{txt(pick, project.topic)}</p>
+                <div className="mt-4 space-y-3 text-sm leading-7 text-slate-600">
+                    <p>{txt(pick, project.summary)}</p>
+                    <p>{txt(pick, project.contribution)}</p>
+                </div>
+
+                <div className="relative z-10">
+                    <PartnerLogoStrip partners={project.partners} />
+                </div>
+
+                <ProjectFacts project={project} pick={pick} className="mt-5" />
+
+                <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-primary-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition group-hover:bg-primary-800">
+                    {pick('Explore the project', 'Zum Projekt')}
+                    <FiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                </span>
+            </div>
+        </article>
+    );
+};
+
+const featured = projects.find((p) => p.feature && p.href);
+const gridProjects = projects.filter((p) => p !== featured);
+
 const IndustryProjects = () => {
     const { pick } = useLanguage();
 
@@ -67,10 +175,26 @@ const IndustryProjects = () => {
                 </div>
             </section>
 
-            <section className="bg-white">
+            {featured && (
+                <section className="bg-slate-50">
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16">
+                        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-500">
+                            {pick('Featured project', 'Projekt im Fokus')}
+                        </p>
+                        <FeaturedProject project={featured} pick={pick} />
+                    </div>
+                </section>
+            )}
+
+            <section className={featured ? 'bg-slate-50' : 'bg-white'}>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+                    {featured && (
+                        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-500">
+                            {pick('More projects', 'Weitere Projekte')}
+                        </p>
+                    )}
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {projects.map((project) => (
+                        {gridProjects.map((project) => (
                             <article
                                 key={project.slug}
                                 className={`flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm ${
@@ -111,20 +235,7 @@ const IndustryProjects = () => {
                                         <PartnerLogoStrip partners={project.partners} />
                                     </div>
 
-                                    <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-slate-200 pt-5 text-xs">
-                                        <div>
-                                            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Funding', 'Förderung')}</dt>
-                                            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.fundingProgram)}</dd>
-                                        </div>
-                                        <div>
-                                            <dt className="font-semibold uppercase tracking-wide text-slate-400">Budget</dt>
-                                            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.budget)}</dd>
-                                        </div>
-                                        <div>
-                                            <dt className="font-semibold uppercase tracking-wide text-slate-400">{pick('Duration', 'Laufzeit')}</dt>
-                                            <dd className="mt-1 font-semibold text-slate-800">{txt(pick, project.duration)}</dd>
-                                        </div>
-                                    </dl>
+                                    <ProjectFacts project={project} pick={pick} className="mt-4" />
 
                                     {project.href && (
                                         <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700">
