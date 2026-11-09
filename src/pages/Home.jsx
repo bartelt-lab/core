@@ -156,7 +156,7 @@ const Home = () => {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="#research" className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700">
-                  {pick('See our research', 'Unsere Forschung')}
+                  {pick('See our work', 'Unsere Projekte')}
                   <FaArrowRight className="h-3 w-3" aria-hidden="true" />
                 </a>
                 <Link to="/tuc/join-us" className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-sm font-bold text-slate-900 backdrop-blur transition hover:border-primary-400 hover:text-primary-700">
@@ -224,8 +224,8 @@ const Home = () => {
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
-              <p className={eyebrow}>{pick('Research', 'Forschung')}</p>
-              <h2 className={sectionTitle}>{pick('Research and projects', 'Forschung und Projekte')}</h2>
+              <p className={eyebrow}>{pick('Projects', 'Projekte')}</p>
+              <h2 className={sectionTitle}>{pick('What we work on', 'Woran wir arbeiten')}</h2>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">

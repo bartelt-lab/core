@@ -9,7 +9,7 @@ const ROUTE_SECTIONS = {
     '/': [
         { id: 'hero', label: 'Home' },
         { id: 'news', label: 'News' },
-        { id: 'research', label: 'Research' },
+        { id: 'research', label: 'Projects' },
         { id: 'network', label: 'Network' },
         { id: 'team', label: 'Team' },
         { id: 'contact', label: 'Join us' },
@@ -25,7 +25,7 @@ const ROUTE_SECTIONS = {
     '/network': [
         { id: 'hero', label: 'Network' },
         { id: 'news', label: 'News' },
-        { id: 'research', label: 'Research' },
+        { id: 'research', label: 'Projects' },
         { id: 'network', label: 'Network' },
         { id: 'team', label: 'Team' },
         { id: 'contact', label: 'Join us' },
