@@ -10,6 +10,7 @@ import PublicationMiniCarousel from '../components/publications/PublicationMiniC
 import { getNetworkMembers, institutions } from '../data/team'
 import { cognitiveProjects } from '../data/demonstrations'
 import { newsByDate } from '../data/news'
+import { publications } from '../data/publications'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
 
@@ -22,9 +23,15 @@ const eyebrow = 'mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary
 const sectionTitle = 'font-heading text-3xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl'
 
 // Research highlights: the page each card opens, its photo and a one-line
-// summary. One robotics card only (DyNAMO); the rest show the software,
-// industry and teaching side of the network.
+// summary. `to` stays on this site, `href` opens a paper in a new tab.
+// `figure`: the image is a paper figure (white diagram), shown whole on white
+// above the text instead of as a darkened full-bleed photo.
+// One robotics card only (DyNAMO). The two paper cards read their link and
+// figure from publications.json, so a new arXiv/venue URL follows.
 const dynamo = cognitiveProjects.find((p) => p.id === 'dynamo')
+const paper = (id) => publications.find((p) => p.id === id)
+const conceptsInMotion = paper('knab2026concepts')
+const barista = paper('knab2026barista')
 const highlights = [
   {
     title: [dynamo.title, dynamo.title],
@@ -33,10 +40,18 @@ const highlights = [
     summary: ['Dynamische Manipulation für kognitive Roboter', 'Dynamic manipulation for cognitive robots'],
   },
   {
-    title: ['CORE Labs Cluj', 'CORE Labs Cluj'],
-    to: '/ubb',
-    image: '/images/ubb/unitree-r1-lab-wide.webp',
-    summary: ['Bald in Cluj-Napoca, mit der Babeș-Bolyai-Universität', 'Opening soon in Cluj-Napoca, with Babeș-Bolyai University'],
+    title: ['Erklärbare KI', 'Explainable AI'],
+    href: conceptsInMotion.url,
+    image: conceptsInMotion.image,
+    figure: true,
+    summary: ['Concepts in Motion: nachvollziehbare Videoklassifikation', 'Concepts in Motion: interpretable video classification'],
+  },
+  {
+    title: ['Egozentrisches Sehen', 'Egocentric vision'],
+    href: barista.url,
+    image: barista.image,
+    figure: true,
+    summary: ['BARISTA: Benchmark für egozentrisches Videoverstehen', 'BARISTA: a benchmark for egocentric video understanding'],
   },
   {
     title: ['AI-Team-Projekte', 'AI Team Projects'],
@@ -44,19 +59,13 @@ const highlights = [
     image: '/videos/ai-team-projects/ai-team-project-showcase-poster.webp',
     summary: ['Studierendenprojekte zwischen TU Clausthal und UBB', 'Student projects across TU Clausthal and UBB'],
   },
-  {
-    title: ['GenAI-Cluster', 'GenAI-Cluster'],
-    to: '/compute-cluster',
-    image: '/images/hero/compute-cluster-hero.webp',
-    summary: ['Eigene GPUs zum Trainieren und Evaluieren von Modellen', 'Our own GPUs for training and evaluating models'],
-  },
 ]
 
 // Member universities of the network, in display order. `to` stays on this
 // site, `href` leaves it.
 const sites = [
   { institution: institutions.TUC, logo: '/logos/clausthal-logo.webp', to: '/tuc', lab: ['Cognitive Software, ISSE', 'Cognitive Software, ISSE'] },
-  { institution: institutions.UBB, logo: '/logos/ubb-logo.webp', to: '/ubb', lab: ['CORE Labs Cluj', 'CORE Labs Cluj'] },
+  { institution: institutions.UBB, logo: '/logos/ubb-logo.webp', to: '/ubb', lab: ['CORE Cluj', 'CORE Cluj'] },
   { institution: institutions.ROSTOCK, logo: '/logos/rostock-logo.webp', href: institutions.ROSTOCK.website, lab: ['MDS Lab', 'MDS Lab'] },
 ]
 
@@ -227,30 +236,54 @@ const Home = () => {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-            {highlights.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.55)]"
-              >
-                <img
-                  src={assetUrl(item.image)}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  style={item.focus ? { objectPosition: item.focus } : undefined}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
-                <div className="relative p-3 text-white sm:p-5">
-                  <h3 className="flex items-center justify-between gap-2 font-heading text-base font-bold leading-tight sm:text-xl">
-                    {txt(pick, item.title)}
-                    <FaArrowRight className="h-3.5 w-3.5 shrink-0 -rotate-45 transition group-hover:rotate-0" aria-hidden="true" />
-                  </h3>
-                  <p className="mt-1 text-xs leading-4 text-slate-200 sm:text-sm sm:leading-5">{txt(pick, item.summary)}</p>
-                </div>
-              </Link>
-            ))}
+            {highlights.map((item) => {
+              const className =
+                'group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.55)]'
+              const content = item.figure ? (
+                <>
+                  <div className="flex min-h-0 flex-1 items-center justify-center bg-white p-3">
+                    <img
+                      src={assetUrl(item.image)}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="max-h-full max-w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                  </div>
+                  <div className="relative shrink-0 p-3 text-white sm:p-5">
+                    <h3 className="flex items-center justify-between gap-2 font-heading text-base font-bold leading-tight sm:text-xl">
+                      {txt(pick, item.title)}
+                      <FaArrowRight className="h-3.5 w-3.5 shrink-0 -rotate-45 transition group-hover:rotate-0" aria-hidden="true" />
+                    </h3>
+                    <p className="mt-1 text-xs leading-4 text-slate-300 sm:text-sm sm:leading-5">{txt(pick, item.summary)}</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <img
+                    src={assetUrl(item.image)}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    style={item.focus ? { objectPosition: item.focus } : undefined}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                  <div className="relative p-3 text-white sm:p-5">
+                    <h3 className="flex items-center justify-between gap-2 font-heading text-base font-bold leading-tight sm:text-xl">
+                      {txt(pick, item.title)}
+                      <FaArrowRight className="h-3.5 w-3.5 shrink-0 -rotate-45 transition group-hover:rotate-0" aria-hidden="true" />
+                    </h3>
+                    <p className="mt-1 text-xs leading-4 text-slate-200 sm:text-sm sm:leading-5">{txt(pick, item.summary)}</p>
+                  </div>
+                </>
+              )
+              return item.to ? (
+                <Link key={item.to} to={item.to} className={className}>{content}</Link>
+              ) : (
+                <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
+              )
+            })}
           </div>
         </div>
       </section>
