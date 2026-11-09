@@ -25,6 +25,7 @@ const UbbHome = lazy(() => import('./pages/ubb/Home'))
 // /tuc/* pages
 const TucHome = lazy(() => import('./pages/tuc/Home'))
 const TucIndustryProjects = lazy(() => import('./pages/tuc/IndustryProjects'))
+const TucMediCar = lazy(() => import('./pages/tuc/industry/MediCar'))
 const TucTeaching = lazy(() => import('./pages/tuc/Teaching'))
 const TucJoinUs = lazy(() => import('./pages/tuc/JoinUs'))
 const TucProjects = lazy(() => import('./pages/tuc/Projects'))
@@ -91,6 +92,7 @@ function TucShell() {
         <Routes>
           <Route path="/" element={<TucHome />} />
           <Route path="/industry-projects" element={<TucIndustryProjects />} />
+          <Route path="/industry-projects/medicar" element={<TucMediCar />} />
           <Route path="/teaching" element={<TucTeaching />} />
           <Route path="/join-us" element={<TucJoinUs />} />
           <Route path="/projects" element={<TucProjects />} />
