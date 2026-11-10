@@ -74,6 +74,19 @@
   --site-900: 3 78 132;    /* #034E84 — the seal; 8.7:1 on white */
 }
 
+/* Cognitive Software, TU Clausthal (/tuc). Anchored on TU Clausthal's web
+   green #008048 (read from tu-clausthal.de's stylesheet, 2026-11), which
+   --site-900 IS exactly; 100-300 are Tailwind emerald rotated hue-only to
+   155.1deg. Note that hue sits only ~12deg from CORE green (143.5deg), so this
+   accent separates /tuc from the network pages far less than UBB blue does;
+   the layout carries most of the difference. */
+.theme-tuc {
+  --site-100: 213 249 224; /* #D5F9E0 */
+  --site-200: 176 242 198; /* #B0F2C6 */
+  --site-300: 129 229 167; /* #81E5A7 — 13.2:1 on slate-950 */
+  --site-900: 0 128 72;    /* #008048 — TU Clausthal; 5.0:1 on white */
+}
+
 /* The partnership gradient — host's mark sweeping to CORE's, on the place word
    of a lab wordmark and nowhere else. Endpoints are tokens, not literals, so a
    palette change carries. Both ends clear AA (8.7:1 and 5.7:1 on white), which

@@ -218,7 +218,7 @@ export const routes = [
     source: 'src/pages/tuc/Home.jsx',
     title: 'Cognitive Software | TU Clausthal',
     description:
-      'Research group at the Institute for Software Systems Engineering (ISSE), TU Clausthal, exploring the intersection of artificial intelligence, cognitive computing, and software engineering.',
+      'Research group at the Institute for Software and Systems Engineering (ISSE), TU Clausthal, exploring the intersection of artificial intelligence, cognitive computing, and software engineering.',
   },
   {
     path: '/tuc/industry-projects',
@@ -240,7 +240,7 @@ export const routes = [
     source: 'src/pages/tuc/Teaching.jsx',
     title: 'Teaching | Cognitive Software, TU Clausthal',
     description:
-      'Courses, seminars, and thesis topics offered by the Cognitive Software group at the Institute for Software Systems Engineering, TU Clausthal.',
+      'Courses, seminars, and thesis topics offered by the Cognitive Software group at the Institute for Software and Systems Engineering, TU Clausthal.',
   },
   {
     path: '/tuc/seminar',
@@ -254,14 +254,14 @@ export const routes = [
     source: 'src/pages/tuc/Teaching.jsx',
     title: 'Theses | Cognitive Software, TU Clausthal',
     description:
-      'Bachelor and master thesis topics in artificial intelligence, cognitive computing, and software engineering at the Institute for Software Systems Engineering, TU Clausthal.',
+      'Bachelor and master thesis topics in artificial intelligence, cognitive computing, and software engineering at the Institute for Software and Systems Engineering, TU Clausthal.',
   },
   {
     path: '/tuc/join-us',
     source: 'src/pages/tuc/JoinUs.jsx',
     title: 'Join Us | Cognitive Software, TU Clausthal',
     description:
-      'Open positions at the Institute for Software Systems Engineering (ISSE), TU Clausthal, for researchers with a strong background in computer science or mathematics.',
+      'Open positions at the Institute for Software and Systems Engineering (ISSE), TU Clausthal, for researchers with a strong background in computer science or mathematics.',
   },
 
   // -------------------------------------------------------------- UBB Cluj ---
