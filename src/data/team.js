@@ -220,7 +220,7 @@ export const teamMembers = [
     coreLabsLead: {
       labName: 'Physical AI Lab',
       role: 'TUC & UBB Operations',
-      researchFocus: ['Physical AI', 'Enbodied AI', 'Locomanipulation', 'Imitation Learning'],
+      researchFocus: ['Physical AI', 'Embodied AI', 'Locomanipulation', 'Imitation Learning'],
       shortDescription: 'Leading operations fostering collaboration on autonomous systems and embodied robotics.',
       selectedPublications: []
     }
