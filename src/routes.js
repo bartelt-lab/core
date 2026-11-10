@@ -221,13 +221,6 @@ export const routes = [
       'Research group at the Institute for Software Systems Engineering (ISSE), TU Clausthal, exploring the intersection of artificial intelligence, cognitive computing, and software engineering.',
   },
   {
-    path: '/tuc/projects',
-    source: 'src/pages/tuc/Projects.jsx',
-    title: 'Projects | Cognitive Software, TU Clausthal',
-    description:
-      'Student research projects offered this semester at TU Clausthal, run on the GenAI-Cluster with travel, accommodation, and social event costs covered.',
-  },
-  {
     path: '/tuc/industry-projects',
     source: 'src/pages/tuc/IndustryProjects.jsx',
     title: 'Industry Projects | Cognitive Software, TU Clausthal',

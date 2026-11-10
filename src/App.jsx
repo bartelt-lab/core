@@ -30,7 +30,6 @@ const TucIndustryProjects = lazy(() => import('./pages/tuc/IndustryProjects'))
 const TucMediCar = lazy(() => import('./pages/tuc/industry/MediCar'))
 const TucTeaching = lazy(() => import('./pages/tuc/Teaching'))
 const TucJoinUs = lazy(() => import('./pages/tuc/JoinUs'))
-const TucProjects = lazy(() => import('./pages/tuc/Projects'))
 const TucAiTeamProjects = lazy(() => import('./pages/tuc/AiTeamProjects'))
 const TucTempoProject = lazy(() => import('./pages/tuc/projects/TempoProject'))
 const TucLectraProject = lazy(() => import('./pages/tuc/projects/LectraProject'))
@@ -99,7 +98,6 @@ function TucShell() {
           <Route path="/industry-projects/medicar" element={<TucMediCar />} />
           <Route path="/teaching" element={<TucTeaching />} />
           <Route path="/join-us" element={<TucJoinUs />} />
-          <Route path="/projects" element={<TucProjects />} />
           <Route path="/seminar" element={<TucTeaching initialSection="seminars" />} />
           <Route path="/theses" element={<TucTeaching initialSection="theses" />} />
         </Routes>

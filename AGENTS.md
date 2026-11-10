@@ -28,7 +28,7 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
   merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`,
   `/tuc/industry-projects`, `/tuc/industry-projects/medicar`, `/tuc/teaching`,
-  `/tuc/seminar`, `/tuc/theses`, `/tuc/join-us`, `/tuc/projects`. TUC navbar links out to the CORE Network
+  `/tuc/seminar`, `/tuc/theses`, `/tuc/join-us`. TUC navbar links out to the CORE Network
   site for `/network` and `/publications` (no `/tuc/publications`).
 
 Note: the AI Team Projects pages live in `pages/tuc/` but route under
@@ -205,7 +205,7 @@ src/
     tuc/
       Home.jsx                     bartelt landing (hero + members + contact)
       Teaching.jsx                   teaching subtree (/seminar, /theses route to it)
-      JoinUs.jsx Projects.jsx AiTeamProjects.jsx
+      JoinUs.jsx AiTeamProjects.jsx
       IndustryProjects.jsx         /tuc/industry-projects, data from industryProjects.js
       industry/MediCar.jsx         /tuc/industry-projects/medicar
       projects/{AI4AI,FastMile,Lectra,NeuroCore,SelfDriving,Stratego,Tempo,
@@ -378,7 +378,6 @@ real browser since the restyle. Verify in dev (`npm run dev`):
 - `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses` (teaching-* CSS
   still applies — those inline `<style>` blocks survived)
 - `/tuc/join-us` (disclosure pattern expands/collapses)
-- `/tuc/projects` (YouTube embed click-to-play)
 - `/ai-team-projects` (project tiles; sidebar Overview/Projects/Voices/Archive)
 - Network panel: zero 404s on `/members/*`, `/papers/*`, `/logos/*`,
   `/videos/*`, `/data/*`
