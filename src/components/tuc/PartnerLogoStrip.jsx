@@ -19,7 +19,7 @@ const PartnerLogo = ({ partner, compact = false }) => {
 
     const className = compact
         ? 'inline-flex h-9 w-[4.75rem] shrink-0 items-center justify-center transition hover:opacity-80 sm:w-[5.25rem]'
-        : 'inline-flex items-center justify-center transition hover:opacity-80';
+        : 'inline-flex min-h-10 min-w-10 items-center justify-center transition hover:opacity-80';
 
     if (!logo.href) return <span className={className} title={partner}>{logoImage}</span>;
 

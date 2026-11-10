@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { FiArrowUpRight } from 'react-icons/fi';
+import { PageShell, Section, Card, Callout } from '../../components/tuc/ui';
 import { useLanguage } from '../../i18n/useLanguage';
 
 const taughtCourses = [
     {
-        title: '"Grundlagen der Informatik" @ TU Clausthal (DigiTec)',
+        title: 'Grundlagen der Informatik (B.Sc. Digital Technologies)',
         semester: 'Winter Semester 2026/27',
         semesterDe: 'Wintersemester 2026/27',
         tone: 'An introduction to programming for first-semester Digital Technologies students. Learn to turn simple problems into Python programs using data types, conditions, loops, and functions. Written and practical tasks build your problem-solving skills and introduce software development tools. No prior knowledge is required.',
@@ -292,23 +294,6 @@ const quickLinks = [
     { id: 'theses', label: 'Theses' }
 ];
 
-const SectionBlock = ({ title, intro, topContent, children, id }) => (
-    <section id={id} className="teaching-section">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div className="md:col-span-1">
-                    <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">{title}</h1>
-                </div>
-                <div className="md:col-span-3">
-                    {topContent}
-                    {intro && <p className="teaching-intro">{intro}</p>}
-                    {children}
-                </div>
-            </div>
-        </div>
-    </section>
-);
-
 const Teaching = ({ initialSection }) => {
     const location = useLocation();
     const { pick } = useLanguage();
@@ -323,7 +308,7 @@ const Teaching = ({ initialSection }) => {
             return;
         }
 
-        const offset = 82;
+        const offset = 120;
         const top = element.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
     };
@@ -350,731 +335,196 @@ const Teaching = ({ initialSection }) => {
         });
     };
 
+    const guidelines = [
+        { title: pick('The exposé', 'Das Exposé'), items: exposeGuidelines },
+        { title: pick('Format and length', 'Form und Umfang'), items: thesisFormatting },
+        { title: pick('Working with your advisor', 'Zusammenarbeit mit der Betreuung'), items: thesisSupervision },
+        { title: pick('Writing the thesis', 'Die Arbeit schreiben'), items: thesisWriting },
+        { title: pick('Final presentation', 'Abschlusspräsentation'), items: thesisFinalPresentation },
+        { title: pick('What to hand in', 'Abgabe'), items: thesisSubmission },
+        { title: pick('Use of generative AI', 'Einsatz generativer KI'), items: thesisAiUse },
+    ];
+
+    const tabLabel = (id) => ({ 'courses-overview': pick('Courses', 'Kurse'), seminars: pick('Seminars', 'Seminare'), theses: pick('Theses', 'Abschlussarbeiten') })[id];
+
     return (
-        <>
-            <style>{`
-                .teaching-hero {
-                    position: relative;
-                    overflow: hidden;
-                    padding: 50px 0 38px;
-                    background:
-                        radial-gradient(circle at top left, rgba(16, 175, 57, 0.2), transparent 32%),
-                        radial-gradient(circle at right 20%, rgba(209, 248, 219, 0.6), transparent 34%),
-                        linear-gradient(135deg, #ffffff 0%, #f8fff9 42%, #eefbf2 100%);
-                }
-                .teaching-hero::before,
-                .teaching-hero::after {
-                    content: '';
-                    position: absolute;
-                    border-radius: 999px;
-                    opacity: 0.55;
-                    filter: blur(4px);
-                }
-                .teaching-hero::before {
-                    width: 260px;
-                    height: 260px;
-                    right: -70px;
-                    top: 40px;
-                    background: rgba(16, 175, 57, 0.16);
-                }
-                .teaching-hero::after {
-                    width: 320px;
-                    height: 320px;
-                    left: -120px;
-                    bottom: -120px;
-                    background: rgba(209, 248, 219, 0.5);
-                }
-                .teaching-hero h1 {
-                    margin: 0 0 12px;
-                    font-size: clamp(2.4rem, 4vw, 4rem);
-                    line-height: 1;
-                    color: #1f2d3d;
-                }
-                .teaching-hero-content {
-                    position: relative;
-                    z-index: 1;
-                    display: grid;
-                    gap: 20px;
-                }
-                .teaching-list-grid {
-                    display: grid;
-                    gap: 16px;
-                    margin-top: 30px;
-                }
-                .teaching-quick-links {
-                    display: inline-flex;
-                    flex-wrap: wrap;
-                    gap: 6px;
-                    width: fit-content;
-                    padding: 5px;
-                    border: 1px solid rgba(31, 45, 61, 0.08);
-                    border-radius: 999px;
-                    background: rgba(255, 255, 255, 0.74);
-                    box-shadow: 0 12px 28px rgba(36, 54, 80, 0.08);
-                }
-                .teaching-quick-links button,
-                .teaching-card,
-                .teaching-timeline-card,
-                .teaching-topic-card,
-                .teaching-highlight {
-                    border-radius: 22px;
-                    border: 1px solid rgba(31, 45, 61, 0.08);
-                    box-shadow: 0 18px 40px rgba(36, 54, 80, 0.08);
-                }
-                .teaching-quick-links button {
-                    min-width: 124px;
-                    padding: 9px 18px;
-                    background: transparent;
-                    border: 0;
-                    border-radius: 999px;
-                    color: #1f2d3d;
-                    font-weight: 700;
-                    text-decoration: none;
-                    text-align: center;
-                    cursor: pointer;
-                    box-shadow: none;
-                    transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
-                }
-                .teaching-quick-links button:hover {
-                    background: rgba(255, 255, 255, 0.9);
-                }
-                .teaching-quick-links button[aria-pressed='true'] {
-                    background: rgb(var(--primary-600));
-                    color: #fff;
-                    box-shadow: 0 8px 18px rgba(0, 144, 32, 0.2);
-                }
-                .teaching-section {
-                    padding-top: 32px;
-                    padding-bottom: 48px;
-                }
-                .teaching-intro {
-                    max-width: 760px;
-                    margin-bottom: 22px;
-                    color: #4f5f72;
-                    line-height: 1.7;
-                }
-                .teaching-grid {
-                    display: grid;
-                    gap: 18px;
-                }
-                .teaching-grid.two {
-                    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-                }
-                .teaching-grid.three {
-                    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                }
-                .teaching-card {
-                    padding: 22px;
-                    background: linear-gradient(180deg, #ffffff 0%, #faf7f3 100%);
-                }
-                .teaching-card h3,
-                .teaching-timeline-card h3,
-                .teaching-topic-card h3,
-                .teaching-highlight h3 {
-                    margin-top: 0;
-                    color: #1f2d3d;
-                }
-                .teaching-card p,
-                .teaching-card li,
-                .teaching-timeline-card li,
-                .teaching-topic-card p,
-                .teaching-highlight li {
-                    color: #536377;
-                    line-height: 1.65;
-                }
-                .teaching-card .muted {
-                    display: inline-block;
-                    margin-bottom: 10px;
-                    color: #8c5b46;
-                    font-size: 0.9em;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.08em;
-                }
-                .teaching-card .cta {
-                    display: inline-block;
-                    margin-top: 10px;
-                    color: rgb(var(--primary-700));
-                    font-weight: 700;
-                }
-                .teaching-simple-list {
-                    margin: 0;
-                    padding-left: 22px;
-                    list-style-position: outside;
-                    list-style-type: disc;
-                }
-                .teaching-simple-list li {
-                    margin-bottom: 16px;
-                    color: #536377;
-                    line-height: 1.65;
-                }
-                .teaching-simple-list strong {
-                    color: #1f2d3d;
-                }
-                .teaching-course-link {
-                    display: block;
-                    margin-top: 4px;
-                    color: rgb(var(--primary-700));
-                    font-weight: 700;
-                }
-                .teaching-bands {
-                    display: grid;
-                    gap: 16px;
-                    margin-top: 20px;
-                }
-                .teaching-band {
-                    padding: 18px 22px;
-                    border-left: 5px solid rgb(var(--primary-600));
-                    border-radius: 18px;
-                    background: linear-gradient(90deg, rgba(16, 175, 57, 0.08), rgba(255, 255, 255, 0.95));
-                }
-                .teaching-band p {
-                    margin: 0;
-                    color: #495b6f;
-                }
-                .teaching-timeline {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 18px;
-                    margin-top: 24px;
-                }
-                .teaching-process-title {
-                    margin: 28px 0 0;
-                    color: #1f2d3d;
-                }
-                .teaching-timeline-card {
-                    padding: 22px;
-                    background: linear-gradient(180deg, #fefefe 0%, #edf4fb 100%);
-                    width: 100%;
-                }
-                .teaching-timeline-card ul {
-                    margin: 0;
-                    padding-left: 22px;
-                    list-style-type: disc;
-                }
-                .teaching-timeline-card li {
-                    margin-bottom: 8px;
-                }
-                .teaching-process-list {
-                    margin: 16px 0 0;
-                    padding-left: 0;
-                    list-style-position: inside;
-                }
-                .teaching-process-list li {
-                    margin-bottom: 12px;
-                    color: #536377;
-                    line-height: 1.7;
-                }
-                .teaching-process-list strong {
-                    color: #1f2d3d;
-                }
-                .teaching-phase {
-                    display: inline-block;
-                    margin-bottom: 10px;
-                    padding: 6px 10px;
-                    border-radius: 999px;
-                    background: #1f2d3d;
-                    color: #fff;
-                    font-size: 0.78em;
-                    letter-spacing: 0.08em;
-                    text-transform: uppercase;
-                }
-                .teaching-topic-card {
-                    padding: 22px;
-                    background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
-                }
-                .teaching-topic-disclosures {
-                    display: grid;
-                    gap: 10px;
-                    margin-top: 16px;
-                }
-                .teaching-topic-disclosure {
-                    overflow: hidden;
-                    border: 1px solid rgba(31, 45, 61, 0.08);
-                    border-radius: 16px;
-                    background: #fff;
-                }
-                .teaching-topic-disclosure summary {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 16px;
-                    padding: 16px 18px;
-                    color: #1f2d3d;
-                    font-weight: 800;
-                    cursor: pointer;
-                    list-style: none;
-                }
-                .teaching-topic-disclosure summary::-webkit-details-marker {
-                    display: none;
-                }
-                .teaching-topic-disclosure summary::after {
-                    content: '+';
-                    display: inline-flex;
-                    flex: 0 0 auto;
-                    align-items: center;
-                    justify-content: center;
-                    width: 26px;
-                    height: 26px;
-                    border-radius: 999px;
-                    background: rgba(16, 175, 57, 0.1);
-                    color: rgb(var(--primary-700));
-                    font-size: 1.1rem;
-                    line-height: 1;
-                }
-                .teaching-topic-disclosure[open] summary::after {
-                    content: '-';
-                }
-                .teaching-topic-disclosure > p {
-                    margin: 0;
-                    padding: 0 18px 18px;
-                    color: #536377;
-                    line-height: 1.65;
-                }
-                .teaching-topic-content {
-                    padding: 0 18px 18px;
-                }
-                .teaching-topic-content p {
-                    margin: 0 0 12px;
-                    color: #536377;
-                    line-height: 1.65;
-                }
-                .teaching-topic-content p:last-of-type {
-                    margin-bottom: 0;
-                }
-                .teaching-topic-references {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 8px 16px;
-                    margin-top: 14px;
-                }
-                .teaching-topic-references a {
-                    color: rgb(var(--primary-700));
-                    font-weight: 700;
-                    overflow-wrap: anywhere;
-                }
-                .teaching-topic-card .lead {
-                    display: inline-block;
-                    margin-bottom: 8px;
-                    color: rgb(var(--primary-700));
-                    font-weight: 700;
-                }
-                .teaching-highlight {
-                    padding: 22px;
-                    background: linear-gradient(135deg, #1f2d3d 0%, #2d4963 100%);
-                }
-                .teaching-highlight h3,
-                .teaching-highlight p,
-                .teaching-highlight li {
-                    color: #f6f8fb;
-                }
-                .teaching-highlight ul {
-                    padding-left: 20px;
-                    margin-bottom: 0;
-                }
-                .teaching-pill-list {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 10px;
-                    margin-top: 18px;
-                }
-                .teaching-pill {
-                    padding: 10px 14px;
-                    border-radius: 999px;
-                    background: #f4eee8;
-                    color: #6a4d3f;
-                    font-weight: 700;
-                }
-                .teaching-guideline-grid {
-                    display: grid;
-                    gap: 18px;
-                    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-                    margin-top: 22px;
-                }
-                .teaching-guideline-list {
-                    display: grid;
-                    gap: 10px;
-                    margin: 22px 0 0;
-                    padding-left: 0;
-                    list-style: none;
-                }
-                .teaching-guideline-list > li {
-                    margin-bottom: 0;
-                    color: #536377;
-                    line-height: 1.7;
-                    list-style: none;
-                }
-                .teaching-guideline-list h3 {
-                    margin: 0 0 8px;
-                    color: #1f2d3d;
-                }
-                .teaching-guideline-list p {
-                    margin-bottom: 10px;
-                }
-                .teaching-guideline-list ul {
-                    padding-left: 22px;
-                    margin-bottom: 0;
-                    list-style-type: disc;
-                    list-style-position: outside;
-                }
-                .teaching-guideline-list ul li {
-                    margin-bottom: 8px;
-                    list-style: disc;
-                }
-                .teaching-guideline-disclosure {
-                    overflow: hidden;
-                    border: 1px solid rgba(31, 45, 61, 0.08);
-                    border-radius: 16px;
-                    background: #fff;
-                    box-shadow: 0 12px 26px rgba(36, 54, 80, 0.06);
-                }
-                .teaching-guideline-disclosure summary {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 16px;
-                    padding: 15px 18px;
-                    color: #1f2d3d;
-                    font-weight: 800;
-                    cursor: pointer;
-                    list-style: none;
-                }
-                .teaching-guideline-disclosure summary::-webkit-details-marker {
-                    display: none;
-                }
-                .teaching-guideline-disclosure summary::after {
-                    content: '+';
-                    display: inline-flex;
-                    flex: 0 0 auto;
-                    align-items: center;
-                    justify-content: center;
-                    width: 26px;
-                    height: 26px;
-                    border-radius: 999px;
-                    background: rgba(31, 45, 61, 0.08);
-                    color: #1f2d3d;
-                    font-size: 1.1rem;
-                    line-height: 1;
-                }
-                .teaching-guideline-disclosure[open] summary::after {
-                    content: '-';
-                }
-                .teaching-guideline-body {
-                    padding: 0 18px 18px;
-                }
-                .teaching-guideline-grid ul,
-                .teaching-timeline-card ul,
-                .teaching-card ul {
-                    padding-left: 20px;
-                    margin-bottom: 0;
-                }
-                .teaching-note {
-                    margin-top: 18px;
-                    margin-bottom: 28px;
-                    padding: 18px 20px;
-                    border-radius: 18px;
-                    border-left: 4px solid rgb(var(--primary-600));
-                    background: linear-gradient(90deg, rgba(16, 175, 57, 0.09), rgba(255, 255, 255, 0.96));
-                    color: #684f42;
-                    line-height: 1.6;
-                }
-                .teaching-note strong {
-                    color: #1f2d3d;
-                }
-                .teaching-note p:last-child {
-                    margin-bottom: 0;
-                }
-                @media (max-width: 767px) {
-                    .teaching-hero {
-                        padding: 38px 0 28px;
-                    }
-                    .teaching-hero-content {
-                        gap: 18px;
-                    }
-                    .teaching-quick-links {
-                        display: grid;
-                        grid-template-columns: repeat(3, minmax(0, 1fr));
-                        width: 100%;
-                        border-radius: 18px;
-                    }
-                    .teaching-quick-links button {
-                        min-width: 0;
-                        padding: 9px 10px;
-                    }
-                    .teaching-section {
-                        padding-top: 28px;
-                        padding-bottom: 42px;
-                    }
-                }
-            `}</style>
-
-            <section className="teaching-hero">
-                <div className="teaching-hero-content max-w-6xl mx-auto px-4 sm:px-6">
-                    <div>
-                        <h1>{pick('Teaching', 'Lehre')}</h1>
-                    </div>
-                    <div id="teaching-tabs" className="teaching-quick-links" role="tablist" aria-label="Teaching sections">
-                        {quickLinks.map((item) => (
-                            <button
-                                key={item.id}
-                                type="button"
-                                role="tab"
-                                aria-selected={activeSection === item.id}
-                                aria-pressed={activeSection === item.id}
-                                onClick={() => selectSection(item.id)}
-                            >
-                                {pick(item.label, item.id === 'courses-overview' ? 'Kurse' : item.id === 'seminars' ? 'Seminare' : 'Abschlussarbeiten')}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
+        <PageShell
+            kicker="TU Clausthal"
+            title={pick('Teaching', 'Lehre')}
+            lede={pick(
+                'Courses, seminars and thesis supervision by the Cognitive Software group.',
+                'Kurse, Seminare und die Betreuung von Abschlussarbeiten der Gruppe Cognitive Software.'
+            )}
+            nav={quickLinks.map((item) => ({ id: item.id, label: tabLabel(item.id), onSelect: selectSection, active: activeSection === item.id }))}
+            rail
+        >
             {activeSection === 'courses-overview' && (
-                <SectionBlock
+                <Section
                     id="courses-overview"
                     title={pick('Courses', 'Kurse')}
                     intro={pick(
-                        'Teaching at Clausthal University of Technology includes computer science foundations, practical courses, projects, and seminars.',
-                        'Das Lehrangebot der TU Clausthal umfasst Grundlagen der Informatik, Praktika, Projekte und Seminare.'
+                        'At TU Clausthal we teach computer science foundations, seminars, practical courses and research projects.',
+                        'An der TU Clausthal lehren wir Grundlagen der Informatik, Seminare, Praktika und Forschungsprojekte.'
                     )}
                 >
-                    <ul className="teaching-simple-list">
+                    <ul className="grid gap-4 lg:grid-cols-2">
                         {taughtCourses.map((course) => (
-                            <li key={course.title}>
-                                <strong>{pick(course.title, course.titleDe ?? course.title)}</strong>
-                                {course.semester && <> ({pick(course.semester, course.semesterDe)})</>}
-                                <br />
-                                {pick(course.tone, course.toneDe)}
-                                {course.link && (
-                                    <Link className="teaching-course-link" to={course.link}>
-                                        {pick(course.cta, course.ctaDe)}
-                                    </Link>
+                            <Card as="li" key={course.title} className="flex flex-col p-5 sm:p-6">
+                                {course.semester && (
+                                    <span className="mb-3 w-fit rounded-full bg-site-100 px-3 py-1 text-xs font-semibold text-slate-800">
+                                        {pick(course.semester, course.semesterDe)}
+                                    </span>
                                 )}
-                                {course.links?.map((link) => (
-                                    <Link key={link.url} className="teaching-course-link" to={link.url}>
-                                        {pick(link.label, link.labelDe)}
-                                    </Link>
-                                ))}
-                            </li>
+                                <h3 className="text-lg font-bold leading-snug">{pick(course.title, course.titleDe ?? course.title)}</h3>
+                                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{pick(course.tone, course.toneDe)}</p>
+                                <div className="mt-4 flex flex-col gap-1 border-t border-slate-100 pt-3">
+                                    {[...(course.link ? [{ url: course.link, label: course.cta, labelDe: course.ctaDe }] : []), ...(course.links ?? [])].map((link) => (
+                                        <a
+                                            key={link.url}
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="inline-flex items-start gap-1.5 py-1 text-sm font-semibold text-primary-700 hover:text-primary-800"
+                                        >
+                                            <FiArrowUpRight className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                                            {pick(link.label, link.labelDe)}
+                                        </a>
+                                    ))}
+                                </div>
+                            </Card>
                         ))}
                     </ul>
-                </SectionBlock>
+                </Section>
             )}
 
             {activeSection === 'seminars' && (
-                <SectionBlock
+                <Section
                     id="seminars"
                     title={pick('Seminars', 'Seminare')}
-                    topContent={
-                        <div className="teaching-note">
-                            <p><strong>{pick('Seminar applications closed', 'Seminarbewerbung geschlossen')}</strong></p>
-                            <p>
-                                {pick(
-                                    'All seminar places for winter semester 2026/27 are filled, and all listed topics have already been assigned. We are no longer accepting applications.',
-                                    'Alle Seminarplätze für das Wintersemester 2026/27 sind belegt, und alle aufgeführten Themen sind bereits vergeben. Wir nehmen keine weiteren Bewerbungen an.'
-                                )}
-                            </p>
-                        </div>
-                    }
                     intro={pick(
-                        'The seminar process is organized in two stages: first a guided reading phase, then an independent research phase, followed by submission and presentation.',
-                        'Der Seminarprozess ist in zwei Phasen organisiert: zunächst eine betreute Lesephase, danach eine eigenständige Recherchephase, gefolgt von Abgabe und Präsentation.'
+                        'A seminar runs in two stages, a supervised reading phase and an independent research phase, and ends with a written paper and a presentation.',
+                        'Ein Seminar läuft in zwei Phasen, einer betreuten Lesephase und einer eigenständigen Recherchephase, und endet mit einer schriftlichen Arbeit und einem Vortrag.'
                     )}
                 >
-                    <div className="teaching-card">
-                        <span className="muted">HWS2026/27</span>
-                        <h3>{pick('Seminar Topics', 'Seminarthemen')}</h3>
-                        <div className="teaching-topic-disclosures">
-                            {seminarTopics.map((topic) => (
-                                <details key={topic.title} className="teaching-topic-disclosure">
-                                    <summary>{topic.title}</summary>
-                                    <div className="teaching-topic-content">
-                                        {topic.abstract.map((paragraph) => (
-                                            <p key={paragraph}>{paragraph}</p>
+                    <Callout title={pick('Seminar applications closed', 'Seminarbewerbung geschlossen')}>
+                        {pick(
+                            'All seminar places for winter semester 2026/27 are filled, and all listed topics have already been assigned. We are no longer accepting applications.',
+                            'Alle Seminarplätze für das Wintersemester 2026/27 sind belegt, und alle aufgeführten Themen sind bereits vergeben. Wir nehmen keine weiteren Bewerbungen an.'
+                        )}
+                    </Callout>
+
+                    <div className="mt-10 flex flex-wrap items-baseline justify-between gap-2">
+                        <h3 className="text-xl font-bold">{pick('Seminar topics', 'Seminarthemen')}</h3>
+                        <span className="text-sm font-semibold text-slate-600">WS 2026/27</span>
+                    </div>
+                    <div className="mt-4 grid items-start gap-4 lg:grid-cols-2">
+                        {seminarTopics.map((topic) => (
+                            <Card as="article" key={topic.title} className="p-5 sm:p-6">
+                                <h4 className="text-lg font-bold leading-snug">{topic.title}</h4>
+                                <div className="mt-3 space-y-3 text-sm leading-relaxed text-slate-600">
+                                    {topic.abstract.map((paragraph) => (
+                                        <p key={paragraph}>{paragraph}</p>
+                                    ))}
+                                </div>
+                                {topic.references && (
+                                    <div className="mt-4 flex flex-wrap gap-2" aria-label="References">
+                                        {topic.references.map((reference) => (
+                                            <a
+                                                key={reference.url}
+                                                href={reference.url}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-primary-300 hover:text-primary-700"
+                                            >
+                                                {reference.label}
+                                                <FiArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                                            </a>
                                         ))}
-                                        {topic.references && (
-                                            <div className="teaching-topic-references" aria-label="References">
-                                                {topic.references.map((reference) => (
-                                                    <a
-                                                        key={reference.url}
-                                                        href={reference.url}
-                                                        target="_blank"
-                                                        rel="noreferrer"
-                                                    >
-                                                        {reference.label}
-                                                    </a>
-                                                ))}
-                                            </div>
-                                        )}
                                     </div>
-                                </details>
-                            ))}
-                        </div>
+                                )}
+                            </Card>
+                        ))}
                     </div>
 
-                    <h3 className="teaching-process-title">{pick('Process', 'Ablauf')}</h3>
-                    <div className="teaching-timeline">
+                    <h3 className="mt-12 text-xl font-bold">{pick('Process', 'Ablauf')}</h3>
+                    <ol className="mt-4 grid gap-4 lg:grid-cols-3">
                         {seminarProcess.map((step) => (
-                            <div key={step.title} className="teaching-timeline-card">
-                                <span className="teaching-phase">{step.phase}</span>
-                                <h3>{step.title}</h3>
-                                <ul>
+                            <Card as="li" key={step.title} className="p-5 sm:p-6">
+                                <span className="inline-block rounded-full bg-site-100 px-3 py-1 text-xs font-semibold text-slate-800">{step.phase}</span>
+                                <h4 className="mt-3 text-lg font-bold leading-snug">{step.title}</h4>
+                                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-slate-600 marker:text-site-900">
                                     {step.points.map((point) => (
                                         <li key={point}>{point}</li>
                                     ))}
                                 </ul>
-                            </div>
+                            </Card>
                         ))}
-                    </div>
-                </SectionBlock>
+                    </ol>
+                </Section>
             )}
 
             {activeSection === 'theses' && (
-                <SectionBlock
+                <Section
                     id="theses"
                     title={pick('Bachelor & Master Thesis Guidelines', 'Richtlinien für Bachelor- und Masterarbeiten')}
-                    topContent={
-                        <div className="teaching-note">
-                            <p><strong>{pick('Apply for a thesis', 'Für eine Abschlussarbeit bewerben')}</strong></p>
-                            <p>
-                                {pick('Send your topic of interest, Transcript of Records, and CV to', 'Senden Sie Ihr Interessengebiet, Ihren Notenspiegel und Ihren Lebenslauf an')}{' '}
-                                <a href="mailto:patrick.knab@tu-clausthal.de">patrick.knab@tu-clausthal.de</a>.
-                            </p>
-                            <p>
-                                {pick('Please allow 2-3 weeks for a response after your initial request.', 'Bitte rechnen Sie nach der ersten Anfrage mit 2-3 Wochen Bearbeitungszeit.')}
-                            </p>
-                        </div>
-                    }
                     intro={pick(
-                        'We offer thesis topics, subject to availability, across several active research areas. The information below consolidates the current public-facing process, expectations, and submission guidance.',
-                        'Wir bieten, abhängig von der Verfügbarkeit, Abschlussarbeitsthemen in mehreren aktiven Forschungsbereichen an. Die folgenden Informationen bündeln den aktuellen öffentlichen Prozess, Erwartungen und Hinweise zur Abgabe.'
+                        'We supervise Bachelor’s and Master’s theses in the research areas below, as long as places are free. This page covers how to apply and what we expect from the exposé, the thesis and the final presentation.',
+                        'Wir betreuen Bachelor- und Masterarbeiten in den unten genannten Forschungsbereichen, solange Plätze frei sind. Hier steht, wie du dich bewirbst und was wir von Exposé, Arbeit und Abschlusspräsentation erwarten.'
                     )}
                 >
-                    <div className="teaching-card">
-                        <h3>{pick('Available Thesis Topics', 'Verfügbare Themen für Abschlussarbeiten')}</h3>
-                        <div className="teaching-topic-disclosures">
-                            {researchAreas.slice(0, 7).map((entry) => (
-                                <details key={entry.area} className="teaching-topic-disclosure">
-                                    <summary>{entry.area}</summary>
-                                    <p>{entry.summary}</p>
-                                </details>
-                            ))}
-                        </div>
-                    </div>
+                    <Callout title={pick('Apply for a thesis', 'Für eine Abschlussarbeit bewerben')}>
+                        <p>
+                            {pick('Send your topic of interest, Transcript of Records, and CV to', 'Senden Sie Ihr Interessengebiet, Ihren Notenspiegel und Ihren Lebenslauf an')}{' '}
+                            <a href="mailto:patrick.knab@tu-clausthal.de">patrick.knab@tu-clausthal.de</a>.{' '}
+                            {pick('Please allow 2-3 weeks for a response after your initial request.', 'Bitte rechnen Sie nach der ersten Anfrage mit 2-3 Wochen Bearbeitungszeit.')}
+                        </p>
+                    </Callout>
 
-                <h3 className="teaching-process-title">{pick('Process', 'Ablauf')}</h3>
-                <ol className="teaching-process-list">
-                    {thesisApplicationSteps.map((step, index) => (
-                        <li key={step}>
-                            <strong>{pick(`Step ${index + 1}.`, `Schritt ${index + 1}.`)}</strong> {step}
-                        </li>
-                    ))}
-                </ol>
-
-                    <ul className="teaching-guideline-list">
-                    <li>
-                        <details className="teaching-guideline-disclosure">
-                            <summary>What the Expose Should Cover</summary>
-                            <div className="teaching-guideline-body">
-                                <ul>
-                                    {exposeGuidelines.map((item) => (
-                                        <li key={item}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </details>
-                    </li>
-                    <li>
-                        <details className="teaching-guideline-disclosure">
-                            <summary>Report Basics</summary>
-                            <div className="teaching-guideline-body">
-                                <ul>
-                                    {thesisFormatting.map((item) => (
-                                        <li key={item}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </details>
-                    </li>
-                    <li>
-                        <details className="teaching-guideline-disclosure">
-                            <summary>Working With Your Advisor</summary>
-                            <div className="teaching-guideline-body">
-                                <ul>
-                                    {thesisSupervision.map((item) => (
-                                        <li key={item}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </details>
-                    </li>
-                    <li>
-                        <details className="teaching-guideline-disclosure">
-                            <summary>Report Expectations</summary>
-                            <div className="teaching-guideline-body">
-                                <ul>
-                                    {thesisWriting.map((item) => (
-                                        <li key={item}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </details>
-                    </li>
-                    <li>
-                        <details className="teaching-guideline-disclosure">
-                            <summary>Defense Format</summary>
-                            <div className="teaching-guideline-body">
-                                <ul>
-                                    {thesisFinalPresentation.map((item) => (
-                                        <li key={item}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </details>
-                    </li>
-                    <li>
-                        <details className="teaching-guideline-disclosure">
-                            <summary>What Must Be Handed In</summary>
-                            <div className="teaching-guideline-body">
-                                <ul>
-                                    {thesisSubmission.map((item) => (
-                                        <li key={item}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </details>
-                    </li>
-                    <li>
-                        <details className="teaching-guideline-disclosure">
-                            <summary>Use of Generative AI</summary>
-                            <div className="teaching-guideline-body">
-                                <ul>
-                                    {thesisAiUse.map((item) => (
-                                        <li key={item}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </details>
-                    </li>
-                    <li>
-                        <details className="teaching-guideline-disclosure">
-                            <summary>Assessment</summary>
-                            <div className="teaching-guideline-body">
-                                <p>
-                                    The thesis report remains the primary basis for assessment, together with the submitted
-                                    artifacts, such as the source code or demonstrator. In addition, supervisors prepare
-                                    comprehension questions for the final presentation to assess the student’s understanding
-                                    of the topic. The final presentation is also evaluated based on its overall quality, the
-                                    presentation of the thesis work, and the student’s ability to answer questions.
-                                </p>
-                            </div>
-                        </details>
-                    </li>
+                    <h3 className="mt-10 text-xl font-bold">{pick('Available thesis topics', 'Verfügbare Themen für Abschlussarbeiten')}</h3>
+                    <ul className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                        {researchAreas.slice(0, 7).map((entry) => (
+                            <Card as="li" key={entry.area} className="p-5">
+                                <h4 className="font-bold leading-snug">{entry.area}</h4>
+                                <p className="mt-2 text-sm leading-relaxed text-slate-600">{entry.summary}</p>
+                            </Card>
+                        ))}
                     </ul>
-                </SectionBlock>
+
+                    <h3 className="mt-12 text-xl font-bold">{pick('Process', 'Ablauf')}</h3>
+                    <ol className="mt-4 space-y-3">
+                        {thesisApplicationSteps.map((step, index) => (
+                            <li key={step} className="flex gap-4">
+                                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-site-900 text-sm font-bold text-white">{index + 1}</span>
+                                <p className="pt-1 leading-relaxed text-slate-700">{step}</p>
+                            </li>
+                        ))}
+                    </ol>
+
+                    <h3 className="mt-12 text-xl font-bold">{pick('Guidelines', 'Richtlinien')}</h3>
+                    <div className="mt-4 grid items-start gap-4 md:grid-cols-2">
+                        {guidelines.map((g) => (
+                            <Card key={g.title} className="p-5 sm:p-6">
+                                <h4 className="font-bold">{g.title}</h4>
+                                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-slate-600 marker:text-site-900">
+                                    {g.items.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </Card>
+                        ))}
+                        <Card className="p-5 sm:p-6">
+                            <h4 className="font-bold">{pick('Assessment', 'Bewertung')}</h4>
+                            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                                The thesis report is the main basis for the grade, together with the submitted artifacts
+                                such as source code or a demonstrator. At the final presentation, supervisors ask
+                                comprehension questions to check your understanding of the topic; the presentation is
+                                also graded on its quality and on how well you answer.
+                            </p>
+                        </Card>
+                    </div>
+                </Section>
             )}
-        </>
+        </PageShell>
     );
 };
 
