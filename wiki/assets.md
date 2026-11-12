@@ -51,6 +51,12 @@ only for the one always-visible top-of-page hero (`HeroVideo`), and even there u
 
 ## Image pipeline — `npm run optimize-images`
 
+`public/logos/nvidia.webp` is the official vertical NVIDIA logo on white, used
+for the Sascha Marton news article. Source:
+[NVIDIA Newsroom](https://nvidianews.nvidia.com/file/nvidia-logo-vert-blk).
+The 2160×1808 original was resized proportionally to 800×670 and saved as WebP.
+Use `object-contain` to preserve the complete logo and its clear space.
+
 `scripts/optimize-images.mjs` (uses `sharp`) walks `public/`, converts PNG/JPEG **larger than
 250 KB** to WebP (quality 80) at a sensible max width, deletes the originals, and rewrites every
 reference to them across `src/`, `public/data/*.json`, and `index.html`. It is **idempotent** —

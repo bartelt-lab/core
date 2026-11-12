@@ -46,7 +46,7 @@ const SeoHead = () => {
             <meta name="description" content={description} />
             <link rel="canonical" href={url} />
 
-            <meta property="og:type" content="website" />
+            <meta property="og:type" content={meta?.type ?? 'website'} />
             <meta property="og:site_name" content={SITE_NAME} />
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />

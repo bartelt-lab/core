@@ -11,6 +11,7 @@ import { LanguageProvider } from './i18n/LanguageContext'
 
 // Shared sections and research projects.
 const Home = lazy(() => import('./pages/Home'))
+const SaschaMartonNvidia = lazy(() => import('./pages/news/SaschaMartonNvidia'))
 const Research = lazy(() => import('./pages/Research'))
 const Projects = lazy(() => import('./pages/Projects'))
 const Teaching = lazy(() => import('./pages/Teaching'))
@@ -52,6 +53,7 @@ function CoreShell() {
           <LegacyRedirect>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/news/sascha-marton-nvidia" element={<SaschaMartonNvidia />} />
               <Route path="/research" element={<Research />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/teaching" element={<Teaching />} />

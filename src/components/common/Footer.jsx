@@ -19,6 +19,7 @@ const Footer = () => {
           {['Research', 'Projects', 'Teaching', 'Labs', 'Team'].map((label) => (
             <Link key={label} to={withInstitution(`/${label.toLowerCase()}`)} className="hover:text-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-700">{label}</Link>
           ))}
+          <Link to={withInstitution('/#news')} className="hover:text-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-700">{pick('News', 'Aktuelles')}</Link>
           <Link to={withInstitution('/team#contact')} className="hover:text-primary-700">{pick('Contact', 'Kontakt')}</Link>
         </nav>
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-4">

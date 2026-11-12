@@ -134,6 +134,17 @@ test('published project details select the correct main navigation category', ()
   }
 })
 
+test('news articles are public routes with a stable canonical and a return to filtered news', () => {
+  const path = '/news/sascha-marton-nvidia'
+  const route = findRoute(path)
+  assert.ok(route, 'the article has metadata for prerendering')
+  assert.ok(indexableRoutes.includes(route), 'the article is included in the sitemap')
+  assert.equal(canonicalUrl(`${path}/`), `${SITE_URL}${path}`)
+  assert.equal(legacyRedirect(path, '?institution=TUC'), null)
+  assert.equal(route.institutionFilterTarget, '/#news')
+  assert.equal(withInstitution(route.institutionFilterTarget, 'UBB'), '/?institution=UBB#news')
+})
+
 test('institution values accept MDS as Rostock and use All for absent or invalid values', () => {
   for (const value of ['TUC', 'UBB', 'Rostock', 'all']) assert.equal(normalizeInstitution(value), value)
   assert.equal(normalizeInstitution('MDS'), 'Rostock')

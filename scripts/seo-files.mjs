@@ -124,6 +124,7 @@ function buildLlmsTxt() {
         '> systems, and machine learning research.',
         '',
         group('Overview', (r) => r.path === '/'),
+        group('News', (r) => r.path.startsWith('/news/')),
         group('Research', (r) => r.section === 'research'),
         group('Projects', (r) => r.section === 'projects'),
         group('Teaching', (r) => r.section === 'teaching'),

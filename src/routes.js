@@ -1,3 +1,5 @@
+import { saschaMartonNvidia } from './data/news.js'
+
 /**
  * Canonical route table — the single source of truth for
  *   - per-route <title>/<meta>   (src/components/common/SeoHead.jsx)
@@ -24,6 +26,9 @@
  *   redirectTo   optional — old URL replaced by this path/query/anchor
  *   section      optional — active main navigation category, including details
  *   image        optional — og:image override, as a /public path
+ *   type         optional — Open Graph type (defaults to website)
+ *   institutionFilterTarget optional — destination when filtering a page outside
+ *                the five main sections, such as a news article
  */
 
 export const SITE_URL = 'https://www.core-network.ai'
@@ -43,6 +48,15 @@ export const routes = [
     source: 'src/pages/Home.jsx',
     title: SITE_NAME,
     description: DEFAULT_ROUTE_META.description,
+  },
+  {
+    path: saschaMartonNvidia.path,
+    source: 'src/pages/news/SaschaMartonNvidia.jsx',
+    title: `${saschaMartonNvidia.title.en} | CORE`,
+    description: saschaMartonNvidia.summary.en,
+    image: saschaMartonNvidia.image,
+    type: 'article',
+    institutionFilterTarget: '/#news',
   },
   {
     path: '/network',

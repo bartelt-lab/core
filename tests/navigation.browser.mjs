@@ -50,6 +50,41 @@ try {
     checks += 1
   }
 
+  const newsPath = '/news/sascha-marton-nvidia'
+  await visit('/?institution=TUC#news')
+  const news = page.locator('#news')
+  await news.getByRole('heading', { name: 'News', exact: true }).waitFor()
+  await news.locator(`a[href^="${newsPath}"]`).first().click()
+  await page.waitForURL((url) => url.pathname === newsPath && url.searchParams.get('institution') === 'TUC')
+  await page.getByRole('heading', { level: 1, name: /Sascha Marton.*tabular/i }).waitFor()
+  assert.equal(await page.locator('main time').first().getAttribute('datetime'), '2026-11-12')
+  assert.equal(await page.getByRole('img', { name: 'NVIDIA logo', exact: true }).getAttribute('src'), '/logos/nvidia.webp')
+  assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), canonicalUrl(newsPath))
+  const articleLinks = await page.locator('main a').evaluateAll((links) => links.map((link) => link.getAttribute('href')))
+  for (const href of [
+    'https://scholar.google.com/citations?user=5PQJ3sEAAAAJ',
+    'https://scholar.google.de/citations?user=9FcF1gwAAAAJ&hl=de',
+    'https://ojs.aaai.org/index.php/AAAI/article/view/29345',
+    'https://openreview.net/forum?id=XEFWBxi075',
+    'https://www.isse.tu-clausthal.de/',
+    '/team?institution=TUC#join-us',
+  ]) assert.ok(articleLinks.includes(href), `Article link: ${href}`)
+  await page.getByRole('button', { name: 'DE', exact: true }).click()
+  await page.getByRole('heading', { level: 1, name: /^Von CORE zu NVIDIA/ }).waitFor()
+  await page.getByRole('link', { name: 'Zurück zu Aktuelles', exact: true }).click()
+  await page.waitForURL((url) => url.pathname === '/' && url.hash === '#news' && url.searchParams.get('institution') === 'TUC')
+  await news.getByRole('heading', { name: 'Aktuelles', exact: true }).waitFor()
+  await page.getByRole('button', { name: 'EN', exact: true }).click()
+  await news.locator(`a[href^="${newsPath}"]`).first().click()
+  await page.waitForURL((url) => url.pathname === newsPath)
+  await choose('UBB')
+  await page.waitForURL((url) => url.pathname === '/' && url.hash === '#news')
+  assert.equal(await news.locator(`a[href^="${newsPath}"]`).count(), 0, 'TUC news is hidden by the UBB filter')
+  await news.getByRole('link', { name: 'Show all news', exact: true }).click()
+  await page.waitForURL((url) => url.pathname === '/' && url.hash === '#news' && !url.searchParams.has('institution'))
+  await news.locator(`a[href^="${newsPath}"]`).first().waitFor()
+  checks += 1
+
   await visit('/research')
   assert.deepEqual(await nav.getByRole('link').allTextContents(), ['Research', 'Projects', 'Teaching', 'Labs', 'Team'])
   await count('#publications article', 65)
@@ -133,7 +168,7 @@ try {
 
   for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 844 })
-    for (const path of ['/research', '/projects', '/teaching', '/labs', '/team']) {
+    for (const path of ['/', newsPath, '/research', '/projects', '/teaching', '/labs', '/team']) {
       await visit(path)
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `${path} at ${width}px overflows`)
       checks += 1

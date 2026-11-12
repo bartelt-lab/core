@@ -8,6 +8,8 @@ five main sections; they do not have their own landing pages or layouts.
 | Route | Content | Main navigation |
 | --- | --- | --- |
 | `/` | Network homepage | Logo |
+| `/#news` | Latest news, filtered by institution | Homepage and footer |
+| `/news/sascha-marton-nvidia` | News article | Homepage and footer |
 | `/research` | Research topics and publications | Research |
 | `/projects` | Research and industry projects | Projects |
 | `/teaching` | Courses, seminars, theses, student projects | Teaching |
@@ -48,6 +50,9 @@ The URL is the filter state. For example:
   External links stay unchanged.
 - Changing the filter on a hub stays on that hub. Changing it on a detail page
   returns to its section; student details return to `#student-projects`.
+  News articles use `institutionFilterTarget: '/#news'` to return to the filtered
+  homepage news section. A directly opened article remains readable regardless
+  of the incoming filter.
 - Lists include an item when any of its institutions matches. Keep affiliation
   data in the shared data sources; do not infer membership from a page's folder.
   Publications use `src/utils/publicationInstitutions.js`.
@@ -60,6 +65,25 @@ skip link must focus the main element without replacing this tab hash.
 
 People use `/team#member-<slug>`. Team clears an incompatible filter with history
 replacement so a direct person link can reveal and highlight its target.
+
+## News
+
+The homepage shows up to three recent articles immediately after the hero.
+`src/data/news.js` holds their date, institution tags, bilingual title and summary,
+and image. The list respects the shared institution filter and offers an All link
+when there are no matching articles. Researcher links come from `src/data/team.js`;
+article images can use existing portraits or logos in `public/`.
+
+Article bodies live in `src/pages/news/`. To add one, add its metadata to
+`newsArticles` in newest-first order, then register its page in both `App.jsx`
+and `routes.js`. Keep the route's title, description, and image tied to that data.
+Articles are prerendered and included in the sitemap and the News group in
+`llms.txt`. Use `type: 'article'` for sharing metadata and
+`institutionFilterTarget: '/#news'` for filter navigation.
+
+The five main navigation sections stay unchanged. The footer links to `/#news`;
+each article links back there. A separate `/news` archive can be added once the
+number of articles warrants it.
 
 ## Old addresses
 

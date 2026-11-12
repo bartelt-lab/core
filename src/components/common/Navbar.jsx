@@ -22,7 +22,8 @@ export default function Navbar() {
   const [openAt, setOpenAt] = useState(null)
   const menuButton = useRef(null)
   const menuOpen = openAt === location.key
-  const section = findRoute(location.pathname)?.section
+  const route = findRoute(location.pathname)
+  const section = route?.section
   const isDetail = section && location.pathname.replace(/\/$/, '') !== `/${section}`
 
   useEffect(() => {
@@ -38,9 +39,9 @@ export default function Navbar() {
   }, [menuOpen])
 
   const chooseInstitution = (value) => {
-    const to = isDetail
+    const to = route?.institutionFilterTarget ?? (isDetail
       ? `/${section}${section === 'teaching' ? '#student-projects' : ''}`
-      : location.hash.startsWith('#member-') ? `${location.pathname}${location.search}` : undefined
+      : location.hash.startsWith('#member-') ? `${location.pathname}${location.search}` : undefined)
     setInstitution(value, { to })
     setOpenAt(null)
   }

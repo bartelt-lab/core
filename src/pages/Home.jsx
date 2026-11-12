@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { FaArrowRight, FaBookOpen, FaBrain, FaExternalLinkAlt, FaFlask, FaGraduationCap, FaUsers } from 'react-icons/fa'
 import PublicationMiniCarousel from '../components/publications/PublicationMiniCarousel'
+import LatestNews from '../components/news/LatestNews'
 import { cognitiveProjects } from '../data/demonstrations'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
@@ -80,6 +81,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <LatestNews />
 
       <section id="about" className="border-t border-slate-100 bg-white py-16 md:py-24">
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
