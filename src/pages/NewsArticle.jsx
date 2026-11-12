@@ -46,7 +46,7 @@ const NewsArticle = () => {
                   alt={txt(pick, item.imageAlt)}
                   decoding="async"
                   style={item.imageFocus ? { objectPosition: item.imageFocus } : undefined}
-                  className="aspect-[4/3] w-full object-cover"
+                  className={`aspect-[4/3] w-full ${item.imageFit === 'contain' ? 'bg-white object-contain p-5' : 'object-cover'}`}
                 />
               </figure>
             )}
