@@ -270,6 +270,17 @@ export const videos = [
         usedOn: ['src/pages/Dynamo.jsx'],
     },
     {
+        id: 'g1-pill-bottle-to-ridgeback-sim',
+        src: '/videos/demonstrations/dynamo/g1-pill-bottle-to-ridgeback-sim.mp4',
+        poster: '/videos/demonstrations/dynamo/g1-pill-bottle-to-ridgeback-sim-poster.webp',
+        bucket: BUCKETS.INSTRUMENTED,
+        duration: 44,
+        description:
+            'Isaac Sim recording in two side-by-side panes. Left: a third-person camera that follows the full-body G1 humanoid with two-jaw Dex1 grippers through a simulated hospital room with wooden wall cabinets, a long grey table and a Ridgeback base carrying a green crate. Right: the right wrist camera, looking out between the two black gripper jaws. White text at the top left gives the simulated time, starting at t= 2.5s, and the current step, for example "walk to the bottle slot (step 1, 0.32 m)", "pre-grasp (servo)", "close", "step back from the table", "walk to the Ridgeback (stand-off)", "over the crate (servo)" and "hands back". The robot walks up to the table, raises its right hand, closes the jaws on a white-capped pill bottle with an orange label (seen close up in the wrist view), lifts it, steps back, turns, walks to the Ridgeback and opens the gripper over the crate; the last frames show the bottle lying in the crate. The left arm swings outward while the robot walks. One continuous run, trimmed only at the start; playback is about 0.9x the simulated time shown in the overlay.',
+        frames: 'wiki/video-frames/g1-pill-bottle-to-ridgeback-sim.jpg',
+        usedOn: ['src/pages/Dynamo.jsx'],
+    },
+    {
         id: 'leader-following-run-01',
         src: '/videos/demonstrations/leader-following/leader-following-run-01.mp4',
         poster: '/videos/demonstrations/leader-following/leader-following-run-01-poster.webp',
