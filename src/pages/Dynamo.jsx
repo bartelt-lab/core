@@ -165,7 +165,7 @@ const experimentResults = [
         operation: 'Walking manipulation in simulation',
         title: 'Carrying a pill bottle from the table to the Ridgeback',
         summary: 'In Isaac Sim, the full-body G1 with Dex1 hands walks to a table, picks up a pill bottle, carries it across the room and drops it into the crate on the Ridgeback, without an operator. NVIDIA\'s pretrained Metatron controller keeps the robot balanced while it walks and reaches; a scripted task program decides where the robot stands and guides the hand onto the bottle.',
-        outcome: 'This is the first complete run of the final object-placement task in simulation, from the table to the crate on the Ridgeback. It does not succeed every time: when the bottle stands further back on the table, the grasp can still fail. The task program reads object positions from the simulator, not from the cameras; runs like this are the starting point for teaching a vision-language model to do the task from camera images.',
+        outcome: 'This is the first complete run of the final object-placement task in simulation, from the table to the crate on the Ridgeback. The task program still reads object positions from the simulator, not from the cameras. Runs like this are the starting point for teaching a vision-language model to do the same task from camera images.',
         media: {
             type: 'video',
             src: '/videos/demonstrations/dynamo/g1-pill-bottle-to-ridgeback-sim.mp4',
