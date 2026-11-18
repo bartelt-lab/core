@@ -176,14 +176,15 @@ and call site keeps working:
 
 ```bash
 npm run replace-video -- <id> <path/to/new.mp4> [--poster-at <seconds>]
-# e.g. npm run replace-video -- medicar ~/Downloads/Medicar-final.mp4 --poster-at 126
+# e.g. npm run replace-video -- medicar ~/Downloads/Medicar-final.mp4 --poster-at 140
 ```
 
 [`scripts/replace-video.mjs`](../scripts/replace-video.mjs) looks the `id` up in
 `src/data/videos.js` and encodes with that entry's bucket settings. It strips a silent
 track and falls back to a remux if the re-encode is not smaller. Then it overwrites the
-`.mp4`, its poster and the frame strip in place. The poster is taken at 3 s unless you
-pass `--poster-at`.
+`.mp4`, its poster and the frame strip in place. The poster is taken at 3 s (mid-clip
+for clips under 6 s) unless you pass `--poster-at`, which is used exactly as given and
+rejected before encoding if it is not inside the clip.
 
 What it does not do:
 

@@ -25,7 +25,8 @@ import { videos, BUCKETS } from '../src/data/videos.js'
 
 const args = process.argv.slice(2)
 const posterFlag = args.indexOf('--poster-at')
-const posterAt = posterFlag === -1 ? 3 : Number(args.splice(posterFlag, 2)[1])
+// null = no flag: take the default frame (3 s, or mid-clip for a clip shorter than 6 s).
+const posterArg = posterFlag === -1 ? null : args.splice(posterFlag, 2)[1]
 const [id, input] = args
 
 if (!id || !input) {
@@ -63,6 +64,19 @@ const s = SETTINGS[entry.bucket]
 if (!s) {
     console.error(`Unknown bucket "${entry.bucket}" on ${id}.`)
     process.exit(1)
+}
+
+// Check --poster-at against the source before the long encode. An explicit time is
+// used as given; it used to be capped at half the clip silently, so --poster-at 140
+// on a 235 s film quietly became 117 s.
+const sourceDuration = Number(run('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', input]))
+let posterAt = Math.min(3, sourceDuration / 2)
+if (posterArg !== null) {
+    posterAt = Number(posterArg)
+    if (posterArg === undefined || !Number.isFinite(posterAt) || posterAt < 0 || posterAt >= sourceDuration) {
+        console.error(`--poster-at must be a time in seconds between 0 and ${sourceDuration.toFixed(1)} (the clip length); got "${posterArg}".`)
+        process.exit(1)
+    }
 }
 
 const hasAudio = run('ffprobe', ['-v', 'error', '-select_streams', 'a', '-show_entries', 'stream=codec_name', '-of', 'csv=p=0', input]).trim() !== ''
@@ -112,7 +126,7 @@ const duration = Number(run('ffprobe', ['-v', 'error', '-show_entries', 'format=
 // Grab the frame as PNG and let sharp write the WebP: many ffmpeg builds
 // (Homebrew's included) ship without libwebp.
 const posterPng = join(work, 'poster.png')
-execFileSync('ffmpeg', ['-nostdin', '-y', '-v', 'error', '-ss', String(Math.min(posterAt, duration / 2)), '-i', out, '-frames:v', '1',
+execFileSync('ffmpeg', ['-nostdin', '-y', '-v', 'error', '-ss', String(Math.min(posterAt, Math.max(0, duration - 0.1))), '-i', out, '-frames:v', '1',
     '-vf', "scale='min(1280,iw)':-2", posterPng])
 await sharp(posterPng).webp({ quality: 78 }).toFile(poster)
 
