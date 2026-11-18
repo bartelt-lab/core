@@ -25,7 +25,7 @@ const Image = ({ item, pick, badge = false, fill = false }) => (
       loading="lazy"
       decoding="async"
       style={item.imageFocus ? { objectPosition: item.imageFocus } : undefined}
-      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+      className={`h-full w-full ${item.imageFit === 'contain' ? 'bg-white object-contain p-4' : 'object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]'}`}
     />
     {badge && item.logo && (
       <span className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-3 py-2 shadow-md backdrop-blur">

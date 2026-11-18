@@ -176,7 +176,7 @@ const Home = () => {
                   alt=""
                   decoding="async"
                   style={leadNews.imageFocus ? { objectPosition: leadNews.imageFocus } : undefined}
-                  className="h-20 w-20 shrink-0 rounded-xl object-cover"
+                  className={`h-20 w-20 shrink-0 rounded-xl ${leadNews.imageFit === 'contain' ? 'bg-white object-contain p-2' : 'object-cover'}`}
                 />
                 <span className="min-w-0">
                   <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700">

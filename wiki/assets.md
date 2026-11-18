@@ -65,6 +65,15 @@ re-running only touches new oversized assets.
 Workflow when adding a large image: drop it in `public/`, reference it, then run
 `npm run optimize-images` and commit the resulting `.webp` + the (auto-rewritten) refs.
 
+## NVIDIA news logo
+
+`public/logos/nvidia.webp` is the official vertical NVIDIA logo on white, used
+for the Sascha Marton news article. Source:
+[NVIDIA Newsroom](https://nvidianews.nvidia.com/file/nvidia-logo-vert-blk).
+The 2160×1808 original was resized proportionally to 800×670 and saved as WebP.
+Set `imageFit: 'contain'` on the news item to preserve the complete logo and its
+clear space in cards and the article header.
+
 ## Video pipeline
 
 Moved. Encode buckets, the H.264-only decision, the registry that makes a clip shippable,
