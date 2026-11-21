@@ -41,14 +41,13 @@ const Home = () => {
         <div className="bg-slate-50 text-slate-900">
             <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[20rem_minmax(0,1fr)] lg:gap-12 lg:py-12">
                 {/* Identity rail */}
-                {/* Sticky only where it fits: with the photo the sidebar is ~840px tall,
+                {/* Sticky only where it fits: with the photo the sidebar is ~800px tall,
                     so on shorter screens (13" laptops) it scrolls with the page rather
                     than having its bottom, and the Join us button, cut off. */}
                 <aside id="hero" className="lg:self-start lg:[@media(min-height:60rem)]:sticky lg:[@media(min-height:60rem)]:top-24">
                     <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
                         <img src={assetUrl(groupPhoto.src)} alt={txt(groupPhoto.alt)} width="1600" height="1200" decoding="async" fetchPriority="high" className="aspect-[4/3] w-full object-cover" />
-                        <p className="px-6 pt-2 text-xs leading-snug text-slate-600">{txt(groupPhoto.caption)}</p>
-                        <div className="mt-2 border-t-4 border-site-900 p-6">
+                        <div className="border-t-4 border-site-900 p-6">
                             <p className="text-xs font-semibold uppercase tracking-wider text-site-900">ISSE · TU Clausthal</p>
                             <h1 className="mt-2 text-3xl font-bold tracking-tight">Cognitive Software</h1>
                             <p className="mt-3 text-sm leading-relaxed text-slate-600">{txt(hero.lede)}</p>

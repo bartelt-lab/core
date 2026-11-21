@@ -138,10 +138,6 @@ export const groupPhoto = {
         'Gruppenfoto: das Team Cognitive Software, die meisten in CORE-T-Shirts, auf den Stufen vor einem Sandsteingebäude mit geschnitzter Holztür; davor ein humanoider Roboter im CORE-T-Shirt',
         'Group photo: the Cognitive Software team, most in CORE T-shirts, on the steps in front of a sandstone building with a carved wooden door; a humanoid robot in a CORE T-shirt stands in front of them',
     ],
-    caption: [
-        'Die Gruppe Cognitive Software mit dem humanoiden Roboter des Labors.',
-        'The Cognitive Software group with the lab’s humanoid robot.',
-    ],
 }
 
 // Name with academic prefix ("Dr. Kristian Kolthoff"), as team.js records it.
