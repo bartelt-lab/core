@@ -131,6 +131,16 @@ export const contact = {
     map: 'https://maps.app.goo.gl/ZeN3Gz2aWHZDJxc8A',
 }
 
+// Intro for the group lead's card on the /tuc landing page. Facts only from the site:
+// ISSE, the research focus in team.js, and the MediCar 4.0 project lead (MediCar.jsx).
+export const leadIntro = {
+    role: ['Professor, Leitung der Gruppe', 'Professor, head of the group'],
+    text: [
+        'Christian Bartelt leitet die Gruppe Cognitive Software am Institut für Software and Systems Engineering der TU Clausthal. Er forscht zu Künstlicher Intelligenz und autonomen Systemen, bringt die Ergebnisse mit Partnern aus Industrie und Kliniken in die Praxis und leitet unter anderem das Projekt MediCar 4.0.',
+        'Christian Bartelt heads the Cognitive Software group at the Institute for Software and Systems Engineering of TU Clausthal. His research covers artificial intelligence and autonomous systems; with partners from industry and hospitals he takes the results into practice, and he leads projects such as MediCar 4.0.',
+    ],
+}
+
 // Group photo for the /tuc landing page (supplied by the group, 2026-11).
 export const groupPhoto = {
     src: '/images/tuc/group.webp',
