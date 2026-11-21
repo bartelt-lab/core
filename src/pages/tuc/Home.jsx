@@ -3,7 +3,7 @@ import { FiArrowRight, FiArrowUpRight, FiMail, FiMapPin } from 'react-icons/fi'
 import assetUrl from '../../utils/assetUrl'
 import { useLanguage } from '../../i18n/useLanguage'
 import { MemberPhoto, MemberLinks } from './home/shared'
-import { groupMembers, stats, hero, about, topics, work, affiliations, contact, groupPhoto, leadIntro, roleLabel, displayName } from './home/content'
+import { groupMembers, stats, hero, about, topics, work, affiliations, contact, groupPhoto, roleLabel, displayName } from './home/content'
 
 
 const SECTIONS = [
@@ -31,18 +31,16 @@ const Person = ({ m, txt }) => (
     </li>
 )
 
-// The group lead gets an own card with a written intro instead of the one-line
-// team.js bio, which other pages share.
-const LeadCard = ({ m, txt }) => (
-    <article className="flex flex-col gap-5 rounded-2xl bg-site-100/40 p-5 sm:flex-row sm:items-center sm:p-6">
-        <MemberPhoto member={m} className="h-28 w-28 shrink-0 rounded-full ring-4 ring-white shadow-md" />
+// The group lead: same row as everyone else, just a bigger photo and name.
+const LeadRow = ({ m, txt }) => (
+    <div className="flex items-center gap-5 p-3">
+        <MemberPhoto member={m} className="h-24 w-24 shrink-0 rounded-full ring-2 ring-white shadow" />
         <div className="min-w-0">
             <h3 className="text-xl font-semibold leading-snug">{displayName(m)}</h3>
-            <p className="text-sm font-medium text-site-900">{txt(leadIntro.role)}</p>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-700">{txt(leadIntro.text)}</p>
-            <MemberLinks member={m} className="-ml-2 mt-2 text-slate-600 [&_a:hover]:bg-white [&_a:hover]:text-primary-700" />
+            <p className="text-sm text-slate-600">{txt(roleLabel(m))}</p>
+            <MemberLinks member={m} className="-ml-2 mt-1 text-slate-500 [&_a:hover]:bg-slate-100 [&_a:hover]:text-primary-700" />
         </div>
-    </article>
+    </div>
 )
 
 const Home = () => {
@@ -94,7 +92,7 @@ const Home = () => {
                 <div className="min-w-0 space-y-8">
                     <section id="people" className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
                         <H2>{pick('The group', 'Die Gruppe')}</H2>
-                        {lead && <div className="mt-5"><LeadCard m={lead} txt={txt} /></div>}
+                        {lead && <div className="mt-5"><LeadRow m={lead} txt={txt} /></div>}
                         <ul className="mt-2 grid gap-1 sm:grid-cols-2">
                             {researchers.map((m) => <Person key={m.slug} m={m} txt={txt} />)}
                         </ul>
