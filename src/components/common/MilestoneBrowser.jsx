@@ -23,7 +23,7 @@ const thumbOf = (media) => {
 // Video controls default to ON and should stay on: these are minutes-long research
 // clips, so without them a viewer cannot scrub, pause or go fullscreen. Do not pass
 // `controls: false` — LeaderFollowing did and the clips were unskimmable.
-const Media = ({ media, title, active, playKey = 0 }) => {
+const Media = ({ media, title, active, playKey = 0, onEngage }) => {
     const videoRef = useRef(null)
     const cls = `absolute inset-0 h-full w-full transition-opacity duration-500 ${
         active ? 'z-10 opacity-100' : 'pointer-events-none z-0 opacity-0'
@@ -39,6 +39,23 @@ const Media = ({ media, title, active, playKey = 0 }) => {
             videoRef.current.pause()
         }
     }, [active, media.type, playKey])
+
+    // iOS Safari plays fullscreen video natively and never fires fullscreenchange on the
+    // document; it fires webkitbeginfullscreen on the element instead. Unmuting is the
+    // other clear sign someone is watching this clip. Either stops the auto-advance.
+    useEffect(() => {
+        const el = videoRef.current
+        if (media.type !== 'video' || !el || !onEngage) return undefined
+        const onVolume = () => {
+            if (!el.muted) onEngage()
+        }
+        el.addEventListener('webkitbeginfullscreen', onEngage)
+        el.addEventListener('volumechange', onVolume)
+        return () => {
+            el.removeEventListener('webkitbeginfullscreen', onEngage)
+            el.removeEventListener('volumechange', onVolume)
+        }
+    }, [media.type, onEngage])
 
     if (media.type === 'image') {
         return (
@@ -113,6 +130,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
     const activeRunRef = useRef(total - 1)
     const listRef = useRef(null)
     const contentRef = useRef(null)
+    const rootRef = useRef(null)
     const [edges, setEdges] = useState({ top: false, bottom: false })
 
     const run = items[activeRun]
@@ -192,9 +210,27 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
         setMounted((prev) => (prev.has(i) ? prev : new Set(prev).add(i)))
     }
 
+    // Taking over the player stops the auto-advance for good: going fullscreen used to
+    // keep the 8 s timer running, so the clip being watched was swapped out mid-view.
+    const engage = useCallback(() => setPaused(true), [])
+    useEffect(() => {
+        const onFullscreen = () => {
+            const el = document.fullscreenElement || document.webkitFullscreenElement
+            if (el && rootRef.current?.contains(el)) engage()
+        }
+        document.addEventListener('fullscreenchange', onFullscreen)
+        document.addEventListener('webkitfullscreenchange', onFullscreen)
+        return () => {
+            document.removeEventListener('fullscreenchange', onFullscreen)
+            document.removeEventListener('webkitfullscreenchange', onFullscreen)
+        }
+    }, [engage])
+
     useEffect(() => {
         if (paused) return undefined
         const timer = window.setInterval(() => {
+            // Belt and braces: never swap the clip while anything is fullscreen.
+            if (document.fullscreenElement || document.webkitFullscreenElement) return
             const next = (activeRunRef.current - 1 + total) % total
             activeRunRef.current = next
             setActiveRun(next)
@@ -349,7 +385,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
     )
 
     return (
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_280px]">
+        <div ref={rootRef} className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_280px]">
             {/* Player */}
             <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/60 lg:self-start">
                 <div className="relative aspect-video w-full bg-black">
@@ -362,6 +398,7 @@ const MilestoneBrowser = ({ items, label = 'Milestones', pillLabel = 'Milestone'
                                 title={item.title}
                                 active={i === activeRun}
                                 playKey={i === activeRun ? playKey : 0}
+                                onEngage={engage}
                             />
                         ) : null,
                     )}
