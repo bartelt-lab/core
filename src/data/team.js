@@ -31,8 +31,10 @@ export const institutions = {
   }
 }
 
-// Team members with new schema
-export const teamMembers = [
+// Team members with new schema. Order here is display order everywhere (CORE Network
+// grid, CORE Labs, /tuc), except that members marked `external: true` are moved to the
+// end of their role group by externalsLast() below, so externals always come last.
+const members = [
   // Professors
   {
     id: 1,
@@ -355,6 +357,7 @@ export const teamMembers = [
     slug: 'homa',
     title: 'PhD Student (External)',
     roleCategory: 'phd_student',
+    external: true,
     affiliations: [
       { institution: institutions.TUC, department: 'Institute for Software and Systems Engineering' }
     ],
@@ -496,6 +499,17 @@ export const teamMembers = [
     links: {}
   },
 ]
+
+const externalsLast = (list) => {
+  const out = list.filter((m) => !m.external)
+  for (const ext of list.filter((m) => m.external)) {
+    const lastOfRole = out.findLastIndex((m) => m.roleCategory === ext.roleCategory)
+    out.splice(lastOfRole === -1 ? out.length : lastOfRole + 1, 0, ext)
+  }
+  return out
+}
+
+export const teamMembers = externalsLast(members)
 
 // Helper functions
 
