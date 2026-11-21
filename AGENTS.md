@@ -188,7 +188,13 @@ src/
     common/                        core Navbar/Footer/RightSidebar/Card/...
     about/ demonstrations/ hero/ network/ publications/ team/   core
     tuc/                           tuc-specific shells
-      Layout.jsx                   minimal Tailwind sticky header + footer
+      Layout.jsx                   /tuc header + footer. Root div carries
+                                   `theme-tuc` (TU Clausthal green #008048 as
+                                   the site accent) and IBM Plex Sans
+      ui.jsx                       PageShell, Section, Card, Callout,
+                                   ContactBand, ButtonLink: every /tuc page is
+                                   built from these. PageShell `rail` gives the
+                                   sticky sidebar; only Teaching uses it
       ProjectLayout.jsx            outer chrome for /ai-team-projects/* subpages
       FinishedProjectContent.jsx   body shared by the finished-project subpages
       PartnerLogoStrip.jsx         partner logo row, reads PARTNER_LOGOS;
@@ -203,7 +209,11 @@ src/
                                     CoreLabs.jsx = CORE Labs page)
     ComputeCluster.jsx Publications.jsx   core
     tuc/
-      Home.jsx                     bartelt landing (hero + members + contact)
+      Home.jsx                     /tuc landing: sticky identity sidebar (group
+                                   photo, pitch, stats) + people, research,
+                                   work, contact
+      home/content.js shared.jsx   its text (six research directions, pitch
+                                   line), member helpers, photo/link components
       Teaching.jsx                   teaching subtree (/seminar, /theses route to it)
       JoinUs.jsx AiTeamProjects.jsx
       IndustryProjects.jsx         /tuc/industry-projects, data from industryProjects.js
@@ -432,14 +442,6 @@ Worth a once-over for: residual bartelt-only inline styles, motion
 animations that might fight with the new minimal Layout, refs to removed
 classes. Scroll-spy ids (now in sync, see issue 6): `hero`,
 `active-projects`, `testimonials`, `archive`.
-
-### 9. Helper consolidation for Tuc social icons
-`pages/tuc/Home.jsx` has a `SOCIAL_ICON` map and `socialEntries(member)`
-helper inline. `team.js` has `links: { scholar, github, twitter,
-linkedin, website, ... }` but the Home page only renders
-`email/scholar/website`. Other icons unused. Either expand the icon map
-to cover all of `team.js` keys OR document why only those three are
-shown on tuc Home (visual density / academic context).
 
 ### 10. `publications.bib` ↔ `publications.json` parity
 `public/data/publications.bib` is the BibTeX export (15 entries from

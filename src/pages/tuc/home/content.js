@@ -1,4 +1,4 @@
-// Shared content for the /tuc landing variants. Text is [German, English],
+// Content for the /tuc landing page (pages/tuc/Home.jsx). Text is [German, English],
 // like news.js and industryProjects.js.
 import { getMembersByInstitution } from '../../../data/team'
 import { projects as industryProjects } from '../../../data/industryProjects'
@@ -131,15 +131,16 @@ export const contact = {
     map: 'https://maps.app.goo.gl/ZeN3Gz2aWHZDJxc8A',
 }
 
-export const labPhoto = {
-    src: '/images/news/core-labs-opening.webp',
+// Group photo for the /tuc landing page (supplied by the group, 2026-11).
+export const groupPhoto = {
+    src: '/images/tuc/group.webp',
     alt: [
-        'Gruppenbild zur Eröffnung der CORE Labs mit einem humanoiden Roboter im Clausthaler Labor',
-        'Group photo at the CORE Labs opening with a humanoid robot in the Clausthal lab',
+        'Gruppenfoto: das Team Cognitive Software, die meisten in CORE-T-Shirts, auf den Stufen vor einem Sandsteingebäude mit geschnitzter Holztür; davor ein humanoider Roboter im CORE-T-Shirt',
+        'Group photo: the Cognitive Software team, most in CORE T-shirts, on the steps in front of a sandstone building with a carved wooden door; a humanoid robot in a CORE T-shirt stands in front of them',
     ],
     caption: [
-        'Das Clausthaler Labor bei der Eröffnung der CORE Labs, Juli 2026. Foto: Christian Ernst, CORE',
-        'The Clausthal lab at the CORE Labs opening, July 2026. Photo: Christian Ernst, CORE',
+        'Die Gruppe Cognitive Software mit dem humanoiden Roboter des Labors.',
+        'The Cognitive Software group with the lab’s humanoid robot.',
     ],
 }
 

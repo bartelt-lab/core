@@ -98,7 +98,7 @@ const MediCar = () => {
                 { id: 'contact', label: pick('Contact', 'Kontakt') },
             ]}
         >
-            <Section id="film" tone="tint" kicker={pick('Project film', 'Projektfilm')} title={pick('MediCar 4.0 in the hospital', 'MediCar 4.0 im Klinikalltag')} intro={pick(
+            <Section id="film" kicker={pick('Project film', 'Projektfilm')} title={pick('MediCar 4.0 in the hospital', 'MediCar 4.0 im Klinikalltag')} intro={pick(
                             'The robots on duty at the pilot hospital, and the people from the consortium who build them.',
                             'Die Roboter im Einsatz in der Pilotklinik, und die Menschen aus dem Konsortium, die sie entwickeln.',
                         )}>
@@ -163,7 +163,7 @@ const MediCar = () => {
                 </div>
             </Section>
 
-            <Section id="contribution" tone="tint" kicker="TU Clausthal" title={pick('Our contribution', 'Unser Beitrag')} intro={pick(
+            <Section id="contribution" kicker="TU Clausthal" title={pick('Our contribution', 'Unser Beitrag')} intro={pick(
                             'The team led by Prof. Dr. Christian Bartelt at the Institute for Software and Systems Engineering contributes two building blocks to MediCar 4.0.',
                             'Das Team um Prof. Dr. Christian Bartelt am Institut für Software and Systems Engineering bringt zwei Bausteine in MediCar 4.0 ein.',
                         )}>

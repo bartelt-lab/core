@@ -167,7 +167,7 @@ const JoinUs = () => {
                 </ul>
             </Section>
 
-            <Section id="phd" tone="tint" kicker={pick('Doctorate', 'Promotion')} title={pick('PhD position', 'Promotionsstelle')} intro={txt(PHD.intro)}>
+            <Section id="phd" kicker={pick('Doctorate', 'Promotion')} title={pick('PhD position', 'Promotionsstelle')} intro={txt(PHD.intro)}>
                 <Card className="grid gap-8 p-6 sm:p-8 md:grid-cols-2">
                     <ListBlock title={pick('What you bring', 'Was du mitbringst')} items={PHD.bring} txt={txt} />
                     <ListBlock title={pick('What we offer', 'Was wir bieten')} items={PHD.offer} txt={txt} />
@@ -200,7 +200,7 @@ const JoinUs = () => {
                 </Card>
             </Section>
 
-            <Section id="apply" tone="tint" title={pick('How to apply', 'So bewirbst du dich')}>
+            <Section id="apply" title={pick('How to apply', 'So bewirbst du dich')}>
                 <div className="grid gap-4 md:grid-cols-2">
                     {APPLY.map((a) => (
                         <Card key={a.id} id={a.id} className="flex flex-col p-6 sm:p-8">

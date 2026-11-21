@@ -176,7 +176,7 @@ const IndustryProjects = () => {
                 </Section>
             )}
 
-            <Section id="projects" tone="tint" kicker={featured ? pick('More projects', 'Weitere Projekte') : undefined} title={pick('Projects', 'Projekte')}>
+            <Section id="projects" kicker={featured ? pick('More projects', 'Weitere Projekte') : undefined} title={pick('Projects', 'Projekte')}>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {gridProjects.map((project) => (
                         <Card

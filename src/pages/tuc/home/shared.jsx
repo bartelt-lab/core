@@ -57,5 +57,3 @@ export const MemberLinks = ({ member, className = '' }) => {
     )
 }
 
-// Page-scoped web font. React 19 hoists the stylesheet into <head> and dedupes it.
-export const FontLink = ({ href }) => <link rel="stylesheet" href={href} precedence="default" />
