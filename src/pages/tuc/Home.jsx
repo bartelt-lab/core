@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { FiArrowRight, FiArrowUpRight, FiMail, FiMapPin } from 'react-icons/fi'
 import assetUrl from '../../utils/assetUrl'
 import { useLanguage } from '../../i18n/useLanguage'
+import ThirdPartyLogo from '../../components/common/ThirdPartyLogo'
 import { MemberPhoto, MemberLinks } from './home/shared'
 import { groupMembers, stats, hero, about, topics, work, affiliations, contact, groupPhoto, roleLabel, displayName } from './home/content'
 
@@ -151,7 +152,7 @@ const Home = () => {
                             </div>
                             <div className="flex flex-wrap items-center gap-x-8 gap-y-4 md:justify-end">
                                 {affiliations.map((a) => {
-                                    const img = <img src={assetUrl(a.logo)} alt={a.name} decoding="async" className="logo-plate h-10 w-auto object-contain" />
+                                    const img = <ThirdPartyLogo src={a.logo} alt={a.name} decoding="async" className="h-10 w-auto object-contain" />
                                     return a.to ? <Link key={a.name} to={a.to}>{img}</Link> : <a key={a.name} href={a.href} target="_blank" rel="noreferrer">{img}</a>
                                 })}
                             </div>

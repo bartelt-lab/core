@@ -40,9 +40,16 @@ keeps the intentionally dark parts working: `bg-slate-950` sections,
   `dark:` class, as the two photo heroes do (`pages/Home.jsx`,
   `pages/ComputeCluster.jsx`).
 - To keep something white in dark mode, use `bg-[#fff]`.
-- Third-party logos (universities, partners) are dark artwork on transparent.
-  Give the `<img>` or its wrapper the `logo-plate` class: no effect in light
-  mode, a white plate in dark mode.
+- Third-party logos (universities, partners) are dark artwork and vanish on a
+  dark card. Render them with `components/common/ThirdPartyLogo.jsx`:
+  - If the logo has a dark-mode file in `public/logos/dark/`, that file shows
+    in dark mode. The TU Clausthal, UBB, Rostock and DIGIT logos have one.
+  - Otherwise it falls back to `logo-plate`: no effect in light mode, a white
+    plate in dark mode. The industry partner logos still use the plate.
+  To add a dark-mode file, add the logo to `JOBS` in `scripts/dark-logos.mjs`
+  and to the list in `ThirdPartyLogo.jsx`, then run the script. It only clears
+  white backgrounds and lightens neutral lettering; brand colours are never
+  changed. Where an official light-on-dark logo exists (UBB), it is used.
 - `bg-site-900` does not flip, because it also sits under white text (number
   badges). Where it is a thin accent bar, add `dark:bg-site-300` by hand, as
   `Section` in `components/tuc/ui.jsx` does.

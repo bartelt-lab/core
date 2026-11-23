@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
-import assetUrl from '../../utils/assetUrl'
 import LegalLinks from '../common/LegalLinks'
+import ThirdPartyLogo from '../common/ThirdPartyLogo'
 
 const sectionLinks = [
   { id: 'autonomous', label: 'Autonomous Driving Lab' },
@@ -25,7 +25,7 @@ const UbbLayout = ({ children }) => {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5 md:px-8">
           <Link to="/ubb" className="flex items-center gap-3" aria-label="CORE Labs Cluj home">
-            <img src={assetUrl('/logos/ubb-logo-only.webp')} alt="" className="logo-plate h-10 w-10 object-contain" />
+            <ThirdPartyLogo src="/logos/ubb-logo-only.webp" alt="" className="h-10 w-10 object-contain" />
             <div className="leading-tight">
               <p className="text-sm font-bold tracking-tight text-slate-950">CORE Labs Cluj</p>
               <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">Babeș-Bolyai University</p>

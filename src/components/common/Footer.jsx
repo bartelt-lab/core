@@ -1,6 +1,6 @@
-import assetUrl from '../../utils/assetUrl'
 import { useLanguage } from '../../i18n/useLanguage'
 import LegalLinks from './LegalLinks'
+import ThirdPartyLogo from './ThirdPartyLogo'
 
 const Footer = () => {
   const { pick } = useLanguage()
@@ -25,12 +25,12 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="flex min-h-24 min-w-48 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-primary-200 hover:bg-white hover:shadow-md"
                 >
-                  <img
-                    src={assetUrl(logo.src)}
+                  <ThirdPartyLogo
+                    src={logo.src}
                     alt={logo.alt}
                     loading="lazy"
                     decoding="async"
-                    className={`${logo.className} logo-plate w-auto object-contain opacity-85 grayscale transition hover:opacity-100 hover:grayscale-0`}
+                    className={`${logo.className} w-auto object-contain opacity-85 grayscale transition hover:opacity-100 hover:grayscale-0`}
                     onError={(e) => {
                       e.target.style.display = 'none'
                     }}

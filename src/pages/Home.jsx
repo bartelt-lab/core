@@ -7,6 +7,7 @@ import { SiGooglescholar } from 'react-icons/si'
 import NewsCard from '../components/news/NewsCard'
 import { formatNewsDate } from '../components/news/newsText'
 import PublicationMiniCarousel from '../components/publications/PublicationMiniCarousel'
+import ThirdPartyLogo from '../components/common/ThirdPartyLogo'
 import { getNetworkMembers, institutions } from '../data/team'
 import { homepageNews } from '../data/news'
 import { topics } from './tuc/home/content'
@@ -272,7 +273,7 @@ const Home = () => {
                 const content = (
                   <>
                     <div className="flex h-14 w-28 shrink-0 items-center justify-center sm:h-24 sm:w-auto">
-                      <img src={assetUrl(logo)} alt={institution.name} loading="lazy" decoding="async" className="logo-plate max-h-full max-w-full object-contain sm:max-h-20 sm:max-w-[85%]" />
+                      <ThirdPartyLogo src={logo} alt={institution.name} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain sm:max-h-20 sm:max-w-[85%]" />
                     </div>
                     <div className="min-w-0 sm:mt-3 sm:border-t sm:border-slate-100 sm:pt-3">
                       <p className="text-sm font-bold text-slate-950 transition-colors group-hover:text-primary-700">{txt(pick, lab)}</p>
