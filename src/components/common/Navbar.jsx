@@ -85,7 +85,7 @@ const Navbar = () => {
         <Link
           to="/"
           aria-label="CORE Network home"
-          className="flex h-full w-14 shrink-0 items-center justify-center rounded-2xl transition hover:bg-slate-50 sm:w-[7.5rem] lg:w-[9rem]"
+          className="flex h-full w-14 shrink-0 items-center justify-center rounded-2xl transition hover:bg-slate-50 sm:w-[7.5rem] 2xl:w-[9rem]"
         >
           <ThemedLogo
             name="core"
@@ -108,24 +108,28 @@ const Navbar = () => {
                 to={item.to}
                 title={pick(item.label, item.labelDe ?? item.label)}
                 aria-label={pick(item.label, item.labelDe ?? item.label)}
-                className={`group relative flex h-full min-w-0 flex-1 items-center justify-center gap-2 px-0 text-xs font-semibold whitespace-nowrap transition-colors duration-200 sm:gap-2.5 sm:px-2 sm:text-sm 2xl:px-3 2xl:text-[15px] ${
+                className={`group relative flex h-full min-w-0 flex-1 items-center justify-center gap-2 px-0 text-xs font-semibold whitespace-nowrap transition-colors duration-200 sm:gap-2.5 sm:px-2 sm:text-sm lg:flex-auto lg:px-1.5 lg:text-[12.5px] xl:gap-2 xl:text-[13px] 2xl:gap-2.5 2xl:px-3 2xl:text-[15px] ${
                   item.isActive
                     ? "text-white"
                     : "text-slate-300 hover:text-white"
                 }`}
               >
+                {/* What shows per width, so five items always fit beside the
+                    logo, the Join Us button and the lab pills:
+                      below lg (1024)  icon only, named by title/aria-label
+                      lg to xl         label only, small
+                      xl (1280) up     icon and label
+                    Items size to their label from lg up (flex-auto): equal
+                    widths made the long labels run into their neighbours. */}
                 <Icon
-                  className={`h-4 w-4 shrink-0 transition-colors sm:h-[1.1rem] sm:w-[1.1rem] ${
+                  className={`h-4 w-4 shrink-0 transition-colors sm:h-[1.1rem] sm:w-[1.1rem] lg:hidden xl:block ${
                     item.isActive
                       ? "text-primary-400"
                       : "text-slate-300 group-hover:text-primary-300"
                   }`}
                   aria-hidden="true"
                 />
-                {/* Five labels plus the Join Us button only fit from about
-                    1440px up; below that the icons stand alone, named by the
-                    link's title and aria-label. */}
-                <span className="hidden min-[1440px]:inline">
+                <span className="hidden lg:inline">
                   {pick(item.label, item.labelDe ?? item.label)}
                 </span>
                 {item.isActive && (
@@ -143,10 +147,12 @@ const Navbar = () => {
         <Link
           to="/join-us"
           aria-label={pick("Join Us", "Mitmachen")}
-          className="flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full border border-primary-700 text-sm font-semibold whitespace-nowrap text-primary-700 transition hover:bg-primary-700 hover:text-white sm:h-10 sm:w-auto sm:px-4"
+          title={pick("Join Us", "Mitmachen")}
+          className="flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full border border-primary-700 text-sm font-semibold whitespace-nowrap text-primary-700 transition hover:bg-primary-700 hover:text-white sm:h-10 sm:w-auto sm:px-4 lg:w-10 lg:px-0 xl:w-auto xl:px-4"
         >
           <FaUserPlus className="h-4 w-4 shrink-0" aria-hidden="true" />
-          <span className="hidden sm:inline">{pick("Join Us", "Mitmachen")}</span>
+          {/* Icon only from lg to xl, where the nav labels need the room. */}
+          <span className="hidden sm:inline lg:hidden xl:inline">{pick("Join Us", "Mitmachen")}</span>
         </Link>
 
         <div
