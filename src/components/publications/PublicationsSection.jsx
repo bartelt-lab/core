@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { FaArrowRight, FaExternalLinkAlt, FaFilter, FaSearch } from 'react-icons/fa'
 import Section from '../common/Section'
 import PublicationItem from './PublicationItem'
+import PublicationRow from './PublicationRow'
 import assetUrl from '../../utils/assetUrl'
 import formatAuthorName from '../../utils/formatAuthorName'
 import { getMemberBySlug } from '../../data/team'
@@ -392,9 +393,12 @@ const PublicationsSection = ({
         </div>
       ) : layout === 'cards' ? (
         <div>
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {/* The archive: compact rows, two side by side from lg up. Picture
+              tiles four across made 65 papers a very long page, and a single
+              column of rows a longer one. */}
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 lg:grid-cols-2">
             {displayPublications.map((publication) => (
-              <PublicationCard key={publication.id} publication={publication} />
+              <PublicationRow key={publication.id} publication={publication} institutions={getPublicationInstitutions(publication)} />
             ))}
           </div>
           {viewAllLink && (
