@@ -8,6 +8,7 @@ import assetUrl from '../../utils/assetUrl'
 import formatAuthorName from '../../utils/formatAuthorName'
 import { getMemberBySlug } from '../../data/team'
 import { publications } from '../../data/publications'
+import { publicationTopics, topicLabel } from '../../data/publicationTopics'
 import { useLanguage } from '../../i18n/useLanguage'
 
 const PublicationCard = ({ publication, featured = false, compact = false, compactHeightClass = 'h-[350px]' }) => {
@@ -182,6 +183,10 @@ const FILTER_OPTIONS = {
     ),
   ),
   institutions: ['TUC', 'UBB', 'Rostock'],
+  // In the order publicationTopics.js lists them, and only those in use.
+  topics: publicationTopics
+    .map((topic) => topic.id)
+    .filter((id) => publications.some((publication) => publication.topics?.includes(id))),
 }
 
 const YEAR_BOUNDS = (() => {
@@ -210,6 +215,7 @@ const PublicationsSection = ({
     query: '',
     type: [],
     status: [],
+    topic: [],
     // The full span, available on the first render now that the corpus is not fetched.
     yearRange: YEAR_BOUNDS,
     researcher: 'all',
@@ -231,6 +237,7 @@ const PublicationsSection = ({
         (filters.type.length === 0 || filters.type.includes(publication.type)) &&
         (filters.status.length === 0 || filters.status.includes(publication.status)) &&
         (!yearRange || (year >= yearRange[0] && year <= yearRange[1])) &&
+        (filters.topic.length === 0 || (publication.topics ?? []).some((topic) => filters.topic.includes(topic))) &&
         (filters.researcher === 'all' || publication.authors.some((author) => author.name === filters.researcher)) &&
         (filters.institution.length === 0 || getPublicationInstitutions(publication).some((institution) => filters.institution.includes(institution)))
       )
@@ -328,6 +335,18 @@ const PublicationsSection = ({
           </div>
 
           <div className="mt-5 grid gap-5 sm:grid-cols-2">
+            {/* Topics come from data/publicationTopics.js; a paper matches when
+                it carries any of the selected ones. Full width: the labels are long. */}
+            <div className="sm:col-span-2">
+              <FilterPills
+                label={pick('Topic', 'Thema')}
+                options={FILTER_OPTIONS.topics}
+                selected={filters.topic}
+                onToggle={(value) => toggleFilter('topic', value)}
+                onClear={() => clearFilter('topic')}
+                renderLabel={(id) => pick(topicLabel(id)[1], topicLabel(id)[0])}
+              />
+            </div>
             <FilterPills
               label="Institution"
               options={FILTER_OPTIONS.institutions}
