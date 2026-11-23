@@ -106,7 +106,9 @@ const Navbar = () => {
               <Link
                 key={item.to}
                 to={item.to}
-                className={`group relative flex h-full min-w-0 flex-1 items-center justify-center gap-2 px-0 text-xs font-semibold whitespace-nowrap transition-colors duration-200 sm:gap-2.5 sm:px-3 sm:text-sm lg:text-[15px] ${
+                title={pick(item.label, item.labelDe ?? item.label)}
+                aria-label={pick(item.label, item.labelDe ?? item.label)}
+                className={`group relative flex h-full min-w-0 flex-1 items-center justify-center gap-2 px-0 text-xs font-semibold whitespace-nowrap transition-colors duration-200 sm:gap-2.5 sm:px-2 sm:text-sm 2xl:px-3 2xl:text-[15px] ${
                   item.isActive
                     ? "text-white"
                     : "text-slate-300 hover:text-white"
@@ -120,7 +122,10 @@ const Navbar = () => {
                   }`}
                   aria-hidden="true"
                 />
-                <span className="hidden lg:inline">
+                {/* Five labels plus the Join Us button only fit from about
+                    1440px up; below that the icons stand alone, named by the
+                    link's title and aria-label. */}
+                <span className="hidden min-[1440px]:inline">
                   {pick(item.label, item.labelDe ?? item.label)}
                 </span>
                 {item.isActive && (
