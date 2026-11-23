@@ -13,6 +13,10 @@ import { topics } from './tuc/home/content'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
 
+// How many news items the homepage shows. Which ones, and in what order, is
+// decided by `homepageNews` in data/news.js (featured first, then by date).
+const HOMEPAGE_NEWS = 4
+
 // Deep-link prefix for a single team member, e.g. `/#member-szilagyi`.
 const MEMBER_HASH = '#member-'
 
@@ -188,13 +192,13 @@ const Home = () => {
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </Link>
             </div>
-            {/* One story gets the wide lead card; with more, the two newest sit
-                side by side as rows and the rest wait on /news. */}
+            {/* One story gets the wide lead card; with more, the first four in
+                homepage order sit two by two as rows and the rest wait on /news. */}
             {moreNews.length === 0 ? (
               <NewsCard item={leadNews} variant="lead" />
             ) : (
               <div className="grid gap-4 lg:grid-cols-2">
-                {[leadNews, moreNews[0]].map((item) => (
+                {[leadNews, ...moreNews.slice(0, HOMEPAGE_NEWS - 1)].map((item) => (
                   <NewsCard key={item.slug} item={item} variant="row" />
                 ))}
               </div>
