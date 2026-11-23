@@ -139,11 +139,13 @@ const Home = () => {
                     English in the German version too. */}
                 Cognitive Software.
               </h1>
-              {/* One sentence that says what CORE is and what it works on. */}
+              {/* One sentence that says what CORE is and what it works on. It
+                  names no single research area on purpose: picking two of the
+                  six puts those two above the rest. */}
               <p className="max-w-xl text-lg leading-8 text-slate-600 md:text-xl">
                 {pick(
-                  'A network of researchers building AI that perceives, reasons and acts: from tabular foundation models to cognitive robotics.',
-                  'Ein Netzwerk von Forschenden, das an KI arbeitet, die wahrnimmt, schlussfolgert und handelt: von tabellarischen Foundation Models bis zur kognitiven Robotik.',
+                  'A network of researchers building AI that perceives, reasons and acts, and stays trustworthy while doing so.',
+                  'Ein Netzwerk von Forschenden, das an KI arbeitet, die wahrnimmt, schlussfolgert und handelt und dabei vertrauenswürdig bleibt.',
                 )}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -220,8 +222,8 @@ const Home = () => {
               <h2 className={sectionTitle}>{pick('What we research', 'Woran wir forschen')}</h2>
               <p className="mt-3 text-base leading-7 text-slate-600">
                 {pick(
-                  'Our work sits between machine learning, cognitive systems and software engineering, with one aim throughout: AI that stays trustworthy.',
-                  'Unsere Arbeit liegt zwischen Machine Learning, kognitiven Systemen und Software Engineering, mit einem durchgehenden Ziel: KI, die vertrauenswürdig bleibt.',
+                  'Our work sits between machine learning, cognitive systems and software engineering.',
+                  'Unsere Arbeit liegt zwischen Machine Learning, kognitiven Systemen und Software Engineering.',
                 )}
               </p>
             </div>
