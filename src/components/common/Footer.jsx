@@ -1,5 +1,6 @@
 import assetUrl from '../../utils/assetUrl'
 import { useLanguage } from '../../i18n/useLanguage'
+import LegalLinks from './LegalLinks'
 
 const Footer = () => {
   const { pick } = useLanguage()
@@ -56,6 +57,7 @@ const Footer = () => {
               'CORE ist ein Netzwerk von Forschenden und keine offizielle Einrichtung der gezeigten Universitäten.',
             )}
           </p>
+          <LegalLinks className="mt-4 justify-center" />
         </div>
       </div>
     </footer>

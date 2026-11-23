@@ -26,6 +26,8 @@ const Publications = lazy(() => import('./pages/Publications'))
 const IndustryProjects = lazy(() => import('./pages/tuc/IndustryProjects'))
 const MediCar = lazy(() => import('./pages/tuc/industry/MediCar'))
 const JoinUs = lazy(() => import('./pages/tuc/JoinUs'))
+const Impressum = lazy(() => import('./pages/legal/Impressum'))
+const Datenschutz = lazy(() => import('./pages/legal/Datenschutz'))
 const UbbHome = lazy(() => import('./pages/ubb/Home'))
 
 // /tuc/* pages
@@ -71,6 +73,8 @@ function CoreShell() {
             <Route path="/industry-projects" element={<UnderNavbar><IndustryProjects /></UnderNavbar>} />
             <Route path="/industry-projects/medicar" element={<UnderNavbar><MediCar /></UnderNavbar>} />
             <Route path="/join-us" element={<UnderNavbar><JoinUs /></UnderNavbar>} />
+            <Route path="/impressum" element={<Impressum />} />
+            <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/news" element={<News />} />
             <Route path="/news/:slug" element={<NewsArticle />} />
             <Route path="/dynamo" element={<Dynamo />} />

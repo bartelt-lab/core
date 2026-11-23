@@ -124,6 +124,20 @@ export const routes = [
     ...JOIN_US_META,
   },
   {
+    path: '/impressum',
+    source: 'src/pages/legal/Impressum.jsx',
+    title: 'Legal notice (Impressum) | CORE',
+    description:
+      'Legal notice for the CORE Network website: operator, postal address, contact details and the person responsible for content.',
+  },
+  {
+    path: '/datenschutz',
+    source: 'src/pages/legal/Datenschutz.jsx',
+    title: 'Privacy policy (Datenschutzerklärung) | CORE',
+    description:
+      'Privacy policy of the CORE Network website: hosting, fonts, embedded videos, browser storage, email contact, and your rights under the GDPR.',
+  },
+  {
     path: '/compute-cluster',
     source: 'src/pages/ComputeCluster.jsx',
     title: 'Compute Cluster | CORE',

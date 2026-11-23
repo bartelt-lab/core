@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FiMenu, FiX, FiChevronUp } from 'react-icons/fi';
 import RightSidebar from '../common/RightSidebar';
 import ThemedLogo from '../common/ThemedLogo';
+import LegalLinks from '../common/LegalLinks';
 import { useLanguage } from '../../i18n/useLanguage';
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -125,6 +126,8 @@ const Layout = ({ children }) => {
 
                         <div className="flex flex-wrap items-center gap-3 text-xs md:justify-end">
                             <span>Christian Bartelt, {CURRENT_YEAR}</span>
+                            <span className="hidden sm:inline-block h-4 w-px bg-slate-200" aria-hidden="true" />
+                            <LegalLinks className="!text-xs" />
                             <span className="hidden sm:inline-block h-4 w-px bg-slate-200" aria-hidden="true" />
                             <button
                                 type="button"

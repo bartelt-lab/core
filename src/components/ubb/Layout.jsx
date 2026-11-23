@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
 import assetUrl from '../../utils/assetUrl'
+import LegalLinks from '../common/LegalLinks'
 
 const sectionLinks = [
   { id: 'autonomous', label: 'Autonomous Driving Lab' },
@@ -97,6 +98,7 @@ const UbbLayout = ({ children }) => {
           <div className="flex items-center gap-4 text-sm text-slate-300">
             <Link to="/publications?institution=UBB" className="hover:text-white">Publications</Link>
             <Link to="/" className="hover:text-white">CORE Network</Link>
+            <LegalLinks tone="dark" />
           </div>
         </div>
       </footer>

@@ -136,6 +136,22 @@ institutions card (`memberLink()` in `pages/CoreLabs.jsx`). Note the grid skips
 `research_assistant` and `support_staff`, so those members have no anchor to
 link to.
 
+### Legal pages — `/impressum` and `/datenschutz`
+
+`pages/legal/Impressum.jsx` and `pages/legal/Datenschutz.jsx`, in `CoreShell`.
+Both are deliberately plain: one narrow text column from `LegalPage` / `Block`
+in `pages/legal/shared.jsx`, no cards and no hero. Keep them that way.
+German law wants both reachable from every page, so all three footers render
+`components/common/LegalLinks.jsx`. Operator details (Prof. Bartelt as a
+person, not a university) live once in `src/data/legal.js`; a field left `null`
+there shows as a highlighted "missing" marker on the page. **Do not merge to
+`main` while a field is `null`.**
+
+The privacy policy describes what the site actually does (GitHub Pages
+hosting, Google Fonts, YouTube and Google Drive embeds, the language and theme
+choice in localStorage). Change it when one of those changes: the comment at
+the top of `Datenschutz.jsx` lists which code each section depends on.
+
 ### Files that look deletable but are not
 
 - `public/google2e6aa57e94108948.html` — Google Search Console verification for
