@@ -373,9 +373,10 @@ The publications page (`/publications`) lists papers as rows, two side by side
 (a figure, shown whole) if set, else `page`, else a tile with the year.
 
 - **`page`** is written by `node scripts/paper-pages.mjs <folder with PDFs>`,
-  one PDF per paper named `<id>.pdf`. It needs `pdftoppm` on the PATH. 13 of
-  the papers without a figure have one; the rest are behind publisher sites
-  that refuse automated downloads, so their authors have to supply the PDF.
+  one PDF per paper named `<id>.pdf`. It needs `pdftoppm` on the PATH. 18 of
+  the papers without a figure have one; the rest (listed in
+  `wiki/paper-pdfs-needed.md`) are behind publisher sites that refuse
+  automated downloads, so their authors have to supply the PDF.
 - **`topics`** holds one or two ids from `src/data/publicationTopics.js` and
   drives the topic filter. **The list and all assignments are a draft made
   from the titles (2026-11) and still need the authors' review.**

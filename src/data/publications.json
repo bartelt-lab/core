@@ -603,7 +603,8 @@
       "abstract": null,
       "topics": [
         "wearables"
-      ]
+      ],
+      "page": "/papers/pages/lee2026affective.webp"
     },
     {
       "id": "kunze2026sonic",
@@ -1079,7 +1080,8 @@
       "abstract": null,
       "topics": [
         "design"
-      ]
+      ],
+      "page": "/papers/pages/boroujeni2026sustainable.webp"
     },
     {
       "id": "zhang2025pro",
@@ -2428,7 +2430,8 @@
       "abstract": null,
       "topics": [
         "robotics"
-      ]
+      ],
+      "page": "/papers/pages/unbehaun2025exploring.webp"
     },
     {
       "id": "schulz2025investigating",
@@ -2458,7 +2461,8 @@
       "abstract": null,
       "topics": [
         "health"
-      ]
+      ],
+      "page": "/papers/pages/schulz2025investigating.webp"
     },
     {
       "id": "szilagyi2025accelerating",
@@ -2524,7 +2528,8 @@
       "topics": [
         "design",
         "xr"
-      ]
+      ],
+      "page": "/papers/pages/schulz2025designing.webp"
     },
     {
       "id": "schulz2025supporting",
