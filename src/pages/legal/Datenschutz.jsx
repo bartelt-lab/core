@@ -6,8 +6,8 @@ import { Address, Block, Ext, LegalPage } from './shared'
 // Privacy policy (Art. 13 GDPR). Every section describes something this site
 // actually does, so it has to change with the code:
 //   - Hosting ............ GitHub Pages (.github/workflows/deploy.yml)
-//   - Fonts .............. Google Fonts links in index.html, in
-//                          components/tuc/Layout.jsx and in public/tuc/iclr-2025/
+//   - Fonts .............. Google Fonts links in index.html and in
+//                          components/tuc/Layout.jsx
 //   - Videos ............. YouTube and Google Drive iframes (DemoCard,
 //                          ProjectLayout, FinishedProjectContent, AiTeamProjects,
 //                          MilestoneBrowser)

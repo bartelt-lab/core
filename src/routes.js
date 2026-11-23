@@ -56,6 +56,12 @@ const JOIN_US_META = {
     'Join the CORE Network as a researcher or research group, or apply for a PhD position or student assistant job with the Cognitive Software group at TU Clausthal.',
 }
 
+const ICLR_2025_META = {
+  title: 'CORE at ICLR and ICSE 2025 | CORE',
+  description:
+    'Papers by CORE members accepted at ICLR 2025 and ICSE 2025: SYMPOL, NNsight and NDIF, GUIDE, ReMeDe Trees, DSEG-LIME and more, with links to each paper.',
+}
+
 export const routes = [
   // ---------------------------------------------------------------- CORE ---
   {
@@ -122,6 +128,11 @@ export const routes = [
     path: '/join-us',
     source: 'src/pages/tuc/JoinUs.jsx',
     ...JOIN_US_META,
+  },
+  {
+    path: '/iclr-2025',
+    source: 'src/pages/Iclr2025.jsx',
+    ...ICLR_2025_META,
   },
   {
     path: '/impressum',
@@ -303,6 +314,14 @@ export const routes = [
     title: 'Theses | Cognitive Software, TU Clausthal',
     description:
       'Bachelor and master thesis topics in artificial intelligence, cognitive computing, and software engineering at the Institute for Software and Systems Engineering, TU Clausthal.',
+  },
+  // The ICLR 2025 page was a standalone static file at this address; it is a
+  // normal page at /iclr-2025 now and the old URL forwards there.
+  {
+    path: '/tuc/iclr-2025',
+    source: 'src/pages/Iclr2025.jsx',
+    ...ICLR_2025_META,
+    canonical: '/iclr-2025',
   },
   // Join Us moved to /join-us; the old URL forwards there like the two above.
   {

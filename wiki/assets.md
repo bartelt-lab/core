@@ -58,8 +58,6 @@ re-running only touches new oversized assets.
 
 - Max width by location: `members/` → 600 px, `logos/` → 500 px, everything else → 1600 px
   (tune in `widthFor()`).
-- **Excluded:** `public/tuc/iclr-2025/` — a self-contained static HTML page; its assets are
-  referenced by raw HTML and must not be rewritten.
 - WebP is supported by all target browsers, so there is no `<picture>`/fallback.
 
 Workflow when adding a large image: drop it in `public/`, reference it, then run

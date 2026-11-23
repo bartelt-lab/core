@@ -239,8 +239,8 @@ export const news = [
                 'At the ICLR main conference, [SYMPOL](https://arxiv.org/pdf/2408.08761) optimises decision trees directly inside standard on-policy reinforcement learning algorithms. The policy stays readable as a tree, without the information loss of translating a neural network into one afterwards. Also at ICLR: NNsight and NDIF, which give researchers access to the internals of large open-weight models.',
             ],
             [
-                'Auf der ICSE-Hauptkonferenz zeigt GUIDE, wie große Sprachmodelle aus Textbeschreibungen Prototypen von Benutzeroberflächen erzeugen. Alle sechs Paper stehen auf unserer [Seite zur ICLR und ICSE 2025](https://www.core-network.ai/tuc/iclr-2025/).',
-                'At the ICSE main conference, GUIDE shows how large language models generate user interface prototypes from text descriptions. All six papers are on our [ICLR and ICSE 2025 page](https://www.core-network.ai/tuc/iclr-2025/).',
+                'Auf der ICSE-Hauptkonferenz zeigt GUIDE, wie große Sprachmodelle aus Textbeschreibungen Prototypen von Benutzeroberflächen erzeugen. Alle sechs Paper stehen auf unserer [Seite zur ICLR und ICSE 2025](/iclr-2025).',
+                'At the ICSE main conference, GUIDE shows how large language models generate user interface prototypes from text descriptions. All six papers are on our [ICLR and ICSE 2025 page](/iclr-2025).',
             ],
         ],
         image: '/papers/mitigating.webp',

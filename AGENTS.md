@@ -136,6 +136,13 @@ institutions card (`memberLink()` in `pages/CoreLabs.jsx`). Note the grid skips
 `research_assistant` and `support_staff`, so those members have no anchor to
 link to.
 
+### `/iclr-2025`
+
+Papers at ICLR and ICSE 2025 (`pages/Iclr2025.jsx`, data inline). Until 2026-11
+this was a standalone static page at `public/tuc/iclr-2025/`; the old address
+`/tuc/iclr-2025` forwards here and stays prerendered as an alias. The news item
+`iclr-icse-2025` links to it. Its images are in `public/images/iclr-2025/`.
+
 ### Legal pages — `/impressum` and `/datenschutz`
 
 `pages/legal/Impressum.jsx` and `pages/legal/Datenschutz.jsx`, in `CoreShell`.
@@ -159,8 +166,6 @@ the top of `Datenschutz.jsx` lists which code each section depends on.
   root. Google re-checks it, so deleting it un-verifies the property. The
   contents (`google-site-verification: <filename>`) are load-bearing; do not
   reformat or add a trailing edit.
-- `public/tuc/iclr-2025/` — standalone static subsite, not linked from any
-  React page (see open issue 4).
 
 ### Source tree
 
@@ -280,12 +285,11 @@ public/
   videos/demonstrations/{dynamo,vial-sort,leader-following,neurocore,stratego,robotics}/
   videos/testimonials/             student testimonial mp4s
   videos/industry-projects/        MediCar 4.0 project film
-  tuc/iclr-2025/                   static subsite kept as-is (see issue 9)
+  images/iclr-2025/                first pages of the papers on /iclr-2025
 ```
 
 Image loading rules, the `LazyVideo` component and `npm run optimize-images` are in
-`wiki/assets.md`. Large PNG/JPEG (>250 KB) are converted to WebP;
-`public/tuc/iclr-2025/` is excluded from that pipeline.
+`wiki/assets.md`. Large PNG/JPEG (>250 KB) are converted to WebP.
 
 **Video has its own rules and they are enforced.** Every clip needs an entry in
 `src/data/videos.js` carrying a written description, or `npm run build` fails via
@@ -404,14 +408,6 @@ person uses the `/#member-<slug>` deep link into the team grid instead (see
 route it under both `/network/member/:slug` (core) and possibly
 `/tuc/member/:slug` (bartelt-style). When that exists, `PublicationItem`
 (both tuc shared one + core one) can wrap author names in `<Link>`.
-
-### 4. `tuc/iclr-2025/` orphan subsite
-Static page at `public/tuc/iclr-2025/index.html` (title: "CORE at ICLR
-2025"). Has its own `style.css` + `assets/`. **Not linked from any React
-page.** Reachable directly at `<domain>/tuc/iclr-2025/` (a real static file,
-untouched by the router or the prerender pass).
-Decide: keep as direct-link archive (do nothing) OR add a link from
-Publications/Home/News.
 
 ### 5. Manual browser smoke pass
 Build passes consistently but nobody has clicked through the app in a

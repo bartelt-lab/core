@@ -26,6 +26,7 @@ const Publications = lazy(() => import('./pages/Publications'))
 const IndustryProjects = lazy(() => import('./pages/tuc/IndustryProjects'))
 const MediCar = lazy(() => import('./pages/tuc/industry/MediCar'))
 const JoinUs = lazy(() => import('./pages/tuc/JoinUs'))
+const Iclr2025 = lazy(() => import('./pages/Iclr2025'))
 const Impressum = lazy(() => import('./pages/legal/Impressum'))
 const Datenschutz = lazy(() => import('./pages/legal/Datenschutz'))
 const UbbHome = lazy(() => import('./pages/ubb/Home'))
@@ -73,6 +74,7 @@ function CoreShell() {
             <Route path="/industry-projects" element={<UnderNavbar><IndustryProjects /></UnderNavbar>} />
             <Route path="/industry-projects/medicar" element={<UnderNavbar><MediCar /></UnderNavbar>} />
             <Route path="/join-us" element={<UnderNavbar><JoinUs /></UnderNavbar>} />
+            <Route path="/iclr-2025" element={<Iclr2025 />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/news" element={<News />} />
@@ -113,6 +115,8 @@ function TucShell() {
           <Route path="/industry-projects/medicar" element={<Navigate to="/industry-projects/medicar" replace />} />
           <Route path="/teaching" element={<TucTeaching />} />
           <Route path="/join-us" element={<Navigate to="/join-us" replace />} />
+          {/* Was a standalone static page at this address until 2026-11. */}
+          <Route path="/iclr-2025" element={<Navigate to="/iclr-2025" replace />} />
           <Route path="/seminar" element={<TucTeaching initialSection="seminars" />} />
           <Route path="/theses" element={<TucTeaching initialSection="theses" />} />
         </Routes>
