@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../../i18n/useLanguage'
 import { editor, operator } from '../../data/legal'
-import { Address, Block, LegalPage, Missing } from './shared'
+import { Address, Block, LegalPage } from './shared'
 
 // Legal notice required by § 5 DDG, plus the editorial contact required by
 // § 18 Abs. 2 MStV (the site carries a News section). Operator details live in
@@ -18,9 +18,13 @@ const Impressum = () => {
                 <p>
                     {pick('Email: ', 'E-Mail: ')}
                     <a href={`mailto:${operator.email}`}>{operator.email}</a>
-                    <br />
-                    {pick('Phone: ', 'Telefon: ')}
-                    {operator.phone ?? <Missing label={pick('phone number missing', 'Telefonnummer fehlt')} />}
+                    {operator.phone && (
+                        <>
+                            <br />
+                            {pick('Phone: ', 'Telefon: ')}
+                            {operator.phone}
+                        </>
+                    )}
                 </p>
                 <p>
                     {pick('Responsible for content under § 18 (2) MStV: ', 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: ')}

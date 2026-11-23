@@ -150,9 +150,8 @@ Both are deliberately plain: one narrow text column from `LegalPage` / `Block`
 in `pages/legal/shared.jsx`, no cards and no hero. Keep them that way.
 German law wants both reachable from every page, so all three footers render
 `components/common/LegalLinks.jsx`. Operator details (Prof. Bartelt as a
-person, not a university) live once in `src/data/legal.js`; a field left `null`
-there shows as a highlighted "missing" marker on the page. **Do not merge to
-`main` while a field is `null`.**
+person, not a university) live once in `src/data/legal.js`. The phone number is
+left out on the operator's decision; the comment there records the legal risk.
 
 The privacy policy describes what the site actually does (GitHub Pages
 hosting, YouTube and Google Drive embeds, the language and theme choice in

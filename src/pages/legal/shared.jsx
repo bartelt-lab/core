@@ -24,18 +24,10 @@ export const Block = ({ id, title, children }) => (
     </section>
 )
 
-// A detail that is still `null` in data/legal.js. Loud on purpose, so a page
-// with a gap cannot be mistaken for finished.
-export const Missing = ({ label }) => (
-    <mark className="rounded bg-amber-50 px-1.5 py-0.5 font-semibold text-amber-800">[{label}]</mark>
-)
-
 /** Name and postal address of the operator, one item per line. */
 export const Address = ({ person = operator, pick }) => (
     <address className="not-italic">
         {person.name}
-        <br />
-        {person.building}
         <br />
         {person.street}
         <br />
