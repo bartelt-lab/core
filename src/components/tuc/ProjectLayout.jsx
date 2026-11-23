@@ -211,7 +211,7 @@ const ProjectLayout = ({
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
                             <div className="aspect-video">
                                 <iframe
-                                    src={`https://www.youtube.com/embed/${heroYouTubeId}?rel=0`}
+                                    src={`https://www.youtube-nocookie.com/embed/${heroYouTubeId}?rel=0`}
                                     title={title}
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

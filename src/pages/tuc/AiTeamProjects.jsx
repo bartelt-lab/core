@@ -236,7 +236,7 @@ const Media = ({ project, title }) => {
   if (project.youtubeId) {
     return (
       <iframe
-        src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${project.youtubeId}`}
+        src={`https://www.youtube-nocookie.com/embed/${project.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${project.youtubeId}`}
         title={title}
         className="h-full w-full"
         allow="autoplay; encrypted-media; picture-in-picture"

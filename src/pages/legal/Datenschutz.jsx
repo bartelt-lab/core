@@ -6,14 +6,15 @@ import { Address, Block, Ext, LegalPage } from './shared'
 // Privacy policy (Art. 13 GDPR). Every section describes something this site
 // actually does, so it has to change with the code:
 //   - Hosting ............ GitHub Pages (.github/workflows/deploy.yml)
-//   - Fonts .............. Google Fonts links in index.html and in
-//                          components/tuc/Layout.jsx
-//   - Videos ............. YouTube and Google Drive iframes (DemoCard,
-//                          ProjectLayout, FinishedProjectContent, AiTeamProjects,
+//   - Videos ............. YouTube (always youtube-nocookie.com) and Google
+//                          Drive iframes (DemoCard, ProjectLayout,
+//                          FinishedProjectContent, AiTeamProjects, ubb/Home,
 //                          MilestoneBrowser)
 //   - Browser storage .... language (i18n/) and theme (ThemeToggle)
-// If one of these goes away (fonts hosted locally, embeds made click-to-load),
-// change or remove its section. The wording is a draft: have the operator, and
+// It also states that fonts and images come from this site only. That holds
+// because src/fonts.js bundles the fonts: a Google Fonts link, a hotlinked
+// image or any other third-party request added later makes the text wrong.
+// If the embeds become click-to-load, rewrite the Videos section. The wording is a draft: have the operator, and
 // ideally a data protection officer, read it before it goes live.
 const Datenschutz = () => {
     const { pick } = useLanguage()
@@ -38,8 +39,8 @@ const Datenschutz = () => {
             <Block id="overview" title={pick('In short', 'Kurz gefasst')}>
                 <p>
                     {pick(
-                        'This website has no user accounts, no contact forms, no advertising and no visitor analytics, and it sets no cookies of its own. Personal data is processed in the four situations below: when the pages are delivered, when fonts are loaded, when a page shows an embedded video, and when you write to us.',
-                        'Diese Website hat keine Benutzerkonten, keine Kontaktformulare, keine Werbung und keine Besucherstatistik und setzt selbst keine Cookies. Personenbezogene Daten werden in den vier folgenden Fällen verarbeitet: beim Ausliefern der Seiten, beim Laden von Schriften, beim Anzeigen eingebetteter Videos und wenn Sie uns schreiben.',
+                        'This website has no user accounts, no contact forms, no advertising and no visitor analytics, and it sets no cookies of its own. Fonts and images are delivered from this website itself. Personal data is processed in the three situations below: when the pages are delivered, when a page shows an embedded video, and when you write to us.',
+                        'Diese Website hat keine Benutzerkonten, keine Kontaktformulare, keine Werbung und keine Besucherstatistik und setzt selbst keine Cookies. Schriften und Bilder werden von dieser Website selbst ausgeliefert. Personenbezogene Daten werden in den drei folgenden Fällen verarbeitet: beim Ausliefern der Seiten, beim Anzeigen eingebetteter Videos und wenn Sie uns schreiben.',
                     )}
                 </p>
             </Block>
@@ -60,25 +61,19 @@ const Datenschutz = () => {
                 </p>
             </Block>
 
-            <Block id="fonts" title={pick('Fonts', 'Schriften')}>
-                <p>
-                    {pick(
-                        'The pages load their fonts from Google Fonts, a service of Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. To do so, your browser connects to Google’s servers, which receive your IP address and the address of the page you are on. Data may also be transferred to Google LLC in the USA.',
-                        'Die Seiten laden ihre Schriften von Google Fonts, einem Dienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Dazu verbindet sich Ihr Browser mit Servern von Google, die Ihre IP-Adresse und die Adresse der aufgerufenen Seite erhalten. Daten können auch an die Google LLC in den USA übermittelt werden.',
-                    )}
-                </p>
-                <p>
-                    {pick('Details: ', 'Näheres: ')}
-                    <Ext href="https://policies.google.com/privacy">{pick('Google privacy policy', 'Datenschutzerklärung von Google')}</Ext>.
-                </p>
-            </Block>
-
             <Block id="videos" title={pick('Embedded videos', 'Eingebettete Videos')}>
                 <p>
                     {pick(
-                        'Some project pages show videos that are embedded from YouTube or Google Drive, both services of Google Ireland Limited. On those pages your browser connects to Google’s servers as soon as the video player loads, in some cases without a click. Google then receives your IP address and the address of the page, and may set cookies or use similar techniques. If you are signed in to a Google account, Google can link the visit to it.',
-                        'Einige Projektseiten zeigen Videos, die von YouTube oder Google Drive eingebettet sind, beides Dienste der Google Ireland Limited. Auf diesen Seiten verbindet sich Ihr Browser mit Servern von Google, sobald der Videoplayer lädt, teils ohne Klick. Google erhält dann Ihre IP-Adresse und die Adresse der Seite und kann Cookies setzen oder ähnliche Techniken einsetzen. Sind Sie bei einem Google-Konto angemeldet, kann Google den Besuch diesem Konto zuordnen.',
+                        'Some project pages show videos that are embedded from YouTube or Google Drive, both services of Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. On those pages your browser connects to Google’s servers as soon as the video player loads, in some cases without a click. Google then receives your IP address and the address of the page. Data may also be transferred to Google LLC in the USA.',
+                        'Einige Projektseiten zeigen Videos, die von YouTube oder Google Drive eingebettet sind, beides Dienste der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Auf diesen Seiten verbindet sich Ihr Browser mit Servern von Google, sobald der Videoplayer lädt, teils ohne Klick. Google erhält dann Ihre IP-Adresse und die Adresse der Seite. Daten können auch an die Google LLC in den USA übermittelt werden.',
                     )}
+                </p>
+                <p>
+                    {pick(
+                        'YouTube videos are embedded in YouTube’s privacy-enhanced mode (youtube-nocookie.com). According to YouTube, this mode sets no tracking cookies until a video plays. Some videos on this website start playing on their own, and from that point YouTube may set cookies or use similar techniques. If you are signed in to a Google account, Google can link the visit to it. Details: ',
+                        'YouTube-Videos sind im erweiterten Datenschutzmodus von YouTube eingebettet (youtube-nocookie.com). Nach Angaben von YouTube setzt dieser Modus keine Tracking-Cookies, bevor ein Video abgespielt wird. Einige Videos auf dieser Website starten von selbst; ab dann kann YouTube Cookies setzen oder ähnliche Techniken einsetzen. Sind Sie bei einem Google-Konto angemeldet, kann Google den Besuch diesem Konto zuordnen. Näheres: ',
+                    )}
+                    <Ext href="https://policies.google.com/privacy">{pick('Google privacy policy', 'Datenschutzerklärung von Google')}</Ext>.
                 </p>
                 <p>
                     {pick(

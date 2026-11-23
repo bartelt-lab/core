@@ -120,7 +120,7 @@ const FinishedProjectContent = ({
                   />
                 ) : showcase.youtubeId ? (
                   <iframe
-                    src={`https://www.youtube.com/embed/${showcase.youtubeId}?rel=0&autoplay=1&mute=1&loop=1&playlist=${showcase.youtubeId}`}
+                    src={`https://www.youtube-nocookie.com/embed/${showcase.youtubeId}?rel=0&autoplay=1&mute=1&loop=1&playlist=${showcase.youtubeId}`}
                     title={showcase.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen

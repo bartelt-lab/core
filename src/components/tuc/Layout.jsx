@@ -5,13 +5,13 @@ import RightSidebar from '../common/RightSidebar';
 import ThemedLogo from '../common/ThemedLogo';
 import LegalLinks from '../common/LegalLinks';
 import { useLanguage } from '../../i18n/useLanguage';
+import './fonts.js';
 
 const CURRENT_YEAR = new Date().getFullYear();
 const LOGO = 'core_tuc';
 
 // /tuc pages set in IBM Plex Sans, headings included (the global rule would otherwise
-// give h1-h4 the CORE heading font). Loaded here, scoped to the /tuc shell.
-const FONT = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap';
+// give h1-h4 the CORE heading font). The font files come from ./fonts.js.
 const TYPE = "font-['IBM_Plex_Sans',Inter,sans-serif] [&_:is(h1,h2,h3,h4)]:font-[inherit]";
 
 // /tuc/seminar and /tuc/theses render the Teaching page on another tab.
@@ -70,7 +70,6 @@ const Layout = ({ children }) => {
 
     return (
         <div className={`theme-tuc min-h-screen flex flex-col bg-white text-slate-900 ${TYPE}`}>
-            <link rel="stylesheet" href={FONT} precedence="default" />
             <header className="fixed top-0 inset-x-0 z-30 bg-white border-b border-slate-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
                     <Link to="/tuc" className="flex items-center gap-3">

@@ -155,9 +155,16 @@ there shows as a highlighted "missing" marker on the page. **Do not merge to
 `main` while a field is `null`.**
 
 The privacy policy describes what the site actually does (GitHub Pages
-hosting, Google Fonts, YouTube and Google Drive embeds, the language and theme
-choice in localStorage). Change it when one of those changes: the comment at
-the top of `Datenschutz.jsx` lists which code each section depends on.
+hosting, YouTube and Google Drive embeds, the language and theme choice in
+localStorage). Change it when one of those changes: the comment at the top of
+`Datenschutz.jsx` lists which code each section depends on.
+
+It also promises that nothing else contacts a third party, so two rules hold:
+
+- **Fonts are bundled, not linked.** `src/fonts.js` (Inter, Poppins) and
+  `components/tuc/fonts.js` (IBM Plex Sans) import them from `@fontsource`.
+  Never add a `fonts.googleapis.com` link or hotlink an image or script.
+- **YouTube embeds use `youtube-nocookie.com`**, never `youtube.com/embed`.
 
 ### Files that look deletable but are not
 

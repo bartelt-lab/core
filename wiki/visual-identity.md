@@ -155,7 +155,8 @@ institutional meaning, reach for `secondary-700` (4.60:1), which is what the
 - **Poppins 600–800** — all headings. Applied once, via a base-layer `h1…h6` rule in
   `index.css`. Do not add `font-heading` per-heading.
 - **Inter 300–700** — body, and the default.
-- Both load from Google Fonts in `index.html` and are render-blocking.
+- Both are bundled with the site from the `@fontsource` packages (`src/fonts.js`),
+  not loaded from Google Fonts: see "Legal pages" in `AGENTS.md` for why.
 
 The real scale is UI-dense rather than editorial: `text-sm` and `text-xs` account for
 roughly half of all sizing utilities. Display sizes (`text-5xl`+) appear only in heroes.
