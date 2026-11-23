@@ -15,8 +15,9 @@
  *
  * Optional per item: `imageCredit` ([de, en] caption under the article photo),
  * `featured: true` puts the item on the homepage ahead of
- * newer ones (the homepage shows two), `logo` ({ src, alt }) for an organisation badge,
- * `imageFocus` (CSS object-position), `imageFit: 'contain'` for uncropped logos,
+ * newer ones (the homepage shows four), `logo` ({ src, alt }) for an organisation badge,
+ * `imageFocus` (CSS object-position), `imageFit` ('contain': logo shown whole with air; 'figure': paper figure
+ * shown whole, edge to edge),
  * `cta`, `people` (team.js slugs).
  */
 
@@ -130,8 +131,8 @@ export const news = [
         date: '2026-09',
         tag: ['Publikationen', 'Publications'],
         title: [
-            'Paper auf der ECML PKDD 2026 angenommen: Transduktion und Induktion im Zusammenspiel',
-            'Paper accepted at ECML PKDD 2026: transduction and induction working together',
+            'Unser Paper „Beyond Either-Or Reasoning“ wurde auf der ECML PKDD 2026 angenommen',
+            'Our paper “Beyond Either-Or Reasoning” has been accepted at ECML PKDD 2026',
         ],
         teaser: [
             'Janis Zenkner, Tobias Sesterhenn und Christian Bartelt stellen TIIPS vor: ein Verfahren, in dem sich Transduktion und Induktion bei der Programmsynthese gegenseitig leiten.',
@@ -157,6 +158,8 @@ export const news = [
             label: ['Publikationen ansehen', 'Browse publications'],
         },
         image: '/papers/tiips.webp',
+
+        imageFit: 'figure',
         imageAlt: ['Abbildung aus dem TIIPS-Paper', 'Figure from the TIIPS paper'],
         people: ['zenkner', 'sesterhenn', 'bartelt'],
     },
@@ -165,8 +168,8 @@ export const news = [
         date: '2026-07',
         tag: ['Publikationen', 'Publications'],
         title: [
-            'Zwei Paper auf Workshops der ICML und CVPR 2026: egozentrisches Video und erklärbare KI',
-            'Two papers at ICML and CVPR 2026 workshops: egocentric video and explainable AI',
+            'Zwei unserer Paper wurden auf Workshops der ICML und CVPR 2026 angenommen',
+            'Two of our papers have been accepted at ICML and CVPR 2026 workshops',
         ],
         teaser: [
             'BARISTA, ein Benchmark für egozentrisches Videoverstehen, und Concepts in Motion, ein erklärbares Modell zur Videoklassifikation, wurden auf drei Workshops angenommen.',
@@ -187,6 +190,8 @@ export const news = [
             ],
         ],
         image: '/papers/barista.webp',
+
+        imageFit: 'figure',
         imageAlt: ['Abbildung aus dem BARISTA-Paper', 'Figure from the BARISTA paper'],
         people: ['knab', 'marton', 'bartelt'],
     },
@@ -195,8 +200,8 @@ export const news = [
         date: '2026-05',
         tag: ['Publikationen', 'Publications'],
         title: [
-            'Übersichtsarbeit in TMLR: eine Roadmap für Concept Bottleneck Models',
-            'Survey in TMLR: a roadmap for concept bottleneck models',
+            'Unsere Übersichtsarbeit „What’s in the Bottle?“ ist in TMLR erschienen',
+            'Our survey “What’s in the Bottle?” has been published in TMLR',
         ],
         teaser: [
             'Concept Bottleneck Models treffen Vorhersagen über verständliche Konzepte. Eine Übersichtsarbeit in Transactions on Machine Learning Research ordnet das Feld und zeigt, wo es hingehen kann.',
@@ -217,6 +222,8 @@ export const news = [
             ],
         ],
         image: '/papers/whats-in-the-bottle.webp',
+
+        imageFit: 'figure',
         imageAlt: ['Abbildung aus der Übersichtsarbeit zu Concept Bottleneck Models', 'Figure from the concept bottleneck model survey'],
         people: ['knab', 'bartelt'],
     },
@@ -224,7 +231,7 @@ export const news = [
         slug: 'iclr-icse-2025',
         date: '2025-04',
         tag: ['Publikationen', 'Publications'],
-        title: ['Sechs Paper auf der ICLR und ICSE 2025', 'Six papers at ICLR and ICSE 2025'],
+        title: ['Sechs unserer Paper wurden auf der ICLR und ICSE 2025 angenommen', 'Six of our papers have been accepted at ICLR and ICSE 2025'],
         teaser: [
             'Sechs Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der ICLR 2025 in Singapur und der ICSE 2025 in Seoul angenommen, auf den Hauptkonferenzen und auf Workshops.',
             'Six papers authored or co-authored by CORE members were accepted at ICLR 2025 in Singapore and ICSE 2025 in Seoul, at the main conferences and at workshops.',
@@ -244,6 +251,8 @@ export const news = [
             ],
         ],
         image: '/papers/mitigating.webp',
+
+        imageFit: 'figure',
         imageAlt: ['Abbildung aus dem SYMPOL-Paper', 'Figure from the SYMPOL paper'],
         people: ['marton', 'grams', 'ludtke', 'bartelt'],
     },
