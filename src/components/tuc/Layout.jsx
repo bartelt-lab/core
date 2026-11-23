@@ -2,11 +2,11 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { FiMenu, FiX, FiChevronUp } from 'react-icons/fi';
 import RightSidebar from '../common/RightSidebar';
-import assetUrl from '../../utils/assetUrl';
+import ThemedLogo from '../common/ThemedLogo';
 import { useLanguage } from '../../i18n/useLanguage';
 
 const CURRENT_YEAR = new Date().getFullYear();
-const LOGO = '/logos/core/light-background/core_tuc.svg';
+const LOGO = 'core_tuc';
 
 // /tuc pages set in IBM Plex Sans, headings included (the global rule would otherwise
 // give h1-h4 the CORE heading font). Loaded here, scoped to the /tuc shell.
@@ -73,7 +73,7 @@ const Layout = ({ children }) => {
             <header className="fixed top-0 inset-x-0 z-30 bg-white border-b border-slate-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
                     <Link to="/tuc" className="flex items-center gap-3">
-                        <img src={assetUrl(LOGO)} alt="Cognitive Software, TU Clausthal" className="h-12 w-auto" />
+                        <ThemedLogo name={LOGO} alt="Cognitive Software, TU Clausthal" className="h-12 w-auto" />
                     </Link>
 
                     <nav className="hidden lg:flex items-center gap-6">
@@ -114,8 +114,8 @@ const Layout = ({ children }) => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
                     <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
                         <div className="flex min-w-0 items-center gap-3">
-                            <img
-                                src={assetUrl(LOGO)}
+                            <ThemedLogo
+                                name={LOGO}
                                 alt="Cognitive Software, TU Clausthal"
                                 loading="lazy"
                                 decoding="async"

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import assetUrl from "../../utils/assetUrl";
 import {
   FaBookOpen,
   FaBrain,
@@ -10,6 +9,7 @@ import {
   FaServer,
   FaUserPlus,
 } from "react-icons/fa";
+import ThemedLogo from "./ThemedLogo";
 import { useLanguage } from "../../i18n/useLanguage";
 
 const Navbar = () => {
@@ -87,8 +87,8 @@ const Navbar = () => {
           aria-label="CORE Network home"
           className="flex h-full w-14 shrink-0 items-center justify-center rounded-2xl transition hover:bg-slate-50 sm:w-[7.5rem] lg:w-[9rem]"
         >
-          <img
-            src={assetUrl("/logos/core/light-background/core.svg")}
+          <ThemedLogo
+            name="core"
             alt="CORE Network"
             className="h-9 max-w-[3.25rem] object-contain sm:h-12 sm:max-w-[6.75rem]"
           />

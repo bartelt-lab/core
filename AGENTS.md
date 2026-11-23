@@ -292,6 +292,11 @@ the bottom of the file tree). Read the relevant one before related work:
   values are what they are.** The logo is the authority for brand colour; ramps are
   regenerated hue-only; `primary-600` is pinned above the AA floor on purpose. Read
   before changing a brand colour or adding a colour family.
+- `wiki/dark-mode.md` — **how dark mode works and what new UI must do to follow
+  it.** Colours flip by role through CSS variables (`bg-white`, `text-slate-900`,
+  `border-slate-200` … are theme-aware as written); arbitrary hex colours and
+  third-party logos need the handling described there. Read before adding a
+  colour or a light-only surface.
 - `wiki/project-subsites.md` — **how CORE Labs project subpages (e.g. `/dynamo`)
   should look and behave.** Visual language, hero forms, the research-question
   intro, the milestone video browser. Read this before building or restyling any

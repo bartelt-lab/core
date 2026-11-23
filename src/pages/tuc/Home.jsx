@@ -15,7 +15,7 @@ const SECTIONS = [
 
 const H2 = ({ children }) => (
     <h2 className={`flex items-center gap-3 text-2xl font-semibold`}>
-        <span className="h-6 w-1 rounded-full bg-site-900" />
+        <span className="h-6 w-1 rounded-full bg-site-900 dark:bg-site-300" />
         {children}
     </h2>
 )
@@ -151,7 +151,7 @@ const Home = () => {
                             </div>
                             <div className="flex flex-wrap items-center gap-x-8 gap-y-4 md:justify-end">
                                 {affiliations.map((a) => {
-                                    const img = <img src={assetUrl(a.logo)} alt={a.name} decoding="async" className="h-10 w-auto object-contain" />
+                                    const img = <img src={assetUrl(a.logo)} alt={a.name} decoding="async" className="logo-plate h-10 w-auto object-contain" />
                                     return a.to ? <Link key={a.name} to={a.to}>{img}</Link> : <a key={a.name} href={a.href} target="_blank" rel="noreferrer">{img}</a>
                                 })}
                             </div>

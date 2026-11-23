@@ -136,10 +136,12 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero ── */}
-      <section id="hero" className="relative overflow-hidden bg-[#f7fafc] text-slate-950">
-        <img src={assetUrl('/images/hero/core-network-hero.webp')} alt="" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover object-center opacity-60" aria-hidden="true" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#f7fafc] via-[#f7fafc]/95 via-[40%] to-[#f7fafc]/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/40" />
+      {/* Dark mode: the hero photo is a light render, so it is inverted (and
+          hue-rotated back, to keep the green) rather than swapped for a second file. */}
+      <section id="hero" className="relative overflow-hidden bg-[#f7fafc] text-slate-950 dark:bg-slate-950">
+        <img src={assetUrl('/images/hero/core-network-hero.webp')} alt="" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover object-center opacity-60 dark:opacity-50 dark:invert dark:hue-rotate-180" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f7fafc] via-[#f7fafc]/95 via-[40%] to-[#f7fafc]/10 dark:from-slate-950 dark:via-slate-950/95 dark:to-slate-950/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/40 dark:from-slate-950" />
 
         <div className="container relative z-10 mx-auto max-w-6xl px-6 pb-12 pt-32 md:px-12 md:pb-16 lg:px-20">
           <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
@@ -281,7 +283,7 @@ const Home = () => {
                 const content = (
                   <>
                     <div className="flex h-14 w-28 shrink-0 items-center justify-center sm:h-24 sm:w-auto">
-                      <img src={assetUrl(logo)} alt={institution.name} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain sm:max-h-20 sm:max-w-[85%]" />
+                      <img src={assetUrl(logo)} alt={institution.name} loading="lazy" decoding="async" className="logo-plate max-h-full max-w-full object-contain sm:max-h-20 sm:max-w-[85%]" />
                     </div>
                     <div className="min-w-0 sm:mt-3 sm:border-t sm:border-slate-100 sm:pt-3">
                       <p className="text-sm font-bold text-slate-950 transition-colors group-hover:text-primary-700">{txt(pick, lab)}</p>

@@ -29,7 +29,7 @@ const Footer = () => {
                     alt={logo.alt}
                     loading="lazy"
                     decoding="async"
-                    className={`${logo.className} w-auto object-contain opacity-85 grayscale transition hover:opacity-100 hover:grayscale-0`}
+                    className={`${logo.className} logo-plate w-auto object-contain opacity-85 grayscale transition hover:opacity-100 hover:grayscale-0`}
                     onError={(e) => {
                       e.target.style.display = 'none'
                     }}

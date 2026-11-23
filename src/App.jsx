@@ -6,6 +6,7 @@ import Footer from './components/common/Footer'
 import ScrollToTop from './components/common/ScrollToTop'
 import SeoHead from './components/common/SeoHead'
 import LanguageToggle from './components/common/LanguageToggle'
+import ThemeToggle from './components/common/ThemeToggle'
 import { LanguageProvider } from './i18n/LanguageContext'
 import TucLayout from './components/tuc/Layout'
 import UbbLayout from './components/ubb/Layout'
@@ -134,7 +135,11 @@ function App() {
       <LanguageProvider>
         <SeoHead />
         <ScrollToTop />
-        <LanguageToggle />
+        {/* Site-wide controls, bottom left on every shell. */}
+        <div className="fixed bottom-4 left-4 z-[70] flex items-center gap-2">
+          <LanguageToggle />
+          <ThemeToggle />
+        </div>
         <Routes>
           <Route path="/tuc/*" element={<TucShell />} />
           <Route path="/ubb/*" element={<UbbShell />} />

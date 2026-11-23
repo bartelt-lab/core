@@ -44,6 +44,19 @@
       })();
     </script>
 
+    <!--
+      Dark mode. Apply the stored choice before first paint so a dark-mode
+      visitor never sees a white flash. Light is the default; the key must match
+      STORAGE_KEY in src/components/common/ThemeToggle.jsx.
+    -->
+    <script>
+      try {
+        if (localStorage.getItem("core-theme") === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
