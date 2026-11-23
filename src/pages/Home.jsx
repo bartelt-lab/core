@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
-  FaArrowRight, FaEnvelope, FaGithub, FaGlobe, FaLinkedin, FaTwitter,
+  FaArrowRight, FaCode, FaComments, FaEnvelope, FaEye, FaGithub, FaGlobe, FaLightbulb, FaLinkedin, FaRobot, FaTable, FaTwitter,
 } from 'react-icons/fa'
 import { SiGooglescholar } from 'react-icons/si'
 import NewsCard from '../components/news/NewsCard'
 import { formatNewsDate } from '../components/news/newsText'
 import PublicationMiniCarousel from '../components/publications/PublicationMiniCarousel'
 import { getNetworkMembers, institutions } from '../data/team'
-import { cognitiveProjects } from '../data/demonstrations'
 import { homepageNews } from '../data/news'
+import { topics } from './tuc/home/content'
 import assetUrl from '../utils/assetUrl'
 import { useLanguage } from '../i18n/useLanguage'
 
@@ -21,38 +21,20 @@ const txt = (pick, pair) => pick(pair[1], pair[0])
 const eyebrow = 'mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700'
 const sectionTitle = 'font-heading text-3xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl'
 
-// Research highlights, in display order: the page each card opens, its photo
-// and a one-line summary. Titles and links of the robotics cards come from the
-// project data so a rename follows.
-const project = (id) => cognitiveProjects.find((p) => p.id === id)
-const highlights = [
-  {
-    title: ['Industrieprojekte', 'Industry Projects'],
-    to: '/industry-projects',
-    image: '/images/projects/industry/ai-bim.webp',
-    summary: ['Angewandte KI mit Partnern aus Bau, Gesundheit und Handel', 'Applied AI with partners in construction, healthcare and retail'],
-  },
-  {
-    title: [project('dynamo').title, project('dynamo').title],
-    to: project('dynamo').link,
-    image: '/images/projects/dynamo/hero.webp',
-    summary: ['Dynamische Manipulation für kognitive Roboter', 'Dynamic manipulation for cognitive robots'],
-  },
-  {
-    title: ['Autonomes Fahren', 'Autonomous Driving'],
-    // The autonomous driving section of the CORE Labs page (DemonstrationsSection).
-    to: '/core-labs#autonomous',
-    // Thumbnail of the group's own 1:10 field-test video (YouTube wrY34WyTEzo).
-    image: '/images/projects/self-driving/hero.webp',
-    focus: '28% 70%',
-    summary: ['Fahrzeuge im Maßstab 1:10, Simulation und Benchmarks', '1:10 scale vehicles, simulation and benchmarks'],
-  },
-  {
-    title: ['AI-Team-Projekte', 'AI Team Projects'],
-    to: '/ai-team-projects',
-    image: '/videos/ai-team-projects/ai-team-project-showcase-poster.webp',
-    summary: ['Studierendenprojekte zwischen TU Clausthal und UBB', 'Student projects across TU Clausthal and UBB'],
-  },
+// The research section lists research areas, not projects. It used to be four
+// photo cards (industry, DyNAMO, autonomous driving, student projects), which
+// made the network look like a robotics lab; robotics is one area of six.
+// The areas and their one-line texts are the group's own (pitch deck, 2026-09)
+// and live in pages/tuc/home/content.js, shared with /tuc. Icons follow that
+// order: keep this list as long as `topics`.
+const topicIcons = [FaTable, FaEye, FaRobot, FaComments, FaCode, FaLightbulb]
+
+// Where the work behind the areas can be seen, as plain links under the grid.
+const researchLinks = [
+  { to: '/publications', label: ['Publikationen', 'Publications'] },
+  { to: '/industry-projects', label: ['Industrieprojekte', 'Industry Projects'] },
+  { to: '/core-labs', label: ['CORE Labs', 'CORE Labs'] },
+  { to: '/ai-team-projects', label: ['AI-Team-Projekte', 'AI Team Projects'] },
 ]
 
 // Universities where network members work, in display order. The network is
@@ -226,33 +208,36 @@ const Home = () => {
         <div className="container mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
-              <p className={eyebrow}>{pick('Projects', 'Projekte')}</p>
-              <h2 className={sectionTitle}>{pick('What we work on', 'Woran wir arbeiten')}</h2>
+              <p className={eyebrow}>{pick('Research', 'Forschung')}</p>
+              <h2 className={sectionTitle}>{pick('What we research', 'Woran wir forschen')}</h2>
+              <p className="mt-3 text-base leading-7 text-slate-600">
+                {pick(
+                  'AI that perceives, reasons and acts, and stays trustworthy while doing so. Our work sits between machine learning, cognitive systems and software engineering.',
+                  'KI, die wahrnimmt, schlussfolgert und handelt und dabei vertrauenswürdig bleibt. Unsere Arbeit liegt zwischen Machine Learning, kognitiven Systemen und Software Engineering.',
+                )}
+              </p>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-            {highlights.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.55)]"
-              >
-                <img
-                  src={assetUrl(item.image)}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  style={item.focus ? { objectPosition: item.focus } : undefined}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
-                <div className="relative p-3 text-white sm:p-5">
-                  <h3 className="flex items-center justify-between gap-2 font-heading text-base font-bold leading-tight sm:text-xl">
-                    {txt(pick, item.title)}
-                    <FaArrowRight className="h-3.5 w-3.5 shrink-0 -rotate-45 transition group-hover:rotate-0" aria-hidden="true" />
-                  </h3>
-                  <p className="mt-1 text-xs leading-4 text-slate-200 sm:text-sm sm:leading-5">{txt(pick, item.summary)}</p>
-                </div>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {topics.map((topic, index) => {
+              const Icon = topicIcons[index]
+              return (
+                <li key={topic.title[1]} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary-700">
+                    <Icon className="h-[1.125rem] w-[1.125rem]" aria-hidden="true" />
+                  </span>
+                  <h3 className="mt-4 font-heading text-lg font-bold leading-snug text-slate-950">{txt(pick, topic.title)}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{txt(pick, topic.text)}</p>
+                </li>
+              )
+            })}
+          </ul>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-bold">
+            <span className="text-slate-500">{pick('See the work:', 'Zur Arbeit:')}</span>
+            {researchLinks.map((link) => (
+              <Link key={link.to} to={link.to} className="inline-flex items-center gap-1.5 py-1 text-primary-700 transition hover:text-primary-800">
+                {txt(pick, link.label)}
+                <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </Link>
             ))}
           </div>
