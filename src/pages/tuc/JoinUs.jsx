@@ -10,7 +10,7 @@ import { stats } from './home/content';
 // researcher or research group is the main way in; the positions follow.
 const NETWORK = {
     intro: [
-        'Das CORE Network ist eine Gemeinschaft von Forschenden und Forschungsgruppen, derzeit an der TU Clausthal, der Babeș-Bolyai-Universität und der Universität Rostock. Wir freuen uns über Forschende und Forschungsgruppen, die an kognitiver Software, autonomen Systemen und KI arbeiten und sich dem Netzwerk anschließen möchten.',
+        'Das CORE Network ist eine Gemeinschaft von Forschenden und Forschungsgruppen, derzeit an der TU Clausthal, der Babeș-Bolyai-Universität und der Universität Rostock. Wir freuen uns über Forschende und Forschungsgruppen, die an Cognitive Software, autonomen Systemen und KI arbeiten und sich dem Netzwerk anschließen möchten.',
         'The CORE Network is a community of researchers and research groups, currently at TU Clausthal, Babeș-Bolyai University and the University of Rostock. We welcome researchers and research groups working on cognitive software, autonomous systems and AI who want to join the network.',
     ],
     shared: [
@@ -37,7 +37,7 @@ const NETWORK = {
             to: '/publications',
             title: ['Gemeinsame Forschung', 'Joint research'],
             text: [
-                'Die Gruppen publizieren gemeinsam zu kognitiver Software, autonomen Systemen und Machine Learning.',
+                'Die Gruppen publizieren gemeinsam zu Cognitive Software, autonomen Systemen und Machine Learning.',
                 'The groups publish together on cognitive software, autonomous systems and machine learning.',
             ],
         },

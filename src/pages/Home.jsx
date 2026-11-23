@@ -135,12 +135,15 @@ const Home = () => {
             <div className="max-w-2xl">
               <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Research Network', 'Forschungsnetzwerk')}</p>
               <h1 className="mb-6 text-4xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-5xl lg:text-6xl">
-                {pick('Cognitive Software.', 'Kognitive Software.')}
+                {/* "Cognitive Software" is the name, not a description: it stays
+                    English in the German version too. */}
+                Cognitive Software.
               </h1>
+              {/* One sentence that says what CORE is and what it works on. */}
               <p className="max-w-xl text-lg leading-8 text-slate-600 md:text-xl">
                 {pick(
-                  'Shared labs, shared compute, one mission: cognitive systems that perceive, reason, and act.',
-                  'Gemeinsame Labore, gemeinsame Rechenleistung, eine Mission: kognitive Systeme, die wahrnehmen, schlussfolgern und handeln.',
+                  'A network of researchers building AI that perceives, reasons and acts: from tabular foundation models to cognitive robotics.',
+                  'Ein Netzwerk von Forschenden, das an KI arbeitet, die wahrnimmt, schlussfolgert und handelt: von tabellarischen Foundation Models bis zur kognitiven Robotik.',
                 )}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -217,8 +220,8 @@ const Home = () => {
               <h2 className={sectionTitle}>{pick('What we research', 'Woran wir forschen')}</h2>
               <p className="mt-3 text-base leading-7 text-slate-600">
                 {pick(
-                  'AI that perceives, reasons and acts, and stays trustworthy while doing so. Our work sits between machine learning, cognitive systems and software engineering.',
-                  'KI, die wahrnimmt, schlussfolgert und handelt und dabei vertrauenswürdig bleibt. Unsere Arbeit liegt zwischen Machine Learning, kognitiven Systemen und Software Engineering.',
+                  'Our work sits between machine learning, cognitive systems and software engineering, with one aim throughout: AI that stays trustworthy.',
+                  'Unsere Arbeit liegt zwischen Machine Learning, kognitiven Systemen und Software Engineering, mit einem durchgehenden Ziel: KI, die vertrauenswürdig bleibt.',
                 )}
               </p>
             </div>
@@ -359,7 +362,7 @@ const Home = () => {
               <p className="mt-3 text-base leading-7 text-slate-300">
                 {pick(
                   'We welcome collaboration proposals from researchers and research groups interested in cognitive software, autonomous systems, and AI research.',
-                  'Wir freuen uns über Kooperationsvorschläge von Forschenden und Forschungsgruppen mit Interesse an kognitiver Software, autonomen Systemen und KI-Forschung.',
+                  'Wir freuen uns über Kooperationsvorschläge von Forschenden und Forschungsgruppen mit Interesse an Cognitive Software, autonomen Systemen und KI-Forschung.',
                 )}
               </p>
               <a href="mailto:bartelt@isse.tu-clausthal.de" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-bold text-white transition hover:border-white/60">

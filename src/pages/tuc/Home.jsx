@@ -150,10 +150,14 @@ const Home = () => {
                                 <a href={`mailto:${contact.email}`} className="flex items-center gap-3 hover:text-primary-700"><FiMail className="text-site-900" /> {contact.email}</a>
                                 <a href={contact.map} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-primary-700"><FiMapPin className="text-site-900" /> {contact.address}</a>
                             </div>
-                            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 md:justify-end">
+                            {/* One row, never wrapped: the logos shrink together
+                                instead of one dropping to a second line. */}
+                            <div className="flex items-center gap-5 sm:gap-7 md:justify-end">
                                 {affiliations.map((a) => {
-                                    const img = <ThirdPartyLogo src={a.logo} alt={a.name} decoding="async" className="h-10 w-auto object-contain" />
-                                    return a.to ? <Link key={a.name} to={a.to}>{img}</Link> : <a key={a.name} href={a.href} target="_blank" rel="noreferrer">{img}</a>
+                                    const img = <ThirdPartyLogo src={a.logo} alt={a.name} decoding="async" className="h-9 w-auto max-w-full object-contain" />
+                                    return a.to
+                                        ? <Link key={a.name} to={a.to} className="min-w-0">{img}</Link>
+                                        : <a key={a.name} href={a.href} target="_blank" rel="noreferrer" className="min-w-0">{img}</a>
                                 })}
                             </div>
                         </div>

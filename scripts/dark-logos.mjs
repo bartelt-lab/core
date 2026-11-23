@@ -32,7 +32,10 @@ const LOGOS = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'pub
 const OUT = path.join(LOGOS, 'dark')
 
 const JOBS = [
-  { file: 'ubb-logo.webp', how: 'copy', from: 'ubb-white.webp' },
+  // The official white lockup, cut to the same box the light ubb-logo.webp was
+  // trimmed to (2026-11: the file carried a wide empty margin that made the
+  // logo look small beside the others). Keep the two boxes equal.
+  { file: 'ubb-logo.webp', how: 'crop', from: 'ubb-white.webp', box: { left: 23, top: 40, width: 454, height: 173 } },
   // The seal alone, cut from the official white lockup (seal on the left).
   { file: 'ubb-logo-only.webp', how: 'crop', from: 'ubb-white.webp', box: { left: 14, top: 34, width: 184, height: 184 } },
   { file: 'clausthal-logo.webp', how: 'ink' },
