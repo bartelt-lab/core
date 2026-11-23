@@ -68,7 +68,7 @@ const PublicationRow = ({ publication, institutions = [] }) => {
   )
 
   return (
-    <article className="group relative grid h-full min-h-[10rem] grid-cols-[7rem_minmax(0,1fr)] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.45)] focus-within:ring-2 focus-within:ring-primary-500 sm:min-h-[12.5rem] sm:grid-cols-[10.5rem_minmax(0,1fr)]">
+    <article className="group relative grid h-full min-h-[10rem] grid-cols-[7rem_minmax(0,1fr)] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.45)] focus-within:ring-2 focus-within:ring-primary-500 sm:min-h-[12.5rem] sm:grid-cols-[10.5rem_minmax(0,1fr)] xl:grid-cols-[9rem_minmax(0,1fr)] 2xl:grid-cols-[10.5rem_minmax(0,1fr)]">
       <div className="relative border-r border-slate-200">
         <Slot publication={publication} />
       </div>
