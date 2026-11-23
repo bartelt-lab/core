@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
 import Navbar from './components/common/Navbar'
 import RightSidebar from './components/common/RightSidebar'
 import Footer from './components/common/Footer'
@@ -22,14 +22,14 @@ const HumanAwarenessDetection = lazy(() => import('./pages/HumanAwarenessDetecti
 const VialSort = lazy(() => import('./pages/VialSort'))
 const ComputeCluster = lazy(() => import('./pages/ComputeCluster'))
 const Publications = lazy(() => import('./pages/Publications'))
+const IndustryProjects = lazy(() => import('./pages/tuc/IndustryProjects'))
+const MediCar = lazy(() => import('./pages/tuc/industry/MediCar'))
+const JoinUs = lazy(() => import('./pages/tuc/JoinUs'))
 const UbbHome = lazy(() => import('./pages/ubb/Home'))
 
 // /tuc/* pages
 const TucHome = lazy(() => import('./pages/tuc/Home'))
-const TucIndustryProjects = lazy(() => import('./pages/tuc/IndustryProjects'))
-const TucMediCar = lazy(() => import('./pages/tuc/industry/MediCar'))
 const TucTeaching = lazy(() => import('./pages/tuc/Teaching'))
-const TucJoinUs = lazy(() => import('./pages/tuc/JoinUs'))
 const TucAiTeamProjects = lazy(() => import('./pages/tuc/AiTeamProjects'))
 const TucTempoProject = lazy(() => import('./pages/tuc/projects/TempoProject'))
 const TucLectraProject = lazy(() => import('./pages/tuc/projects/LectraProject'))
@@ -48,6 +48,12 @@ const LoadingFallback = () => (
   </div>
 )
 
+// Pages built from the /tuc blocks expect that shell's in-flow header. Under the
+// floating network Navbar they need their own top room.
+const UnderNavbar = ({ children }) => (
+  <div className="bg-slate-50 pt-[4.5rem] sm:pt-[5.5rem]">{children}</div>
+)
+
 function CoreShell() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -61,6 +67,9 @@ function CoreShell() {
             <Route path="/demos" element={<Demos />} />
             <Route path="/network" element={<Home />} />
             <Route path="/publications" element={<Publications />} />
+            <Route path="/industry-projects" element={<UnderNavbar><IndustryProjects /></UnderNavbar>} />
+            <Route path="/industry-projects/medicar" element={<UnderNavbar><MediCar /></UnderNavbar>} />
+            <Route path="/join-us" element={<UnderNavbar><JoinUs /></UnderNavbar>} />
             <Route path="/news" element={<News />} />
             <Route path="/news/:slug" element={<NewsArticle />} />
             <Route path="/dynamo" element={<Dynamo />} />
@@ -94,10 +103,11 @@ function TucShell() {
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<TucHome />} />
-          <Route path="/industry-projects" element={<TucIndustryProjects />} />
-          <Route path="/industry-projects/medicar" element={<TucMediCar />} />
+          {/* Industry projects and Join Us moved to the network site; old /tuc URLs forward there. */}
+          <Route path="/industry-projects" element={<Navigate to="/industry-projects" replace />} />
+          <Route path="/industry-projects/medicar" element={<Navigate to="/industry-projects/medicar" replace />} />
           <Route path="/teaching" element={<TucTeaching />} />
-          <Route path="/join-us" element={<TucJoinUs />} />
+          <Route path="/join-us" element={<Navigate to="/join-us" replace />} />
           <Route path="/seminar" element={<TucTeaching initialSection="seminars" />} />
           <Route path="/theses" element={<TucTeaching initialSection="theses" />} />
         </Routes>

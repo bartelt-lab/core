@@ -26,13 +26,24 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
   DyNAMO page readers want is `/dynamo`.
   CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
-  merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`,
-  `/tuc/industry-projects`, `/tuc/industry-projects/medicar`, `/tuc/teaching`,
-  `/tuc/seminar`, `/tuc/theses`, `/tuc/join-us`. TUC navbar links out to the CORE Network
-  site for `/network` and `/publications` (no `/tuc/publications`).
+  merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`, `/tuc/teaching`,
+  `/tuc/seminar`, `/tuc/theses`. TUC navbar links out to the CORE Network
+  site for `/network`, `/publications`, `/industry-projects`, `/ai-team-projects`
+  and `/join-us` (no `/tuc/publications`).
 
 Note: the AI Team Projects pages live in `pages/tuc/` but route under
 `/ai-team-projects/*` in `CoreShell` (not `/tuc/*`).
+
+Industry Projects and Join Us moved to the network site (2026-11):
+`/industry-projects`, `/industry-projects/medicar` and `/join-us` render in
+`CoreShell`, and the network Navbar links them (Industry Projects sits before
+CORE Labs; Join Us is the outlined button). Their files still live in
+`pages/tuc/` and are built from the `components/tuc/ui.jsx` blocks, so `App.jsx`
+wraps them in `UnderNavbar` to clear the floating Navbar. The old
+`/tuc/industry-projects`, `/tuc/industry-projects/medicar` and `/tuc/join-us`
+URLs are `<Navigate>` forwards in `TucShell`; `routes.js` keeps them as aliases
+(`canonical` set) so they stay prerendered. `/join-us` leads with joining the
+network as a researcher or research group; the PhD and HiWi positions follow.
 
 App is split via `<Routes>` in `src/App.jsx` between `CoreShell` (core's
 pill Navbar + Footer) and `TucShell` (bartelt-style Layout). Each subtree
@@ -156,7 +167,7 @@ src/
                                    NOTE: member `id` must be unique — a merge
                                    once produced duplicate ids; grep before reuse.
     projects.js                    CORE Labs projects metadata
-    industryProjects.js            /tuc/industry-projects tiles: `projects`
+    industryProjects.js            /industry-projects tiles: `projects`
                                    (text fields are [German, English] pairs;
                                    an entry with `href` gets a clickable tile
                                    and a detail page — only MediCar today),
@@ -215,9 +226,12 @@ src/
       home/content.js shared.jsx   its text (six research directions, pitch
                                    line), member helpers, photo/link components
       Teaching.jsx                   teaching subtree (/seminar, /theses route to it)
-      JoinUs.jsx AiTeamProjects.jsx
-      IndustryProjects.jsx         /tuc/industry-projects, data from industryProjects.js
-      industry/MediCar.jsx         /tuc/industry-projects/medicar
+      AiTeamProjects.jsx
+      JoinUs.jsx                   /join-us (CoreShell): network first, then
+                                   PhD and HiWi positions
+      IndustryProjects.jsx         /industry-projects (CoreShell), data from
+                                   industryProjects.js
+      industry/MediCar.jsx         /industry-projects/medicar (CoreShell)
       projects/{AI4AI,FastMile,Lectra,NeuroCore,SelfDriving,Stratego,Tempo,
                 TrafficNetwork,Vergabepilot,Werewolfs}Project.jsx
                                    routed under /ai-team-projects/*
@@ -387,7 +401,7 @@ real browser since the restyle. Verify in dev (`npm run dev`):
   affiliation logo + contact links work)
 - `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses` (teaching-* CSS
   still applies — those inline `<style>` blocks survived)
-- `/tuc/join-us` (disclosure pattern expands/collapses)
+- `/join-us` (network section first, then PhD and HiWi)
 - `/ai-team-projects` (project tiles; sidebar Overview/Projects/Voices/Archive)
 - Network panel: zero 404s on `/members/*`, `/papers/*`, `/logos/*`,
   `/videos/*`, `/data/*`

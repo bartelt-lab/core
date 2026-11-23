@@ -1,8 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaBookOpen, FaBrain, FaFlask, FaServer } from "react-icons/fa";
 import assetUrl from "../../utils/assetUrl";
+import {
+  FaBookOpen,
+  FaBrain,
+  FaFlask,
+  FaIndustry,
+  FaServer,
+  FaUserPlus,
+} from "react-icons/fa";
 import { useLanguage } from "../../i18n/useLanguage";
 
 const Navbar = () => {
@@ -35,8 +42,16 @@ const Navbar = () => {
     {
       to: "/publications",
       label: "Publications",
+      labelDe: "Publikationen",
       icon: FaBookOpen,
       isActive: location.pathname === "/publications",
+    },
+    {
+      to: "/industry-projects",
+      label: "Industry Projects",
+      labelDe: "Industrieprojekte",
+      icon: FaIndustry,
+      isActive: location.pathname.startsWith("/industry-projects"),
     },
     {
       to: "/core-labs",
@@ -47,12 +62,14 @@ const Navbar = () => {
     {
       to: "/ai-team-projects",
       label: "AI Team Projects",
+      labelDe: "AI-Team-Projekte",
       icon: FaBrain,
       isActive: location.pathname.startsWith("/ai-team-projects"),
     },
     {
       to: "/compute-cluster",
       label: "Compute Cluster",
+      labelDe: "Rechencluster",
       icon: FaServer,
       isActive: location.pathname === "/compute-cluster",
     },
@@ -104,16 +121,7 @@ const Navbar = () => {
                   aria-hidden="true"
                 />
                 <span className="hidden lg:inline">
-                  {pick(
-                    item.label,
-                    item.label === "Publications"
-                      ? "Publikationen"
-                      : item.label === "AI Team Projects"
-                        ? "AI-Team-Projekte"
-                        : item.label === "Compute Cluster"
-                          ? "Rechencluster"
-                          : item.label,
-                  )}
+                  {pick(item.label, item.labelDe ?? item.label)}
                 </span>
                 {item.isActive && (
                   <motion.span
@@ -127,6 +135,15 @@ const Navbar = () => {
           })}
         </nav>
 
+        <Link
+          to="/join-us"
+          aria-label={pick("Join Us", "Mitmachen")}
+          className="flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full border border-primary-700 text-sm font-semibold whitespace-nowrap text-primary-700 transition hover:bg-primary-700 hover:text-white sm:h-10 sm:w-auto sm:px-4"
+        >
+          <FaUserPlus className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span className="hidden sm:inline">{pick("Join Us", "Mitmachen")}</span>
+        </Link>
+
         <div
           className="hidden h-10 w-px shrink-0 bg-slate-200 sm:block"
           aria-hidden="true"
@@ -134,7 +151,7 @@ const Navbar = () => {
 
         <div
           className="flex h-9 w-[5.5rem] shrink-0 items-center rounded-full border border-slate-200/80 bg-slate-50/80 p-0.5 sm:h-10 sm:w-auto sm:px-1"
-          aria-label="Partner institutions"
+          aria-label="Lab sites"
         >
           {labSites.map((lab) => {
             const isTucActive =

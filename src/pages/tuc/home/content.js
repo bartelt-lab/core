@@ -92,7 +92,7 @@ export const topics = [
 
 export const work = [
     {
-        to: '/tuc/industry-projects',
+        to: '/industry-projects',
         title: ['Industrieprojekte', 'Industry projects'],
         text: [
             `${industryProjects.length} Transfer- und Förderprojekte, darunter MediCar 4.0 und AI-BIM.`,

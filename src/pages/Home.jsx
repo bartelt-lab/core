@@ -28,7 +28,7 @@ const project = (id) => cognitiveProjects.find((p) => p.id === id)
 const highlights = [
   {
     title: ['Industrieprojekte', 'Industry Projects'],
-    to: '/tuc/industry-projects',
+    to: '/industry-projects',
     image: '/images/projects/industry/ai-bim.webp',
     summary: ['Angewandte KI mit Partnern aus Bau, Gesundheit und Handel', 'Applied AI with partners in construction, healthcare and retail'],
   },
@@ -55,7 +55,9 @@ const highlights = [
   },
 ]
 
-// Member universities of the network, in display order. `to` stays on this
+// Universities where network members work, in display order. The network is
+// one of researchers and research groups, not of universities: keep the copy
+// around these cards phrased that way. `to` stays on this
 // site, `href` leaves it.
 const sites = [
   { institution: institutions.TUC, logo: '/logos/clausthal-logo.webp', to: '/tuc', lab: ['Cognitive Software, ISSE', 'Cognitive Software, ISSE'] },
@@ -144,10 +146,7 @@ const Home = () => {
             <div className="max-w-2xl">
               <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary-700">{pick('Research Network', 'Forschungsnetzwerk')}</p>
               <h1 className="mb-6 text-4xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-5xl lg:text-6xl">
-                {pick(
-                  <>Cognitive Software<br className="hidden md:block" /> in Europe.</>,
-                  <>Kognitive Software<br className="hidden md:block" /> in Europa.</>,
-                )}
+                {pick('Cognitive Software.', 'Kognitive Software.')}
               </h1>
               <p className="max-w-xl text-lg leading-8 text-slate-600 md:text-xl">
                 {pick(
@@ -160,7 +159,7 @@ const Home = () => {
                   {pick('See our work', 'Unsere Projekte')}
                   <FaArrowRight className="h-3 w-3" aria-hidden="true" />
                 </a>
-                <Link to="/tuc/join-us" className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-sm font-bold text-slate-900 backdrop-blur transition hover:border-primary-400 hover:text-primary-700">
+                <Link to="/join-us" className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-sm font-bold text-slate-900 backdrop-blur transition hover:border-primary-400 hover:text-primary-700">
                   {pick('Join us', 'Mitmachen')}
                 </Link>
               </div>
@@ -266,14 +265,14 @@ const Home = () => {
               <p className={eyebrow}>{pick('The Network', 'Das Netzwerk')}</p>
               <h2 className={sectionTitle}>
                 {pick(
-                  `${txt(pick, COUNT_WORDS[sites.length])} universities, one research platform`,
-                  `${txt(pick, COUNT_WORDS[sites.length])} Universitäten, eine Forschungsplattform`,
+                  `Researchers at ${txt(pick, COUNT_WORDS[sites.length]).toLowerCase()} universities, one research platform`,
+                  `Forschende an ${txt(pick, COUNT_WORDS[sites.length]).toLowerCase()} Universitäten, eine Forschungsplattform`,
                 )}
               </h2>
               <p className="mt-4 text-base leading-7 text-slate-600">
                 {pick(
-                  'CORE connects labs, compute and people across its member universities. Projects, students and researchers move between the sites.',
-                  'CORE verbindet Labore, Rechenleistung und Menschen an seinen Mitgliedsuniversitäten. Projekte, Studierende und Forschende wechseln zwischen den Standorten.',
+                  'CORE is a network of researchers and research groups. Its members share labs, compute and projects across the universities where they work, and students and researchers move between the sites.',
+                  'CORE ist ein Netzwerk von Forschenden und Forschungsgruppen. Die Mitglieder teilen Labore, Rechenleistung und Projekte über die Universitäten hinweg, an denen sie arbeiten; Studierende und Forschende wechseln zwischen den Standorten.',
                 )}
               </p>
             </div>
@@ -312,7 +311,7 @@ const Home = () => {
           <div className="mb-8 max-w-xl">
             <p className={eyebrow}>{pick('People', 'Menschen')}</p>
             <h2 className={sectionTitle}>{pick('Research team', 'Forschungsteam')}</h2>
-            <p className="mt-3 text-base leading-7 text-slate-600">{pick('Faculty, postdoctoral researchers, PhD students and network members across the CORE institutions.', 'Professorinnen und Professoren, Postdocs, Promovierende und Netzwerkmitglieder an den CORE-Institutionen.')}</p>
+            <p className="mt-3 text-base leading-7 text-slate-600">{pick('Faculty, postdoctoral researchers, PhD students and network members of the CORE Network.', 'Professorinnen und Professoren, Postdocs, Promovierende und Netzwerkmitglieder im CORE Network.')}</p>
           </div>
           {/* No entrance animation: the prerendered HTML must show every card
               without JavaScript (it shipped at opacity 0 before). */}
@@ -357,7 +356,7 @@ const Home = () => {
                   'Grundlagenforschung, praktische Anwendungen und Austausch mit internationalen Forschungs- und Industriepartnern.',
                 )}
               </p>
-              <Link to="/tuc/join-us" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-950 shadow-lg transition hover:bg-primary-100">
+              <Link to="/join-us" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-950 shadow-lg transition hover:bg-primary-100">
                 {pick('Open positions', 'Offene Stellen')}
                 <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </Link>
@@ -367,8 +366,8 @@ const Home = () => {
               <h2 className="font-heading text-2xl font-bold md:text-3xl">{pick('Collaborate with the CORE Network', 'Mit dem CORE Network zusammenarbeiten')}</h2>
               <p className="mt-3 text-base leading-7 text-slate-300">
                 {pick(
-                  'We welcome collaboration proposals from researchers and institutions interested in cognitive software, autonomous systems, and AI research.',
-                  'Wir freuen uns über Kooperationsvorschläge von Forschenden und Institutionen mit Interesse an kognitiver Software, autonomen Systemen und KI-Forschung.',
+                  'We welcome collaboration proposals from researchers and research groups interested in cognitive software, autonomous systems, and AI research.',
+                  'Wir freuen uns über Kooperationsvorschläge von Forschenden und Forschungsgruppen mit Interesse an kognitiver Software, autonomen Systemen und KI-Forschung.',
                 )}
               </p>
               <a href="mailto:bartelt@isse.tu-clausthal.de" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-bold text-white transition hover:border-white/60">

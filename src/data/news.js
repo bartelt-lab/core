@@ -37,8 +37,8 @@ export const news = [
             'In July 2026, MediCar 4.0 was tested in a field trial at the University Medical Center Freiburg. Our part: language models that adapt routes live, and robots that load and unload the transport boxes themselves.',
         ],
         lead: [
-            'Blutproben, Medikamente, Material: [MediCar 4.0](/tuc/industry-projects/medicar) bringt sie im Krankenhaus mit autonomen Transportfahrzeugen bedarfsgerecht ans Ziel. Im Juli 2026 wurde das System am Universitätsklinikum Freiburg im Feldversuch erprobt.',
-            'Blood samples, medication, supplies: [MediCar 4.0](/tuc/industry-projects/medicar) gets them where they are needed in the hospital, with autonomous transport vehicles. In July 2026 the system was tested in a field trial at the University Medical Center Freiburg.',
+            'Blutproben, Medikamente, Material: [MediCar 4.0](/industry-projects/medicar) bringt sie im Krankenhaus mit autonomen Transportfahrzeugen bedarfsgerecht ans Ziel. Im Juli 2026 wurde das System am Universitätsklinikum Freiburg im Feldversuch erprobt.',
+            'Blood samples, medication, supplies: [MediCar 4.0](/industry-projects/medicar) gets them where they are needed in the hospital, with autonomous transport vehicles. In July 2026 the system was tested in a field trial at the University Medical Center Freiburg.',
         ],
         body: [
             [
@@ -57,10 +57,10 @@ export const news = [
         cta: {
             heading: ['Mehr zu MediCar 4.0', 'More on MediCar 4.0'],
             text: [
-                'Projektfilm, Partner und Details zu unserem Beitrag stehen auf der [MediCar-Projektseite](/tuc/industry-projects/medicar).',
-                'The project film, the partners and details of our contribution are on the [MediCar project page](/tuc/industry-projects/medicar).',
+                'Projektfilm, Partner und Details zu unserem Beitrag stehen auf der [MediCar-Projektseite](/industry-projects/medicar).',
+                'The project film, the partners and details of our contribution are on the [MediCar project page](/industry-projects/medicar).',
             ],
-            href: '/tuc/industry-projects/medicar',
+            href: '/industry-projects/medicar',
             label: ['Zum Projekt', 'Explore the project'],
         },
         image: '/images/projects/industry/medicar/corridor.webp',
@@ -114,10 +114,10 @@ export const news = [
         cta: {
             heading: ['Du möchtest selbst an KI forschen?', 'Want to research AI?'],
             text: [
-                'Informationen zu einer Promotion bei CORE und Kontaktmöglichkeiten findest du auf unserer Seite [Promotion und Mitarbeit bei CORE](/tuc/join-us).',
-                'Find information about a doctorate at CORE and how to get in touch on our [PhD opportunities and joining CORE](/tuc/join-us) page.',
+                'Informationen zu einer Promotion bei CORE und Kontaktmöglichkeiten findest du auf unserer Seite [Promotion und Mitarbeit bei CORE](/join-us).',
+                'Find information about a doctorate at CORE and how to get in touch on our [PhD opportunities and joining CORE](/join-us) page.',
             ],
-            href: '/tuc/join-us',
+            href: '/join-us',
             label: ['Zur Promotion bei CORE', 'Do a PhD at CORE'],
         },
         image: '/logos/nvidia.webp',
@@ -271,8 +271,8 @@ export const news = [
                 'Two high-performance nodes with NVIDIA H200 NVL GPUs, connected via NVLink, are built for fine-tuning models up to 70 billion parameters and for inference of open models such as Llama 3, Qwen 3 and Gemma 3. Two further nodes with 12 NVIDIA RTX PRO 6000 Blackwell GPUs handle resource-efficient training of smaller models and vision models.',
             ],
             [
-                'Weil die Daten auf eigener Infrastruktur bleiben, lassen sich Modelle jederzeit anpassen und Experimente ohne Wartezeit starten. Das nutzt etwa das Projekt [MediCar 4.0](/tuc/industry-projects/medicar). Regelmäßige Workshops stellen den Cluster Wissenschaft, Start-ups und Industrie vor.',
-                'Because data stays on our own infrastructure, models can be adapted at any time and experiments start without waiting. The [MediCar 4.0](/tuc/industry-projects/medicar) project, for example, relies on it. Regular workshops introduce the cluster to researchers, start-ups and industry.',
+                'Weil die Daten auf eigener Infrastruktur bleiben, lassen sich Modelle jederzeit anpassen und Experimente ohne Wartezeit starten. Das nutzt etwa das Projekt [MediCar 4.0](/industry-projects/medicar). Regelmäßige Workshops stellen den Cluster Wissenschaft, Start-ups und Industrie vor.',
+                'Because data stays on our own infrastructure, models can be adapted at any time and experiments start without waiting. The [MediCar 4.0](/industry-projects/medicar) project, for example, relies on it. Regular workshops introduce the cluster to researchers, start-ups and industry.',
             ],
         ],
         cta: {
@@ -308,8 +308,8 @@ export const news = [
                 'The aim is a distributed lab platform for embodied AI: AI that perceives, decides and acts through robots in the real world. The Clausthal lab has a humanoid robot, an autonomous transport robot and a test setup that combines augmented reality with robotic gripper arms. Further labs are being set up in Cluj ([CORE Labs Cluj](/ubb)) and Rostock.',
             ],
             [
-                'Ein erstes Anwendungsfeld ist die Krankenhauslogistik im Projekt [MediCar 4.0](/tuc/industry-projects/medicar). Die Labore dienen auch der Lehre: Die Universitäten verbinden sie über gemeinsame Experimente, technische Plattformen und Lehrformate, und sie passen zum neuen Bachelorstudiengang AI Engineering an der TU Clausthal, der im Wintersemester 2026/27 startet.',
-                'A first application area is hospital logistics in the [MediCar 4.0](/tuc/industry-projects/medicar) project. The labs also serve teaching: the universities connect them through shared experiments, technical platforms and teaching formats, and they fit the new AI Engineering bachelor’s programme at TU Clausthal, which starts in the winter semester 2026/27.',
+                'Ein erstes Anwendungsfeld ist die Krankenhauslogistik im Projekt [MediCar 4.0](/industry-projects/medicar). Die Labore dienen auch der Lehre: Die Forschungsgruppen verbinden sie über gemeinsame Experimente, technische Plattformen und Lehrformate, und sie passen zum neuen Bachelorstudiengang AI Engineering an der TU Clausthal, der im Wintersemester 2026/27 startet.',
+                'A first application area is hospital logistics in the [MediCar 4.0](/industry-projects/medicar) project. The labs also serve teaching: the research groups connect them through shared experiments, technical platforms and teaching formats, and they fit the new AI Engineering bachelor’s programme at TU Clausthal, which starts in the winter semester 2026/27.',
             ],
         ],
         cta: {

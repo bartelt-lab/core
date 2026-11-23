@@ -119,15 +119,16 @@ function buildLlmsTxt() {
     return [
         `# ${SITE_NAME}`,
         '',
-        '> A joint initiative by leading European universities — TU Clausthal, Babeș-Bolyai',
-        '> University Cluj-Napoca, and partners — advancing cognitive software, autonomous',
-        '> systems, and machine learning research.',
+        '> A network of researchers and research groups — at TU Clausthal, Babeș-Bolyai',
+        '> University Cluj-Napoca and the University of Rostock — working on cognitive',
+        '> software, autonomous systems, and machine learning. CORE is a community of',
+        '> researchers, not an official body of these universities.',
         '',
         group('Overview', (r) => r.path === '/' || ['/core-labs', '/publications', '/compute-cluster', '/demos'].includes(r.path)),
         group('Research demonstrators', (r) => ['/dynamo', '/leader-following', '/vial-sort'].includes(r.path)),
         group('AI Team Projects', (r) => r.path.startsWith('/ai-team-projects')),
         group('Cognitive Software (TU Clausthal)', (r) => r.path.startsWith('/tuc')),
-        group('Babeș-Bolyai University (Cluj-Napoca)', (r) => r.path.startsWith('/ubb')),
+        group('CORE Cluj (researchers at Babeș-Bolyai University)', (r) => r.path.startsWith('/ubb')),
     ]
         .filter((section) => section !== null)
         .join('\n')

@@ -1,10 +1,65 @@
 import { Link } from 'react-router-dom';
-import { FiArrowRight, FiArrowUpRight, FiBriefcase, FiCheck, FiClock, FiCpu, FiMail, FiUsers } from 'react-icons/fi';
+import { FiArrowRight, FiArrowUpRight, FiBookOpen, FiBriefcase, FiCheck, FiClock, FiCpu, FiLayers, FiMail, FiServer, FiUsers } from 'react-icons/fi';
 import { useLanguage } from '../../i18n/useLanguage';
 import { PageShell, Section, Card, ButtonLink } from '../../components/tuc/ui';
 import { stats } from './home/content';
 
 // Text pairs are [German, English], like the other /tuc data.
+
+// What member groups share. Comes first on the page: joining the network as a
+// researcher or research group is the main way in; the positions follow.
+const NETWORK = {
+    intro: [
+        'Das CORE Network ist eine Gemeinschaft von Forschenden und Forschungsgruppen, derzeit an der TU Clausthal, der Babeș-Bolyai-Universität und der Universität Rostock. Wir freuen uns über Forschende und Forschungsgruppen, die an kognitiver Software, autonomen Systemen und KI arbeiten und sich dem Netzwerk anschließen möchten.',
+        'The CORE Network is a community of researchers and research groups, currently at TU Clausthal, Babeș-Bolyai University and the University of Rostock. We welcome researchers and research groups working on cognitive software, autonomous systems and AI who want to join the network.',
+    ],
+    shared: [
+        {
+            icon: FiLayers,
+            to: '/core-labs',
+            title: ['Gemeinsame Labore', 'Shared labs'],
+            text: [
+                'Die CORE Labs an der TU Clausthal und der Babeș-Bolyai-Universität, verbunden durch gemeinsame Experimente und technische Plattformen.',
+                'The CORE Labs at TU Clausthal and Babeș-Bolyai University, connected through shared experiments and technical platforms.',
+            ],
+        },
+        {
+            icon: FiServer,
+            to: '/compute-cluster',
+            title: ['Gemeinsame Rechenleistung', 'Shared compute'],
+            text: [
+                'Ein Rechencluster auf eigener Infrastruktur, um Modelle zu trainieren und Experimente durchzuführen.',
+                'A compute cluster on our own infrastructure for training models and running experiments.',
+            ],
+        },
+        {
+            icon: FiBookOpen,
+            to: '/publications',
+            title: ['Gemeinsame Forschung', 'Joint research'],
+            text: [
+                'Die Gruppen publizieren gemeinsam zu kognitiver Software, autonomen Systemen und Machine Learning.',
+                'The groups publish together on cognitive software, autonomous systems and machine learning.',
+            ],
+        },
+        {
+            icon: FiUsers,
+            to: '/ai-team-projects',
+            title: ['Gemeinsame Lehre', 'Joint teaching'],
+            text: [
+                'In den AI-Team-Projekten arbeiten Studierende der TU Clausthal und der Babeș-Bolyai-Universität in internationalen Teams.',
+                'In the AI Team Projects, students from TU Clausthal and Babeș-Bolyai University work in international teams.',
+            ],
+        },
+    ],
+    contact: {
+        to: 'Prof. Dr. Christian Bartelt',
+        email: 'bartelt@isse.tu-clausthal.de',
+        text: [
+            'Eine kurze Nachricht genügt: zur Person oder Forschungsgruppe, zu den Forschungsthemen und zu dem, was gemeinsam entstehen soll.',
+            'A short note is enough: who you or your group are, your research topics, and what you would like to work on together.',
+        ],
+    },
+};
 const PHD = {
     intro: [
         'Du möchtest in die Forschung einsteigen und an aktuellen Fragen der Künstlichen Intelligenz arbeiten? Als Doktorand:in entwirfst und entwickelst du Architekturen und Engineering-Methoden für zukünftige KI-Systeme und verbindest dabei Grundlagenforschung mit praktischen Anwendungen.',
@@ -140,20 +195,60 @@ const JoinUs = () => {
 
     return (
         <PageShell
-            kicker={pick('Open positions', 'Offene Stellen')}
+            kicker="CORE Network"
             title={pick('Join us', 'Mitmachen')}
             lede={pick(
-                'We are looking for PhD candidates and student assistants who want to work on machine learning with us, in Goslar and with partners across the CORE Network.',
-                'Wir suchen Promovierende und studentische Hilfskräfte, die mit uns an Machine Learning arbeiten wollen, in Goslar und mit Partnern im CORE Network.'
+                'Join the CORE Network as a researcher or research group, or start with us as a PhD candidate or student assistant at TU Clausthal.',
+                'Als Forschende oder Forschungsgruppe Teil des CORE Network werden, oder als Promovierende und studentische Hilfskraft an der TU Clausthal einsteigen.'
             )}
             actions={
                 <>
-                    <ButtonLink href="#phd">{pick('PhD position', 'Promotionsstelle')}</ButtonLink>
+                    <ButtonLink href="#network">{pick('Join the network', 'Dem Netzwerk beitreten')}</ButtonLink>
+                    <ButtonLink href="#phd" variant="secondary">{pick('PhD position', 'Promotionsstelle')}</ButtonLink>
                     <ButtonLink href="#hiwi" variant="secondary">{pick('Student assistants', 'Hilfskräfte')}</ButtonLink>
                 </>
             }
         >
-            <Section id="why" title={pick('Working with us', 'Arbeiten bei uns')}>
+            <Section
+                id="network"
+                kicker={pick('Researchers and research groups', 'Forschende und Forschungsgruppen')}
+                title={pick('Join the network', 'Dem Netzwerk beitreten')}
+                intro={txt(NETWORK.intro)}
+            >
+                <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {NETWORK.shared.map(({ icon: Icon, to, title, text }) => (
+                        <Card as="li" key={to} className="flex flex-col p-5">
+                            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-site-100 text-site-900">
+                                <Icon size={18} aria-hidden="true" />
+                            </span>
+                            <h3 className="mt-4 font-bold">{txt(title)}</h3>
+                            <p className="mt-1 flex-1 text-sm leading-relaxed text-slate-600">{txt(text)}</p>
+                            <Link to={to} className="mt-3 inline-flex items-center gap-1 py-1 text-sm font-semibold text-primary-700 hover:text-primary-800">
+                                {pick('Learn more', 'Mehr erfahren')}
+                                <FiArrowRight className="h-4 w-4" aria-hidden="true" />
+                            </Link>
+                        </Card>
+                    ))}
+                </ul>
+                <Card id="apply-network" className="mt-4 flex flex-col gap-5 p-6 sm:p-8 md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h3 className="text-xl font-bold">{pick('Get in touch', 'Kontakt aufnehmen')}</h3>
+                        <p className="mt-1 text-sm text-slate-600">
+                            {pick('Write to', 'Schreiben an')} {NETWORK.contact.to}
+                        </p>
+                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-700">{txt(NETWORK.contact.text)}</p>
+                    </div>
+                    <ButtonLink href={`mailto:${NETWORK.contact.email}`} className="max-w-full shrink-0 break-all">
+                        <FiMail className="shrink-0" aria-hidden="true" /> {NETWORK.contact.email}
+                    </ButtonLink>
+                </Card>
+            </Section>
+
+            <Section
+                id="why"
+                kicker={pick('PhD and student positions', 'Promotions- und Hilfskraftstellen')}
+                title={pick('Working with us in Goslar', 'Arbeiten bei uns in Goslar')}
+            >
                 <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {why.map(({ icon: Icon, title, text }) => (
                         <Card as="li" key={title} className="p-5">

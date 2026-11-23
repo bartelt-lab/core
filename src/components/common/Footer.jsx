@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="container mx-auto max-w-7xl px-4 md:pr-20 lg:pr-24">
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-4">
           <div className="md:col-span-3">
-            <h3 className="mb-4 text-lg font-semibold">{pick('Partner Institutions', 'Partnerinstitutionen')}</h3>
+            <h3 className="mb-4 text-lg font-semibold">{pick('Where our members work', 'Hier arbeiten unsere Mitglieder')}</h3>
             <div className="flex flex-wrap items-center gap-4">
               {logos.map((logo) => (
                 <a
@@ -50,6 +50,12 @@ const Footer = () => {
 
         <div className="mt-8 border-t border-slate-200 pt-8 text-center text-sm text-slate-500">
           <p>{pick('Advancing cognitive software research through European collaboration', 'Wir fördern Forschung zu kognitiver Software durch europäische Zusammenarbeit')}</p>
+          <p className="mt-2">
+            {pick(
+              'CORE is a network of researchers, not an official body of the universities shown.',
+              'CORE ist ein Netzwerk von Forschenden und keine offizielle Einrichtung der gezeigten Universitäten.',
+            )}
+          </p>
         </div>
       </div>
     </footer>

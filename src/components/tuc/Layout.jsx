@@ -17,17 +17,18 @@ const TYPE = "font-['IBM_Plex_Sans',Inter,sans-serif] [&_:is(h1,h2,h3,h4)]:font-
 const TEACHING_ALIASES = ['/tuc/seminar', '/tuc/theses'];
 
 const TUC_NAV = [
-    { to: '/tuc/industry-projects', label: ['Industrieprojekte', 'Industry Projects'] },
     { to: '/tuc/teaching', label: ['Lehre', 'Teaching'] },
 ];
 
+// Pages that live on the CORE Network site; these links leave the /tuc shell.
 const NETWORK_NAV = [
     { to: '/network', label: ['CORE Network', 'CORE Network'] },
     { to: '/publications?institution=TUC', label: ['Publikationen', 'Publications'] },
+    { to: '/industry-projects', label: ['Industrieprojekte', 'Industry Projects'] },
     { to: '/ai-team-projects', label: ['AI-Team-Projekte', 'AI Team Projects'] },
 ];
 
-const JOIN = { to: '/tuc/join-us', label: ['Mitmachen', 'Join Us'] };
+const JOIN = { to: '/join-us', label: ['Mitmachen', 'Join Us'] };
 
 const navClass = (active) =>
     `whitespace-nowrap text-sm font-medium transition-colors border-b-2 py-5 ${

@@ -33,7 +33,27 @@ export const DEFAULT_OG_IMAGE = '/og-image.png'
 export const DEFAULT_ROUTE_META = {
   title: SITE_NAME,
   description:
-    'A joint initiative by leading European universities advancing cognitive software, autonomous systems, and machine learning research.',
+    'CORE is a network of researchers and research groups working on cognitive software, autonomous systems, and machine learning.',
+}
+
+// Shared by the live /industry-projects routes and their old /tuc aliases.
+const INDUSTRY_PROJECTS_META = {
+  title: 'Industry Projects | CORE',
+  description:
+    'Transfer and publicly funded projects of the Cognitive Software group, including AI-BIM, an AI-supported copilot for sustainable architectural design under environmental standards.',
+}
+
+const MEDICAR_META = {
+  title: 'MediCar 4.0 | Industry Projects | CORE',
+  description:
+    'MediCar 4.0: autonomous hospital transport, tested at the University Medical Center Freiburg. Our part: LLM-based adaptive routing and robotics, trained on the GenAI-Cluster.',
+  image: '/images/projects/industry/medicar/corridor.webp',
+}
+
+const JOIN_US_META = {
+  title: 'Join Us | CORE',
+  description:
+    'Join the CORE Network as a researcher or research group, or apply for a PhD position or student assistant job with the Cognitive Software group at TU Clausthal.',
 }
 
 export const routes = [
@@ -56,7 +76,7 @@ export const routes = [
     source: 'src/data/news.js',
     title: 'News | CORE',
     description:
-      'News from the CORE Network: people, projects and results from the Cognitive Software research group at TU Clausthal and its partner universities.',
+      'News from the CORE Network: people, projects and results from the Cognitive Software research group at TU Clausthal and the other research groups in the network.',
   },
   // One page per item in src/data/news.js. `source` is the data file, so
   // <lastmod> moves when an article is edited, not when the page layout is.
@@ -87,6 +107,21 @@ export const routes = [
     title: 'Publications | CORE',
     description:
       'Peer-reviewed publications from the research groups of the CORE Network on cognitive software, autonomous systems, and machine learning.',
+  },
+  {
+    path: '/industry-projects',
+    source: 'src/pages/tuc/IndustryProjects.jsx',
+    ...INDUSTRY_PROJECTS_META,
+  },
+  {
+    path: '/industry-projects/medicar',
+    source: 'src/pages/tuc/industry/MediCar.jsx',
+    ...MEDICAR_META,
+  },
+  {
+    path: '/join-us',
+    source: 'src/pages/tuc/JoinUs.jsx',
+    ...JOIN_US_META,
   },
   {
     path: '/compute-cluster',
@@ -220,20 +255,19 @@ export const routes = [
     description:
       'Research group at the Institute for Software and Systems Engineering (ISSE), TU Clausthal, exploring the intersection of artificial intelligence, cognitive computing, and software engineering.',
   },
+  // Industry projects moved to /industry-projects; the old URLs forward there
+  // (a <Navigate> in TucShell) and stay prerendered as aliases.
   {
     path: '/tuc/industry-projects',
     source: 'src/pages/tuc/IndustryProjects.jsx',
-    title: 'Industry Projects | Cognitive Software, TU Clausthal',
-    description:
-      'Transfer and publicly funded projects of the Cognitive Software group, including AI-BIM, an AI-supported copilot for sustainable architectural design under environmental standards.',
+    ...INDUSTRY_PROJECTS_META,
+    canonical: '/industry-projects',
   },
   {
     path: '/tuc/industry-projects/medicar',
     source: 'src/pages/tuc/industry/MediCar.jsx',
-    title: 'MediCar 4.0 | Cognitive Software, TU Clausthal',
-    description:
-      'MediCar 4.0: autonomous hospital transport, tested at the University Medical Center Freiburg. Our part: LLM-based adaptive routing and robotics, trained on the GenAI-Cluster.',
-    image: '/images/projects/industry/medicar/corridor.webp',
+    ...MEDICAR_META,
+    canonical: '/industry-projects/medicar',
   },
   {
     path: '/tuc/teaching',
@@ -256,12 +290,12 @@ export const routes = [
     description:
       'Bachelor and master thesis topics in artificial intelligence, cognitive computing, and software engineering at the Institute for Software and Systems Engineering, TU Clausthal.',
   },
+  // Join Us moved to /join-us; the old URL forwards there like the two above.
   {
     path: '/tuc/join-us',
     source: 'src/pages/tuc/JoinUs.jsx',
-    title: 'Join Us | Cognitive Software, TU Clausthal',
-    description:
-      'Open positions at the Institute for Software and Systems Engineering (ISSE), TU Clausthal, for researchers with a strong background in computer science or mathematics.',
+    ...JOIN_US_META,
+    canonical: '/join-us',
   },
 
   // -------------------------------------------------------------- UBB Cluj ---
@@ -270,7 +304,7 @@ export const routes = [
     source: 'src/pages/ubb/Home.jsx',
     title: 'UBB Cluj-Napoca | CORE',
     description:
-      'A joint research initiative with Babeș-Bolyai University in autonomous systems, intelligent simulation, and robot learning — a new home for cognitive robotics and embodied intelligence.',
+      'A joint research initiative with researchers at Babeș-Bolyai University in autonomous systems, intelligent simulation, and robot learning — a new home for cognitive robotics and embodied intelligence.',
   },
 ]
 

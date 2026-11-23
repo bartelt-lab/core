@@ -71,8 +71,8 @@ const CoreLabs = () => {
               </p>
               <p className="mt-4 text-base leading-7 text-slate-700 md:text-lg md:leading-8">
                 {pick(
-                  'This shared infrastructure turns three institutions into one coherent scientific platform for cognitive systems research.',
-                  'Diese gemeinsame Infrastruktur macht aus drei Institutionen eine kohärente wissenschaftliche Plattform für Forschung an kognitiven Systemen.',
+                  'This shared infrastructure turns research groups at three sites into one coherent scientific platform for cognitive systems research.',
+                  'Diese gemeinsame Infrastruktur macht aus Forschungsgruppen an drei Standorten eine kohärente wissenschaftliche Plattform für Forschung an kognitiven Systemen.',
                 )}
               </p>
 
@@ -111,7 +111,7 @@ const CoreLabs = () => {
               )}
             </div>
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
-              <h3 className="text-2xl font-bold text-slate-950">{pick('Participating Institutions', 'Beteiligte Institutionen')}</h3>
+              <h3 className="text-2xl font-bold text-slate-950">{pick('Participating researchers', 'Beteiligte Forschende')}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-600">
                 {pick(
                   'Our labs operate as a unified distributed entity, sharing resources, data, and expertise to accelerate discovery.',

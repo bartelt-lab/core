@@ -27,7 +27,7 @@ const UbbHome = () => {
               </span>
               Opening soon in Cluj-Napoca
             </div>
-            <p className="mt-9 text-xs font-semibold uppercase tracking-[0.24em] text-site-900">UBB × CORE Network</p>
+            <p className="mt-9 text-xs font-semibold uppercase tracking-[0.24em] text-site-900">CORE Network · Cluj-Napoca</p>
             <h1 className="mt-4 max-w-2xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-slate-950 sm:text-6xl lg:text-[5.4rem]">
               CORE Labs
               {/* w-fit matters: bg-clip-text masks the gradient with the glyphs, but the
