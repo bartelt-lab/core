@@ -3,6 +3,7 @@ import { FiArrowRight, FiArrowUpRight, FiMail, FiMapPin } from 'react-icons/fi'
 import assetUrl from '../../utils/assetUrl'
 import { useLanguage } from '../../i18n/useLanguage'
 import ThirdPartyLogo from '../../components/common/ThirdPartyLogo'
+import ShellLink from '../../components/common/ShellLink'
 import { MemberPhoto, MemberLinks } from './home/shared'
 import { groupMembers, stats, hero, about, topics, work, affiliations, contact, groupPhoto, roleLabel, displayName } from './home/content'
 
@@ -108,6 +109,14 @@ const Home = () => {
                                 </div>
                             ))}
                         </div>
+                        {/* Students look for this here, next to the assistants
+                            they would join; the page itself is the lab's Join Us. */}
+                        <p className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg bg-site-100/50 px-4 py-3 text-sm text-slate-700">
+                            {pick('Studying and want to work with us?', 'Im Studium und Lust, bei uns mitzuarbeiten?')}
+                            <ShellLink to="/join-us/tuc#hiwi" className="inline-flex items-center gap-1 font-semibold text-primary-700 hover:text-primary-800">
+                                {pick('Apply as a student assistant (HiWi)', 'Als studentische Hilfskraft (HiWi) bewerben')} <FiArrowRight size={14} aria-hidden="true" />
+                            </ShellLink>
+                        </p>
                     </section>
 
                     <section id="research" className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">

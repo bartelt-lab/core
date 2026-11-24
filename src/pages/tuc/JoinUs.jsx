@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { FiArrowRight, FiArrowUpRight, FiBookOpen, FiBriefcase, FiCheck, FiClock, FiCpu, FiLayers, FiMail, FiMapPin, FiServer, FiUsers } from 'react-icons/fi';
 import { useLanguage } from '../../i18n/useLanguage';
 import { PageShell, Section, Card, ButtonLink } from '../../components/tuc/ui';
-import { stats } from './home/content';
+import { stats, displayName } from './home/content';
+import { getMemberBySlug } from '../../data/team';
 
 // Text pairs are [German, English], like the other /tuc data.
 //
@@ -72,6 +73,8 @@ const NETWORK = {
 // The groups that take PhD candidates and students, for the network's page.
 // Only the TU Clausthal lab has its positions written up on this site; the
 // other two are pointed to, without claims about what they have open.
+// `contacts` names who to write to for what: `member` is a slug in
+// data/team.js, where the name, email and website come from.
 const GROUPS = [
     {
         id: 'tuc',
@@ -89,8 +92,12 @@ const GROUPS = [
         name: ['Babeș-Bolyai-Universität', 'Babeș-Bolyai University'],
         place: ['Cluj-Napoca, Rumänien', 'Cluj-Napoca, Romania'],
         text: [
-            'Das CORE Lab in Cluj. Zu Promotion und studentischer Mitarbeit gibt die Gruppe vor Ort Auskunft.',
-            'The CORE Lab in Cluj. Ask the group there about doctoral studies and student work.',
+            'Das CORE Lab in Cluj: Promotion in der Gruppe und der Robotics Club für Studierende.',
+            'The CORE Lab in Cluj: doctoral studies with the group, and the Robotics Club for students.',
+        ],
+        contacts: [
+            { about: ['Promotion', 'PhD'], member: 'sacarea' },
+            { about: ['Robotics Club', 'Robotics Club'], member: 'benta' },
         ],
         cta: ['Zum Lab in Cluj', 'The Cluj lab'],
         to: '/ubb',
@@ -317,6 +324,26 @@ const JoinUs = ({ lab }) => {
                                     </p>
                                     <h3 className="mt-2 text-lg font-bold">{txt(group.name)}</h3>
                                     <p className="mt-1 flex-1 text-sm leading-relaxed text-slate-600">{txt(group.text)}</p>
+                                    {group.contacts && (
+                                        <dl className="mt-4 space-y-2 border-t border-slate-200 pt-4 text-sm">
+                                            {group.contacts.map((contact) => {
+                                                const member = getMemberBySlug(contact.member);
+                                                const name = displayName(member);
+                                                // Email first; a member without one links to their own page.
+                                                const href = member.email ? `mailto:${member.email}` : member.links?.website;
+                                                return (
+                                                    <div key={contact.member} className="flex flex-wrap gap-x-2">
+                                                        <dt className="font-semibold text-slate-900">{txt(contact.about)}:</dt>
+                                                        <dd className="text-slate-700">
+                                                            {href ? (
+                                                                <a href={href} target={member.email ? undefined : '_blank'} rel="noreferrer" className="font-semibold text-primary-700 underline underline-offset-2 hover:text-primary-800">{name}</a>
+                                                            ) : name}
+                                                        </dd>
+                                                    </div>
+                                                );
+                                            })}
+                                        </dl>
+                                    )}
                                     {group.to ? (
                                         <Link to={group.to} className={cls}>
                                             {txt(group.cta)}
