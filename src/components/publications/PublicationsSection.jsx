@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaArrowRight, FaCheck, FaExternalLinkAlt, FaFilter, FaSearch } from 'react-icons/fa'
+import { FaArrowRight, FaCheck, FaExternalLinkAlt, FaFilter, FaSearch, FaTimes } from 'react-icons/fa'
 import Section from '../common/Section'
 import PublicationItem from './PublicationItem'
 import PublicationRow from './PublicationRow'
@@ -329,6 +329,20 @@ const PublicationsSection = ({
   const resetFilters = () =>
     setFilters({ query: '', type: [], status: [], topic: [], yearRange: YEAR_BOUNDS, researcher: 'all', institution: [] })
 
+  // Every filter in effect, as a chip in the sidebar header. A filter can be
+  // on without showing: the lab sites link here with theirs preset
+  // (/publications?institution=TUC), its pills sit below the fold, and on
+  // small screens the whole panel is folded away.
+  const activeChips = [
+    ...filters.institution.map((value) => ({ key: `institution:${value}`, label: value, remove: () => toggleFilter('institution', value) })),
+    ...filters.topic.map((id) => ({ key: `topic:${id}`, label: pick(topicLabel(id)[1], topicLabel(id)[0]), remove: () => toggleFilter('topic', id) })),
+    ...filters.type.map((value) => ({ key: `type:${value}`, label: value, remove: () => toggleFilter('type', value) })),
+    ...filters.status.map((value) => ({ key: `status:${value}`, label: value, remove: () => toggleFilter('status', value) })),
+    ...(filters.researcher !== 'all' ? [{ key: 'researcher', label: formatAuthorName(filters.researcher), remove: () => updateFilter('researcher', 'all') }] : []),
+    ...(filters.query.trim() ? [{ key: 'query', label: `“${filters.query.trim()}”`, remove: () => updateFilter('query', '') }] : []),
+    ...(yearNarrowed ? [{ key: 'year', label: filters.yearRange[0] === filters.yearRange[1] ? String(filters.yearRange[0]) : `${filters.yearRange[0]}–${filters.yearRange[1]}`, remove: () => updateFilter('yearRange', YEAR_BOUNDS) }] : []),
+  ]
+
   return (
     <Section
       id={sectionId || undefined}
@@ -380,6 +394,24 @@ const PublicationsSection = ({
               </button>
             </div>
           </div>
+
+          {activeChips.length > 0 && (
+            <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={pick('Filters in effect', 'Aktive Filter')}>
+              {activeChips.map((chip) => (
+                <li key={chip.key} className="max-w-full">
+                  <button
+                    type="button"
+                    onClick={chip.remove}
+                    aria-label={pick(`Remove filter: ${chip.label}`, `Filter entfernen: ${chip.label}`)}
+                    className="inline-flex max-w-full items-center gap-1.5 rounded-full bg-primary-100 py-1 pl-2.5 pr-2 text-xs font-semibold text-primary-800 transition hover:bg-primary-200"
+                  >
+                    <span className="truncate">{chip.label}</span>
+                    <FaTimes className="h-2.5 w-2.5 shrink-0" aria-hidden="true" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
 
           <div className={`${filtersOpen ? 'block' : 'hidden'} mt-4 space-y-5 lg:block`}>
             <label className="relative block">
