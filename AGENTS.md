@@ -492,7 +492,7 @@ real browser since the restyle. Verify in dev (`npm run dev`):
   still applies — those inline `<style>` blocks survived)
 - `/join-us` (joining the network, then where to ask for positions)
 - `/join-us/tuc` (PhD and HiWi positions at the TU Clausthal lab in Goslar)
-- `/ai-team-projects` (project tiles; sidebar Overview/Projects/Voices/Archive)
+- `/ai-team-projects` (project tiles; sidebar Overview/Projects/Archive)
 - Network panel: zero 404s on `/members/*`, `/papers/*`, `/logos/*`,
   `/videos/*`, `/data/*`
 - DevTools console: no React 19 deprecation warnings, no router v7
@@ -525,7 +525,7 @@ Current verified configs: `/` and `/network` →
 item; `/core-labs` →
 `hero, initiative, dynamo, autonomous, publications` (the `#team` "Lab leads"
 grid was deleted 2026-09-16; its dot went with it); `/ai-team-projects`
-→ `hero, active-projects, testimonials, archive`; `/compute-cluster` →
+→ `hero, active-projects, archive` (`testimonials` is switched off); `/compute-cluster` →
 `hero, purpose, capabilities, sites, policies`. Routes with `[]` (`/dynamo`,
 `/publications`) and unconfigured routes show no sidebar by design.
 
@@ -545,7 +545,8 @@ removed — TUC now links to the core publications page.)
 Worth a once-over for: residual bartelt-only inline styles, motion
 animations that might fight with the new minimal Layout, refs to removed
 classes. Scroll-spy ids (now in sync, see issue 6): `hero`,
-`active-projects`, `testimonials`, `archive`.
+`active-projects`, `archive`. The student testimonials section is hidden, not
+deleted: `SHOW_TESTIMONIALS` in that file brings it back.
 
 ### 10. `publications.bib` ↔ `publications.json` parity
 `public/data/publications.bib` is the BibTeX export (15 entries from
