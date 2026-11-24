@@ -231,8 +231,10 @@ const ComputeCluster = () => {
       {/* ── Hero ── */}
       {/* Dark mode: same treatment as the homepage hero (light render, inverted). */}
       <section id="hero" className="relative min-h-screen overflow-hidden bg-[#f7fafc] text-slate-950 dark:bg-slate-950">
+        {/* The photo is a light render of server racks. It is dimmed in dark
+            mode, not inverted: inverted it turned muddy. */}
         <img
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-60 dark:opacity-50 dark:invert dark:hue-rotate-180"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-60 dark:opacity-50"
           src={assetUrl('/images/hero/compute-cluster-hero.webp')}
           alt=""
           aria-hidden="true"
@@ -240,7 +242,7 @@ const ComputeCluster = () => {
           decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#f7fafc] via-[#f7fafc]/96 via-[40%] to-[#f7fafc]/10 dark:from-slate-950 dark:via-slate-950/95 dark:to-slate-950/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/40 dark:from-slate-950" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f7fafc] via-transparent to-white/40 dark:from-slate-950 dark:to-slate-950/30" />
 
         <div className="container relative mx-auto flex min-h-screen max-w-7xl items-center px-6 pb-14 pt-28 md:px-12 lg:px-20">
           <div className="max-w-2xl">
