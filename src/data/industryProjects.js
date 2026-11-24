@@ -1,7 +1,7 @@
 import assetUrl from '../utils/assetUrl';
 
 /**
- * Industry / transfer projects shown on /tuc/industry-projects.
+ * Industry / transfer projects shown on /industry-projects.
  *
  * Text fields are [German, English] pairs. An entry with `href` gets a clickable
  * tile that opens its detail page (currently only MediCar 4.0).
@@ -67,7 +67,7 @@ export const projects = [
     {
         slug: 'medicar',
         title: 'MediCar 4.0',
-        href: '/tuc/industry-projects/medicar',
+        href: '/industry-projects/medicar',
         domain: ['Gesundheit & Einsatzsysteme', 'Healthcare & emergency response systems'],
         topic: ['Autonome On-Demand-Transportsysteme für Kliniken', 'Autonomous on-demand transport systems for hospitals'],
         // Consortium per medicar40.de/konsortium (bridgingIT leads) and fzi.de/project/medicar-40,
@@ -96,7 +96,7 @@ export const projects = [
         ],
         visual: assetUrl('/images/projects/industry/medicar.webp'),
         // `feature` puts the project in the large card above the grid on
-        // /tuc/industry-projects. The images are the ones its detail page shows.
+        // /industry-projects. The images are the ones its detail page shows.
         feature: {
             badge: ['Feldversuch am Universitätsklinikum Freiburg', 'Field trial at the University Medical Center Freiburg'],
             // id in src/data/videos.js; the card shows that the detail page carries the film

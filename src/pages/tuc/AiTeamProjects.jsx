@@ -7,6 +7,7 @@ import {
 import assetUrl from "../../utils/assetUrl";
 import LazyVideo from "../../components/common/LazyVideo";
 import { useLanguage } from "../../i18n/useLanguage";
+import { features } from "../../config/features";
 
 const activeProjects = [
   {
@@ -236,7 +237,7 @@ const Media = ({ project, title }) => {
   if (project.youtubeId) {
     return (
       <iframe
-        src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${project.youtubeId}`}
+        src={`https://www.youtube-nocookie.com/embed/${project.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${project.youtubeId}`}
         title={title}
         className="h-full w-full"
         allow="autoplay; encrypted-media; picture-in-picture"
@@ -285,7 +286,14 @@ const AiTeamProjects = () => {
         className="relative isolate overflow-hidden border-b border-slate-200 bg-white pb-16 pt-32 sm:pb-18 sm:pt-36 lg:flex lg:min-h-screen lg:items-center lg:pb-8 lg:pt-32"
       >
         <div
-          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_18%,rgba(220,252,231,0.72),transparent_28%),radial-gradient(circle_at_82%_70%,rgba(209,248,219,0.56),transparent_30%),linear-gradient(135deg,#ffffff_0%,#f9fffb_52%,#f4fbf8_100%)]"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_18%,rgba(220,252,231,0.72),transparent_28%),radial-gradient(circle_at_82%_70%,rgba(209,248,219,0.56),transparent_30%),linear-gradient(135deg,#ffffff_0%,#f9fffb_52%,#f4fbf8_100%)] dark:hidden"
+          aria-hidden="true"
+        />
+        {/* The wash above is written in fixed light colours, so the dark theme
+            cannot rebind it: without this twin the white title sat on a
+            near-white background. Same two glows, in green on the dark page. */}
+        <div
+          className="absolute inset-0 -z-10 hidden bg-[radial-gradient(circle_at_16%_18%,rgba(9,120,27,0.30),transparent_30%),radial-gradient(circle_at_82%_70%,rgba(1,188,43,0.14),transparent_34%)] dark:block"
           aria-hidden="true"
         />
         <div
@@ -540,6 +548,9 @@ const AiTeamProjects = () => {
         </div>
       </section>
 
+      {/* Switched off, not removed: see showStudentTestimonials in
+          config/features.js. */}
+      {features.showStudentTestimonials && (
       <section id="testimonials" className="bg-white py-16">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">
           <div className="mb-10 text-center">
@@ -569,6 +580,7 @@ const AiTeamProjects = () => {
           </div>
         </div>
       </section>
+      )}
 
       <section id="archive" className="bg-white py-16">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">

@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Moving between the network site and a lab site ──────────────────────────
+   common/ShellLink.jsx runs these jumps as a view transition. The parts the two
+   headers share carry the same view-transition-name, so the browser moves and
+   resizes each from its old place to its new one; the rest of the page fades.
+   ShellLink does not start a transition under reduced motion. */
+::view-transition-group(shell-header),
+::view-transition-group(shell-logo),
+::view-transition-group(shell-nav),
+::view-transition-group(shell-labs),
+::view-transition-group(shell-join) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
 /* Brand palette — RGB triplets, consumed two ways:
    - tailwind.config.js maps them to primary/secondary/tertiary via rgb(var(--x))
    - raw CSS reads them directly (.range-dual below, the inline <style> blocks in
@@ -61,7 +79,159 @@
   --site-900: 19 78 24;
 }
 
-/* CORE Labs Cluj. Anchored on the Babeș-Bolyai seal blue #034E84, which
+/* ── Role tokens: light and dark ────────────────────────────────────────────
+   tailwind.config.js routes surfaces (bg-*, gradient stops), text, hairlines
+   (border/divide/ring) and shadow tints through these variables instead of
+   fixed colours. Light values equal the Tailwind defaults, so light mode is
+   unchanged; `.dark` on <html> rebinds them. Only the steps listed here flip.
+   Dark-on-purpose colours (bg-slate-950, text-white, text-slate-300, primary
+   buttons) are deliberately absent and render the same in both themes.
+
+   The site-accent roles are re-declared inside each .theme-* scope: a custom
+   property that points at var(--site-*) resolves where it is declared, so
+   declaring it only on :root would freeze it to the CORE green. */
+:root {
+  --bg-white: 255 255 255;
+  --bg-slate-50: 248 250 252;
+  --bg-slate-100: 241 245 249;
+  --bg-slate-200: 226 232 240;
+  --bg-slate-300: 203 213 225;
+  --bg-primary-50: var(--primary-50);
+  --bg-primary-100: var(--primary-100);
+  --bg-primary-200: var(--primary-200);
+  --bg-sky-50: 240 249 255;
+
+  --tx-slate-500: 100 116 139;
+  --tx-slate-600: 71 85 105;
+  --tx-slate-700: 51 65 85;
+  --tx-slate-800: 30 41 59;
+  --tx-slate-900: 15 23 42;
+  --tx-slate-950: 2 6 23;
+  --tx-primary-600: var(--primary-600);
+  --tx-primary-700: var(--primary-700);
+  --tx-primary-800: var(--primary-800);
+  --tx-primary-900: var(--primary-900);
+  --tx-tertiary-600: var(--tertiary-600);
+
+  --bd-white: 255 255 255;
+  --bd-slate-100: 241 245 249;
+  --bd-slate-200: 226 232 240;
+  --bd-slate-300: 203 213 225;
+  --bd-slate-400: 148 163 184;
+  --bd-primary-100: var(--primary-100);
+  --bd-primary-200: var(--primary-200);
+  --bd-primary-300: var(--primary-300);
+
+  --sh-slate: 148 163 184;
+
+  /* Pastel chips and notes. One text and one hairline value per hue: the two
+     text steps in use (700/800) are close enough to share a dark-mode value. */
+  --bg-emerald-50: 236 253 245;  --tx-emerald: 6 95 70;    --bd-emerald: 167 243 208;
+  --bg-amber-50: 255 251 235;    --tx-amber: 146 64 14;    --bd-amber: 253 230 138;
+  --bg-violet-50: 245 243 255;   --tx-violet: 109 40 217;  --bd-violet: 237 233 254;
+  --bg-red-50: 254 242 242;      --tx-red: 185 28 28;      --bd-red: 254 202 202;
+  --bg-green-100: 220 252 231;   --tx-green: 22 101 52;
+  --bg-yellow-100: 254 249 195;  --tx-yellow: 133 77 14;
+  --tx-sky: 7 89 133;            --bd-sky: 186 230 253;
+}
+
+:root,
+.theme-ubb,
+.theme-tuc {
+  --bg-site-100: var(--site-100);
+  --bd-site-200: var(--site-200);
+  --bd-site-900: var(--site-900);
+  --tx-site-900: var(--site-900);
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Surfaces: page (slate-50) sits just below cards (white); 100-300 step up. */
+  --bg-white: 15 23 42;
+  --bg-slate-50: 9 14 28;
+  --bg-slate-100: 30 41 59;
+  --bg-slate-200: 51 65 85;
+  --bg-slate-300: 71 85 105;
+  --bg-primary-50: 10 38 18;
+  --bg-primary-100: 13 52 22;
+  --bg-primary-200: 17 72 27;
+  --bg-sky-50: 12 24 44;
+
+  /* Text: the dark half of the ramp mirrored onto the light half. */
+  --tx-slate-500: 148 163 184;
+  --tx-slate-600: 176 188 204;
+  --tx-slate-700: 203 213 225;
+  --tx-slate-800: 226 232 240;
+  --tx-slate-900: 241 245 249;
+  --tx-slate-950: 248 250 252;
+  /* Green text needs the light end to stay readable on dark surfaces:
+     primary-400 is 9.1:1 on the card surface, primary-700 only 2.9:1. */
+  --tx-primary-600: var(--primary-400);
+  --tx-primary-700: var(--primary-400);
+  --tx-primary-800: var(--primary-300);
+  --tx-primary-900: var(--primary-200);
+  --tx-tertiary-600: 226 200 160;
+
+  --bd-white: 71 85 105;
+  --bd-slate-100: 24 34 52;
+  --bd-slate-200: 36 48 68;
+  --bd-slate-300: 51 65 85;
+  --bd-slate-400: 71 85 105;
+  --bd-primary-100: 15 60 24;
+  --bd-primary-200: 18 82 28;
+  --bd-primary-300: var(--primary-700);
+
+  --sh-slate: 0 0 0;
+
+  --bg-emerald-50: 6 40 30;    --tx-emerald: 110 231 183;  --bd-emerald: 8 62 46;
+  --bg-amber-50: 46 32 8;      --tx-amber: 252 211 77;     --bd-amber: 92 60 10;
+  --bg-violet-50: 30 22 58;    --tx-violet: 196 181 253;   --bd-violet: 50 36 100;
+  --bg-red-50: 52 16 18;       --tx-red: 252 165 165;      --bd-red: 100 30 32;
+  --bg-green-100: 10 44 22;    --tx-green: 134 239 172;
+  --bg-yellow-100: 44 36 8;    --tx-yellow: 253 224 71;
+  --tx-sky: 125 211 252;       --bd-sky: 14 62 96;
+}
+
+.dark,
+.dark .theme-ubb,
+.dark .theme-tuc {
+  --tx-site-900: var(--site-300);
+  --bd-site-900: var(--site-300);
+}
+
+.dark { --bg-site-100: 13 52 22; --bd-site-200: 18 82 28; }
+.dark .theme-ubb { --bg-site-100: 8 38 66; --bd-site-200: 12 62 104; }
+.dark .theme-tuc { --bg-site-100: 8 48 30; --bd-site-200: 10 76 46; }
+
+.dark body {
+  background-color: rgb(var(--bg-slate-50));
+}
+
+/* Near-black call-to-action pills (bg-slate-950 / bg-slate-900 on a rounded
+   link or button) vanish into a dark page. Dark sections and photo cards keep
+   that colour, so the role tokens cannot flip it; pill buttons alone turn green
+   here instead. */
+.dark :is(a, button):is(.bg-slate-950, .bg-slate-900):is(.rounded-full, .rounded-lg) {
+  background-color: rgb(var(--primary-700));
+}
+
+.dark :is(a, button):is(.bg-slate-950, .bg-slate-900):is(.rounded-full, .rounded-lg):hover {
+  background-color: rgb(var(--primary-600));
+}
+
+/* Third-party logos (universities, partners) are dark marks on transparent
+   artwork and disappear on a dark card. `logo-plate` gives them a white plate
+   in dark mode only; light mode is untouched. */
+.dark .logo-plate {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  filter: none;
+  opacity: 1;
+}
+
+/* CORE Cluj (/ubb). Anchored on the Babeș-Bolyai seal blue #034E84, which
    --site-900 IS exactly; the other three are Tailwind sky rotated hue-only to
    248.3deg, the same technique the brand ramps use. Four steps, not eleven: the
    seal is a dark colour, so the light half of a full ramp drifts into a generic
@@ -101,6 +271,13 @@
   background-image: linear-gradient(in oklch to right, rgb(var(--site-900)), rgb(var(--primary-700)));
 }
 
+/* Dark mode: both endpoints move to the light end of their ramps, or the host
+   colour (UBB's #034E84) sinks into the page. */
+.dark .wordmark-partnership {
+  background-image: linear-gradient(to right, rgb(var(--site-300)), rgb(var(--primary-400)));
+  background-image: linear-gradient(in oklch to right, rgb(var(--site-300)), rgb(var(--primary-400)));
+}
+
 /* Hero wash for a lab landing page: host's tint top-left, CORE's bottom-right,
    same two-institution reading as the wordmark. Lives here rather than in a
    bg-[radial-gradient(...)] arbitrary value because that form can only hold raw
@@ -111,6 +288,13 @@
     radial-gradient(circle at 12% 18%, rgb(var(--site-200) / 0.65), transparent 30%),
     radial-gradient(circle at 88% 78%, rgb(var(--primary-200) / 0.5), transparent 32%),
     linear-gradient(135deg, #f8fbff 0%, #ffffff 48%, #f4fbf8 100%);
+}
+
+.dark .lab-hero-wash {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgb(var(--site-900) / 0.45), transparent 30%),
+    radial-gradient(circle at 88% 78%, rgb(var(--primary-900) / 0.4), transparent 32%),
+    linear-gradient(135deg, #0a1020 0%, #0f172a 48%, #0a1512 100%);
 }
 
 @layer base {
@@ -252,4 +436,16 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0b1120;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
 }

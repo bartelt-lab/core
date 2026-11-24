@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { FiArrowRight, FiArrowUpRight, FiMail, FiMapPin } from 'react-icons/fi'
 import assetUrl from '../../utils/assetUrl'
 import { useLanguage } from '../../i18n/useLanguage'
+import ThirdPartyLogo from '../../components/common/ThirdPartyLogo'
+import ShellLink from '../../components/common/ShellLink'
 import { MemberPhoto, MemberLinks } from './home/shared'
 import { groupMembers, stats, hero, about, topics, work, affiliations, contact, groupPhoto, roleLabel, displayName } from './home/content'
 
@@ -15,7 +17,7 @@ const SECTIONS = [
 
 const H2 = ({ children }) => (
     <h2 className={`flex items-center gap-3 text-2xl font-semibold`}>
-        <span className="h-6 w-1 rounded-full bg-site-900" />
+        <span className="h-6 w-1 rounded-full bg-site-900 dark:bg-site-300" />
         {children}
     </h2>
 )
@@ -81,7 +83,7 @@ const Home = () => {
                                     ))}
                                 </ul>
                             </nav>
-                            <Link to="/tuc/join-us" className="mt-4 flex items-center justify-center gap-2 rounded-lg bg-primary-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-800">
+                            <Link to="/join-us/tuc" className="mt-4 flex items-center justify-center gap-2 rounded-lg bg-primary-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-800">
                                 {pick('Join us', 'Mitmachen')} <FiArrowRight />
                             </Link>
                         </div>
@@ -107,6 +109,14 @@ const Home = () => {
                                 </div>
                             ))}
                         </div>
+                        {/* Students look for this here, next to the assistants
+                            they would join; the page itself is the lab's Join Us. */}
+                        <p className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg bg-site-100/50 px-4 py-3 text-sm text-slate-700">
+                            {pick('Studying and want to work with us?', 'Im Studium und Lust, bei uns mitzuarbeiten?')}
+                            <ShellLink to="/join-us/tuc#hiwi" className="inline-flex items-center gap-1 font-semibold text-primary-700 hover:text-primary-800">
+                                {pick('Apply as a student assistant (HiWi)', 'Als studentische Hilfskraft (HiWi) bewerben')} <FiArrowRight size={14} aria-hidden="true" />
+                            </ShellLink>
+                        </p>
                     </section>
 
                     <section id="research" className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
@@ -149,10 +159,14 @@ const Home = () => {
                                 <a href={`mailto:${contact.email}`} className="flex items-center gap-3 hover:text-primary-700"><FiMail className="text-site-900" /> {contact.email}</a>
                                 <a href={contact.map} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-primary-700"><FiMapPin className="text-site-900" /> {contact.address}</a>
                             </div>
-                            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 md:justify-end">
+                            {/* One row, never wrapped: the logos shrink together
+                                instead of one dropping to a second line. */}
+                            <div className="flex items-center gap-5 sm:gap-7 md:justify-end">
                                 {affiliations.map((a) => {
-                                    const img = <img src={assetUrl(a.logo)} alt={a.name} decoding="async" className="h-10 w-auto object-contain" />
-                                    return a.to ? <Link key={a.name} to={a.to}>{img}</Link> : <a key={a.name} href={a.href} target="_blank" rel="noreferrer">{img}</a>
+                                    const img = <ThirdPartyLogo src={a.logo} alt={a.name} decoding="async" className="h-9 w-auto max-w-full object-contain" />
+                                    return a.to
+                                        ? <Link key={a.name} to={a.to} className="min-w-0">{img}</Link>
+                                        : <a key={a.name} href={a.href} target="_blank" rel="noreferrer" className="min-w-0">{img}</a>
                                 })}
                             </div>
                         </div>

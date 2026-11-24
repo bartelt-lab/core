@@ -17,6 +17,9 @@
     "replace-video": "node scripts/replace-video.mjs"
   },
   "dependencies": {
+    "@fontsource/ibm-plex-sans": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/poppins": "5.3.0",
     "framer-motion": "^12.34.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

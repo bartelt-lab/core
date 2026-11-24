@@ -130,7 +130,7 @@ HOST UNIVERSITY COLOUR
 Material from a specific lab may carry that university's own colour alongside the
 green. This is optional.
 
-  Babes-Bolyai Blue  ${C.ubb}   CORE Labs Cluj only. From the university seal.
+  Babes-Bolyai Blue  ${C.ubb}   CORE Cluj (/ubb) only. From the university seal.
 
 Green always means CORE and marks anything the reader should act on.
 The host colour only says where you are — never put it on a button or a link.

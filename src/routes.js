@@ -27,13 +27,45 @@
 import { news } from './data/news.js'
 
 export const SITE_URL = 'https://www.core-network.ai'
-export const SITE_NAME = 'CORE — Cognitive Software in Europe'
+export const SITE_NAME = 'CORE — Cognitive Software'
 export const DEFAULT_OG_IMAGE = '/og-image.png'
 
 export const DEFAULT_ROUTE_META = {
   title: SITE_NAME,
   description:
-    'A joint initiative by leading European universities advancing cognitive software, autonomous systems, and machine learning research.',
+    'CORE is a network of researchers and research groups working on cognitive software, autonomous systems, and machine learning.',
+}
+
+// Shared by the live /industry-projects routes and their old /tuc aliases.
+const INDUSTRY_PROJECTS_META = {
+  title: 'Industry Projects | CORE',
+  description:
+    'Transfer and publicly funded projects of the Cognitive Software group, including AI-BIM, an AI-supported copilot for sustainable architectural design under environmental standards.',
+}
+
+const MEDICAR_META = {
+  title: 'MediCar 4.0 | Industry Projects | CORE',
+  description:
+    'MediCar 4.0: autonomous hospital transport, tested at the University Medical Center Freiburg. Our part: LLM-based adaptive routing and robotics, trained on the GenAI-Cluster.',
+  image: '/images/projects/industry/medicar/corridor.webp',
+}
+
+const JOIN_US_META = {
+  title: 'Join Us | CORE',
+  description:
+    'Join the CORE Network as a researcher or research group, or find out where to ask for a PhD or student position with one of its groups.',
+}
+
+const JOIN_US_TUC_META = {
+  title: 'Join Us in Goslar | Cognitive Software, TU Clausthal',
+  description:
+    'PhD positions and student assistant jobs with the Cognitive Software group at TU Clausthal in Goslar: what we offer, what you bring, and how to apply.',
+}
+
+const ICLR_2025_META = {
+  title: 'CORE at ICLR and ICSE 2025 | CORE',
+  description:
+    'Papers by CORE members accepted at ICLR 2025 and ICSE 2025: SYMPOL, NNsight and NDIF, GUIDE, ReMeDe Trees, DSEG-LIME and more, with links to each paper.',
 }
 
 export const routes = [
@@ -56,7 +88,7 @@ export const routes = [
     source: 'src/data/news.js',
     title: 'News | CORE',
     description:
-      'News from the CORE Network: people, projects and results from the Cognitive Software research group at TU Clausthal and its partner universities.',
+      'News from the CORE Network: people, projects and results from the Cognitive Software research group at TU Clausthal and the other research groups in the network.',
   },
   // One page per item in src/data/news.js. `source` is the data file, so
   // <lastmod> moves when an article is edited, not when the page layout is.
@@ -87,6 +119,45 @@ export const routes = [
     title: 'Publications | CORE',
     description:
       'Peer-reviewed publications from the research groups of the CORE Network on cognitive software, autonomous systems, and machine learning.',
+  },
+  {
+    path: '/industry-projects',
+    source: 'src/pages/tuc/IndustryProjects.jsx',
+    ...INDUSTRY_PROJECTS_META,
+  },
+  {
+    path: '/industry-projects/medicar',
+    source: 'src/pages/tuc/industry/MediCar.jsx',
+    ...MEDICAR_META,
+  },
+  {
+    path: '/join-us',
+    source: 'src/pages/tuc/JoinUs.jsx',
+    ...JOIN_US_META,
+  },
+  {
+    path: '/join-us/tuc',
+    source: 'src/pages/tuc/JoinUs.jsx',
+    ...JOIN_US_TUC_META,
+  },
+  {
+    path: '/iclr-2025',
+    source: 'src/pages/Iclr2025.jsx',
+    ...ICLR_2025_META,
+  },
+  {
+    path: '/impressum',
+    source: 'src/pages/legal/Impressum.jsx',
+    title: 'Legal notice (Impressum) | CORE',
+    description:
+      'Legal notice for the CORE Network website: operator, postal address, contact details and the person responsible for content.',
+  },
+  {
+    path: '/datenschutz',
+    source: 'src/pages/legal/Datenschutz.jsx',
+    title: 'Privacy policy (Datenschutzerklärung) | CORE',
+    description:
+      'Privacy policy of the CORE Network website: hosting, fonts, embedded videos, browser storage, email contact, and your rights under the GDPR.',
   },
   {
     path: '/compute-cluster',
@@ -220,20 +291,19 @@ export const routes = [
     description:
       'Research group at the Institute for Software and Systems Engineering (ISSE), TU Clausthal, exploring the intersection of artificial intelligence, cognitive computing, and software engineering.',
   },
+  // Industry projects moved to /industry-projects; the old URLs forward there
+  // (a <Navigate> in TucShell) and stay prerendered as aliases.
   {
     path: '/tuc/industry-projects',
     source: 'src/pages/tuc/IndustryProjects.jsx',
-    title: 'Industry Projects | Cognitive Software, TU Clausthal',
-    description:
-      'Transfer and publicly funded projects of the Cognitive Software group, including AI-BIM, an AI-supported copilot for sustainable architectural design under environmental standards.',
+    ...INDUSTRY_PROJECTS_META,
+    canonical: '/industry-projects',
   },
   {
     path: '/tuc/industry-projects/medicar',
     source: 'src/pages/tuc/industry/MediCar.jsx',
-    title: 'MediCar 4.0 | Cognitive Software, TU Clausthal',
-    description:
-      'MediCar 4.0: autonomous hospital transport, tested at the University Medical Center Freiburg. Our part: LLM-based adaptive routing and robotics, trained on the GenAI-Cluster.',
-    image: '/images/projects/industry/medicar/corridor.webp',
+    ...MEDICAR_META,
+    canonical: '/industry-projects/medicar',
   },
   {
     path: '/tuc/teaching',
@@ -256,21 +326,30 @@ export const routes = [
     description:
       'Bachelor and master thesis topics in artificial intelligence, cognitive computing, and software engineering at the Institute for Software and Systems Engineering, TU Clausthal.',
   },
+  // The ICLR 2025 page was a standalone static file at this address; it is a
+  // normal page at /iclr-2025 now and the old URL forwards there.
+  {
+    path: '/tuc/iclr-2025',
+    source: 'src/pages/Iclr2025.jsx',
+    ...ICLR_2025_META,
+    canonical: '/iclr-2025',
+  },
+  // The lab's Join Us page moved to /join-us/tuc; the old URL forwards there
+  // like the two above.
   {
     path: '/tuc/join-us',
     source: 'src/pages/tuc/JoinUs.jsx',
-    title: 'Join Us | Cognitive Software, TU Clausthal',
-    description:
-      'Open positions at the Institute for Software and Systems Engineering (ISSE), TU Clausthal, for researchers with a strong background in computer science or mathematics.',
+    ...JOIN_US_TUC_META,
+    canonical: '/join-us/tuc',
   },
 
   // -------------------------------------------------------------- UBB Cluj ---
   {
     path: '/ubb',
     source: 'src/pages/ubb/Home.jsx',
-    title: 'UBB Cluj-Napoca | CORE',
+    title: 'CORE Cluj | Babeș-Bolyai University',
     description:
-      'A joint research initiative with Babeș-Bolyai University in autonomous systems, intelligent simulation, and robot learning — a new home for cognitive robotics and embodied intelligence.',
+      'CORE Cluj: the researchers of the CORE Network at Babeș-Bolyai University in Cluj-Napoca. Their research in autonomous driving, simulation and machine learning, the Robotics Club for students, and who to contact.',
   },
 ]
 

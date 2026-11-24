@@ -17,7 +17,7 @@ const DemoCard = ({ demo }) => {
               <iframe
                 width="100%"
                 height="100%"
-                src={`https://www.youtube.com/embed/${demo.youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${demo.youtubeId}&playsinline=1&modestbranding=1&rel=0`}
+                src={`https://www.youtube-nocookie.com/embed/${demo.youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${demo.youtubeId}&playsinline=1&modestbranding=1&rel=0`}
                 title={demo.title}
                 loading="lazy"
                 frameBorder="0"
@@ -101,7 +101,7 @@ const DemoCard = ({ demo }) => {
               <iframe
                 width="100%"
                 height="100%"
-                src={`https://www.youtube.com/embed/${demo.youtubeId || demo.youtubeIdModal}?autoplay=1&rel=0`}
+                src={`https://www.youtube-nocookie.com/embed/${demo.youtubeId || demo.youtubeIdModal}?autoplay=1&rel=0`}
                 title={demo.title}
                 loading="lazy"
                 frameBorder="0"

@@ -58,7 +58,7 @@ const MediCar = () => {
 
     return (
         <PageShell
-            back={{ to: '/tuc/industry-projects', label: pick('Industry Projects', 'Industrieprojekte') }}
+            back={{ to: '/industry-projects', label: pick('Industry Projects', 'Industrieprojekte') }}
             kicker={txt(pick, project.topic)}
             title={project.title}
             lede={pick(

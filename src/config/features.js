@@ -15,6 +15,18 @@ export const features = {
    * with no other edit.
    */
   showProjectPeople: false,
+
+  /**
+   * The "Student Testimonials" section on /ai-team-projects
+   * (`pages/tuc/AiTeamProjects.jsx`).
+   *
+   * Off since 2026-11-24, hidden on request. Nothing was deleted: the
+   * section's markup, the three videos in `public/videos/testimonials/` and
+   * their entries in `data/videos.js` are all still there. To show it again,
+   * set this to `true` and put the `testimonials` entry back in the
+   * '/ai-team-projects' list of `components/common/RightSidebar.jsx`.
+   */
+  showStudentTestimonials: false,
 }
 
 export default features

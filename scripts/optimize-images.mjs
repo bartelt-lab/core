@@ -7,9 +7,6 @@
  * files are skipped, and reference rewrites are no-ops on a second run.
  *
  * Run:  npm run optimize-images
- *
- * NOTE: public/tuc/iclr-2025/ is a self-contained static HTML artifact and is
- * intentionally excluded.
  */
 import { readdirSync, statSync, readFileSync, writeFileSync, rmSync } from 'node:fs'
 import { join, relative, extname, sep, posix } from 'node:path'
@@ -22,7 +19,6 @@ const PUBLIC_DIR = join(ROOT, 'public')
 const MIN_BYTES = 0 // convert every raster asset; the size guard below keeps the smaller file
 const QUALITY = 80
 const EXCLUDE = [
-  join('tuc', 'iclr-2025'), // self-contained static page
   join('logos', 'core', 'legacy'), // historical brand archive, not displayed
   'icons', // favicon source assets, not page images
 ]

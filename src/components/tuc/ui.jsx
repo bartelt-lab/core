@@ -123,7 +123,7 @@ export const Section = ({ id, kicker, title, intro, children, className = '' }) 
         {kicker && <Kicker className="mb-2">{kicker}</Kicker>}
         {title && (
             <h2 className="flex items-center gap-3 text-2xl font-semibold">
-                <span className="h-6 w-1 shrink-0 rounded-full bg-site-900" />
+                <span className="h-6 w-1 shrink-0 rounded-full bg-site-900 dark:bg-site-300" />
                 {title}
             </h2>
         )}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FiArrowUpRight } from 'react-icons/fi';
 import { PageShell, Section, Card, Callout } from '../../components/tuc/ui';
+import ShellLink from '../../components/common/ShellLink';
 import { useLanguage } from '../../i18n/useLanguage';
 
 const taughtCourses = [
@@ -524,6 +525,18 @@ const Teaching = ({ initialSection }) => {
                     </div>
                 </Section>
             )}
+
+            {/* On every tab: students are the readers of this page, and the
+                jobs for them are on the lab's Join Us page. */}
+            <Callout title={pick('Student assistant jobs (HiWi)', 'Stellen für studentische Hilfskräfte (HiWi)')}>
+                <p>
+                    {pick(
+                        'Work in our research projects alongside your studies, on machine learning, generative AI and reinforcement learning.',
+                        'Arbeiten Sie neben dem Studium in unseren Forschungsprojekten mit, zu Machine Learning, generativer KI und Reinforcement Learning.'
+                    )}{' '}
+                    <ShellLink to="/join-us/tuc#hiwi">{pick('Tasks, profile and how to apply', 'Aufgaben, Profil und Bewerbung')}</ShellLink>
+                </p>
+            </Callout>
         </PageShell>
     );
 };

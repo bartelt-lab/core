@@ -36,7 +36,7 @@ const NewsArticle = () => {
               </div>
               <h1 className="mt-4 font-heading text-3xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">{txt(pick, item.title)}</h1>
               {item.logo && (
-                <img src={assetUrl(item.logo.src)} alt={item.logo.alt} decoding="async" className="mt-6 h-7 w-auto" />
+                <img src={assetUrl(item.logo.src)} alt={item.logo.alt} decoding="async" className="logo-plate mt-6 h-7 w-auto" />
               )}
             </div>
             {item.image && (

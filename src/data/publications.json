@@ -25,7 +25,10 @@
       "url": "https://arxiv.org/abs/2505.14744",
       "code": null,
       "image": "/papers/tiips.webp",
-      "abstract": "Introduces TIIPS, a cooperative transductive-inductive framework that interleaves transduction and induction for Programming-by-Example to guide program synthesis and improve solution behavior."
+      "abstract": "Introduces TIIPS, a cooperative transductive-inductive framework that interleaves transduction and induction for Programming-by-Example to guide program synthesis and improve solution behavior.",
+      "topics": [
+        "llm"
+      ]
     },
     {
       "id": "elgarba2026enhancing",
@@ -60,7 +63,10 @@
       "url": "https://doi.org/10.1145/3837075",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "health"
+      ]
     },
     {
       "id": "lee2026nasa",
@@ -99,7 +105,10 @@
       "url": "https://doi.org/10.1145/3837858",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "design"
+      ]
     },
     {
       "id": "knab2026barista",
@@ -154,7 +163,11 @@
       "url": "https://openreview.net/forum?id=xtnrFDmu1O",
       "code": null,
       "image": "/papers/barista.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "ml",
+        "robotics"
+      ]
     },
     {
       "id": "knab2026concepts",
@@ -189,7 +202,11 @@
       "url": "https://arxiv.org/abs/2509.20899",
       "code": "https://patrick-knab.github.io/MoTIF/",
       "image": "/papers/concepts-in-motion.webp",
-      "abstract": "Introduces MoTIF, a transformer-based temporal concept bottleneck framework that discovers video concepts with vision-language models and models their temporal patterns for interpretable video classification."
+      "abstract": "Introduces MoTIF, a transformer-based temporal concept bottleneck framework that discovers video concepts with vision-language models and models their temporal patterns for interpretable video classification.",
+      "topics": [
+        "xai",
+        "robotics"
+      ]
     },
     {
       "id": "osifade2026supporting",
@@ -220,7 +237,11 @@
       "url": "https://doi.org/10.1145/3786579.3804995",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "health",
+        "robotics"
+      ]
     },
     {
       "id": "barbareschi2026counter",
@@ -263,7 +284,10 @@
       "url": "https://doi.org/10.1145/3800645.3813063",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "design"
+      ]
     },
     {
       "id": "xu2026floating",
@@ -314,7 +338,10 @@
       "url": "https://doi.org/10.1145/3800645.3813051",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "robotics"
+      ]
     },
     {
       "id": "knab2026whats",
@@ -361,7 +388,10 @@
       "url": "https://openreview.net/forum?id=IF5vnqxBEW",
       "code": null,
       "image": "/papers/whats-in-the-bottle.webp",
-      "abstract": "Surveys the Concept Bottleneck Model literature, identifies core components and challenges, and proposes a unified taxonomy and roadmap for future interpretable concept-based learning systems."
+      "abstract": "Surveys the Concept Bottleneck Model literature, identifies core components and challenges, and proposes a unified taxonomy and roadmap for future interpretable concept-based learning systems.",
+      "topics": [
+        "xai"
+      ]
     },
     {
       "id": "lan2026qifield",
@@ -416,7 +446,10 @@
       "url": "https://doi.org/10.1145/3772363.3798743",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "chen2026sensing",
@@ -479,7 +512,11 @@
       "url": "https://doi.org/10.1145/3772318.3790965",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/chen2026sensing.webp",
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "meng2026abstract",
@@ -522,7 +559,11 @@
       "url": "https://doi.org/10.1145/3795011.3795059",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/meng2026abstract.webp",
+      "topics": [
+        "xr"
+      ]
     },
     {
       "id": "lee2026affective",
@@ -561,7 +602,11 @@
       "url": "https://doi.org/10.1145/3790116",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "wearables"
+      ],
+      "page": "/papers/pages/lee2026affective.webp"
     },
     {
       "id": "kunze2026sonic",
@@ -608,7 +653,10 @@
       "url": "https://doi.org/10.1145/3795011.3795056",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xr"
+      ]
     },
     {
       "id": "nanayakkara2026inbody",
@@ -659,7 +707,10 @@
       "url": "https://doi.org/10.1145/3795011.3797157",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xr"
+      ]
     },
     {
       "id": "zhang2026opticalaging",
@@ -706,7 +757,12 @@
       "url": "https://doi.org/10.1145/3795011.3795035",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/zhang2026opticalaging.webp",
+      "topics": [
+        "design",
+        "xr"
+      ]
     },
     {
       "id": "lan2026towards",
@@ -745,7 +801,11 @@
       "url": "https://doi.org/10.1109/VRW70859.2026.00143",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xr",
+        "wearables"
+      ]
     },
     {
       "id": "kirchdorfer2026investigating",
@@ -784,7 +844,10 @@
       "url": "https://link.springer.com/article/10.1007/s11263-025-02625-x",
       "code": null,
       "image": "/papers/uwso.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "ml"
+      ]
     },
     {
       "id": "attwell2026is",
@@ -815,7 +878,10 @@
       "url": "https://aclanthology.org/2026.eacl-long.163/",
       "code": null,
       "image": "/papers/eacl_paper.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "llm"
+      ]
     },
     {
       "id": "ramesh2026characterizing",
@@ -866,7 +932,11 @@
       "url": "https://arxiv.org/abs/2607.24603",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/ramesh2026characterizing.webp",
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "kosch2026cognitive",
@@ -897,7 +967,11 @@
       "url": "https://doi.org/10.4230/DagRep.15.10.75",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/kosch2026cognitive.webp",
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "bhattarai2026electronic",
@@ -936,7 +1010,11 @@
       "url": "https://doi.org/10.48340/ecscw2026_094",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/bhattarai2026electronic.webp",
+      "topics": [
+        "health"
+      ]
     },
     {
       "id": "thiel2026invisible",
@@ -971,7 +1049,10 @@
       "url": "https://doi.org/10.1515/icom-2025-0041",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "health"
+      ]
     },
     {
       "id": "boroujeni2026sustainable",
@@ -998,7 +1079,11 @@
       "url": "https://doi.org/10.1515/icom-2025-0051",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "design"
+      ],
+      "page": "/papers/pages/boroujeni2026sustainable.webp"
     },
     {
       "id": "zhang2025pro",
@@ -1037,7 +1122,10 @@
       "url": "https://doi.org/10.1145/3757373.3763766",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "chen2025multimodal",
@@ -1064,7 +1152,10 @@
       "url": "https://doi.org/10.1145/3714394.3750550",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "dseg-lime",
@@ -1091,7 +1182,10 @@
       "url": "https://arxiv.org/abs/2403.07733",
       "code": "https://github.com/patrick-knab/DSEG-LIME",
       "image": "/papers/DSEG.webp",
-      "abstract": "Presents DSEG-LIME framework for improved image explanation using foundation model integration."
+      "abstract": "Presents DSEG-LIME framework for improved image explanation using foundation model integration.",
+      "topics": [
+        "xai"
+      ]
     },
     {
       "id": "zhang2025beyond",
@@ -1134,7 +1228,11 @@
       "url": "https://doi.org/10.1145/3715071.3750418",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/zhang2025beyond.webp",
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "hakkila2025biosensing",
@@ -1185,7 +1283,11 @@
       "url": "https://doi.org/10.1145/3714394.3750568",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xr",
+        "wearables"
+      ]
     },
     {
       "id": "lee2025closedloop",
@@ -1224,7 +1326,11 @@
       "url": "https://doi.org/10.1145/3715071.3750412",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/lee2025closedloop.webp",
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "peng2025conscious",
@@ -1263,7 +1369,10 @@
       "url": "https://doi.org/10.1145/3714394.3756165",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "grams2025disentangling",
@@ -1298,7 +1407,10 @@
       "url": "https://arxiv.org/abs/2501.08925",
       "code": null,
       "image": "/papers/disentangling.webp",
-      "abstract": "Examines exploration as a crucial skill for in-context reinforcement learning in unknown environments and investigates whether large language models can effectively explore partially observable settings."
+      "abstract": "Examines exploration as a crucial skill for in-context reinforcement learning in unknown environments and investigates whether large language models can effectively explore partially observable settings.",
+      "topics": [
+        "llm"
+      ]
     },
     {
       "id": "peng2025echosense",
@@ -1349,7 +1461,11 @@
       "url": "https://doi.org/10.1145/3714394.3754428",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xr",
+        "wearables"
+      ]
     },
     {
       "id": "chen2025exploring",
@@ -1380,7 +1496,11 @@
       "url": "https://doi.org/10.1145/3714394.3756159",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xr",
+        "wearables"
+      ]
     },
     {
       "id": "chen2025introduction",
@@ -1427,7 +1547,10 @@
       "url": "https://doi.org/10.1145/3714394.3754407",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "szilagyi2025scalable",
@@ -1454,8 +1577,11 @@
       "status": "Published",
       "url": "https://doi.ieeecomputersociety.org/10.1109/ICTAI66417.2025.00085",
       "code": null,
-      "image": null,
-      "abstract": "Proposes FedCompAvg, a compute-aware aggregation strategy for Federated Learning."
+      "image": "/papers/fedcompavg-setup.webp",
+      "abstract": "Proposes FedCompAvg, a compute-aware aggregation strategy for Federated Learning.",
+      "topics": [
+        "ml"
+      ]
     },
     {
       "id": "gruenerbl20252nd",
@@ -1498,7 +1624,10 @@
       "url": "https://doi.org/10.1145/3737821.3743747",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xr"
+      ]
     },
     {
       "id": "kikuchi2025mindspace",
@@ -1537,7 +1666,10 @@
       "url": "https://doi.org/10.1145/3743049.3743054",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "xu2025spread",
@@ -1592,7 +1724,10 @@
       "url": "https://doi.org/10.1145/3721257.3734034",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "robotics"
+      ]
     },
     {
       "id": "sesterhenn2025trove",
@@ -1623,7 +1758,10 @@
       "url": "https://arxiv.org/abs/2507.22069",
       "code": null,
       "image": "/papers/trove.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "llm"
+      ]
     },
     {
       "id": "dcbm",
@@ -1658,7 +1796,11 @@
       "url": "https://arxiv.org/abs/2412.11576",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/dcbm.webp",
+      "topics": [
+        "xai"
+      ]
     },
     {
       "id": "schulz2025integrating",
@@ -1689,7 +1831,11 @@
       "url": "https://doi.org/10.1145/3742800.3742854",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "design",
+        "xr"
+      ]
     },
     {
       "id": "kolthoff2025guide",
@@ -1724,7 +1870,10 @@
       "url": "https://www.computer.org/csdl/proceedings-article/icse-companion/2025/368300a001/27vTfGNTz0s",
       "code": "https://github.com/GUIDE-Prototyper/GUIDE",
       "image": "/papers/guide.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "llm"
+      ]
     },
     {
       "id": "zaidi2025tieboard",
@@ -1759,7 +1908,11 @@
       "url": "https://doi.org/10.1145/3729478",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/zaidi2025tieboard.webp",
+      "topics": [
+        "design"
+      ]
     },
     {
       "id": "hansen2025bodypursuits",
@@ -1810,7 +1963,10 @@
       "url": "https://doi.org/10.1145/3715669.3723110",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xr"
+      ]
     },
     {
       "id": "kim2025eye",
@@ -1837,7 +1993,10 @@
       "url": "https://doi.org/10.1145/3715669.3726817",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "wearables"
+      ]
     },
     {
       "id": "naacl2025",
@@ -1868,7 +2027,11 @@
       "url": "https://arxiv.org/abs/2501.06346",
       "code": null,
       "image": "/papers/naacl2025.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "llm",
+        "xai"
+      ]
     },
     {
       "id": "meng2025placebo",
@@ -1915,7 +2078,10 @@
       "url": "https://doi.org/10.1145/3706598.3713594",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xr"
+      ]
     },
     {
       "id": "kretzer2025closing",
@@ -1950,7 +2116,10 @@
       "url": "https://dl.acm.org/doi/full/10.1145/3706598.3713932",
       "code": null,
       "image": "/papers/closing_the_loop.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "llm"
+      ]
     },
     {
       "id": "marton2025sympol",
@@ -1989,7 +2158,11 @@
       "url": "https://arxiv.org/pdf/2408.08761",
       "code": null,
       "image": "/papers/mitigating.webp",
-      "abstract": "Addresses how reinforcement learning has seen significant success across various domains, but its adoption is often limited by the black-box nature of neural network policies."
+      "abstract": "Addresses how reinforcement learning has seen significant success across various domains, but its adoption is often limited by the black-box nature of neural network policies.",
+      "topics": [
+        "xai",
+        "ml"
+      ]
     },
     {
       "id": "barbareschi2025sticking",
@@ -2036,7 +2209,10 @@
       "url": "https://doi.org/10.1145/3706598.3714234",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "design"
+      ]
     },
     {
       "id": "li2025beyond",
@@ -2071,7 +2247,11 @@
       "url": "https://doi.org/10.1145/3745900.3746127",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/li2025beyond.webp",
+      "topics": [
+        "xr"
+      ]
     },
     {
       "id": "xu2025cuddle",
@@ -2134,7 +2314,11 @@
       "url": "https://doi.org/10.1145/3745900.3746080",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/xu2025cuddle.webp",
+      "topics": [
+        "robotics"
+      ]
     },
     {
       "id": "zenkner2025shedding",
@@ -2161,7 +2345,10 @@
       "url": "https://openreview.net/pdf?id=3vqnyd2Xe8",
       "code": null,
       "image": "/papers/accuracy_barplot_deepcoder.svg",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "llm"
+      ]
     },
     {
       "id": "lime-survey",
@@ -2192,7 +2379,10 @@
       "url": "https://patrick-knab.github.io/which-lime-to-trust/",
       "code": null,
       "image": "/papers/LIME.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "xai"
+      ]
     },
     {
       "id": "unbehaun2025exploring",
@@ -2239,7 +2429,11 @@
       "url": "https://doi.org/10.1515/icom-2024-0044",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "robotics"
+      ],
+      "page": "/papers/pages/unbehaun2025exploring.webp"
     },
     {
       "id": "schulz2025investigating",
@@ -2266,7 +2460,11 @@
       "url": "https://doi.org/10.1515/icom-2024-0045",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "health"
+      ],
+      "page": "/papers/pages/schulz2025investigating.webp"
     },
     {
       "id": "szilagyi2025accelerating",
@@ -2293,8 +2491,11 @@
       "status": "Published",
       "url": "https://doi.org/10.33436/v35i3y202508",
       "code": null,
-      "image": null,
-      "abstract": "A hybrid Python-Rust architecture for intelligent vehicle vision systems."
+      "image": "/papers/vehicle-vision-shared-message.webp",
+      "abstract": "A hybrid Python-Rust architecture for intelligent vehicle vision systems.",
+      "topics": [
+        "robotics"
+      ]
     },
     {
       "id": "schulz2025designing",
@@ -2325,7 +2526,12 @@
       "url": "https://doi.org/10.1145/3688828.3699635",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "design",
+        "xr"
+      ],
+      "page": "/papers/pages/schulz2025designing.webp"
     },
     {
       "id": "schulz2025supporting",
@@ -2376,7 +2582,11 @@
       "url": "https://doi.org/10.48340/ecscw2025_cp03",
       "code": null,
       "image": null,
-      "abstract": null
+      "abstract": null,
+      "page": "/papers/pages/schulz2025supporting.webp",
+      "topics": [
+        "health"
+      ]
     },
     {
       "id": "szilagyi2024benchmarking",
@@ -2403,8 +2613,11 @@
       "status": "Published",
       "url": "https://doi.org/10.1109/ictai62512.2024.00067",
       "code": null,
-      "image": null,
-      "abstract": null
+      "image": "/papers/benchmarking-ad-simulation.webp",
+      "abstract": null,
+      "topics": [
+        "robotics"
+      ]
     },
     {
       "id": "kolthoff2024self-elicitation",
@@ -2435,7 +2648,10 @@
       "url": "https://dl.acm.org/doi/abs/10.1145/3691620.3695350",
       "code": "https://github.com/SERGUI-Prototyper/SERGUI-Prototyping",
       "image": "/papers/self_elicitation_of_requirements.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "llm"
+      ]
     },
     {
       "id": "kolthoff2024interlinking",
@@ -2470,7 +2686,10 @@
       "url": "https://ieeexplore.ieee.org/abstract/document/10628517/",
       "code": "https://github.com/IUS-GUI-Prototyping/IUS-GUI",
       "image": "/papers/interlinking_user_stories_and_gui_prototyping.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "llm"
+      ]
     },
     {
       "id": "oesterle2024raise",
@@ -2501,7 +2720,10 @@
       "url": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1492.pdf",
       "code": null,
       "image": "/papers/RAISE.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "ml"
+      ]
     },
     {
       "id": "oesterle2024drama",
@@ -2528,7 +2750,10 @@
       "url": "https://hdl.handle.net/10125/107324",
       "code": null,
       "image": "/papers/DRAMA.webp",
-      "abstract": null
+      "abstract": null,
+      "topics": [
+        "ml"
+      ]
     }
   ]
 }

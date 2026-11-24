@@ -14,8 +14,8 @@ const News = () => {
           <h1 className="font-heading text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-5xl">{pick('News', 'Neuigkeiten')}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600">
             {pick(
-              'People, projects and results from the CORE research group and its partner universities.',
-              'Menschen, Projekte und Ergebnisse aus der Forschungsgruppe CORE und ihren Partneruniversitäten.',
+              'People, projects and results from the researchers and research groups of the CORE Network.',
+              'Menschen, Projekte und Ergebnisse der Forschenden und Forschungsgruppen im CORE Network.',
             )}
           </p>
         </div>

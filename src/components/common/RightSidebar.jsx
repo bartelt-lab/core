@@ -9,7 +9,7 @@ const ROUTE_SECTIONS = {
     '/': [
         { id: 'hero', label: 'Home' },
         { id: 'news', label: 'News' },
-        { id: 'research', label: 'Projects' },
+        { id: 'research', label: 'Research' },
         { id: 'network', label: 'Network' },
         { id: 'team', label: 'Team' },
         { id: 'contact', label: 'Join us' },
@@ -19,13 +19,15 @@ const ROUTE_SECTIONS = {
         { id: 'initiative', label: 'Initiative' },
         { id: 'dynamo', label: 'Dynamo' },
         { id: 'autonomous', label: 'Self-Driving' },
+        { id: 'augmentation', label: 'Augmentation' },
         { id: 'publications', label: 'Papers' },
+        { id: 'cluj', label: 'Humanoid' },
     ],
     '/dynamo': [],
     '/network': [
         { id: 'hero', label: 'Network' },
         { id: 'news', label: 'News' },
-        { id: 'research', label: 'Projects' },
+        { id: 'research', label: 'Research' },
         { id: 'network', label: 'Network' },
         { id: 'team', label: 'Team' },
         { id: 'contact', label: 'Join us' },
@@ -34,7 +36,8 @@ const ROUTE_SECTIONS = {
     '/ai-team-projects': [
         { id: 'hero', label: 'Overview' },
         { id: 'active-projects', label: 'Projects' },
-        { id: 'testimonials', label: 'Voices' },
+        // { id: 'testimonials', label: 'Voices' }, hidden with the section: see
+        // showStudentTestimonials in config/features.js
         { id: 'archive', label: 'Archive' },
     ],
     '/compute-cluster': [

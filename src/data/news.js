@@ -15,8 +15,9 @@
  *
  * Optional per item: `imageCredit` ([de, en] caption under the article photo),
  * `featured: true` puts the item on the homepage ahead of
- * newer ones (the homepage shows two), `logo` ({ src, alt }) for an organisation badge,
- * `imageFocus` (CSS object-position), `imageFit: 'contain'` for uncropped logos,
+ * newer ones (the homepage shows four), `logo` ({ src, alt }) for an organisation badge,
+ * `imageFocus` (CSS object-position), `imageFit` ('contain': logo shown whole with air; 'figure': paper figure
+ * shown whole, edge to edge),
  * `cta`, `people` (team.js slugs).
  */
 
@@ -37,8 +38,8 @@ export const news = [
             'In July 2026, MediCar 4.0 was tested in a field trial at the University Medical Center Freiburg. Our part: language models that adapt routes live, and robots that load and unload the transport boxes themselves.',
         ],
         lead: [
-            'Blutproben, Medikamente, Material: [MediCar 4.0](/tuc/industry-projects/medicar) bringt sie im Krankenhaus mit autonomen Transportfahrzeugen bedarfsgerecht ans Ziel. Im Juli 2026 wurde das System am Universitätsklinikum Freiburg im Feldversuch erprobt.',
-            'Blood samples, medication, supplies: [MediCar 4.0](/tuc/industry-projects/medicar) gets them where they are needed in the hospital, with autonomous transport vehicles. In July 2026 the system was tested in a field trial at the University Medical Center Freiburg.',
+            'Blutproben, Medikamente, Material: [MediCar 4.0](/industry-projects/medicar) bringt sie im Krankenhaus mit autonomen Transportfahrzeugen bedarfsgerecht ans Ziel. Im Juli 2026 wurde das System am Universitätsklinikum Freiburg im Feldversuch erprobt.',
+            'Blood samples, medication, supplies: [MediCar 4.0](/industry-projects/medicar) gets them where they are needed in the hospital, with autonomous transport vehicles. In July 2026 the system was tested in a field trial at the University Medical Center Freiburg.',
         ],
         body: [
             [
@@ -57,10 +58,10 @@ export const news = [
         cta: {
             heading: ['Mehr zu MediCar 4.0', 'More on MediCar 4.0'],
             text: [
-                'Projektfilm, Partner und Details zu unserem Beitrag stehen auf der [MediCar-Projektseite](/tuc/industry-projects/medicar).',
-                'The project film, the partners and details of our contribution are on the [MediCar project page](/tuc/industry-projects/medicar).',
+                'Projektfilm, Partner und Details zu unserem Beitrag stehen auf der [MediCar-Projektseite](/industry-projects/medicar).',
+                'The project film, the partners and details of our contribution are on the [MediCar project page](/industry-projects/medicar).',
             ],
-            href: '/tuc/industry-projects/medicar',
+            href: '/industry-projects/medicar',
             label: ['Zum Projekt', 'Explore the project'],
         },
         image: '/images/projects/industry/medicar/corridor.webp',
@@ -114,10 +115,10 @@ export const news = [
         cta: {
             heading: ['Du möchtest selbst an KI forschen?', 'Want to research AI?'],
             text: [
-                'Informationen zu einer Promotion bei CORE und Kontaktmöglichkeiten findest du auf unserer Seite [Promotion und Mitarbeit bei CORE](/tuc/join-us).',
-                'Find information about a doctorate at CORE and how to get in touch on our [PhD opportunities and joining CORE](/tuc/join-us) page.',
+                'Informationen zu einer Promotion bei CORE und Kontaktmöglichkeiten findest du auf unserer Seite [Promotion und Mitarbeit bei CORE](/join-us).',
+                'Find information about a doctorate at CORE and how to get in touch on our [PhD opportunities and joining CORE](/join-us) page.',
             ],
-            href: '/tuc/join-us',
+            href: '/join-us',
             label: ['Zur Promotion bei CORE', 'Do a PhD at CORE'],
         },
         image: '/logos/nvidia.webp',
@@ -130,8 +131,8 @@ export const news = [
         date: '2026-09',
         tag: ['Publikationen', 'Publications'],
         title: [
-            'Paper auf der ECML PKDD 2026 angenommen: Transduktion und Induktion im Zusammenspiel',
-            'Paper accepted at ECML PKDD 2026: transduction and induction working together',
+            'Unser Paper „Beyond Either-Or Reasoning“ wurde auf der ECML PKDD 2026 angenommen',
+            'Our paper “Beyond Either-Or Reasoning” has been accepted at ECML PKDD 2026',
         ],
         teaser: [
             'Janis Zenkner, Tobias Sesterhenn und Christian Bartelt stellen TIIPS vor: ein Verfahren, in dem sich Transduktion und Induktion bei der Programmsynthese gegenseitig leiten.',
@@ -157,6 +158,8 @@ export const news = [
             label: ['Publikationen ansehen', 'Browse publications'],
         },
         image: '/papers/tiips.webp',
+
+        imageFit: 'figure',
         imageAlt: ['Abbildung aus dem TIIPS-Paper', 'Figure from the TIIPS paper'],
         people: ['zenkner', 'sesterhenn', 'bartelt'],
     },
@@ -165,8 +168,8 @@ export const news = [
         date: '2026-07',
         tag: ['Publikationen', 'Publications'],
         title: [
-            'Zwei Paper auf Workshops der ICML und CVPR 2026: egozentrisches Video und erklärbare KI',
-            'Two papers at ICML and CVPR 2026 workshops: egocentric video and explainable AI',
+            'Zwei unserer Paper wurden auf Workshops der ICML und CVPR 2026 angenommen',
+            'Two of our papers have been accepted at ICML and CVPR 2026 workshops',
         ],
         teaser: [
             'BARISTA, ein Benchmark für egozentrisches Videoverstehen, und Concepts in Motion, ein erklärbares Modell zur Videoklassifikation, wurden auf drei Workshops angenommen.',
@@ -187,6 +190,8 @@ export const news = [
             ],
         ],
         image: '/papers/barista.webp',
+
+        imageFit: 'figure',
         imageAlt: ['Abbildung aus dem BARISTA-Paper', 'Figure from the BARISTA paper'],
         people: ['knab', 'marton', 'bartelt'],
     },
@@ -195,8 +200,8 @@ export const news = [
         date: '2026-05',
         tag: ['Publikationen', 'Publications'],
         title: [
-            'Übersichtsarbeit in TMLR: eine Roadmap für Concept Bottleneck Models',
-            'Survey in TMLR: a roadmap for concept bottleneck models',
+            'Unsere Übersichtsarbeit „What’s in the Bottle?“ ist in TMLR erschienen',
+            'Our survey “What’s in the Bottle?” has been published in TMLR',
         ],
         teaser: [
             'Concept Bottleneck Models treffen Vorhersagen über verständliche Konzepte. Eine Übersichtsarbeit in Transactions on Machine Learning Research ordnet das Feld und zeigt, wo es hingehen kann.',
@@ -217,6 +222,8 @@ export const news = [
             ],
         ],
         image: '/papers/whats-in-the-bottle.webp',
+
+        imageFit: 'figure',
         imageAlt: ['Abbildung aus der Übersichtsarbeit zu Concept Bottleneck Models', 'Figure from the concept bottleneck model survey'],
         people: ['knab', 'bartelt'],
     },
@@ -224,14 +231,14 @@ export const news = [
         slug: 'iclr-icse-2025',
         date: '2025-04',
         tag: ['Publikationen', 'Publications'],
-        title: ['Sechs Paper auf der ICLR und ICSE 2025', 'Six papers at ICLR and ICSE 2025'],
+        title: ['Acht unserer Paper wurden auf der ICLR und ICSE 2025 angenommen', 'Eight of our papers have been accepted at ICLR and ICSE 2025'],
         teaser: [
-            'Sechs Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der ICLR 2025 in Singapur und der ICSE 2025 in Seoul angenommen, auf den Hauptkonferenzen und auf Workshops.',
-            'Six papers authored or co-authored by CORE members were accepted at ICLR 2025 in Singapore and ICSE 2025 in Seoul, at the main conferences and at workshops.',
+            'Acht Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der ICLR 2025 in Singapur und der ICSE 2025 in Ottawa angenommen, auf den Hauptkonferenzen und auf Workshops.',
+            'Eight papers authored or co-authored by CORE members were accepted at ICLR 2025 in Singapore and ICSE 2025 in Ottawa, at the main conferences and at workshops.',
         ],
         lead: [
-            'Sechs Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der International Conference on Learning Representations (ICLR 2025) in Singapur und der International Conference on Software Engineering (ICSE 2025) in Seoul angenommen.',
-            'Six papers authored or co-authored by CORE members were accepted at the International Conference on Learning Representations (ICLR 2025) in Singapore and the International Conference on Software Engineering (ICSE 2025) in Seoul.',
+            'Acht Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der International Conference on Learning Representations (ICLR 2025) in Singapur und der International Conference on Software Engineering (ICSE 2025) in Ottawa angenommen.',
+            'Eight papers authored or co-authored by CORE members were accepted at the International Conference on Learning Representations (ICLR 2025) in Singapore and the International Conference on Software Engineering (ICSE 2025) in Ottawa.',
         ],
         body: [
             [
@@ -239,11 +246,13 @@ export const news = [
                 'At the ICLR main conference, [SYMPOL](https://arxiv.org/pdf/2408.08761) optimises decision trees directly inside standard on-policy reinforcement learning algorithms. The policy stays readable as a tree, without the information loss of translating a neural network into one afterwards. Also at ICLR: NNsight and NDIF, which give researchers access to the internals of large open-weight models.',
             ],
             [
-                'Auf der ICSE-Hauptkonferenz zeigt GUIDE, wie große Sprachmodelle aus Textbeschreibungen Prototypen von Benutzeroberflächen erzeugen. Alle sechs Paper stehen auf unserer [Seite zur ICLR und ICSE 2025](https://www.core-network.ai/tuc/iclr-2025/).',
-                'At the ICSE main conference, GUIDE shows how large language models generate user interface prototypes from text descriptions. All six papers are on our [ICLR and ICSE 2025 page](https://www.core-network.ai/tuc/iclr-2025/).',
+                'Auf der ICSE-Hauptkonferenz zeigt GUIDE, wie große Sprachmodelle aus Textbeschreibungen Prototypen von Benutzeroberflächen erzeugen. Alle acht Paper stehen auf unserer [Seite zur ICLR und ICSE 2025](/iclr-2025).',
+                'At the ICSE main conference, GUIDE shows how large language models generate user interface prototypes from text descriptions. All eight papers are on our [ICLR and ICSE 2025 page](/iclr-2025).',
             ],
         ],
         image: '/papers/mitigating.webp',
+
+        imageFit: 'figure',
         imageAlt: ['Abbildung aus dem SYMPOL-Paper', 'Figure from the SYMPOL paper'],
         people: ['marton', 'grams', 'ludtke', 'bartelt'],
     },
@@ -271,8 +280,8 @@ export const news = [
                 'Two high-performance nodes with NVIDIA H200 NVL GPUs, connected via NVLink, are built for fine-tuning models up to 70 billion parameters and for inference of open models such as Llama 3, Qwen 3 and Gemma 3. Two further nodes with 12 NVIDIA RTX PRO 6000 Blackwell GPUs handle resource-efficient training of smaller models and vision models.',
             ],
             [
-                'Weil die Daten auf eigener Infrastruktur bleiben, lassen sich Modelle jederzeit anpassen und Experimente ohne Wartezeit starten. Das nutzt etwa das Projekt [MediCar 4.0](/tuc/industry-projects/medicar). Regelmäßige Workshops stellen den Cluster Wissenschaft, Start-ups und Industrie vor.',
-                'Because data stays on our own infrastructure, models can be adapted at any time and experiments start without waiting. The [MediCar 4.0](/tuc/industry-projects/medicar) project, for example, relies on it. Regular workshops introduce the cluster to researchers, start-ups and industry.',
+                'Weil die Daten auf eigener Infrastruktur bleiben, lassen sich Modelle jederzeit anpassen und Experimente ohne Wartezeit starten. Das nutzt etwa das Projekt [MediCar 4.0](/industry-projects/medicar). Regelmäßige Workshops stellen den Cluster Wissenschaft, Start-ups und Industrie vor.',
+                'Because data stays on our own infrastructure, models can be adapted at any time and experiments start without waiting. The [MediCar 4.0](/industry-projects/medicar) project, for example, relies on it. Regular workshops introduce the cluster to researchers, start-ups and industry.',
             ],
         ],
         cta: {
@@ -308,8 +317,8 @@ export const news = [
                 'The aim is a distributed lab platform for embodied AI: AI that perceives, decides and acts through robots in the real world. The Clausthal lab has a humanoid robot, an autonomous transport robot and a test setup that combines augmented reality with robotic gripper arms. Further labs are being set up in Cluj ([CORE Labs Cluj](/ubb)) and Rostock.',
             ],
             [
-                'Ein erstes Anwendungsfeld ist die Krankenhauslogistik im Projekt [MediCar 4.0](/tuc/industry-projects/medicar). Die Labore dienen auch der Lehre: Die Universitäten verbinden sie über gemeinsame Experimente, technische Plattformen und Lehrformate, und sie passen zum neuen Bachelorstudiengang AI Engineering an der TU Clausthal, der im Wintersemester 2026/27 startet.',
-                'A first application area is hospital logistics in the [MediCar 4.0](/tuc/industry-projects/medicar) project. The labs also serve teaching: the universities connect them through shared experiments, technical platforms and teaching formats, and they fit the new AI Engineering bachelor’s programme at TU Clausthal, which starts in the winter semester 2026/27.',
+                'Ein erstes Anwendungsfeld ist die Krankenhauslogistik im Projekt [MediCar 4.0](/industry-projects/medicar). Die Labore dienen auch der Lehre: Die Forschungsgruppen verbinden sie über gemeinsame Experimente, technische Plattformen und Lehrformate, und sie passen zum neuen Bachelorstudiengang AI Engineering an der TU Clausthal, der im Wintersemester 2026/27 startet.',
+                'A first application area is hospital logistics in the [MediCar 4.0](/industry-projects/medicar) project. The labs also serve teaching: the research groups connect them through shared experiments, technical platforms and teaching formats, and they fit the new AI Engineering bachelor’s programme at TU Clausthal, which starts in the winter semester 2026/27.',
             ],
         ],
         cta: {

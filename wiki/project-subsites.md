@@ -11,17 +11,18 @@ is that every project page feels like the same family without being a copy-paste
 - `ResearchQuestionCard.jsx` → the primary-tinted question + tags card.
 - `ResearchQuestionIntro.jsx` → two-column objective + `ResearchQuestionCard` (use below a hero).
 - `MilestoneBrowser.jsx` → the player + newest-first selector (autocycle, mount-once media).
-  Each item's `media` is `{ type: 'drive', id }`, `{ type: 'video', src }` (local mp4), or
-  `{ type: 'image', src, alt }` (a "Placeholder" still). Props: `items`, `label`, `pillLabel`,
-  `autoCycleMs`, `aside`.
+  Each item's `media` is `{ type: 'video', src, poster }` (local mp4) or
+  `{ type: 'image', src, alt, placeholder?, fit? }` (a figure; `placeholder: true` adds a
+  "Placeholder" badge). `{ type: 'drive', id }` still works but is legacy: all milestone
+  media is local now. Props: `items`, `label`, `pillLabel`, `autoCycleMs`, `aside`.
 
 **Reference implementations** (how the pieces compose):
 
 - `src/pages/Dynamo.jsx` — fullest version (cinematic hero + `ResearchQuestionIntro` +
   `MilestoneBrowser` + architecture/stack).
 - `src/pages/VialSort.jsx` — light header with `ResearchQuestionCard`; `MilestoneBrowser`
-  with mixed media (a native video + an image placeholder) and a Project-setup / About
-  `aside`; pipeline / expected-outcome / metrics sections.
+  with mixed media (videos and figures), no `aside`; then a system section
+  ("Built and trained") and a results section.
 - `src/pages/LeaderFollowing.jsx` — light header + `MilestoneBrowser` with an ABOUT `aside`.
 
 ## The mental model
@@ -49,7 +50,7 @@ page.
   is slate. One accent, applied consistently, beats color sprinkled around.
 - **Glassy accents, lightly.** Frosted cards: `rounded-2xl border border-slate-200
   bg-white/70 shadow-sm backdrop-blur-sm`. The signature accent is a single green
-  hairline before a label (the `Label` component in `Dynamo.jsx`).
+  hairline before a label (the `Label` component, `components/common/Eyebrow.jsx`).
 - Display headings are **bold** (not black, not semibold). Small subheads can be
   `font-semibold`.
 
@@ -71,7 +72,8 @@ adding a separate Objective section up top.
 ### Back-to-labs pill (steal this)
 
 A white pill, primary text, top of the page or bottom of the hero — links to
-`/core-labs`:
+`/core-labs`. Use the `BackToLabsPill` component, which carries exactly these classes
+in its `dark` and `light` variants; the snippet is here to show what it renders:
 
 ```jsx
 <Link to="/core-labs"
@@ -101,11 +103,12 @@ The progress milestones are the centerpiece — use the `MilestoneBrowser` compo
 above. Layout (from LeaderFollowing):
 
 - Grid `lg:grid-cols-[1fr_300px]` — **player left**, **selector right**.
-- **Player:** `aspect-video` media on top (Drive embed, local video, or image
-  placeholder), caption below — a label pill (`Milestone 06`), an operation eyebrow,
+- **Player:** `aspect-video` media on top (a local video or an image),
+  caption below — a label pill (`Milestone 06`), an operation eyebrow,
   bold title, summary, and a green-bordered **OUTCOME** line. Prev/next arrows + an
-  `NN/total` counter. A milestone whose footage isn't ready yet uses an `image` media
-  with a "Placeholder" badge until the clip lands.
+  `NN/total` counter. A milestone whose footage isn't ready yet can use an `image` media
+  with `placeholder: true`, which adds a "Placeholder" badge, until the clip lands. No
+  page uses it at present.
 - **Selector** (labelled **Milestones**): a stretching frosted card listing entries
   **newest-first**, numbered chronologically (01 = first ever, highest = latest).
   Active item gets a primary ring. The list defines the row height so it can grow
@@ -123,11 +126,14 @@ with a `Fig. 1 ·` mono caption) beside a **Technical stack** divided list
 (`layer` / `system` / mono `approach` / detail). Keep these calm — hairline
 eyebrows, no heavy color.
 
-## Video hosting (current limitation)
+## Video hosting
 
-Most clips are Google Drive `/preview` iframes (`media.type: 'drive'`). **Drive's
-player has no working loop parameter** — to loop a clip on end, host it as a real file
-and use `media.type: 'video'` (a native `<video loop muted>`, like VialSort's annotated
-episode in `public/videos/demonstrations/...`; the `LazyVideo` component is the
-viewport-gated variant — see [assets.md](assets.md)). Migrate Drive clips when
-looping/finer control is needed.
+All milestone media is local: a real file under `public/videos/demonstrations/...`
+played with `media.type: 'video'` (a native `<video loop muted>`; the `LazyVideo`
+component is the viewport-gated variant — see [assets.md](assets.md)). Every clip
+needs its entry in the video registry first ([video.md](video.md)).
+
+Do not go back to Google Drive `/preview` iframes (`media.type: 'drive'`, still
+supported by the component). Drive's player has no working loop parameter, and an
+embed contacts Google from the visitor's browser
+([legal-pages.md](legal-pages.md)).

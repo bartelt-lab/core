@@ -44,10 +44,24 @@
       })();
     </script>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+    <!--
+      Dark mode. Apply the stored choice before first paint so a dark-mode
+      visitor never sees a white flash. Light is the default; the key must match
+      STORAGE_KEY in src/components/common/ThemeToggle.jsx.
+    -->
+    <script>
+      try {
+        if (localStorage.getItem("core-theme") === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    </script>
+
+    <!--
+      Fonts are served from this site (src/fonts.js), not from Google Fonts.
+      Do not add a fonts.googleapis.com link back: it sends every visitor's IP
+      address to Google, which the privacy policy says does not happen.
+    -->
   </head>
   <body>
     <div id="root"></div>

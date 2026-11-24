@@ -58,8 +58,6 @@ re-running only touches new oversized assets.
 
 - Max width by location: `members/` → 600 px, `logos/` → 500 px, everything else → 1600 px
   (tune in `widthFor()`).
-- **Excluded:** `public/tuc/iclr-2025/` — a self-contained static HTML page; its assets are
-  referenced by raw HTML and must not be rewritten.
 - WebP is supported by all target browsers, so there is no `<picture>`/fallback.
 
 Workflow when adding a large image: drop it in `public/`, reference it, then run
@@ -82,6 +80,22 @@ Git LFS, the size budget and the `npm run check-videos` gate are all in
 
 `scripts/compress-videos.ps1` still exists but is PowerShell-only and predates the bucket
 rules — prefer the `ffmpeg` invocations in the workflow doc, which run anywhere.
+
+## Where files go under `public/`
+
+| Folder | Holds |
+|---|---|
+| `members/` | member photos, named `first-last.webp`. A member without one gets a placeholder |
+| `logos/` | partner and university logos, flat, kebab-case |
+| `logos/dark/` | their dark-mode versions, made by `scripts/dark-logos.mjs` and picked by `ThirdPartyLogo` |
+| `logos/core/` | CORE's own logos as SVG, one per background (white, light, dark, black), picked by `ThemedLogo`; `avocando-icon.svg` is the mascot, from which the favicons were generated |
+| `papers/` | figures shown beside publications |
+| `papers/pages/` | first pages of papers, written by `scripts/paper-pages.mjs` |
+| `images/projects/<project>/` | one folder per project page; `industry/` for the industry tiles |
+| `images/news/`, `images/ubb/`, `images/tuc/`, `images/hero/`, `images/iclr-2025/` | pictures for those pages |
+| `videos/` | every clip, each with a `-poster.webp` beside it ([video.md](video.md)) |
+| `documents/project-descriptions/` | PDFs linked from the AI Team Project pages |
+| `data/publications.bib` | a BibTeX export, out of date ([open-issues.md](open-issues.md)) |
 
 ## Checklist for a new asset
 
