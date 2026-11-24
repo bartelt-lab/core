@@ -22,7 +22,7 @@ const LAB_TOPICS = ['robotics']
 
 // The part of the labs that is in preparation: Kai Kunze's group will add its
 // work. Until then it has an entry and nothing more. `lead` is his id in
-// team.js. The title is a working title.
+// team.js.
 const AUGMENTATION = {
   lead: 24,
   title: ['Human Augmentation', 'Human Augmentation'],
