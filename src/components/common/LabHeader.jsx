@@ -50,10 +50,11 @@ const LABS = [
 // of the window: just below the header and the sections' scroll margin.
 const CURRENT_LINE = 160;
 
-// The underline is the lab's own colour (--site-900, set by its .theme-* class).
+// The underline is green on every group's site, not the group's accent: green
+// owns action and active states everywhere (wiki/visual-identity.md).
 const navClass = (active) =>
     `flex h-14 items-center whitespace-nowrap border-b-2 text-sm font-medium transition-colors ${
-        active ? 'border-site-900 text-slate-900' : 'border-transparent text-slate-600 hover:text-slate-900'
+        active ? 'border-primary-600 text-slate-900' : 'border-transparent text-slate-600 hover:text-slate-900'
     }`;
 
 const labClass = 'flex h-6 items-center gap-0.5 rounded-full px-2.5 text-[11px] font-semibold';

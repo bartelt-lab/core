@@ -27,7 +27,7 @@
 import { news } from './data/news.js'
 
 export const SITE_URL = 'https://www.core-network.ai'
-export const SITE_NAME = 'CORE — Cognitive Software in Europe'
+export const SITE_NAME = 'CORE — Cognitive Software'
 export const DEFAULT_OG_IMAGE = '/og-image.png'
 
 export const DEFAULT_ROUTE_META = {

@@ -46,7 +46,7 @@ const Footer = () => {
 
           <div className="md:col-span-1 md:pr-6 md:text-right lg:pr-10">
             <h3 className="mb-2 text-2xl font-heading font-bold text-tertiary-600">CORE</h3>
-            <p className="mb-4 text-slate-600">{pick('Cognitive Software in Europe', 'Cognitive Software in Europa')}</p>
+            <p className="mb-4 text-slate-600">Cognitive Software</p>
             <p className="text-sm text-slate-500">
               © {new Date().getFullYear()} CORE Initiative. All rights reserved.
             </p>

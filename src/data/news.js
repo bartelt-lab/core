@@ -231,14 +231,14 @@ export const news = [
         slug: 'iclr-icse-2025',
         date: '2025-04',
         tag: ['Publikationen', 'Publications'],
-        title: ['Sechs unserer Paper wurden auf der ICLR und ICSE 2025 angenommen', 'Six of our papers have been accepted at ICLR and ICSE 2025'],
+        title: ['Acht unserer Paper wurden auf der ICLR und ICSE 2025 angenommen', 'Eight of our papers have been accepted at ICLR and ICSE 2025'],
         teaser: [
-            'Sechs Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der ICLR 2025 in Singapur und der ICSE 2025 in Seoul angenommen, auf den Hauptkonferenzen und auf Workshops.',
-            'Six papers authored or co-authored by CORE members were accepted at ICLR 2025 in Singapore and ICSE 2025 in Seoul, at the main conferences and at workshops.',
+            'Acht Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der ICLR 2025 in Singapur und der ICSE 2025 in Ottawa angenommen, auf den Hauptkonferenzen und auf Workshops.',
+            'Eight papers authored or co-authored by CORE members were accepted at ICLR 2025 in Singapore and ICSE 2025 in Ottawa, at the main conferences and at workshops.',
         ],
         lead: [
-            'Sechs Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der International Conference on Learning Representations (ICLR 2025) in Singapur und der International Conference on Software Engineering (ICSE 2025) in Seoul angenommen.',
-            'Six papers authored or co-authored by CORE members were accepted at the International Conference on Learning Representations (ICLR 2025) in Singapore and the International Conference on Software Engineering (ICSE 2025) in Seoul.',
+            'Acht Paper von CORE-Mitgliedern oder mit ihrer Beteiligung wurden auf der International Conference on Learning Representations (ICLR 2025) in Singapur und der International Conference on Software Engineering (ICSE 2025) in Ottawa angenommen.',
+            'Eight papers authored or co-authored by CORE members were accepted at the International Conference on Learning Representations (ICLR 2025) in Singapore and the International Conference on Software Engineering (ICSE 2025) in Ottawa.',
         ],
         body: [
             [
@@ -246,8 +246,8 @@ export const news = [
                 'At the ICLR main conference, [SYMPOL](https://arxiv.org/pdf/2408.08761) optimises decision trees directly inside standard on-policy reinforcement learning algorithms. The policy stays readable as a tree, without the information loss of translating a neural network into one afterwards. Also at ICLR: NNsight and NDIF, which give researchers access to the internals of large open-weight models.',
             ],
             [
-                'Auf der ICSE-Hauptkonferenz zeigt GUIDE, wie große Sprachmodelle aus Textbeschreibungen Prototypen von Benutzeroberflächen erzeugen. Alle sechs Paper stehen auf unserer [Seite zur ICLR und ICSE 2025](/iclr-2025).',
-                'At the ICSE main conference, GUIDE shows how large language models generate user interface prototypes from text descriptions. All six papers are on our [ICLR and ICSE 2025 page](/iclr-2025).',
+                'Auf der ICSE-Hauptkonferenz zeigt GUIDE, wie große Sprachmodelle aus Textbeschreibungen Prototypen von Benutzeroberflächen erzeugen. Alle acht Paper stehen auf unserer [Seite zur ICLR und ICSE 2025](/iclr-2025).',
+                'At the ICSE main conference, GUIDE shows how large language models generate user interface prototypes from text descriptions. All eight papers are on our [ICLR and ICSE 2025 page](/iclr-2025).',
             ],
         ],
         image: '/papers/mitigating.webp',

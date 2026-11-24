@@ -19,6 +19,9 @@ import { useLanguage } from '../../i18n/useLanguage'
 // neither a group picture nor a people grid; the contacts are the people
 // it shows. The laboratories are described on /core-labs only.
 //
+// Colour: the Babeș-Bolyai blue (site-*) marks place only: kickers, tints,
+// the wordmark. Everything one can click is green (wiki/visual-identity.md).
+//
 // Text pairs are [German, English]. Names, photos, emails and links of people
 // come from data/team.js.
 
@@ -182,7 +185,7 @@ const UbbHome = () => {
               <div>
                 <p className="text-xs font-semibold text-slate-400">{pick('To join, get in touch with', 'Zum Mitmachen wenden Sie sich an')}</p>
                 <p className="font-semibold text-white">{displayName(clubContact)}</p>
-                <p className="mt-0.5 text-sm"><ReachLine member={clubContact} className="text-site-300 decoration-white/30 hover:decoration-site-300" /></p>
+                <p className="mt-0.5 text-sm"><ReachLine member={clubContact} className="text-primary-300 decoration-white/30 hover:decoration-primary-300" /></p>
               </div>
             </div>
           </div>
@@ -215,10 +218,10 @@ const UbbHome = () => {
           <ul className="mt-10 grid gap-5 md:grid-cols-3">
             {network.map((item) => (
               <li key={item.to}>
-                <ShellLink to={item.to} className="group flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-site-200 hover:shadow-xl">
+                <ShellLink to={item.to} className="group flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-primary-300 hover:shadow-xl">
                   <span className="flex items-center justify-between">
                     <span className={`${KICKER} text-slate-500`}>{txt(item.kicker)}</span>
-                    <FiArrowUpRight className="text-slate-400 transition group-hover:text-site-900" size={20} aria-hidden="true" />
+                    <FiArrowUpRight className="text-slate-400 transition group-hover:text-primary-700" size={20} aria-hidden="true" />
                   </span>
                   <span className="mt-14 block text-2xl font-bold tracking-tight text-slate-950">{txt(item.title)}</span>
                   <span className="mt-2 block text-sm leading-6 text-slate-600">{txt(item.text)}</span>
@@ -244,7 +247,7 @@ const UbbHome = () => {
                     <p className={`${KICKER} text-site-900`}>{txt(contact.about)}</p>
                     <p className="mt-1 text-lg font-bold text-slate-950">{displayName(member)}</p>
                     {contact.note && <p className="mt-1 text-sm leading-6 text-slate-600">{txt(contact.note)}</p>}
-                    <p className="mt-1 text-sm"><ReachLine member={member} className="text-primary-700 decoration-site-300 hover:decoration-site-900" /></p>
+                    <p className="mt-1 text-sm"><ReachLine member={member} className="text-primary-700 decoration-primary-300 hover:decoration-primary-700" /></p>
                   </div>
                 </li>
               )
