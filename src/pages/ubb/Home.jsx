@@ -14,9 +14,9 @@ import { useLanguage } from '../../i18n/useLanguage'
 //   - the Robotics Club, with the one photo of it: the lead of the page
 //   - the group's publications
 //   - what the group takes part in elsewhere in the network (links)
-//   - the two people to write to
+//   - the people to write to, each for one thing
 // There is no photo of the group and no list of members, so the page has
-// neither a group picture nor a people grid; the two contacts are the people
+// neither a group picture nor a people grid; the contacts are the people
 // it shows. The laboratories are described on /core-labs only.
 //
 // Text pairs are [German, English]. Names, photos, emails and links of people
@@ -69,10 +69,21 @@ const network = [
   },
 ]
 
-// Who answers what.
+// Who answers what. `note` says what a person is here, where their title in
+// team.js would mislead: David Szilagyi coordinates CORE Labs and studied at
+// Babeș-Bolyai, but his doctorate is at TU Clausthal, so he is not a PhD
+// student of this group and must not be shown as one.
 const contacts = [
   { about: ['Promotion', 'PhD'], member: 'sacarea' },
   { about: ['Robotics Club', 'Robotics Club'], member: 'benta' },
+  {
+    about: ['CORE Labs', 'CORE Labs'],
+    member: 'szilagyi',
+    note: [
+      'Koordinator Forschung & Betrieb der CORE Labs. UBB-Alumnus, heute an der TU Clausthal.',
+      'Research & Operations Coordinator of CORE Labs. UBB alumnus, now at TU Clausthal.',
+    ],
+  },
 ]
 
 const KICKER = 'text-xs font-bold uppercase tracking-[0.22em]'
@@ -218,21 +229,22 @@ const UbbHome = () => {
         </div>
       </section>
 
-      {/* Contact: the two people are the people this page shows. */}
+      {/* Contact: these are the people this page shows. */}
       <section id="contact" className="scroll-mt-24 border-t border-slate-100 bg-site-100/50 py-16 md:py-24">
         <div className={BAND}>
           <p className={`${KICKER} text-site-900`}>{pick('Contact', 'Kontakt')}</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">{pick('Who to write to', 'An wen Sie sich wenden')}</h2>
-          <ul className="mt-10 grid gap-5 md:grid-cols-2">
+          <ul className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {contacts.map((contact) => {
               const member = getMemberBySlug(contact.member)
               return (
-                <li key={contact.member} className="flex items-center gap-5 rounded-3xl border border-slate-200 bg-white p-6">
-                  <MemberPhoto member={member} className="h-20 w-20 shrink-0 rounded-full" />
+                <li key={contact.member} className="flex items-start gap-5 rounded-3xl border border-slate-200 bg-white p-6">
+                  <MemberPhoto member={member} className="h-16 w-16 shrink-0 rounded-full" />
                   <div className="min-w-0">
                     <p className={`${KICKER} text-site-900`}>{txt(contact.about)}</p>
                     <p className="mt-1 text-lg font-bold text-slate-950">{displayName(member)}</p>
-                    <p className="mt-0.5 text-sm"><ReachLine member={member} className="text-primary-700 decoration-site-300 hover:decoration-site-900" /></p>
+                    {contact.note && <p className="mt-1 text-sm leading-6 text-slate-600">{txt(contact.note)}</p>}
+                    <p className="mt-1 text-sm"><ReachLine member={member} className="text-primary-700 decoration-site-300 hover:decoration-site-900" /></p>
                   </div>
                 </li>
               )

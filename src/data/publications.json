@@ -2489,7 +2489,7 @@
       "status": "Published",
       "url": "https://doi.org/10.33436/v35i3y202508",
       "code": null,
-      "image": null,
+      "image": "/papers/vehicle-vision-shared-message.webp",
       "abstract": "A hybrid Python-Rust architecture for intelligent vehicle vision systems.",
       "topics": [
         "robotics"
