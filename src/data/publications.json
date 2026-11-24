@@ -1,6 +1,92 @@
 {
   "publications": [
     {
+      "id": "zenkner2026sad",
+      "title": "Solver-Aware Decompositions for Programming-by-Example: When Dividing Requires Knowing How to Conquer",
+      "authors": [
+        {
+          "name": "Zenkner, Janis",
+          "memberSlug": "zenkner"
+        },
+        {
+          "name": "Sesterhenn, Tobias",
+          "memberSlug": "sesterhenn"
+        },
+        {
+          "name": "Grams, Tim",
+          "memberSlug": "grams"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
+      ],
+      "venue": "NeurIPS 2026",
+      "year": 2026,
+      "date": "2026-11",
+      "type": "Conference",
+      "status": "Accepted",
+      "url": "https://arxiv.org/abs/2608.03461",
+      "code": "https://github.com/jzenkner/SAD",
+      "image": "/papers/sad.webp",
+      "abstract": "Introduces Solver-Aware Decompositions (SAD), which trains the decomposer in decomposition-based Programming-by-Example against a frozen synthesizer, rewarding subgoals that synthesizer can solve, and shows that decomposition quality depends on the synthesizer rather than on the task alone.",
+      "topics": [
+        "llm",
+        "ml"
+      ]
+    },
+    {
+      "id": "knab2026trace",
+      "title": "Intervenable Concept Dynamics for Video Activity Forecasting",
+      "authors": [
+        {
+          "name": "Knab, Patrick",
+          "memberSlug": "knab"
+        },
+        {
+          "name": "Steinmann, David",
+          "memberSlug": null
+        },
+        {
+          "name": "De Felice, Giovanni",
+          "memberSlug": null
+        },
+        {
+          "name": "Divo, Felix",
+          "memberSlug": null
+        },
+        {
+          "name": "Schlegel, Udo",
+          "memberSlug": null
+        },
+        {
+          "name": "Stammer, Wolfgang",
+          "memberSlug": null
+        },
+        {
+          "name": "Marton, Sascha",
+          "memberSlug": "marton"
+        },
+        {
+          "name": "Bartelt, Christian",
+          "memberSlug": "bartelt"
+        }
+      ],
+      "venue": "NeurIPS 2026 (FMTS Workshop)",
+      "year": 2026,
+      "date": "2026-11",
+      "type": "Workshop",
+      "status": "Accepted",
+      "url": "https://arxiv.org/abs/2611.00020",
+      "code": null,
+      "image": null,
+      "abstract": "Introduces TRACE-CBM, a concept bottleneck model that forecasts future activities in video by recursively predicting how human-understandable concepts evolve, so that editing a concept can correct a forecast.",
+      "topics": [
+        "xai",
+        "robotics"
+      ]
+    },
+    {
       "id": "zenkner2026tiips",
       "title": "Beyond Either-Or Reasoning: Transduction and Induction as Cooperative Problem-Solving Paradigms",
       "authors": [

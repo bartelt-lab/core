@@ -127,6 +127,68 @@ export const news = [
         people: ['marton', 'bartelt'],
     },
     {
+        // Listed after the Sascha Marton item on purpose: same month, both
+        // featured, and the sort is stable, so array order decides.
+        slug: 'neurips-2026',
+        featured: true,
+        date: '2026-11',
+        tag: ['Publikationen', 'Publications'],
+        title: [
+            'Zwei unserer Paper wurden auf der NeurIPS 2026 angenommen',
+            'Two of our papers have been accepted at NeurIPS 2026',
+        ],
+        teaser: [
+            'SAD zeigt, dass die Qualität einer Aufgabenzerlegung vom Synthesizer abhängt, der die Teilaufgaben löst. TRACE-CBM sagt künftige Aktivitäten in Videos über verständliche Konzepte vorher, die sich korrigieren lassen.',
+            'SAD shows that the quality of a task decomposition depends on the synthesizer that solves the parts. TRACE-CBM forecasts future activities in video through human-understandable concepts that can be corrected.',
+        ],
+        lead: [
+            'Zwei unserer Paper wurden auf der Conference on Neural Information Processing Systems (NeurIPS, CORE-Rang A*) angenommen: eines im Hauptprogramm, eines auf dem Workshop FMTS.',
+            'Two of our papers have been accepted at the Conference on Neural Information Processing Systems (NeurIPS, CORE Rank A*): one in the main conference, one at the FMTS workshop.',
+        ],
+        body: [
+            [
+                'Die NeurIPS ist eine der weltweit führenden Konferenzen für maschinelles Lernen und künstliche Intelligenz. Die NeurIPS 2026 findet vom 6. bis 12. Dezember 2026 in Sydney, Australien, statt, mit Satellitenveranstaltungen in Atlanta und Paris vom 9. bis 13. Dezember.',
+                'NeurIPS is one of the world’s leading conferences for machine learning and artificial intelligence. NeurIPS 2026 will be held in Sydney, Australia, from December 6 to 12, 2026, with satellite events in Atlanta and Paris from December 9 to 13.',
+            ],
+            [
+                '[Solver-Aware Decompositions for Programming-by-Example: When Dividing Requires Knowing How to Conquer](https://arxiv.org/abs/2608.03461) von Janis Zenkner, Tobias Sesterhenn, Tim Grams und Christian Bartelt, im Hauptprogramm. Zerlegungsbasiertes Programming by Example teilt eine Aufgabe in Teilaufgaben auf: Ein Decomposer sagt Zwischenziele vorher, und ein gelernter Synthesizer erzeugt für jedes Zwischenziel ein Programm. Ansätze der Execution Decomposition trainieren den Decomposer darauf, Ground-Truth-Zwischenziele (GT) nachzuahmen, und behandeln die Qualität einer Zerlegung damit als Eigenschaft der Aufgabe allein. Ein gelernter Synthesizer hat jedoch eigene induktive Verzerrungen, und GT-Zwischenziele spiegeln wider, wie die annotierende Person die Aufgabe zerlegt hat, nicht, was dieser Synthesizer lösen kann. Ein Decomposer, der sie nachahmt, kann daher Zwischenziele vorschlagen, die logisch korrekt, für den Synthesizer aber nicht lösbar sind.',
+                '[Solver-Aware Decompositions for Programming-by-Example: When Dividing Requires Knowing How to Conquer](https://arxiv.org/abs/2608.03461) by Janis Zenkner, Tobias Sesterhenn, Tim Grams and Christian Bartelt, in the main conference. Decomposition-based Programming-by-Example splits a task into subtasks: a decomposer predicts intermediate subgoals, and a learned synthesizer generates a program for each subgoal. Execution-decomposition approaches train the decomposer to imitate ground-truth (GT) subgoals and thereby treat decomposition quality as a property of the task alone. A learned synthesizer, however, has its own inductive biases, and GT subgoals reflect how the annotator factorized the task, not what this synthesizer can solve. A decomposer that imitates them can therefore propose subgoals that are logically valid but intractable for the synthesizer.',
+            ],
+            [
+                'Ausgehend von dieser Beobachtung schlagen wir Solver-Aware Decompositions (SAD) vor. SAD behält das überwachte Training auf GT-Zwischenzielen als strukturelles Gerüst bei und trainiert den Decomposer zusätzlich online mit Self-Critical Policy Gradients gegen einen eingefrorenen Synthesizer. Jedes gesampelte Zwischenziel wird mit der negativen Kreuzentropie des Synthesizers auf dem Zielprogramm belohnt: ein kontinuierliches Signal dafür, wie schwierig die Teilaufgabe für diesen Synthesizer ist.',
+                'Motivated by this observation, we propose Solver-Aware Decompositions (SAD), which keeps supervised training on GT subgoals as a structural scaffold and additionally trains the decomposer online with self-critical policy gradients against a frozen synthesizer. Each sampled subgoal is rewarded with the negative cross-entropy of the synthesizer on the target program, a continuous signal of how difficult the subtask is for this synthesizer.',
+            ],
+            [
+                'Unsere Experimente zeigen ein Genauigkeitsparadox: Bei festem Synthesizer stimmt ein GT-überwachter Decomposer häufiger mit den GT-Zwischenzielen überein, seine Zwischenziele führen aber zu geringerer Synthesegenauigkeit, obwohl der Synthesizer auf denselben GT-Daten trainiert wurde. Auf zwei Domänen der Listenverarbeitung verbessert SAD die Synthese- und Aufgabengenauigkeit gegenüber dem GT-überwachten Decomposer, sowohl innerhalb der Trainingsverteilung als auch bei Längengeneralisierung; dasselbe gilt beim Zero-Shot-Transfer auf einen externen Benchmark und für ein feinabgestimmtes Sprachmodell.',
+                'Our experiments show an accuracy paradox: with the synthesizer fixed, a GT-supervised decomposer agrees more often with the GT subgoals, yet its subgoals lead to lower synthesis accuracy, although the synthesizer was trained on the same GT data. On two list-processing domains, SAD improves synthesis and task accuracy over the GT-supervised decomposer, both in-distribution and under length generalization; the same holds under zero-shot transfer to an external benchmark and for a fine-tuned language model.',
+            ],
+            [
+                'Selbst ein Orakel, das die GT-Zwischenziele zur Inferenzzeit erhält, scheitert mit demselben Synthesizer und derselben Suche an Aufgaben, die SAD löst, und weniger als 2 % der Lösungen von SAD für diese Aufgaben stimmen mit dem GT-Programm überein. Die Qualität einer Zerlegung ist also keine Eigenschaft der Aufgabe: Sie hängt vom Synthesizer ab, der die Zwischenziele ausführt. [Code](https://github.com/jzenkner/SAD), [OpenReview](https://openreview.net/forum?id=SffA3K1Xus).',
+                'Even an oracle that receives the GT subgoals at inference time, with the same synthesizer and search, fails on tasks that SAD solves, and fewer than 2% of SAD’s solutions to these tasks match the GT program. Decomposition quality is therefore not a property of the task: it depends on the synthesizer that executes the subgoals. [Code](https://github.com/jzenkner/SAD), [OpenReview](https://openreview.net/forum?id=SffA3K1Xus).',
+            ],
+            [
+                '[Intervenable Concept Dynamics for Video Activity Forecasting](https://arxiv.org/abs/2611.00020) von Patrick Knab, David Steinmann, Giovanni De Felice, Felix Divo, Udo Schlegel, Wolfgang Stammer, Sascha Marton und Christian Bartelt, auf dem Workshop FMTS. Concept-Bottleneck-Modelle leiten ihre Vorhersagen über Konzepte, die Menschen verstehen. Das Paper stellt TRACE-CBM vor: Es sagt künftige Aktivitäten in Videos vorher, indem es Schritt für Schritt vorhersagt, wie sich diese Konzepte über die Zeit entwickeln. Weil die Vorhersage über die Konzepte läuft, lässt sie sich korrigieren: Wer Konzepte berichtigt, berichtigt damit ein Viertel bis ein Drittel der zunächst falschen Vorhersagen.',
+                '[Intervenable Concept Dynamics for Video Activity Forecasting](https://arxiv.org/abs/2611.00020) by Patrick Knab, David Steinmann, Giovanni De Felice, Felix Divo, Udo Schlegel, Wolfgang Stammer, Sascha Marton and Christian Bartelt, at the FMTS workshop. Concept bottleneck models route their predictions through concepts that people can understand. The paper introduces TRACE-CBM, which forecasts future activities in video by predicting, step by step, how those concepts evolve over time. Because the forecast runs through the concepts, it can be corrected: editing concepts fixes a quarter to a third of the initially wrong forecasts.',
+            ],
+        ],
+        cta: {
+            heading: ['Alle Publikationen', 'All publications'],
+            text: [
+                'Paper, Preprints und Workshop-Beiträge aus dem Netzwerk stehen auf der [Publikationsseite](/publications).',
+                'Papers, preprints and workshop contributions from the network are on the [publications page](/publications).',
+            ],
+            href: '/publications',
+            label: ['Publikationen ansehen', 'Browse publications'],
+        },
+        image: '/papers/sad.webp',
+        imageFit: 'figure',
+        imageAlt: [
+            'Zwei Balkendiagramme aus dem SAD-Paper: SAD erreicht eine geringere Zerlegungsgenauigkeit als der Solver-blinde Decomposer, aber eine höhere Synthesegenauigkeit',
+            'Two bar charts from the SAD paper: SAD reaches lower decomposition accuracy than the solver-blind decomposer, but higher synthesis accuracy',
+        ],
+        people: ['zenkner', 'sesterhenn', 'grams', 'knab', 'marton', 'bartelt'],
+    },
+    {
         slug: 'ecml-pkdd-2026-transduction-induction',
         date: '2026-09',
         tag: ['Publikationen', 'Publications'],
