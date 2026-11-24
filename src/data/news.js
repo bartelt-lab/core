@@ -134,16 +134,16 @@ export const news = [
         date: '2026-11',
         tag: ['Publikationen', 'Publications'],
         title: [
-            'Zwei unserer Paper wurden auf der NeurIPS 2026 angenommen',
-            'Two of our papers have been accepted at NeurIPS 2026',
+            'Drei unserer Paper wurden auf der NeurIPS 2026 angenommen',
+            'Three of our papers have been accepted at NeurIPS 2026',
         ],
         teaser: [
-            'SAD zeigt, dass die Qualität einer Aufgabenzerlegung vom Synthesizer abhängt, der die Teilaufgaben löst. TRACE-CBM sagt künftige Aktivitäten in Videos über verständliche Konzepte vorher, die sich korrigieren lassen.',
-            'SAD shows that the quality of a task decomposition depends on the synthesizer that solves the parts. TRACE-CBM forecasts future activities in video through human-understandable concepts that can be corrected.',
+            'SAD zeigt, dass die Qualität einer Aufgabenzerlegung vom Synthesizer abhängt, der die Teilaufgaben löst. MoTIF und TRACE-CBM machen Videomodelle über verständliche Konzepte nachvollziehbar und korrigierbar.',
+            'SAD shows that the quality of a task decomposition depends on the synthesizer that solves the parts. MoTIF and TRACE-CBM make video models traceable and correctable through human-understandable concepts.',
         ],
         lead: [
-            'Zwei unserer Paper wurden auf der Conference on Neural Information Processing Systems (NeurIPS, CORE-Rang A*) angenommen: eines im Hauptprogramm, eines auf dem Workshop FMTS.',
-            'Two of our papers have been accepted at the Conference on Neural Information Processing Systems (NeurIPS, CORE Rank A*): one in the main conference, one at the FMTS workshop.',
+            'Drei unserer Paper wurden auf der Conference on Neural Information Processing Systems (NeurIPS, CORE-Rang A*) angenommen: zwei im Hauptprogramm, eines auf dem Workshop FMTS.',
+            'Three of our papers have been accepted at the Conference on Neural Information Processing Systems (NeurIPS, CORE Rank A*): two in the main conference, one at the FMTS workshop.',
         ],
         body: [
             [
@@ -165,6 +165,10 @@ export const news = [
             [
                 'Selbst ein Orakel, das die GT-Zwischenziele zur Inferenzzeit erhält, scheitert mit demselben Synthesizer und derselben Suche an Aufgaben, die SAD löst, und weniger als 2 % der Lösungen von SAD für diese Aufgaben stimmen mit dem GT-Programm überein. Die Qualität einer Zerlegung ist also keine Eigenschaft der Aufgabe: Sie hängt vom Synthesizer ab, der die Zwischenziele ausführt. [Code](https://github.com/jzenkner/SAD), [OpenReview](https://openreview.net/forum?id=SffA3K1Xus).',
                 'Even an oracle that receives the GT subgoals at inference time, with the same synthesizer and search, fails on tasks that SAD solves, and fewer than 2% of SAD’s solutions to these tasks match the GT program. Decomposition quality is therefore not a property of the task: it depends on the synthesizer that executes the subgoals. [Code](https://github.com/jzenkner/SAD), [OpenReview](https://openreview.net/forum?id=SffA3K1Xus).',
+            ],
+            [
+                '[Concepts in Motion: Temporal Concept Bottleneck Model for Interpretable Video Classification](https://arxiv.org/abs/2509.20899) von Patrick Knab, Sascha Marton, Philipp J. Schubert, Drago Guggiana und Christian Bartelt, im Hauptprogramm. Das Paper stellt MoTIF vor, ein transformerbasiertes Concept-Bottleneck-Modell für Videos. Ein Vision-Language-Modell findet objekt- und handlungsbezogene Konzepte in den Trainingsvideos, ohne dass jemand sie annotieren muss, und MoTIF modelliert, wie sich jedes Konzept über die Zeit entwickelt. So lässt sich jede Klassifikation auf diese Konzepte zurückführen. MoTIF übertrifft Concept-Bottleneck-Modelle, die ein Video als Ganzes betrachten, und verkleinert den Abstand zu Black-Box-Videomodellen. Zuvor erhielt MoTIF in diesem Jahr den Best Paper Award auf dem CompLearn-Workshop der ICML 2026 und war Spotlight-Paper auf dem XAI4CV-Workshop der CVPR 2026. [Code](https://github.com/patrick-knab/MoTIF), [Projektseite](https://patrick-knab.github.io/MoTIF/).',
+                '[Concepts in Motion: Temporal Concept Bottleneck Model for Interpretable Video Classification](https://arxiv.org/abs/2509.20899) by Patrick Knab, Sascha Marton, Philipp J. Schubert, Drago Guggiana and Christian Bartelt, in the main conference. The paper introduces MoTIF, a transformer-based concept bottleneck model for video. A vision-language model finds object- and action-centric concepts in the training videos without manual annotation, and MoTIF models how each concept unfolds over time, so every classification can be traced back to those concepts. MoTIF improves over concept bottlenecks that treat a video as a whole and narrows the gap to black-box video models. Earlier this year, MoTIF received the Best Paper Award at the CompLearn workshop at ICML 2026 and was a spotlight paper at the XAI4CV workshop at CVPR 2026. [Code](https://github.com/patrick-knab/MoTIF), [project page](https://patrick-knab.github.io/MoTIF/).',
             ],
             [
                 '[Intervenable Concept Dynamics for Video Activity Forecasting](https://arxiv.org/abs/2611.00020) von Patrick Knab, David Steinmann, Giovanni De Felice, Felix Divo, Udo Schlegel, Wolfgang Stammer, Sascha Marton und Christian Bartelt, auf dem Workshop FMTS. Concept-Bottleneck-Modelle leiten ihre Vorhersagen über Konzepte, die Menschen verstehen. Das Paper stellt TRACE-CBM vor: Es sagt künftige Aktivitäten in Videos vorher, indem es Schritt für Schritt vorhersagt, wie sich diese Konzepte über die Zeit entwickeln. Weil die Vorhersage über die Konzepte läuft, lässt sie sich korrigieren: Wer Konzepte berichtigt, berichtigt damit ein Viertel bis ein Drittel der zunächst falschen Vorhersagen.',

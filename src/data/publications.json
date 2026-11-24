@@ -280,13 +280,13 @@
           "memberSlug": "bartelt"
         }
       ],
-      "venue": "CVPR 2026 (XAI4CV Workshop) and ICML 2026 (CompLearn Workshop)",
+      "venue": "NeurIPS 2026",
       "year": 2026,
-      "date": "2026-07",
-      "type": "Workshop",
+      "date": "2026-11",
+      "type": "Conference",
       "status": "Accepted",
       "url": "https://arxiv.org/abs/2509.20899",
-      "code": "https://patrick-knab.github.io/MoTIF/",
+      "code": "https://github.com/patrick-knab/MoTIF",
       "image": "/papers/concepts-in-motion.webp",
       "abstract": "Introduces MoTIF, a transformer-based temporal concept bottleneck framework that discovers video concepts with vision-language models and models their temporal patterns for interpretable video classification.",
       "topics": [
