@@ -37,7 +37,7 @@ const networkNav = (lab) => [
 const LABS = [
     { initials: 'TUC', to: '/tuc', name: 'TU Clausthal lab, Goslar' },
     { initials: 'MDS', href: 'https://www.mds-lab.de/', name: 'MDS Lab, Rostock' },
-    { initials: 'UBB', to: '/ubb', name: 'Babeș-Bolyai lab, Cluj-Napoca' },
+    { initials: 'UBB', to: '/ubb', name: 'CORE Cluj, Babeș-Bolyai University' },
 ];
 
 // A section counts as current once its top passes this many px from the top

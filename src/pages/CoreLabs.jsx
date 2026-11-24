@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FaArrowRight } from 'react-icons/fa'
+import { FaArrowRight, FaLock } from 'react-icons/fa'
 import HeroVideo from '../components/hero/HeroVideo'
 import { getNetworkMembers } from '../data/team'
 import PublicationsSection from '../components/publications/PublicationsSection'
@@ -142,6 +142,63 @@ const CoreLabs = () => {
       </section>
 
       <DemonstrationsSection priority tightTop />
+
+      {/* The Cluj laboratory's humanoid platform. Everything about the labs
+          lives on this page; the Cluj group's own page (/ubb) links here.
+          The photos stay blurred until the platform is announced. */}
+      <section id="cluj" className="scroll-mt-24 border-t border-slate-100 bg-slate-950 py-20 text-white md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-8">
+          <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary-300">CORE Labs · Cluj-Napoca</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">{pick('Humanoid robotics in Cluj', 'Humanoide Robotik in Cluj')}</h2>
+              <p className="mt-5 text-base leading-8 text-slate-300">
+                {pick(
+                  'The Cluj laboratory is preparing a new humanoid robotics research platform around the Unitree R1 for embodied AI, locomotion, and human–robot interaction.',
+                  'Das Labor in Cluj bereitet eine neue Forschungsplattform für humanoide Robotik rund um den Unitree R1 vor: für Embodied AI, Fortbewegung und Mensch-Roboter-Interaktion.',
+                )}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                <a
+                  href="https://www.unitree.com/R1/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex w-fit items-center gap-2 text-sm font-semibold text-white transition hover:text-primary-300"
+                >
+                  {pick('Explore the Unitree R1', 'Zum Unitree R1')}
+                  <FaArrowRight className="-rotate-45 text-xs" aria-hidden="true" />
+                </a>
+                <Link to="/ubb" className="flex w-fit items-center gap-2 text-sm font-semibold text-white transition hover:text-primary-300">
+                  {pick('The group in Cluj', 'Die Gruppe in Cluj')}
+                  <FaArrowRight className="text-xs" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative min-h-[24rem] overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900 shadow-2xl shadow-black/30">
+              <div className="absolute inset-0 grid scale-[1.04] grid-cols-[1.35fr_0.65fr] gap-2 p-2 blur-[9px]" aria-hidden="true">
+                <img src={assetUrl('/images/ubb/unitree-r1-lab-wide.webp')} alt="" loading="lazy" decoding="async" className="h-full w-full rounded-[1.5rem] object-cover" />
+                <img src={assetUrl('/images/ubb/unitree-r1-lab-detail.webp')} alt="" loading="lazy" decoding="async" className="h-full w-full rounded-[1.5rem] object-cover" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-slate-950/20" />
+              <div className="absolute inset-0 flex items-center justify-center p-6">
+                <div className="max-w-sm rounded-2xl border border-white/15 bg-slate-950/75 p-6 text-center shadow-xl backdrop-blur-xl">
+                  <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full border border-primary-300/30 bg-primary-300/10 text-primary-300">
+                    <FaLock aria-hidden="true" />
+                  </div>
+                  <p className="mt-4 text-sm font-bold uppercase tracking-[0.18em]">{pick('Lab integration in progress', 'Labor im Aufbau')}</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">
+                    {pick(
+                      'Experiments, capabilities, and platform details will be revealed soon.',
+                      'Experimente, Fähigkeiten und Details zur Plattform folgen in Kürze.',
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section id="publications" className="border-t border-slate-100 bg-gradient-to-br from-white via-slate-50 to-white py-10 md:py-14">
         <div className="container mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1fr_0.82fr] md:items-center md:px-12 lg:px-20">

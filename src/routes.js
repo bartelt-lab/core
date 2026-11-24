@@ -347,9 +347,9 @@ export const routes = [
   {
     path: '/ubb',
     source: 'src/pages/ubb/Home.jsx',
-    title: 'UBB Cluj-Napoca | CORE',
+    title: 'CORE Cluj | Babeș-Bolyai University',
     description:
-      'A joint research initiative with researchers at Babeș-Bolyai University in autonomous systems, intelligent simulation, and robot learning — a new home for cognitive robotics and embodied intelligence.',
+      'CORE Cluj: the researchers of the CORE Network at Babeș-Bolyai University in Cluj-Napoca. Their research in autonomous driving, simulation and machine learning, the Robotics Club for students, and who to contact.',
   },
 ]
 

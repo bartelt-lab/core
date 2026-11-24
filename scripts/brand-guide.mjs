@@ -271,13 +271,13 @@ const html = `<!doctype html>
 
   <div style="margin-top:8mm">
     <h3>Currently defined</h3>
-    ${swatch('Babeș-Bolyai Blue', UBB, 'CORE Labs Cluj only. Taken from the university seal.')}
+    ${swatch('Babeș-Bolyai Blue', UBB, 'CORE Cluj (/ubb) only. Taken from the university seal.')}
     <small>Goslar and Rostock have not defined one. Their material runs green.</small>
   </div>
 
   <div style="margin-top:8mm;border:1px solid #E2E8F0;border-radius:4mm;padding:6mm">
     <h3>Where the two meet</h3>
-    <p style="margin-top:1mm">On the CORE Labs Cluj wordmark the place name runs from the
+    <p style="margin-top:1mm">On the CORE Cluj wordmark the place name runs from the
     university's blue into CORE's green — the two institutions in one word. This is the only
     place a brand colour is ever used as a gradient.</p>
     <!-- Drawn as SVG, not background-clip:text. The CSS version renders with a white

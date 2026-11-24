@@ -3,20 +3,22 @@ import LabHeader from '../common/LabHeader'
 import LegalLinks from '../common/LegalLinks'
 import ThirdPartyLogo from '../common/ThirdPartyLogo'
 
-// The header is common/LabHeader.jsx, shared with /tuc. This is what the Cluj
-// lab puts in it. Each entry is a section of the /ubb home page (the ids are
+// The header is common/LabHeader.jsx, shared with /tuc. This is what CORE
+// Cluj puts in it. Each entry is a section of the /ubb home page (the ids are
 // set in pages/ubb/Home.jsx). Text pairs are [German, English].
 const LAB_NAV = [
-  { to: '/ubb#robotics-club', section: 'robotics-club', label: ['Robotics Club', 'Robotics Club'] },
+  { to: '/ubb#people', section: 'people', label: ['Personen', 'People'] },
   { to: '/ubb#research', section: 'research', label: ['Forschung', 'Research'] },
-  { to: '/ubb#autonomous', section: 'autonomous', label: ['Autonomes Fahren', 'Autonomous Driving'] },
+  { to: '/ubb#robotics-club', section: 'robotics-club', label: ['Robotics Club', 'Robotics Club'] },
+  { to: '/ubb#contact', section: 'contact', label: ['Kontakt', 'Contact'] },
 ]
 
-// Every section of the home page with an id, in page order.
-const HOME_SECTIONS = ['robotics-club', 'research', 'autonomous', 'publications']
+// Every section of the home page with an id, in page order. "labs" has no
+// entry in the bar: while it is on screen nothing is highlighted.
+const HOME_SECTIONS = ['people', 'research', 'robotics-club', 'labs', 'contact']
 
 // The network's Join Us page, at the list of groups: the Cluj card there names
-// who to write to. The lab has no Join Us page of its own.
+// who to write to. CORE Cluj has no Join Us page of its own.
 const JOIN = { to: '/join-us#positions', label: ['Mitmachen', 'Join Us'] }
 
 const UbbLayout = ({ children }) => {
@@ -28,12 +30,12 @@ const UbbLayout = ({ children }) => {
       <LabHeader
         lab="UBB"
         home="/ubb"
-        logoLabel="CORE Labs Cluj home"
+        logoLabel="CORE Cluj home"
         logo={
           <>
             <ThirdPartyLogo src="/logos/ubb-logo-only.webp" alt="" className="h-10 w-10 object-contain" />
             <div className="leading-tight">
-              <p className="text-sm font-bold tracking-tight text-slate-950">CORE Labs Cluj</p>
+              <p className="text-sm font-bold tracking-tight text-slate-950">CORE Cluj</p>
               <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">Babeș-Bolyai University</p>
             </div>
           </>
@@ -43,12 +45,12 @@ const UbbLayout = ({ children }) => {
         join={JOIN}
       />
 
-      <main>{children}</main>
+      <main className="pt-16 lg:pt-[5.8125rem]">{children}</main>
 
       <footer className="border-t border-slate-200 bg-slate-950 text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-10 sm:flex-row sm:items-center sm:justify-between md:px-8">
           <div>
-            <p className="font-semibold">CORE Labs Cluj</p>
+            <p className="font-semibold">CORE Cluj</p>
             <p className="mt-1 text-sm text-slate-400">Babeș-Bolyai University · Cluj-Napoca</p>
           </div>
           <div className="flex items-center gap-4 text-sm text-slate-300">

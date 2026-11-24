@@ -288,8 +288,14 @@ src/
                 TrafficNetwork,Vergabepilot,Werewolfs}Project.jsx
                                    routed under /ai-team-projects/*
     ubb/
-      Home.jsx                     CORE Labs Cluj (/ubb), third shell. Carries
-                                   the only site accent — see below
+      Home.jsx                     CORE Cluj (/ubb), third shell: the page of
+                                   the network's researchers at Babeș-Bolyai
+                                   (people, research, Robotics Club, contact),
+                                   built like the /tuc home page. It does not
+                                   describe the laboratories: all lab content
+                                   is on /core-labs (the humanoid block is its
+                                   #cluj section) and this page links there.
+                                   Carries the only site accent — see below
 
 public/
   data/

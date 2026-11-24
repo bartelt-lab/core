@@ -54,7 +54,7 @@ const Navbar = () => {
       title: "MDS Lab, Rostock",
       place: "Rostock",
     },
-    { initials: "UBB", to: "/ubb", title: "Babeș-Bolyai lab", place: "Cluj-Napoca" },
+    { initials: "UBB", to: "/ubb", title: "CORE Cluj, Babeș-Bolyai University", place: "Cluj-Napoca" },
   ];
 
   const navItems = [

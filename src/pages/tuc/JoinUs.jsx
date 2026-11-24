@@ -93,14 +93,14 @@ const GROUPS = [
         name: ['Babeș-Bolyai-Universität', 'Babeș-Bolyai University'],
         place: ['Cluj-Napoca, Rumänien', 'Cluj-Napoca, Romania'],
         text: [
-            'Das CORE Lab in Cluj: Promotion in der Gruppe und der Robotics Club für Studierende.',
-            'The CORE Lab in Cluj: doctoral studies with the group, and the Robotics Club for students.',
+            'CORE Cluj: Promotion in der Gruppe und der Robotics Club für Studierende.',
+            'CORE Cluj: doctoral studies with the group, and the Robotics Club for students.',
         ],
         contacts: [
             { about: ['Promotion', 'PhD'], member: 'sacarea' },
             { about: ['Robotics Club', 'Robotics Club'], member: 'benta' },
         ],
-        cta: ['Zum Lab in Cluj', 'The Cluj lab'],
+        cta: ['Zu CORE Cluj', 'CORE Cluj'],
         to: '/ubb',
     },
     {
