@@ -12,15 +12,18 @@ const ScrollToTop = () => {
             window.history.scrollRestoration = 'manual'
         }
 
+        let hashTimer
         if (hash) {
-            // Scroll to id
+            // Scroll to id. Pages are lazy, so a link from another page gets
+            // here before its target exists: look again for a moment.
             const id = hash.replace('#', '')
-            const element = document.getElementById(id)
-            if (element) {
-                setTimeout(() => {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }, 300)
+            let tries = 0
+            const look = () => {
+                const element = document.getElementById(id)
+                if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                else if (++tries < 12) hashTimer = setTimeout(look, 150)
             }
+            hashTimer = setTimeout(look, 300)
         } else {
             // Default to top
             window.scrollTo(0, 0)
@@ -31,7 +34,10 @@ const ScrollToTop = () => {
             if (!hash) window.scrollTo(0, 0)
         }, 0)
 
-        return () => clearTimeout(timeout)
+        return () => {
+            clearTimeout(timeout)
+            clearTimeout(hashTimer)
+        }
     }, [pathname, hash])
 
     useEffect(() => {

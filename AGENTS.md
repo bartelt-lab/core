@@ -27,9 +27,14 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
   CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
   merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`, `/tuc/teaching`,
-  `/tuc/seminar`, `/tuc/theses`. TUC navbar links out to the CORE Network
-  site for `/network`, `/publications`, `/industry-projects`, `/ai-team-projects`
-  and `/join-us` (no `/tuc/publications`).
+  `/tuc/seminar`, `/tuc/theses`. Its navigation (`components/tuc/Layout.jsx`)
+  has two tiers. The bar is the lab itself: People, Research and Contact are
+  sections of the `/tuc` home page (`/tuc#people` ...), then Teaching and
+  Join Us. The thin strip above it, shown from 1024px up, holds what leaves
+  the lab: the CORE Network site (`/network`, `/publications?institution=TUC`,
+  `/industry-projects`, `/ai-team-projects`) and the other labs. Below 1024px
+  the strip folds into the menu under its own headings. There is no
+  `/tuc/publications`.
 
 Note: the AI Team Projects pages live in `pages/tuc/` but route under
 `/ai-team-projects/*` in `CoreShell` (not `/tuc/*`).
