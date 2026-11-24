@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { FiArrowLeft, FiArrowUpRight, FiChevronUp, FiMenu, FiX } from 'react-icons/fi';
 import RightSidebar from '../common/RightSidebar';
 import ThemedLogo from '../common/ThemedLogo';
+import ShellLink from '../common/ShellLink';
 import LegalLinks from '../common/LegalLinks';
 import { useLanguage } from '../../i18n/useLanguage';
 import './fonts.js';
@@ -19,9 +20,15 @@ const TEACHING_ALIASES = ['/tuc/seminar', '/tuc/theses'];
 
 // The navigation has two tiers, so that it is plain which links belong to the
 // lab and which leave for the network site:
-//   strip (lg up)  the CORE Network pages and the other labs
-//   bar            the lab itself: its sections, Teaching, Join Us
-// Below lg the strip folds into the menu, under its own headings.
+//   top row (lg up)  two capsules: the CORE Network pages in the dark one,
+//                    which is the network navbar's own dark pill in small,
+//                    and the lab switch
+//   bar              the lab itself: its sections, Teaching, Join Us
+// Below lg the top row folds into the menu, under its own headings.
+//
+// Links that leave the lab are ShellLinks: on the way to the network site the
+// capsules, the logo and Join Us morph into their counterparts in its navbar.
+// The `viewTransitionName`s below pair them up (see common/ShellLink.jsx).
 
 // The lab's own navigation. An entry with `section` is a section of the /tuc
 // home page (the ids are set in pages/tuc/Home.jsx).
@@ -59,7 +66,7 @@ const navClass = (active) =>
         active ? 'border-primary-600 text-slate-900' : 'border-transparent text-slate-600 hover:text-slate-900'
     }`;
 
-const stripClass = 'whitespace-nowrap transition-colors hover:text-slate-900';
+const labClass = 'flex h-6 items-center gap-0.5 rounded-full px-2.5 text-[11px] font-semibold';
 
 const joinClass = (active) =>
     `whitespace-nowrap rounded-lg px-4 py-2 text-sm font-semibold transition ${
@@ -137,51 +144,69 @@ const Layout = ({ children }) => {
     };
 
     const navLinks = (items, cls) =>
-        items.map((item) => (
-            <Link key={item.to} to={item.to} onClick={onNavClick(item)} aria-current={isActive(item) ? 'true' : undefined} className={cls(isActive(item))}>
-                {label(item)}
-            </Link>
-        ));
+        items.map((item) => {
+            const leavesLab = !item.to.startsWith('/tuc');
+            const LinkTo = leavesLab ? ShellLink : Link;
+            return (
+                <LinkTo
+                    key={item.to}
+                    to={item.to}
+                    onClick={onNavClick(item)}
+                    aria-current={isActive(item) ? 'true' : undefined}
+                    className={cls(isActive(item))}
+                    // Join Us in the bar pairs with Join Us in the network navbar.
+                    style={item === JOIN && cls === joinClass ? { viewTransitionName: 'shell-join' } : undefined}
+                >
+                    {label(item)}
+                </LinkTo>
+            );
+        });
 
     const labLink = (lab, className, children) =>
         lab.to ? (
-            <Link key={lab.initials} to={lab.to} title={lab.name} className={className}>{children}</Link>
+            <ShellLink key={lab.initials} to={lab.to} title={lab.name} className={className}>{children}</ShellLink>
         ) : (
             <a key={lab.initials} href={lab.href} target="_blank" rel="noreferrer" title={lab.name} className={className}>{children}</a>
         );
 
     return (
         <div className={`theme-tuc min-h-screen flex flex-col bg-white text-slate-900 ${TYPE}`}>
-            <header className="fixed top-0 inset-x-0 z-30 bg-white border-b border-slate-200">
-                <div className="hidden border-b border-slate-200 bg-slate-50 lg:block">
-                    <nav
-                        className="mx-auto flex h-8 max-w-7xl items-center gap-6 px-6 text-xs text-slate-600"
-                        aria-label={pick('CORE Network', 'CORE Network')}
-                    >
-                        <Link to={NETWORK_HOME.to} className="inline-flex items-center gap-1.5 whitespace-nowrap font-semibold text-slate-800 transition-colors hover:text-primary-700">
-                            <FiArrowLeft size={13} aria-hidden="true" />
-                            {label(NETWORK_HOME)}
-                        </Link>
-                        {NETWORK_NAV.map((item) => (
-                            <Link key={item.to} to={item.to} className={stripClass}>{label(item)}</Link>
-                        ))}
-                        <div className="ml-auto flex items-center gap-1">
-                            <span className="mr-1 text-slate-500">{pick('Labs', 'Labs')}</span>
-                            <span className="rounded-full bg-primary-100 px-2 py-0.5 font-semibold text-primary-800" aria-current="true" title="TU Clausthal lab">TUC</span>
+            <header className="fixed top-0 inset-x-0 z-30 bg-white border-b border-slate-200" style={{ viewTransitionName: 'shell-header' }}>
+                <div className="hidden lg:block">
+                    <div className="mx-auto flex h-9 max-w-7xl items-end justify-between px-6 text-xs">
+                        <nav
+                            className="flex h-7 items-center gap-4 rounded-full border border-slate-700/40 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 px-3.5 text-slate-300"
+                            aria-label="CORE Network"
+                            style={{ viewTransitionName: 'shell-nav' }}
+                        >
+                            <ShellLink to={NETWORK_HOME.to} className="inline-flex items-center gap-1.5 whitespace-nowrap font-semibold text-white transition-colors hover:text-primary-300">
+                                <FiArrowLeft size={13} aria-hidden="true" />
+                                {label(NETWORK_HOME)}
+                            </ShellLink>
+                            {NETWORK_NAV.map((item) => (
+                                <ShellLink key={item.to} to={item.to} className="whitespace-nowrap transition-colors hover:text-white">{label(item)}</ShellLink>
+                            ))}
+                        </nav>
+                        <div
+                            className="flex h-7 items-center rounded-full border border-slate-200/80 bg-slate-50/80 p-0.5"
+                            aria-label={pick('Lab sites', 'Seiten der Labs')}
+                            style={{ viewTransitionName: 'shell-labs' }}
+                        >
+                            <span className={`${labClass} bg-white text-primary-700 shadow-sm`} aria-current="true" title="TU Clausthal lab">TUC</span>
                             {OTHER_LABS.map((lab) =>
-                                labLink(lab, `inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 font-semibold ${stripClass}`, (
+                                labLink(lab, `${labClass} text-slate-600 transition hover:bg-white hover:text-slate-900`, (
                                     <>
                                         {lab.initials}
-                                        {lab.href && <FiArrowUpRight size={12} aria-hidden="true" />}
+                                        {lab.href && <FiArrowUpRight size={11} aria-hidden="true" />}
                                     </>
                                 )),
                             )}
                         </div>
-                    </nav>
+                    </div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 lg:h-14">
-                    <Link to="/tuc" className="flex items-center gap-3">
+                    <Link to="/tuc" className="flex items-center gap-3" style={{ viewTransitionName: 'shell-logo' }}>
                         <ThemedLogo name={LOGO} alt="Cognitive Software, TU Clausthal" className="h-12 w-auto lg:h-11" />
                     </Link>
 
@@ -226,7 +251,7 @@ const Layout = ({ children }) => {
 
             <RightSidebar />
 
-            <main className="flex-grow pt-16 lg:pt-[5.625rem]">{children}</main>
+            <main className="flex-grow pt-16 lg:pt-[5.8125rem]">{children}</main>
 
             <footer className="border-t border-slate-200 bg-white text-slate-600">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">

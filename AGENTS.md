@@ -30,11 +30,19 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
   `/tuc/seminar`, `/tuc/theses`. Its navigation (`components/tuc/Layout.jsx`)
   has two tiers. The bar is the lab itself: People, Research and Contact are
   sections of the `/tuc` home page (`/tuc#people` ...), then Teaching and
-  Join Us. The thin strip above it, shown from 1024px up, holds what leaves
-  the lab: the CORE Network site (`/network`, `/publications?institution=TUC`,
-  `/industry-projects`, `/ai-team-projects`) and the other labs. Below 1024px
-  the strip folds into the menu under its own headings. There is no
-  `/tuc/publications`.
+  Join Us. The row above it, shown from 1024px up, holds what leaves the lab
+  in two capsules: the CORE Network site (`/network`,
+  `/publications?institution=TUC`, `/industry-projects`, `/ai-team-projects`)
+  in a small copy of the network navbar's dark pill, and the lab switch.
+  Below 1024px the row folds into the menu under its own headings. There is
+  no `/tuc/publications`.
+- **Links between the network site and a lab site** use
+  `components/common/ShellLink.jsx` instead of `Link`. It runs the jump as a
+  view transition, in which the header, the logo, the dark nav, the lab
+  switch and Join Us morph into their counterparts: each carries the same
+  `viewTransitionName` (`shell-*`) in `common/Navbar.jsx` and
+  `tuc/Layout.jsx`. A name must be on one visible element per page, or the
+  browser drops the whole transition. Do not use ShellLink within a shell.
 
 Note: the AI Team Projects pages live in `pages/tuc/` but route under
 `/ai-team-projects/*` in `CoreShell` (not `/tuc/*`).

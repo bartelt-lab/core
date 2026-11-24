@@ -7,6 +7,10 @@ const ScrollToTop = () => {
     const [isVisible, setIsVisible] = useState(false)
 
     useLayoutEffect(() => {
+        // Stamps the route on <html> in the commit that shows it: ShellLink
+        // waits for this to change before it lets a view transition run.
+        document.documentElement.dataset.route = pathname
+
         // Prevent browser from restoring scroll position
         if (window.history.scrollRestoration) {
             window.history.scrollRestoration = 'manual'

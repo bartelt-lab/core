@@ -13,6 +13,7 @@ import {
   FaUserPlus,
 } from "react-icons/fa";
 import ThemedLogo from "./ThemedLogo";
+import ShellLink from "./ShellLink";
 import { useLanguage } from "../../i18n/useLanguage";
 
 const Navbar = () => {
@@ -109,10 +110,15 @@ const Navbar = () => {
         isScrolled ? "scale-[0.985] opacity-100" : "scale-100 opacity-100"
       }`}
     >
-      <div className="flex h-[3.75rem] items-center gap-2 rounded-[1.5rem] border border-white/90 bg-white/90 p-2.5 shadow-[0_18px_55px_-24px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:h-[4.5rem] sm:gap-4 sm:p-3">
+      <div className="flex h-[3.75rem] items-center gap-2 rounded-[1.5rem] border border-white/90 bg-white/90 p-2.5 shadow-[0_18px_55px_-24px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:h-[4.5rem] sm:gap-4 sm:p-3"
+        // The viewTransitionNames in this bar pair its parts with the lab
+        // header's (tuc/Layout.jsx), so they morph on the way to a lab site.
+        style={{ viewTransitionName: "shell-header" }}
+      >
         <Link
           to="/"
           onClick={closeMenu}
+          style={{ viewTransitionName: "shell-logo" }}
           aria-label="CORE Network home"
           className="flex h-full w-14 shrink-0 items-center justify-center rounded-2xl transition hover:bg-slate-50 sm:w-[7.5rem] 2xl:w-[9rem]"
         >
@@ -130,7 +136,9 @@ const Navbar = () => {
 
         <div className="flex-1 lg:hidden" aria-hidden="true" />
 
-        <nav className="relative hidden h-full min-w-0 flex-1 items-center justify-center overflow-hidden rounded-[1.4rem] border border-slate-700/40 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 px-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_30px_-18px_rgba(15,23,42,0.9)] sm:px-3 lg:flex">
+        <nav className="relative hidden h-full min-w-0 flex-1 items-center justify-center overflow-hidden rounded-[1.4rem] border border-slate-700/40 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 px-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_30px_-18px_rgba(15,23,42,0.9)] sm:px-3 lg:flex"
+          style={{ viewTransitionName: "shell-nav" }}
+        >
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -178,6 +186,7 @@ const Navbar = () => {
         <Link
           to="/join-us"
           onClick={closeMenu}
+          style={{ viewTransitionName: "shell-join" }}
           aria-label={pick("Join Us", "Mitmachen")}
           title={pick("Join Us", "Mitmachen")}
           className="flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full border border-primary-700 text-sm font-semibold whitespace-nowrap text-primary-700 transition hover:bg-primary-700 hover:text-white min-[360px]:w-auto min-[360px]:px-3.5 sm:px-4 lg:w-10 lg:px-0 xl:w-auto xl:px-4"
@@ -212,6 +221,7 @@ const Navbar = () => {
 
         <div
           className="hidden h-10 shrink-0 items-center rounded-full border border-slate-200/80 bg-slate-50/80 p-0.5 px-1 lg:flex"
+          style={{ viewTransitionName: "shell-labs" }}
           aria-label="Lab sites"
         >
           {labSites.map((lab) => {
@@ -226,7 +236,7 @@ const Navbar = () => {
                 : "text-slate-600 hover:bg-white hover:text-slate-900"
             }`;
             return lab.to ? (
-              <Link
+              <ShellLink
                 key={lab.initials}
                 to={lab.to}
                 title={lab.title}
@@ -234,7 +244,7 @@ const Navbar = () => {
                 className={cls}
               >
                 {lab.initials}
-              </Link>
+              </ShellLink>
             ) : (
               <a
                 key={lab.initials}
@@ -317,9 +327,9 @@ const Navbar = () => {
                   return (
                     <li key={lab.initials}>
                       {lab.to ? (
-                        <Link to={lab.to} onClick={closeMenu} aria-label={lab.title} className={cls}>
+                        <ShellLink to={lab.to} onClick={closeMenu} aria-label={lab.title} className={cls}>
                           {body}
-                        </Link>
+                        </ShellLink>
                       ) : (
                         <a href={lab.href} target="_blank" rel="noreferrer" aria-label={lab.title} className={cls}>
                           {body}

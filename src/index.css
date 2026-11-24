@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Moving between the network site and a lab site ──────────────────────────
+   common/ShellLink.jsx runs these jumps as a view transition. The parts the two
+   headers share carry the same view-transition-name, so the browser moves and
+   resizes each from its old place to its new one; the rest of the page fades.
+   ShellLink does not start a transition under reduced motion. */
+::view-transition-group(shell-header),
+::view-transition-group(shell-logo),
+::view-transition-group(shell-nav),
+::view-transition-group(shell-labs),
+::view-transition-group(shell-join) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
 /* Brand palette — RGB triplets, consumed two ways:
    - tailwind.config.js maps them to primary/secondary/tertiary via rgb(var(--x))
    - raw CSS reads them directly (.range-dual below, the inline <style> blocks in
