@@ -2,9 +2,18 @@
 
 For members of the network who want to change something on
 <https://www.core-network.ai>: add a paper, update a person, post a news
-item, fix a text. You work on your own copy (a fork) and propose the change
-as a pull request; a maintainer reviews and merges it, and merging publishes
-it.
+item, fix a text, or anything larger.
+
+There are two ways in, and nothing in between:
+
+- **You have write access to the repository.** You can change anything
+  directly. The conventions below still hold, and so does the fact that
+  whatever reaches `main` is published.
+- **You do not.** Every change, of any size, is a pull request from your own
+  copy (a fork). Someone with write access reviews and merges it. There is no
+  need to ask first or to open an issue: the pull request is the proposal.
+
+The rest of this page describes the pull request route.
 
 You do not need to know React for content changes.
 [wiki/editing-content.md](wiki/editing-content.md) names the one file to edit
@@ -60,8 +69,8 @@ You need [Node.js](https://nodejs.org) 20 or newer and Git.
    Both must pass. The build takes about a minute; its last step needs a
    browser, which you install once with `npx playwright install chromium`.
    On Windows the build currently stops at its first step for a reason that
-   has nothing to do with your change; run `npm run build:fast` instead and
-   say so in the pull request.
+   has nothing to do with your change; run `npm run build:fast` instead. The
+   full build then runs for you on GitHub, in the next step.
 
 5. **Commit and push to your fork.**
 
@@ -74,31 +83,29 @@ You need [Node.js](https://nodejs.org) 20 or newer and Git.
 6. **Open the pull request** on GitHub, against `bartelt-lab/core`, branch
    `main`. Fill in the short form it shows you.
 
-A maintainer will review it, may ask for a change, and merges it. **Merging
-into `main` publishes the site**, which is why only maintainers merge and why
-nobody pushes to `main` directly.
+GitHub then runs the lint and the full build on your pull request by itself
+("Check pull request"). A green tick means the site would still build with
+your change; a red cross links to the step that failed and what it said. Push
+a fix to the same branch and it runs again. On your first pull request the
+check may wait until someone with write access approves it.
 
-## What you can change on your own, and what to raise first
+Someone with write access will review the pull request, may ask for a change,
+and merges it. **Merging into `main` publishes the site.**
 
-**Go ahead:**
+## What to read before a larger change
 
-- people (`src/data/team.js`) and their photos
-- publications (`src/data/publications.json`), their figures and topics
-- news items (`src/data/news.js`)
-- your group's contacts, positions and texts
-- project texts and pictures
-- typos and wrong facts, anywhere
+A pull request can contain anything. For some changes there is a guide that
+saves you a round of review:
 
-**Open an issue or ask first:**
-
-- a new page, a moved page, a new item in a menu
-- a change to a header, the footer, a layout or a colour
-- anything on the legal pages (Impressum, privacy policy)
-- a new embed or anything loaded from another server (fonts, scripts, video
-  players, maps)
-- adding, replacing or re-encoding a video: possible, but read
-  [wiki/video.md](wiki/video.md) first, the build enforces its rules
-- another group's page
+| If you … | Read first |
+|---|---|
+| add or change a person, a paper, a news item, a contact | [wiki/editing-content.md](wiki/editing-content.md) |
+| add or move a page | [wiki/routing-and-seo.md](wiki/routing-and-seo.md), [wiki/site-structure.md](wiki/site-structure.md) |
+| touch a header, a menu or the footer | [wiki/navigation.md](wiki/navigation.md) |
+| change a colour or a layout | [wiki/visual-identity.md](wiki/visual-identity.md), [wiki/dark-mode.md](wiki/dark-mode.md) |
+| add, replace or re-encode a video | [wiki/video.md](wiki/video.md): the build enforces its rules |
+| add an embed or load anything from another server (fonts, scripts, players, maps) | [wiki/legal-pages.md](wiki/legal-pages.md): the privacy policy has to stay true |
+| change the Impressum or the privacy policy | [wiki/legal-pages.md](wiki/legal-pages.md) |
 
 ## Conventions
 
@@ -128,7 +135,7 @@ nobody pushes to `main` directly.
   (`jane-doe.webp`). Run `npm run optimize-images` on anything large.
 - Do not upload a phone photo as it is: it records where it was taken.
   Converting it to WebP drops that.
-- No Git LFS. No files above 25 MB without asking.
+- No Git LFS. A video above 25 MB gets a warning from the build; keep clips below that.
 - Do not delete `public/google2e6aa57e94108948.html`. It looks like a stray
   file and is not.
 

@@ -56,10 +56,14 @@ Text is written twice, German first: `['Deutsch', 'English']`.
 
 ## Contributing and publishing
 
-**A push to `main` publishes the site.** GitHub Actions builds it and deploys
-to GitHub Pages. So nobody pushes there directly: changes come in as pull
-requests, from a fork or a branch. [CONTRIBUTING.md](CONTRIBUTING.md) walks
-through it step by step and lists the conventions.
+**Whatever reaches `main` is published.** GitHub Actions builds it and deploys
+to GitHub Pages.
+
+There are two ways to change the site. With write access to the repository you
+can change anything directly. Without it, every change is a pull request from
+a fork, which GitHub checks by itself (lint and the full build) before someone
+with write access merges it. [CONTRIBUTING.md](CONTRIBUTING.md) walks through
+the pull request route step by step and lists the conventions.
 
 Before committing, `npm run lint` and `npm run build` must pass
 ([PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)). Look at your change in the browser

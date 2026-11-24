@@ -10,9 +10,10 @@ Deferred ideas with their reasoning are in [later.md](later.md).
 
 `scripts/check-videos.mjs` reads `ffprobe` output and chokes on Windows line
 endings, so the first step of `npm run build` fails on a Windows machine
-whatever was changed. The deploy workflow runs on Linux and is not affected.
-Until it is fixed, `npm run lint` plus `npm run build:fast` is the local
-check, and the prerender step goes unverified locally.
+whatever was changed. The workflows run on Linux and are not affected: a pull
+request gets the full build from `.github/workflows/check.yml`. Until it is
+fixed, `npm run lint` plus `npm run build:fast` is the local check on
+Windows, and the prerender step is only verified once a pull request is open.
 
 ### The BibTeX export is far behind
 
@@ -31,7 +32,8 @@ on the project pages have the same problem.
 
 ### The deploy workflow pins actions built for Node 20
 
-Each run of `.github/workflows/deploy.yml` ends with a deprecation note for
+Each run of `.github/workflows/deploy.yml` (and of `check.yml`, which pins the
+same versions) ends with a deprecation note for
 `actions/cache@v4`, `actions/checkout@v4`, `actions/configure-pages@v4` and
 `actions/setup-node@v4`. Builds pass, because GitHub runs them on Node 24
 anyway; it becomes a failure when GitHub stops doing that. Bump each to its
@@ -75,4 +77,7 @@ they should have them ([navigation.md](navigation.md)).
 - **The prerendered output** of the pages added or rebuilt in November 2026
   (`/join-us`, `/join-us/tuc`, `/ubb`, `/core-labs`, `/impressum`,
   `/datenschutz`, `/iclr-2025`). The prerender step has not been run on them:
-  it cannot run on the Windows machine they were built on (see above).
+  it cannot run on the Windows machine they were built on (see above). The
+  first pull request with these changes will run it.
+- **The pull request check itself** (`.github/workflows/check.yml`) was written
+  without being run; watch its first run.

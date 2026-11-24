@@ -45,7 +45,7 @@ never of universities. "Cognitive Software" is not translated. Code names
 | touch the legal pages, fonts or embeds | `wiki/legal-pages.md` |
 | make something for print or for a partner | `wiki/decks-and-print.md` (and send `brand/CORE-Brand-Guidelines.pdf`, do not paraphrase it) |
 | pick up known problems or deferred work | `wiki/open-issues.md`, `wiki/later.md` |
-| explain to a person how to contribute | `CONTRIBUTING.md` (fork, branch, checks, pull request; what needs asking first) |
+| explain to a person how to contribute | `CONTRIBUTING.md`: with write access anything goes; without it, every change is a pull request from a fork. No "ask first", no issues |
 
 Also in `wiki/`: `paper-pdfs-needed.md` (papers without a picture),
 `navbar-scroll-hide.md` (a parked technique), `video-frames/` (a contact strip
@@ -207,6 +207,11 @@ scripts/
   optimize-images.mjs  large PNG/JPEG to WebP
   replace-video.mjs compress-videos.ps1   video tooling
   brand-guide.mjs brand-kit.mjs palette-figures.mjs print-figures.mjs   print
+
+.github/
+  workflows/deploy.yml   builds and publishes on every push to main
+  workflows/check.yml    lint and the same build on every pull request
+  pull_request_template.md
 
 wiki/                  the documentation this file points to
 brand/                 CORE-Brand-Guidelines.pdf (generated)
