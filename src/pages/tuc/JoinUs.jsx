@@ -108,13 +108,10 @@ const GROUPS = [
         name: ['Universität Rostock', 'University of Rostock'],
         place: ['Rostock, Deutschland', 'Rostock, Germany'],
         text: [
-            'Das MDS Lab (Marine Data Science): Promotion in der Gruppe und Themen für Abschlussarbeiten.',
-            'The MDS Lab (Marine Data Science): doctoral studies with the group, and thesis topics for students.',
+            'Das MDS Lab (Marine Data Science): Promotion in der Gruppe.',
+            'The MDS Lab (Marine Data Science): doctoral studies with the group.',
         ],
-        contacts: [
-            { about: ['Promotion', 'PhD'], member: 'ludtke' },
-            { about: ['Abschlussarbeiten', 'Theses'], link: { label: ['Offene Themen', 'Open topics'], href: 'https://www.mds-lab.de/theses/' } },
-        ],
+        contacts: [{ about: ['Promotion', 'PhD'], member: 'ludtke' }],
         cta: ['Website des MDS Lab', 'MDS Lab website'],
         href: 'https://www.mds-lab.de/',
     },

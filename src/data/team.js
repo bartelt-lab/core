@@ -101,7 +101,7 @@ const members = [
     ],
     photo: '/members/stefan-luedtke.webp',
     bio: 'Assistant Professor at the University of Rostock.',
-    email: '',
+    email: 'stefan.luedtke@uni-rostock.de',
     links: {
       scholar: 'https://scholar.google.de/citations?user=DxgfRiQAAAAJ&hl=en',
       website: 'https://www.mds-lab.de/people/stefan-ludtke/'
