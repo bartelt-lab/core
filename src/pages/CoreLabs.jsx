@@ -15,6 +15,19 @@ import { useLanguage } from '../i18n/useLanguage'
 const PI_IDS = [1, 24, 2, 4]
 const OPERATIONS_CONTACT_ID = 5
 
+// The papers this page lists: every publication tagged with one of these
+// topics (the `topics` field in publications.json, ids from
+// data/publicationTopics.js). To add a paper here, give it the topic.
+const LAB_TOPICS = ['robotics']
+
+// Where the hero sends people. Visitors come for different things, so the
+// first screen offers each of them directly instead of one "explore" button.
+const JUMPS = [
+  { href: '#dynamo', label: ['Projekte', 'Projects'] },
+  { href: '#publications', label: ['Publikationen', 'Publications'] },
+  { href: '#initiative', label: ['Beteiligte', 'People'] },
+]
+
 // Every person here links to their card in the CORE Network team grid, which
 // Home.jsx scrolls to and ring-highlights off this hash. There is still no
 // per-member detail route (see AGENTS.md issue 2), so the grid is the target.
@@ -47,10 +60,22 @@ const CoreLabs = () => {
                 'Gemeinsame Forschungsinfrastruktur, gemeinsame Projekte und ein internationales Team zur Weiterentwicklung kognitiver autonomer Systeme.',
               )}
             </p>
-            <a href="#initiative" className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition hover:bg-primary-50">
-              {pick('Explore the labs', 'Labore erkunden')}
-              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
-            </a>
+            <nav className="flex flex-wrap gap-3" aria-label={pick('On this page', 'Auf dieser Seite')}>
+              {JUMPS.map((jump, index) => (
+                <a
+                  key={jump.href}
+                  href={jump.href}
+                  className={`inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold transition ${
+                    index === 0
+                      ? 'bg-white text-slate-950 shadow-lg hover:bg-primary-50'
+                      : 'border border-white/40 bg-white/10 text-white backdrop-blur hover:bg-white/20'
+                  }`}
+                >
+                  {pick(jump.label[1], jump.label[0])}
+                  <FaArrowRight className="h-3 w-3 rotate-90" aria-hidden="true" />
+                </a>
+              ))}
+            </nav>
           </motion.div>
         </div>
       </section>
@@ -145,6 +170,33 @@ const CoreLabs = () => {
 
       <DemonstrationsSection priority tightTop />
 
+      {/* The papers that fit CORE Labs, as a list. It stands above the Cluj
+          block: papers are what many visitors come for, the block below
+          announces something that is not there yet. */}
+      <section id="publications" className="scroll-mt-24 border-t border-slate-100 bg-slate-50 py-14 md:py-20">
+        <div className="container mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-2xl">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">CORE Labs</p>
+              <h2 className="mb-4 text-3xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">{pick('Research publications', 'Forschungspublikationen')}</h2>
+              <p className="text-sm leading-6 text-slate-600">
+                {pick(
+                  'Papers from the network on robots and autonomous systems. The publication list has every paper of the CORE Network, on all topics.',
+                  'Arbeiten aus dem Netzwerk zu Robotern und autonomen Systemen. Die Publikationsliste enthält alle Arbeiten des CORE Network, zu allen Themen.',
+                )}
+              </p>
+            </div>
+            <Link to={`/publications?topic=${LAB_TOPICS[0]}`} className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700">
+              {pick('Open in the publication list', 'In der Publikationsliste öffnen')}
+              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="mt-10">
+            <PublicationsSection layout="cards" title="" subtitle="" compact initialTopics={LAB_TOPICS} sectionId={null} />
+          </div>
+        </div>
+      </section>
+
       {/* The Cluj laboratory's humanoid platform. Everything about the labs
           lives on this page; the Cluj group's own page (/ubb) links here.
           The photos stay blurred until the platform is announced. */}
@@ -198,28 +250,6 @@ const CoreLabs = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="publications" className="border-t border-slate-100 bg-gradient-to-br from-white via-slate-50 to-white py-10 md:py-14">
-        <div className="container mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1fr_0.82fr] md:items-center md:px-12 lg:px-20">
-          <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary-700">CORE Labs</p>
-            <h2 className="mb-4 text-3xl font-heading font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">{pick('Research publications', 'Forschungspublikationen')}</h2>
-            <p className="text-sm leading-6 text-slate-600">
-              {pick(
-                'A rotating preview of recent publications connected to CORE Labs. Open the archive for the full publication list across the CORE Network.',
-                'Eine rotierende Vorschau aktueller Publikationen mit Bezug zu CORE Labs. Öffnen Sie das Archiv für die vollständige Publikationsliste des CORE Network.',
-              )}
-            </p>
-            <Link to="/publications" className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-primary-700">
-              {pick('View all publications', 'Alle Publikationen ansehen')}
-              <FaArrowRight className="h-3 w-3" aria-hidden="true" />
-            </Link>
-          </div>
-          <div className="mx-auto w-full max-w-lg rounded-2xl border border-white bg-white/75 p-2 shadow-xl shadow-slate-200/70 ring-1 ring-slate-200/70 backdrop-blur">
-            <PublicationsSection limit={4} layout="rotator" title="" subtitle="" compact compactHeightClass="h-[220px]" sectionId={null} />
           </div>
         </div>
       </section>

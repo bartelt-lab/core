@@ -225,16 +225,11 @@ const Navbar = () => {
           aria-label="Lab sites"
         >
           {labSites.map((lab) => {
-            const isTucActive =
-              lab.initials === "TUC" && location.pathname.startsWith("/tuc");
-            const isUbbActive =
-              lab.initials === "UBB" && location.pathname.startsWith("/ubb");
-            const isPrimaryLab = lab.initials === "TUC" && !isUbbActive;
-            const cls = `flex h-8 min-w-12 flex-1 items-center justify-center rounded-full px-3 text-xs font-semibold tracking-wide transition duration-200 ${
-              isTucActive || isUbbActive || isPrimaryLab
-                ? "bg-white text-primary-700 shadow-sm"
-                : "text-slate-600 hover:bg-white hover:text-slate-900"
-            }`;
+            // No pill is highlighted: this navbar only shows on the network
+            // site, where none of the labs is the current one. (A lab's own
+            // header, LabHeader.jsx, marks that lab.)
+            const cls =
+              "flex h-8 min-w-12 flex-1 items-center justify-center rounded-full px-3 text-xs font-semibold tracking-wide text-slate-600 transition duration-200 hover:bg-white hover:text-slate-900";
             return lab.to ? (
               <ShellLink
                 key={lab.initials}

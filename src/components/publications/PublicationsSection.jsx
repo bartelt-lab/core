@@ -244,6 +244,8 @@ const PublicationsSection = ({
   compact = false,
   compactHeightClass = 'h-[350px]',
   initialInstitution = 'all',
+  // Topic ids (data/publicationTopics.js) the list starts filtered to.
+  initialTopics = [],
   // Pages that embed this inside their own <section id="publications"> pass
   // sectionId={null} — two elements with the same id break the scroll-spy.
   sectionId = 'publications',
@@ -254,7 +256,7 @@ const PublicationsSection = ({
     query: '',
     type: [],
     status: [],
-    topic: [],
+    topic: initialTopics,
     // The full span, available on the first render now that the corpus is not fetched.
     yearRange: YEAR_BOUNDS,
     researcher: 'all',

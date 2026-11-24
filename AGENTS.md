@@ -404,6 +404,12 @@ the bottom of the file tree). Read the relevant one before related work:
 `memberSlug` resolves against `slug` on each entry in `src/data/team.js`.
 Currently the value is written but not yet rendered as a link (issue 2).
 
+The address can preset a filter: `/publications?institution=TUC|UBB|Rostock`
+(the lab sites link this way) and `/publications?topic=<topic id>`.
+`/core-labs` lists every paper tagged with one of its `LAB_TOPICS`
+(`pages/CoreLabs.jsx`, currently `robotics`): to put a paper on that page,
+give it the topic.
+
 The publications page (`/publications`) lists papers as rows, two side by side
 (`components/publications/PublicationRow.jsx`). The image slot shows `image`
 (a figure, shown whole) if set, else `page`, else a cover with the short name
