@@ -32,8 +32,10 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
   sections of the `/tuc` home page (`/tuc#people` ...), then Teaching and
   Join Us. The row above it, shown from 1024px up, holds what leaves the lab
   in two capsules: the CORE Network site (`/network`,
-  `/publications?institution=TUC`, `/industry-projects`, `/ai-team-projects`)
-  in a small copy of the network navbar's dark pill, and the lab switch.
+  `/publications?institution=TUC`, `/industry-projects`, `/core-labs`,
+  `/ai-team-projects`, `/compute-cluster`: the same pages in the same order
+  as the network navbar) in a small copy of that navbar's dark pill, and the
+  lab switch.
   Below 1024px the row folds into the menu under its own headings. There is
   no `/tuc/publications`.
 - **Links between the network site and a lab site** use

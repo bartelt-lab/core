@@ -44,7 +44,9 @@ const NETWORK_HOME = { to: '/network', label: ['CORE Network', 'CORE Network'] }
 const NETWORK_NAV = [
     { to: '/publications?institution=TUC', label: ['Publikationen', 'Publications'] },
     { to: '/industry-projects', label: ['Industrieprojekte', 'Industry Projects'] },
+    { to: '/core-labs', label: ['CORE Labs', 'CORE Labs'] },
     { to: '/ai-team-projects', label: ['AI-Team-Projekte', 'AI Team Projects'] },
+    { to: '/compute-cluster', label: ['Rechencluster', 'Compute Cluster'] },
 ];
 
 const OTHER_LABS = [
