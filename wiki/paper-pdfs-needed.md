@@ -27,7 +27,6 @@ over the publisher's PDF. Remove the paper from this list afterwards.
 | `peng2025echosense` | EchoSense: Frontal Haptic Navigation in VR towards Biomimetic Empathy | https://doi.org/10.1145/3714394.3754428 |
 | `chen2025exploring` | Exploring Singing Breath: Physiological Insights and Directions for Breath-Aware Augmentation in Mixed Reality Design | https://doi.org/10.1145/3714394.3756159 |
 | `chen2025introduction` | Introduction of the VCSD Dataset: A Vocal Cords Dataset Using EMG and Ultrasonography for Singing Pitch Skill Recognition | https://doi.org/10.1145/3714394.3754407 |
-| `szilagyi2025scalable` | Scalable Aggregation Under Client-Side Compute Variability in Federated Learning | https://doi.ieeecomputersociety.org/10.1109/ICTAI66417.2025.00085 |
 | `gruenerbl20252nd` | 2nd International Workshop on Mobile Cognitive-Augmenting and Cognition-Altering Technologies (CAT) in Human-Centered AI | https://doi.org/10.1145/3737821.3743747 |
 | `kikuchi2025mindspace` | MindSpace: Improving Relaxation Break and Performance Using a Device Exterting Tactile Sensation of Life-like Breathing Movement with Squeeze-like Deep Touch Pressure on Users' Upper Chest Area | https://doi.org/10.1145/3743049.3743054 |
 | `xu2025spread` | Spread Your Wings: Demonstrating a Soft Floating Robotic Avatar with Flapping Wings for Novel Physical Interactions | https://doi.org/10.1145/3721257.3734034 |
@@ -36,5 +35,3 @@ over the publisher's PDF. Remove the paper from this list afterwards.
 | `kim2025eye` | Eye-Tracking for Cognitive Well-Being: Balancing Detection and Ethical Feedback | https://doi.org/10.1145/3715669.3726817 |
 | `meng2025placebo` | A Placebo Concert: The Placebo Effect for Visualization of Physiological Audience Data during Experience Recreation in Virtual Reality | https://doi.org/10.1145/3706598.3713594 |
 | `barbareschi2025sticking` | Sticking With Electronics for Crafting Practices: An Inclusive Approach to Promote Making Literacy Among Older Adults | https://doi.org/10.1145/3706598.3714234 |
-| `szilagyi2025accelerating` | Accelerating Intelligent Vehicle Vision: A Hybrid Python-Rust Architecture with Partial-Blocking Inter-Process Communication | https://doi.org/10.33436/v35i3y202508 |
-| `szilagyi2024benchmarking` | Benchmarking Autonomous Driving Systems using a Modular and Scalable Simulation Environment | https://doi.org/10.1109/ictai62512.2024.00067 |

@@ -7,6 +7,7 @@ import {
 import assetUrl from "../../utils/assetUrl";
 import LazyVideo from "../../components/common/LazyVideo";
 import { useLanguage } from "../../i18n/useLanguage";
+import { features } from "../../config/features";
 
 const activeProjects = [
   {
@@ -177,12 +178,6 @@ const archiveProjects = [
     link: "/ai-team-projects/traffic-network",
   },
 ];
-
-// The student testimonials are switched off, not removed: the section, the
-// three videos and their entries in data/videos.js are all still here. Set
-// this to true to show the section again, and put its entry back in the
-// '/ai-team-projects' list of components/common/RightSidebar.jsx.
-const SHOW_TESTIMONIALS = false;
 
 const testimonials = [
   assetUrl("/videos/testimonials/Student-Testim-1.mp4"),
@@ -553,7 +548,9 @@ const AiTeamProjects = () => {
         </div>
       </section>
 
-      {SHOW_TESTIMONIALS && (
+      {/* Switched off, not removed: see showStudentTestimonials in
+          config/features.js. */}
+      {features.showStudentTestimonials && (
       <section id="testimonials" className="bg-white py-16">
         <div className="container mx-auto max-w-6xl px-6 md:px-10">
           <div className="mb-10 text-center">

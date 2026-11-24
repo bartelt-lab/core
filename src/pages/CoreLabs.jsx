@@ -42,7 +42,7 @@ const JUMPS = [
 
 // Every person here links to their card in the CORE Network team grid, which
 // Home.jsx scrolls to and ring-highlights off this hash. There is still no
-// per-member detail route (see AGENTS.md issue 2), so the grid is the target.
+// per-member detail route (see wiki/open-issues.md, "A page per person"), so the grid is the target.
 const memberLink = (member) => `/#member-${member.slug}`
 
 const CoreLabs = () => {

@@ -1,130 +1,89 @@
-# CORE
+# CORE website
 
-Website for the **CORE** initiative (Cognitive Software / Cognitive Robotics in
-Europe). One React app hosts two sites behind a `BrowserRouter`:
+The website of **CORE**, a network of researchers and research groups working
+on cognitive software: <https://www.core-network.ai>.
 
-- **CORE Network / CORE Labs** — `/`, `/core-labs`, `/network`, `/publications`,
-  `/demos`, `/dynamo`, `/compute-cluster`, and the AI Team Projects pages under
-  `/ai-team-projects/*`.
-- **Bartelt Lab** (TU Clausthal group) — everything under `/tuc/*`.
+One React app serves three things:
 
-`src/App.jsx` splits the two into `CoreShell` (pill navbar + footer) and
-`TucShell` (minimal sticky header). See `AGENTS.md` for the full route map and
-architecture notes.
+- **the network's site**: home, publications, industry projects, CORE Labs,
+  AI Team Projects, the compute cluster, news, Join Us;
+- **the group sites**: the TU Clausthal group under `/tuc` and CORE Cluj under
+  `/ubb` (the Rostock group has its own site);
+- **CORE Labs**: the laboratories the network runs together, at `/core-labs`.
 
-## Tech stack
-
-- React 19 + Vite 7
-- Tailwind CSS 3
-- React Router 7 (`BrowserRouter`), prerendered to static HTML at build time
-- Framer Motion 12
-- react-icons 5
+How these relate, and which page belongs to whom, is in
+[wiki/site-structure.md](wiki/site-structure.md).
 
 ## Getting started
 
-Requires Node.js 20+ and npm.
+Needs Node.js 20 or newer.
 
 ```bash
 npm install
-npm run dev      # vite dev server at http://localhost:5173
+npm run dev      # http://localhost:5173
 ```
 
-### Scripts
-
-| Script | Purpose |
-|--------|---------|
-| `npm run dev` | Start the Vite dev server (HMR). |
-| `npm run build` | Production build to `dist/`, then prerender every route to static HTML. ~60s. |
-| `npm run build:fast` | Vite build only, no prerender (~6s). For quick dead-ref checks. |
-| `npm run prerender` | Re-run the SEO + prerender passes over an existing `dist/`. |
+| Command | What it does |
+|---|---|
+| `npm run dev` | Development server with live reload. |
+| `npm run lint` | ESLint. No warnings allowed. |
+| `npm run build` | The full build: video check, compile, SEO files, then every page rendered to static HTML. About a minute. Needs a browser for the last step: `npx playwright install chromium`, once. |
+| `npm run build:fast` | Compile only, a few seconds. Proves nothing is broken at the import level. |
 | `npm run preview` | Serve the built `dist/` locally. |
-| `npm run lint` | ESLint (flat config), zero warnings allowed. |
-| `npm run optimize-images` | Convert large PNG/JPEG in `public/` to WebP (see `wiki/assets.md`). |
+| `npm run optimize-images` | Convert large PNG/JPEG under `public/` to WebP. |
 
-## Project structure
+On Windows the full build currently stops at its first step, for a reason that
+has nothing to do with your change. See
+[wiki/open-issues.md](wiki/open-issues.md).
 
-```
-src/
-  App.jsx              route gating: CoreShell vs TucShell (BrowserRouter)
-  routes.js            canonical route table — paths + per-route title/meta
-  index.css            Tailwind v3 entry + theme palettes (CSS vars)
-  data/                team.js, projects.js, demonstrations.js, videos.js,
-                       publications.json + publications.js (build-time import)
-  utils/assetUrl.js    prefixes BASE_URL onto /public asset paths
-  components/
-    common/            Navbar, Footer, RightSidebar, ThemeToggle, ...
-    tuc/               TucShell Layout + ProjectLayout
-    about/ demonstrations/ hero/ network/ publications/ team/
-  pages/
-    Home.jsx CoreLabs.jsx Demos.jsx Dynamo.jsx ComputeCluster.jsx
-    Publications.jsx AiTeamProjects.jsx
-    tuc/               bartelt pages + tuc/projects/*Project.jsx
-public/
-  data/publications.bib    BibTeX export (download artifact)
-  members/ logos/ papers/ images/ videos/ documents/ icons/
-```
+## Changing content
 
-## Editing content
+You do not need to know React to add a person, a paper or a news item:
+[wiki/editing-content.md](wiki/editing-content.md) names the one file to edit
+for each and shows what to write.
 
-- **Team members** — `src/data/team.js` only. Both CORE and TUC pages derive
-  from it (filtered by `roleCategory` / institution).
-- **Publications** — `src/data/publications.json` only. Imported at build time
-  via `src/data/publications.js`; no runtime fetch.
-- **CORE Labs projects / demos** — `src/data/projects.js`, `demonstrations.js`.
-- **Asset paths** — write `/<bucket>/...` (e.g. `/members/foo.webp`) and wrap in
-  `assetUrl()` so the base prefix is applied.
+In short:
 
-## Theming
+| What | File |
+|---|---|
+| People | `src/data/team.js` |
+| Publications | `src/data/publications.json` |
+| News | `src/data/news.js` |
+| Industry projects | `src/data/industryProjects.js` |
+| Video | `src/data/videos.js`, and read [wiki/video.md](wiki/video.md) first: the build enforces its rules |
 
-Themes are `[data-theme]` attributes on `<html>` (`ThemeToggle`) backed by
-`--primary-*` / `--secondary-*` CSS variables in `src/index.css`. Tailwind color
-classes (`primary-600`, …) resolve those vars, so theme-aware UI must use
-Tailwind color classes or `currentColor` — a static `<img>`/SVG file cannot pick
-up the theme.
+Text is written twice, German first: `['Deutsch', 'English']`.
 
-## Deployment
+## Publishing
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds and
-publishes to GitHub Pages at <https://www.core-network.ai>.
+**A push to `main` publishes the site.** GitHub Actions builds it and deploys
+to GitHub Pages. Work on a branch and open a pull request.
 
-### Prerendering
+Before committing, `npm run lint` and `npm run build` must pass
+([PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)). Look at your change in the browser
+too, in German and in dark mode: the buttons for both are at the bottom left
+of every page.
 
-The site is a client-rendered SPA, so a plain HTTP fetch would return an empty
-`<div id="root">` — invisible to crawlers, link unfurlers, and agents. The build
-therefore has two passes after `vite build`:
+## Documentation
 
-1. `scripts/seo-files.mjs` — writes `robots.txt`, `sitemap.xml`, `llms.txt`, and
-   a 1200x630 `og-image.png`, all generated from `src/routes.js`.
-2. `scripts/prerender.mjs` — drives headless Chromium over every route and
-   writes the rendered DOM to static HTML. Each route lands in two files,
-   `<path>.html` and `<path>/index.html`, so `/foo` and `/foo/` both serve the
-   right page whichever way the host resolves extensionless URLs. `404.html` is
-   the raw shell, which boots the app for anything unmatched.
+| Read | For |
+|---|---|
+| [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) | the rules the build enforces, mainly for video |
+| [wiki/site-structure.md](wiki/site-structure.md) | network, groups and labs; every page and its file; the words to use |
+| [wiki/navigation.md](wiki/navigation.md) | the two headers, the menus, the side dots, the animated jump between sites |
+| [wiki/editing-content.md](wiki/editing-content.md) | adding and changing people, papers, news, contacts |
+| [wiki/routing-and-seo.md](wiki/routing-and-seo.md) | adding or moving a page; why and how pages are prerendered |
+| [wiki/dark-mode.md](wiki/dark-mode.md) | how dark mode works and what new UI must do |
+| [wiki/visual-identity.md](wiki/visual-identity.md) | colour, type and shape, and why |
+| [wiki/assets.md](wiki/assets.md) | where files go; image and video loading |
+| [wiki/video.md](wiki/video.md), [wiki/video-workflow.md](wiki/video-workflow.md) | video policy; adding a clip step by step |
+| [wiki/project-subsites.md](wiki/project-subsites.md) | how a lab project page should look |
+| [wiki/legal-pages.md](wiki/legal-pages.md) | Impressum, privacy policy, and the rules that keep them true |
+| [wiki/decks-and-print.md](wiki/decks-and-print.md) | the brand guide for print and partners |
+| [wiki/open-issues.md](wiki/open-issues.md), [wiki/later.md](wiki/later.md) | known problems; deferred work |
+| [AGENTS.md](AGENTS.md) | the repo map and hard-won rules, written for AI coding agents and useful to anyone new |
 
-The prerender pass fails the build if a page comes back untitled, undersized, or
-carrying the wrong canonical URL — the signature of the SPA fallback being served
-in place of a real route.
+## Built with
 
-### Do not delete `public/google2e6aa57e94108948.html`
-
-That is the Google Search Console verification file for the
-`https://www.core-network.ai` URL prefix property. Vite copies `public/` to the
-site root verbatim, so it serves at `/google2e6aa57e94108948.html`, which is
-where Google looks.
-
-**Google re-checks it periodically — removing it silently un-verifies the
-property and Search Console stops reporting.** It looks like a stray file; it
-is not.
-
-A Domain property would cover every hostname at once, but it needs a DNS TXT
-record and the domain's DNS (Strato) is not ours to change. With Enforce HTTPS
-on, the apex and both `http://` variants all redirect to
-`https://www.core-network.ai`, so the single URL prefix property covers the
-whole site.
-
-### Adding a route
-
-Add the `<Route>` to `src/App.jsx` **and** an entry to `src/routes.js`. Without
-the second one the page still works, but it ships with the default title and
-never reaches the sitemap or the prerenderer — i.e. it stays invisible.
-Prerendering needs a browser locally: `npx playwright install chromium`.
+React 19, Vite 7, Tailwind CSS 3, React Router 7, Framer Motion. Exact versions
+are in `package.json`.

@@ -9,7 +9,7 @@
  * right place to read it.
  *
  * Edit `src/data/publications.json` and nothing else. The schema is documented in
- * AGENTS.md; `memberSlug` on an author resolves against `slug` in `./team.js`.
+ * wiki/editing-content.md; `memberSlug` on an author resolves against `slug` in `./team.js`.
  */
 import data from './publications.json'
 

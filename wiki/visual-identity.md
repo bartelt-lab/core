@@ -156,7 +156,7 @@ institutional meaning, reach for `secondary-700` (4.60:1), which is what the
   `index.css`. Do not add `font-heading` per-heading.
 - **Inter 300–700** — body, and the default.
 - Both are bundled with the site from the `@fontsource` packages (`src/fonts.js`),
-  not loaded from Google Fonts: see "Legal pages" in `AGENTS.md` for why.
+  not loaded from Google Fonts: see `wiki/legal-pages.md` for why.
 
 The real scale is UI-dense rather than editorial: `text-sm` and `text-xs` account for
 roughly half of all sizing utilities. Display sizes (`text-5xl`+) appear only in heroes.

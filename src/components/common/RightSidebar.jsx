@@ -37,7 +37,7 @@ const ROUTE_SECTIONS = {
         { id: 'hero', label: 'Overview' },
         { id: 'active-projects', label: 'Projects' },
         // { id: 'testimonials', label: 'Voices' }, hidden with the section: see
-        // SHOW_TESTIMONIALS in pages/tuc/AiTeamProjects.jsx
+        // showStudentTestimonials in config/features.js
         { id: 'archive', label: 'Archive' },
     ],
     '/compute-cluster': [
