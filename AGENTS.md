@@ -28,6 +28,12 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
   merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`, `/tuc/teaching`,
   `/tuc/seminar`, `/tuc/theses`. There is no `/tuc/publications`.
+- **Wording: TU Clausthal, MDS Rostock and CORE Cluj are research groups**,
+  not labs. "Lab" is for the laboratories (CORE Labs) and for the one group
+  that carries it in its name (MDS Lab). Menus, tooltips and screen-reader
+  labels say "Groups", "This group", "Other groups". Code names
+  (`LabHeader`, `lab=`) kept the old word; this file still says "lab site"
+  for `/tuc` and `/ubb` in places, meaning a group's site.
 - **The lab sites (`/tuc`, `/ubb`) share one header**,
   `components/common/LabHeader.jsx`; each lab's `Layout.jsx` passes its logo,
   its own links and its Join Us link. The navigation has two tiers. The bar

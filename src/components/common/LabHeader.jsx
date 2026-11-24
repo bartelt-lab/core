@@ -4,8 +4,14 @@ import { FiArrowLeft, FiArrowUpRight, FiMenu, FiX } from 'react-icons/fi';
 import ShellLink from './ShellLink';
 import { useLanguage } from '../../i18n/useLanguage';
 
-// The header of a lab site (/tuc, /ubb). Both labs use this one component, so
-// they stay the same; a lab passes its own logo, sections and Join Us link.
+// The header of a group's site (/tuc, /ubb). Both groups use this one
+// component, so they stay the same; a group passes its own logo, sections and
+// Join Us link.
+//
+// Wording: TU Clausthal, MDS Rostock and CORE Cluj are research GROUPS of the
+// network. "Lab" means the laboratories (CORE Labs) and is part of one
+// group's own name (MDS Lab); do not call the groups labs in anything a
+// visitor reads or hears. The component and its props keep the old name.
 //
 // The navigation has two tiers, so that it is plain which links belong to the
 // lab and which leave for the network site:
@@ -35,7 +41,7 @@ const networkNav = (lab) => [
 
 // The lab switch, in the order of the one in the network navbar.
 const LABS = [
-    { initials: 'TUC', to: '/tuc', name: 'TU Clausthal lab, Goslar' },
+    { initials: 'TUC', to: '/tuc', name: 'Cognitive Software group, TU Clausthal' },
     { initials: 'MDS', href: 'https://www.mds-lab.de/', name: 'MDS Lab, Rostock' },
     { initials: 'UBB', to: '/ubb', name: 'CORE Cluj, Babeș-Bolyai University' },
 ];
@@ -190,7 +196,7 @@ const LabHeader = ({ lab, home, logo, logoLabel, nav, sections = [], join }) => 
                     </nav>
                     <div
                         className="flex h-7 items-center rounded-full border border-slate-200/80 bg-slate-50/80 p-0.5"
-                        aria-label={pick('Lab sites', 'Seiten der Labs')}
+                        aria-label={pick('Groups', 'Gruppen')}
                         style={{ viewTransitionName: 'shell-labs' }}
                     >
                         {LABS.map((entry) =>
@@ -214,7 +220,7 @@ const LabHeader = ({ lab, home, logo, logoLabel, nav, sections = [], join }) => 
                     {logo}
                 </Link>
 
-                <nav className="hidden lg:flex items-center gap-7" aria-label={pick('Lab', 'Lab')}>
+                <nav className="hidden lg:flex items-center gap-7" aria-label={pick('This group', 'Diese Gruppe')}>
                     {navLinks(nav, navClass)}
                     {navLinks([join], joinClass)}
                 </nav>
@@ -233,13 +239,13 @@ const LabHeader = ({ lab, home, logo, logoLabel, nav, sections = [], join }) => 
             {isNavOpen && (
                 <div className="lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-slate-200 bg-white">
                     <nav className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
-                        <p className={menuHeading}>{pick('This lab', 'Dieses Lab')}</p>
+                        <p className={menuHeading}>{pick('This group', 'Diese Gruppe')}</p>
                         {navLinks([...nav, join], mobileClass)}
                         <div className="my-2 h-px bg-slate-200" />
                         <p className={menuHeading}>CORE Network</p>
                         {navLinks([{ ...NETWORK_HOME, label: ['Startseite des Netzwerks', 'Network home'] }, ...network], mobileClass)}
                         <div className="my-2 h-px bg-slate-200" />
-                        <p className={menuHeading}>{pick('Other labs', 'Andere Labs')}</p>
+                        <p className={menuHeading}>{pick('Other groups', 'Andere Gruppen')}</p>
                         {otherLabs.map((entry) =>
                             labLink(entry, `flex items-center gap-1.5 ${mobileClass(false)}`, (
                                 <>

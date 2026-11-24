@@ -47,7 +47,7 @@ const Navbar = () => {
   }, []);
 
   const labSites = [
-    { initials: "TUC", to: "/tuc", title: "TU Clausthal lab", place: "Clausthal" },
+    { initials: "TUC", to: "/tuc", title: "Cognitive Software group, TU Clausthal", place: "Clausthal" },
     {
       initials: "MDS",
       href: "https://www.mds-lab.de/",
@@ -222,7 +222,7 @@ const Navbar = () => {
         <div
           className="hidden h-10 shrink-0 items-center rounded-full border border-slate-200/80 bg-slate-50/80 p-0.5 px-1 lg:flex"
           style={{ viewTransitionName: "shell-labs" }}
-          aria-label="Lab sites"
+          aria-label={pick("Groups", "Gruppen")}
         >
           {labSites.map((lab) => {
             // No pill is highlighted: this navbar only shows on the network
@@ -302,7 +302,7 @@ const Navbar = () => {
 
             <div className="mt-2 border-t border-slate-200 px-2.5 pt-3 pb-1">
               <p className="text-xs font-semibold text-slate-500">
-                {pick("Lab sites", "Seiten der Labs")}
+                {pick("Groups", "Gruppen")}
               </p>
               <ul className="mt-2 grid grid-cols-3 gap-2">
                 {labSites.map((lab) => {
