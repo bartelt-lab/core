@@ -74,10 +74,9 @@ they should have them ([navigation.md](navigation.md)).
   missing files; the console for warnings.
 - **Safari and Firefox** for the animated jump between the network and a
   group.
-- **The prerendered output** of the pages added or rebuilt in November 2026
-  (`/join-us`, `/join-us/tuc`, `/ubb`, `/core-labs`, `/impressum`,
-  `/datenschutz`, `/iclr-2025`). The prerender step has not been run on them:
-  it cannot run on the Windows machine they were built on (see above). The
-  first pull request with these changes will run it.
-- **The pull request check itself** (`.github/workflows/check.yml`) was written
-  without being run; watch its first run.
+- **The prerendered output, read by a person.** The full build, prerender
+  included, passed for the pages added or rebuilt in November 2026 (first run
+  of the pull request check, 2026-11-24). That proves each page renders with
+  a title, a plausible size and the right canonical address; nobody has opened
+  the generated HTML of `/join-us`, `/join-us/tuc`, `/ubb` or `/core-labs` to
+  see that it says what the live page says.
