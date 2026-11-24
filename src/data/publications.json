@@ -1,6 +1,162 @@
 {
   "publications": [
     {
+      "id": "shah2026activation",
+      "title": "Mitigating Adaptive Attacks against Reasoning Models with Activation Consistency Training",
+      "authors": [
+        {
+          "name": "Shah, Avidan",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Angell, Rico",
+          "memberSlug": null
+        }
+      ],
+      "venue": "NeurIPS 2026 (FLMSec Workshop)",
+      "year": 2026,
+      "date": "2026-11",
+      "type": "Workshop",
+      "status": "Accepted",
+      "url": "https://openreview.net/forum?id=iQqYYBo3EQ",
+      "code": null,
+      "image": null,
+      "abstract": "Fine-tunes a reasoning model so its hidden activations on an adversarially rewritten prompt match those on the clean prompt, making it more robust against an adaptive prompt-injection attacker.",
+      "topics": [
+        "llm",
+        "xai"
+      ]
+    },
+    {
+      "id": "minder2026persona",
+      "title": "Synthetic Persona Pretraining: Alignment from Token Zero",
+      "authors": [
+        {
+          "name": "Minder, Julian",
+          "memberSlug": null
+        },
+        {
+          "name": "Moskvoretskii, Viktor",
+          "memberSlug": null
+        },
+        {
+          "name": "Singhal, Raghav",
+          "memberSlug": null
+        },
+        {
+          "name": "Jiao, Difan",
+          "memberSlug": null
+        },
+        {
+          "name": "Arditi, Andy",
+          "memberSlug": null
+        },
+        {
+          "name": "Cui, Shaobo",
+          "memberSlug": null
+        },
+        {
+          "name": "Borjigin, Yiderigun",
+          "memberSlug": null
+        },
+        {
+          "name": "Bali, Kartik",
+          "memberSlug": null
+        },
+        {
+          "name": "Krsteski, Stefan",
+          "memberSlug": null
+        },
+        {
+          "name": "Raj, Harsh",
+          "memberSlug": null
+        },
+        {
+          "name": "Nguyen, Huu",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Anderson, Ashton",
+          "memberSlug": null
+        },
+        {
+          "name": "Aydin, Roland",
+          "memberSlug": null
+        },
+        {
+          "name": "West, Robert",
+          "memberSlug": null
+        }
+      ],
+      "venue": "NeurIPS 2026 (AI4Good Workshop)",
+      "year": 2026,
+      "date": "2026-11",
+      "type": "Workshop",
+      "status": "Accepted",
+      "url": "https://openreview.net/forum?id=o5fzrIaaQd",
+      "code": "https://github.com/epfl-dlab/spp",
+      "image": null,
+      "abstract": "Adds first-person reflections drawn from a written value constitution to pretraining documents, so a model learns an aligned persona from the start, then binds that persona to the assistant role in post-training.",
+      "topics": [
+        "llm"
+      ]
+    },
+    {
+      "id": "lu2026folding",
+      "title": "Two Stages of Folding: Convergent Mechanisms in AI Protein Folding Trunks",
+      "authors": [
+        {
+          "name": "Lu, Kevin",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Huber, Stefan",
+          "memberSlug": null
+        },
+        {
+          "name": "Mueller, Aaron",
+          "memberSlug": null
+        },
+        {
+          "name": "Belinkov, Yonatan",
+          "memberSlug": null
+        },
+        {
+          "name": "Bau, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Wendler, Chris",
+          "memberSlug": null
+        }
+      ],
+      "venue": "NeurIPS 2026",
+      "year": 2026,
+      "date": "2026-11",
+      "type": "Conference",
+      "status": "Accepted",
+      "url": "https://arxiv.org/abs/2602.06020",
+      "code": "https://github.com/kevinlu4588/ProteinFolding",
+      "image": null,
+      "abstract": "Intervenes on the internal states of ESMFold, OpenFold and Boltz-1 and shows that all three fold proteins in two stages: early blocks carry chemical cues, later blocks build up distance and contact information.",
+      "topics": [
+        "xai",
+        "ml"
+      ]
+    },
+    {
       "id": "zenkner2026sad",
       "title": "Solver-Aware Decompositions for Programming-by-Example: When Dividing Requires Knowing How to Conquer",
       "authors": [
@@ -84,6 +240,123 @@
       "topics": [
         "xai",
         "robotics"
+      ]
+    },
+    {
+      "id": "brinton2026interlingua",
+      "title": "The Interlingua Hypothesis: LLMs Translate via a Latent Task-agnostic Feature Space",
+      "authors": [
+        {
+          "name": "Brinton, Jacob",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Crovella, Mark",
+          "memberSlug": null
+        },
+        {
+          "name": "Mueller, Aaron",
+          "memberSlug": null
+        }
+      ],
+      "venue": "EMNLP 2026",
+      "year": 2026,
+      "date": "2026-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://aclanthology.org/2026.emnlp-main.2470/",
+      "code": null,
+      "image": null,
+      "abstract": "Gives three lines of evidence that language models translate by encoding the source into a shared, task-agnostic latent feature space and generating the target from it.",
+      "topics": [
+        "llm",
+        "xai"
+      ]
+    },
+    {
+      "id": "sahin2026icl",
+      "title": "In-Context Learning Beyond Copying: A Training-Time Analysis of Abstractive ICL",
+      "authors": [
+        {
+          "name": "Şahin, Kerem",
+          "memberSlug": null
+        },
+        {
+          "name": "Feucht, Sheridan",
+          "memberSlug": null
+        },
+        {
+          "name": "Belfki, Adam",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Mueller, Aaron",
+          "memberSlug": null
+        },
+        {
+          "name": "Bau, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Wendler, Chris",
+          "memberSlug": null
+        }
+      ],
+      "venue": "EMNLP 2026",
+      "year": 2026,
+      "date": "2026-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://aclanthology.org/2026.emnlp-main.2286/",
+      "code": "https://github.com/KeremSahin22/icl-without-copying",
+      "image": null,
+      "abstract": "Drops the training loss on tokens that induction heads could predict and shows that abstractive in-context learning still emerges, so copying is not a prerequisite for it.",
+      "topics": [
+        "llm",
+        "xai"
+      ]
+    },
+    {
+      "id": "klerings2026mood",
+      "title": "Mood Matters: How Syntactic Sensitivity Undermines Safety Alignment",
+      "authors": [
+        {
+          "name": "Klerings, Alina",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Stuckenschmidt, Heiner",
+          "memberSlug": null
+        },
+        {
+          "name": "Ponzetto, Simone Paolo",
+          "memberSlug": null
+        }
+      ],
+      "venue": "EMNLP 2026",
+      "year": 2026,
+      "date": "2026-10",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://aclanthology.org/2026.emnlp-main.317/",
+      "code": null,
+      "image": null,
+      "abstract": "Shows across 16 models that changing a request’s grammatical mood or tense can get around refusals, and traces this to syntactic features upstream of the refusal decision.",
+      "topics": [
+        "llm",
+        "xai"
       ]
     },
     {
@@ -480,6 +753,72 @@
       ]
     },
     {
+      "id": "todd2026algebra",
+      "title": "In-Context Algebra",
+      "authors": [
+        {
+          "name": "Todd, Eric",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Gandikota, Rohit",
+          "memberSlug": null
+        },
+        {
+          "name": "Bau, David",
+          "memberSlug": null
+        }
+      ],
+      "venue": "ICLR 2026",
+      "year": 2026,
+      "date": "2026-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://openreview.net/forum?id=J2peqXPQbB",
+      "code": "https://github.com/ericwtodd/algebra",
+      "image": null,
+      "abstract": "Trains transformers on group arithmetic where a symbol’s meaning is set only by the examples in the prompt, and identifies the mechanisms they learn: copying, recognising the identity element, and cancellation.",
+      "topics": [
+        "xai",
+        "ml"
+      ]
+    },
+    {
+      "id": "angell2026jailbreak",
+      "title": "Jailbreak Transferability Emerges from Shared Representations",
+      "authors": [
+        {
+          "name": "Angell, Rico",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "He, He",
+          "memberSlug": null
+        }
+      ],
+      "venue": "ICLR 2026",
+      "year": 2026,
+      "date": "2026-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://openreview.net/forum?id=UQK3tUsouK",
+      "code": null,
+      "image": null,
+      "abstract": "Shows across 20 open-weight models and 33 jailbreaks that a jailbreak transfers between two models more often when their internal representations are similar and when it is strong on the source model.",
+      "topics": [
+        "llm",
+        "xai"
+      ]
+    },
+    {
       "id": "lan2026qifield",
       "title": "Qìfield: Externalizing Qi as a Palmar Haptic Field for Volitional Extension in Tai Chi Practices",
       "authors": [
@@ -602,6 +941,77 @@
       "page": "/papers/pages/chen2026sensing.webp",
       "topics": [
         "wearables"
+      ]
+    },
+    {
+      "id": "mueller2026quest",
+      "title": "The Quest for the Right Mediator: Surveying Mechanistic Interpretability for NLP Through the Lens of Causal Mediation Analysis",
+      "authors": [
+        {
+          "name": "Mueller, Aaron",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Li, Millicent",
+          "memberSlug": null
+        },
+        {
+          "name": "Marks, Samuel",
+          "memberSlug": null
+        },
+        {
+          "name": "Pal, Koyena",
+          "memberSlug": null
+        },
+        {
+          "name": "Prakash, Nikhil",
+          "memberSlug": null
+        },
+        {
+          "name": "Rager, Can",
+          "memberSlug": null
+        },
+        {
+          "name": "Sankaranarayanan, Aruna",
+          "memberSlug": null
+        },
+        {
+          "name": "Sen Sharma, Arnab",
+          "memberSlug": null
+        },
+        {
+          "name": "Sun, Jiuding",
+          "memberSlug": null
+        },
+        {
+          "name": "Todd, Eric",
+          "memberSlug": null
+        },
+        {
+          "name": "Bau, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Belinkov, Yonatan",
+          "memberSlug": null
+        }
+      ],
+      "venue": "Computational Linguistics",
+      "year": 2026,
+      "date": "2026-03",
+      "type": "Journal",
+      "status": "Published",
+      "url": "https://aclanthology.org/2026.cl-1.10/",
+      "code": null,
+      "image": null,
+      "abstract": "A survey that organises interpretability methods by which internal parts of a model they test as the cause of a behaviour and how they search for them, with directions for future work.",
+      "topics": [
+        "xai",
+        "llm"
       ]
     },
     {
@@ -894,6 +1304,176 @@
       ]
     },
     {
+      "id": "shapira2026agents",
+      "title": "Agents of Chaos",
+      "authors": [
+        {
+          "name": "Shapira, Natalie",
+          "memberSlug": null
+        },
+        {
+          "name": "Wendler, Chris",
+          "memberSlug": null
+        },
+        {
+          "name": "Yen, Avery",
+          "memberSlug": null
+        },
+        {
+          "name": "Sarti, Gabriele",
+          "memberSlug": null
+        },
+        {
+          "name": "Pal, Koyena",
+          "memberSlug": null
+        },
+        {
+          "name": "Floody, Olivia",
+          "memberSlug": null
+        },
+        {
+          "name": "Belfki, Adam",
+          "memberSlug": null
+        },
+        {
+          "name": "Loftus, Alex",
+          "memberSlug": null
+        },
+        {
+          "name": "Jannali, Aditya Ratan",
+          "memberSlug": null
+        },
+        {
+          "name": "Prakash, Nikhil",
+          "memberSlug": null
+        },
+        {
+          "name": "Cui, Jasmine",
+          "memberSlug": null
+        },
+        {
+          "name": "Rogers, Giordano",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Rager, Can",
+          "memberSlug": null
+        },
+        {
+          "name": "Zur, Amir",
+          "memberSlug": null
+        },
+        {
+          "name": "Ripa, Michael",
+          "memberSlug": null
+        },
+        {
+          "name": "Sankaranarayanan, Aruna",
+          "memberSlug": null
+        },
+        {
+          "name": "Atkinson, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Gandikota, Rohit",
+          "memberSlug": null
+        },
+        {
+          "name": "Fiotto-Kaufman, Jaden",
+          "memberSlug": null
+        },
+        {
+          "name": "Hwang, EunJeong",
+          "memberSlug": null
+        },
+        {
+          "name": "Orgad, Hadas",
+          "memberSlug": null
+        },
+        {
+          "name": "Sahil, P Sam",
+          "memberSlug": null
+        },
+        {
+          "name": "Taglicht, Negev",
+          "memberSlug": null
+        },
+        {
+          "name": "Shabtay, Tomer",
+          "memberSlug": null
+        },
+        {
+          "name": "Ambus, Atai",
+          "memberSlug": null
+        },
+        {
+          "name": "Alon, Nitay",
+          "memberSlug": null
+        },
+        {
+          "name": "Oron, Shiri",
+          "memberSlug": null
+        },
+        {
+          "name": "Gordon-Tapiero, Ayelet",
+          "memberSlug": null
+        },
+        {
+          "name": "Kaplan, Yotam",
+          "memberSlug": null
+        },
+        {
+          "name": "Shwartz, Vered",
+          "memberSlug": null
+        },
+        {
+          "name": "Rott Shaham, Tamar",
+          "memberSlug": null
+        },
+        {
+          "name": "Riedl, Christoph",
+          "memberSlug": null
+        },
+        {
+          "name": "Mirsky, Reuth",
+          "memberSlug": null
+        },
+        {
+          "name": "Sap, Maarten",
+          "memberSlug": null
+        },
+        {
+          "name": "Manheim, David",
+          "memberSlug": null
+        },
+        {
+          "name": "Ullman, Tomer",
+          "memberSlug": null
+        },
+        {
+          "name": "Bau, David",
+          "memberSlug": null
+        }
+      ],
+      "venue": "arXiv preprint arXiv:2602.20021",
+      "year": 2026,
+      "date": "2026-02",
+      "type": "Preprint",
+      "status": "Preprint",
+      "url": "https://arxiv.org/abs/2602.20021",
+      "code": null,
+      "image": null,
+      "abstract": "A two-week red-teaming study of autonomous language-model agents with email, shell and file access in a live Discord server, documenting how they failed on security, privacy and governance.",
+      "topics": [
+        "llm"
+      ]
+    },
+    {
       "id": "kirchdorfer2026investigating",
       "title": "Investigating Uncertainty Weighting for Multi-Task Learning: Insights and Analytical Alternative",
       "authors": [
@@ -1172,6 +1752,52 @@
       "page": "/papers/pages/boroujeni2026sustainable.webp"
     },
     {
+      "id": "lechenadec2025tales",
+      "title": "Tales from a Graph: a Pipeline for Mathematical Problem Generation",
+      "authors": [
+        {
+          "name": "Le Chenadec, Bastien",
+          "memberSlug": null
+        },
+        {
+          "name": "Kreacic, Eleonora",
+          "memberSlug": null
+        },
+        {
+          "name": "Sibue, Mathieu",
+          "memberSlug": null
+        },
+        {
+          "name": "Mercier, Gabriel",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Vadori, Nelson",
+          "memberSlug": null
+        },
+        {
+          "name": "Veloso, Manuela",
+          "memberSlug": null
+        }
+      ],
+      "venue": "NeurIPS 2025 (MATH-AI Workshop)",
+      "year": 2025,
+      "date": "2025-12",
+      "type": "Workshop",
+      "status": "Published",
+      "url": "https://openreview.net/forum?id=fqtdnjcHTp",
+      "code": null,
+      "image": null,
+      "abstract": "Generates pairs of a bare math problem and a word problem from one symbolically solved graph, giving verified answers with controllable difficulty.",
+      "topics": [
+        "llm"
+      ]
+    },
+    {
       "id": "zhang2025pro",
       "title": "Pro's Eyes: A Wearable System for Synchronous and Asynchronous Observational Pattern Learning",
       "authors": [
@@ -1211,6 +1837,41 @@
       "abstract": null,
       "topics": [
         "wearables"
+      ]
+    },
+    {
+      "id": "klerings2025steering",
+      "title": "Steering Language Models in Multi-Token Generation: A Case Study on Tense and Aspect",
+      "authors": [
+        {
+          "name": "Klerings, Alina",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Ruffinelli, Daniel",
+          "memberSlug": null
+        },
+        {
+          "name": "Ponzetto, Simone Paolo",
+          "memberSlug": null
+        }
+      ],
+      "venue": "EMNLP 2025",
+      "year": 2025,
+      "date": "2025-11",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://aclanthology.org/2025.emnlp-main.435/",
+      "code": "https://github.com/klerings/tense-aspect",
+      "image": null,
+      "abstract": "Finds separate directions for grammatical tense and aspect inside language models and shows that steering along them during generation controls both.",
+      "topics": [
+        "llm",
+        "xai"
       ]
     },
     {
@@ -2117,6 +2778,105 @@
       "topics": [
         "llm",
         "xai"
+      ]
+    },
+    {
+      "id": "fiottokaufman2025nnsight",
+      "title": "NNsight and NDIF: Democratizing Access to Open-Weight Foundation Model Internals",
+      "authors": [
+        {
+          "name": "Fiotto-Kaufman, Jaden",
+          "memberSlug": null
+        },
+        {
+          "name": "Loftus, Alexander R.",
+          "memberSlug": null
+        },
+        {
+          "name": "Todd, Eric",
+          "memberSlug": null
+        },
+        {
+          "name": "Brinkmann, Jannik",
+          "memberSlug": "brinkmann"
+        },
+        {
+          "name": "Pal, Koyena",
+          "memberSlug": null
+        },
+        {
+          "name": "Troitskii, Dmitrii",
+          "memberSlug": null
+        },
+        {
+          "name": "Ripa, Michael",
+          "memberSlug": null
+        },
+        {
+          "name": "Belfki, Adam",
+          "memberSlug": null
+        },
+        {
+          "name": "Rager, Can",
+          "memberSlug": null
+        },
+        {
+          "name": "Juang, Caden",
+          "memberSlug": null
+        },
+        {
+          "name": "Mueller, Aaron",
+          "memberSlug": null
+        },
+        {
+          "name": "Marks, Samuel",
+          "memberSlug": null
+        },
+        {
+          "name": "Sen Sharma, Arnab",
+          "memberSlug": null
+        },
+        {
+          "name": "Lucchetti, Francesca",
+          "memberSlug": null
+        },
+        {
+          "name": "Prakash, Nikhil",
+          "memberSlug": null
+        },
+        {
+          "name": "Brodley, Carla",
+          "memberSlug": null
+        },
+        {
+          "name": "Guha, Arjun",
+          "memberSlug": null
+        },
+        {
+          "name": "Bell, Jonathan",
+          "memberSlug": null
+        },
+        {
+          "name": "Wallace, Byron C.",
+          "memberSlug": null
+        },
+        {
+          "name": "Bau, David",
+          "memberSlug": null
+        }
+      ],
+      "venue": "ICLR 2025",
+      "year": 2025,
+      "date": "2025-04",
+      "type": "Conference",
+      "status": "Published",
+      "url": "https://openreview.net/forum?id=MxbEiFRf39",
+      "code": "https://nnsight.net",
+      "image": null,
+      "abstract": "Presents NNsight, a PyTorch extension for interpretability experiments, and NDIF, a shared service that runs them remotely, so researchers can study very large open-weight models without hosting them.",
+      "topics": [
+        "xai",
+        "llm"
       ]
     },
     {
