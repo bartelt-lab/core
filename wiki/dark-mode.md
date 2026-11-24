@@ -39,6 +39,12 @@ keeps the intentionally dark parts working: `bg-slate-950` sections,
 - Arbitrary colours (`bg-[#f7fafc]`) never flip. Pair them with an explicit
   `dark:` class, as the two photo heroes do (`pages/Home.jsx`,
   `pages/ComputeCluster.jsx`).
+- **The same goes for a gradient written as an arbitrary value**
+  (`bg-[radial-gradient(...rgba(220,252,231,0.72)...)]`): its colours are
+  literals and stay light. Add `dark:hidden` to it and a `hidden dark:block`
+  twin with dark colours beside it, as the AI Team Projects hero does. That
+  hero shipped with a white title on a near-white wash for exactly this
+  reason; a passing build does not show it, only looking at the page does.
 - To keep something white in dark mode, use `bg-[#fff]`.
 - Third-party logos (universities, partners) are dark artwork and vanish on a
   dark card. Render them with `components/common/ThirdPartyLogo.jsx`:
@@ -73,13 +79,16 @@ keeps the intentionally dark parts working: `bg-slate-950` sections,
   extend the inline script in `index.html` to also add `dark` when nothing is
   stored and `matchMedia('(prefers-color-scheme: dark)')` matches.
 - **Checked by eye:** home, publications, industry projects, CORE Labs, AI Team
-  Projects, compute cluster, join us, `/tuc`, `/tuc/teaching`, `/ubb`,
-  `/dynamo`, TEMPO. An automated contrast sweep also covered news, MediCar,
-  vial-sort, leader-following and demos. The other student project pages,
-  hover and focus states, and phone widths have not been looked at.
+  Projects, compute cluster, both Join Us pages, `/tuc`, `/tuc/teaching`,
+  `/ubb`, `/dynamo`, TEMPO, and both headers with their phone menus. An
+  automated contrast sweep also covered news, MediCar, vial-sort,
+  leader-following and demos. The other student project pages and most hover
+  and focus states have not been looked at.
 - **Inline colours.** A few pages carry hex colours in `style` attributes or
   SVG diagrams (mostly `pages/tuc/projects/TempoProject.jsx`). They do not flip.
-- **Photo heroes** are the light renders inverted with a CSS filter. Dedicated
-  dark images would look better.
+- **Photo heroes.** The home page hero is its light render inverted with a CSS
+  filter. The compute cluster hero is dimmed instead (`dark:opacity-50`):
+  inverted, that photo turned muddy. Dedicated dark images would look better
+  than either.
 - **Print/brand.** `wiki/visual-identity.md` documents the light palette only;
   the dark surface and text values are a first proposal, not a brand decision.

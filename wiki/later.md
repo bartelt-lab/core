@@ -20,24 +20,26 @@ expiry date on them.
 **Status:** not started. **Blocked on:** editorial content, not code.
 
 Search Console reports **0 discovered videos**, which is correct — `scripts/seo-files.mjs`
-emits a plain URL sitemap with no `<video:video>` entries. But the site hosts **24
-self-hosted MP4s** plus **12 YouTube embeds**: DyNAMO, leader following, vial sort,
-the autonomous-driving demos, NeuroCore, Stratego, Traffic Network Builder, the
-AI4BIM and Vergabepilot walkthroughs, and the student testimonials.
+emits a plain URL sitemap with no `<video:video>` entries. But the site hosts **39
+self-hosted MP4s** plus **four YouTube embeds** (the autonomous-driving demos):
+DyNAMO, leader following, vial sort, NeuroCore, Stratego, Traffic Network Builder,
+the AI4BIM and Vergabepilot walkthroughs, MediCar. (Three more, the student
+testimonials, are on disk but switched off: `showStudentTestimonials`.)
 
-For a robotics lab that is arguably the most distinctive content on the site, and
+For a network that runs robotics labs that is arguably the most distinctive content on the site, and
 footage of robots doing things performs well in video search.
 
 **What it needs:** per video — `title`, `description`, `thumbnail_loc`,
 `content_loc`, ideally `duration`.
 
-**What already exists:** 12 poster images under `public/videos/**/*poster*`, usable
-as thumbnails. The AI Team Project videos have titles and descriptions in
-`src/pages/tuc/AiTeamProjects.jsx`.
+**What already exists:** every clip has a poster beside it, usable as a thumbnail,
+and an entry in `src/data/videos.js` with a written description. The AI Team Project
+videos also have titles and descriptions in `src/pages/tuc/AiTeamProjects.jsx`.
 
-**What is missing:** the demonstration videos are bare filenames
-(`CTP_Showcase_2022.mp4`, `ADatIG.mp4`). Someone has to write real titles and
-descriptions — that cannot be generated.
+**What is missing:** a public title per clip, and a public description. The
+descriptions in the registry say what is literally on screen, for whoever maintains
+the site; they are not written for a search result. Someone has to write those —
+that cannot be generated.
 
 **Cheaper first step:** schema.org `VideoObject` JSON-LD on the pages that already
 have video metadata. Reuses existing titles and posters, skips the ones needing
@@ -97,9 +99,12 @@ without a browser. Three reasons were on that list; two are now gone.
 - ~~**Publications fetched at runtime.**~~ Resolved: the corpus is a build-time
   import (`src/data/publications.js`). It was never 180 KB either — 68 KB.
 - ~~**`localStorage` for theme and language.**~~ Already SSR-safe:
-  `LanguageContext.jsx` guards on `typeof localStorage === 'undefined'`. The theme
-  half of this is moot — `ThemeToggle` and the runtime palette switcher were
-  removed; there is one palette now (`wiki/visual-identity.md`).
+  `LanguageContext.jsx` guards on `typeof localStorage === 'undefined'`. The
+  runtime palette switcher is gone; there is one palette now
+  (`wiki/visual-identity.md`). Dark mode (2026-11) brought a `ThemeToggle` back:
+  it reads the stored choice in an inline script in `index.html` and writes it in
+  a click handler, never during render (`wiki/dark-mode.md`). Check that still
+  holds before leaning on this.
 - **Scroll-reveal animations.** The one that remains, and the expensive one.
   Roughly eight `whileInView` / `useInView` sites start at `opacity: 0` and only
   reveal once IntersectionObserver fires against real layout. `prerender.mjs`

@@ -111,7 +111,7 @@ was no core/tuc split to preserve — both ramps appeared throughout both subtre
 
 ### Site accents — the host institution's colour
 
-A lab page may carry the colour of the university hosting it. Four tokens,
+A group's site may carry the colour of the university its researchers work at. Four tokens,
 `--site-{100,200,300,900}`, declared green in `:root` and rebound under a `.theme-*`
 class for a host that wants its own. **Opting in is a choice, not an obligation** — a
 host that does not override inherits the CORE green and the page is still correct.
@@ -120,25 +120,27 @@ host that does not override inherits the CORE green and the page is still correc
 
 **The division of labour is the whole point:**
 
-- **Green owns action** — buttons, links, active states, focus rings. On every lab page,
-  without exception.
+- **Green owns action** — buttons, links, active states, focus rings. On every group's site,
+  without exception. That includes the underline of the current entry in the group
+  header (`LabHeader.jsx`), although it sits right beside the group's own logo.
 - **The site accent owns place** — kicker labels, section rules, institutional marks,
   tint washes. Never anything clickable.
 
-A visitor moving between labs then meets identical interaction affordances and a
-changing sense of locale. Put the accent on a button and the labs stop behaving like one
+A visitor moving between groups then meets identical interaction affordances and a
+changing sense of locale. Put the accent on a button and the groups stop behaving like one
 network.
 
-The one live instance is `.theme-ubb`, anchored on the Babeș-Bolyai seal `#034E84` —
-which `--site-900` **is**, exactly, the same way the brand ramps carry their logo hex.
-The other three steps are Tailwind `sky` rotated hue-only to 248.3°.
+There are two. `.theme-ubb` (CORE Cluj, `/ubb`) is anchored on the Babeș-Bolyai seal
+`#034E84` — which `--site-900` **is**, exactly, the same way the brand ramps carry their
+logo hex; its other three steps are Tailwind `sky` rotated hue-only to 248.3°.
+`.theme-tuc` (`/tuc`) is anchored the same way on TU Clausthal's green `#008048`.
 
 Four steps rather than eleven, for two reasons. The seal is a dark colour, so the light
 half of a full ramp drifts into a generic blue that reads as Tailwind rather than as the
 institution. And a small palette is a small attack surface: there is no mid-weight
 `site-500` sitting around inviting someone to make a blue button out of it.
 
-The class goes on the subtree root — `UbbLayout`'s outermost `div` — and is static in
+The class goes on the subtree root — the outermost `div` of the group's `Layout.jsx` — and is static in
 the markup, so the prerendered HTML and the hydrated client resolve the same colours.
 This is the second legitimate reason the `rgb(var(--x))` indirection exists, alongside
 the ten raw-CSS readers above.
@@ -177,15 +179,15 @@ Project subpages deliberately narrow this further — Inter only, no Poppins, pl
 ### The partnership gradient
 
 The single sanctioned brand-fill gradient: `.wordmark-partnership` in `index.css`, host's
-mark sweeping to CORE's, **on the place word of a lab wordmark and nowhere else.** On
-`/ubb` it runs the seal `#034E84` to `primary-700` across the word "Cluj".
+mark sweeping to CORE's, **on the place word of a group's wordmark and nowhere else.** On
+`/ubb` it runs the seal `#034E84` to `primary-700` across the word "Cluj" in "CORE Cluj".
 
 It earns the exception because it is not decoration — it is the joint venture drawn. The
 gradient that shipped before it was `sky-700 → cyan-700 → emerald-600`: three colours,
 none of which were UBB's or CORE's. It looked like the partnership without containing
 either institution. Endpoints must be real marks or it means nothing.
 
-Rules if you add one for another lab:
+Rules if you add one for another group:
 
 - **Endpoints are tokens, never literals**, so a palette change carries.
 - **Both ends must clear AA** on the background. The green end is `primary-700` and not

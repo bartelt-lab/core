@@ -50,4 +50,4 @@ true:
 
 Tracked in [open-issues.md](open-issues.md): some embedded videos start by
 themselves and so contact Google before the visitor has agreed to anything;
-consent for photos of people; use of partner logos.
+use of partner logos.

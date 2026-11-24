@@ -63,7 +63,9 @@ which leave for the network:
   switch, with the current group marked.
 - **Bar.** The group itself: its sections and pages, then Join Us. A section
   entry scrolls to that section of the group's home page and is underlined
-  while the section is on screen. The underline is the group's accent colour.
+  while the section is on screen. The underline is green on every group's site,
+  not the group's accent: green marks what is active everywhere
+  ([visual-identity.md](visual-identity.md)).
 
 Below 1024px the top row folds into the menu, under the headings "This group",
 "CORE Network" and "Other groups".

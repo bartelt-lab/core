@@ -197,9 +197,8 @@ entry in `routes.js` ([routing-and-seo.md](routing-and-seo.md)).
 - **Pictures:** WebP, under `public/`. Anything larger than about 250 KB
   should be converted: `npm run optimize-images`. Loading rules are in
   [assets.md](assets.md).
-- **Photos of people** need those people's agreement before they go live.
-  Phone photos carry the place they were taken; convert them (which drops
-  that) and do not upload the original.
+- **Phone photos carry the place they were taken.** Convert them to WebP
+  (which drops that) and do not upload the original.
 - **A third party's logo or branding in a photo** (a partner's sign in a lab)
   is that partner's call. Ask before publishing.
 - **Video has strict rules that the build enforces.** A clip without an entry

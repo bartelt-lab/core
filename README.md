@@ -54,10 +54,12 @@ In short:
 
 Text is written twice, German first: `['Deutsch', 'English']`.
 
-## Publishing
+## Contributing and publishing
 
 **A push to `main` publishes the site.** GitHub Actions builds it and deploys
-to GitHub Pages. Work on a branch and open a pull request.
+to GitHub Pages. So nobody pushes there directly: changes come in as pull
+requests, from a fork or a branch. [CONTRIBUTING.md](CONTRIBUTING.md) walks
+through it step by step and lists the conventions.
 
 Before committing, `npm run lint` and `npm run build` must pass
 ([PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)). Look at your change in the browser
@@ -68,6 +70,7 @@ of every page.
 
 | Read | For |
 |---|---|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | how to propose a change: fork, branch, checks, pull request, conventions |
 | [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) | the rules the build enforces, mainly for video |
 | [wiki/site-structure.md](wiki/site-structure.md) | network, groups and labs; every page and its file; the words to use |
 | [wiki/navigation.md](wiki/navigation.md) | the two headers, the menus, the side dots, the animated jump between sites |

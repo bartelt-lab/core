@@ -172,7 +172,7 @@ overlay text, panel labels, HUD readouts, how many panes, what changes over the 
 marketing copy.
 
 `frames` points at a four-frame contact strip in [`video-frames/`](./video-frames/), kept
-outside `public/` so it never ships to the site (~1.3 MB for all 35). Use it when the
+outside `public/` so it never ships to the site (about 1.5 MB for all 39). Use it when the
 description is not enough, or when writing a new description.
 
 `usedOn` is how you find every render site before touching a file. Several videos are
@@ -189,18 +189,21 @@ Hard failures — these are always bugs:
 - codec is not H.264 / `yuv420p`
 - `moov` after `mdat` (no faststart)
 - an audio track that is digital silence
-- missing poster, or a poster that breaks the naming convention
+- missing poster. The gate checks that the poster named in the registry exists. It does
+  **not** check the `<name>-poster.webp` naming that two call sites rely on
+  (`PROJECT_CONTEXT.md`), so keep to it yourself
 - a video on disk with no registry entry, or an entry with no file
 - **a registry entry with no description**
 
 Warnings — build continues:
 
 - file over the 25 MB soft cap
-- unusually high bitrate for the declared bucket
+- the frame strip named in the registry is missing
+- the audio track could not be measured
 
 ## Current state
 
-35 videos, ~190 MB, every one registered, described, postered and faststart. Zero
+39 videos, about 380 MB, every one registered, described, postered and faststart. Zero
 third-party video embeds for milestone media; YouTube is still used where a clip exists
 there already and no local copy is needed.
 

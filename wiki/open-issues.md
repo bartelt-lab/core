@@ -45,16 +45,8 @@ since a broken workflow only shows after it has failed on `main`.
   (`src/data/publicationTopics.js`).
 - **25 papers have no picture.** They need a PDF from an author:
   [paper-pdfs-needed.md](paper-pdfs-needed.md).
-- **The Cluj contacts' email addresses** were taken from the faculty's staff
-  page, not given by the two people. Confirm them.
-- **Photos of people** on the site (member photos, the Robotics Club meeting
-  on `/ubb`): confirm that those shown agree.
 - **Partner logos and paper figures** are used without recorded permission.
 - **The legal texts** are drafts ([legal-pages.md](legal-pages.md)).
-- **"CORE in Europe"** still appears in the footer tagline and the browser
-  title, after it was removed from the home page headline.
-- **The ICLR/ICSE 2025 news item** says six papers where the page lists eight,
-  and names Seoul as the venue of ICSE 2025.
 
 ## Not built
 

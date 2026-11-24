@@ -45,6 +45,7 @@ never of universities. "Cognitive Software" is not translated. Code names
 | touch the legal pages, fonts or embeds | `wiki/legal-pages.md` |
 | make something for print or for a partner | `wiki/decks-and-print.md` (and send `brand/CORE-Brand-Guidelines.pdf`, do not paraphrase it) |
 | pick up known problems or deferred work | `wiki/open-issues.md`, `wiki/later.md` |
+| explain to a person how to contribute | `CONTRIBUTING.md` (fork, branch, checks, pull request; what needs asking first) |
 
 Also in `wiki/`: `paper-pdfs-needed.md` (papers without a picture),
 `navbar-scroll-hide.md` (a parked technique), `video-frames/` (a contact strip
