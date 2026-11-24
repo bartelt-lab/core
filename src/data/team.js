@@ -65,7 +65,7 @@ const members = [
     ],
     photo: '/members/christian-sacarea.webp',
     bio: 'Professor at Babeș-Bolyai University with expertise in formal methods and AI.',
-    email: '',
+    email: 'christian.sacarea@ubbcluj.ro',
     links: {
       scholar: 'https://scholar.google.com/citations?user=ciq4vzwAAAAJ&hl=en',
       website: 'https://math.ubbcluj.ro/~csacarea/wordpress/'
@@ -84,7 +84,7 @@ const members = [
     ],
     photo: '/members/iulian-benta.webp',
     bio: 'Lecturer at UBB.',
-    email: '',
+    email: 'kuderna.benta@ubbcluj.ro',
     links: {
       scholar: 'https://scholar.google.com/citations?user=iSQpE0YAAAAJ&hl=ro'
     }

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import { FiArrowDown, FiArrowRight, FiArrowUpRight, FiMapPin } from 'react-icons/fi'
+import { FiArrowDown, FiArrowRight, FiArrowUpRight, FiGlobe, FiMail, FiMapPin } from 'react-icons/fi'
 import PublicationsSection from '../../components/publications/PublicationsSection'
 import ShellLink from '../../components/common/ShellLink'
 import ThirdPartyLogo from '../../components/common/ThirdPartyLogo'
-import { MemberPhoto, MemberLinks } from '../tuc/home/shared'
+import { MemberPhoto } from '../tuc/home/shared'
 import { getMemberBySlug, institutions } from '../../data/team'
 import assetUrl from '../../utils/assetUrl'
 import { useLanguage } from '../../i18n/useLanguage'
@@ -80,16 +80,28 @@ const BAND = 'mx-auto max-w-7xl px-6 md:px-8'
 
 const displayName = (member) => (member.prefix ? `${member.prefix} ${member.name}` : member.name)
 
-// A person to write to: an email link, else their own page, else the name alone.
-const ContactName = ({ member, className = '' }) => {
-  const name = displayName(member)
-  const href = member.email ? `mailto:${member.email}` : member.links?.website
-  if (!href) return <span className={className}>{name}</span>
-  return (
-    <a href={href} target={member.email ? undefined : '_blank'} rel="noreferrer" className={`underline decoration-site-300 underline-offset-4 transition hover:decoration-site-900 ${className}`}>
-      {name}
-    </a>
-  )
+// How to reach a person, written out beside them: the email address itself,
+// so nobody has to guess that a name is a link. A member without an email
+// gets their own page instead; one with neither gets no line.
+const ReachLine = ({ member, className = '' }) => {
+  const cls = `inline-flex max-w-full items-center gap-2 break-all underline underline-offset-4 transition ${className}`
+  if (member.email) {
+    return (
+      <a href={`mailto:${member.email}`} className={cls}>
+        <FiMail className="shrink-0" aria-hidden="true" />
+        {member.email}
+      </a>
+    )
+  }
+  if (member.links?.website) {
+    return (
+      <a href={member.links.website} target="_blank" rel="noreferrer" className={cls}>
+        <FiGlobe className="shrink-0" aria-hidden="true" />
+        {member.links.website.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+      </a>
+    )
+  }
+  return null
 }
 
 const UbbHome = () => {
@@ -158,7 +170,8 @@ const UbbHome = () => {
               <MemberPhoto member={clubContact} className="h-14 w-14 shrink-0 rounded-full" />
               <div>
                 <p className="text-xs font-semibold text-slate-400">{pick('To join, get in touch with', 'Zum Mitmachen wenden Sie sich an')}</p>
-                <p className="font-semibold text-white"><ContactName member={clubContact} /></p>
+                <p className="font-semibold text-white">{displayName(clubContact)}</p>
+                <p className="mt-0.5 text-sm"><ReachLine member={clubContact} className="text-site-300 decoration-white/30 hover:decoration-site-300" /></p>
               </div>
             </div>
           </div>
@@ -218,8 +231,8 @@ const UbbHome = () => {
                   <MemberPhoto member={member} className="h-20 w-20 shrink-0 rounded-full" />
                   <div className="min-w-0">
                     <p className={`${KICKER} text-site-900`}>{txt(contact.about)}</p>
-                    <p className="mt-1 text-lg font-bold text-slate-950"><ContactName member={member} /></p>
-                    <MemberLinks member={member} className="-ml-2 text-slate-500 [&_a:hover]:bg-slate-100 [&_a:hover]:text-primary-700" />
+                    <p className="mt-1 text-lg font-bold text-slate-950">{displayName(member)}</p>
+                    <p className="mt-0.5 text-sm"><ReachLine member={member} className="text-primary-700 decoration-site-300 hover:decoration-site-900" /></p>
                   </div>
                 </li>
               )
