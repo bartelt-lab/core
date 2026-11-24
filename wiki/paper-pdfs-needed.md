@@ -1,7 +1,7 @@
 # Papers that still need a PDF
 
 These publications have no figure and no first-page image, so the publications
-page shows a plain year tile for them. Their publishers refuse automated
+page shows a cover with the venue name for them. Their publishers refuse automated
 downloads, so the PDF has to come from an author.
 
 To add one: save the PDF as `<id>.pdf` in any folder, then run

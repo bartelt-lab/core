@@ -370,7 +370,10 @@ Currently the value is written but not yet rendered as a link (issue 2).
 
 The publications page (`/publications`) lists papers as rows, two side by side
 (`components/publications/PublicationRow.jsx`). The image slot shows `image`
-(a figure, shown whole) if set, else `page`, else a tile with the year.
+(a figure, shown whole) if set, else `page`, else a cover with the short name
+of the venue ("CHI", "UbiComp"). The short names are rules in
+`data/venueShortNames.js`: a venue without a rule gets its publication type
+on the cover, so add a rule when a paper from a new venue has no image.
 
 - **`page`** is written by `node scripts/paper-pages.mjs <folder with PDFs>`,
   one PDF per paper named `<id>.pdf`. It needs `pdftoppm` on the PATH. 18 of

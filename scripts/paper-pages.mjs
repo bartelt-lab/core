@@ -2,7 +2,7 @@
  * First-page thumbnails for publications that have no figure of their own.
  *
  * The publications page shows a paper's `image` (a figure) when it has one,
- * else its `page` (the first page of the PDF), else a plain year tile. This
+ * else its `page` (the first page of the PDF), else a cover with the venue name. This
  * script makes the `page` images.
  *
  * Run:  node scripts/paper-pages.mjs <folder with PDFs>

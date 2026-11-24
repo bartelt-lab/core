@@ -2,25 +2,35 @@ import { FaExternalLinkAlt } from 'react-icons/fa'
 import assetUrl from '../../utils/assetUrl'
 import formatAuthorName from '../../utils/formatAuthorName'
 import { topicLabel } from '../../data/publicationTopics'
+import { venueShortName } from '../../data/venueShortNames'
 import { useLanguage } from '../../i18n/useLanguage'
 
-// A venue name short enough to stand in the image slot ("ICLR 2025", "i-com").
-// Longer ones ("Proceedings of the 2026 CHI Conference on …") are not shortened
-// by guessing an acronym: the tile shows the publication type instead, and the
-// full venue is in the card text either way.
-const SHORT_VENUE = 14
-
 // What fills the image slot when a publication has neither a figure nor a
-// first-page image.
-const VenueTile = ({ publication }) => {
-  const venue = publication.venue ?? ''
-  const short = venue.length > 0 && venue.length <= SHORT_VENUE
-  // "ICLR 2025" already carries the year: show the name on top, the year below.
-  const label = short ? venue.replace(String(publication.year), '').trim() : publication.type
+// first-page image: a cover with the name researchers know the venue by
+// ("CHI", "UbiComp"), set as large as the slot allows. The card text gives the
+// venue in full, where it is clamped to one line and mostly reads "Proceedings
+// of the …", so the cover is what tells two venues apart at a glance.
+//
+// The name is sized in cqw (a share of the slot's width, see the container on
+// the slot in PublicationRow), so it fits the slot at every breakpoint. A
+// glyph of the heading face is about 0.68em wide, and the padding leaves about
+// 75% of the slot: 75 / 0.68 = 110.
+const VenueCover = ({ publication }) => {
+  const { lines, track } = venueShortName(publication)
+  const longest = Math.max(...lines.map((line) => line.length))
+  const size = Math.min(30, 110 / longest)
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-1.5 bg-slate-100 px-2 text-center">
-      <span className="text-[11px] font-bold uppercase leading-tight tracking-[0.14em] text-slate-500 [overflow-wrap:anywhere]">{label}</span>
-      <span className="font-heading text-2xl font-bold leading-none text-slate-700 sm:text-3xl">{publication.year}</span>
+    // The same facts are in the card text, so this is not read out twice.
+    <div className="flex h-full flex-col justify-between bg-primary-100 p-3 sm:p-4" aria-hidden="true">
+      <span className="text-[13px] font-semibold tabular-nums leading-none text-primary-800">{publication.year}</span>
+      <div>
+        <p className="font-heading font-bold leading-[0.95] tracking-[-0.02em] text-primary-900" style={{ fontSize: `${size.toFixed(1)}cqw` }}>
+          {lines.map((line) => (
+            <span key={line} className="block whitespace-nowrap">{line}</span>
+          ))}
+        </p>
+        {track && <p className="mt-1.5 text-[11px] font-semibold leading-tight text-primary-800 sm:text-xs">{track}</p>}
+      </div>
     </div>
   )
 }
@@ -30,7 +40,7 @@ const VenueTile = ({ publication }) => {
 //          an unreadable strip)
 //   page   the paper's first page (scripts/paper-pages.mjs): fills the slot
 //          from the top, so the title block is what shows
-//   else   the venue tile
+//   else   the venue cover
 // Figures and pages are drawn on white, so the plate stays white in dark mode.
 const Slot = ({ publication }) => {
   if (publication.image) {
@@ -43,7 +53,7 @@ const Slot = ({ publication }) => {
   if (publication.page) {
     return <img src={assetUrl(publication.page)} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full bg-[#fff] object-cover object-top" />
   }
-  return <VenueTile publication={publication} />
+  return <VenueCover publication={publication} />
 }
 
 /**
@@ -69,7 +79,7 @@ const PublicationRow = ({ publication, institutions = [] }) => {
 
   return (
     <article className="group relative grid h-full min-h-[10rem] grid-cols-[7rem_minmax(0,1fr)] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-[0_24px_60px_-28px_rgb(var(--primary-700)/0.45)] focus-within:ring-2 focus-within:ring-primary-500 sm:min-h-[12.5rem] sm:grid-cols-[10.5rem_minmax(0,1fr)] xl:grid-cols-[9rem_minmax(0,1fr)] 2xl:grid-cols-[10.5rem_minmax(0,1fr)]">
-      <div className="relative border-r border-slate-200">
+      <div className="relative border-r border-slate-200 [container-type:inline-size]">
         <Slot publication={publication} />
       </div>
 
@@ -97,7 +107,7 @@ const PublicationRow = ({ publication, institutions = [] }) => {
             {publication.topics.map((id) => {
               const label = topicLabel(id)
               return label ? (
-                <li key={id} className="rounded-full bg-primary-50 px-2 py-0.5 text-[11px] font-semibold text-primary-700">{pick(label[1], label[0])}</li>
+                <li key={id} className="max-w-full truncate rounded-full bg-primary-50 px-2 py-0.5 text-[11px] font-semibold text-primary-700">{pick(label[1], label[0])}</li>
               ) : null
             })}
           </ul>
