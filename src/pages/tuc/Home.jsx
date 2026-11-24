@@ -82,7 +82,7 @@ const Home = () => {
                                     ))}
                                 </ul>
                             </nav>
-                            <Link to="/join-us" className="mt-4 flex items-center justify-center gap-2 rounded-lg bg-primary-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-800">
+                            <Link to="/join-us/tuc" className="mt-4 flex items-center justify-center gap-2 rounded-lg bg-primary-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-800">
                                 {pick('Join us', 'Mitmachen')} <FiArrowRight />
                             </Link>
                         </div>

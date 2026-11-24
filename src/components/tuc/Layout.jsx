@@ -54,7 +54,8 @@ const OTHER_LABS = [
     { initials: 'UBB', to: '/ubb', name: 'Babeș-Bolyai lab, Cluj-Napoca' },
 ];
 
-const JOIN = { to: '/join-us', label: ['Mitmachen', 'Join Us'] };
+// The lab's own Join Us page (working in Goslar), not the network's /join-us.
+const JOIN = { to: '/join-us/tuc', label: ['Mitmachen', 'Join Us'] };
 
 // Every section of the home page, in page order, for the highlight in the bar.
 // "work" has no entry in the bar: while it is on screen nothing is highlighted.

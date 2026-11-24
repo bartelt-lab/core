@@ -57,8 +57,16 @@ CORE Labs; Join Us is the outlined button). Their files still live in
 wraps them in `UnderNavbar` to clear the floating Navbar. The old
 `/tuc/industry-projects`, `/tuc/industry-projects/medicar` and `/tuc/join-us`
 URLs are `<Navigate>` forwards in `TucShell`; `routes.js` keeps them as aliases
-(`canonical` set) so they stay prerendered. `/join-us` leads with joining the
-network as a researcher or research group; the PhD and HiWi positions follow.
+(`canonical` set) so they stay prerendered.
+
+Join Us is two pages from one component (`pages/tuc/JoinUs.jsx`):
+- `/join-us` is the network's: joining as a researcher or research group,
+  then the three groups to ask for a PhD or student position. It must not
+  speak for one place: each group fills its own positions at its own
+  university, so the Goslar content does not belong here.
+- `/join-us/tuc` (`<JoinUs lab="tuc" />`) is the TU Clausthal lab's: working
+  in Goslar, the PhD position, student assistants, how to apply. The lab
+  site's Join Us links and the old `/tuc/join-us` lead here.
 
 App is split via `<Routes>` in `src/App.jsx` between `CoreShell` (core's
 pill Navbar + Footer) and `TucShell` (bartelt-style Layout). Each subtree
@@ -269,8 +277,8 @@ src/
                                    line), member helpers, photo/link components
       Teaching.jsx                   teaching subtree (/seminar, /theses route to it)
       AiTeamProjects.jsx
-      JoinUs.jsx                   /join-us (CoreShell): network first, then
-                                   PhD and HiWi positions
+      JoinUs.jsx                   /join-us (the network's page) and
+                                   /join-us/tuc (the lab's), both CoreShell
       IndustryProjects.jsx         /industry-projects (CoreShell), data from
                                    industryProjects.js
       industry/MediCar.jsx         /industry-projects/medicar (CoreShell)
@@ -457,7 +465,8 @@ real browser since the restyle. Verify in dev (`npm run dev`):
   affiliation logo + contact links work)
 - `/tuc/teaching`, `/tuc/seminar`, `/tuc/theses` (teaching-* CSS
   still applies — those inline `<style>` blocks survived)
-- `/join-us` (network section first, then PhD and HiWi)
+- `/join-us` (joining the network, then where to ask for positions)
+- `/join-us/tuc` (PhD and HiWi positions at the TU Clausthal lab in Goslar)
 - `/ai-team-projects` (project tiles; sidebar Overview/Projects/Voices/Archive)
 - Network panel: zero 404s on `/members/*`, `/papers/*`, `/logos/*`,
   `/videos/*`, `/data/*`

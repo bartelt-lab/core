@@ -74,6 +74,7 @@ function CoreShell() {
             <Route path="/industry-projects" element={<UnderNavbar><IndustryProjects /></UnderNavbar>} />
             <Route path="/industry-projects/medicar" element={<UnderNavbar><MediCar /></UnderNavbar>} />
             <Route path="/join-us" element={<UnderNavbar><JoinUs /></UnderNavbar>} />
+            <Route path="/join-us/tuc" element={<UnderNavbar><JoinUs lab="tuc" /></UnderNavbar>} />
             <Route path="/iclr-2025" element={<Iclr2025 />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
@@ -114,7 +115,7 @@ function TucShell() {
           <Route path="/industry-projects" element={<Navigate to="/industry-projects" replace />} />
           <Route path="/industry-projects/medicar" element={<Navigate to="/industry-projects/medicar" replace />} />
           <Route path="/teaching" element={<TucTeaching />} />
-          <Route path="/join-us" element={<Navigate to="/join-us" replace />} />
+          <Route path="/join-us" element={<Navigate to="/join-us/tuc" replace />} />
           {/* Was a standalone static page at this address until 2026-11. */}
           <Route path="/iclr-2025" element={<Navigate to="/iclr-2025" replace />} />
           <Route path="/seminar" element={<TucTeaching initialSection="seminars" />} />

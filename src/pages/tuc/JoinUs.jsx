@@ -1,13 +1,22 @@
 import { Link } from 'react-router-dom';
-import { FiArrowRight, FiArrowUpRight, FiBookOpen, FiBriefcase, FiCheck, FiClock, FiCpu, FiLayers, FiMail, FiServer, FiUsers } from 'react-icons/fi';
+import { FiArrowRight, FiArrowUpRight, FiBookOpen, FiBriefcase, FiCheck, FiClock, FiCpu, FiLayers, FiMail, FiMapPin, FiServer, FiUsers } from 'react-icons/fi';
 import { useLanguage } from '../../i18n/useLanguage';
 import { PageShell, Section, Card, ButtonLink } from '../../components/tuc/ui';
 import { stats } from './home/content';
 
 // Text pairs are [German, English], like the other /tuc data.
+//
+// One component, two pages:
+//   /join-us      the network's page: joining as a researcher or research
+//                 group, then where to ask for a PhD or student position.
+//                 Each group fills its own positions at its own university,
+//                 so nothing here speaks for one place.
+//   /join-us/tuc  the TU Clausthal lab's page (<JoinUs lab="tuc" />): working
+//                 in Goslar, the PhD position, student assistants, how to
+//                 apply. The lab site's Join Us links lead here.
 
-// What member groups share. Comes first on the page: joining the network as a
-// researcher or research group is the main way in; the positions follow.
+// What member groups share. Comes first on the network's page: joining as a
+// researcher or research group is the main way in.
 const NETWORK = {
     intro: [
         'Das CORE Network ist eine Gemeinschaft von Forschenden und Forschungsgruppen, derzeit an der TU Clausthal, der Babeș-Bolyai-Universität und der Universität Rostock. Wir freuen uns über Forschende und Forschungsgruppen, die an Cognitive Software, autonomen Systemen und KI arbeiten und sich dem Netzwerk anschließen möchten.',
@@ -60,6 +69,45 @@ const NETWORK = {
         ],
     },
 };
+// The groups that take PhD candidates and students, for the network's page.
+// Only the TU Clausthal lab has its positions written up on this site; the
+// other two are pointed to, without claims about what they have open.
+const GROUPS = [
+    {
+        id: 'tuc',
+        name: ['TU Clausthal', 'TU Clausthal'],
+        place: ['Goslar, Deutschland', 'Goslar, Germany'],
+        text: [
+            'Die Gruppe Cognitive Software am Institut für Software and Systems Engineering. Promotionsstellen und Stellen für studentische Hilfskräfte, mit allem, was zur Bewerbung gehört.',
+            'The Cognitive Software group at the Institute for Software and Systems Engineering. PhD positions and student assistant jobs, with everything you need to apply.',
+        ],
+        cta: ['Stellen in Goslar', 'Positions in Goslar'],
+        to: '/join-us/tuc',
+    },
+    {
+        id: 'ubb',
+        name: ['Babeș-Bolyai-Universität', 'Babeș-Bolyai University'],
+        place: ['Cluj-Napoca, Rumänien', 'Cluj-Napoca, Romania'],
+        text: [
+            'Das CORE Lab in Cluj. Zu Promotion und studentischer Mitarbeit gibt die Gruppe vor Ort Auskunft.',
+            'The CORE Lab in Cluj. Ask the group there about doctoral studies and student work.',
+        ],
+        cta: ['Zum Lab in Cluj', 'The Cluj lab'],
+        to: '/ubb',
+    },
+    {
+        id: 'rostock',
+        name: ['Universität Rostock', 'University of Rostock'],
+        place: ['Rostock, Deutschland', 'Rostock, Germany'],
+        text: [
+            'Das MDS Lab. Zu Promotion und studentischer Mitarbeit gibt die Gruppe vor Ort Auskunft.',
+            'The MDS Lab. Ask the group there about doctoral studies and student work.',
+        ],
+        cta: ['Website des MDS Lab', 'MDS Lab website'],
+        href: 'https://www.mds-lab.de/',
+    },
+];
+
 const PHD = {
     intro: [
         'Du möchtest in die Forschung einsteigen und an aktuellen Fragen der Künstlichen Intelligenz arbeiten? Als Doktorand:in entwirfst und entwickelst du Architekturen und Engineering-Methoden für zukünftige KI-Systeme und verbindest dabei Grundlagenforschung mit praktischen Anwendungen.',
@@ -152,7 +200,8 @@ const ListBlock = ({ title, items, txt }) => (
     </div>
 );
 
-const JoinUs = () => {
+const JoinUs = ({ lab }) => {
+    const atTuc = lab === 'tuc';
     const { pick } = useLanguage();
     const txt = (pair) => pick(pair[1], pair[0]);
     // Researchers in the group (lead, postdocs, PhD students), counted from team.js.
@@ -193,56 +242,117 @@ const JoinUs = () => {
         },
     ];
 
+    const networkSection = (
+        <Section
+            id="network"
+            kicker={pick('Researchers and research groups', 'Forschende und Forschungsgruppen')}
+            title={pick('Join the network', 'Dem Netzwerk beitreten')}
+            intro={txt(NETWORK.intro)}
+        >
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {NETWORK.shared.map(({ icon: Icon, to, title, text }) => (
+                    <Card as="li" key={to} className="flex flex-col p-5">
+                        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-site-100 text-site-900">
+                            <Icon size={18} aria-hidden="true" />
+                        </span>
+                        <h3 className="mt-4 font-bold">{txt(title)}</h3>
+                        <p className="mt-1 flex-1 text-sm leading-relaxed text-slate-600">{txt(text)}</p>
+                        <Link to={to} className="mt-3 inline-flex items-center gap-1 py-1 text-sm font-semibold text-primary-700 hover:text-primary-800">
+                            {pick('Learn more', 'Mehr erfahren')}
+                            <FiArrowRight className="h-4 w-4" aria-hidden="true" />
+                        </Link>
+                    </Card>
+                ))}
+            </ul>
+            <Card id="apply-network" className="mt-4 flex flex-col gap-5 p-6 sm:p-8 md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h3 className="text-xl font-bold">{pick('Get in touch', 'Kontakt aufnehmen')}</h3>
+                    <p className="mt-1 text-sm text-slate-600">
+                        {pick('Write to', 'Schreiben an')} {NETWORK.contact.to}
+                    </p>
+                    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-700">{txt(NETWORK.contact.text)}</p>
+                </div>
+                <ButtonLink href={`mailto:${NETWORK.contact.email}`} className="max-w-full shrink-0 break-all">
+                    <FiMail className="shrink-0" aria-hidden="true" /> {NETWORK.contact.email}
+                </ButtonLink>
+            </Card>
+        </Section>
+    );
+
+    if (!atTuc) {
+        return (
+            <PageShell
+                kicker="CORE Network"
+                title={pick('Join us', 'Mitmachen')}
+                lede={pick(
+                    'Join the CORE Network as a researcher or research group, or start as a PhD candidate or student with one of its groups.',
+                    'Als Forschende oder Forschungsgruppe Teil des CORE Network werden, oder als Promovierende oder Studierende bei einer seiner Gruppen einsteigen.'
+                )}
+                actions={
+                    <>
+                        <ButtonLink href="#network">{pick('Join the network', 'Dem Netzwerk beitreten')}</ButtonLink>
+                        <ButtonLink href="#positions" variant="secondary">{pick('PhD and student positions', 'Promotions- und Hilfskraftstellen')}</ButtonLink>
+                    </>
+                }
+            >
+                {networkSection}
+
+                <Section
+                    id="positions"
+                    kicker={pick('PhD candidates and students', 'Promovierende und Studierende')}
+                    title={pick('PhD and student positions', 'Promotions- und Hilfskraftstellen')}
+                    intro={pick(
+                        'You do a doctorate or work as a student with one of the groups, at its university. Each group fills its own positions.',
+                        'Promoviert und als Studierende gearbeitet wird bei einer der Gruppen, an ihrer Universität. Jede Gruppe besetzt ihre Stellen selbst.'
+                    )}
+                >
+                    <ul className="grid gap-4 md:grid-cols-3">
+                        {GROUPS.map((group) => {
+                            const cls = 'mt-4 inline-flex items-center gap-1 py-1 text-sm font-semibold text-primary-700 hover:text-primary-800';
+                            return (
+                                <Card as="li" key={group.id} className="flex flex-col p-5">
+                                    <p className="flex items-center gap-1.5 text-sm text-slate-600">
+                                        <FiMapPin className="h-4 w-4 shrink-0 text-site-900" aria-hidden="true" />
+                                        {txt(group.place)}
+                                    </p>
+                                    <h3 className="mt-2 text-lg font-bold">{txt(group.name)}</h3>
+                                    <p className="mt-1 flex-1 text-sm leading-relaxed text-slate-600">{txt(group.text)}</p>
+                                    {group.to ? (
+                                        <Link to={group.to} className={cls}>
+                                            {txt(group.cta)}
+                                            <FiArrowRight className="h-4 w-4" aria-hidden="true" />
+                                        </Link>
+                                    ) : (
+                                        <a href={group.href} target="_blank" rel="noreferrer" className={cls}>
+                                            {txt(group.cta)}
+                                            <FiArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                                        </a>
+                                    )}
+                                </Card>
+                            );
+                        })}
+                    </ul>
+                </Section>
+            </PageShell>
+        );
+    }
+
     return (
         <PageShell
-            kicker="CORE Network"
-            title={pick('Join us', 'Mitmachen')}
+            kicker={pick('TU Clausthal · Goslar', 'TU Clausthal · Goslar')}
+            title={pick('Join us in Goslar', 'Mitmachen in Goslar')}
             lede={pick(
-                'Join the CORE Network as a researcher or research group, or start with us as a PhD candidate or student assistant at TU Clausthal.',
-                'Als Forschende oder Forschungsgruppe Teil des CORE Network werden, oder als Promovierende und studentische Hilfskraft an der TU Clausthal einsteigen.'
+                'Start with the Cognitive Software group at TU Clausthal as a PhD candidate or student assistant.',
+                'Als Promovierende oder studentische Hilfskraft bei der Gruppe Cognitive Software der TU Clausthal einsteigen.'
             )}
             actions={
                 <>
-                    <ButtonLink href="#network">{pick('Join the network', 'Dem Netzwerk beitreten')}</ButtonLink>
-                    <ButtonLink href="#phd" variant="secondary">{pick('PhD position', 'Promotionsstelle')}</ButtonLink>
+                    <ButtonLink href="#phd">{pick('PhD position', 'Promotionsstelle')}</ButtonLink>
                     <ButtonLink href="#hiwi" variant="secondary">{pick('Student assistants', 'Hilfskräfte')}</ButtonLink>
+                    <ButtonLink href="#apply" variant="secondary">{pick('How to apply', 'So bewirbst du dich')}</ButtonLink>
                 </>
             }
         >
-            <Section
-                id="network"
-                kicker={pick('Researchers and research groups', 'Forschende und Forschungsgruppen')}
-                title={pick('Join the network', 'Dem Netzwerk beitreten')}
-                intro={txt(NETWORK.intro)}
-            >
-                <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {NETWORK.shared.map(({ icon: Icon, to, title, text }) => (
-                        <Card as="li" key={to} className="flex flex-col p-5">
-                            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-site-100 text-site-900">
-                                <Icon size={18} aria-hidden="true" />
-                            </span>
-                            <h3 className="mt-4 font-bold">{txt(title)}</h3>
-                            <p className="mt-1 flex-1 text-sm leading-relaxed text-slate-600">{txt(text)}</p>
-                            <Link to={to} className="mt-3 inline-flex items-center gap-1 py-1 text-sm font-semibold text-primary-700 hover:text-primary-800">
-                                {pick('Learn more', 'Mehr erfahren')}
-                                <FiArrowRight className="h-4 w-4" aria-hidden="true" />
-                            </Link>
-                        </Card>
-                    ))}
-                </ul>
-                <Card id="apply-network" className="mt-4 flex flex-col gap-5 p-6 sm:p-8 md:flex-row md:items-center md:justify-between">
-                    <div>
-                        <h3 className="text-xl font-bold">{pick('Get in touch', 'Kontakt aufnehmen')}</h3>
-                        <p className="mt-1 text-sm text-slate-600">
-                            {pick('Write to', 'Schreiben an')} {NETWORK.contact.to}
-                        </p>
-                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-700">{txt(NETWORK.contact.text)}</p>
-                    </div>
-                    <ButtonLink href={`mailto:${NETWORK.contact.email}`} className="max-w-full shrink-0 break-all">
-                        <FiMail className="shrink-0" aria-hidden="true" /> {NETWORK.contact.email}
-                    </ButtonLink>
-                </Card>
-            </Section>
 
             <Section
                 id="why"
@@ -321,6 +431,17 @@ const JoinUs = () => {
                         'Die TU Clausthal setzt sich für Chancengleichheit ein und fordert qualifizierte Frauen ausdrücklich zur Bewerbung auf. Bewerber:innen mit Behinderung werden bei gleicher Qualifikation bevorzugt.'
                     )}
                 </p>
+            </Section>
+
+            <Section id="elsewhere" title={pick('Elsewhere in the network', 'Anderswo im Netzwerk')}>
+                <div className="mt-4 flex flex-wrap gap-3">
+                    <ButtonLink to="/join-us#positions" variant="secondary">
+                        {pick('Positions with the other groups', 'Stellen bei den anderen Gruppen')} <FiArrowRight aria-hidden="true" />
+                    </ButtonLink>
+                    <ButtonLink to="/join-us#network" variant="secondary">
+                        {pick('Join the network as a researcher or group', 'Als Forschende oder Gruppe dem Netzwerk beitreten')} <FiArrowRight aria-hidden="true" />
+                    </ButtonLink>
+                </div>
             </Section>
         </PageShell>
     );

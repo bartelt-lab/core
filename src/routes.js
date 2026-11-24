@@ -53,7 +53,13 @@ const MEDICAR_META = {
 const JOIN_US_META = {
   title: 'Join Us | CORE',
   description:
-    'Join the CORE Network as a researcher or research group, or apply for a PhD position or student assistant job with the Cognitive Software group at TU Clausthal.',
+    'Join the CORE Network as a researcher or research group, or find out where to ask for a PhD or student position with one of its groups.',
+}
+
+const JOIN_US_TUC_META = {
+  title: 'Join Us in Goslar | Cognitive Software, TU Clausthal',
+  description:
+    'PhD positions and student assistant jobs with the Cognitive Software group at TU Clausthal in Goslar: what we offer, what you bring, and how to apply.',
 }
 
 const ICLR_2025_META = {
@@ -128,6 +134,11 @@ export const routes = [
     path: '/join-us',
     source: 'src/pages/tuc/JoinUs.jsx',
     ...JOIN_US_META,
+  },
+  {
+    path: '/join-us/tuc',
+    source: 'src/pages/tuc/JoinUs.jsx',
+    ...JOIN_US_TUC_META,
   },
   {
     path: '/iclr-2025',
@@ -323,12 +334,13 @@ export const routes = [
     ...ICLR_2025_META,
     canonical: '/iclr-2025',
   },
-  // Join Us moved to /join-us; the old URL forwards there like the two above.
+  // The lab's Join Us page moved to /join-us/tuc; the old URL forwards there
+  // like the two above.
   {
     path: '/tuc/join-us',
     source: 'src/pages/tuc/JoinUs.jsx',
-    ...JOIN_US_META,
-    canonical: '/join-us',
+    ...JOIN_US_TUC_META,
+    canonical: '/join-us/tuc',
   },
 
   // -------------------------------------------------------------- UBB Cluj ---
