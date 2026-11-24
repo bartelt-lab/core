@@ -289,11 +289,16 @@ src/
                                    routed under /ai-team-projects/*
     ubb/
       Home.jsx                     CORE Cluj (/ubb), third shell: the page of
-                                   the network's researchers at Babeș-Bolyai
-                                   (people, research, Robotics Club, contact),
-                                   built like the /tuc home page. It does not
-                                   describe the laboratories: all lab content
-                                   is on /core-labs (the humanoid block is its
+                                   the network's researchers at Babeș-Bolyai.
+                                   Its own layout, shaped by what there is to
+                                   show: the Robotics Club with its photo, the
+                                   group's publications, links into the
+                                   network, the two contacts. No group photo
+                                   and no member list exist, so it has
+                                   neither; do not copy the /tuc home page
+                                   here. It does not describe the
+                                   laboratories: all lab content is on
+                                   /core-labs (the humanoid block is its
                                    #cluj section) and this page links there.
                                    Carries the only site accent — see below
 

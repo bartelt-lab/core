@@ -78,19 +78,21 @@ const CoreLabs = () => {
 
               {contact && (
                 // Affiliations are omitted on purpose — the institutions card
-                // beside this block already names TUC and UBB. The photo and
-                // the name link to the team grid; the mailto stays separate,
-                // since anchors cannot nest.
-                <div className="mt-6 flex max-w-md items-center gap-3 rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm">
-                  <Link to={memberLink(contact)} aria-label={contact.name} className="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-slate-200 bg-slate-100 transition hover:border-primary-300">
-                    <img src={assetUrl(contact.photo)} alt={contact.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-                  </Link>
+                // beside this block already names TUC and UBB. The whole card
+                // leads to the team grid, like the investigators' cards beside
+                // it: the name's link is stretched over the card (after:inset-0).
+                // Anchors cannot nest, so the mailto is a second link that
+                // sits above the stretched one (relative z-10).
+                <div className="relative mt-6 flex max-w-md items-center gap-3 rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm transition hover:shadow-md hover:ring-1 hover:ring-primary-200 focus-within:ring-2 focus-within:ring-primary-500">
+                  <div className="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-slate-200 bg-slate-100">
+                    <img src={assetUrl(contact.photo)} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                  </div>
                   <div className="min-w-0">
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
                       {pick('Operations & contact', 'Betrieb & Kontakt')}
                     </p>
                     <p className="mt-0.5 text-sm font-bold leading-tight text-slate-950">
-                      <Link to={memberLink(contact)} className="transition hover:text-primary-700">{contact.name}</Link>
+                      <Link to={memberLink(contact)} className="transition after:absolute after:inset-0 after:rounded-xl after:content-[''] hover:text-primary-700 focus:outline-none">{contact.name}</Link>
                       <span className="text-slate-300"> · </span>
                       <span className="text-xs font-semibold text-slate-500">{pick('PhD candidate', 'Doktorand')}</span>
                     </p>
@@ -101,7 +103,7 @@ const CoreLabs = () => {
                     <p className="flex flex-wrap items-center gap-x-3 text-xs font-semibold text-slate-500">
                       <span>{pick('Research & Operations Coordinator', 'Forschung & Betrieb')}</span>
                       {contact.email && (
-                        <a href={`mailto:${contact.email}`} className="font-bold text-primary-700 underline decoration-primary-200 underline-offset-2 transition hover:decoration-primary-500">
+                        <a href={`mailto:${contact.email}`} className="relative z-10 font-bold text-primary-700 underline decoration-primary-200 underline-offset-2 transition hover:decoration-primary-500">
                           {pick('email', 'E-Mail')}
                         </a>
                       )}

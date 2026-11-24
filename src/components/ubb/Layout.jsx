@@ -7,15 +7,14 @@ import ThirdPartyLogo from '../common/ThirdPartyLogo'
 // Cluj puts in it. Each entry is a section of the /ubb home page (the ids are
 // set in pages/ubb/Home.jsx). Text pairs are [German, English].
 const LAB_NAV = [
-  { to: '/ubb#people', section: 'people', label: ['Personen', 'People'] },
-  { to: '/ubb#research', section: 'research', label: ['Forschung', 'Research'] },
   { to: '/ubb#robotics-club', section: 'robotics-club', label: ['Robotics Club', 'Robotics Club'] },
+  { to: '/ubb#research', section: 'research', label: ['Forschung', 'Research'] },
   { to: '/ubb#contact', section: 'contact', label: ['Kontakt', 'Contact'] },
 ]
 
-// Every section of the home page with an id, in page order. "labs" has no
+// Every section of the home page with an id, in page order. "network" has no
 // entry in the bar: while it is on screen nothing is highlighted.
-const HOME_SECTIONS = ['people', 'research', 'robotics-club', 'labs', 'contact']
+const HOME_SECTIONS = ['robotics-club', 'research', 'network', 'contact']
 
 // The network's Join Us page, at the list of groups: the Cluj card there names
 // who to write to. CORE Cluj has no Join Us page of its own.
@@ -45,7 +44,7 @@ const UbbLayout = ({ children }) => {
         join={JOIN}
       />
 
-      <main className="pt-16 lg:pt-[5.8125rem]">{children}</main>
+      <main>{children}</main>
 
       <footer className="border-t border-slate-200 bg-slate-950 text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-10 sm:flex-row sm:items-center sm:justify-between md:px-8">
