@@ -104,7 +104,7 @@ const members = [
     email: '',
     links: {
       scholar: 'https://scholar.google.de/citations?user=DxgfRiQAAAAJ&hl=en',
-      website: 'https://www.mds-lab.de/stefan-ludtke'
+      website: 'https://www.mds-lab.de/people/stefan-ludtke/'
     }
   },
   {

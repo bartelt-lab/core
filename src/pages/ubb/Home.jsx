@@ -4,11 +4,29 @@ import { FaArrowRight, FaBrain, FaFlask, FaLock, FaProjectDiagram, FaRobot } fro
 import PublicationsSection from '../../components/publications/PublicationsSection'
 import ThirdPartyLogo from '../../components/common/ThirdPartyLogo'
 import { autonomousDemonstrations } from '../../data/demonstrations'
+import { getMemberBySlug } from '../../data/team'
 import assetUrl from '../../utils/assetUrl'
 
 const upcomingAreas = ['Embodied AI', 'Robot learning', 'Multi-modal perception']
 
+// The Robotics Club. `contact` is a slug in data/team.js: the name, and the
+// email once there is one, come from there.
+// Photos: add { src, alt } entries (files under public/images/ubb/) and the
+// section shows them beside the text; with none it is text only.
+const club = {
+  contact: 'benta',
+  photos: [
+    {
+      src: '/images/ubb/robotics-club-meeting.webp',
+      alt: 'A Robotics Club meeting: about a dozen students sit in a circle with laptops, and a small wheeled robot stands on a table.',
+    },
+  ],
+}
+
 const UbbHome = () => {
+  const clubContact = getMemberBySlug(club.contact)
+  const clubContactName = clubContact.prefix ? `${clubContact.prefix} ${clubContact.name}` : clubContact.name
+
   const scrollToProjects = () => {
     document.getElementById('autonomous')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
@@ -164,6 +182,46 @@ const UbbHome = () => {
         </div>
       </section>
 
+      <section id="robotics-club" className="scroll-mt-24 border-t border-slate-100 bg-site-100/50 py-20 md:py-28">
+        <div className={`mx-auto grid max-w-7xl gap-10 px-6 md:px-8 ${club.photos.length > 0 ? 'lg:grid-cols-[0.8fr_1.2fr] lg:items-center' : ''}`}>
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-site-900">New · For students</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">Robotics Club</h2>
+            <p className="mt-5 text-base leading-8 text-slate-600">
+              CORE Labs Cluj now has a Robotics Club. Students are welcome to join.
+            </p>
+            <div className="mt-8 flex w-fit items-center gap-4 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-site-100 text-site-900">
+                <FaRobot aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-xs font-semibold text-slate-500">To join, get in touch with</p>
+                {clubContact.email ? (
+                  <a href={`mailto:${clubContact.email}`} className="font-semibold text-primary-700 underline underline-offset-2 hover:text-primary-800">{clubContactName}</a>
+                ) : (
+                  <p className="font-semibold text-slate-950">{clubContactName}</p>
+                )}
+              </div>
+            </div>
+          </div>
+          {club.photos.length > 0 && (
+            <div className={`grid gap-3 ${club.photos.length > 1 ? 'grid-cols-2' : ''}`}>
+              {club.photos.map((photo, index) => (
+                <img
+                  key={photo.src}
+                  src={assetUrl(photo.src)}
+                  alt={photo.alt}
+                  loading="lazy"
+                  decoding="async"
+                  // An odd number of photos: the first one spans both columns.
+                  className={`w-full rounded-3xl border border-slate-200 object-cover ${club.photos.length % 2 === 1 && index === 0 ? 'col-span-full aspect-[16/9]' : 'aspect-[4/3]'}`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
       <section id="research" className="scroll-mt-24 border-t border-slate-100 bg-white py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 md:px-8">
           <div className="mx-auto max-w-2xl text-center">
@@ -222,7 +280,7 @@ const UbbHome = () => {
         </div>
       </section>
 
-      <section className="border-t border-slate-100 bg-gradient-to-br from-site-100 via-white to-primary-50 py-16 md:py-20">
+      <section id="publications" className="scroll-mt-24 border-t border-slate-100 bg-gradient-to-br from-site-100 via-white to-primary-50 py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6 md:px-8">
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>

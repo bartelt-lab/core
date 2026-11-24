@@ -9,7 +9,7 @@ const WAIT_MS = 1000
  * the two headers share morph into each other instead of being swapped: the
  * header itself, the logo, the dark network nav, the lab switch and Join Us.
  * Those parts carry the same `viewTransitionName` in both headers
- * (common/Navbar.jsx, tuc/Layout.jsx); timing is in index.css.
+ * (common/Navbar.jsx, common/LabHeader.jsx); timing is in index.css.
  *
  * Use it only for links that leave the current shell. Within a shell nothing
  * morphs, and a link to a section of the page already open would freeze the

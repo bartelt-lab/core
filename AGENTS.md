@@ -27,23 +27,25 @@ on push to `main` (`.github/workflows/deploy.yml`). This repo
   CORE = Cognitive Software; CORE Labs = Cognitive Robotics in Europe.
 - **Bartelt Lab** (formerly `bartelt-lab.github.io`) — academic lab site,
   merged in under `/tuc/*` (`TucShell`). Routes: `/tuc`, `/tuc/teaching`,
-  `/tuc/seminar`, `/tuc/theses`. Its navigation (`components/tuc/Layout.jsx`)
-  has two tiers. The bar is the lab itself: People, Research and Contact are
-  sections of the `/tuc` home page (`/tuc#people` ...), then Teaching and
-  Join Us. The row above it, shown from 1024px up, holds what leaves the lab
-  in two capsules: the CORE Network site (`/network`,
-  `/publications?institution=TUC`, `/industry-projects`, `/core-labs`,
+  `/tuc/seminar`, `/tuc/theses`. There is no `/tuc/publications`.
+- **The lab sites (`/tuc`, `/ubb`) share one header**,
+  `components/common/LabHeader.jsx`; each lab's `Layout.jsx` passes its logo,
+  its own links and its Join Us link. The navigation has two tiers. The bar
+  is the lab itself: sections of its home page (`/tuc#people`,
+  `/ubb#robotics-club` ...), highlighted as they scroll into view, its pages
+  (Teaching) and Join Us. The row above it, shown from 1024px up, holds what
+  leaves the lab in two capsules: the CORE Network site (`/network`,
+  `/publications?institution=<lab>`, `/industry-projects`, `/core-labs`,
   `/ai-team-projects`, `/compute-cluster`: the same pages in the same order
   as the network navbar) in a small copy of that navbar's dark pill, and the
-  lab switch.
-  Below 1024px the row folds into the menu under its own headings. There is
-  no `/tuc/publications`.
+  lab switch. Below 1024px the row folds into the menu under its own
+  headings. Change the header in LabHeader, not per lab.
 - **Links between the network site and a lab site** use
   `components/common/ShellLink.jsx` instead of `Link`. It runs the jump as a
   view transition, in which the header, the logo, the dark nav, the lab
   switch and Join Us morph into their counterparts: each carries the same
   `viewTransitionName` (`shell-*`) in `common/Navbar.jsx` and
-  `tuc/Layout.jsx`. A name must be on one visible element per page, or the
+  `common/LabHeader.jsx`. A name must be on one visible element per page, or the
   browser drops the whole transition. Do not use ShellLink within a shell.
 
 Note: the AI Team Projects pages live in `pages/tuc/` but route under
@@ -249,7 +251,7 @@ src/
     common/                        core Navbar/Footer/RightSidebar/Card/...
     about/ demonstrations/ hero/ network/ publications/ team/   core
     tuc/                           tuc-specific shells
-      Layout.jsx                   /tuc header + footer. Root div carries
+      Layout.jsx                   /tuc shell: common/LabHeader + footer. Root div carries
                                    `theme-tuc` (TU Clausthal green #008048 as
                                    the site accent) and IBM Plex Sans
       ui.jsx                       PageShell, Section, Card, Callout,
@@ -261,7 +263,7 @@ src/
       PartnerLogoStrip.jsx         partner logo row, reads PARTNER_LOGOS;
                                    falls back to the name when no logo exists
     ubb/
-      Layout.jsx                   /ubb header + footer. Its root div carries
+      Layout.jsx                   /ubb shell: common/LabHeader + footer. Its root div carries
                                    `theme-ubb`, which rebinds --site-* to the
                                    Babeș-Bolyai blue for the whole subtree
   pages/

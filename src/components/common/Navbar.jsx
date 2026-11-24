@@ -112,7 +112,7 @@ const Navbar = () => {
     >
       <div className="flex h-[3.75rem] items-center gap-2 rounded-[1.5rem] border border-white/90 bg-white/90 p-2.5 shadow-[0_18px_55px_-24px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:h-[4.5rem] sm:gap-4 sm:p-3"
         // The viewTransitionNames in this bar pair its parts with the lab
-        // header's (tuc/Layout.jsx), so they morph on the way to a lab site.
+        // header's (LabHeader.jsx), so they morph on the way to a lab site.
         style={{ viewTransitionName: "shell-header" }}
       >
         <Link

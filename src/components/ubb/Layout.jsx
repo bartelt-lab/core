@@ -1,91 +1,47 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiMenu, FiX } from 'react-icons/fi'
+import LabHeader from '../common/LabHeader'
 import LegalLinks from '../common/LegalLinks'
 import ThirdPartyLogo from '../common/ThirdPartyLogo'
 
-const sectionLinks = [
-  { id: 'autonomous', label: 'Autonomous Driving Lab' },
-  { id: 'research', label: 'Research' },
+// The header is common/LabHeader.jsx, shared with /tuc. This is what the Cluj
+// lab puts in it. Each entry is a section of the /ubb home page (the ids are
+// set in pages/ubb/Home.jsx). Text pairs are [German, English].
+const LAB_NAV = [
+  { to: '/ubb#robotics-club', section: 'robotics-club', label: ['Robotics Club', 'Robotics Club'] },
+  { to: '/ubb#research', section: 'research', label: ['Forschung', 'Research'] },
+  { to: '/ubb#autonomous', section: 'autonomous', label: ['Autonomes Fahren', 'Autonomous Driving'] },
 ]
 
+// Every section of the home page with an id, in page order.
+const HOME_SECTIONS = ['robotics-club', 'research', 'autonomous', 'publications']
+
+// The network's Join Us page, at the list of groups: the Cluj card there names
+// who to write to. The lab has no Join Us page of its own.
+const JOIN = { to: '/join-us#positions', label: ['Mitmachen', 'Join Us'] }
+
 const UbbLayout = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    setIsOpen(false)
-  }
-
   return (
     // theme-ubb rebinds --site-* to the Babeș-Bolyai seal blue for this subtree
     // (index.css). Static class, so the prerendered HTML and the hydrated client
     // resolve the same colours.
     <div className="theme-ubb min-h-screen bg-white text-slate-950">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5 md:px-8">
-          <Link to="/ubb" className="flex items-center gap-3" aria-label="CORE Labs Cluj home">
+      <LabHeader
+        lab="UBB"
+        home="/ubb"
+        logoLabel="CORE Labs Cluj home"
+        logo={
+          <>
             <ThirdPartyLogo src="/logos/ubb-logo-only.webp" alt="" className="h-10 w-10 object-contain" />
             <div className="leading-tight">
               <p className="text-sm font-bold tracking-tight text-slate-950">CORE Labs Cluj</p>
               <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">Babeș-Bolyai University</p>
             </div>
-          </Link>
-
-          <nav className="hidden items-center gap-6 md:flex">
-            {sectionLinks.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => scrollToSection(item.id)}
-                className="text-sm font-semibold text-slate-500 transition hover:text-slate-950"
-              >
-                {item.label}
-              </button>
-            ))}
-            <span className="h-5 w-px bg-slate-200" aria-hidden="true" />
-            <Link to="/publications?institution=UBB" className="text-sm font-semibold text-slate-600 transition hover:text-primary-700">
-              Publications
-            </Link>
-            <Link to="/" className="rounded-full bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-700">
-              CORE Network
-            </Link>
-          </nav>
-
-          <button
-            type="button"
-            onClick={() => setIsOpen((current) => !current)}
-            className="rounded-lg p-2 text-slate-700 md:hidden"
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isOpen}
-          >
-            {isOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-          </button>
-        </div>
-
-        {isOpen && (
-          <nav className="border-t border-slate-200 bg-white px-5 py-4 md:hidden">
-            <div className="mx-auto flex max-w-7xl flex-col gap-1">
-              {sectionLinks.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => scrollToSection(item.id)}
-                  className="rounded-lg px-3 py-2 text-left text-sm font-semibold text-slate-600 hover:bg-slate-50"
-                >
-                  {item.label}
-                </button>
-              ))}
-              <Link to="/publications?institution=UBB" className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50">
-                Publications
-              </Link>
-              <Link to="/" className="mt-2 rounded-lg bg-slate-950 px-3 py-2 text-center text-sm font-semibold text-white">
-                CORE Network
-              </Link>
-            </div>
-          </nav>
-        )}
-      </header>
+          </>
+        }
+        nav={LAB_NAV}
+        sections={HOME_SECTIONS}
+        join={JOIN}
+      />
 
       <main>{children}</main>
 

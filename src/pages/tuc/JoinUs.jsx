@@ -74,7 +74,8 @@ const NETWORK = {
 // Only the TU Clausthal lab has its positions written up on this site; the
 // other two are pointed to, without claims about what they have open.
 // `contacts` names who to write to for what: `member` is a slug in
-// data/team.js, where the name, email and website come from.
+// data/team.js, where the name, email and website come from. An entry with
+// `link` instead points to a page: { about, link: { label, href } }.
 const GROUPS = [
     {
         id: 'tuc',
@@ -107,8 +108,12 @@ const GROUPS = [
         name: ['Universität Rostock', 'University of Rostock'],
         place: ['Rostock, Deutschland', 'Rostock, Germany'],
         text: [
-            'Das MDS Lab. Zu Promotion und studentischer Mitarbeit gibt die Gruppe vor Ort Auskunft.',
-            'The MDS Lab. Ask the group there about doctoral studies and student work.',
+            'Das MDS Lab (Marine Data Science): Promotion in der Gruppe und Themen für Abschlussarbeiten.',
+            'The MDS Lab (Marine Data Science): doctoral studies with the group, and thesis topics for students.',
+        ],
+        contacts: [
+            { about: ['Promotion', 'PhD'], member: 'ludtke' },
+            { about: ['Abschlussarbeiten', 'Theses'], link: { label: ['Offene Themen', 'Open topics'], href: 'https://www.mds-lab.de/theses/' } },
         ],
         cta: ['Website des MDS Lab', 'MDS Lab website'],
         href: 'https://www.mds-lab.de/',
@@ -327,16 +332,17 @@ const JoinUs = ({ lab }) => {
                                     {group.contacts && (
                                         <dl className="mt-4 space-y-2 border-t border-slate-200 pt-4 text-sm">
                                             {group.contacts.map((contact) => {
-                                                const member = getMemberBySlug(contact.member);
-                                                const name = displayName(member);
+                                                const member = contact.member ? getMemberBySlug(contact.member) : null;
+                                                const name = member ? displayName(member) : txt(contact.link.label);
                                                 // Email first; a member without one links to their own page.
-                                                const href = member.email ? `mailto:${member.email}` : member.links?.website;
+                                                const href = member ? (member.email ? `mailto:${member.email}` : member.links?.website) : contact.link.href;
+                                                const external = !href?.startsWith('mailto:');
                                                 return (
-                                                    <div key={contact.member} className="flex flex-wrap gap-x-2">
+                                                    <div key={contact.about[1]} className="flex flex-wrap gap-x-2">
                                                         <dt className="font-semibold text-slate-900">{txt(contact.about)}:</dt>
                                                         <dd className="text-slate-700">
                                                             {href ? (
-                                                                <a href={href} target={member.email ? undefined : '_blank'} rel="noreferrer" className="font-semibold text-primary-700 underline underline-offset-2 hover:text-primary-800">{name}</a>
+                                                                <a href={href} target={external ? '_blank' : undefined} rel="noreferrer" className="font-semibold text-primary-700 underline underline-offset-2 hover:text-primary-800">{name}</a>
                                                             ) : name}
                                                         </dd>
                                                     </div>
