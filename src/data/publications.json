@@ -1575,7 +1575,7 @@
       "status": "Published",
       "url": "https://doi.ieeecomputersociety.org/10.1109/ICTAI66417.2025.00085",
       "code": null,
-      "image": null,
+      "image": "/papers/fedcompavg-setup.webp",
       "abstract": "Proposes FedCompAvg, a compute-aware aggregation strategy for Federated Learning.",
       "topics": [
         "ml"
@@ -2611,7 +2611,7 @@
       "status": "Published",
       "url": "https://doi.org/10.1109/ictai62512.2024.00067",
       "code": null,
-      "image": null,
+      "image": "/papers/benchmarking-ad-simulation.webp",
       "abstract": null,
       "topics": [
         "robotics"
