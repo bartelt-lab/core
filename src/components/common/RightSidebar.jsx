@@ -19,6 +19,7 @@ const ROUTE_SECTIONS = {
         { id: 'initiative', label: 'Initiative' },
         { id: 'dynamo', label: 'Dynamo' },
         { id: 'autonomous', label: 'Self-Driving' },
+        { id: 'augmentation', label: 'Augmentation' },
         { id: 'publications', label: 'Papers' },
         { id: 'cluj', label: 'Humanoid' },
     ],

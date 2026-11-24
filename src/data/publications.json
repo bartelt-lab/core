@@ -204,7 +204,8 @@
       "image": "/papers/concepts-in-motion.webp",
       "abstract": "Introduces MoTIF, a transformer-based temporal concept bottleneck framework that discovers video concepts with vision-language models and models their temporal patterns for interpretable video classification.",
       "topics": [
-        "xai"
+        "xai",
+        "robotics"
       ]
     },
     {
